@@ -73,6 +73,34 @@ def article_detail(request, pk):
     })
 
 
+def download_pdf(request, pk):
+    """PDF yuklab olish — downloads_count ni oshiradi"""
+    from django.http import FileResponse, Http404
+    import os
+
+    article = get_object_or_404(Article, pk=pk, status='published')
+
+    if not article.pdf_file:
+        raise Http404
+
+    # Yuklab olishlar sonini oshir
+    Article.objects.filter(pk=pk).update(
+        downloads_count=article.downloads_count + 1
+    )
+
+    file_path = article.pdf_file.path
+    if not os.path.exists(file_path):
+        raise Http404
+
+    response = FileResponse(
+        open(file_path, 'rb'),
+        content_type='application/pdf'
+    )
+    filename = f"{article.title[:50]}.pdf".replace(' ', '_')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response
+
+
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)

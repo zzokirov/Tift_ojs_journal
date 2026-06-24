@@ -7,6 +7,7 @@ urlpatterns = [
     path('archive/', views.archive, name='archive'),
     path('about/', views.about, name='about'),
     path('article/<int:pk>/', views.article_detail, name='article_detail'),
+    path('article/<int:pk>/download/', views.download_pdf, name='download_pdf'),
     path('signup/', views.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

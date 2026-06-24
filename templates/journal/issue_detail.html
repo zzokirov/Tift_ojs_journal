@@ -106,7 +106,7 @@
                                        class="text-navy-700 hover:text-navy-900 text-xs font-semibold flex items-center gap-1 transition-colors">
                                         Batafsil <i class="fas fa-arrow-right text-[10px]"></i>
                                     </a>
-                                    <a href="{{ article.pdf_file.url }}"
+                                    <a href="{% url 'download_pdf' article.pk %}"
                                        class="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-sm" download>
                                         <i class="fas fa-download"></i>
                                         PDF
