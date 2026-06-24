@@ -13,13 +13,17 @@ def index(request):
         return redirect('my_articles')
 
     # Tashrif buyuruvchilarni sanash
-    ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1'))
-    if ',' in ip:
-        ip = ip.split(',')[0].strip()
-    from datetime import date
-    SiteVisit.objects.get_or_create(date=date.today(), ip_address=ip)
-    total_visitors = SiteVisit.objects.values('ip_address').distinct().count()
-    today_visitors = SiteVisit.objects.filter(date=date.today()).count()
+    try:
+        ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1'))
+        if ',' in ip:
+            ip = ip.split(',')[0].strip()
+        from datetime import date
+        SiteVisit.objects.get_or_create(date=date.today(), ip_address=ip)
+        total_visitors = SiteVisit.objects.values('ip_address').distinct().count()
+        today_visitors = SiteVisit.objects.filter(date=date.today()).count()
+    except Exception:
+        total_visitors = 0
+        today_visitors = 0
 
     query = request.GET.get('q')
     recent_articles = Article.objects.filter(status='published').order_by('-created_at')
