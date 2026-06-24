@@ -216,7 +216,7 @@ JAZZMIN_UI_TWEAKS = {
     },
     "actions_sticky_top": True,
 }
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = '/my-articles/'
 LOGOUT_REDIRECT_URL = 'index'
 LOGIN_URL = '/login/'
 STATIC_URL = 'static/'
