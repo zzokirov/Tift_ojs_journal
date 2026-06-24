@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -8,6 +8,10 @@ from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateF
 
 
 def index(request):
+    # Login qilgan user bosh sahifaga kelsa — hisobiga yo'naltir
+    if request.user.is_authenticated:
+        return redirect('my_articles')
+
     query = request.GET.get('q')
     recent_articles = Article.objects.filter(status='published').order_by('-created_at')
     if query:

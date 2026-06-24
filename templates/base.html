@@ -148,26 +148,26 @@
                 </div>
                 {% endif %}
 
-                <!-- QIDIRUV -->
-                <form action="{% url 'index' %}" method="GET"
-                      class="hidden md:flex items-center gap-2 rounded-lg px-3 py-1.5 transition-all"
-                      style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); width: 220px;">
-                    <i class="fas fa-search flex-shrink-0" style="color:#6b7280; font-size:11px;"></i>
-                    <input type="text" name="q"
-                           value="{{ request.GET.q|default:'' }}"
-                           placeholder="Qidirish..."
-                           style="background:transparent; color:white; font-size:13px; outline:none; width:100%; border:none;"
-                           onfocus="this.parentElement.style.borderColor='rgba(34,197,94,0.5)'"
-                           onblur="this.parentElement.style.borderColor='rgba(255,255,255,0.12)'">
-                    {% if request.GET.q %}
-                        <a href="{% url 'index' %}" style="color:#6b7280; flex-shrink:0;" class="hover:text-white transition-colors">
-                            <i class="fas fa-times" style="font-size:10px;"></i>
-                        </a>
-                    {% endif %}
-                </form>
-
                 <!-- AUTH BUTTONS -->
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2">
+
+                    <!-- QIDIRUV ICON + EXPANDABLE INPUT -->
+                    <div class="relative flex items-center" id="searchWrapper">
+                        <form action="{% url 'index' %}" method="GET" id="searchForm"
+                              class="flex items-center overflow-hidden transition-all duration-300"
+                              style="width:36px;">
+                            <button type="button" id="searchToggle"
+                                    class="w-9 h-9 flex items-center justify-center rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all flex-shrink-0">
+                                <i class="fas fa-search text-sm"></i>
+                            </button>
+                            <input type="text" name="q"
+                                   id="searchInput"
+                                   value="{{ request.GET.q|default:'' }}"
+                                   placeholder="Maqola qidirish..."
+                                   style="background:transparent; color:white; font-size:13px; outline:none; border:none; width:0; opacity:0; transition:all 0.3s ease;"
+                                   class="placeholder-gray-500">
+                        </form>
+                    </div>
                     {% if user.is_authenticated %}
                         <div class="hidden md:flex items-center gap-3">
 
@@ -374,8 +374,52 @@
             icon.classList.toggle('fa-times');
         });
 
-        // Avatar dropdown toggle
-        document.getElementById('avatarBtn')?.addEventListener('click', function(e) {
+        // Search expand
+        const searchToggle = document.getElementById('searchToggle');
+        const searchInput  = document.getElementById('searchInput');
+        const searchForm   = document.getElementById('searchForm');
+        let searchOpen = false;
+
+        if (searchToggle && searchInput) {
+            // Agar qidiruv so'zi bo'lsa, avtomatik ochiq qolsin
+            if (searchInput.value.trim() !== '') {
+                searchForm.style.width = '220px';
+                searchInput.style.width = '160px';
+                searchInput.style.opacity = '1';
+                searchOpen = true;
+            }
+
+            searchToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!searchOpen) {
+                    searchForm.style.width = '220px';
+                    searchInput.style.width = '160px';
+                    searchInput.style.opacity = '1';
+                    searchInput.focus();
+                    searchOpen = true;
+                } else {
+                    if (searchInput.value.trim()) {
+                        searchForm.submit();
+                    } else {
+                        searchForm.style.width = '36px';
+                        searchInput.style.width = '0';
+                        searchInput.style.opacity = '0';
+                        searchOpen = false;
+                    }
+                }
+            });
+
+            // Enter bosilganda submit
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchForm.style.width = '36px';
+                    searchInput.style.width = '0';
+                    searchInput.style.opacity = '0';
+                    searchOpen = false;
+                    searchInput.blur();
+                }
+            });
+        }
             e.stopPropagation();
             document.getElementById('avatarDropdown').classList.toggle('hidden');
         });
