@@ -148,6 +148,21 @@
                 </div>
                 {% endif %}
 
+                <!-- QIDIRUV -->
+                <form action="{% url 'index' %}" method="GET"
+                      class="hidden md:flex items-center gap-2 bg-white/8 border border-white/15 rounded-xl px-3 py-2 w-64 lg:w-80 focus-within:border-green-500/50 transition-all">
+                    <i class="fas fa-search text-gray-400 text-xs flex-shrink-0"></i>
+                    <input type="text" name="q"
+                           value="{{ request.GET.q|default:'' }}"
+                           placeholder="Maqola qidirish..."
+                           class="bg-transparent text-white text-sm placeholder-gray-500 outline-none w-full">
+                    {% if request.GET.q %}
+                        <a href="{% url 'index' %}" class="text-gray-500 hover:text-white transition-colors flex-shrink-0">
+                            <i class="fas fa-times text-xs"></i>
+                        </a>
+                    {% endif %}
+                </form>
+
                 <!-- AUTH BUTTONS -->
                 <div class="flex items-center gap-3">
                     {% if user.is_authenticated %}
