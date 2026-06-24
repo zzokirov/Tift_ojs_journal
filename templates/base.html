@@ -110,7 +110,7 @@
             <div class="flex justify-between items-center h-18 py-3">
 
                 <!-- LOGO -->
-                <a href="{% url 'index' %}" class="flex items-center gap-3 group">
+                <a href="{% url 'index' %}" class="flex items-center gap-3 group flex-shrink-0">
                     <div class="relative">
                         <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
                             <img src="{% static 'images/tift.png' %}" alt="TIFT" class="w-10 h-10 object-contain"
@@ -148,10 +148,8 @@
                 </div>
                 {% endif %}
 
-                <!-- AUTH BUTTONS -->
-                <div class="flex items-center gap-2">
-
-                    <!-- QIDIRUV ICON + EXPANDABLE INPUT -->
+                <!-- CENTER: SEARCH -->
+                <div class="flex-1 flex justify-center px-4">
                     <div class="relative flex items-center" id="searchWrapper">
                         <form action="{% url 'index' %}" method="GET" id="searchForm"
                               class="flex items-center overflow-hidden transition-all duration-300"
@@ -168,6 +166,10 @@
                                    class="placeholder-gray-500">
                         </form>
                     </div>
+                </div>
+
+                <!-- AUTH BUTTONS -->
+                <div class="flex items-center gap-2 flex-shrink-0">
                     {% if user.is_authenticated %}
                         <div class="hidden md:flex items-center gap-3">
 
