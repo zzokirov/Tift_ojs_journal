@@ -26,6 +26,18 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = UserCreationForm.Meta.fields + ('email', 'first_name', 'last_name')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            existing = field.widget.attrs.get('class', '')
+            field.widget.attrs['class'] = css_input + ' ' + existing
+        self.fields['username'].widget.attrs['placeholder']   = 'Foydalanuvchi nomi'
+        self.fields['email'].widget.attrs['placeholder']      = 'Email manzil'
+        self.fields['first_name'].widget.attrs['placeholder'] = 'Ism'
+        self.fields['last_name'].widget.attrs['placeholder']  = 'Familiya'
+        self.fields['password1'].widget.attrs['placeholder']  = 'Parol'
+        self.fields['password2'].widget.attrs['placeholder']  = 'Parolni tasdiqlang'
+
 
 class ProfileUpdateForm(forms.ModelForm):
     """Profil ma'lumotlarini yangilash"""
