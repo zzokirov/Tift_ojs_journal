@@ -75,8 +75,8 @@ def article_detail(request, pk):
 
 def download_pdf(request, pk):
     """PDF yuklab olish — downloads_count ni oshiradi"""
-    from django.http import FileResponse, Http404
-    import os
+    import urllib.request
+    from django.http import HttpResponse, Http404
 
     article = get_object_or_404(Article, pk=pk, status='published')
 
@@ -88,17 +88,32 @@ def download_pdf(request, pk):
         downloads_count=article.downloads_count + 1
     )
 
-    file_path = article.pdf_file.path
-    if not os.path.exists(file_path):
-        raise Http404
+    # Cloudinary yoki lokal — ikkalasini ham qo'llab-quvvatlaydi
+    try:
+        # Lokal fayl
+        import os
+        file_path = article.pdf_file.path
+        if os.path.exists(file_path):
+            from django.http import FileResponse
+            filename = f"{article.title[:50]}.pdf".replace(' ', '_')
+            response = FileResponse(
+                open(file_path, 'rb'),
+                content_type='application/pdf'
+            )
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+    except (NotImplementedError, ValueError, AttributeError):
+        pass
 
-    response = FileResponse(
-        open(file_path, 'rb'),
-        content_type='application/pdf'
-    )
+    # Cloudinary URL orqali
+    import urllib.request
+    from django.http import HttpResponse
+    url = article.pdf_file.url
     filename = f"{article.title[:50]}.pdf".replace(' ', '_')
-    response['Content-Disposition'] = f'attachment; filename="{filename}"'
-    return response
+    with urllib.request.urlopen(url) as f:
+        response = HttpResponse(f.read(), content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response
 
 
 def signup(request):

@@ -1,9 +1,9 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-# 1. Loyihada Git omborini yaratish
-git init
-
-# 2. Hamma fayllarni yuklashga tayyorlash (yashil holatga keltirish)
-git add .
-
-# 3. Ilk commit-ni qilish (fayllarni saqlash)
-git commit -m "First commit"
+venv/
+__pycache__/
+*.pyc
+*.pyo
+db.sqlite3
+media/
+staticfiles/
+.env
+*.log
