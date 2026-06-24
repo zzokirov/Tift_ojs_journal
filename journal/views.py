@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import JournalIssue, Article, StaffMember
+from .models import JournalIssue, Article, StaffMember, SiteVisit
 from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateForm, CustomPasswordChangeForm
 
 
@@ -11,6 +11,15 @@ def index(request):
     # Login qilgan user bosh sahifaga kelsa — hisobiga yo'naltir
     if request.user.is_authenticated:
         return redirect('my_articles')
+
+    # Tashrif buyuruvchilarni sanash
+    ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1'))
+    if ',' in ip:
+        ip = ip.split(',')[0].strip()
+    from datetime import date
+    SiteVisit.objects.get_or_create(date=date.today(), ip_address=ip)
+    total_visitors = SiteVisit.objects.values('ip_address').distinct().count()
+    today_visitors = SiteVisit.objects.filter(date=date.today()).count()
 
     query = request.GET.get('q')
     recent_articles = Article.objects.filter(status='published').order_by('-created_at')
@@ -26,6 +35,8 @@ def index(request):
         'recent_articles': recent_articles,
         'issues': issues,
         'query': query,
+        'total_visitors': total_visitors,
+        'today_visitors': today_visitors,
     })
 
 

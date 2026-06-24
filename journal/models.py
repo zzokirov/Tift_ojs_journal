@@ -80,6 +80,19 @@ class Article(models.Model):
         return self.title
 
 
+class SiteVisit(models.Model):
+    date       = models.DateField(auto_now_add=True, verbose_name="Sana")
+    ip_address = models.GenericIPAddressField(verbose_name="IP manzil")
+
+    class Meta:
+        verbose_name = "Tashrif"
+        verbose_name_plural = "Tashriflar"
+        unique_together = ('date', 'ip_address')
+
+    def __str__(self):
+        return f"{self.ip_address} — {self.date}"
+
+
 def staff_photo_path(instance, filename):
     ext = filename.split('.')[-1]
     return f"staff_photos/{uuid.uuid4()}.{ext}"
