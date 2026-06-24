@@ -1,0 +1,105 @@
+import uuid
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    ROLE_CHOICES = (
+        ('author', 'Muallif'),
+        ('reviewer', 'Taqrizchi'),
+        ('editor', 'Muharrir'),
+    )
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='author')
+    institution = models.CharField(max_length=255, blank=True, verbose_name="Ish/O'qish joyi")
+
+    def __str__(self):
+        return f"{self.get_full_name()} ({self.get_role_display()})"
+
+
+class JournalIssue(models.Model):
+    volume = models.PositiveIntegerField(verbose_name="Jurnal jildi (Volume)")
+    number = models.PositiveIntegerField(verbose_name="Jurnal soni (Issue)")
+    year = models.PositiveIntegerField(verbose_name="Chop etilgan yili")
+    is_published = models.BooleanField(default=False, verbose_name="Saytda ko'rsatish")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-year', '-volume', '-number']
+        verbose_name = "Jurnal soni"
+        verbose_name_plural = "Jurnal sonlari"
+
+    def __str__(self):
+        return f"Jild {self.volume}, Son {self.number} ({self.year})"
+
+
+def article_upload_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f"{uuid.uuid4()}.{ext}"
+    return f"articles_pdf/{filename}"
+
+
+class Article(models.Model):
+    STATUS_CHOICES = (
+        ('submitted', 'Yuborildi'),
+        ('under_review', 'Taqriz jarayonida'),
+        ('accepted', 'Qabul qilindi'),
+        ('rejected', 'Rad etildi'),
+        ('published', 'Chop etildi'),
+    )
+
+    title = models.CharField(max_length=500, verbose_name="Maqola sarlavhasi")
+    abstract = models.TextField(verbose_name="Annotatsiya / Abstract")
+    keywords = models.CharField(max_length=255, verbose_name="Kalit so'zlar (vergul bilan ajrating)")
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name="Muallif")
+    issue = models.ForeignKey(JournalIssue, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Jurnal soni")
+
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='submitted', verbose_name="Maqola holati")
+    pdf_file = models.FileField(upload_to=article_upload_path, verbose_name="PDF Fayl")
+
+    views_count = models.PositiveIntegerField(default=0, verbose_name="Ko'rishlar soni")
+    downloads_count = models.PositiveIntegerField(default=0, verbose_name="Yuklab olishlar soni")
+
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yuborilgan sana")
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Maqola"
+        verbose_name_plural = "Maqolalar"
+
+    def __str__(self):
+        return self.title
+
+
+def staff_photo_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return f"staff_photos/{uuid.uuid4()}.{ext}"
+
+
+class StaffMember(models.Model):
+    POSITION_CHOICES = (
+        ('editor_in_chief', 'Bosh muharrir'),
+        ('deputy_editor',   "O'rinbosar muharrir"),
+        ('editor',          'Muharrir'),
+        ('reviewer',        'Taqrizchi'),
+        ('secretary',       'Kotib'),
+        ('member',          'A\'zo'),
+    )
+
+    full_name   = models.CharField(max_length=255, verbose_name="Ism Familiya")
+    position    = models.CharField(max_length=30, choices=POSITION_CHOICES, default='member', verbose_name="Lavozim")
+    workplace   = models.CharField(max_length=255, verbose_name="Ish joyi")
+    age         = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name="Yoshi")
+    photo       = models.ImageField(upload_to=staff_photo_path, null=True, blank=True, verbose_name="Rasmi")
+    bio         = models.TextField(blank=True, verbose_name="Qisqacha ma'lumot")
+    order       = models.PositiveIntegerField(default=0, verbose_name="Tartib raqami")
+    is_active   = models.BooleanField(default=True, verbose_name="Ko'rsatish")
+
+    class Meta:
+        ordering = ['order', 'full_name']
+        verbose_name = "Jurnal a'zosi"
+        verbose_name_plural = "Jurnal a'zolari"
+
+    def __str__(self):
+        return f"{self.full_name} — {self.get_position_display()}"

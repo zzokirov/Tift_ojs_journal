@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Jurnal haqida | TIFT Jurnali{% endblock %}
+
+{% block content %}
+
+<!-- HEADER -->
+<div class="bg-navy-900 text-white py-12 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5"
+         style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+                background-size: 30px 30px;"></div>
+    <div class="max-w-7xl mx-auto px-4 relative">
+        <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
+            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
+                <i class="fas fa-home text-[10px]"></i> Bosh sahifa
+            </a>
+            <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
+            <span class="text-gray-300">Jurnal haqida</span>
+        </nav>
+        <h1 class="text-3xl font-black text-white">Jurnal haqida</h1>
+        <p class="text-gray-400 text-sm mt-1">TIFT "Arxitektura va Ta'lim" ilmiy-elektron jurnali</p>
+    </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-16">
+
+        <!-- LEFT: MUQOVA RASMI -->
+        <div class="flex justify-center">
+            <div class="relative group">
+                <div class="absolute -inset-3 bg-green-500/15 rounded-3xl blur-2xl group-hover:bg-green-500/25 transition-all duration-500"></div>
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10 group-hover:border-green-500/40 transition-all duration-300"
+                     style="max-width: 420px; width: 100%;">
+                    <img src="{% static 'images/muqova1.jpg' %}"
+                         alt="TIFT Jurnali muqovasi"
+                         class="w-full h-auto block group-hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: JURNAL HAQIDA MA'LUMOT -->
+        <div class="space-y-6">
+            <div>
+                <h2 class="text-2xl font-black text-navy-900 mb-4 flex items-center gap-2">
+                    <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
+                    Jurnal haqida
+                </h2>
+                <p class="text-gray-600 leading-relaxed text-sm">
+                    <strong>"Arxitektura va Ta'lim"</strong> ilmiy-elektron jurnali Toshkent Xalqaro
+                    Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi.
+                    Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi
+                    ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan.
+                </p>
+            </div>
+
+            <!-- Info cards -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <div class="text-green-600 font-black text-2xl">2021</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Tashkil etilgan</div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <div class="text-green-600 font-black text-2xl">4x</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Yiliga chop etiladi</div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <div class="text-green-600 font-black text-sm font-mono">2181-XXXX</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">ISSN (Online)</div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <div class="text-green-600 font-black text-sm">Open Access</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Bepul kirish</div>
+                </div>
+            </div>
+
+            <!-- Peer review -->
+            <div class="bg-navy-900 rounded-xl p-5 text-white">
+                <h4 class="font-bold mb-2 flex items-center gap-2">
+                    <i class="fas fa-shield-alt text-green-400 text-sm"></i>
+                    Double-blind Peer Review
+                </h4>
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi.
+                    Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi.
+                </p>
+            </div>
+
+            <!-- Focus areas -->
+            <div>
+                <h4 class="font-bold text-navy-900 mb-3 text-sm uppercase tracking-wider">Yo'nalishlar</h4>
+                <div class="flex flex-wrap gap-2">
+                    {% for area in areas %}
+                        <span class="bg-green-600/10 text-green-700 border border-green-500/20 px-3 py-1 rounded-full text-xs font-medium">
+                            {{ area }}
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAFF SECTION -->
+    {% if staff %}
+        <div class="mb-6">
+            <h2 class="text-2xl font-black text-navy-900 flex items-center gap-2 mb-2">
+                <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
+                Tahririyat a'zolari
+            </h2>
+            <div class="section-divider ml-3 mb-8"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {% for member in staff %}
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm card-hover overflow-hidden">
+                    <!-- Photo -->
+                    <div class="relative bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden flex items-center justify-center" style="height: 260px;">
+                        {% if member.photo %}
+                            <img src="{{ member.photo.url }}"
+                                 alt="{{ member.full_name }}"
+                                 class="w-full h-full object-contain object-center">
+                        {% else %}
+                            <div class="w-20 h-20 bg-green-600/20 border-2 border-green-500/30 rounded-full flex items-center justify-center">
+                                <span class="text-green-600 font-black text-3xl">
+                                    {{ member.full_name|first|upper }}
+                                </span>
+                            </div>
+                        {% endif %}
+                        <!-- Position badge -->
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <span class="inline-block bg-navy-900/90 backdrop-blur text-green-400 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-green-500/20">
+                                {{ member.get_position_display }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="p-4">
+                        <h3 class="font-bold text-navy-900 text-base leading-tight mb-2">
+                            {{ member.full_name }}
+                        </h3>
+                        <div class="space-y-1.5 text-xs text-gray-500">
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-university text-green-500 mt-0.5 flex-shrink-0"></i>
+                                <span>{{ member.workplace }}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-id-badge text-green-500 flex-shrink-0"></i>
+                                <span>{{ member.get_position_display }}</span>
+                            </div>
+                        </div>
+                        {% if member.bio %}
+                            <p class="text-gray-500 text-xs mt-3 leading-relaxed line-clamp-2"
+                               style="word-break: break-word;">
+                                {{ member.bio }}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center">
+            <i class="fas fa-users text-4xl text-gray-300 mb-3 block"></i>
+            <p class="text-gray-400 text-sm">Tahririyat a'zolari hali qo'shilmagan.</p>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

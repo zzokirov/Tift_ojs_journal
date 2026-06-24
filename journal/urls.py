@@ -1,0 +1,16 @@
+from django.urls import path
+from . import views
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('archive/', views.archive, name='archive'),
+    path('about/', views.about, name='about'),
+    path('article/<int:pk>/', views.article_detail, name='article_detail'),
+    path('signup/', views.signup, name='signup'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('submit/', views.submit_article, name='submit_article'),
+    path('my-articles/', views.my_articles, name='my_articles'),
+    path('issue/<int:issue_pk>/', views.issue_detail, name='issue_detail'),
+]
