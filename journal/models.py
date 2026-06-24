@@ -3,14 +3,22 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
+def user_avatar_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return f"avatars/{uuid.uuid4()}.{ext}"
+
+
 class User(AbstractUser):
     ROLE_CHOICES = (
         ('author', 'Muallif'),
         ('reviewer', 'Taqrizchi'),
         ('editor', 'Muharrir'),
     )
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='author')
+    role        = models.CharField(max_length=10, choices=ROLE_CHOICES, default='author')
     institution = models.CharField(max_length=255, blank=True, verbose_name="Ish/O'qish joyi")
+    avatar      = models.ImageField(upload_to=user_avatar_path, null=True, blank=True, verbose_name="Profil rasmi")
+    bio         = models.TextField(blank=True, verbose_name="O'zim haqimda")
+    phone       = models.CharField(max_length=20, blank=True, verbose_name="Telefon raqam")
 
     def __str__(self):
         return f"{self.get_full_name()} ({self.get_role_display()})"

@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard | TIFT Jurnali{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 50:'#f0f4ff', 100:'#e0e9ff', 700:'#142d54', 800:'#0f2040', 900:'#0a1628' },
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+        .sidebar-link { display:flex; align-items:center; gap:10px; padding:10px 16px; border-radius:12px; font-size:14px; font-weight:500; color:#64748b; transition:all 0.2s; }
+        .sidebar-link:hover, .sidebar-link.active { background:#f0fdf4; color:#16a34a; }
+        .sidebar-link.active { font-weight:700; }
+        .sidebar-link i { width:18px; text-align:center; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- TOP HEADER -->
+<header class="bg-navy-900 border-b-2 border-green-600 sticky top-0 z-50 shadow-xl">
+    <div class="flex items-center justify-between px-6 py-3">
+        <!-- Logo -->
+        <a href="{% url 'index' %}" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow overflow-hidden">
+                <img src="{% static 'images/tift.png' %}" alt="TIFT" class="w-8 h-8 object-contain"
+                     onerror="this.style.display='none'">
+            </div>
+            <div>
+                <div class="text-white font-black text-base leading-none">TIFT <span class="text-green-400">JOURNAL</span></div>
+                <div class="text-gray-500 text-[9px] uppercase tracking-widest mt-0.5">Muallif paneli</div>
+            </div>
+        </a>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-3">
+            <a href="{% url 'index' %}"
+               class="hidden md:flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors px-3 py-2 rounded-lg hover:bg-white/5">
+                <i class="fas fa-globe text-xs"></i> Saytga o'tish
+            </a>
+            <a href="{% url 'submit_article' %}"
+               class="hidden md:flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-sm font-bold px-4 py-2 rounded-xl transition-all hover:scale-105 shadow">
+                <i class="fas fa-plus-circle"></i> Maqola yuborish
+            </a>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"
+                        class="flex items-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 text-sm px-3 py-2 rounded-xl transition border border-red-500/20">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="hidden md:inline">Chiqish</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<!-- MAIN LAYOUT -->
+<div class="flex flex-1 overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white border-r border-gray-100 shadow-sm flex flex-col py-6 px-3 hidden md:flex flex-shrink-0">
+
+        <!-- User info -->
+        <div class="flex items-center gap-3 px-3 pb-6 mb-4 border-b border-gray-100">
+            <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-green-500/30 flex-shrink-0">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" class="w-full h-full object-cover">
+                {% else %}
+                    <div class="w-full h-full bg-gradient-to-br from-navy-700 to-navy-900 flex items-center justify-center">
+                        <span class="text-green-400 font-black text-base">{{ user.username|first|upper }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="min-w-0">
+                <div class="text-navy-900 font-bold text-sm truncate">{{ user.get_full_name|default:user.username }}</div>
+                <div class="text-gray-400 text-xs">{{ user.get_role_display }}</div>
+            </div>
+        </div>
+
+        <!-- Nav links -->
+        <nav class="flex-1 space-y-1">
+            <a href="{% url 'my_articles' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'my_articles' %}active{% endif %}">
+                <i class="fas fa-file-alt"></i> Maqolalarim
+            </a>
+            <a href="{% url 'submit_article' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'submit_article' %}active{% endif %}">
+                <i class="fas fa-plus-circle"></i> Maqola yuborish
+            </a>
+            <a href="{% url 'profile' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+                <i class="fas fa-user-circle"></i> Profilim
+            </a>
+            <a href="{% url 'change_password' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'change_password' %}active{% endif %}">
+                <i class="fas fa-lock"></i> Parol o'zgartirish
+            </a>
+        </nav>
+
+        <!-- Bottom: saytga qaytish -->
+        <div class="mt-auto pt-4 border-t border-gray-100">
+            <a href="{% url 'index' %}" class="sidebar-link text-gray-400">
+                <i class="fas fa-arrow-left"></i> Bosh sahifaga qaytish
+            </a>
+        </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="flex-1 overflow-y-auto p-6 md:p-8">
+        <!-- Page title -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-black text-navy-900">{% block page_title %}
+                {% if request.resolver_match.url_name == 'my_articles' %}Maqolalarim
+                {% elif request.resolver_match.url_name == 'submit_article' %}Maqola yuborish
+                {% elif request.resolver_match.url_name == 'profile' %}Profilim
+                {% elif request.resolver_match.url_name == 'change_password' %}Parol o'zgartirish
+                {% else %}Dashboard{% endif %}
+            {% endblock %}</h1>
+        </div>
+
+        {% block dashboard_content %}{% endblock %}
+    </main>
+</div>
+
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

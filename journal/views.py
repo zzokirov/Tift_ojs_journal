@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
-from django.contrib.auth import login
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import JournalIssue, Article, StaffMember
-from .forms import ArticleSubmissionForm, CustomUserCreationForm
+from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateForm, CustomPasswordChangeForm
 
 
 def index(request):
@@ -99,3 +100,49 @@ def my_articles(request):
         'articles': articles,
         'status_counts': status_counts,
     })
+
+
+@login_required
+def profile(request):
+    """Profil ko'rish + ma'lumotlarni yangilash"""
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profil muvaffaqiyatli yangilandi!')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.')
+    else:
+        form = ProfileUpdateForm(instance=request.user)
+
+    articles = Article.objects.filter(author=request.user).order_by('-created_at')
+    status_counts = {
+        'submitted':    articles.filter(status='submitted').count(),
+        'under_review': articles.filter(status='under_review').count(),
+        'accepted':     articles.filter(status='accepted').count(),
+        'published':    articles.filter(status='published').count(),
+        'rejected':     articles.filter(status='rejected').count(),
+    }
+    return render(request, 'profile.html', {
+        'form': form,
+        'articles': articles,
+        'status_counts': status_counts,
+    })
+
+
+@login_required
+def change_password(request):
+    """Parol o'zgartirish"""
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Parol muvaffaqiyatli o\'zgartirildi!')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Xatolik yuz berdi.')
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {'form': form})

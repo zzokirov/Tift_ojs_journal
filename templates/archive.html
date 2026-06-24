@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load static %}
 {% block title %}Arxiv | TIFT Jurnali{% endblock %}
 
@@ -10,7 +10,7 @@
          style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
                 background-size: 30px 30px;"></div>
-    <div class="max-w-7xl mx-auto px-4 relative">
+    <div class="site-container px-4 relative">
         <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
             <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
                 <i class="fas fa-home text-[10px]"></i> Bosh sahifa
@@ -31,7 +31,7 @@
 </div>
 
 <!-- ARCHIVE GRID -->
-<div class="max-w-7xl mx-auto px-4 py-12">
+<div class="site-container px-4 py-12">
     {% if issues %}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {% for issue in issues %}

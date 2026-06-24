@@ -12,5 +12,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('submit/', views.submit_article, name='submit_article'),
     path('my-articles/', views.my_articles, name='my_articles'),
+    path('profile/', views.profile, name='profile'),
+    path('profile/password/', views.change_password, name='change_password'),
     path('issue/<int:issue_pk>/', views.issue_detail, name='issue_detail'),
 ]

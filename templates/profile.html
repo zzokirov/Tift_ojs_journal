@@ -1,0 +1,148 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% block title %}Profil | TIFT Jurnali{% endblock %}
+{% block dashboard_content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="mb-4 px-4 py-3 rounded-xl text-sm font-medium flex items-center gap-2
+            {% if message.tags == 'success' %}bg-green-50 text-green-700 border border-green-200
+            {% else %}bg-red-50 text-red-700 border border-red-200{% endif %}">
+            <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- LEFT: AVATAR + STATS -->
+    <div class="space-y-5">
+        <!-- Avatar card -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center">
+            <div class="relative inline-block mb-4">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-green-500/30 shadow-lg mx-auto">
+                    {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" alt="Avatar" class="w-full h-full object-cover">
+                    {% else %}
+                        <div class="w-full h-full bg-gradient-to-br from-navy-700 to-navy-900 flex items-center justify-center">
+                            <span class="text-green-400 font-black text-3xl">{{ user.username|first|upper }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <label for="id_avatar"
+                       class="absolute bottom-0 right-0 w-8 h-8 bg-green-600 hover:bg-green-500 rounded-full flex items-center justify-center cursor-pointer shadow-lg transition-all hover:scale-110">
+                    <i class="fas fa-camera text-white text-xs"></i>
+                </label>
+            </div>
+            <h2 class="font-black text-navy-900 text-lg">{{ user.get_full_name|default:user.username }}</h2>
+            <p class="text-gray-500 text-sm mt-0.5">{{ user.get_role_display }}</p>
+            {% if user.institution %}
+                <p class="text-gray-400 text-xs mt-1 flex items-center justify-center gap-1">
+                    <i class="fas fa-university text-green-500"></i> {{ user.institution }}
+                </p>
+            {% endif %}
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-2 mt-5 pt-5 border-t border-gray-50">
+                <div class="text-center">
+                    <div class="font-black text-navy-900 text-xl">{{ status_counts.published }}</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">Nashr</div>
+                </div>
+                <div class="text-center border-x border-gray-100">
+                    <div class="font-black text-navy-900 text-xl">{{ status_counts.under_review }}</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">Taqrizda</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-black text-navy-900 text-xl">{{ status_counts.submitted }}</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">Yuborildi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick links -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <a href="{% url 'my_articles' %}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 transition text-sm font-medium text-gray-700 border-b border-gray-50">
+                <i class="fas fa-file-alt text-green-500 w-4"></i> Maqolalarim
+            </a>
+            <a href="{% url 'submit_article' %}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 transition text-sm font-medium text-gray-700 border-b border-gray-50">
+                <i class="fas fa-plus-circle text-green-500 w-4"></i> Maqola yuborish
+            </a>
+            <a href="{% url 'change_password' %}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 transition text-sm font-medium text-gray-700">
+                <i class="fas fa-lock text-green-500 w-4"></i> Parol o'zgartirish
+            </a>
+        </div>
+    </div>
+
+    <!-- RIGHT: EDIT FORM -->
+    <div class="lg:col-span-2">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                <i class="fas fa-user-edit text-green-600"></i>
+                <h3 class="font-bold text-gray-800">Profil ma'lumotlarini tahrirlash</h3>
+            </div>
+            <form method="post" enctype="multipart/form-data" class="p-6">
+                {% csrf_token %}
+                <!-- Hidden avatar input triggered by camera btn -->
+                {{ form.avatar }}
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Ism</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Familiya</label>
+                        {{ form.last_name }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Telefon</label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Ish / O'qish joyi</label>
+                        {{ form.institution }}
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">O'zim haqimda</label>
+                        {{ form.bio }}
+                    </div>
+                </div>
+
+                {% for field in form %}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ field.label }}: {{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+
+                <div class="mt-6 flex gap-3">
+                    <button type="submit"
+                            class="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-all hover:scale-105 text-sm shadow-lg">
+                        <i class="fas fa-save"></i> Saqlash
+                    </button>
+                    <a href="{% url 'change_password' %}"
+                       class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-xl transition text-sm">
+                        <i class="fas fa-lock"></i> Parol o'zgartirish
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Avatar yuklanganda sahifa avtomatik submit bo'lsin
+document.getElementById('id_avatar').addEventListener('change', function() {
+    this.closest('form').submit();
+});
+</script>
+{% endblock %}
