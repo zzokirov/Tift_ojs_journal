@@ -60,7 +60,17 @@ def article_detail(request, pk):
         article.views_count += 1
         article.save()
         request.session[f'viewed_article_{pk}'] = True
-    return render(request, 'article_detail.html', {'article': article})
+
+    # Shu muallifning boshqa nashr etilgan maqolalari
+    author_articles = Article.objects.filter(
+        author=article.author,
+        status='published'
+    ).exclude(pk=pk).order_by('-created_at')[:5]
+
+    return render(request, 'article_detail.html', {
+        'article': article,
+        'author_articles': author_articles,
+    })
 
 
 def signup(request):
