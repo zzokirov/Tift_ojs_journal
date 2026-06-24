@@ -193,6 +193,14 @@
                                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
                                             <i class="fas fa-lock text-green-500 w-4 text-center"></i> Parol o'zgartirish
                                         </a>
+                                        <div class="border-t border-gray-100 my-1"></div>
+                                        <form action="{% url 'logout' %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit"
+                                                    class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
+                                                <i class="fas fa-sign-out-alt w-4 text-center"></i> Chiqish
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
