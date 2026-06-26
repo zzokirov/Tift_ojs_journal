@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
-from .models import User, JournalIssue, Article, StaffMember
+from .models import User, JournalIssue, Article, StaffMember, Conference, News, Document
 
 
 # ─── USER ADMIN ───────────────────────────────────────────────────────────────
@@ -189,3 +189,54 @@ class StaffMemberAdmin(admin.ModelAdmin):
             initials
         )
     photo_tag.short_description = 'Rasm'
+
+
+# ─── CONFERENCE ADMIN ─────────────────────────────────────────────────────────
+
+@admin.register(Conference)
+class ConferenceAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date', 'location', 'is_active', 'created_at')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'description', 'location')
+    list_editable = ('is_active',)
+    ordering = ('-date',)
+    list_per_page = 20
+    fieldsets = (
+        ("Konferensiya ma'lumotlari", {
+            'fields': ('title', 'description', 'date', 'location', 'url', 'is_active')
+        }),
+    )
+
+
+# ─── NEWS ADMIN ───────────────────────────────────────────────────────────────
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'created_at')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'content')
+    list_editable = ('is_active',)
+    ordering = ('-created_at',)
+    list_per_page = 20
+    fieldsets = (
+        ("Yangilik ma'lumotlari", {
+            'fields': ('title', 'content', 'image', 'is_active')
+        }),
+    )
+
+
+# ─── DOCUMENT ADMIN ───────────────────────────────────────────────────────────
+
+@admin.register(Document)
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'order', 'is_active', 'created_at')
+    list_filter = ('category', 'is_active')
+    search_fields = ('title', 'description')
+    list_editable = ('category', 'order', 'is_active')
+    ordering = ('order', '-created_at')
+    list_per_page = 20
+    fieldsets = (
+        ("Hujjat ma'lumotlari", {
+            'fields': ('title', 'category', 'description', 'file', 'url', 'order', 'is_active')
+        }),
+    )

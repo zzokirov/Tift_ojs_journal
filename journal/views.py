@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import JournalIssue, Article, StaffMember, SiteVisit
+from .models import JournalIssue, Article, StaffMember, SiteVisit, Conference, News, Document
 from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateForm, CustomPasswordChangeForm
 
 
@@ -218,3 +218,26 @@ def change_password(request):
     else:
         form = CustomPasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
+
+
+def conferences(request):
+    items = Conference.objects.filter(is_active=True).order_by('-date')
+    return render(request, 'conferences.html', {'items': items})
+
+
+def news_list(request):
+    items = News.objects.filter(is_active=True).order_by('-created_at')
+    return render(request, 'news.html', {'items': items})
+
+
+def documents(request):
+    normative = Document.objects.filter(is_active=True, category='normative').order_by('order')
+    requirements = Document.objects.filter(is_active=True, category='requirement').order_by('order')
+    templates = Document.objects.filter(is_active=True, category='template').order_by('order')
+    other = Document.objects.filter(is_active=True, category='other').order_by('order')
+    return render(request, 'documents.html', {
+        'normative': normative,
+        'requirements': requirements,
+        'templates': templates,
+        'other': other,
+    })

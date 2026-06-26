@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Yangiliklar | TIFT Jurnali{% endblock %}
+{% block content %}
+
+<div class="bg-navy-900 text-white py-12 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
+    <div class="site-container px-4 relative">
+        <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
+            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors"><i class="fas fa-home text-[10px]"></i> Bosh sahifa</a>
+            <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
+            <span class="text-gray-300">Yangiliklar</span>
+        </nav>
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-600/20 border border-green-500/30 rounded-xl flex items-center justify-center">
+                <i class="fas fa-newspaper text-green-400"></i>
+            </div>
+            <div>
+                <h1 class="text-3xl font-black text-white">Yangiliklar</h1>
+                <p class="text-gray-400 text-sm mt-0.5">Jurnal va universitetdagi so'nggi yangiliklar</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-container px-4 py-12">
+    {% if items %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for item in items %}
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden card-hover">
+                    {% if item.image %}
+                        <div class="h-48 overflow-hidden">
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}"
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                        </div>
+                    {% else %}
+                        <div class="h-20 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1628, #1a3a6b);">
+                            <i class="fas fa-newspaper text-green-400 text-3xl opacity-50"></i>
+                        </div>
+                    {% endif %}
+                    <div class="p-5">
+                        <div class="text-xs text-gray-400 mb-2 flex items-center gap-1">
+                            <i class="far fa-calendar-alt text-green-500"></i>
+                            {{ item.created_at|date:"d.m.Y" }}
+                        </div>
+                        <h3 class="font-bold text-navy-900 text-base leading-snug mb-2">{{ item.title }}</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">{{ item.content|truncatewords:30 }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
+            <i class="fas fa-newspaper text-5xl text-gray-300 mb-4 block"></i>
+            <p class="text-gray-400">Hozircha yangiliklar mavjud emas.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
