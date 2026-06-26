@@ -26,8 +26,7 @@
                 </h1>
 
                 <p class="text-gray-300 text-base leading-relaxed mb-8">
-                    Arxitektura, ta'lim va zamonaviy texnologiyalar kesishmasida chop etiladigan peer-reviewed
-                    ilmiy nashr. Tadqiqotchilar, professorlar va arxitektorlar uchun ochiq platforma.
+                    "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir.
                 </p>
 
                 <!-- STATS -->
@@ -60,6 +59,65 @@
                         Maqola yuborish
                     </a>
                 </div>
+
+                <!-- QUSHIMCHA MALUMOTLAR -->
+                <div class="mt-8 grid grid-cols-1 gap-3">
+                    <!-- VISITOR COUNTER -->
+                    <div class="rounded-xl px-4 py-3" style="background:rgba(22,163,74,0.12); border:1px solid rgba(22,163,74,0.3);">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 text-xs font-bold uppercase tracking-wider">Jonli statistika</span>
+                        </div>
+                        <div class="flex gap-6">
+                            <div>
+                                <div class="text-white font-black text-2xl leading-none" id="totalCounter">{{ total_visitors }}</div>
+                                <div class="text-gray-400 text-xs mt-1">Jami tashriflar</div>
+                            </div>
+                            <div class="w-px" style="background:rgba(255,255,255,0.1);"></div>
+                            <div>
+                                <div class="text-green-400 font-black text-2xl leading-none">{{ today_visitors }}</div>
+                                <div class="text-gray-400 text-xs mt-1">Bugungi tashriflar</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(22,163,74,0.2);">
+                            <i class="fas fa-shield-alt text-green-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-sm font-semibold">Double-blind peer review</div>
+                            <div class="text-gray-400 text-xs mt-0.5">Ko'rib chiqish muddati: 4–6 hafta</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(22,163,74,0.2);">
+                            <i class="fas fa-unlock text-green-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-sm font-semibold">Open Access jurnal</div>
+                            <div class="text-gray-400 text-xs mt-0.5">Barcha maqolalar bepul ochiq</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(22,163,74,0.2);">
+                            <i class="fas fa-calendar-alt text-green-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-sm font-semibold">Yiliga 4 marta nashr</div>
+                            <div class="text-gray-400 text-xs mt-0.5">ISSN (Online): 2181-XXXX</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(22,163,74,0.2);">
+                            <i class="fas fa-university text-green-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-white text-sm font-semibold">TIFT universiteti nashri</div>
+                            <div class="text-gray-400 text-xs mt-0.5">Toshkent, O'zbekiston · 2021</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- RIGHT: MUQOVA RASMI -->
@@ -70,22 +128,11 @@
                     <!-- Frame -->
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10 group-hover:border-green-500/40 transition-all duration-300"
                          style="max-width: 480px; width: 100%;">
-                        <img src="{% static 'images/muqova1.png' %}"
+                        <img src="{% static 'images/muqova1.jpg' %}"
                              alt="TIFT Jurnali muqovasi"
                              class="w-full h-auto block group-hover:scale-105 transition-transform duration-500">
-                        <!-- Bottom overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-900/95 to-transparent px-5 py-4">
-                            <div class="text-green-400 text-[10px] font-bold uppercase tracking-widest mb-1">Joriy son</div>
-                            {% if issues %}
-                                <div class="text-white text-sm font-bold">
-                                    Jild {{ issues.0.volume }}, Son {{ issues.0.number }} · {{ issues.0.year }}
-                                </div>
-                                <a href="{% url 'issue_detail' issues.0.pk %}"
-                                   class="inline-flex items-center gap-1 text-green-400 hover:text-green-300 text-xs font-semibold mt-1 transition-colors">
-                                    Maqolalarni ko'rish <i class="fas fa-arrow-right text-[9px]"></i>
-                                </a>
-                            {% endif %}
-                        </div>
+                        <!-- Bottom overlay olib tashlandi -->
+                    </div>
                     </div>
                 </div>
             </div>
@@ -211,7 +258,7 @@
                                    class="text-navy-700 hover:text-navy-900 text-xs font-semibold flex items-center gap-1 transition-colors">
                                     Batafsil <i class="fas fa-arrow-right text-[10px]"></i>
                                 </a>
-                                <a href="{% url 'download_pdf' article.pk %}"
+                                <a href="{{ article.pdf_file.url }}"
                                    class="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-sm" download>
                                     <i class="fas fa-download"></i>
                                     PDF
