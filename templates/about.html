@@ -2,7 +2,23 @@
 {% load static %}
 {% block title %}Jurnal haqida | TIFT Jurnali{% endblock %}
 
-{% block content %}
+{% block extra_scripts %}
+<script>
+const wrapper = document.getElementById('coverImg1')?.closest('.relative.rounded-2xl');
+const img1 = document.getElementById('coverImg1');
+const img2 = document.getElementById('coverImg2');
+if (wrapper && img1 && img2) {
+    wrapper.addEventListener('mouseenter', () => {
+        img1.style.opacity = '0';
+        img2.style.opacity = '1';
+    });
+    wrapper.addEventListener('mouseleave', () => {
+        img1.style.opacity = '1';
+        img2.style.opacity = '0';
+    });
+}
+</script>
+{% endblock %}{% block content %}
 
 <!-- HEADER -->
 <div class="bg-navy-900 text-white py-12 relative overflow-hidden">
@@ -33,9 +49,18 @@
                 <div class="absolute -inset-3 bg-green-500/15 rounded-3xl blur-2xl group-hover:bg-green-500/25 transition-all duration-500"></div>
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10 group-hover:border-green-500/40 transition-all duration-300"
                      style="max-width: 420px; width: 100%;">
+                    <!-- muqova1 — default -->
                     <img src="{% static 'images/muqova1.png' %}"
                          alt="TIFT Jurnali muqovasi"
-                         class="w-full h-auto block group-hover:scale-105 transition-transform duration-500">
+                         class="w-full h-auto block transition-all duration-500"
+                         id="coverImg1"
+                         style="opacity:1;">
+                    <!-- muqova2 — hover da chiqadi -->
+                    <img src="{% static 'images/muqova2 (2).png' %}"
+                         alt="TIFT Jurnali muqovasi 2"
+                         class="w-full h-auto block transition-all duration-500 absolute inset-0"
+                         id="coverImg2"
+                         style="opacity:0;">
                 </div>
             </div>
         </div>
