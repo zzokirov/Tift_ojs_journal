@@ -3,7 +3,60 @@
 
 {% block title %}Bosh sahifa | TIFT Ilmiy Jurnali{% endblock %}
 
-{% block content %}
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+const ctx = document.getElementById('visitChart');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ week_labels|safe }},
+            datasets: [{
+                label: 'Tashriflar',
+                data: {{ week_data|safe }},
+                borderColor: '#22c55e',
+                backgroundColor: 'rgba(34,197,94,0.15)',
+                borderWidth: 2,
+                pointBackgroundColor: '#22c55e',
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                fill: true,
+                tension: 0.4,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(10,22,40,0.9)',
+                    titleColor: '#22c55e',
+                    bodyColor: '#fff',
+                    borderColor: 'rgba(34,197,94,0.3)',
+                    borderWidth: 1,
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#9ca3af', font: { size: 10 } }
+                },
+                y: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#9ca3af', font: { size: 10 }, stepSize: 1 },
+                    beginAtZero: true,
+                }
+            }
+        }
+    });
+}
+</script>
+{% endblock %}{% block content %}
 
 <!-- HERO SECTION -->
 <section class="hero-gradient text-white relative overflow-hidden">
@@ -60,62 +113,34 @@
                     </a>
                 </div>
 
-                <!-- QUSHIMCHA MALUMOTLAR -->
-                <div class="mt-8 grid grid-cols-1 gap-3">
-                    <!-- VISITOR COUNTER -->
-                    <div class="rounded-xl px-4 py-3" style="background:rgba(22,163,74,0.12); border:1px solid rgba(22,163,74,0.3);">
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                            <span class="text-green-400 text-xs font-bold uppercase tracking-wider">Jonli statistika</span>
+                <!-- JONLI STATISTIKA — CHART -->
+                <div class="mt-8 rounded-2xl p-5" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span style="color:#22c55e; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;">Jonli statistika</span>
+                    </div>
+
+                    <!-- Raqamlar -->
+                    <div class="flex gap-6 mb-5">
+                        <div>
+                            <div class="text-white font-black text-3xl leading-none">{{ total_visitors }}</div>
+                            <div class="text-gray-400 text-xs mt-1">Jami tashriflar</div>
                         </div>
-                        <div class="flex gap-6">
-                            <div>
-                                <div class="text-white font-black text-2xl leading-none" id="totalCounter">{{ total_visitors }}</div>
-                                <div class="text-gray-400 text-xs mt-1">Jami tashriflar</div>
-                            </div>
-                            <div class="w-px" style="background:rgba(255,255,255,0.1);"></div>
-                            <div>
-                                <div class="text-green-400 font-black text-2xl leading-none">{{ today_visitors }}</div>
-                                <div class="text-gray-400 text-xs mt-1">Bugungi tashriflar</div>
-                            </div>
+                        <div class="w-px" style="background:rgba(255,255,255,0.1);"></div>
+                        <div>
+                            <div class="font-black text-3xl leading-none" style="color:#22c55e;">{{ today_visitors }}</div>
+                            <div class="text-gray-400 text-xs mt-1">Bugungi tashriflar</div>
+                        </div>
+                        <div class="w-px" style="background:rgba(255,255,255,0.1);"></div>
+                        <div>
+                            <div class="text-white font-black text-3xl leading-none">{{ recent_articles|length }}</div>
+                            <div class="text-gray-400 text-xs mt-1">Nashr maqolalar</div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(22,163,74,0.2);">
-                            <i class="fas fa-shield-alt text-green-400 text-sm"></i>
-                        </div>
-                        <div>
-                            <div class="text-white text-sm font-semibold">Double-blind peer review</div>
-                            <div class="text-gray-400 text-xs mt-0.5">Ko'rib chiqish muddati: 4–6 hafta</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(22,163,74,0.2);">
-                            <i class="fas fa-unlock text-green-400 text-sm"></i>
-                        </div>
-                        <div>
-                            <div class="text-white text-sm font-semibold">Open Access jurnal</div>
-                            <div class="text-gray-400 text-xs mt-0.5">Barcha maqolalar bepul ochiq</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(22,163,74,0.2);">
-                            <i class="fas fa-calendar-alt text-green-400 text-sm"></i>
-                        </div>
-                        <div>
-                            <div class="text-white text-sm font-semibold">Yiliga 4 marta nashr</div>
-                            <div class="text-gray-400 text-xs mt-0.5">ISSN (Online): 2181-XXXX</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(22,163,74,0.2);">
-                            <i class="fas fa-university text-green-400 text-sm"></i>
-                        </div>
-                        <div>
-                            <div class="text-white text-sm font-semibold">TIFT universiteti nashri</div>
-                            <div class="text-gray-400 text-xs mt-0.5">Toshkent, O'zbekiston · 2021</div>
-                        </div>
+                    <!-- Chart -->
+                    <div style="position:relative; height:120px;">
+                        <canvas id="visitChart"></canvas>
                     </div>
                 </div>
             </div>

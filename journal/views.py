@@ -17,13 +17,22 @@ def index(request):
         ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1'))
         if ',' in ip:
             ip = ip.split(',')[0].strip()
-        from datetime import date
+        from datetime import date, timedelta
         SiteVisit.objects.get_or_create(date=date.today(), ip_address=ip)
         total_visitors = SiteVisit.objects.values('ip_address').distinct().count()
         today_visitors = SiteVisit.objects.filter(date=date.today()).count()
+        # So'nggi 7 kunlik statistika
+        week_labels = []
+        week_data = []
+        for i in range(6, -1, -1):
+            d = date.today() - timedelta(days=i)
+            week_labels.append(d.strftime('%d.%m'))
+            week_data.append(SiteVisit.objects.filter(date=d).count())
     except Exception:
         total_visitors = 0
         today_visitors = 0
+        week_labels = []
+        week_data = []
 
     query = request.GET.get('q')
     recent_articles = Article.objects.filter(status='published').order_by('-created_at')
@@ -41,6 +50,8 @@ def index(request):
         'query': query,
         'total_visitors': total_visitors,
         'today_visitors': today_visitors,
+        'week_labels': week_labels,
+        'week_data': week_data,
     })
 
 
