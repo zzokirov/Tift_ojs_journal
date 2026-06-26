@@ -19,7 +19,7 @@ def index(request):
             ip = ip.split(',')[0].strip()
         from datetime import date, timedelta
         SiteVisit.objects.get_or_create(date=date.today(), ip_address=ip)
-        total_visitors = SiteVisit.objects.values('ip_address').distinct().count()
+        total_visitors = SiteVisit.objects.count()
         today_visitors = SiteVisit.objects.filter(date=date.today()).count()
         # So'nggi 7 kunlik statistika
         week_labels = []
