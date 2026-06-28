@@ -91,24 +91,16 @@ body {
     width: 100%;
     border-top: 1pt solid #15803d;
     padding-top: 5pt;
-    display: table;
-    table-layout: fixed;
     font-family: Arial, sans-serif;
     font-size: 7.5pt;
     color: #555;
-}
-#page-footer .ftr-left  { display: table-cell; vertical-align: middle; }
-#page-footer .ftr-center {
-    display: table-cell;
-    vertical-align: middle;
     text-align: center;
+    line-height: 1.8;
+}
+#page-footer .ftr-page {
     font-weight: bold;
     color: #0a1628;
-}
-#page-footer .ftr-right {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: right;
+    margin-bottom: 2pt;
 }
 
 /* ── BADGE ── */
@@ -246,17 +238,9 @@ hr.div { border:none; border-top:0.5pt solid #e2e8f0; margin:12pt 0; }
 
 <!-- ══ PASTKI KOLONTITUL ══ -->
 <div id="page-footer">
-    <div class="ftr-left">
-        Toshkent sh., Amir Temur ko'chasi, 108<br>
-        Tel: +998 71 238-74-80
-    </div>
-    <div class="ftr-center">
-        – <pdf:pagenumber> –
-    </div>
-    <div class="ftr-right">
-        journal@tift.uz<br>
-        www.tift.uz
-    </div>
+    <div class="ftr-page">– <pdf:pagenumber> –</div>
+    <div>Toshkent sh., Amir Temur ko'chasi, 108 &nbsp;|&nbsp; Tel: +998 71 238-74-80</div>
+    <div>journal@tift.uz &nbsp;|&nbsp; www.tift.uz &nbsp;|&nbsp; ISSN: 2181-XXXX</div>
 </div>
 
 <!-- ══ BADGES ══ -->
@@ -303,6 +287,11 @@ hr.div { border:none; border-top:0.5pt solid #e2e8f0; margin:12pt 0; }
 {% if article.content %}
     <h2 class="sec">Maqola matni</h2>
     <div class="content">{{ article.content|safe }}</div>
+    <hr class="div">
+{% else %}
+    <div style="font-size:10pt; color:#666; font-style:italic; padding:12pt; text-align:center; border:0.5pt dashed #ccc; border-radius:4pt; margin:10pt 0;">
+        Maqola to'liq matni hali qo'shilmagan.
+    </div>
     <hr class="div">
 {% endif %}
 
