@@ -5,262 +5,318 @@
 
 {% block content %}
 
-<!-- BREADCRUMB + HEADER -->
-<div class="bg-navy-900 text-white py-10 relative overflow-hidden">
+<!-- ═══ HEADER ═══ -->
+<div class="bg-navy-900 text-white relative overflow-hidden" style="padding:2.5rem 0;">
     <div class="absolute inset-0 opacity-5"
-         style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
+         style="background-image:linear-gradient(rgba(255,255,255,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:32px 32px;"></div>
+    <!-- Green accent line -->
+    <div class="absolute left-0 top-0 bottom-0 w-1" style="background:linear-gradient(180deg,#22c55e,#16a34a);"></div>
+
     <div class="site-container px-4 relative">
         <!-- Breadcrumb -->
-        <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
+        <nav class="flex flex-wrap items-center gap-2 text-xs mb-4" style="color:#6b7280;">
             <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
                 <i class="fas fa-home text-[10px]"></i> Bosh sahifa
             </a>
-            <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
+            <i class="fas fa-chevron-right text-[8px]"></i>
             {% if article.issue %}
                 <a href="{% url 'issue_detail' article.issue.pk %}" class="hover:text-green-400 transition-colors">
                     Jild {{ article.issue.volume }}, Son {{ article.issue.number }}
                 </a>
-                <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
+                <i class="fas fa-chevron-right text-[8px]"></i>
             {% endif %}
-            <span class="text-gray-500 truncate max-w-xs">{{ article.title|truncatewords:8 }}</span>
+            <span style="color:#9ca3af;" class="truncate max-w-xs">{{ article.title|truncatewords:8 }}</span>
         </nav>
 
-        <!-- Status badges -->
+        <!-- Badges -->
         <div class="flex flex-wrap gap-2 mb-4">
-            <span class="inline-flex items-center gap-1.5 bg-green-500/10 border border-green-500/30 text-green-400 px-3 py-1 rounded-full text-xs font-semibold">
-                <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
+                  style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);color:#22c55e;">
+                <span class="w-1.5 h-1.5 rounded-full" style="background:#22c55e;"></span>
                 Chop etilgan
             </span>
+            {% if article.category %}
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
+                      style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);color:#a5b4fc;">
+                    <i class="fas fa-tag text-[9px]"></i>
+                    {{ article.category.code }} — {{ article.category.name }}
+                </span>
+            {% endif %}
             {% if article.issue %}
-                <span class="inline-flex items-center gap-1.5 bg-green-600/10 border border-green-500/30 text-green-400 px-3 py-1 rounded-full text-xs font-semibold">
-                    <i class="fas fa-book text-[10px]"></i>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
+                      style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#cbd5e1;">
+                    <i class="fas fa-book text-[9px]"></i>
                     Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}
                 </span>
             {% endif %}
-            <span class="inline-flex items-center gap-1.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 px-3 py-1 rounded-full text-xs font-semibold">
-                <i class="fas fa-unlock text-[10px]"></i>
-                Open Access
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
+                  style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#6ee7b7;">
+                <i class="fas fa-unlock text-[9px]"></i> Open Access
             </span>
         </div>
 
-        <h1 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-white max-w-4xl">
+        <!-- Title -->
+        <h1 class="font-serif font-bold leading-snug text-white mb-4"
+            style="font-size:clamp(1.3rem,2.5vw,2.2rem); max-width:900px;">
             {{ article.title }}
         </h1>
+
+        <!-- Authors row -->
+        <div class="flex flex-wrap items-center gap-4 text-sm" style="color:#94a3b8;">
+            <span class="flex items-center gap-2">
+                <i class="fas fa-users text-green-500 text-xs"></i>
+                {% if article.authors %}
+                    {{ article.authors }}
+                {% else %}
+                    {{ article.author.get_full_name|default:article.author.username }}
+                {% endif %}
+            </span>
+            {% if article.published_at %}
+                <span class="flex items-center gap-1.5">
+                    <i class="far fa-calendar-check text-green-500 text-xs"></i>
+                    {{ article.published_at|date:"d.m.Y" }}
+                </span>
+            {% endif %}
+            <span class="flex items-center gap-1.5">
+                <i class="far fa-eye text-blue-400 text-xs"></i>
+                {{ article.views_count }} ko'rish
+            </span>
+            <span class="flex items-center gap-1.5">
+                <i class="fas fa-download text-green-400 text-xs"></i>
+                {{ article.downloads_count }} yuklab olish
+            </span>
+        </div>
     </div>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- ═══ MAIN CONTENT ═══ -->
 <div class="site-container px-4 py-10">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
 
-        <!-- ARTICLE BODY -->
-        <div class="lg:col-span-2 space-y-6">
+        <!-- LEFT: ARTICLE BODY -->
+        <div class="xl:col-span-3 space-y-6">
 
-            <!-- Author info -->
-            <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                    <i class="fas fa-user-circle text-navy-400"></i> Muallif ma'lumotlari
-                </h2>
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-navy-700 to-navy-900 rounded-xl flex items-center justify-center text-green-400 font-black text-xl shadow-lg flex-shrink-0">
-                        {{ article.author.get_full_name|default:article.author.username|first|upper }}
-                    </div>
-                    <div>
-                        <div class="font-bold text-gray-900 text-lg leading-tight">
-                            {{ article.author.get_full_name|default:article.author.username }}
-                        </div>
-                        {% if article.author.institution %}
-                            <div class="text-gray-500 text-sm mt-1 flex items-center gap-1.5">
-                                <i class="fas fa-university text-green-500 text-xs"></i>
-                                {{ article.author.institution }}
-                            </div>
-                        {% endif %}
-                        <div class="flex flex-wrap gap-4 mt-3 text-xs text-gray-500">
-                            <span class="flex items-center gap-1.5">
-                                <i class="far fa-calendar-alt text-green-500/80"></i>
-                                Yuborilgan: {{ article.created_at|date:"d.m.Y" }}
-                            </span>
-                            <span class="flex items-center gap-1.5">
-                                <i class="far fa-eye text-blue-500/80"></i>
-                                {{ article.views_count }} ko'rish
-                            </span>
-                            <span class="flex items-center gap-1.5">
-                                <i class="fas fa-download text-green-500/80"></i>
-                                {{ article.downloads_count }} yuklab olish
-                            </span>
-                        </div>
-                    </div>
+            <!-- ANNOTATSIYA -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
+                    <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
+                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">Annotatsiya</h2>
+                </div>
+                <div class="px-6 py-5">
+                    <p class="leading-relaxed text-justify italic"
+                       style="color:#374151;font-size:clamp(0.875rem,1.05vw,1rem);word-break:break-word;border-left:3px solid #22c55e;padding-left:1rem;">
+                        {{ article.abstract }}
+                    </p>
                 </div>
             </div>
 
-            <!-- Abstract -->
-            <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                <h2 class="font-bold text-navy-900 text-lg mb-4 flex items-center gap-2">
-                    <span class="w-1 h-5 bg-green-600 rounded-full block"></span>
-                    Annotatsiya
-                </h2>
-                <div class="section-divider mb-4 ml-3"></div>
-                <p class="text-gray-700 leading-relaxed text-justify italic bg-gray-50 p-4 rounded-xl border-l-4 border-navy-300 text-sm" style="word-break: break-word; overflow-wrap: break-word;">
-                    {{ article.abstract }}
-                </p>
-            </div>
-
-            <!-- Keywords -->
-            <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                <h2 class="font-bold text-navy-900 text-base mb-4 flex items-center gap-2">
-                    <span class="w-1 h-5 bg-green-600 rounded-full block"></span>
-                    Kalit so'zlar
-                </h2>
+            <!-- KALIT SO'ZLAR -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+                <h3 class="font-bold text-navy-900 text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
+                    <i class="fas fa-tags text-green-500 text-xs"></i> Kalit so'zlar
+                </h3>
                 <div class="flex flex-wrap gap-2">
                     {% for tag in article.keywords.split %}
-                        <span class="inline-flex items-center gap-1 bg-navy-50 text-navy-700 border border-navy-100 px-3 py-1.5 rounded-full text-sm font-medium hover:bg-navy-100 transition-colors cursor-default">
-                            <i class="fas fa-tag text-[9px] text-green-500"></i>
+                        <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium"
+                              style="background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;">
+                            <i class="fas fa-tag text-[9px]" style="color:#22c55e;"></i>
                             {{ tag|cut:"," }}
                         </span>
                     {% endfor %}
                 </div>
             </div>
 
-            <!-- Citation -->
-            <div class="bg-gray-50 rounded-2xl border border-gray-200 p-6">
-                <h2 class="font-bold text-gray-700 text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
-                    <i class="fas fa-quote-left text-green-500 text-base"></i>
-                    Iqtibos keltirish (APA format)
-                </h2>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 relative group">
-                    <p class="text-sm text-gray-600 font-mono leading-relaxed pr-8" id="citationText">
-                        {{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}. ({{ article.issue.year|default:"2026" }}). {{ article.title }}. <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %}, <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
+            <!-- MAQOLA MATNI -->
+            {% if article.content %}
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
+                    <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
+                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">Maqola matni</h2>
+                </div>
+                <div class="px-6 py-6 prose prose-lg max-w-none"
+                     style="color:#1e293b;line-height:1.8;font-size:clamp(0.9rem,1.05vw,1rem);">
+                    {{ article.content|safe }}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- IQTIBOS -->
+            <div class="rounded-2xl p-5" style="background:#f8fafc;border:1px solid #e2e8f0;">
+                <h3 class="font-bold text-sm mb-3 flex items-center gap-2 uppercase tracking-wider" style="color:#475569;">
+                    <i class="fas fa-quote-left text-green-500"></i> Iqtibos (APA)
+                </h3>
+                <div class="relative group">
+                    <p class="font-mono leading-relaxed pr-10" id="citationText"
+                       style="font-size:0.82rem;color:#64748b;word-break:break-word;">
+                        {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
+                        ({{ article.published_at.year|default:article.issue.year|default:"2026" }}).
+                        {{ article.title }}.
+                        <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %}, <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
                     </p>
-                    <button onclick="copyToClipboard()"
-                            class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-navy-800 hover:bg-navy-700 text-white p-1.5 rounded-lg"
-                            title="Nusxa olish">
+                    <button onclick="copyAPA()"
+                            class="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg"
+                            style="background:#0f172a;color:white;" title="Nusxa olish">
                         <i class="fas fa-copy text-xs"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- MUALLIF BOSHQA MAQOLALARI -->
-            {% if author_articles %}
-            <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                <h2 class="font-bold text-navy-900 text-lg mb-4 flex items-center gap-2">
-                    <span class="w-1 h-5 bg-green-600 rounded-full block"></span>
-                    Muallif boshqa maqolalari
-                </h2>
-                <div class="section-divider mb-4 ml-3"></div>
-                <ul class="divide-y divide-gray-50">
-                    {% for other in author_articles %}
-                        <li class="py-3 flex items-start gap-3 group">
-                            <div class="w-7 h-7 bg-navy-900 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <i class="fas fa-file-alt text-green-400 text-[10px]"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <a href="{% url 'article_detail' other.pk %}"
-                                   class="text-sm font-semibold text-navy-800 hover:text-green-700 transition-colors leading-snug block">
-                                    {{ other.title }}
-                                </a>
-                                <div class="flex items-center gap-3 mt-1 text-xs text-gray-400">
-                                    <span class="flex items-center gap-1">
-                                        <i class="far fa-calendar-alt text-green-500/70"></i>
-                                        {{ other.created_at|date:"d.m.Y" }}
-                                    </span>
-                                    {% if other.issue %}
-                                        <span class="flex items-center gap-1">
-                                            <i class="fas fa-book text-green-500/70"></i>
-                                            Jild {{ other.issue.volume }}, Son {{ other.issue.number }}
-                                        </span>
-                                    {% endif %}
-                                    <span class="flex items-center gap-1">
-                                        <i class="far fa-eye text-blue-400/70"></i>
-                                        {{ other.views_count }}
-                                    </span>
-                                </div>
-                            </div>
-                            <a href="{% url 'download_pdf' other.pk %}"
-                               class="flex-shrink-0 flex items-center gap-1 bg-gray-100 hover:bg-navy-800 hover:text-white text-gray-600 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-all" download>
-                                <i class="fas fa-download text-[10px]"></i> PDF
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-
         </div>
 
-        <!-- SIDEBAR -->
-        <aside class="space-y-5">
+        <!-- RIGHT: SIDEBAR -->
+        <aside class="xl:col-span-1 space-y-5">
 
-            <!-- Download button -->
-            <div class="bg-gradient-to-br from-navy-900 to-navy-700 rounded-2xl p-6 text-white shadow-xl text-center">
-                <div class="w-16 h-16 bg-red-500/10 border-2 border-red-400/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-file-pdf text-red-400 text-2xl"></i>
+            <!-- TIFT BREND KARTASI -->
+            <div class="rounded-2xl overflow-hidden shadow-xl text-white"
+                 style="background:linear-gradient(160deg,#0a1628 0%,#142d54 60%,#1a3a6b 100%);">
+                <!-- Logo header -->
+                <div class="px-5 py-4 flex items-center gap-3" style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                    <div class="w-9 h-9 bg-white rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+                        <img src="{% static 'images/tift.png' %}" alt="TIFT" class="w-7 h-7 object-contain"
+                             onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <div class="font-black text-sm leading-none">TIFT <span style="color:#22c55e;">JOURNAL</span></div>
+                        <div class="text-[9px] uppercase tracking-widest mt-0.5" style="color:#6b7280;">Arxitektura va Ta'lim</div>
+                    </div>
                 </div>
-                <h3 class="font-bold text-lg mb-1">To'liq matn</h3>
-                <p class="text-gray-400 text-xs mb-5">PDF formatida yuklab oling</p>
-                <a href="{% url 'download_pdf' article.pk %}"
-                   class="block w-full bg-green-600 hover:bg-green-500 text-navy-900 font-black py-3 rounded-xl transition-all hover:scale-105 shadow-lg hover:shadow-green-500/30 flex items-center justify-center gap-2" download>
-                    <i class="fas fa-download"></i>
-                    PDF Yuklab olish
-                </a>
+
+                <!-- PDF Yuklab olish -->
+                {% if article.template_pdf %}
+                    <div class="px-5 pt-5 pb-2">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                                 style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);">
+                                <i class="fas fa-file-pdf text-red-400"></i>
+                            </div>
+                            <div>
+                                <div class="text-white text-sm font-bold leading-none">Shablon PDF</div>
+                                <div class="text-xs mt-0.5" style="color:#6b7280;">Tahririyat shablonida</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'download_pdf' article.pk %}"
+                           class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
+                           style="background:#22c55e;color:#0a1628;">
+                            <i class="fas fa-download text-xs"></i> Yuklab olish
+                        </a>
+                    </div>
+                    <div class="px-5 pb-4 pt-2">
+                        <a href="{{ article.pdf_file.url }}" target="_blank"
+                           class="flex items-center justify-center gap-2 font-semibold text-xs py-2 rounded-xl w-full transition-all"
+                           style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#94a3b8;">
+                            <i class="fas fa-external-link-alt text-[10px]"></i> Muallif versiyasi
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="px-5 py-5">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                                 style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);">
+                                <i class="fas fa-file-pdf text-red-400"></i>
+                            </div>
+                            <div>
+                                <div class="text-white text-sm font-bold leading-none">To'liq matn</div>
+                                <div class="text-xs mt-0.5" style="color:#6b7280;">PDF formatda</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'download_pdf' article.pk %}"
+                           class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
+                           style="background:#22c55e;color:#0a1628;">
+                            <i class="fas fa-download text-xs"></i> PDF Yuklab olish
+                        </a>
+                    </div>
+                {% endif %}
             </div>
 
-            <!-- Article info -->
-            <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-                <h3 class="font-bold text-gray-900 text-sm mb-4 flex items-center gap-2">
-                    <i class="fas fa-info-circle text-navy-500 text-sm"></i>
-                    Maqola ma'lumotlari
-                </h3>
-                <dl class="space-y-3 text-sm">
-                    {% if article.issue %}
-                        <div class="flex justify-between items-start">
-                            <dt class="text-gray-500 text-xs uppercase tracking-wider">Jurnal soni</dt>
-                            <dd class="font-semibold text-navy-800 text-right text-xs">
-                                <a href="{% url 'issue_detail' article.issue.pk %}" class="hover:text-green-600 transition-colors">
-                                    Jild {{ article.issue.volume }}, Son {{ article.issue.number }}
-                                </a>
-                            </dd>
-                        </div>
-                        <div class="border-t border-gray-50"></div>
-                        <div class="flex justify-between">
-                            <dt class="text-gray-500 text-xs uppercase tracking-wider">Yil</dt>
-                            <dd class="font-semibold text-navy-800 text-xs">{{ article.issue.year }}</dd>
-                        </div>
-                        <div class="border-t border-gray-50"></div>
+            <!-- MAQOLA MA'LUMOTLARI -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="px-5 py-3.5 border-b border-gray-50 flex items-center gap-2">
+                    <i class="fas fa-info-circle text-green-500 text-sm"></i>
+                    <h3 class="font-bold text-navy-900 text-sm">Maqola ma'lumotlari</h3>
+                </div>
+                <dl class="divide-y divide-gray-50">
+                    {% if article.category %}
+                    <div class="flex justify-between items-start px-5 py-3">
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Yo'nalish</dt>
+                        <dd class="text-xs font-semibold text-right ml-2" style="color:#1e293b;max-width:60%;">{{ article.category.code }}</dd>
+                    </div>
                     {% endif %}
-                    <div class="flex justify-between">
-                        <dt class="text-gray-500 text-xs uppercase tracking-wider">Sana</dt>
-                        <dd class="font-semibold text-navy-800 text-xs">{{ article.created_at|date:"d.m.Y" }}</dd>
+                    {% if article.issue %}
+                    <div class="flex justify-between items-start px-5 py-3">
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Jurnal soni</dt>
+                        <dd class="text-xs font-semibold" style="color:#1e293b;">
+                            <a href="{% url 'issue_detail' article.issue.pk %}" class="hover:text-green-600 transition-colors">
+                                Jild {{ article.issue.volume }}, Son {{ article.issue.number }}
+                            </a>
+                        </dd>
                     </div>
-                    <div class="border-t border-gray-50"></div>
-                    <div class="flex justify-between">
-                        <dt class="text-gray-500 text-xs uppercase tracking-wider">Ko'rishlar</dt>
-                        <dd class="font-semibold text-navy-800 text-xs">{{ article.views_count }}</dd>
+                    <div class="flex justify-between px-5 py-3">
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Yil</dt>
+                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.issue.year }}</dd>
                     </div>
-                    <div class="border-t border-gray-50"></div>
-                    <div class="flex justify-between">
-                        <dt class="text-gray-500 text-xs uppercase tracking-wider">Yuklab olish</dt>
-                        <dd class="font-semibold text-navy-800 text-xs">{{ article.downloads_count }}</dd>
+                    {% endif %}
+                    {% if article.published_at %}
+                    <div class="flex justify-between px-5 py-3">
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Chop etilgan</dt>
+                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.published_at|date:"d.m.Y" }}</dd>
                     </div>
-                    <div class="border-t border-gray-50"></div>
-                    <div class="flex justify-between">
-                        <dt class="text-gray-500 text-xs uppercase tracking-wider">Kirish</dt>
-                        <dd class="text-xs">
-                            <span class="bg-green-50 text-green-700 border border-green-200 px-2 py-0.5 rounded-full font-medium">
-                                Open Access
+                    {% endif %}
+                    <div class="flex justify-between px-5 py-3">
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Ko'rishlar</dt>
+                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.views_count }}</dd>
+                    </div>
+                    <div class="flex justify-between px-5 py-3">
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Yuklamalar</dt>
+                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.downloads_count }}</dd>
+                    </div>
+                    <div class="flex justify-between items-center px-5 py-3">
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Kirish</dt>
+                        <dd>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold"
+                                  style="background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;">
+                                <i class="fas fa-unlock text-[9px]"></i> Open Access
                             </span>
                         </dd>
                     </div>
                 </dl>
             </div>
 
-            <!-- Back link -->
-            <a href="{% url 'index' %}"
-               class="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-xl text-sm font-medium transition-colors w-full">
-                <i class="fas fa-arrow-left text-xs"></i>
-                Bosh sahifaga qaytish
-            </a>
-        </aside>
+            <!-- MUALLIF -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <h3 class="font-bold text-navy-900 text-sm mb-4 flex items-center gap-2">
+                    <i class="fas fa-user-circle text-green-500 text-sm"></i> Muallif
+                </h3>
+                <div class="flex items-start gap-3">
+                    <div class="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg flex-shrink-0"
+                         style="background:linear-gradient(135deg,#142d54,#0a1628);color:#22c55e;">
+                        {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                    </div>
+                    <div>
+                        <div class="font-bold text-navy-900 text-sm">
+                            {% if article.authors %}
+                                {{ article.authors|truncatewords:4 }}
+                            {% else %}
+                                {{ article.author.get_full_name|default:article.author.username }}
+                            {% endif %}
+                        </div>
+                        {% if article.author.institution %}
+                            <div class="text-xs mt-1 flex items-center gap-1.5" style="color:#64748b;">
+                                <i class="fas fa-university text-green-500 text-[9px]"></i>
+                                {{ article.author.institution }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
+            <!-- BOSH SAHIFAGA QAYTISH -->
+            <a href="{% url 'index' %}"
+               class="flex items-center justify-center gap-2 font-medium text-sm py-3 rounded-xl transition-colors w-full"
+               style="background:#f1f5f9;color:#475569;">
+                <i class="fas fa-arrow-left text-xs"></i> Bosh sahifaga qaytish
+            </a>
+
+        </aside>
     </div>
 </div>
 
@@ -268,14 +324,12 @@
 
 {% block extra_scripts %}
 <script>
-function copyToClipboard() {
-    const text = document.getElementById('citationText').innerText;
-    navigator.clipboard.writeText(text).then(() => {
+function copyAPA() {
+    const t = document.getElementById('citationText').innerText;
+    navigator.clipboard.writeText(t).then(() => {
         const btn = event.currentTarget;
         btn.innerHTML = '<i class="fas fa-check text-xs text-green-400"></i>';
-        setTimeout(() => {
-            btn.innerHTML = '<i class="fas fa-copy text-xs"></i>';
-        }, 2000);
+        setTimeout(() => btn.innerHTML = '<i class="fas fa-copy text-xs"></i>', 2000);
     });
 }
 </script>

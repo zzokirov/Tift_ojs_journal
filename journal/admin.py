@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
-from .models import User, JournalIssue, Article, StaffMember, Conference, News, Document
+from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, Document
 
 
 # ─── USER ADMIN ───────────────────────────────────────────────────────────────
@@ -51,7 +51,14 @@ class CustomUserAdmin(UserAdmin):
         return super().get_queryset(request).prefetch_related('articles')
 
 
-# ─── JOURNAL ISSUE ADMIN ──────────────────────────────────────────────────────
+@admin.register(ArticleCategory)
+class ArticleCategoryAdmin(admin.ModelAdmin):
+    list_display = ('code', 'name', 'order')
+    list_editable = ('order',)
+    ordering = ('order', 'code')
+
+
+
 
 @admin.register(JournalIssue)
 class JournalIssueAdmin(admin.ModelAdmin):
@@ -105,13 +112,13 @@ class ArticleAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Maqola ma'lumotlari", {
-            'fields': ('title', 'abstract', 'keywords')
+            'fields': ('title', 'authors', 'abstract', 'keywords', 'content')
         }),
         ("Muallif va jurnal", {
-            'fields': ('author', 'issue')
+            'fields': ('author', 'issue', 'category')
         }),
-        ("Holat va fayl", {
-            'fields': ('status', 'pdf_file', 'pdf_link')
+        ("Holat va fayllar", {
+            'fields': ('status', 'published_at', 'pdf_file', 'pdf_link', 'template_pdf')
         }),
         ("Statistika", {
             'fields': ('views_count', 'downloads_count', 'created_at', 'updated_at'),

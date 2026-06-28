@@ -46,26 +46,62 @@ def article_upload_path(instance, filename):
     return f"articles_pdf/{filename}"
 
 
+def article_template_pdf_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return f"articles_template/{uuid.uuid4()}.{ext}"
+
+
+# ─── YO'NALISH / KATEGORIYA ───────────────────────────────────────────────────
+
+class ArticleCategory(models.Model):
+    code  = models.CharField(max_length=20, unique=True, verbose_name="Kod (masalan: 18.00.00)")
+    name  = models.CharField(max_length=200, verbose_name="Nomi")
+    order = models.PositiveIntegerField(default=0, verbose_name="Tartib")
+
+    class Meta:
+        ordering = ['order', 'code']
+        verbose_name = "Yo'nalish"
+        verbose_name_plural = "Yo'nalishlar"
+
+    def __str__(self):
+        return f"{self.code} — {self.name}"
+
+
 class Article(models.Model):
     STATUS_CHOICES = (
-        ('submitted', 'Yuborildi'),
+        ('submitted',    'Yuborildi'),
         ('under_review', 'Taqriz jarayonida'),
-        ('accepted', 'Qabul qilindi'),
-        ('rejected', 'Rad etildi'),
-        ('published', 'Chop etildi'),
+        ('accepted',     'Qabul qilindi'),
+        ('rejected',     'Rad etildi'),
+        ('published',    'Chop etildi'),
     )
 
-    title = models.CharField(max_length=500, verbose_name="Maqola sarlavhasi")
+    # Asosiy ma'lumotlar
+    title    = models.CharField(max_length=500, verbose_name="Maqola sarlavhasi")
+    authors  = models.CharField(max_length=500, blank=True, verbose_name="Mualliflar (to'liq ro'yxat)")
     abstract = models.TextField(verbose_name="Annotatsiya / Abstract")
     keywords = models.CharField(max_length=255, verbose_name="Kalit so'zlar (vergul bilan ajrating)")
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name="Muallif")
-    issue = models.ForeignKey(JournalIssue, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Jurnal soni")
+    # Muallif (tizim foydalanuvchisi) va jurnal
+    author   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name="Muallif (foydalanuvchi)")
+    issue    = models.ForeignKey(JournalIssue, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Jurnal soni")
+    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Yo'nalish / Kategoriya")
 
+    # Holat
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='submitted', verbose_name="Maqola holati")
-    pdf_file = models.FileField(upload_to=article_upload_path, verbose_name="PDF Fayl")
 
-    views_count = models.PositiveIntegerField(default=0, verbose_name="Ko'rishlar soni")
+    # Maqola matni (HTML)
+    content = models.TextField(blank=True, verbose_name="Maqola matni (HTML)")
+
+    # Fayllar
+    pdf_file     = models.FileField(upload_to=article_upload_path, verbose_name="PDF Fayl (muallif tomonidan yuborilgan)")
+    template_pdf = models.FileField(upload_to=article_template_pdf_path, null=True, blank=True, verbose_name="Shablon PDF (tahririyat tomonidan)")
+
+    # Chop etilgan sana
+    published_at = models.DateField(null=True, blank=True, verbose_name="Chop etilgan sana")
+
+    # Statistika
+    views_count     = models.PositiveIntegerField(default=0, verbose_name="Ko'rishlar soni")
     downloads_count = models.PositiveIntegerField(default=0, verbose_name="Yuklab olishlar soni")
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yuborilgan sana")
