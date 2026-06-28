@@ -101,26 +101,58 @@ def article_detail(request, pk):
 
 def _extract_pdf_text_as_html(pdf_path):
     """
-    PDF fayldan faqat MATNNI o'qib HTML qaytaradi.
-    Rasmlar, rasm joylari va bo'sh joylar o'tkazib yuboriladi.
-    Jadvallar ham matn sifatida chiqariladi.
+    PDF fayldan matn, jadval va rasmlarni o'qib HTML qaytaradi.
+    - Matn bloklari: paragraf/sarlavha sifatida
+    - Rasm bloklari: PyMuPDF bilan render qilib base64 PNG sifatida
     PyMuPDF (fitz) ishlatiladi.
     """
     try:
         import fitz
         import html as html_lib
+        import base64
 
         doc = fitz.open(pdf_path)
         result_html = []
 
-        for page in doc:
-            # "dict" rejimida o'qiymiz — blok turlari aniq ko'rinadi
+        for page_idx, page in enumerate(doc):
             page_dict = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
-            page_width = page.rect.width  # sahifa kengligi (pt)
+            page_rect = page.rect
 
             for block in page_dict.get("blocks", []):
-                # Faqat matn bloklari (type=0), rasmlarni (type=1) skip
-                if block.get("type") != 0:
+                block_type = block.get("type", -1)
+
+                # ── RASM BLOKI (type=1) ──
+                if block_type == 1:
+                    try:
+                        # Rasm bbox ni olish
+                        bbox = block.get("bbox")
+                        if not bbox:
+                            continue
+                        rect = fitz.Rect(bbox)
+                        # Clip rect orqali faqat shu qismni render qilamiz
+                        mat = fitz.Matrix(2.0, 2.0)  # 2x zoom — sifat uchun
+                        clip = rect
+                        pix = page.get_pixmap(matrix=mat, clip=clip)
+                        img_bytes = pix.tobytes("png")
+                        b64 = base64.b64encode(img_bytes).decode('ascii')
+                        # Kenglikni pt da hisoblash (xhtml2pdf % ni tushunmaydi)
+                        img_width_pt = rect.width
+                        page_width_pt = page_rect.width
+                        # Maksimal kenglik = sahifa kengligi (margins hisobga olingan)
+                        content_width_pt = page_width_pt - 142  # ~5cm margin jami
+                        render_width_pt = min(img_width_pt, content_width_pt)
+                        result_html.append(
+                            f'<div class="doc-img-wrap">'
+                            f'<img src="data:image/png;base64,{b64}" '
+                            f'style="width:{render_width_pt:.0f}pt;max-width:100%;height:auto;display:block;margin:6pt auto;"/>'
+                            f'</div>'
+                        )
+                    except Exception:
+                        pass
+                    continue
+
+                # ── MATN BLOKI (type=0) ──
+                if block_type != 0:
                     continue
 
                 block_lines = []
@@ -135,12 +167,9 @@ def _extract_pdf_text_as_html(pdf_path):
                 if not block_lines:
                     continue
 
-                # Blok pozitsiyasi bo'yicha sarlavha yoki paragraf aniqlash
-                # bbox: (x0, y0, x1, y1)
-                bbox = block.get("bbox", [0, 0, 0, 0])
                 block_text = " ".join(block_lines)
 
-                # Birinchi span ni tekshirib font kattaligini olamiz
+                # Font o'lcham va bold tekshirish
                 font_size = 11
                 is_bold = False
                 if block.get("lines"):
@@ -148,7 +177,7 @@ def _extract_pdf_text_as_html(pdf_path):
                     if first_spans:
                         font_size = first_spans[0].get("size", 11)
                         flags = first_spans[0].get("flags", 0)
-                        is_bold = bool(flags & 16)  # bold flag
+                        is_bold = bool(flags & 16)
 
                 escaped = html_lib.escape(block_text)
 
@@ -167,32 +196,74 @@ def _extract_pdf_text_as_html(pdf_path):
 
 def _extract_docx_text_as_html(docx_path):
     """
-    Word (.docx) fayldan matnni, sarlavhalarni va jadvallarni HTML ga o'giradi.
-    Rasmlar skip qilinadi (bo'sh joy qoldirmaydi).
+    Word (.docx) fayldan matn, sarlavha, jadval va rasmlarni HTML ga o'giradi.
+    - Paragraflar: stil bo'yicha sarlavha/paragraf
+    - Jadvallar: to'liq HTML jadval
+    - Rasmlar: base64 PNG sifatida inline embed
     python-docx ishlatiladi.
     """
     try:
         import docx
         import html as html_lib
+        import base64
+        from docx.oxml.ns import qn
+        from lxml import etree
 
         doc = docx.Document(docx_path)
+
+        # Barcha relationships (rImage) dan rasm ma'lumotlarini olish
+        # doc.part.rels: {rId: rel}
+        def get_image_base64(rel_id):
+            try:
+                rel = doc.part.rels.get(rel_id)
+                if rel and "image" in rel.reltype:
+                    img_data = rel.target_part.blob
+                    ext = rel.target_part.content_type.split('/')[-1]
+                    if ext == 'jpeg':
+                        ext = 'jpg'
+                    b64 = base64.b64encode(img_data).decode('ascii')
+                    return f"data:image/{ext};base64,{b64}"
+            except Exception:
+                pass
+            return None
+
         result_html = []
 
-        # Paragraflar va jadvallar tartibini saqlash uchun
-        # docx.Document.element.body ichidagi barcha elementlarni ketma-ket o'tamiz
-        from docx.oxml.ns import qn
-
+        # Body ichidagi barcha elementlarni tartib bilan o'tamiz
         for child in doc.element.body:
             tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
 
+            # ── PARAGRAF ──
             if tag == 'p':
-                # Paragraf
                 para = None
                 for p in doc.paragraphs:
                     if p._element is child:
                         para = p
                         break
                 if para is None:
+                    continue
+
+                # Paragrafda rasm borligini tekshirish (drawing/blipFill)
+                drawings = child.findall('.//' + qn('a:blip'))
+                if drawings:
+                    # Rasmlar embed yoki link orqali
+                    for blip in drawings:
+                        r_embed = blip.get(qn('r:embed'))
+                        r_link = blip.get(qn('r:link'))
+                        rid = r_embed or r_link
+                        if rid:
+                            src = get_image_base64(rid)
+                            if src:
+                                result_html.append(
+                                    f'<div class="doc-img-wrap">'
+                                    f'<img src="{src}" style="max-width:100%;height:auto;display:block;margin:6pt auto;"/>'
+                                    f'</div>'
+                                )
+                    # Agar paragrafda matn ham bor bo'lsa
+                    text = para.text.strip()
+                    if text:
+                        escaped = html_lib.escape(text)
+                        result_html.append(f'<p class="img-caption">{escaped}</p>')
                     continue
 
                 text = para.text.strip()
@@ -209,15 +280,14 @@ def _extract_docx_text_as_html(docx_path):
                 elif 'heading' in style_name:
                     result_html.append(f'<h4 class="doc-subheading">{escaped}</h4>')
                 else:
-                    # Bold tekshirish
                     is_bold = any(run.bold for run in para.runs if run.text.strip())
                     if is_bold and len(text) < 120:
                         result_html.append(f'<p><strong>{escaped}</strong></p>')
                     else:
                         result_html.append(f'<p>{escaped}</p>')
 
+            # ── JADVAL ──
             elif tag == 'tbl':
-                # Jadval
                 tbl = None
                 for t in doc.tables:
                     if t._element is child:
@@ -238,8 +308,6 @@ def _extract_docx_text_as_html(docx_path):
                     table_html.append('</tr>')
                 table_html.append('</table>')
                 result_html.append('\n'.join(table_html))
-
-            # Rasmlar (sectPr, drawing va boshqalar) — skip
 
         return '\n'.join(result_html)
     except Exception:
