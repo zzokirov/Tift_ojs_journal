@@ -112,7 +112,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Maqola ma'lumotlari", {
-            'fields': ('title', 'authors', 'abstract', 'keywords', 'content')
+            'fields': ('title', 'authors', 'abstract', 'keywords')
         }),
         ("Muallif va jurnal", {
             'fields': ('author', 'issue', 'category')

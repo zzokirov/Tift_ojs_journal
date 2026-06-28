@@ -99,21 +99,46 @@ def article_detail(request, pk):
     })
 
 
+def _extract_pdf_text_as_html(pdf_path):
+    """
+    PDF fayldan matnni o'qib, paragraflar bilan HTML string qaytaradi.
+    PyMuPDF (fitz) ishlatiladi.
+    """
+    try:
+        import fitz  # PyMuPDF
+        doc = fitz.open(pdf_path)
+        pages_html = []
+        for page_num, page in enumerate(doc):
+            blocks = page.get_text("blocks")  # (x0, y0, x1, y1, text, block_no, block_type)
+            # Faqat matn bloklari (block_type == 0)
+            text_blocks = [b[4] for b in sorted(blocks, key=lambda b: (b[1], b[0])) if b[6] == 0]
+            for block_text in text_blocks:
+                # Har blokni paragraf sifatida qo'shamiz
+                cleaned = block_text.strip()
+                if cleaned:
+                    import html as html_lib
+                    escaped = html_lib.escape(cleaned).replace('\n', '<br/>')
+                    pages_html.append(f'<p>{escaped}</p>')
+        doc.close()
+        return '\n'.join(pages_html)
+    except Exception:
+        return ''
+
+
 def download_pdf(request, pk):
-    """PDF yuklab olish.
+    """PDF yuklab olish — TIFT kolontitullar bilan.
 
-    Agar maqolada HTML matn (content) mavjud bo'lsa — xhtml2pdf bilan
-    TIFT shablonida PDF yasab qaytaradi (yuqori/pastki kolontitullar bilan).
-
-    Agar content bo'sh bo'lsa — muallif yuklagan asl PDF faylni qaytaradi.
+    Muallif yuklagan PDF fayldan matnni avtomatik o'qib,
+    xhtml2pdf orqali kolontitullar bilan yangi PDF qaytaradi.
+    Agar matn o'qib bo'lmasa — asl PDF faylni qaytaradi.
     """
     import os
     from django.http import HttpResponse, Http404, FileResponse
     from django.shortcuts import redirect as _redirect
+    from django.template.loader import render_to_string
 
     article = get_object_or_404(Article, pk=pk, status='published')
 
-    # Yuklab olishlar sonini oshir
     Article.objects.filter(pk=pk).update(
         downloads_count=article.downloads_count + 1
     )
@@ -121,33 +146,31 @@ def download_pdf(request, pk):
     safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
     filename = f"TIFT_{safe_title}.pdf"
 
-    # ── 1. Agar maqolada HTML matn bo'lsa: xhtml2pdf bilan shablon PDF ──
-    if article.content and article.content.strip():
+    # ── PDF fayldan matnni o'qib, shablon bilan PDF yasash ──
+    if article.pdf_file:
         try:
-            from django.template.loader import render_to_string
-            from xhtml2pdf import pisa
-            import io
+            pdf_path = article.pdf_file.path
+            if os.path.exists(pdf_path):
+                pdf_content_html = _extract_pdf_text_as_html(pdf_path)
 
-            html_string = render_to_string('article_pdf.html', {
-                'article': article,
-                'request': request,
-            })
-            buffer = io.BytesIO()
-            pisa_status = pisa.CreatePDF(
-                src=html_string,
-                dest=buffer,
-                encoding='utf-8',
-            )
-            if not pisa_status.err:
-                pdf_bytes = buffer.getvalue()
-                buffer.close()
-                response = HttpResponse(pdf_bytes, content_type='application/pdf')
-                response['Content-Disposition'] = f'attachment; filename="{filename}"'
-                return response
+                from xhtml2pdf import pisa
+                import io
+
+                html_string = render_to_string('article_pdf.html', {
+                    'article': article,
+                    'request': request,
+                    'pdf_content_html': pdf_content_html,
+                })
+                buffer = io.BytesIO()
+                pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
+                if not pisa_status.err:
+                    response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
+                    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+                    return response
         except Exception:
-            pass  # Xatolik bo'lsa asl faylga o'tamiz
+            pass
 
-    # ── 2. Asl PDF faylni qaytarish ──
+    # ── Fallback: asl PDF faylni qaytarish ──
     if not article.pdf_file:
         raise Http404("Maqola fayli topilmadi.")
 
@@ -167,10 +190,12 @@ def download_pdf(request, pk):
 
 
 def generate_article_pdf(request, pk):
-    """Maqolani TIFT shablonida PDF ga aylantiradi (brauzerda ochish uchun)"""
+    """Maqolani TIFT shablonida PDF ga aylantiradi (brauzerda ko'rish uchun).
+    Asl PDF fayldan matnni avtomatik o'qib, kolontitullar bilan chiqaradi.
+    """
     from django.template.loader import render_to_string
     from django.http import HttpResponse
-    import io
+    import io, os
 
     try:
         from xhtml2pdf import pisa
@@ -182,7 +207,21 @@ def generate_article_pdf(request, pk):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
         request.session[f'pdf_viewed_{pk}'] = True
 
-    html_string = render_to_string('article_pdf.html', {'article': article, 'request': request})
+    # PDF fayldan matnni o'qi
+    pdf_content_html = ''
+    if article.pdf_file:
+        try:
+            pdf_path = article.pdf_file.path
+            if os.path.exists(pdf_path):
+                pdf_content_html = _extract_pdf_text_as_html(pdf_path)
+        except Exception:
+            pass
+
+    html_string = render_to_string('article_pdf.html', {
+        'article': article,
+        'request': request,
+        'pdf_content_html': pdf_content_html,
+    })
     buffer = io.BytesIO()
     pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
 

@@ -350,15 +350,14 @@ h2.sec {
 
 <hr class="divider"/>
 
-<!-- Maqola matni -->
-{% if article.content %}
+<!-- Maqola matni (PDF dan avtomatik o'qilgan) -->
+{% if pdf_content_html %}
     <h2 class="sec">Maqola matni</h2>
-    <div class="content">{{ article.content|safe }}</div>
+    <div class="content">{{ pdf_content_html|safe }}</div>
     <hr class="divider"/>
 {% else %}
     <div class="pdf-notice">
-        Maqola to'liq matni tizimda HTML ko'rinishida saqlanmagan.<br/>
-        Muallif tomonidan yuborilgan asl PDF fayl asosida tayyorlangan.
+        Maqola matni o'qib bo'lmadi yoki PDF fayl mavjud emas.
     </div>
     <hr class="divider"/>
 {% endif %}
