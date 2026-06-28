@@ -17,7 +17,7 @@ class ArticleSubmissionForm(forms.ModelForm):
             'title':    forms.TextInput(attrs={'class': css_input, 'placeholder': 'Maqola sarlavhasi'}),
             'abstract': forms.Textarea(attrs={'class': css_textarea, 'rows': 5}),
             'keywords': forms.TextInput(attrs={'class': css_input, 'placeholder': 'Kalit so\'zlar (vergul bilan)'}),
-            'pdf_file': forms.FileInput(attrs={'class': 'hidden', 'accept': '.pdf'}),
+            'pdf_file': forms.FileInput(attrs={'class': 'hidden', 'accept': '.pdf,.doc,.docx'}),
         }
 
 

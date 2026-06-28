@@ -94,7 +94,7 @@ class Article(models.Model):
     content = models.TextField(blank=True, verbose_name="Maqola matni (HTML)")
 
     # Fayllar
-    pdf_file     = models.FileField(upload_to=article_upload_path, verbose_name="PDF Fayl (muallif tomonidan yuborilgan)")
+    pdf_file     = models.FileField(upload_to=article_upload_path, null=True, blank=True, verbose_name="Fayl (PDF yoki Word .docx)")
     template_pdf = models.FileField(upload_to=article_template_pdf_path, null=True, blank=True, verbose_name="Shablon PDF (tahririyat tomonidan)")
 
     # Chop etilgan sana

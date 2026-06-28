@@ -101,36 +101,168 @@ def article_detail(request, pk):
 
 def _extract_pdf_text_as_html(pdf_path):
     """
-    PDF fayldan matnni o'qib, paragraflar bilan HTML string qaytaradi.
+    PDF fayldan faqat MATNNI o'qib HTML qaytaradi.
+    Rasmlar, rasm joylari va bo'sh joylar o'tkazib yuboriladi.
+    Jadvallar ham matn sifatida chiqariladi.
     PyMuPDF (fitz) ishlatiladi.
     """
     try:
-        import fitz  # PyMuPDF
+        import fitz
+        import html as html_lib
+
         doc = fitz.open(pdf_path)
-        pages_html = []
-        for page_num, page in enumerate(doc):
-            blocks = page.get_text("blocks")  # (x0, y0, x1, y1, text, block_no, block_type)
-            # Faqat matn bloklari (block_type == 0)
-            text_blocks = [b[4] for b in sorted(blocks, key=lambda b: (b[1], b[0])) if b[6] == 0]
-            for block_text in text_blocks:
-                # Har blokni paragraf sifatida qo'shamiz
-                cleaned = block_text.strip()
-                if cleaned:
-                    import html as html_lib
-                    escaped = html_lib.escape(cleaned).replace('\n', '<br/>')
-                    pages_html.append(f'<p>{escaped}</p>')
+        result_html = []
+
+        for page in doc:
+            # "dict" rejimida o'qiymiz — blok turlari aniq ko'rinadi
+            page_dict = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
+            page_width = page.rect.width  # sahifa kengligi (pt)
+
+            for block in page_dict.get("blocks", []):
+                # Faqat matn bloklari (type=0), rasmlarni (type=1) skip
+                if block.get("type") != 0:
+                    continue
+
+                block_lines = []
+                for line in block.get("lines", []):
+                    line_text = ""
+                    for span in line.get("spans", []):
+                        line_text += span.get("text", "")
+                    stripped = line_text.strip()
+                    if stripped:
+                        block_lines.append(stripped)
+
+                if not block_lines:
+                    continue
+
+                # Blok pozitsiyasi bo'yicha sarlavha yoki paragraf aniqlash
+                # bbox: (x0, y0, x1, y1)
+                bbox = block.get("bbox", [0, 0, 0, 0])
+                block_text = " ".join(block_lines)
+
+                # Birinchi span ni tekshirib font kattaligini olamiz
+                font_size = 11
+                is_bold = False
+                if block.get("lines"):
+                    first_spans = block["lines"][0].get("spans", [])
+                    if first_spans:
+                        font_size = first_spans[0].get("size", 11)
+                        flags = first_spans[0].get("flags", 0)
+                        is_bold = bool(flags & 16)  # bold flag
+
+                escaped = html_lib.escape(block_text)
+
+                if font_size >= 14 or (font_size >= 12 and is_bold):
+                    result_html.append(f'<h2 class="doc-heading">{escaped}</h2>')
+                elif font_size >= 12:
+                    result_html.append(f'<h3 class="doc-subheading">{escaped}</h3>')
+                else:
+                    result_html.append(f'<p>{escaped}</p>')
+
         doc.close()
-        return '\n'.join(pages_html)
+        return '\n'.join(result_html)
     except Exception:
         return ''
+
+
+def _extract_docx_text_as_html(docx_path):
+    """
+    Word (.docx) fayldan matnni, sarlavhalarni va jadvallarni HTML ga o'giradi.
+    Rasmlar skip qilinadi (bo'sh joy qoldirmaydi).
+    python-docx ishlatiladi.
+    """
+    try:
+        import docx
+        import html as html_lib
+
+        doc = docx.Document(docx_path)
+        result_html = []
+
+        # Paragraflar va jadvallar tartibini saqlash uchun
+        # docx.Document.element.body ichidagi barcha elementlarni ketma-ket o'tamiz
+        from docx.oxml.ns import qn
+
+        for child in doc.element.body:
+            tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
+
+            if tag == 'p':
+                # Paragraf
+                para = None
+                for p in doc.paragraphs:
+                    if p._element is child:
+                        para = p
+                        break
+                if para is None:
+                    continue
+
+                text = para.text.strip()
+                if not text:
+                    continue
+
+                style_name = para.style.name.lower() if para.style else ''
+                escaped = html_lib.escape(text)
+
+                if 'heading 1' in style_name or style_name == 'title':
+                    result_html.append(f'<h2 class="doc-heading">{escaped}</h2>')
+                elif 'heading 2' in style_name:
+                    result_html.append(f'<h3 class="doc-subheading">{escaped}</h3>')
+                elif 'heading' in style_name:
+                    result_html.append(f'<h4 class="doc-subheading">{escaped}</h4>')
+                else:
+                    # Bold tekshirish
+                    is_bold = any(run.bold for run in para.runs if run.text.strip())
+                    if is_bold and len(text) < 120:
+                        result_html.append(f'<p><strong>{escaped}</strong></p>')
+                    else:
+                        result_html.append(f'<p>{escaped}</p>')
+
+            elif tag == 'tbl':
+                # Jadval
+                tbl = None
+                for t in doc.tables:
+                    if t._element is child:
+                        tbl = t
+                        break
+                if tbl is None:
+                    continue
+
+                table_html = ['<table class="doc-table">']
+                for i, row in enumerate(tbl.rows):
+                    table_html.append('<tr>')
+                    for cell in row.cells:
+                        cell_text = html_lib.escape(cell.text.strip())
+                        if i == 0:
+                            table_html.append(f'<th>{cell_text}</th>')
+                        else:
+                            table_html.append(f'<td>{cell_text}</td>')
+                    table_html.append('</tr>')
+                table_html.append('</table>')
+                result_html.append('\n'.join(table_html))
+
+            # Rasmlar (sectPr, drawing va boshqalar) — skip
+
+        return '\n'.join(result_html)
+    except Exception:
+        return ''
+
+
+def _get_article_content_html(article_file_path):
+    """Fayl kengaytmasiga qarab to'g'ri extractor chaqiradi."""
+    if not article_file_path:
+        return ''
+    ext = article_file_path.lower().rsplit('.', 1)[-1]
+    if ext in ('doc', 'docx'):
+        return _extract_docx_text_as_html(article_file_path)
+    else:
+        return _extract_pdf_text_as_html(article_file_path)
 
 
 def download_pdf(request, pk):
     """PDF yuklab olish — TIFT kolontitullar bilan.
 
-    Muallif yuklagan PDF fayldan matnni avtomatik o'qib,
+    Muallif yuklagan fayl (PDF yoki Word) dan matnni avtomatik o'qib,
     xhtml2pdf orqali kolontitullar bilan yangi PDF qaytaradi.
-    Agar matn o'qib bo'lmasa — asl PDF faylni qaytaradi.
+    Agar ishlamasa — asl faylni qaytaradi.
     """
     import os
     from django.http import HttpResponse, Http404, FileResponse
@@ -146,12 +278,11 @@ def download_pdf(request, pk):
     safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
     filename = f"TIFT_{safe_title}.pdf"
 
-    # ── PDF fayldan matnni o'qib, shablon bilan PDF yasash ──
     if article.pdf_file:
         try:
-            pdf_path = article.pdf_file.path
-            if os.path.exists(pdf_path):
-                pdf_content_html = _extract_pdf_text_as_html(pdf_path)
+            file_path = article.pdf_file.path
+            if os.path.exists(file_path):
+                content_html = _get_article_content_html(file_path)
 
                 from xhtml2pdf import pisa
                 import io
@@ -159,7 +290,7 @@ def download_pdf(request, pk):
                 html_string = render_to_string('article_pdf.html', {
                     'article': article,
                     'request': request,
-                    'pdf_content_html': pdf_content_html,
+                    'pdf_content_html': content_html,
                 })
                 buffer = io.BytesIO()
                 pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
@@ -170,7 +301,7 @@ def download_pdf(request, pk):
         except Exception:
             pass
 
-    # ── Fallback: asl PDF faylni qaytarish ──
+    # Fallback: asl faylni qaytarish
     if not article.pdf_file:
         raise Http404("Maqola fayli topilmadi.")
 
@@ -179,7 +310,7 @@ def download_pdf(request, pk):
         if os.path.exists(file_path):
             return FileResponse(
                 open(file_path, 'rb'),
-                content_type='application/pdf',
+                content_type='application/octet-stream',
                 as_attachment=True,
                 filename=filename,
             )
@@ -191,7 +322,7 @@ def download_pdf(request, pk):
 
 def generate_article_pdf(request, pk):
     """Maqolani TIFT shablonida PDF ga aylantiradi (brauzerda ko'rish uchun).
-    Asl PDF fayldan matnni avtomatik o'qib, kolontitullar bilan chiqaradi.
+    PDF yoki Word fayldan matnni avtomatik o'qib, kolontitullar bilan chiqaradi.
     """
     from django.template.loader import render_to_string
     from django.http import HttpResponse
@@ -207,20 +338,19 @@ def generate_article_pdf(request, pk):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
         request.session[f'pdf_viewed_{pk}'] = True
 
-    # PDF fayldan matnni o'qi
-    pdf_content_html = ''
+    content_html = ''
     if article.pdf_file:
         try:
-            pdf_path = article.pdf_file.path
-            if os.path.exists(pdf_path):
-                pdf_content_html = _extract_pdf_text_as_html(pdf_path)
+            file_path = article.pdf_file.path
+            if os.path.exists(file_path):
+                content_html = _get_article_content_html(file_path)
         except Exception:
             pass
 
     html_string = render_to_string('article_pdf.html', {
         'article': article,
         'request': request,
-        'pdf_content_html': pdf_content_html,
+        'pdf_content_html': content_html,
     })
     buffer = io.BytesIO()
     pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
