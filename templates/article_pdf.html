@@ -4,11 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <style>
-/* ═══════════════════════════════════════════
-   xhtml2pdf (ReportLab) PDF shabloni
-   Yuqori va pastki kolontitullar bilan
-═══════════════════════════════════════════ */
-
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
@@ -19,18 +14,18 @@ body {
     line-height: 1.65;
 }
 
-/* ── @PAGE sozlamalari ── */
+/* ── @PAGE — kolontitullar ── */
 @page {
     size: A4;
-    margin-top: 3.6cm;
-    margin-bottom: 3.2cm;
+    margin-top: 3.4cm;
+    margin-bottom: 3.0cm;
     margin-left: 2.5cm;
     margin-right: 2.5cm;
 
     @frame header_frame {
         -pdf-frame-content: page-header;
         left: 2.5cm;
-        top: 0.6cm;
+        top: 0.5cm;
         right: 2.5cm;
         height: 2.4cm;
     }
@@ -38,9 +33,9 @@ body {
     @frame footer_frame {
         -pdf-frame-content: page-footer;
         left: 2.5cm;
-        bottom: 0.5cm;
+        bottom: 0.4cm;
         right: 2.5cm;
-        height: 2.2cm;
+        height: 2.0cm;
     }
 }
 
@@ -80,9 +75,7 @@ body {
     font-weight: 900;
     color: #0a1628;
 }
-.hdr-journal-name-green {
-    color: #15803d;
-}
+.hdr-journal-name-green { color: #15803d; }
 .hdr-journal-sub {
     font-family: Arial, sans-serif;
     font-size: 7.5pt;
@@ -116,98 +109,7 @@ body {
     font-size: 8.5pt;
     text-align: center;
 }
-.ftr-info {
-    font-size: 7pt;
-    color: #666;
-}
-
-/* ── BADGE ── */
-.badges {
-    margin: 10pt 0 12pt 0;
-}
-.badge {
-    display: inline;
-    padding: 2pt 6pt;
-    border-radius: 8pt;
-    font-size: 7.5pt;
-    font-family: Arial, sans-serif;
-    font-weight: 600;
-    margin-right: 4pt;
-}
-.b-green  { background-color: #f0fdf4; color: #15803d; }
-.b-blue   { background-color: #eff6ff; color: #1d4ed8; }
-.b-purple { background-color: #faf5ff; color: #6d28d9; }
-.b-orange { background-color: #fff7ed; color: #c2410c; }
-
-/* ── SARLAVHA ── */
-h1.atitle {
-    font-family: Arial, sans-serif;
-    font-size: 15pt;
-    font-weight: 900;
-    color: #0a1628;
-    line-height: 1.3;
-    margin: 10pt 0 8pt 0;
-}
-
-/* ── MUALLIFLAR ── */
-.authors {
-    font-size: 10.5pt;
-    font-weight: bold;
-    color: #1e293b;
-    margin-bottom: 3pt;
-}
-.author-inst {
-    font-size: 9pt;
-    color: #555;
-    font-style: italic;
-    margin-bottom: 10pt;
-}
-
-/* ── META ── */
-.meta {
-    font-size: 8pt;
-    color: #555;
-    font-family: Arial, sans-serif;
-    border-top: 0.5pt solid #e2e8f0;
-    border-bottom: 0.5pt solid #e2e8f0;
-    padding: 5pt 0;
-    margin-bottom: 14pt;
-}
-
-/* ── SECTION SARLAVHA ── */
-h2.sec {
-    font-family: Arial, sans-serif;
-    font-size: 11pt;
-    font-weight: 700;
-    color: #0a1628;
-    margin: 14pt 0 5pt 0;
-    padding-left: 7pt;
-    border-left: 2.5pt solid #15803d;
-}
-
-/* ── ANNOTATSIYA BLOKI ── */
-.abstract {
-    background-color: #f8fafc;
-    border-left: 2.5pt solid #15803d;
-    padding: 9pt 11pt;
-    margin-bottom: 12pt;
-}
-.abstract p {
-    font-size: 10pt;
-    font-style: italic;
-    color: #374151;
-    text-align: justify;
-}
-
-/* ── KALIT SO'ZLAR ── */
-.kw {
-    font-size: 9.5pt;
-    margin-bottom: 14pt;
-}
-.kw-label {
-    color: #15803d;
-    font-weight: bold;
-}
+.ftr-info { font-size: 7pt; color: #666; }
 
 /* ── ASOSIY MATN ── */
 .content {
@@ -222,7 +124,7 @@ h2.sec {
     width: 100%;
     text-align: justify;
 }
-/* Word / PDF dan o'qilgan sarlavhalar */
+/* Sarlavhalar */
 .content .doc-heading {
     font-family: Arial, sans-serif;
     font-size: 12pt;
@@ -239,6 +141,12 @@ h2.sec {
     font-weight: 600;
     color: #1e293b;
     margin: 10pt 0 4pt 0;
+    text-indent: 0;
+}
+.content h1, .content h2, .content h3, .content h4 {
+    font-family: Arial, sans-serif;
+    color: #0a1628;
+    margin: 12pt 0 5pt 0;
     text-indent: 0;
 }
 /* Jadvallar */
@@ -267,13 +175,25 @@ h2.sec {
 .content .doc-table tr:nth-child(even) td {
     background-color: #f8fafc;
 }
-.content h1, .content h2, .content h3, .content h4 {
-    font-family: Arial, sans-serif;
-    color: #0a1628;
-    margin: 12pt 0 5pt 0;
-    text-indent: 0;
+/* Rasmlar */
+.doc-img-wrap {
+    width: 100%;
+    text-align: center;
+    margin: 10pt 0;
+    page-break-inside: avoid;
 }
-
+.doc-img-wrap img {
+    max-width: 100%;
+    height: auto;
+}
+p.img-caption {
+    font-size: 9pt;
+    color: #555;
+    font-style: italic;
+    text-align: center;
+    text-indent: 0;
+    margin-bottom: 8pt;
+}
 /* Matn yo'q holati */
 .pdf-notice {
     font-size: 10pt;
@@ -285,53 +205,11 @@ h2.sec {
     margin: 10pt 0;
     background-color: #fafafa;
 }
-
-/* Rasm wrapper */
-.doc-img-wrap {
-    width: 100%;
-    text-align: center;
-    margin: 10pt 0;
-    page-break-inside: avoid;
-}
-.doc-img-wrap img {
-    max-width: 100%;
-    height: auto;
-}
-/* Rasm tagidagi izoh */
-p.img-caption {
-    font-size: 9pt;
-    color: #555;
-    font-style: italic;
-    text-align: center;
-    text-indent: 0;
-    margin-bottom: 8pt;
-}
-
-.divider {
-    border-top: 0.5pt solid #e2e8f0;
-    margin: 12pt 0;
-}
-
-/* ── IQTIBOS BLOKI ── */
-.cite {
-    background-color: #f8fafc;
-    padding: 7pt 10pt;
-    margin-top: 14pt;
-}
-.cite-lbl {
-    font-size: 7.5pt;
-    font-weight: bold;
-    letter-spacing: 0.7pt;
-    color: #15803d;
-    font-family: Arial, sans-serif;
-    margin-bottom: 3pt;
-}
-.cite p { font-size: 9pt; color: #374151; }
 </style>
 </head>
 <body>
 
-<!-- ══ YUQORI KOLONTITUL (har sahifada takrorlanadi) ══ -->
+<!-- ══ YUQORI KOLONTITUL ══ -->
 <div id="page-header">
     <table class="hdr-table">
         <tr>
@@ -354,7 +232,7 @@ p.img-caption {
     </table>
 </div>
 
-<!-- ══ PASTKI KOLONTITUL (har sahifada takrorlanadi) ══ -->
+<!-- ══ PASTKI KOLONTITUL ══ -->
 <div id="page-footer">
     <div class="ftr-page">
         &ndash; <pdf:pagenumber> / <pdf:pagecount> &ndash;
@@ -365,72 +243,14 @@ p.img-caption {
     </div>
 </div>
 
-<!-- ══ MAQOLA TARKIBI ══ -->
-
-<!-- Badges -->
-<div class="badges">
-    <span class="badge b-green">&#10003; Chop etilgan</span>
-    <span class="badge b-blue">Open Access</span>
-    {% if article.category %}
-        <span class="badge b-purple">{{ article.category.code }} &mdash; {{ article.category.name }}</span>
-    {% endif %}
-    {% if article.issue %}
-        <span class="badge b-orange">Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}</span>
-    {% endif %}
-</div>
-
-<!-- Sarlavha -->
-<h1 class="atitle">{{ article.title }}</h1>
-
-<!-- Mualliflar -->
-<div class="authors">
-    {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.get_full_name|default:article.author.username }}{% endif %}
-</div>
-{% if article.author.institution %}
-    <div class="author-inst">{{ article.author.institution }}</div>
-{% endif %}
-
-<!-- Meta ma'lumotlar -->
-<div class="meta">
-    Yuborilgan: {{ article.created_at|date:"d.m.Y" }}
-    {% if article.published_at %} &nbsp;|&nbsp; Chop etilgan: {{ article.published_at|date:"d.m.Y" }}{% endif %}
-    &nbsp;|&nbsp; Ko'rishlar: {{ article.views_count }}
-    &nbsp;|&nbsp; Yuklamalar: {{ article.downloads_count }}
-</div>
-
-<!-- Annotatsiya -->
-<h2 class="sec">Annotatsiya</h2>
-<div class="abstract"><p>{{ article.abstract }}</p></div>
-
-<!-- Kalit so'zlar -->
-<div class="kw">
-    <span class="kw-label">Kalit so'zlar:</span> {{ article.keywords }}
-</div>
-
-<hr class="divider"/>
-
-<!-- Maqola matni (PDF dan avtomatik o'qilgan) -->
+<!-- ══ MAQOLA MATNI ══ -->
 {% if pdf_content_html %}
-    <h2 class="sec">Maqola matni</h2>
     <div class="content">{{ pdf_content_html|safe }}</div>
-    <hr class="divider"/>
 {% else %}
     <div class="pdf-notice">
-        Maqola matni o'qib bo'lmadi yoki PDF fayl mavjud emas.
+        Maqola matni o'qib bo'lmadi yoki fayl mavjud emas.
     </div>
-    <hr class="divider"/>
 {% endif %}
-
-<!-- Iqtibos -->
-<div class="cite">
-    <div class="cite-lbl">IQTIBOS KELTIRISH (APA)</div>
-    <p>
-        {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
-        ({{ article.published_at.year|default:article.issue.year|default:"2026" }}).
-        {{ article.title }}.
-        <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %}, <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
-    </p>
-</div>
 
 </body>
 </html>
