@@ -11,6 +11,7 @@ urlpatterns = [
     path('documents/', views.documents, name='documents'),
     path('article/<int:pk>/', views.article_detail, name='article_detail'),
     path('article/<int:pk>/download/', views.download_pdf, name='download_pdf'),
+    path('article/<int:pk>/pdf/', views.generate_article_pdf, name='article_pdf'),
     path('signup/', views.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),

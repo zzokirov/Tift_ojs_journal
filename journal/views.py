@@ -130,7 +130,36 @@ def download_pdf(request, pk):
     return _redirect(article.pdf_file.url)
 
 
-def signup(request):
+def generate_article_pdf(request, pk):
+    """Maqolani TIFT shablonida PDF ga aylantiradi"""
+    from django.template.loader import render_to_string
+    from django.http import HttpResponse
+    try:
+        from weasyprint import HTML, CSS
+        from weasyprint.text.fonts import FontConfiguration
+    except ImportError:
+        return HttpResponse("WeasyPrint o'rnatilmagan.", status=500)
+
+    article = get_object_or_404(Article, pk=pk, status='published')
+
+    # Ko'rishlar sonini oshir
+    if not request.session.get(f'pdf_viewed_{pk}'):
+        Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
+        request.session[f'pdf_viewed_{pk}'] = True
+
+    html_string = render_to_string('article_pdf.html', {
+        'article': article,
+        'request': request,
+    })
+
+    font_config = FontConfiguration()
+    html = HTML(string=html_string, base_url=request.build_absolute_uri('/'))
+    pdf_file = html.write_pdf(font_config=font_config)
+
+    filename = f"TIFT_{article.title[:40].replace(' ', '_')}.pdf"
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = f'inline; filename="{filename}"'
+    return response
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():

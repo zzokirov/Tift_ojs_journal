@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 11pt;
+        color: #000;
+        background: #fff;
+        line-height: 1.6;
+    }
+
+    /* ── PAGE ── */
+    @page {
+        size: A4;
+        margin: 2cm 2.5cm 2.5cm 2.5cm;
+        @top-center {
+            content: element(header);
+        }
+        @bottom-center {
+            content: "– " counter(page) " –";
+            font-size: 9pt;
+            color: #555;
+        }
+    }
+
+    /* ── HEADER (kolontitula) ── */
+    #running-header {
+        position: running(header);
+        border-bottom: 1.5pt solid #15803d;
+        padding-bottom: 4pt;
+        margin-bottom: 10pt;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 8pt;
+        color: #444;
+    }
+    #running-header .journal-name {
+        font-weight: bold;
+        color: #0a1628;
+    }
+    #running-header .issn {
+        color: #666;
+    }
+
+    /* ── COVER HEADER ── */
+    .cover-header {
+        border-bottom: 2pt solid #15803d;
+        padding-bottom: 12pt;
+        margin-bottom: 18pt;
+    }
+    .cover-header table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .cover-header td { vertical-align: middle; }
+    .cover-header .logo-cell { width: 60pt; }
+    .cover-header .logo-box {
+        width: 50pt;
+        height: 50pt;
+        background: #0a1628;
+        border-radius: 6pt;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 6pt;
+    }
+    .cover-header .logo-box span {
+        color: #22c55e;
+        font-weight: 900;
+        font-size: 16pt;
+        font-family: Arial, sans-serif;
+    }
+    .cover-header .journal-info { padding-left: 12pt; }
+    .cover-header .journal-title {
+        font-family: Arial, sans-serif;
+        font-size: 13pt;
+        font-weight: 900;
+        color: #0a1628;
+        letter-spacing: 0.5pt;
+    }
+    .cover-header .journal-title span { color: #15803d; }
+    .cover-header .journal-subtitle {
+        font-size: 8pt;
+        color: #555;
+        margin-top: 2pt;
+        text-transform: uppercase;
+        letter-spacing: 1pt;
+    }
+    .cover-header .issue-info {
+        text-align: right;
+        font-size: 8pt;
+        color: #555;
+        line-height: 1.8;
+    }
+
+    /* ── BADGES ── */
+    .badges { margin-bottom: 14pt; display: flex; gap: 6pt; flex-wrap: wrap; }
+    .badge {
+        display: inline-block;
+        padding: 2pt 8pt;
+        border-radius: 10pt;
+        font-size: 8pt;
+        font-family: Arial, sans-serif;
+        font-weight: 600;
+        border: 1pt solid;
+    }
+    .badge-published { background: #f0fdf4; color: #15803d; border-color: #86efac; }
+    .badge-oa        { background: #eff6ff; color: #1d4ed8; border-color: #93c5fd; }
+    .badge-category  { background: #faf5ff; color: #6d28d9; border-color: #c4b5fd; }
+    .badge-issue     { background: #fff7ed; color: #c2410c; border-color: #fdba74; }
+
+    /* ── ARTICLE TITLE ── */
+    h1.article-title {
+        font-family: Arial, sans-serif;
+        font-size: 16pt;
+        font-weight: 900;
+        color: #0a1628;
+        line-height: 1.3;
+        margin-bottom: 10pt;
+    }
+
+    /* ── AUTHORS ── */
+    .authors {
+        font-size: 10pt;
+        color: #1e293b;
+        font-weight: bold;
+        margin-bottom: 4pt;
+    }
+    .author-institution {
+        font-size: 9pt;
+        color: #555;
+        font-style: italic;
+        margin-bottom: 12pt;
+    }
+
+    /* ── META ROW ── */
+    .meta-row {
+        font-size: 8.5pt;
+        color: #555;
+        margin-bottom: 16pt;
+        border-top: 0.5pt solid #e2e8f0;
+        border-bottom: 0.5pt solid #e2e8f0;
+        padding: 6pt 0;
+        display: flex;
+        gap: 16pt;
+        flex-wrap: wrap;
+    }
+    .meta-row span { display: inline-block; }
+
+    /* ── SECTION TITLES ── */
+    h2.section-title {
+        font-family: Arial, sans-serif;
+        font-size: 11pt;
+        font-weight: 700;
+        color: #0a1628;
+        margin: 14pt 0 6pt 0;
+        padding-left: 8pt;
+        border-left: 3pt solid #15803d;
+    }
+
+    /* ── ABSTRACT ── */
+    .abstract-block {
+        background: #f8fafc;
+        border: 0.5pt solid #e2e8f0;
+        border-left: 3pt solid #15803d;
+        padding: 10pt 12pt;
+        margin-bottom: 14pt;
+        border-radius: 4pt;
+    }
+    .abstract-block p {
+        font-size: 10pt;
+        font-style: italic;
+        color: #374151;
+        text-align: justify;
+        line-height: 1.7;
+    }
+
+    /* ── KEYWORDS ── */
+    .keywords {
+        font-size: 9.5pt;
+        margin-bottom: 16pt;
+    }
+    .keywords strong { color: #15803d; }
+
+    /* ── MAIN CONTENT ── */
+    .content {
+        text-align: justify;
+        font-size: 11pt;
+        line-height: 1.8;
+        margin-bottom: 16pt;
+    }
+    .content p { margin-bottom: 8pt; text-indent: 1.5em; }
+    .content h3 { font-size: 11pt; font-weight: bold; margin: 10pt 0 6pt 0; }
+
+    /* ── CITATION ── */
+    .citation-box {
+        background: #f8fafc;
+        border: 0.5pt solid #e2e8f0;
+        padding: 8pt 12pt;
+        border-radius: 4pt;
+        margin-top: 16pt;
+        page-break-inside: avoid;
+    }
+    .citation-box .citation-label {
+        font-size: 8pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.8pt;
+        color: #15803d;
+        margin-bottom: 4pt;
+        font-family: Arial, sans-serif;
+    }
+    .citation-box p {
+        font-size: 9pt;
+        color: #374151;
+        line-height: 1.6;
+    }
+
+    /* ── FOOTER BAR ── */
+    .footer-bar {
+        margin-top: 20pt;
+        border-top: 1.5pt solid #15803d;
+        padding-top: 8pt;
+        display: flex;
+        justify-content: space-between;
+        font-size: 8pt;
+        color: #555;
+        font-family: Arial, sans-serif;
+    }
+
+    /* ── DIVIDER ── */
+    hr.divider {
+        border: none;
+        border-top: 0.5pt solid #e2e8f0;
+        margin: 12pt 0;
+    }
+</style>
+</head>
+<body>
+
+<!-- Running header (takrorlanuvchi) -->
+<div id="running-header">
+    <span class="journal-name">TIFT Journal — "Arxitektura va Ta'lim"</span>
+    <span class="issn">ISSN: 2181-XXXX &nbsp;|&nbsp; Open Access</span>
+</div>
+
+<!-- ═══ MUQOVA HEADER ═══ -->
+<div class="cover-header">
+    <table>
+        <tr>
+            <td class="logo-cell">
+                <div class="logo-box"><span>TIFT</span></div>
+            </td>
+            <td class="journal-info">
+                <div class="journal-title">TIFT <span>JOURNAL</span></div>
+                <div class="journal-subtitle">Arxitektura va Ta'lim Ilmiy-Elektron Jurnali</div>
+            </td>
+            <td class="issue-info">
+                {% if article.issue %}
+                    <div>Jild {{ article.issue.volume }}, Son {{ article.issue.number }}</div>
+                    <div>{{ article.issue.year }}-yil</div>
+                {% endif %}
+                {% if article.published_at %}
+                    <div>{{ article.published_at|date:"d.m.Y" }}</div>
+                {% endif %}
+                <div style="color:#15803d; font-weight:bold;">Open Access</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- ═══ BADGES ═══ -->
+<div class="badges">
+    <span class="badge badge-published">✓ Chop etilgan</span>
+    <span class="badge badge-oa">Open Access</span>
+    {% if article.category %}
+        <span class="badge badge-category">{{ article.category.code }} — {{ article.category.name }}</span>
+    {% endif %}
+    {% if article.issue %}
+        <span class="badge badge-issue">Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}</span>
+    {% endif %}
+</div>
+
+<!-- ═══ SARLAVHA ═══ -->
+<h1 class="article-title">{{ article.title }}</h1>
+
+<!-- ═══ MUALLIFLAR ═══ -->
+<div class="authors">
+    {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.get_full_name|default:article.author.username }}{% endif %}
+</div>
+{% if article.author.institution %}
+    <div class="author-institution">{{ article.author.institution }}</div>
+{% endif %}
+
+<!-- ═══ META ═══ -->
+<div class="meta-row">
+    <span>Yuborilgan: {{ article.created_at|date:"d.m.Y" }}</span>
+    {% if article.published_at %}<span>Chop etilgan: {{ article.published_at|date:"d.m.Y" }}</span>{% endif %}
+    <span>Ko'rishlar: {{ article.views_count }}</span>
+    <span>DOI: —</span>
+</div>
+
+<!-- ═══ ANNOTATSIYA ═══ -->
+<h2 class="section-title">Annotatsiya</h2>
+<div class="abstract-block">
+    <p>{{ article.abstract }}</p>
+</div>
+
+<!-- ═══ KALIT SO'ZLAR ═══ -->
+<div class="keywords">
+    <strong>Kalit so'zlar:</strong> {{ article.keywords }}
+</div>
+
+<hr class="divider">
+
+<!-- ═══ ASOSIY MATN ═══ -->
+{% if article.content %}
+    <h2 class="section-title">Maqola matni</h2>
+    <div class="content">
+        {{ article.content|safe }}
+    </div>
+    <hr class="divider">
+{% endif %}
+
+<!-- ═══ IQTIBOS ═══ -->
+<div class="citation-box">
+    <div class="citation-label">Iqtibos keltirish (APA format)</div>
+    <p>
+        {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
+        ({{ article.published_at.year|default:article.issue.year|default:"2026" }}).
+        {{ article.title }}.
+        <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %}, <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
+    </p>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer-bar">
+    <span>© {{ article.published_at.year|default:"2026" }} TIFT Ilmiy Jurnali. Barcha huquqlar himoyalangan.</span>
+    <span>tift-ojs-journal.onrender.com</span>
+</div>
+
+</body>
+</html>
