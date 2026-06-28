@@ -100,34 +100,47 @@ def article_detail(request, pk):
 
 
 def download_pdf(request, pk):
-    """PDF yuklab olish — downloads_count ni oshiradi"""
-    from django.http import FileResponse, Http404
-    from django.shortcuts import redirect as _redirect
-    import os
+    """PDF yuklab olish — TIFT shablonida WeasyPrint orqali"""
+    from django.template.loader import render_to_string
+    from django.http import HttpResponse, Http404
 
     article = get_object_or_404(Article, pk=pk, status='published')
-
-    if not article.pdf_file:
-        raise Http404
 
     # Yuklab olishlar sonini oshir
     Article.objects.filter(pk=pk).update(
         downloads_count=article.downloads_count + 1
     )
 
-    # Lokal fayl bo'lsa — FileResponse
+    # WeasyPrint bilan PDF yasash
     try:
-        file_path = article.pdf_file.path
-        if os.path.exists(file_path):
-            filename = f"{article.title[:50]}.pdf".replace(' ', '_').replace('/', '_')
-            response = FileResponse(open(file_path, 'rb'), content_type='application/pdf')
-            response['Content-Disposition'] = f'attachment; filename="{filename}"'
-            return response
-    except Exception:
-        pass
-
-    # Lokal emas (Render, S3 va h.k.) — to'g'ridan URL ga redirect
-    return _redirect(article.pdf_file.url)
+        from weasyprint import HTML
+        from weasyprint.text.fonts import FontConfiguration
+        html_string = render_to_string('article_pdf.html', {
+            'article': article,
+            'request': request,
+        })
+        font_config = FontConfiguration()
+        html = HTML(string=html_string, base_url=request.build_absolute_uri('/'))
+        pdf_bytes = html.write_pdf(font_config=font_config)
+        filename = f"TIFT_{article.title[:40].replace(' ', '_').replace('/', '_')}.pdf"
+        response = HttpResponse(pdf_bytes, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response
+    except Exception as e:
+        # WeasyPrint ishlamasa — asl faylni qaytarish
+        import os
+        from django.shortcuts import redirect as _redirect
+        if not article.pdf_file:
+            raise Http404
+        try:
+            file_path = article.pdf_file.path
+            if os.path.exists(file_path):
+                from django.http import FileResponse
+                return FileResponse(open(file_path, 'rb'), content_type='application/pdf',
+                                    as_attachment=True, filename=f"{article.title[:50]}.pdf")
+        except Exception:
+            pass
+        return _redirect(article.pdf_file.url)
 
 
 def generate_article_pdf(request, pk):
