@@ -1,8 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
 <style>
+/* ═══════════════════════════════════════════
+   xhtml2pdf (ReportLab) PDF shabloni
+   Yuqori va pastki kolontitullar bilan
+═══════════════════════════════════════════ */
+
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
@@ -13,70 +19,78 @@ body {
     line-height: 1.65;
 }
 
+/* ── @PAGE sozlamalari ── */
 @page {
     size: A4;
-    margin-top: 3.2cm;
-    margin-bottom: 3cm;
+    margin-top: 3.6cm;
+    margin-bottom: 3.2cm;
     margin-left: 2.5cm;
     margin-right: 2.5cm;
 
-    @top-left {
-        content: element(page-header);
+    @frame header_frame {
+        -pdf-frame-content: page-header;
+        left: 2.5cm;
+        top: 0.6cm;
+        right: 2.5cm;
+        height: 2.4cm;
     }
-    @bottom-center {
-        content: element(page-footer);
+
+    @frame footer_frame {
+        -pdf-frame-content: page-footer;
+        left: 2.5cm;
+        bottom: 0.5cm;
+        right: 2.5cm;
+        height: 2.2cm;
     }
 }
 
 /* ── YUQORI KOLONTITUL ── */
 #page-header {
-    position: running(page-header);
     width: 100%;
     border-bottom: 2pt solid #15803d;
-    padding-bottom: 6pt;
-    display: table;
-    table-layout: fixed;
+    padding-bottom: 5pt;
 }
-#page-header .hdr-left {
-    display: table-cell;
+.hdr-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.hdr-logo-cell {
+    width: 44pt;
     vertical-align: middle;
-    width: 50pt;
 }
-#page-header .hdr-logo {
-    width: 38pt;
-    height: 38pt;
-    background: #0a1628;
+.hdr-logo {
+    width: 36pt;
+    height: 36pt;
+    background-color: #0a1628;
     border-radius: 5pt;
     text-align: center;
-    line-height: 38pt;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-size: 13pt;
+    font-size: 18pt;
     color: #22c55e;
+    padding-top: 4pt;
 }
-#page-header .hdr-center {
-    display: table-cell;
+.hdr-center-cell {
     vertical-align: middle;
-    padding-left: 8pt;
+    padding-left: 7pt;
 }
-#page-header .hdr-journal-name {
+.hdr-journal-name {
     font-family: Arial, sans-serif;
     font-size: 11pt;
     font-weight: 900;
     color: #0a1628;
-    letter-spacing: 0.3pt;
 }
-#page-header .hdr-journal-name span { color: #15803d; }
-#page-header .hdr-journal-sub {
+.hdr-journal-name-green {
+    color: #15803d;
+}
+.hdr-journal-sub {
     font-family: Arial, sans-serif;
     font-size: 7.5pt;
     color: #555;
-    text-transform: uppercase;
-    letter-spacing: 0.8pt;
+    letter-spacing: 0.5pt;
     margin-top: 1pt;
 }
-#page-header .hdr-right {
-    display: table-cell;
+.hdr-right-cell {
     vertical-align: middle;
     text-align: right;
     font-size: 8pt;
@@ -87,38 +101,43 @@ body {
 
 /* ── PASTKI KOLONTITUL ── */
 #page-footer {
-    position: running(page-footer);
     width: 100%;
     border-top: 1pt solid #15803d;
-    padding-top: 5pt;
+    padding-top: 4pt;
     font-family: Arial, sans-serif;
     font-size: 7.5pt;
     color: #555;
     text-align: center;
     line-height: 1.8;
 }
-#page-footer .ftr-page {
+.ftr-page {
     font-weight: bold;
     color: #0a1628;
-    margin-bottom: 2pt;
+    font-size: 8.5pt;
+    text-align: center;
+}
+.ftr-info {
+    font-size: 7pt;
+    color: #666;
 }
 
 /* ── BADGE ── */
-.badges { margin: 10pt 0 12pt 0; }
+.badges {
+    margin: 10pt 0 12pt 0;
+}
 .badge {
-    display: inline-block;
-    padding: 2pt 7pt;
-    border-radius: 9pt;
+    display: inline;
+    padding: 2pt 6pt;
+    border-radius: 8pt;
     font-size: 7.5pt;
     font-family: Arial, sans-serif;
     font-weight: 600;
-    border: 0.8pt solid;
     margin-right: 4pt;
 }
-.b-green  { background:#f0fdf4; color:#15803d; border-color:#86efac; }
-.b-blue   { background:#eff6ff; color:#1d4ed8; border-color:#93c5fd; }
-.b-purple { background:#faf5ff; color:#6d28d9; border-color:#c4b5fd; }
-.b-orange { background:#fff7ed; color:#c2410c; border-color:#fdba74; }
+.b-green  { background-color: #f0fdf4; color: #15803d; }
+.b-blue   { background-color: #eff6ff; color: #1d4ed8; }
+.b-purple { background-color: #faf5ff; color: #6d28d9; }
+.b-orange { background-color: #fff7ed; color: #c2410c; }
 
 /* ── SARLAVHA ── */
 h1.atitle {
@@ -155,7 +174,7 @@ h1.atitle {
     margin-bottom: 14pt;
 }
 
-/* ── SECTION ── */
+/* ── SECTION SARLAVHA ── */
 h2.sec {
     font-family: Arial, sans-serif;
     font-size: 11pt;
@@ -166,14 +185,12 @@ h2.sec {
     border-left: 2.5pt solid #15803d;
 }
 
-/* ── ANNOTATSIYA ── */
+/* ── ANNOTATSIYA BLOKI ── */
 .abstract {
-    background: #f8fafc;
-    border: 0.5pt solid #e2e8f0;
+    background-color: #f8fafc;
     border-left: 2.5pt solid #15803d;
     padding: 9pt 11pt;
     margin-bottom: 12pt;
-    border-radius: 3pt;
 }
 .abstract p {
     font-size: 10pt;
@@ -183,32 +200,68 @@ h2.sec {
 }
 
 /* ── KALIT SO'ZLAR ── */
-.kw { font-size: 9.5pt; margin-bottom: 14pt; }
-.kw strong { color: #15803d; }
+.kw {
+    font-size: 9.5pt;
+    margin-bottom: 14pt;
+}
+.kw-label {
+    color: #15803d;
+    font-weight: bold;
+}
 
-/* ── MATN ── */
+/* ── ASOSIY MATN ── */
 .content {
     text-align: justify;
     font-size: 11pt;
     line-height: 1.8;
 }
-.content p { margin-bottom: 7pt; text-indent: 1.5em; }
+.content p {
+    margin-bottom: 7pt;
+    text-indent: 1.5em;
+}
+.content h1, .content h2, .content h3 {
+    font-family: Arial, sans-serif;
+    color: #0a1628;
+    margin: 12pt 0 5pt 0;
+}
+.content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10pt 0;
+    font-size: 10pt;
+}
+.content table td, .content table th {
+    border: 0.5pt solid #aaa;
+    padding: 4pt 6pt;
+}
+.content img { max-width: 100%; }
 
-hr.div { border:none; border-top:0.5pt solid #e2e8f0; margin:12pt 0; }
+/* Matn yo'q holati */
+.pdf-notice {
+    font-size: 10pt;
+    color: #666;
+    font-style: italic;
+    padding: 12pt;
+    text-align: center;
+    border: 0.5pt dashed #ccc;
+    margin: 10pt 0;
+    background-color: #fafafa;
+}
 
-/* ── IQTIBOS ── */
+.divider {
+    border-top: 0.5pt solid #e2e8f0;
+    margin: 12pt 0;
+}
+
+/* ── IQTIBOS BLOKI ── */
 .cite {
-    background: #f8fafc;
-    border: 0.5pt solid #e2e8f0;
+    background-color: #f8fafc;
     padding: 7pt 10pt;
-    border-radius: 3pt;
     margin-top: 14pt;
-    page-break-inside: avoid;
 }
 .cite-lbl {
     font-size: 7.5pt;
     font-weight: bold;
-    text-transform: uppercase;
     letter-spacing: 0.7pt;
     color: #15803d;
     font-family: Arial, sans-serif;
@@ -219,46 +272,58 @@ hr.div { border:none; border-top:0.5pt solid #e2e8f0; margin:12pt 0; }
 </head>
 <body>
 
-<!-- ══ YUQORI KOLONTITUL ══ -->
+<!-- ══ YUQORI KOLONTITUL (har sahifada takrorlanadi) ══ -->
 <div id="page-header">
-    <div class="hdr-left">
-        <div class="hdr-logo">T</div>
-    </div>
-    <div class="hdr-center">
-        <div class="hdr-journal-name">TIFT <span>JOURNAL</span></div>
-        <div class="hdr-journal-sub">"Arxitektura va Ta'lim" Ilmiy-Elektron Jurnali</div>
-    </div>
-    <div class="hdr-right">
-        {% if article.issue %}
-            Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}<br>
-        {% endif %}
-        ISSN: 2181-XXXX &nbsp;|&nbsp; Open Access
-    </div>
+    <table class="hdr-table">
+        <tr>
+            <td class="hdr-logo-cell">
+                <div class="hdr-logo">T</div>
+            </td>
+            <td class="hdr-center-cell">
+                <div class="hdr-journal-name">
+                    TIFT <span class="hdr-journal-name-green">JOURNAL</span>
+                </div>
+                <div class="hdr-journal-sub">"Arxitektura va Ta'lim" Ilmiy-Elektron Jurnali</div>
+            </td>
+            <td class="hdr-right-cell">
+                {% if article.issue %}
+                    Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}<br/>
+                {% endif %}
+                ISSN: 2181-XXXX &nbsp;|&nbsp; Open Access
+            </td>
+        </tr>
+    </table>
 </div>
 
-<!-- ══ PASTKI KOLONTITUL ══ -->
+<!-- ══ PASTKI KOLONTITUL (har sahifada takrorlanadi) ══ -->
 <div id="page-footer">
-    <div class="ftr-page">– <pdf:pagenumber> –</div>
-    <div>Toshkent sh., Amir Temur ko'chasi, 108 &nbsp;|&nbsp; Tel: +998 71 238-74-80</div>
-    <div>journal@tift.uz &nbsp;|&nbsp; www.tift.uz &nbsp;|&nbsp; ISSN: 2181-XXXX</div>
+    <div class="ftr-page">
+        &ndash; <pdf:pagenumber> / <pdf:pagecount> &ndash;
+    </div>
+    <div class="ftr-info">
+        Toshkent sh., Amir Temur ko'chasi, 108 &nbsp;|&nbsp; Tel: +998 71 238-74-80<br/>
+        journal@tift.uz &nbsp;|&nbsp; www.tift.uz &nbsp;|&nbsp; ISSN: 2181-XXXX
+    </div>
 </div>
 
-<!-- ══ BADGES ══ -->
+<!-- ══ MAQOLA TARKIBI ══ -->
+
+<!-- Badges -->
 <div class="badges">
-    <span class="badge b-green">✓ Chop etilgan</span>
+    <span class="badge b-green">&#10003; Chop etilgan</span>
     <span class="badge b-blue">Open Access</span>
     {% if article.category %}
-        <span class="badge b-purple">{{ article.category.code }} — {{ article.category.name }}</span>
+        <span class="badge b-purple">{{ article.category.code }} &mdash; {{ article.category.name }}</span>
     {% endif %}
     {% if article.issue %}
         <span class="badge b-orange">Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}</span>
     {% endif %}
 </div>
 
-<!-- ══ SARLAVHA ══ -->
+<!-- Sarlavha -->
 <h1 class="atitle">{{ article.title }}</h1>
 
-<!-- ══ MUALLIFLAR ══ -->
+<!-- Mualliflar -->
 <div class="authors">
     {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.get_full_name|default:article.author.username }}{% endif %}
 </div>
@@ -266,7 +331,7 @@ hr.div { border:none; border-top:0.5pt solid #e2e8f0; margin:12pt 0; }
     <div class="author-inst">{{ article.author.institution }}</div>
 {% endif %}
 
-<!-- ══ META ══ -->
+<!-- Meta ma'lumotlar -->
 <div class="meta">
     Yuborilgan: {{ article.created_at|date:"d.m.Y" }}
     {% if article.published_at %} &nbsp;|&nbsp; Chop etilgan: {{ article.published_at|date:"d.m.Y" }}{% endif %}
@@ -274,30 +339,33 @@ hr.div { border:none; border-top:0.5pt solid #e2e8f0; margin:12pt 0; }
     &nbsp;|&nbsp; Yuklamalar: {{ article.downloads_count }}
 </div>
 
-<!-- ══ ANNOTATSIYA ══ -->
+<!-- Annotatsiya -->
 <h2 class="sec">Annotatsiya</h2>
 <div class="abstract"><p>{{ article.abstract }}</p></div>
 
-<!-- ══ KALIT SO'ZLAR ══ -->
-<div class="kw"><strong>Kalit so'zlar:</strong> {{ article.keywords }}</div>
+<!-- Kalit so'zlar -->
+<div class="kw">
+    <span class="kw-label">Kalit so'zlar:</span> {{ article.keywords }}
+</div>
 
-<hr class="div">
+<hr class="divider"/>
 
-<!-- ══ MAQOLA MATNI ══ -->
+<!-- Maqola matni -->
 {% if article.content %}
     <h2 class="sec">Maqola matni</h2>
     <div class="content">{{ article.content|safe }}</div>
-    <hr class="div">
+    <hr class="divider"/>
 {% else %}
-    <div style="font-size:10pt; color:#666; font-style:italic; padding:12pt; text-align:center; border:0.5pt dashed #ccc; border-radius:4pt; margin:10pt 0;">
-        Maqola to'liq matni hali qo'shilmagan.
+    <div class="pdf-notice">
+        Maqola to'liq matni tizimda HTML ko'rinishida saqlanmagan.<br/>
+        Muallif tomonidan yuborilgan asl PDF fayl asosida tayyorlangan.
     </div>
-    <hr class="div">
+    <hr class="divider"/>
 {% endif %}
 
-<!-- ══ IQTIBOS ══ -->
+<!-- Iqtibos -->
 <div class="cite">
-    <div class="cite-lbl">Iqtibos keltirish (APA)</div>
+    <div class="cite-lbl">IQTIBOS KELTIRISH (APA)</div>
     <p>
         {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
         ({{ article.published_at.year|default:article.issue.year|default:"2026" }}).

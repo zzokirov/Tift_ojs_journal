@@ -100,9 +100,16 @@ def article_detail(request, pk):
 
 
 def download_pdf(request, pk):
-    """PDF yuklab olish — TIFT shablonida WeasyPrint orqali"""
-    from django.template.loader import render_to_string
-    from django.http import HttpResponse, Http404
+    """PDF yuklab olish.
+
+    Agar maqolada HTML matn (content) mavjud bo'lsa — xhtml2pdf bilan
+    TIFT shablonida PDF yasab qaytaradi (yuqori/pastki kolontitullar bilan).
+
+    Agar content bo'sh bo'lsa — muallif yuklagan asl PDF faylni qaytaradi.
+    """
+    import os
+    from django.http import HttpResponse, Http404, FileResponse
+    from django.shortcuts import redirect as _redirect
 
     article = get_object_or_404(Article, pk=pk, status='published')
 
@@ -111,47 +118,64 @@ def download_pdf(request, pk):
         downloads_count=article.downloads_count + 1
     )
 
-    # WeasyPrint bilan PDF yasash
-    try:
-        from weasyprint import HTML
-        from weasyprint.text.fonts import FontConfiguration
-        html_string = render_to_string('article_pdf.html', {
-            'article': article,
-            'request': request,
-        })
-        font_config = FontConfiguration()
-        html = HTML(string=html_string, base_url=request.build_absolute_uri('/'))
-        pdf_bytes = html.write_pdf(font_config=font_config)
-        filename = f"TIFT_{article.title[:40].replace(' ', '_').replace('/', '_')}.pdf"
-        response = HttpResponse(pdf_bytes, content_type='application/pdf')
-        response['Content-Disposition'] = f'attachment; filename="{filename}"'
-        return response
-    except Exception as e:
-        # WeasyPrint ishlamasa — asl faylni qaytarish
-        import os
-        from django.shortcuts import redirect as _redirect
-        if not article.pdf_file:
-            raise Http404
+    safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
+    filename = f"TIFT_{safe_title}.pdf"
+
+    # ── 1. Agar maqolada HTML matn bo'lsa: xhtml2pdf bilan shablon PDF ──
+    if article.content and article.content.strip():
         try:
-            file_path = article.pdf_file.path
-            if os.path.exists(file_path):
-                from django.http import FileResponse
-                return FileResponse(open(file_path, 'rb'), content_type='application/pdf',
-                                    as_attachment=True, filename=f"{article.title[:50]}.pdf")
+            from django.template.loader import render_to_string
+            from xhtml2pdf import pisa
+            import io
+
+            html_string = render_to_string('article_pdf.html', {
+                'article': article,
+                'request': request,
+            })
+            buffer = io.BytesIO()
+            pisa_status = pisa.CreatePDF(
+                src=html_string,
+                dest=buffer,
+                encoding='utf-8',
+            )
+            if not pisa_status.err:
+                pdf_bytes = buffer.getvalue()
+                buffer.close()
+                response = HttpResponse(pdf_bytes, content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="{filename}"'
+                return response
         except Exception:
-            pass
-        return _redirect(article.pdf_file.url)
+            pass  # Xatolik bo'lsa asl faylga o'tamiz
+
+    # ── 2. Asl PDF faylni qaytarish ──
+    if not article.pdf_file:
+        raise Http404("Maqola fayli topilmadi.")
+
+    try:
+        file_path = article.pdf_file.path
+        if os.path.exists(file_path):
+            return FileResponse(
+                open(file_path, 'rb'),
+                content_type='application/pdf',
+                as_attachment=True,
+                filename=filename,
+            )
+    except Exception:
+        pass
+
+    return _redirect(article.pdf_file.url)
 
 
 def generate_article_pdf(request, pk):
-    """Maqolani TIFT shablonida PDF ga aylantiradi"""
+    """Maqolani TIFT shablonida PDF ga aylantiradi (brauzerda ochish uchun)"""
     from django.template.loader import render_to_string
     from django.http import HttpResponse
+    import io
+
     try:
-        from weasyprint import HTML
-        from weasyprint.text.fonts import FontConfiguration
+        from xhtml2pdf import pisa
     except ImportError:
-        return HttpResponse("WeasyPrint o'rnatilmagan.", status=500)
+        return HttpResponse("xhtml2pdf o'rnatilmagan.", status=500)
 
     article = get_object_or_404(Article, pk=pk, status='published')
     if not request.session.get(f'pdf_viewed_{pk}'):
@@ -159,11 +183,15 @@ def generate_article_pdf(request, pk):
         request.session[f'pdf_viewed_{pk}'] = True
 
     html_string = render_to_string('article_pdf.html', {'article': article, 'request': request})
-    font_config = FontConfiguration()
-    html = HTML(string=html_string, base_url=request.build_absolute_uri('/'))
-    pdf_file = html.write_pdf(font_config=font_config)
-    filename = f"TIFT_{article.title[:40].replace(' ', '_')}.pdf"
-    response = HttpResponse(pdf_file, content_type='application/pdf')
+    buffer = io.BytesIO()
+    pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
+
+    if pisa_status.err:
+        return HttpResponse("PDF yaratishda xatolik yuz berdi.", status=500)
+
+    safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
+    filename = f"TIFT_{safe_title}.pdf"
+    response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
     response['Content-Disposition'] = f'inline; filename="{filename}"'
     return response
 
