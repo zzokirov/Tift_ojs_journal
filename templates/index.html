@@ -155,87 +155,88 @@ if (ctx) {
 
                     <!-- Wrapper -->
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl"
-                         style="border:2px solid rgba(255,255,255,0.1);">
+                         style="border:2px solid rgba(255,255,255,0.1); min-height:300px;">
 
                         <!-- Rasm -->
                         <img src="{% static 'images/muqova1.png' %}"
                              alt="TIFT Jurnali muqovasi"
                              class="w-full h-auto block transition-transform duration-500 group-hover:scale-105">
 
-                        <!-- HOVER OVERLAY — to'liq qoplab, bir qator -->
-                        <div class="absolute inset-0 flex flex-col justify-between py-6 px-8 opacity-0 group-hover:opacity-100 transition-all duration-400"
+                        <!-- HOVER OVERLAY — to'liq qoplab chiqadi -->
+                        <div class="absolute inset-0 flex flex-col justify-between py-5 px-6 opacity-0 group-hover:opacity-100 transition-all duration-400"
                              style="background:linear-gradient(160deg, rgba(10,22,40,0.97) 0%, rgba(15,40,70,0.96) 100%);">
 
                             <!-- Sarlavha -->
                             <div class="text-center">
-                                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-2" style="background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.35);">
-                                    <div class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:#22c55e;"></div>
-                                    <span class="font-bold uppercase tracking-widest text-xs" style="color:#22c55e;">Ilmiy yo'nalishlar</span>
-                                </div>
+                                <p class="text-white font-black text-sm leading-tight mb-0.5">
+                                    "Arxitektura va Ta'lim" Ilmiy-Elektron Jurnali
+                                </p>
+                                <p class="text-xs mb-3" style="color:#22c55e;">Qabul qilinadigan maqolalar yo'nalishlari</p>
+                                <div class="w-16 h-0.5 mx-auto rounded" style="background:rgba(34,197,94,0.4);"></div>
                             </div>
 
-                            <!-- Yo'nalishlar — 1 ustun, to'liq balandlik -->
-                            <div class="flex flex-col justify-center gap-1.5 flex-1 py-3">
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">01.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Fizika-matematika fanlari</span>
+                            <!-- Yo'nalishlar — to'liq balandlikni egallaydi -->
+                            <div class="flex flex-col gap-1 flex-1 py-3 overflow-hidden">
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">01.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Fizika-matematika fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">04.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Geologiya-mineralogiya fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">04.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Geologiya-mineralogiya fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">05.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Texnika fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">05.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Texnika fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">07.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Tarix fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">07.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Tarix fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">08.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Iqtisodiyot fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">08.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Iqtisodiyot fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">09.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Falsafa fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">09.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Falsafa fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">10.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Filologiya fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">10.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Filologiya fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">13.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Pedagogika fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">13.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Pedagogika fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">18.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Arxitektura fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">18.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Arxitektura fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">19.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Psixologiya fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">19.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Psixologiya fanlari</span>
                                 </div>
-                                <div class="flex items-center gap-3 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.04); border:1px solid rgba(34,197,94,0.12);">
-                                    <span class="font-black text-xs w-8 flex-shrink-0 text-right" style="color:#22c55e;">22.</span>
-                                    <div class="w-px h-4 flex-shrink-0" style="background:rgba(34,197,94,0.3);"></div>
-                                    <span class="text-sm leading-tight" style="color:#e2e8f0;">Sotsiologiya fanlari</span>
+                                <div class="flex items-center gap-2 rounded-lg px-3 py-1" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                    <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">22.00.00</span>
+                                    <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
+                                    <span class="text-xs leading-tight" style="color:#e2e8f0;">Sotsiologiya fanlari</span>
                                 </div>
                             </div>
 
                             <!-- Tugma -->
                             <a href="{% if user.is_authenticated %}{% url 'submit_article' %}{% else %}{% url 'login' %}{% endif %}"
-                               class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 mt-2"
+                               class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105"
                                style="background:#22c55e; color:#0a1628;">
                                 <i class="fas fa-paper-plane text-xs"></i>
                                 Maqola yuborish
