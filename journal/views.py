@@ -40,7 +40,11 @@ def index(request):
         recent_articles = recent_articles.filter(
             Q(title__icontains=query) |
             Q(abstract__icontains=query) |
-            Q(keywords__icontains=query)
+            Q(keywords__icontains=query) |
+            Q(authors__icontains=query) |
+            Q(author__first_name__icontains=query) |
+            Q(author__last_name__icontains=query) |
+            Q(author__username__icontains=query)
         )
     recent_articles = recent_articles[:10]
     issues = JournalIssue.objects.all().order_by('-year', '-number')
@@ -91,7 +95,7 @@ def article_detail(request, pk):
     author_articles = Article.objects.filter(
         author=article.author,
         status='published'
-    ).exclude(pk=pk).order_by('-created_at')[:5]
+    ).exclude(pk=pk).order_by('-created_at')[:8]
 
     return render(request, 'article_detail.html', {
         'article': article,
