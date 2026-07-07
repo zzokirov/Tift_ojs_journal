@@ -4,5 +4,10 @@
     },
     "emmet.includeLanguages": {
         "django-html": "html"
-    }
+    },
+    "css.lint.unknownAtRules": "ignore",
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "html.validate.styles": false
 }

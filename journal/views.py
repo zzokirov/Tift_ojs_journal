@@ -318,15 +318,70 @@ def _extract_docx_text_as_html(docx_path):
         return ''
 
 
-def _get_article_content_html(article_file_path):
-    """Fayl kengaytmasiga qarab to'g'ri extractor chaqiradi."""
-    if not article_file_path:
+def _get_file_as_bytes(article_file):
+    """
+    Fayl maydonidan bytes qaytaradi.
+    Lokal (path) bo'lsa — disk dan o'qiydi.
+    Cloudinary (URL) bo'lsa — HTTP orqali yuklab oladi.
+    """
+    import os
+    try:
+        # Lokal fayl
+        path = article_file.path
+        if os.path.exists(path):
+            with open(path, 'rb') as f:
+                return f.read(), path
+    except (NotImplementedError, AttributeError, Exception):
+        pass
+
+    # Cloudinary yoki tashqi URL
+    try:
+        import requests as req
+        url = article_file.url
+        if url:
+            resp = req.get(url, timeout=30)
+            if resp.status_code == 200:
+                # Vaqtinchalik fayl sifatida saqlash
+                import tempfile
+                suffix = '.' + url.split('?')[0].rsplit('.', 1)[-1]
+                tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+                tmp.write(resp.content)
+                tmp.close()
+                return resp.content, tmp.name
+    except Exception:
+        pass
+
+    return None, None
+
+
+def _get_article_content_html(article_file):
+    """
+    Fayl ob'ektidan (FileField) matn/rasm HTML qaytaradi.
+    Lokal va Cloudinary (URL) ni qo'llab-quvvatlaydi.
+    """
+    if not article_file:
         return ''
-    ext = article_file_path.lower().rsplit('.', 1)[-1]
-    if ext in ('doc', 'docx'):
-        return _extract_docx_text_as_html(article_file_path)
-    else:
-        return _extract_pdf_text_as_html(article_file_path)
+
+    file_bytes, file_path = _get_file_as_bytes(article_file)
+    if not file_path:
+        return ''
+
+    try:
+        url_or_name = getattr(article_file, 'name', '') or ''
+        ext = url_or_name.lower().rsplit('.', 1)[-1].split('?')[0]
+        if ext in ('doc', 'docx'):
+            return _extract_docx_text_as_html(file_path)
+        else:
+            return _extract_pdf_text_as_html(file_path)
+    finally:
+        # Vaqtinchalik faylni o'chirish
+        import os, tempfile
+        try:
+            tmp_dir = tempfile.gettempdir()
+            if file_path.startswith(tmp_dir):
+                os.unlink(file_path)
+        except Exception:
+            pass
 
 
 def download_pdf(request, pk):
@@ -334,9 +389,7 @@ def download_pdf(request, pk):
 
     Muallif yuklagan fayl (PDF yoki Word) dan matnni avtomatik o'qib,
     xhtml2pdf orqali kolontitullar bilan yangi PDF qaytaradi.
-    Agar ishlamasa — asl faylni qaytaradi.
     """
-    import os
     from django.http import HttpResponse, Http404, FileResponse
     from django.shortcuts import redirect as _redirect
     from django.template.loader import render_to_string
@@ -352,53 +405,37 @@ def download_pdf(request, pk):
 
     if article.pdf_file:
         try:
-            file_path = article.pdf_file.path
-            if os.path.exists(file_path):
-                content_html = _get_article_content_html(file_path)
+            content_html = _get_article_content_html(article.pdf_file)
 
-                from xhtml2pdf import pisa
-                import io
+            from xhtml2pdf import pisa
+            import io
 
-                html_string = render_to_string('article_pdf.html', {
-                    'article': article,
-                    'request': request,
-                    'pdf_content_html': content_html,
-                })
-                buffer = io.BytesIO()
-                pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
-                if not pisa_status.err:
-                    response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
-                    response['Content-Disposition'] = f'attachment; filename="{filename}"'
-                    return response
+            html_string = render_to_string('article_pdf.html', {
+                'article': article,
+                'request': request,
+                'pdf_content_html': content_html,
+            })
+            buffer = io.BytesIO()
+            pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
+            if not pisa_status.err:
+                response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="{filename}"'
+                return response
         except Exception:
             pass
 
-    # Fallback: asl faylni qaytarish
+    # Fallback: asl faylni qaytarish (URL orqali redirect)
     if not article.pdf_file:
         raise Http404("Maqola fayli topilmadi.")
-
-    try:
-        file_path = article.pdf_file.path
-        if os.path.exists(file_path):
-            return FileResponse(
-                open(file_path, 'rb'),
-                content_type='application/octet-stream',
-                as_attachment=True,
-                filename=filename,
-            )
-    except Exception:
-        pass
 
     return _redirect(article.pdf_file.url)
 
 
 def generate_article_pdf(request, pk):
-    """Maqolani TIFT shablonida PDF ga aylantiradi (brauzerda ko'rish uchun).
-    PDF yoki Word fayldan matnni avtomatik o'qib, kolontitullar bilan chiqaradi.
-    """
+    """Maqolani TIFT shablonida PDF ga aylantiradi (brauzerda ko'rish uchun)."""
     from django.template.loader import render_to_string
     from django.http import HttpResponse
-    import io, os
+    import io
 
     try:
         from xhtml2pdf import pisa
@@ -413,9 +450,7 @@ def generate_article_pdf(request, pk):
     content_html = ''
     if article.pdf_file:
         try:
-            file_path = article.pdf_file.path
-            if os.path.exists(file_path):
-                content_html = _get_article_content_html(file_path)
+            content_html = _get_article_content_html(article.pdf_file)
         except Exception:
             pass
 
