@@ -124,14 +124,6 @@ body {
     text-align: right;
     margin-bottom: 3pt;
 }
-.article-email {
-    font-family: Arial, sans-serif;
-    font-size: 8.5pt;
-    color: #15803d;
-    text-align: right;
-    margin-bottom: 10pt;
-}
-
 /* ── SECTION SARLAVHA ── */
 .sec-title {
     font-family: Arial, sans-serif;
@@ -345,10 +337,7 @@ p.img-caption {
     <div class="article-institution">{{ article.author.institution }}</div>
 {% endif %}
 
-<!-- Email -->
-{% if article.author.email %}
-    <div class="article-email">{{ article.author.email }}</div>
-{% endif %}
+<!-- Email kerak emas -->
 
 <!-- Annotatsiya -->
 <div class="sec-title">Annotatsiya</div>

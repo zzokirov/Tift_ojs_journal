@@ -103,6 +103,36 @@ def article_detail(request, pk):
     })
 
 
+def _clean_text(text):
+    """
+    Unicode belgilarni xhtml2pdf tushuna oladigan ko'rinishga keltiradi.
+    Qora to'rtburchak (replacement char) va maxsus belgilarni almashtiradi.
+    """
+    import unicodedata
+    # Normalizatsiya
+    text = unicodedata.normalize('NFC', text)
+    # Tez-tez muammo chiqaradigan Unicode belgilarni ASCII ga almashtirish
+    replacements = {
+        '\u2019': "'",   # ' (right single quotation)
+        '\u2018': "'",   # ' (left single quotation)
+        '\u201c': '"',   # " (left double quotation)
+        '\u201d': '"',   # " (right double quotation)
+        '\u2013': '-',   # – (en dash)
+        '\u2014': '-',   # — (em dash)
+        '\u2026': '...',  # … (ellipsis)
+        '\u00a0': ' ',   # non-breaking space
+        '\u00ad': '-',   # soft hyphen
+        '\ufffd': '',    # replacement character (qora to'rtburchak)
+        '\u25a0': '',    # ■ (qora kvadrat)
+        '\u25a1': '',    # □ (oq kvadrat)
+        '\u2022': '-',   # • (bullet)
+        '\u00b7': '-',   # · (middle dot)
+    }
+    for char, replacement in replacements.items():
+        text = text.replace(char, replacement)
+    return text
+
+
 def _extract_pdf_text_as_html(pdf_path):
     """
     PDF fayldan matn, jadval va rasmlarni o'qib HTML qaytaradi.
@@ -183,7 +213,7 @@ def _extract_pdf_text_as_html(pdf_path):
                         flags = first_spans[0].get("flags", 0)
                         is_bold = bool(flags & 16)
 
-                escaped = html_lib.escape(block_text)
+                escaped = html_lib.escape(_clean_text(block_text))
 
                 if font_size >= 14 or (font_size >= 12 and is_bold):
                     result_html.append(f'<h2 class="doc-heading">{escaped}</h2>')
@@ -275,7 +305,7 @@ def _extract_docx_text_as_html(docx_path):
                     continue
 
                 style_name = para.style.name.lower() if para.style else ''
-                escaped = html_lib.escape(text)
+                escaped = html_lib.escape(_clean_text(text))
 
                 if 'heading 1' in style_name or style_name == 'title':
                     result_html.append(f'<h2 class="doc-heading">{escaped}</h2>')
@@ -304,7 +334,7 @@ def _extract_docx_text_as_html(docx_path):
                 for i, row in enumerate(tbl.rows):
                     table_html.append('<tr>')
                     for cell in row.cells:
-                        cell_text = html_lib.escape(cell.text.strip())
+                        cell_text = html_lib.escape(_clean_text(cell.text.strip()))
                         if i == 0:
                             table_html.append(f'<th>{cell_text}</th>')
                         else:
