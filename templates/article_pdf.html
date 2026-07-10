@@ -293,30 +293,6 @@ p.img-caption {
     background-color: #fafafa;
 }
 
-/* ── IQTIBOS BLOKI ── */
-.cite-box {
-    background-color: #f8fafc;
-    border: 0.5pt solid #e2e8f0;
-    border-left: 3pt solid #0a1628;
-    padding: 8pt 10pt;
-    margin-top: 14pt;
-    page-break-inside: avoid;
-}
-.cite-label {
-    font-family: Arial, sans-serif;
-    font-size: 7.5pt;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.7pt;
-    color: #15803d;
-    margin-bottom: 4pt;
-}
-.cite-text {
-    font-size: 9pt;
-    color: #374151;
-    line-height: 1.6;
-    text-indent: 0;
-}
 </style>
 </head>
 <body>
@@ -419,19 +395,6 @@ p.img-caption {
 {% endif %}
 
 <hr class="divider"/>
-
-<!-- Iqtibos -->
-<div class="cite-box">
-    <div class="cite-label">Iqtibos keltirish &mdash; APA uslubi</div>
-    <p class="cite-text">
-        {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
-        ({% if article.published_at %}{{ article.published_at.year }}{% elif article.issue %}{{ article.issue.year }}{% else %}2026{% endif %}).
-        {{ article.title }}.
-        <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %},
-        <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
-        www.tift.uz
-    </p>
-</div>
 
 </body>
 </html>
