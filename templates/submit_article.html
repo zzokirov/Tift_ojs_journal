@@ -32,16 +32,16 @@
                                 <div class="relative">
                                     <label class="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-navy-400 transition-all group">
                                         <div class="flex flex-col items-center justify-center text-center px-4">
-                                            <i class="fas fa-cloud-upload-alt text-2xl text-gray-400 group-hover:text-navy-500 mb-2 transition-colors"></i>
+                                            <i class="fas fa-file-word text-2xl text-blue-500 group-hover:text-blue-600 mb-2 transition-colors"></i>
                                             <p class="text-sm font-medium text-gray-600 group-hover:text-navy-600 transition-colors">
-                                                Fayl bu yerga tashlang yoki bosing
+                                                Word faylni bu yerga tashlang yoki bosing
                                             </p>
-                                            <p class="text-xs text-gray-400 mt-1">PDF yoki Word (.docx), maksimal hajm: 20MB</p>
+                                            <p class="text-xs text-gray-400 mt-1">Faqat <strong>.docx</strong> format, maksimal hajm: 20MB</p>
                                         </div>
-                                        <input type="file" name="{{ field.name }}" class="hidden" accept=".pdf,.doc,.docx" id="{{ field.id_for_label }}">
+                                        <input type="file" name="{{ field.name }}" class="hidden" accept=".docx" id="{{ field.id_for_label }}">
                                     </label>
-                                    <div id="filePreview_{{ field.name }}" class="hidden mt-2 flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
-                                        <i class="fas fa-file-alt text-blue-500" id="fileIcon_{{ field.name }}"></i>
+                                    <div id="filePreview_{{ field.name }}" class="hidden mt-2 flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
+                                        <i class="fas fa-file-word text-blue-600"></i>
                                         <span class="text-sm text-gray-700 font-medium" id="fileName_{{ field.name }}"></span>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                         <div class="w-5 h-5 bg-green-50 border border-green-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                             <i class="fas fa-check text-green-500 text-[9px]"></i>
                         </div>
-                        <span>Maqola <strong>PDF</strong> yoki <strong>Word (.docx)</strong> formatida bo'lishi mumkin</span>
+                        <span>Maqola faqat <strong>Word (.docx)</strong> formatida yuboriladi</span>
                     </li>
                     <li class="flex items-start gap-2.5">
                         <div class="w-5 h-5 bg-green-50 border border-green-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -169,29 +169,16 @@
 
 {% block extra_scripts %}
 <script>
-// File upload preview
 document.querySelectorAll('input[type="file"]').forEach(function(input) {
     input.addEventListener('change', function() {
         const name = this.name;
         const preview = document.getElementById('filePreview_' + name);
         const fileName = document.getElementById('fileName_' + name);
-        const fileIcon = document.getElementById('fileIcon_' + name);
         if (this.files && this.files[0]) {
             if (preview && fileName) {
                 fileName.textContent = this.files[0].name;
                 preview.classList.remove('hidden');
                 preview.classList.add('flex');
-                // Icon turini aniqlash
-                if (fileIcon) {
-                    const ext = this.files[0].name.split('.').pop().toLowerCase();
-                    if (ext === 'pdf') {
-                        fileIcon.className = 'fas fa-file-pdf text-red-500';
-                    } else if (ext === 'docx' || ext === 'doc') {
-                        fileIcon.className = 'fas fa-file-word text-blue-600';
-                    } else {
-                        fileIcon.className = 'fas fa-file-alt text-gray-500';
-                    }
-                }
             }
         }
     });

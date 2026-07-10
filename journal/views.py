@@ -524,12 +524,12 @@ def _get_pdf_bytes(article_file):
 
 def download_pdf(request, pk):
     """
-    PDF yuklab olish.
-    - PDF fayl bo'lsa: asl PDF ga kolontitullar qo'shib qaytaradi
-    - Word (.docx) bo'lsa: xhtml2pdf bilan shablon PDF yaratadi
+    Word (.docx) faylni PDF ga aylantirib qaytaradi.
+    Kolontitullar bilan birga xhtml2pdf shablon ishlatiladi.
     """
     from django.http import HttpResponse, Http404
     from django.shortcuts import redirect as _redirect
+    from django.template.loader import render_to_string
 
     article = get_object_or_404(Article, pk=pk, status='published')
     Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
@@ -540,50 +540,31 @@ def download_pdf(request, pk):
     if not article.pdf_file:
         raise Http404("Maqola fayli topilmadi.")
 
-    # Fayl kengaytmasini aniqlash
-    file_name = getattr(article.pdf_file, 'name', '') or ''
-    ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0]
+    try:
+        from xhtml2pdf import pisa
+        import io
 
-    # ── PDF: asl faylga kolontitullar qo'shish ──
-    if ext != 'docx' and ext != 'doc':
-        try:
-            pdf_bytes = _get_pdf_bytes(article.pdf_file)
-            if pdf_bytes:
-                result = _add_header_footer_to_pdf(pdf_bytes, article)
-                response = HttpResponse(result, content_type='application/pdf')
-                response['Content-Disposition'] = f'attachment; filename="{filename}"'
-                return response
-        except Exception:
-            pass
+        content_html = _get_article_content_html(article.pdf_file)
+        html_string = render_to_string('article_pdf.html', {
+            'article': article,
+            'request': request,
+            'pdf_content_html': content_html,
+        })
+        buffer = io.BytesIO()
+        res = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
+        if not res.err:
+            response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+    except Exception:
+        pass
 
-    # ── Word (.docx): xhtml2pdf bilan shablon PDF ──
-    if ext in ('doc', 'docx'):
-        try:
-            from django.template.loader import render_to_string
-            from xhtml2pdf import pisa
-            import io
-
-            content_html = _get_article_content_html(article.pdf_file)
-            html_string = render_to_string('article_pdf.html', {
-                'article': article,
-                'request': request,
-                'pdf_content_html': content_html,
-            })
-            buffer = io.BytesIO()
-            res = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
-            if not res.err:
-                response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
-                response['Content-Disposition'] = f'attachment; filename="{filename}"'
-                return response
-        except Exception:
-            pass
-
-    # Fallback: asl fayl URL ga yo'naltirish
+    # Fallback: asl faylni qaytarish
     return _redirect(article.pdf_file.url)
 
 
 def generate_article_pdf(request, pk):
-    """Maqolani TIFT shablonida PDF ga aylantiradi (brauzerda ko'rish uchun)."""
+    """Maqolani brauzerda ko'rish uchun PDF ga aylantiradi (Word → PDF)."""
     from django.template.loader import render_to_string
     from django.http import HttpResponse
     import io
@@ -617,9 +598,8 @@ def generate_article_pdf(request, pk):
         return HttpResponse("PDF yaratishda xatolik yuz berdi.", status=500)
 
     safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
-    filename = f"TIFT_{safe_title}.pdf"
     response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
-    response['Content-Disposition'] = f'inline; filename="{filename}"'
+    response['Content-Disposition'] = f'inline; filename="TIFT_{safe_title}.pdf"'
     return response
 
 
