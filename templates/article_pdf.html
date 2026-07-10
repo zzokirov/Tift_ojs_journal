@@ -54,11 +54,7 @@ body {
     background-color: #0a1628;
     border-radius: 4pt;
     text-align: center;
-    font-family: Arial, sans-serif;
-    font-weight: 900;
-    font-size: 18pt;
-    color: #22c55e;
-    padding-top: 4pt;
+    padding: 3pt;
 }
 .hdr-center-cell { vertical-align: middle; padding-left: 7pt; }
 .hdr-journal-name {
@@ -118,7 +114,7 @@ body {
     font-size: 10.5pt;
     font-weight: 700;
     color: #1e293b;
-    text-align: center;
+    text-align: right;
     margin-bottom: 3pt;
 }
 .article-institution {
@@ -126,27 +122,15 @@ body {
     font-size: 9pt;
     color: #555;
     font-style: italic;
-    text-align: center;
+    text-align: right;
     margin-bottom: 3pt;
 }
 .article-email {
     font-family: Arial, sans-serif;
     font-size: 8.5pt;
     color: #15803d;
-    text-align: center;
+    text-align: right;
     margin-bottom: 10pt;
-}
-
-/* ── META CHIZIQ ── */
-.article-meta {
-    font-family: Arial, sans-serif;
-    font-size: 7.5pt;
-    color: #666;
-    border-top: 0.5pt solid #e2e8f0;
-    border-bottom: 0.5pt solid #e2e8f0;
-    padding: 4pt 0;
-    margin-bottom: 12pt;
-    text-align: center;
 }
 
 /* ── SECTION SARLAVHA ── */
@@ -302,7 +286,14 @@ p.img-caption {
     <table class="hdr-table">
         <tr>
             <td class="hdr-logo-cell">
-                <div class="hdr-logo">T</div>
+                <div class="hdr-logo">
+                    {% if logo_base64 %}
+                        <img src="{{ logo_base64 }}"
+                             style="width:30pt;height:30pt;object-fit:contain;display:block;margin:auto;"/>
+                    {% else %}
+                        <span style="font-family:Arial;font-weight:900;font-size:18pt;color:#22c55e;line-height:36pt;">T</span>
+                    {% endif %}
+                </div>
             </td>
             <td class="hdr-center-cell">
                 <div class="hdr-journal-name">
@@ -361,16 +352,6 @@ p.img-caption {
 {% if article.author.email %}
     <div class="article-email">{{ article.author.email }}</div>
 {% endif %}
-
-<!-- Meta -->
-<div class="article-meta">
-    Maqola yuborilgan: {{ article.created_at|date:"d.m.Y" }}
-    {% if article.published_at %}
-        &nbsp;&bull;&nbsp; Chop etilgan: {{ article.published_at|date:"d.m.Y" }}
-    {% endif %}
-    &nbsp;&bull;&nbsp; Ko'rishlar: {{ article.views_count }}
-    &nbsp;&bull;&nbsp; Yuklamalar: {{ article.downloads_count }}
-</div>
 
 <!-- Annotatsiya -->
 <div class="sec-title">Annotatsiya</div>

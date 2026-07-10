@@ -318,7 +318,19 @@ def _extract_docx_text_as_html(docx_path):
         return ''
 
 
-def _get_file_as_bytes(article_file):
+def _get_logo_base64():
+    """TIFT logosini base64 ga o'giradi (PDF uchun inline embed)."""
+    import base64, os
+    from django.conf import settings
+    logo_path = os.path.join(settings.STATIC_ROOT, 'images', 'tift.png')
+    # staticfiles da topilmasa — static papkasidan qidirish
+    if not os.path.exists(logo_path):
+        logo_path = os.path.join(settings.BASE_DIR, 'static', 'images', 'tift.png')
+    try:
+        with open(logo_path, 'rb') as f:
+            return 'data:image/png;base64,' + base64.b64encode(f.read()).decode('ascii')
+    except Exception:
+        return ''
     """
     Fayl maydonidan bytes qaytaradi.
     Lokal (path) bo'lsa — disk dan o'qiydi.
@@ -543,15 +555,19 @@ def download_pdf(request, pk):
     try:
         from xhtml2pdf import pisa
         import io
+        from django.conf import settings
 
         content_html = _get_article_content_html(article.pdf_file)
         html_string = render_to_string('article_pdf.html', {
             'article': article,
             'request': request,
             'pdf_content_html': content_html,
+            'static_root': settings.STATIC_ROOT,
+            'logo_base64': _get_logo_base64(),
         })
         buffer = io.BytesIO()
-        res = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
+        base_url = request.build_absolute_uri('/')
+        res = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
         if not res.err:
             response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
             response['Content-Disposition'] = f'attachment; filename="{filename}"'
@@ -579,6 +595,8 @@ def generate_article_pdf(request, pk):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
         request.session[f'pdf_viewed_{pk}'] = True
 
+    from django.conf import settings as django_settings
+
     content_html = ''
     if article.pdf_file:
         try:
@@ -590,9 +608,12 @@ def generate_article_pdf(request, pk):
         'article': article,
         'request': request,
         'pdf_content_html': content_html,
+        'static_root': django_settings.STATIC_ROOT,
+        'logo_base64': _get_logo_base64(),
     })
     buffer = io.BytesIO()
-    pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
+    base_url = request.build_absolute_uri('/')
+    pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
 
     if pisa_status.err:
         return HttpResponse("PDF yaratishda xatolik yuz berdi.", status=500)
