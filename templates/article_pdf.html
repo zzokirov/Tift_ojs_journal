@@ -51,10 +51,8 @@ body {
 .hdr-logo {
     width: 36pt;
     height: 36pt;
-    background-color: #0a1628;
-    border-radius: 4pt;
     text-align: center;
-    padding: 3pt;
+    padding: 0;
 }
 .hdr-center-cell { vertical-align: middle; padding-left: 7pt; }
 .hdr-journal-name {
@@ -303,10 +301,8 @@ p.img-caption {
             </td>
             <td class="hdr-right-cell">
                 {% if article.issue %}
-                    Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}<br/>
+                    Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}
                 {% endif %}
-                ISSN: 2181-XXXX<br/>
-                Open Access
             </td>
         </tr>
     </table>
