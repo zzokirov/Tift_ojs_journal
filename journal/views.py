@@ -319,16 +319,23 @@ def _extract_docx_text_as_html(docx_path):
 
 
 def _get_logo_base64():
-    """TIFT logosini base64 ga o'giradi (PDF uchun inline embed)."""
-    import base64, os
+    """TIFT logosini base64 PNG ga o'giradi (PDF uchun inline embed).
+    WebP bo'lsa Pillow bilan PNG ga konvertatsiya qilinadi.
+    """
+    import base64, os, io
     from django.conf import settings
+
     logo_path = os.path.join(settings.STATIC_ROOT, 'images', 'tift.png')
-    # staticfiles da topilmasa — static papkasidan qidirish
     if not os.path.exists(logo_path):
         logo_path = os.path.join(settings.BASE_DIR, 'static', 'images', 'tift.png')
+
     try:
-        with open(logo_path, 'rb') as f:
-            return 'data:image/png;base64,' + base64.b64encode(f.read()).decode('ascii')
+        from PIL import Image
+        img = Image.open(logo_path).convert('RGBA')
+        buf = io.BytesIO()
+        img.save(buf, format='PNG')
+        b64 = base64.b64encode(buf.getvalue()).decode('ascii')
+        return 'data:image/png;base64,' + b64
     except Exception:
         return ''
     """
@@ -374,7 +381,35 @@ def _get_article_content_html(article_file):
     if not article_file:
         return ''
 
-    file_bytes, file_path = _get_file_as_bytes(article_file)
+    import os, tempfile
+
+    # Lokal fayl
+    file_path = None
+    is_tmp = False
+    try:
+        path = article_file.path
+        if os.path.exists(path):
+            file_path = path
+    except Exception:
+        pass
+
+    # URL (Cloudinary)
+    if not file_path:
+        try:
+            import requests as req
+            url = article_file.url
+            resp = req.get(url, timeout=30)
+            if resp.status_code == 200:
+                url_name = url.split('?')[0]
+                suffix = '.' + url_name.rsplit('.', 1)[-1]
+                tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+                tmp.write(resp.content)
+                tmp.close()
+                file_path = tmp.name
+                is_tmp = True
+        except Exception:
+            pass
+
     if not file_path:
         return ''
 
@@ -386,14 +421,11 @@ def _get_article_content_html(article_file):
         else:
             return _extract_pdf_text_as_html(file_path)
     finally:
-        # Vaqtinchalik faylni o'chirish
-        import os, tempfile
-        try:
-            tmp_dir = tempfile.gettempdir()
-            if file_path.startswith(tmp_dir):
+        if is_tmp:
+            try:
                 os.unlink(file_path)
-        except Exception:
-            pass
+            except Exception:
+                pass
 
 
 def _add_header_footer_to_pdf(pdf_bytes, article):
