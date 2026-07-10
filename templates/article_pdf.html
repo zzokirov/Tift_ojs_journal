@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Times New Roman', Times, serif;
@@ -14,10 +14,10 @@ body {
     line-height: 1.65;
 }
 
-/* ── @PAGE — kolontitullar ── */
+/* stylelint-disable */
 @page {
     size: A4;
-    margin-top: 3.4cm;
+    margin-top: 3.6cm;
     margin-bottom: 3.0cm;
     margin-left: 2.5cm;
     margin-right: 2.5cm;
@@ -27,7 +27,7 @@ body {
         left: 2.5cm;
         top: 0.5cm;
         right: 2.5cm;
-        height: 2.4cm;
+        height: 2.6cm;
     }
 
     @frame footer_frame {
@@ -38,6 +38,7 @@ body {
         height: 2.0cm;
     }
 }
+/* stylelint-enable */
 
 /* ── YUQORI KOLONTITUL ── */
 #page-header {
@@ -45,19 +46,13 @@ body {
     border-bottom: 2pt solid #15803d;
     padding-bottom: 5pt;
 }
-.hdr-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-.hdr-logo-cell {
-    width: 44pt;
-    vertical-align: middle;
-}
+.hdr-table { width: 100%; border-collapse: collapse; }
+.hdr-logo-cell { width: 44pt; vertical-align: middle; }
 .hdr-logo {
     width: 36pt;
     height: 36pt;
     background-color: #0a1628;
-    border-radius: 5pt;
+    border-radius: 4pt;
     text-align: center;
     font-family: Arial, sans-serif;
     font-weight: 900;
@@ -65,10 +60,7 @@ body {
     color: #22c55e;
     padding-top: 4pt;
 }
-.hdr-center-cell {
-    vertical-align: middle;
-    padding-left: 7pt;
-}
+.hdr-center-cell { vertical-align: middle; padding-left: 7pt; }
 .hdr-journal-name {
     font-family: Arial, sans-serif;
     font-size: 11pt;
@@ -89,7 +81,7 @@ body {
     font-size: 8pt;
     color: #555;
     font-family: Arial, sans-serif;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* ── PASTKI KOLONTITUL ── */
@@ -107,9 +99,106 @@ body {
     font-weight: bold;
     color: #0a1628;
     font-size: 8.5pt;
-    text-align: center;
+    margin-bottom: 2pt;
 }
 .ftr-info { font-size: 7pt; color: #666; }
+
+/* ── SARLAVHA BLOKI ── */
+.article-title {
+    font-family: Arial, sans-serif;
+    font-size: 15pt;
+    font-weight: 900;
+    color: #0a1628;
+    line-height: 1.3;
+    margin: 12pt 0 8pt 0;
+    text-align: center;
+}
+.article-authors {
+    font-family: Arial, sans-serif;
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 3pt;
+}
+.article-institution {
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    color: #555;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 3pt;
+}
+.article-email {
+    font-family: Arial, sans-serif;
+    font-size: 8.5pt;
+    color: #15803d;
+    text-align: center;
+    margin-bottom: 10pt;
+}
+
+/* ── META CHIZIQ ── */
+.article-meta {
+    font-family: Arial, sans-serif;
+    font-size: 7.5pt;
+    color: #666;
+    border-top: 0.5pt solid #e2e8f0;
+    border-bottom: 0.5pt solid #e2e8f0;
+    padding: 4pt 0;
+    margin-bottom: 12pt;
+    text-align: center;
+}
+
+/* ── SECTION SARLAVHA ── */
+.sec-title {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    font-weight: 700;
+    color: #0a1628;
+    margin: 12pt 0 4pt 0;
+    padding-left: 7pt;
+    border-left: 2.5pt solid #15803d;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+}
+
+/* ── ANNOTATSIYA ── */
+.abstract-box {
+    background-color: #f8fafc;
+    border-left: 3pt solid #15803d;
+    padding: 8pt 10pt;
+    margin-bottom: 10pt;
+}
+.abstract-box p {
+    font-size: 10pt;
+    font-style: italic;
+    color: #374151;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+/* ── KALIT SO'ZLAR ── */
+.keywords {
+    font-size: 9.5pt;
+    margin-bottom: 12pt;
+    line-height: 1.5;
+}
+.kw-label {
+    font-weight: 700;
+    color: #15803d;
+}
+
+/* ── AJRATUVCHI CHIZIQ ── */
+.divider {
+    border: none;
+    border-top: 0.8pt solid #cbd5e1;
+    margin: 12pt 0;
+}
+.divider-thick {
+    border: none;
+    border-top: 1.5pt solid #0a1628;
+    margin: 14pt 0;
+}
 
 /* ── ASOSIY MATN ── */
 .content {
@@ -121,13 +210,11 @@ body {
 .content p {
     margin-bottom: 7pt;
     text-indent: 1.5em;
-    width: 100%;
     text-align: justify;
 }
-/* Sarlavhalar */
 .content .doc-heading {
     font-family: Arial, sans-serif;
-    font-size: 12pt;
+    font-size: 11.5pt;
     font-weight: 700;
     color: #0a1628;
     margin: 14pt 0 5pt 0;
@@ -149,7 +236,8 @@ body {
     margin: 12pt 0 5pt 0;
     text-indent: 0;
 }
-/* Jadvallar */
+
+/* ── JADVALLAR ── */
 .content .doc-table {
     width: 100%;
     border-collapse: collapse;
@@ -175,17 +263,15 @@ body {
 .content .doc-table tr:nth-child(even) td {
     background-color: #f8fafc;
 }
-/* Rasmlar */
+
+/* ── RASMLAR ── */
 .doc-img-wrap {
     width: 100%;
     text-align: center;
     margin: 10pt 0;
     page-break-inside: avoid;
 }
-.doc-img-wrap img {
-    max-width: 100%;
-    height: auto;
-}
+.doc-img-wrap img { max-width: 100%; height: auto; }
 p.img-caption {
     font-size: 9pt;
     color: #555;
@@ -194,7 +280,8 @@ p.img-caption {
     text-indent: 0;
     margin-bottom: 8pt;
 }
-/* Matn yo'q holati */
+
+/* ── MATN YO'Q ── */
 .pdf-notice {
     font-size: 10pt;
     color: #666;
@@ -204,6 +291,31 @@ p.img-caption {
     border: 0.5pt dashed #ccc;
     margin: 10pt 0;
     background-color: #fafafa;
+}
+
+/* ── IQTIBOS BLOKI ── */
+.cite-box {
+    background-color: #f8fafc;
+    border: 0.5pt solid #e2e8f0;
+    border-left: 3pt solid #0a1628;
+    padding: 8pt 10pt;
+    margin-top: 14pt;
+    page-break-inside: avoid;
+}
+.cite-label {
+    font-family: Arial, sans-serif;
+    font-size: 7.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7pt;
+    color: #15803d;
+    margin-bottom: 4pt;
+}
+.cite-text {
+    font-size: 9pt;
+    color: #374151;
+    line-height: 1.6;
+    text-indent: 0;
 }
 </style>
 </head>
@@ -226,7 +338,8 @@ p.img-caption {
                 {% if article.issue %}
                     Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}<br/>
                 {% endif %}
-                ISSN: 2181-XXXX &nbsp;|&nbsp; Open Access
+                ISSN: 2181-XXXX<br/>
+                Open Access
             </td>
         </tr>
     </table>
@@ -234,16 +347,69 @@ p.img-caption {
 
 <!-- ══ PASTKI KOLONTITUL ══ -->
 <div id="page-footer">
-    <div class="ftr-page">
-        &ndash; <pdf:pagenumber> / <pdf:pagecount> &ndash;
-    </div>
+    <div class="ftr-page">&ndash; <pdf:pagenumber> / <pdf:pagecount> &ndash;</div>
     <div class="ftr-info">
-        Toshkent sh., Amir Temur ko'chasi, 108 &nbsp;|&nbsp; Tel: +998 71 238-74-80<br/>
-        journal@tift.uz &nbsp;|&nbsp; www.tift.uz &nbsp;|&nbsp; ISSN: 2181-XXXX
+        Toshkent sh., Amir Temur ko'chasi, 108 &nbsp;|&nbsp; Tel: +998 71 238-74-80 &nbsp;|&nbsp;
+        journal@tift.uz &nbsp;|&nbsp; www.tift.uz
     </div>
 </div>
 
-<!-- ══ MAQOLA MATNI ══ -->
+<!-- ══ MAQOLA MA'LUMOTLARI ══ -->
+
+<!-- Kategoriya badge -->
+{% if article.category %}
+<div style="font-family:Arial,sans-serif; font-size:8pt; color:#15803d; font-weight:700;
+            text-transform:uppercase; letter-spacing:0.6pt; margin-bottom:6pt;">
+    {{ article.category.code }} &mdash; {{ article.category.name }}
+</div>
+{% endif %}
+
+<!-- Sarlavha -->
+<div class="article-title">{{ article.title }}</div>
+
+<!-- Mualliflar -->
+<div class="article-authors">
+    {% if article.authors %}
+        {{ article.authors }}
+    {% else %}
+        {{ article.author.get_full_name|default:article.author.username }}
+    {% endif %}
+</div>
+
+<!-- Muassasa -->
+{% if article.author.institution %}
+    <div class="article-institution">{{ article.author.institution }}</div>
+{% endif %}
+
+<!-- Email -->
+{% if article.author.email %}
+    <div class="article-email">{{ article.author.email }}</div>
+{% endif %}
+
+<!-- Meta -->
+<div class="article-meta">
+    Maqola yuborilgan: {{ article.created_at|date:"d.m.Y" }}
+    {% if article.published_at %}
+        &nbsp;&bull;&nbsp; Chop etilgan: {{ article.published_at|date:"d.m.Y" }}
+    {% endif %}
+    &nbsp;&bull;&nbsp; Ko'rishlar: {{ article.views_count }}
+    &nbsp;&bull;&nbsp; Yuklamalar: {{ article.downloads_count }}
+</div>
+
+<!-- Annotatsiya -->
+<div class="sec-title">Annotatsiya</div>
+<div class="abstract-box">
+    <p>{{ article.abstract }}</p>
+</div>
+
+<!-- Kalit so'zlar -->
+<div class="keywords">
+    <span class="kw-label">Kalit so'zlar:</span> {{ article.keywords }}
+</div>
+
+<hr class="divider-thick"/>
+
+<!-- Maqola matni -->
 {% if pdf_content_html %}
     <div class="content">{{ pdf_content_html|safe }}</div>
 {% else %}
@@ -251,6 +417,21 @@ p.img-caption {
         Maqola matni o'qib bo'lmadi yoki fayl mavjud emas.
     </div>
 {% endif %}
+
+<hr class="divider"/>
+
+<!-- Iqtibos -->
+<div class="cite-box">
+    <div class="cite-label">Iqtibos keltirish &mdash; APA uslubi</div>
+    <p class="cite-text">
+        {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
+        ({{ article.published_at.year|default:article.issue.year|default:"2026" }}).
+        {{ article.title }}.
+        <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %},
+        <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
+        www.tift.uz
+    </p>
+</div>
 
 </body>
 </html>
