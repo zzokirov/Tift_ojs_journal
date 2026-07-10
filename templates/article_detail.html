@@ -149,7 +149,7 @@
                     <p class="font-mono leading-relaxed pr-10" id="citationText"
                        style="font-size:0.82rem;color:#64748b;word-break:break-word;">
                         {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
-                        ({{ article.published_at.year|default:article.issue.year|default:"2026" }}).
+                        ({% if article.published_at %}{{ article.published_at.year }}{% elif article.issue %}{{ article.issue.year }}{% else %}2026{% endif %}).
                         {{ article.title }}.
                         <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %}, <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
                     </p>
