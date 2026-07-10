@@ -384,50 +384,201 @@ def _get_article_content_html(article_file):
             pass
 
 
-def download_pdf(request, pk):
-    """PDF yuklab olish — TIFT kolontitullar bilan.
-
-    Muallif yuklagan fayl (PDF yoki Word) dan matnni avtomatik o'qib,
-    xhtml2pdf orqali kolontitullar bilan yangi PDF qaytaradi.
+def _add_header_footer_to_pdf(pdf_bytes, article):
     """
-    from django.http import HttpResponse, Http404, FileResponse
+    PyMuPDF yordamida asl PDF faylning har sahifasiga
+    yuqori va pastki kolontitullarni qo'shadi.
+    Matn, rasmlar, jadvallar o'zgarmaydi.
+    """
+    try:
+        import fitz
+        import io
+
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+
+        # Ranglar
+        DARK_BLUE = (0.04, 0.086, 0.157)   # #0a1628
+        GREEN     = (0.086, 0.502, 0.239)   # #15803d
+        GRAY      = (0.4, 0.4, 0.4)
+
+        # Jurnal ma'lumotlari
+        journal_name  = "TIFT JOURNAL"
+        journal_sub   = '"Arxitektura va Ta\'lim" Ilmiy-Elektron Jurnali'
+        footer_text   = "Toshkent sh., Amir Temur ko'chasi, 108  |  Tel: +998 71 238-74-80  |  journal@tift.uz  |  www.tift.uz"
+
+        if article.issue:
+            issue_text = f"Jild {article.issue.volume}, Son {article.issue.number}, {article.issue.year}"
+        else:
+            issue_text = "ISSN: 2181-XXXX"
+
+        for page in doc:
+            w = page.rect.width    # sahifa kengligi (pt)
+            h = page.rect.height   # sahifa balandligi (pt)
+
+            margin_x = 71.0  # 2.5cm
+            header_y = 22.0  # yuqoridan 0.77cm
+            footer_y = h - 25.0  # pastdan
+
+            # ── YUQORI KOLONTITUL ──
+
+            # Logo kvadrat (chap)
+            logo_rect = fitz.Rect(margin_x, header_y - 2, margin_x + 28, header_y + 26)
+            page.draw_rect(logo_rect, color=DARK_BLUE, fill=DARK_BLUE, width=0)
+            page.insert_text(
+                (margin_x + 7, header_y + 19),
+                "T", fontsize=16,
+                color=(0.133, 0.773, 0.369),  # #22c55e
+                fontname="Helvetica-Bold"
+            )
+
+            # Jurnal nomi (o'rta)
+            page.insert_text(
+                (margin_x + 34, header_y + 10),
+                journal_name, fontsize=10,
+                color=DARK_BLUE, fontname="Helvetica-Bold"
+            )
+            page.insert_text(
+                (margin_x + 34, header_y + 22),
+                journal_sub, fontsize=7,
+                color=GRAY, fontname="Helvetica"
+            )
+
+            # Jurnal soni (o'ng)
+            page.insert_text(
+                (w - margin_x - 100, header_y + 10),
+                issue_text, fontsize=8,
+                color=GRAY, fontname="Helvetica"
+            )
+            page.insert_text(
+                (w - margin_x - 70, header_y + 20),
+                "ISSN: 2181-XXXX", fontsize=7,
+                color=GRAY, fontname="Helvetica"
+            )
+
+            # Yuqori chiziq (yashil)
+            page.draw_line(
+                (margin_x, header_y + 30),
+                (w - margin_x, header_y + 30),
+                color=GREEN, width=1.2
+            )
+
+            # ── PASTKI KOLONTITUL ──
+
+            # Pastki chiziq (yashil)
+            page.draw_line(
+                (margin_x, footer_y - 4),
+                (w - margin_x, footer_y - 4),
+                color=GREEN, width=0.8
+            )
+
+            # Sahifa raqami
+            page_num = f"– {page.number + 1} / {doc.page_count} –"
+            page.insert_text(
+                (w / 2 - 20, footer_y + 8),
+                page_num, fontsize=8,
+                color=DARK_BLUE, fontname="Helvetica-Bold"
+            )
+
+            # Manzil
+            page.insert_text(
+                (margin_x, footer_y + 18),
+                footer_text, fontsize=6.5,
+                color=GRAY, fontname="Helvetica"
+            )
+
+        # Yangi PDF bytes
+        out = io.BytesIO()
+        doc.save(out)
+        doc.close()
+        return out.getvalue()
+
+    except Exception as e:
+        # Xatolik bo'lsa asl bytes qaytaradi
+        return pdf_bytes
+
+
+def _get_pdf_bytes(article_file):
+    """
+    FileField dan PDF bytes oladi.
+    Lokal: disk dan, Cloudinary/URL: HTTP orqali.
+    """
+    import os
+    # Lokal
+    try:
+        path = article_file.path
+        if os.path.exists(path):
+            with open(path, 'rb') as f:
+                return f.read()
+    except Exception:
+        pass
+    # URL (Cloudinary)
+    try:
+        import requests as req
+        resp = req.get(article_file.url, timeout=30)
+        if resp.status_code == 200:
+            return resp.content
+    except Exception:
+        pass
+    return None
+
+
+def download_pdf(request, pk):
+    """
+    PDF yuklab olish.
+    - PDF fayl bo'lsa: asl PDF ga kolontitullar qo'shib qaytaradi
+    - Word (.docx) bo'lsa: xhtml2pdf bilan shablon PDF yaratadi
+    """
+    from django.http import HttpResponse, Http404
     from django.shortcuts import redirect as _redirect
-    from django.template.loader import render_to_string
 
     article = get_object_or_404(Article, pk=pk, status='published')
-
-    Article.objects.filter(pk=pk).update(
-        downloads_count=article.downloads_count + 1
-    )
+    Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
 
     safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
     filename = f"TIFT_{safe_title}.pdf"
 
-    if article.pdf_file:
-        try:
-            content_html = _get_article_content_html(article.pdf_file)
+    if not article.pdf_file:
+        raise Http404("Maqola fayli topilmadi.")
 
+    # Fayl kengaytmasini aniqlash
+    file_name = getattr(article.pdf_file, 'name', '') or ''
+    ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0]
+
+    # ── PDF: asl faylga kolontitullar qo'shish ──
+    if ext != 'docx' and ext != 'doc':
+        try:
+            pdf_bytes = _get_pdf_bytes(article.pdf_file)
+            if pdf_bytes:
+                result = _add_header_footer_to_pdf(pdf_bytes, article)
+                response = HttpResponse(result, content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="{filename}"'
+                return response
+        except Exception:
+            pass
+
+    # ── Word (.docx): xhtml2pdf bilan shablon PDF ──
+    if ext in ('doc', 'docx'):
+        try:
+            from django.template.loader import render_to_string
             from xhtml2pdf import pisa
             import io
 
+            content_html = _get_article_content_html(article.pdf_file)
             html_string = render_to_string('article_pdf.html', {
                 'article': article,
                 'request': request,
                 'pdf_content_html': content_html,
             })
             buffer = io.BytesIO()
-            pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
-            if not pisa_status.err:
+            res = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8')
+            if not res.err:
                 response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
                 response['Content-Disposition'] = f'attachment; filename="{filename}"'
                 return response
         except Exception:
             pass
 
-    # Fallback: asl faylni qaytarish (URL orqali redirect)
-    if not article.pdf_file:
-        raise Http404("Maqola fayli topilmadi.")
-
+    # Fallback: asl fayl URL ga yo'naltirish
     return _redirect(article.pdf_file.url)
 
 
