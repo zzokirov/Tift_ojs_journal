@@ -368,39 +368,6 @@ def _get_logo_base64():
         return 'data:image/png;base64,' + b64
     except Exception:
         return ''
-    """
-    Fayl maydonidan bytes qaytaradi.
-    Lokal (path) bo'lsa — disk dan o'qiydi.
-    Cloudinary (URL) bo'lsa — HTTP orqali yuklab oladi.
-    """
-    import os
-    try:
-        # Lokal fayl
-        path = article_file.path
-        if os.path.exists(path):
-            with open(path, 'rb') as f:
-                return f.read(), path
-    except (NotImplementedError, AttributeError, Exception):
-        pass
-
-    # Cloudinary yoki tashqi URL
-    try:
-        import requests as req
-        url = article_file.url
-        if url:
-            resp = req.get(url, timeout=30)
-            if resp.status_code == 200:
-                # Vaqtinchalik fayl sifatida saqlash
-                import tempfile
-                suffix = '.' + url.split('?')[0].rsplit('.', 1)[-1]
-                tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
-                tmp.write(resp.content)
-                tmp.close()
-                return resp.content, tmp.name
-    except Exception:
-        pass
-
-    return None, None
 
 
 def _get_article_content_html(article_file):
@@ -687,15 +654,6 @@ def generate_article_pdf(request, pk):
 
 
 def signup(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('my_articles')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
