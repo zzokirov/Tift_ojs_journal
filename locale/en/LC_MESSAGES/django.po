@@ -1,0 +1,64 @@
+# TIFT Journal - English Translation
+# Copyright (C) 2026
+# This file is distributed under the same license as the TIFT Journal package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TIFT Journal 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: TIFT Team\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "O'zbek"
+msgstr "Uzbek"
+
+msgid "Русский"
+msgstr "Russian"
+
+msgid "English"
+msgstr "English"
+
+msgid "Bosh sahifa"
+msgstr "Home"
+
+msgid "Arxiv"
+msgstr "Archive"
+
+msgid "Yangiliklar"
+msgstr "News"
+
+msgid "Konferensiyalar"
+msgstr "Conferences"
+
+msgid "Hujjatlar"
+msgstr "Documents"
+
+msgid "Jurnal haqida"
+msgstr "About Journal"
+
+msgid "Kirish"
+msgstr "Login"
+
+msgid "A'zo bo'lish"
+msgstr "Register"
+
+msgid "Maqola yuborish"
+msgstr "Submit Article"
+
+msgid "Maqolalarim"
+msgstr "My Articles"
+
+msgid "Chiqish"
+msgstr "Logout"
+
+msgid "Profilni tahrirlash"
+msgstr "Edit Profile"
+
+msgid "Parol o'zgartirish"
+msgstr "Change Password"

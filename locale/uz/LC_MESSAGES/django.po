@@ -1,0 +1,64 @@
+# TIFT Journal - Uzbek Translation
+# Copyright (C) 2026
+# This file is distributed under the same license as the TIFT Journal package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TIFT Journal 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: TIFT Team\n"
+"Language-Team: Uzbek\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "O'zbek"
+msgstr "O'zbek"
+
+msgid "Русский"
+msgstr "Rus"
+
+msgid "English"
+msgstr "Ingliz"
+
+msgid "Bosh sahifa"
+msgstr "Bosh sahifa"
+
+msgid "Arxiv"
+msgstr "Arxiv"
+
+msgid "Yangiliklar"
+msgstr "Yangiliklar"
+
+msgid "Konferensiyalar"
+msgstr "Konferensiyalar"
+
+msgid "Hujjatlar"
+msgstr "Hujjatlar"
+
+msgid "Jurnal haqida"
+msgstr "Jurnal haqida"
+
+msgid "Kirish"
+msgstr "Kirish"
+
+msgid "A'zo bo'lish"
+msgstr "A'zo bo'lish"
+
+msgid "Maqola yuborish"
+msgstr "Maqola yuborish"
+
+msgid "Maqolalarim"
+msgstr "Maqolalarim"
+
+msgid "Chiqish"
+msgstr "Chiqish"
+
+msgid "Profilni tahrirlash"
+msgstr "Profilni tahrirlash"
+
+msgid "Parol o'zgartirish"
+msgstr "Parol o'zgartirish"
