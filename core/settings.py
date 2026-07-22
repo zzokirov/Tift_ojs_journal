@@ -252,6 +252,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com', 'https://architect-edu.tift.uz']
 
+# Til cookie sozlamalari
+LANGUAGE_COOKIE_NAME = 'django_language'
+LANGUAGE_COOKIE_AGE = 365 * 24 * 60 * 60  # 1 yil
+
 # ── XAVFSIZLIK SOZLAMALARI ────────────────────────────────────────────────────
 # Production da HTTPS orqali ishlanganda qo'shimcha himoya
 if not DEBUG:
