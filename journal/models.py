@@ -4,7 +4,12 @@ from django.contrib.auth.models import AbstractUser
 
 
 def user_avatar_path(instance, filename):
-    ext = filename.split('.')[-1]
+    # Path traversal himoyasi: faqat kengaytmani olish, yo'lni butunlay almashtirish
+    import os
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    allowed = {'jpg', 'jpeg', 'png', 'webp', 'gif'}
+    if ext not in allowed:
+        ext = 'jpg'
     return f"avatars/{uuid.uuid4()}.{ext}"
 
 
@@ -41,13 +46,21 @@ class JournalIssue(models.Model):
 
 
 def article_upload_path(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = f"{uuid.uuid4()}.{ext}"
-    return f"articles_pdf/{filename}"
+    # Path traversal himoyasi: kengaytmani tekshirish
+    import os
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    allowed = {'pdf', 'doc', 'docx'}
+    if ext not in allowed:
+        ext = 'pdf'
+    return f"articles_pdf/{uuid.uuid4()}.{ext}"
 
 
 def article_template_pdf_path(instance, filename):
-    ext = filename.split('.')[-1]
+    import os
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    allowed = {'pdf', 'docx'}
+    if ext not in allowed:
+        ext = 'pdf'
     return f"articles_template/{uuid.uuid4()}.{ext}"
 
 
@@ -130,7 +143,11 @@ class SiteVisit(models.Model):
 
 
 def staff_photo_path(instance, filename):
-    ext = filename.split('.')[-1]
+    import os
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    allowed = {'jpg', 'jpeg', 'png', 'webp'}
+    if ext not in allowed:
+        ext = 'jpg'
     return f"staff_photos/{uuid.uuid4()}.{ext}"
 
 

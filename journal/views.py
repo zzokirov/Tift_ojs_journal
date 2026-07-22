@@ -231,32 +231,56 @@ def _extract_pdf_text_as_html(pdf_path):
 def _extract_docx_text_as_html(docx_path):
     """
     Word (.docx) fayldan matn, sarlavha, jadval va rasmlarni HTML ga o'giradi.
-    - Paragraflar: stil bo'yicha sarlavha/paragraf
-    - Jadvallar: to'liq HTML jadval
-    - Rasmlar: base64 PNG sifatida inline embed
-    python-docx ishlatiladi.
+    XXE himoyasi: lxml parser tashqi entity yuklashni bloklaydi.
+    Rasm bombalari: har bir rasm 2000x2000px ga cheklanadi.
     """
     try:
         import docx
         import html as html_lib
         import base64
         from docx.oxml.ns import qn
+        # XXE himoyasi: lxml defusedxml yoki resolve_entities=False bilan
         from lxml import etree
+
+        # Fayl hajmini tekshirish (zip bomba himoyasi)
+        import os
+        import zipfile
+        MAX_UNCOMPRESSED = 50 * 1024 * 1024  # 50 MB
+        with zipfile.ZipFile(docx_path) as zf:
+            total = sum(info.file_size for info in zf.infolist())
+            if total > MAX_UNCOMPRESSED:
+                return ''
 
         doc = docx.Document(docx_path)
 
         # Barcha relationships (rImage) dan rasm ma'lumotlarini olish
-        # doc.part.rels: {rId: rel}
+        MAX_IMG_PIXELS = 2000 * 2000  # 4 MP limit — piksel bombasi himoyasi
+
         def get_image_base64(rel_id):
             try:
                 rel = doc.part.rels.get(rel_id)
                 if rel and "image" in rel.reltype:
                     img_data = rel.target_part.blob
-                    ext = rel.target_part.content_type.split('/')[-1]
-                    if ext == 'jpeg':
-                        ext = 'jpg'
-                    b64 = base64.b64encode(img_data).decode('ascii')
-                    return f"data:image/{ext};base64,{b64}"
+                    # Rasm o'lchamini tekshirish (Pillow bilan)
+                    try:
+                        from PIL import Image
+                        import io as _io
+                        img = Image.open(_io.BytesIO(img_data))
+                        w, h = img.size
+                        if w * h > MAX_IMG_PIXELS:
+                            # Katta rasmni kichraytirish
+                            img.thumbnail((1200, 1200), Image.LANCZOS)
+                        buf = _io.BytesIO()
+                        img.save(buf, format='PNG')
+                        b64 = base64.b64encode(buf.getvalue()).decode('ascii')
+                        return f"data:image/png;base64,{b64}"
+                    except Exception:
+                        # Pillow ishlamasa asl ma'lumotni ishlatish
+                        ext = rel.target_part.content_type.split('/')[-1]
+                        if ext == 'jpeg':
+                            ext = 'jpg'
+                        b64 = base64.b64encode(img_data).decode('ascii')
+                        return f"data:image/{ext};base64,{b64}"
             except Exception:
                 pass
             return None

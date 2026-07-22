@@ -250,4 +250,21 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com', 'https://architect-edu.tift.uz']
+
+# ── XAVFSIZLIK SOZLAMALARI ────────────────────────────────────────────────────
+# Production da HTTPS orqali ishlanganda qo'shimcha himoya
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER        = True
+    SECURE_CONTENT_TYPE_NOSNIFF      = True
+    X_FRAME_OPTIONS                  = 'DENY'
+    SESSION_COOKIE_SECURE            = True
+    CSRF_COOKIE_SECURE               = True
+    SECURE_HSTS_SECONDS              = 31536000   # 1 yil
+    SECURE_HSTS_INCLUDE_SUBDOMAINS   = True
+    SECURE_HSTS_PRELOAD              = True
+
+# Fayl yuklash cheklovlari (zip bomba, piksel bomba himoyasi)
+DATA_UPLOAD_MAX_MEMORY_SIZE    = 25 * 1024 * 1024   # 25 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE    = 25 * 1024 * 1024   # 25 MB
+DATA_UPLOAD_MAX_NUMBER_FIELDS  = 100
