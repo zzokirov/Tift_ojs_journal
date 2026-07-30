@@ -1,15 +1,7 @@
 # TIFT Journal - English Translation
-# Copyright (C) 2026
-# This file is distributed under the same license as the TIFT Journal package.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-01 00:00+0000\n"
-"PO-Revision-Date: 2026-01-01 00:00+0000\n"
-"Last-Translator: TIFT Team\n"
-"Language-Team: English\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,3 +54,126 @@ msgstr "Edit Profile"
 
 msgid "Parol o'zgartirish"
 msgstr "Change Password"
+
+msgid "Muallif paneli"
+msgstr "Author Panel"
+
+msgid "Profilim"
+msgstr "My Profile"
+
+msgid "Jurnal Arxivlari"
+msgstr "Journal Archive"
+
+msgid "Barcha chop etilgan sonlar"
+msgstr "All published issues"
+
+msgid "Annotatsiya"
+msgstr "Abstract"
+
+msgid "Kalit so'zlar"
+msgstr "Keywords"
+
+msgid "Maqola matni"
+msgstr "Article Text"
+
+msgid "Muallif"
+msgstr "Author"
+
+msgid "Ko'rish"
+msgstr "View"
+
+msgid "Yuklab olish"
+msgstr "Download"
+
+msgid "Batafsil"
+msgstr "Details"
+
+msgid "So'nggi maqolalar"
+msgstr "Recent Articles"
+
+msgid "Qidiruv natijalari"
+msgstr "Search Results"
+
+msgid "Jurnal arxivlari"
+msgstr "Journal Archives"
+
+msgid "Taqrizlash jarayoni"
+msgstr "Review Process"
+
+msgid "Maqolangizni yuboring"
+msgstr "Submit Your Article"
+
+msgid "Ro'yxatdan o'tish"
+msgstr "Register"
+
+msgid "Tizimga kirish"
+msgstr "Sign In"
+
+msgid "Bosh sahifaga qaytish"
+msgstr "Back to Home"
+
+msgid "Chop etildi"
+msgstr "Published"
+
+msgid "Yuborildi"
+msgstr "Submitted"
+
+msgid "Taqriz jarayonida"
+msgstr "Under Review"
+
+msgid "Qabul qilindi"
+msgstr "Accepted"
+
+msgid "Rad etildi"
+msgstr "Rejected"
+
+msgid "Jami tashriflar"
+msgstr "Total Visits"
+
+msgid "Bugungi tashriflar"
+msgstr "Today's Visits"
+
+msgid "Nashr maqolalar"
+msgstr "Published Articles"
+
+msgid "Jonli statistika"
+msgstr "Live Statistics"
+
+msgid "Maqolalarni ko'rish"
+msgstr "View Articles"
+
+msgid "Tashkil etilgan"
+msgstr "Founded"
+
+msgid "Arxiv sonlari"
+msgstr "Archive Issues"
+
+msgid "Maqolalar"
+msgstr "Articles"
+
+msgid "Ilmiy tadbirlar va anjumanlar"
+msgstr "Scientific events and conferences"
+
+msgid "Me'yoriy hujjatlar va maqola talablari"
+msgstr "Normative documents and article requirements"
+
+msgid "Jurnal va universitetdagi so'nggi yangiliklar"
+msgstr "Latest news from the journal and university"
+
+msgid "Yuborish talablari"
+msgstr "Submission Requirements"
+
+msgid "Ko'rib chiqish jarayoni"
+msgstr "Review Process"
+
+msgid "Maqolani tahririyatga yuborish"
+msgstr "Submit Article to Editorial"
+
+msgid "Bekor qilish"
+msgstr "Cancel"
+
+msgid "Saqlash"
+msgstr "Save"
+
+msgid "Hisob"
+msgstr "Account"

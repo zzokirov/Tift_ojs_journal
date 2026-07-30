@@ -1,15 +1,7 @@
 # TIFT Journal - Russian Translation
-# Copyright (C) 2026
-# This file is distributed under the same license as the TIFT Journal package.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-01 00:00+0000\n"
-"PO-Revision-Date: 2026-01-01 00:00+0000\n"
-"Last-Translator: TIFT Team\n"
-"Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,3 +54,126 @@ msgstr "Редактировать профиль"
 
 msgid "Parol o'zgartirish"
 msgstr "Изменить пароль"
+
+msgid "Muallif paneli"
+msgstr "Панель автора"
+
+msgid "Profilim"
+msgstr "Мой профиль"
+
+msgid "Jurnal Arxivlari"
+msgstr "Архив журнала"
+
+msgid "Barcha chop etilgan sonlar"
+msgstr "Все опубликованные номера"
+
+msgid "Annotatsiya"
+msgstr "Аннотация"
+
+msgid "Kalit so'zlar"
+msgstr "Ключевые слова"
+
+msgid "Maqola matni"
+msgstr "Текст статьи"
+
+msgid "Muallif"
+msgstr "Автор"
+
+msgid "Ko'rish"
+msgstr "Просмотр"
+
+msgid "Yuklab olish"
+msgstr "Скачать"
+
+msgid "Batafsil"
+msgstr "Подробнее"
+
+msgid "So'nggi maqolalar"
+msgstr "Последние статьи"
+
+msgid "Qidiruv natijalari"
+msgstr "Результаты поиска"
+
+msgid "Jurnal arxivlari"
+msgstr "Архивы журнала"
+
+msgid "Taqrizlash jarayoni"
+msgstr "Процесс рецензирования"
+
+msgid "Maqolangizni yuboring"
+msgstr "Отправьте вашу статью"
+
+msgid "Ro'yxatdan o'tish"
+msgstr "Регистрация"
+
+msgid "Tizimga kirish"
+msgstr "Войти в систему"
+
+msgid "Bosh sahifaga qaytish"
+msgstr "Вернуться на главную"
+
+msgid "Chop etildi"
+msgstr "Опубликовано"
+
+msgid "Yuborildi"
+msgstr "Отправлено"
+
+msgid "Taqriz jarayonida"
+msgstr "На рецензировании"
+
+msgid "Qabul qilindi"
+msgstr "Принято"
+
+msgid "Rad etildi"
+msgstr "Отклонено"
+
+msgid "Jami tashriflar"
+msgstr "Всего посещений"
+
+msgid "Bugungi tashriflar"
+msgstr "Сегодня посещений"
+
+msgid "Nashr maqolalar"
+msgstr "Опубликованных статей"
+
+msgid "Jonli statistika"
+msgstr "Статистика в реальном времени"
+
+msgid "Maqolalarni ko'rish"
+msgstr "Смотреть статьи"
+
+msgid "Tashkil etilgan"
+msgstr "Основан"
+
+msgid "Arxiv sonlari"
+msgstr "Номеров архива"
+
+msgid "Maqolalar"
+msgstr "Статьи"
+
+msgid "Ilmiy tadbirlar va anjumanlar"
+msgstr "Научные мероприятия и конференции"
+
+msgid "Me'yoriy hujjatlar va maqola talablari"
+msgstr "Нормативные документы и требования к статьям"
+
+msgid "Jurnal va universitetdagi so'nggi yangiliklar"
+msgstr "Последние новости журнала и университета"
+
+msgid "Yuborish talablari"
+msgstr "Требования к публикации"
+
+msgid "Ko'rib chiqish jarayoni"
+msgstr "Процесс рассмотрения"
+
+msgid "Maqolani tahririyatga yuborish"
+msgstr "Отправить статью в редакцию"
+
+msgid "Bekor qilish"
+msgstr "Отмена"
+
+msgid "Saqlash"
+msgstr "Сохранить"
+
+msgid "Hisob"
+msgstr "Аккаунт"

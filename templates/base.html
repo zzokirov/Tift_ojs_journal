@@ -152,24 +152,24 @@
                     </button>
                     <!-- Dropdown -->
                     <div id="langDropdown"
-                         class="hidden absolute right-0 top-full mt-2 w-28 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+                         class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
                         <form action="{% url 'set_language' %}" method="post">
                             {% csrf_token %}
                             <input name="next" type="hidden" value="{{ request.get_full_path }}">
                             <button type="submit" name="language" value="uz"
                                     class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
                                            {% if CURRENT_LANG == 'uz' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
-                                <span class="text-base">🇺🇿</span> O'zbek
+                                <span class="text-xs font-bold w-6">UZ</span> O'zbek
                             </button>
                             <button type="submit" name="language" value="ru"
                                     class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
                                            {% if CURRENT_LANG == 'ru' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
-                                <span class="text-base">🇷🇺</span> Русский
+                                <span class="text-xs font-bold w-6">RU</span> Русский
                             </button>
                             <button type="submit" name="language" value="en"
                                     class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
                                            {% if CURRENT_LANG == 'en' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
-                                <span class="text-base">🇬🇧</span> English
+                                <span class="text-xs font-bold w-6">EN</span> English
                             </button>
                         </form>
                     </div>

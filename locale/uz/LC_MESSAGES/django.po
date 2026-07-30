@@ -1,15 +1,7 @@
 # TIFT Journal - Uzbek Translation
-# Copyright (C) 2026
-# This file is distributed under the same license as the TIFT Journal package.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-01 00:00+0000\n"
-"PO-Revision-Date: 2026-01-01 00:00+0000\n"
-"Last-Translator: TIFT Team\n"
-"Language-Team: Uzbek\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,3 +54,126 @@ msgstr "Profilni tahrirlash"
 
 msgid "Parol o'zgartirish"
 msgstr "Parol o'zgartirish"
+
+msgid "Muallif paneli"
+msgstr "Muallif paneli"
+
+msgid "Profilim"
+msgstr "Profilim"
+
+msgid "Jurnal Arxivlari"
+msgstr "Jurnal Arxivlari"
+
+msgid "Barcha chop etilgan sonlar"
+msgstr "Barcha chop etilgan sonlar"
+
+msgid "Annotatsiya"
+msgstr "Annotatsiya"
+
+msgid "Kalit so'zlar"
+msgstr "Kalit so'zlar"
+
+msgid "Maqola matni"
+msgstr "Maqola matni"
+
+msgid "Muallif"
+msgstr "Muallif"
+
+msgid "Ko'rish"
+msgstr "Ko'rish"
+
+msgid "Yuklab olish"
+msgstr "Yuklab olish"
+
+msgid "Batafsil"
+msgstr "Batafsil"
+
+msgid "So'nggi maqolalar"
+msgstr "So'nggi maqolalar"
+
+msgid "Qidiruv natijalari"
+msgstr "Qidiruv natijalari"
+
+msgid "Jurnal arxivlari"
+msgstr "Jurnal arxivlari"
+
+msgid "Taqrizlash jarayoni"
+msgstr "Taqrizlash jarayoni"
+
+msgid "Maqolangizni yuboring"
+msgstr "Maqolangizni yuboring"
+
+msgid "Ro'yxatdan o'tish"
+msgstr "Ro'yxatdan o'tish"
+
+msgid "Tizimga kirish"
+msgstr "Tizimga kirish"
+
+msgid "Bosh sahifaga qaytish"
+msgstr "Bosh sahifaga qaytish"
+
+msgid "Chop etildi"
+msgstr "Chop etildi"
+
+msgid "Yuborildi"
+msgstr "Yuborildi"
+
+msgid "Taqriz jarayonida"
+msgstr "Taqriz jarayonida"
+
+msgid "Qabul qilindi"
+msgstr "Qabul qilindi"
+
+msgid "Rad etildi"
+msgstr "Rad etildi"
+
+msgid "Jami tashriflar"
+msgstr "Jami tashriflar"
+
+msgid "Bugungi tashriflar"
+msgstr "Bugungi tashriflar"
+
+msgid "Nashr maqolalar"
+msgstr "Nashr maqolalar"
+
+msgid "Jonli statistika"
+msgstr "Jonli statistika"
+
+msgid "Maqolalarni ko'rish"
+msgstr "Maqolalarni ko'rish"
+
+msgid "Tashkil etilgan"
+msgstr "Tashkil etilgan"
+
+msgid "Arxiv sonlari"
+msgstr "Arxiv sonlari"
+
+msgid "Maqolalar"
+msgstr "Maqolalar"
+
+msgid "Ilmiy tadbirlar va anjumanlar"
+msgstr "Ilmiy tadbirlar va anjumanlar"
+
+msgid "Me'yoriy hujjatlar va maqola talablari"
+msgstr "Me'yoriy hujjatlar va maqola talablari"
+
+msgid "Jurnal va universitetdagi so'nggi yangiliklar"
+msgstr "Jurnal va universitetdagi so'nggi yangiliklar"
+
+msgid "Yuborish talablari"
+msgstr "Yuborish talablari"
+
+msgid "Ko'rib chiqish jarayoni"
+msgstr "Ko'rib chiqish jarayoni"
+
+msgid "Maqolani tahririyatga yuborish"
+msgstr "Maqolani tahririyatga yuborish"
+
+msgid "Bekor qilish"
+msgstr "Bekor qilish"
+
+msgid "Saqlash"
+msgstr "Saqlash"
+
+msgid "Hisob"
+msgstr "Hisob"
