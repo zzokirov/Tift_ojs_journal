@@ -62,14 +62,14 @@
         /* Responsive container — to'liq full-width, faqat padding */
         .site-container {
             width: 100%;
-            padding-left: clamp(1rem, 3vw, 5rem);
-            padding-right: clamp(1rem, 3vw, 5rem);
+            padding-left: clamp(1rem, 2vw, 3rem);
+            padding-right: clamp(1rem, 2vw, 3rem);
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Katta ekran uchun clamp-based shrift o'lchamlari */
-        html { font-size: clamp(14px, 1.1vw, 18px); }
+        /* Katta ekran uchun clamp-based shrift o'lchamlari - kattalashtirildi */
+        html { font-size: clamp(14px, 1.25vw, 24px); }
 
         .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
@@ -354,7 +354,7 @@
                         <div class="flex items-start gap-3">
                             <i class="fas fa-calendar text-green-500 text-xs mt-1"></i>
                             <div>
-                                <div class="text-white text-xs font-medium">{% trans "Chastotasi" %}</div>
+                                <div class="text-white text-xs font-medium">{% trans "Nashr davriyligi" %}</div>
                                 <div class="text-gray-500">{% trans "Yiliga 4 marta" %}</div>
                             </div>
                         </div>
@@ -362,7 +362,8 @@
                             <i class="fas fa-map-marker-alt text-green-500 text-xs mt-1"></i>
                             <div>
                                 <div class="text-white text-xs font-medium">{% trans "Manzil" %}</div>
-                                <div class="text-gray-500">{% trans "Toshkent, O'zbekiston" %}</div>
+                                <div class="text-gray-500">{% trans "15 Amir Temur Shoh Street,
+Tashkent, Uzbekistan" %}</div>
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
