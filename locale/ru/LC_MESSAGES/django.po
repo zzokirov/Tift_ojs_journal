@@ -1,4 +1,4 @@
-﻿# TIFT Journal - Russian Translation
+# TIFT Journal - Russian Translation
 msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
@@ -8,418 +8,418 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "O'zbek"
-msgstr "Ð£Ð·Ð±ÐµÐºÑÐºÐ¸Ð¹"
+msgstr "Узбекский"
 
-msgid "Ð ÑƒÑÑÐºÐ¸Ð¹"
-msgstr "Ð ÑƒÑÑÐºÐ¸Ð¹"
+msgid "Р�ƒсский"
+msgstr "Р�ƒсский"
 
 msgid "English"
-msgstr "ÐÐ½Ð³Ð»Ð¸Ð¹ÑÐºÐ¸Ð¹"
+msgstr "Английский"
 
 msgid "Bosh sahifa"
-msgstr "Ð“Ð»Ð°Ð²Ð½Ð°Ñ"
+msgstr "�“лавная"
 
 msgid "Arxiv"
-msgstr "ÐÑ€Ñ…Ð¸Ð²"
+msgstr "А�€�…ив"
 
 msgid "Yangiliklar"
-msgstr "ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸"
+msgstr "Новос�‚и"
 
 msgid "Konferensiyalar"
-msgstr "ÐšÐ¾Ð½Ñ„ÐµÑ€ÐµÐ½Ñ†Ð¸Ð¸"
+msgstr "�šон�„е�€ен�†ии"
 
 msgid "Hujjatlar"
-msgstr "Ð”Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ñ‹"
+msgstr "�”ок�ƒмен�‚�‹"
 
 msgid "Jurnal haqida"
-msgstr "Ðž Ð¶ÑƒÑ€Ð½Ð°Ð»Ðµ"
+msgstr "�ž ж�ƒ�€нале"
 
 msgid "Kirish"
-msgstr "Ð’Ð¾Ð¹Ñ‚Ð¸"
+msgstr "�’ой�‚и"
 
 msgid "A'zo bo'lish"
-msgstr "Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ"
+msgstr "Регис�‚�€а�†ия"
 
 msgid "Maqola yuborish"
-msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ ÑÑ‚Ð°Ñ‚ÑŒÑŽ"
+msgstr "�ž�‚п�€ави�‚�Œ с�‚а�‚�Œ�Ž"
 
 msgid "Maqolalarim"
-msgstr "ÐœÐ¾Ð¸ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
+msgstr "�œои с�‚а�‚�Œи"
 
 msgid "Chiqish"
-msgstr "Ð’Ñ‹Ð¹Ñ‚Ð¸"
+msgstr "�’�‹й�‚и"
 
 msgid "Profilni tahrirlash"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ"
+msgstr "Редак�‚и�€ова�‚�Œ п�€о�„ил�Œ"
 
 msgid "Parol o'zgartirish"
-msgstr "Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ"
+msgstr "�˜змени�‚�Œ па�€ол�Œ"
 
 msgid "Muallif paneli"
-msgstr "ÐŸÐ°Ð½ÐµÐ»ÑŒ Ð°Ð²Ñ‚Ð¾Ñ€Ð°"
+msgstr "�Ÿанел�Œ ав�‚о�€а"
 
 msgid "Profilim"
-msgstr "ÐœÐ¾Ð¹ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ"
+msgstr "�œой п�€о�„ил�Œ"
 
 msgid "Jurnal Arxivlari"
-msgstr "ÐÑ€Ñ…Ð¸Ð² Ð¶ÑƒÑ€Ð½Ð°Ð»Ð°"
+msgstr "А�€�…ив ж�ƒ�€нала"
 
 msgid "Barcha chop etilgan sonlar"
-msgstr "Ð’ÑÐµ Ð¾Ð¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð½Ñ‹Ðµ Ð½Ð¾Ð¼ÐµÑ€Ð°"
+msgstr "�’се оп�ƒбликованн�‹е номе�€а"
 
 msgid "Annotatsiya"
-msgstr "ÐÐ½Ð½Ð¾Ñ‚Ð°Ñ†Ð¸Ñ"
+msgstr "Анно�‚а�†ия"
 
 msgid "Kalit so'zlar"
-msgstr "ÐšÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ðµ ÑÐ»Ð¾Ð²Ð°"
+msgstr "�šл�Ž�‡ев�‹е слова"
 
 msgid "Maqola matni"
-msgstr "Ð¢ÐµÐºÑÑ‚ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
+msgstr "Текс�‚ с�‚а�‚�Œи"
 
 msgid "Muallif"
-msgstr "ÐÐ²Ñ‚Ð¾Ñ€"
+msgstr "Ав�‚о�€"
 
 msgid "Ko'rish"
-msgstr "ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€"
+msgstr "�Ÿ�€осмо�‚�€"
 
 msgid "Yuklab olish"
-msgstr "Ð¡ÐºÐ°Ñ‡Ð°Ñ‚ÑŒ"
+msgstr "Ска�‡а�‚�Œ"
 
 msgid "Batafsil"
-msgstr "ÐŸÐ¾Ð´Ñ€Ð¾Ð±Ð½ÐµÐµ"
+msgstr "�Ÿод�€обнее"
 
 msgid "So'nggi maqolalar"
-msgstr "ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
+msgstr "�Ÿоследние с�‚а�‚�Œи"
 
 msgid "Qidiruv natijalari"
-msgstr "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ð¿Ð¾Ð¸ÑÐºÐ°"
+msgstr "Рез�ƒл�Œ�‚а�‚�‹ поиска"
 
 msgid "Jurnal arxivlari"
-msgstr "ÐÑ€Ñ…Ð¸Ð²Ñ‹ Ð¶ÑƒÑ€Ð½Ð°Ð»Ð°"
+msgstr "А�€�…ив�‹ ж�ƒ�€нала"
 
 msgid "Taqrizlash jarayoni"
-msgstr "ÐŸÑ€Ð¾Ñ†ÐµÑÑ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ"
+msgstr "�Ÿ�€о�†есс �€е�†ензи�€ования"
 
 msgid "Maqolangizni yuboring"
-msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ Ð²Ð°ÑˆÑƒ ÑÑ‚Ð°Ñ‚ÑŒÑŽ"
+msgstr "�ž�‚п�€ав�Œ�‚е ва�ˆ�ƒ с�‚а�‚�Œ�Ž"
 
 msgid "Ro'yxatdan o'tish"
-msgstr "Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ"
+msgstr "Регис�‚�€а�†ия"
 
 msgid "Tizimga kirish"
-msgstr "Ð’Ð¾Ð¹Ñ‚Ð¸ Ð² ÑÐ¸ÑÑ‚ÐµÐ¼Ñƒ"
+msgstr "�’ой�‚и в сис�‚ем�ƒ"
 
 msgid "Bosh sahifaga qaytish"
-msgstr "Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒÑÑ Ð½Ð° Ð³Ð»Ð°Ð²Ð½ÑƒÑŽ"
+msgstr "�’е�€н�ƒ�‚�Œся на главн�ƒ�Ž"
 
 msgid "Chop etildi"
-msgstr "ÐžÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð¾"
+msgstr "�žп�ƒбликовано"
 
 msgid "Yuborildi"
-msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾"
+msgstr "�ž�‚п�€авлено"
 
 msgid "Taqriz jarayonida"
-msgstr "ÐÐ° Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ð¸"
+msgstr "На �€е�†ензи�€овании"
 
 msgid "Qabul qilindi"
-msgstr "ÐŸÑ€Ð¸Ð½ÑÑ‚Ð¾"
+msgstr "�Ÿ�€иня�‚о"
 
 msgid "Rad etildi"
-msgstr "ÐžÑ‚ÐºÐ»Ð¾Ð½ÐµÐ½Ð¾"
+msgstr "�ž�‚клонено"
 
 msgid "Jami tashriflar"
-msgstr "Ð’ÑÐµÐ³Ð¾ Ð¿Ð¾ÑÐµÑ‰ÐµÐ½Ð¸Ð¹"
+msgstr "�’сего посе�‰ений"
 
 msgid "Bugungi tashriflar"
-msgstr "Ð¡ÐµÐ³Ð¾Ð´Ð½Ñ Ð¿Ð¾ÑÐµÑ‰ÐµÐ½Ð¸Ð¹"
+msgstr "Сегодня посе�‰ений"
 
 msgid "Nashr maqolalar"
-msgstr "ÐžÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð½Ñ‹Ñ… ÑÑ‚Ð°Ñ‚ÐµÐ¹"
+msgstr "�žп�ƒбликованн�‹�… с�‚а�‚ей"
 
 msgid "Jonli statistika"
-msgstr "Ð¡Ñ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ° Ð² Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð¼ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸"
+msgstr "С�‚а�‚ис�‚ика в �€еал�Œном в�€емени"
 
 msgid "Maqolalarni ko'rish"
-msgstr "Ð¡Ð¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
+msgstr "Смо�‚�€е�‚�Œ с�‚а�‚�Œи"
 
 msgid "Tashkil etilgan"
-msgstr "ÐžÑÐ½Ð¾Ð²Ð°Ð½"
+msgstr "�žснован"
 
 msgid "Arxiv sonlari"
-msgstr "ÐÐ¾Ð¼ÐµÑ€Ð¾Ð² Ð°Ñ€Ñ…Ð¸Ð²Ð°"
+msgstr "Номе�€ов а�€�…ива"
 
 msgid "Maqolalar"
-msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÐ¸"
+msgstr "С�‚а�‚�Œи"
 
 msgid "Ilmiy tadbirlar va anjumanlar"
-msgstr "ÐÐ°ÑƒÑ‡Ð½Ñ‹Ðµ Ð¼ÐµÑ€Ð¾Ð¿Ñ€Ð¸ÑÑ‚Ð¸Ñ Ð¸ ÐºÐ¾Ð½Ñ„ÐµÑ€ÐµÐ½Ñ†Ð¸Ð¸"
+msgstr "На�ƒ�‡н�‹е ме�€оп�€ия�‚ия и кон�„е�€ен�†ии"
 
 msgid "Me'yoriy hujjatlar va maqola talablari"
-msgstr "ÐÐ¾Ñ€Ð¼Ð°Ñ‚Ð¸Ð²Ð½Ñ‹Ðµ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð¸ Ñ‚Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸Ñ Ðº ÑÑ‚Ð°Ñ‚ÑŒÑÐ¼"
+msgstr "Но�€ма�‚ивн�‹е док�ƒмен�‚�‹ и �‚�€ебования к с�‚а�‚�Œям"
 
 msgid "Jurnal va universitetdagi so'nggi yangiliklar"
-msgstr "ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ Ð½Ð¾Ð²Ð¾ÑÑ‚Ð¸ Ð¶ÑƒÑ€Ð½Ð°Ð»Ð° Ð¸ ÑƒÐ½Ð¸Ð²ÐµÑ€ÑÐ¸Ñ‚ÐµÑ‚Ð°"
+msgstr "�Ÿоследние новос�‚и ж�ƒ�€нала и �ƒниве�€си�‚е�‚а"
 
 msgid "Yuborish talablari"
-msgstr "Ð¢Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸Ñ Ðº Ð¿ÑƒÐ±Ð»Ð¸ÐºÐ°Ñ†Ð¸Ð¸"
+msgstr "Т�€ебования к п�ƒблика�†ии"
 
 msgid "Ko'rib chiqish jarayoni"
-msgstr "ÐŸÑ€Ð¾Ñ†ÐµÑÑ Ñ€Ð°ÑÑÐ¼Ð¾Ñ‚Ñ€ÐµÐ½Ð¸Ñ"
+msgstr "�Ÿ�€о�†есс �€ассмо�‚�€ения"
 
 msgid "Maqolani tahririyatga yuborish"
-msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ ÑÑ‚Ð°Ñ‚ÑŒÑŽ Ð² Ñ€ÐµÐ´Ð°ÐºÑ†Ð¸ÑŽ"
+msgstr "�ž�‚п�€ави�‚�Œ с�‚а�‚�Œ�Ž в �€едак�†и�Ž"
 
 msgid "Bekor qilish"
-msgstr "ÐžÑ‚Ð¼ÐµÐ½Ð°"
+msgstr "�ž�‚мена"
 
 msgid "Saqlash"
-msgstr "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ"
+msgstr "Со�…�€ани�‚�Œ"
 
 msgid "Hisob"
-msgstr "ÐÐºÐºÐ°ÑƒÐ½Ñ‚"
+msgstr "Акка�ƒн�‚"
 
-# ============ ÐÐžÐ’Ð«Ð• ÐŸÐ•Ð Ð•Ð’ÐžÐ”Ð« ============
+# ============ Н�ž�’Ы�• �Ÿ�•Р�•�’�ž�”Ы ============
 
 # base.html
 msgid "Arxitektura va Ta'lim"
-msgstr "ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ"
+msgstr "А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование"
 
 msgid "Tezkor havolalar"
-msgstr "Ð‘Ñ‹ÑÑ‚Ñ€Ñ‹Ðµ ÑÑÑ‹Ð»ÐºÐ¸"
+msgstr "�‘�‹с�‚�€�‹е сс�‹лки"
 
 msgid "Jurnal ma'lumotlari"
-msgstr "Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¶ÑƒÑ€Ð½Ð°Ð»Ðµ"
+msgstr "�˜н�„о�€ма�†ия о ж�ƒ�€нале"
 
 msgid "Chastotasi"
-msgstr "ÐŸÐµÑ€Ð¸Ð¾Ð´Ð¸Ñ‡Ð½Ð¾ÑÑ‚ÑŒ"
+msgstr "�Ÿе�€иоди�‡нос�‚�Œ"
 
 msgid "Yiliga 4 marta"
-msgstr "4 Ñ€Ð°Ð·Ð° Ð² Ð³Ð¾Ð´"
+msgstr "4 �€аза в год"
 
 msgid "Manzil"
-msgstr "ÐÐ´Ñ€ÐµÑ"
+msgstr "Ад�€ес"
 
 msgid "Toshkent, O'zbekiston"
-msgstr "Ð¢Ð°ÑˆÐºÐµÐ½Ñ‚, Ð£Ð·Ð±ÐµÐºÐ¸ÑÑ‚Ð°Ð½"
+msgstr "Та�ˆкен�‚, Узбекис�‚ан"
 
 msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
-msgstr "Ð¢Ð°ÑˆÐºÐµÐ½Ñ‚ÑÐºÐ¸Ð¹ ÐœÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ñ‹Ð¹ Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ¸Ñ‚ÐµÑ‚ Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¸ Ð¢ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¹"
+msgstr "Та�ˆкен�‚ский �œежд�ƒна�€одн�‹й Униве�€си�‚е�‚ Финансового Уп�€авления и Те�…нологий"
 
 msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
-msgstr "ÐÐ°ÑƒÑ‡Ð½Ð¾-ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ñ‹Ð¹ Ð¶ÑƒÑ€Ð½Ð°Ð» Ð¢Ð°ÑˆÐºÐµÐ½Ñ‚ÑÐºÐ¾Ð³Ð¾ ÐœÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ¸Ñ‚ÐµÑ‚Ð° Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¸ Ð¢ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¹."
+msgstr "На�ƒ�‡но-элек�‚�€онн�‹й ж�ƒ�€нал Та�ˆкен�‚ского �œежд�ƒна�€одного Униве�€си�‚е�‚а Финансового Уп�€авления и Те�…нологий."
 
 msgid "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
-msgstr "Ð¡Ð¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ñ Ð² Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Â«ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸ÐµÂ»."
+msgstr "Сов�€еменн�‹е исследования в облас�‚и «А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование»."
 
 # index.html
 msgid "Ilmiy Jurnali"
-msgstr "ÐÐ°ÑƒÑ‡Ð½Ñ‹Ð¹ Ð–ÑƒÑ€Ð½Ð°Ð»"
+msgstr "На�ƒ�‡н�‹й �–�ƒ�€нал"
 
 msgid "Qidirish"
-msgstr "ÐŸÐ¾Ð¸ÑÐº"
+msgstr "�Ÿоиск"
 
 msgid "Tozalash"
-msgstr "ÐžÑ‡Ð¸ÑÑ‚Ð¸Ñ‚ÑŒ"
+msgstr "�ž�‡ис�‚и�‚�Œ"
 
 msgid "ta maqola"
-msgstr "ÑÑ‚Ð°Ñ‚ÐµÐ¹"
+msgstr "с�‚а�‚ей"
 
 msgid "ta ko'rish"
-msgstr "Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€Ð¾Ð²"
+msgstr "п�€осмо�‚�€ов"
 
 msgid "Hozircha arxivlar mavjud emas."
-msgstr "ÐÑ€Ñ…Ð¸Ð²Ñ‹ Ð¿Ð¾ÐºÐ° Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‚."
+msgstr "А�€�…ив�‹ пока о�‚с�ƒ�‚с�‚в�ƒ�Ž�‚."
 
 msgid "Maqolalar mavjud emas"
-msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÐ¸ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‚"
+msgstr "С�‚а�‚�Œи о�‚с�ƒ�‚с�‚в�ƒ�Ž�‚"
 
 msgid "Natijalar topilmadi"
-msgstr "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ñ‹"
+msgstr "Рез�ƒл�Œ�‚а�‚�‹ не найден�‹"
 
 msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
-msgstr "ÐžÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð½Ñ‹Ñ… Ð½Ð°ÑƒÑ‡Ð½Ñ‹Ñ… ÑÑ‚Ð°Ñ‚ÐµÐ¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ‚."
+msgstr "�žп�ƒбликованн�‹�… на�ƒ�‡н�‹�… с�‚а�‚ей пока не�‚."
 
 msgid "Qabul qilinadigan maqolalar yo'nalishlari"
-msgstr "ÐŸÑ€Ð¸Ð½Ð¸Ð¼Ð°ÐµÐ¼Ñ‹Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ ÑÑ‚Ð°Ñ‚ÐµÐ¹"
+msgstr "�Ÿ�€инимаем�‹е нап�€авления с�‚а�‚ей"
 
 msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
-msgstr "ÐŸÐ¾Ð¸ÑÐº Ð¿Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸ÑŽ ÑÑ‚Ð°Ñ‚ÑŒÐ¸, Ð°Ð½Ð½Ð¾Ñ‚Ð°Ñ†Ð¸Ð¸ Ð¸Ð»Ð¸ ÐºÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ð¼ ÑÐ»Ð¾Ð²Ð°Ð¼..."
+msgstr "�Ÿоиск по названи�Ž с�‚а�‚�Œи, анно�‚а�†ии или кл�Ž�‡ев�‹м словам..."
 
 msgid "bo'yicha qidiruv natijalari"
-msgstr "Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ð¿Ð¾Ð¸ÑÐºÐ° Ð¿Ð¾ Ð·Ð°Ð¿Ñ€Ð¾ÑÑƒ"
+msgstr "�€ез�ƒл�Œ�‚а�‚�‹ поиска по зап�€ос�ƒ"
 
 msgid "Barchasini ko'rish"
-msgstr "ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð²ÑÐµ"
+msgstr "�Ÿоказа�‚�Œ все"
 
 msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
-msgstr "Ð’ÑÐµ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€ÑƒÑŽÑ‚ÑÑ ÑÐºÑÐ¿ÐµÑ€Ñ‚Ð°Ð¼Ð¸ Ð² ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²Ð¸Ð¸ Ñ Ñ‚Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸ÑÐ¼Ð¸ Ð´Ð²Ð¾Ð¹Ð½Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¿Ð¾Ð³Ð¾ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ (Double-blind peer review)."
+msgstr "�’се п�€едс�‚авленн�‹е с�‚а�‚�Œи �€е�†ензи�€�ƒ�Ž�‚ся экспе�€�‚ами в соо�‚ве�‚с�‚вии с �‚�€ебованиями двойного слепого �€е�†ензи�€ования (Double-blind peer review)."
 
-msgid "Yuborildi â†’ Taqriz â†’ Qabul â†’ Chop etildi"
-msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾ â†’ Ð ÐµÑ†ÐµÐ½Ð·Ð¸Ñ â†’ ÐŸÑ€Ð¸Ð½ÑÑ‚Ð¾ â†’ ÐžÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð¾"
+msgid "Yuborildi �†’ Taqriz �†’ Qabul �†’ Chop etildi"
+msgstr "�ž�‚п�€авлено �†’ Ре�†ензия �†’ �Ÿ�€иня�‚о �†’ �žп�ƒбликовано"
 
 msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
-msgstr "Ð¡Ñ€ÐµÐ´Ð½Ð¸Ð¹ ÑÑ€Ð¾Ðº Ñ€Ð°ÑÑÐ¼Ð¾Ñ‚Ñ€ÐµÐ½Ð¸Ñ: 4-6 Ð½ÐµÐ´ÐµÐ»ÑŒ"
+msgstr "С�€едний с�€ок �€ассмо�‚�€ения: 4-6 недел�Œ"
 
-msgid "Open Access â€” bepul kirish"
-msgstr "Open Access â€” ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ð¹ Ð´Ð¾ÑÑ‚ÑƒÐ¿"
+msgid "Open Access �€” bepul kirish"
+msgstr "Open Access �€” свободн�‹й дос�‚�ƒп"
 
 msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
-msgstr "ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÐµÑÑŒ ÑÐ²Ð¾Ð¸Ð¼Ð¸ Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸ÑÐ¼Ð¸ Ñ Ð¼Ð¸Ñ€Ð¾Ð¼. Ð—Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€ÑƒÐ¹Ñ‚ÐµÑÑŒ Ð´Ð»Ñ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ¸ ÑÑ‚Ð°Ñ‚ÑŒÐ¸."
+msgstr "�Ÿодели�‚ес�Œ своими исследованиями с ми�€ом. �—а�€егис�‚�€и�€�ƒй�‚ес�Œ для о�‚п�€авки с�‚а�‚�Œи."
 
 #: index.html - blocktrans
 msgid "Jild %(vol)s, Son %(num)s"
-msgstr "Ð¢Ð¾Ð¼ %(vol)s, Ð’Ñ‹Ð¿ÑƒÑÐº %(num)s"
+msgstr "Том %(vol)s, �’�‹п�ƒск %(num)s"
 
 # index.html hero description
 msgid "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
-msgstr "Ð”Ð°Ð½Ð½Ð¾Ðµ Ð¸Ð·Ð´Ð°Ð½Ð¸Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾ Ð½Ð° Ð¿Ð¾Ð²Ñ‹ÑˆÐµÐ½Ð¸Ðµ ÑÑ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚Ð¸ Ñ„ÑƒÐ½Ð´Ð°Ð¼ÐµÐ½Ñ‚Ð°Ð»ÑŒÐ½Ñ‹Ñ… Ð¸ Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´Ð½Ñ‹Ñ… Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ð¹ Ð² Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Ð°Ñ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ñ‹, Ð³Ñ€Ð°Ð´Ð¾ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð°, ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð° Ð·Ð´Ð°Ð½Ð¸Ð¹ Ð¸ ÑÐ¾Ð¾Ñ€ÑƒÐ¶ÐµÐ½Ð¸Ð¹, Ð³ÐµÐ¾Ð´ÐµÐ·Ð¸Ð¸, ÐºÐ°Ñ€Ñ‚Ð¾Ð³Ñ€Ð°Ñ„Ð¸Ð¸ Ð¸ Ð³Ð¾ÑÑƒÐ´Ð°Ñ€ÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð³Ð¾ ÐºÐ°Ð´Ð°ÑÑ‚Ñ€Ð°. Ð¢Ð°ÐºÐ¶Ðµ ÑÐ²Ð»ÑÐµÑ‚ÑÑ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¾Ð¼ Ð²Ñ‹ÑÐ¾ÐºÐ¾ÐºÐ°Ñ‡ÐµÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ñ… Ð°Ð½Ð°Ð»Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¸ Ð¸Ð½Ð½Ð¾Ð²Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ñ… Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹ Ð¿Ð¾ ÑÐ¾Ð²ÐµÑ€ÑˆÐµÐ½ÑÑ‚Ð²Ð¾Ð²Ð°Ð½Ð¸ÑŽ ÑÐ¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹ Ð¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ð¹ Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð»Ð¾Ð³Ð¸Ð¸, Ð³Ð»ÑƒÐ±Ð¾ÐºÐ¾Ð¹ Ð¸Ð½Ñ‚ÐµÐ³Ñ€Ð°Ñ†Ð¸Ð¸ Ñ†Ð¸Ñ„Ñ€Ð¾Ð²Ñ‹Ñ… Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¹, ÑÐ¸ÑÑ‚ÐµÐ¼ BIM (Building Information Modeling) Ð¸ Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð¾Ð² Ð¸ÑÐºÑƒÑÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¸Ð½Ñ‚ÐµÐ»Ð»ÐµÐºÑ‚Ð° Ð² Ð¾Ñ‚Ñ€Ð°ÑÐ»ÑŒ."
+msgstr "�”анное издание нап�€авлено на пов�‹�ˆение э�„�„ек�‚ивнос�‚и �„�ƒндамен�‚ал�Œн�‹�… и п�€икладн�‹�… исследований в облас�‚и а�€�…и�‚ек�‚�ƒ�€�‹, г�€адос�‚�€ои�‚ел�Œс�‚ва, с�‚�€ои�‚ел�Œс�‚ва зданий и соо�€�ƒжений, геодезии, ка�€�‚ог�€а�„ии и гос�ƒда�€с�‚венного кадас�‚�€а. Также являе�‚ся ис�‚о�‡ником в�‹сокока�‡ес�‚венн�‹�… анали�‚и�‡ески�… данн�‹�… и иннова�†ионн�‹�… �€е�ˆений по сове�€�ˆенс�‚вовани�Ž сов�€еменной об�€азова�‚ел�Œной ме�‚одологии, гл�ƒбокой ин�‚ег�€а�†ии �†и�„�€ов�‹�… �‚е�…нологий, сис�‚ем BIM (Building Information Modeling) и алго�€и�‚мов иск�ƒсс�‚венного ин�‚еллек�‚а в о�‚�€асл�Œ."
 
 msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
-msgstr "ÐÐ°ÑƒÑ‡Ð½Ð¾-ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ñ‹Ð¹ Ð¶ÑƒÑ€Ð½Ð°Ð» Â«ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸ÐµÂ»"
+msgstr "На�ƒ�‡но-элек�‚�€онн�‹й ж�ƒ�€нал «А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование»"
 
 # about.html
 msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
-msgstr "ÐÐ°ÑƒÑ‡Ð½Ð¾-ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ñ‹Ð¹ Ð¶ÑƒÑ€Ð½Ð°Ð» Ð¢Ð˜Ð¤Ð¢ Â«ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸ÐµÂ»"
+msgstr "На�ƒ�‡но-элек�‚�€онн�‹й ж�ƒ�€нал Т�˜ФТ «А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование»"
 
 msgid "Yiliga chop etiladi"
-msgstr "ÐŸÑƒÐ±Ð»Ð¸ÐºÑƒÐµÑ‚ÑÑ Ð² Ð³Ð¾Ð´"
+msgstr "�Ÿ�ƒблик�ƒе�‚ся в год"
 
 msgid "Bepul kirish"
-msgstr "Ð‘ÐµÑÐ¿Ð»Ð°Ñ‚Ð½Ñ‹Ð¹ Ð´Ð¾ÑÑ‚ÑƒÐ¿"
+msgstr "�‘еспла�‚н�‹й дос�‚�ƒп"
 
 msgid "Yo'nalishlar"
-msgstr "ÐÐ°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ"
+msgstr "Нап�€авления"
 
 msgid "Tahririyat a'zolari"
-msgstr "Ð§Ð»ÐµÐ½Ñ‹ Ñ€ÐµÐ´Ð°ÐºÑ†Ð¸Ð¸"
+msgstr "Член�‹ �€едак�†ии"
 
 msgid "Tahririyat a'zolari hali qo'shilmagan."
-msgstr "Ð§Ð»ÐµÐ½Ñ‹ Ñ€ÐµÐ´Ð°ÐºÑ†Ð¸Ð¸ ÐµÑ‰Ñ‘ Ð½Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹."
+msgstr "Член�‹ �€едак�†ии е�‰�‘ не добавлен�‹."
 
 msgid "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
-msgstr "Ð’ÑÐµ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸ Ð¿Ñ€Ð¾Ñ…Ð¾Ð´ÑÑ‚ Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ñƒ Ð´Ð²Ð¾Ð¹Ð½Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¿Ð¾Ð³Ð¾ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ. Ð¡Ñ€Ð¾Ðº Ñ€Ð°ÑÑÐ¼Ð¾Ñ‚Ñ€ÐµÐ½Ð¸Ñ 4-6 Ð½ÐµÐ´ÐµÐ»ÑŒ. ÐÐ²Ñ‚Ð¾Ñ€ Ð¸ Ñ€ÐµÑ†ÐµÐ½Ð·ÐµÐ½Ñ‚ Ð½Ðµ Ð·Ð½Ð°ÑŽÑ‚ Ð´Ñ€ÑƒÐ³ Ð´Ñ€ÑƒÐ³Ð°."
+msgstr "�’се п�€едс�‚авленн�‹е с�‚а�‚�Œи п�€о�…одя�‚ п�€о�†ед�ƒ�€�ƒ двойного слепого �€е�†ензи�€ования. С�€ок �€ассмо�‚�€ения 4-6 недел�Œ. Ав�‚о�€ и �€е�†ензен�‚ не зна�Ž�‚ д�€�ƒг д�€�ƒга."
 
 msgid "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
-msgstr "ÐÐ°ÑƒÑ‡Ð½Ð¾-ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ñ‹Ð¹ Ð¶ÑƒÑ€Ð½Ð°Ð» Â«ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸ÐµÂ» Ð¸Ð·Ð´Ð°Ñ‘Ñ‚ÑÑ Ð¢Ð°ÑˆÐºÐµÐ½Ñ‚ÑÐºÐ¸Ð¼ ÐœÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ñ‹Ð¼ Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ¸Ñ‚ÐµÑ‚Ð¾Ð¼ Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¸ Ð¢ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¹ (Ð¢Ð˜Ð¤Ð¢). Ð–ÑƒÑ€Ð½Ð°Ð» ÑÐ¿ÐµÑ†Ð¸Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ÑÑ Ð½Ð° Ð¿ÑƒÐ±Ð»Ð¸ÐºÐ°Ñ†Ð¸Ð¸ Ð½Ð°ÑƒÑ‡Ð½Ð¾-Ð¿Ñ€Ð°ÐºÑ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ð¹ Ð² Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Ð°Ñ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ñ‹, ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð°, Ð³ÐµÐ¾Ð´ÐµÐ·Ð¸Ð¸, ÐºÐ°Ñ€Ñ‚Ð¾Ð³Ñ€Ð°Ñ„Ð¸Ð¸, ÐºÐ°Ð´Ð°ÑÑ‚Ñ€Ð° Ð¸ Ð¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ."
+msgstr "На�ƒ�‡но-элек�‚�€онн�‹й ж�ƒ�€нал «А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование» изда�‘�‚ся Та�ˆкен�‚ским �œежд�ƒна�€одн�‹м Униве�€си�‚е�‚ом Финансового Уп�€авления и Те�…нологий (Т�˜ФТ). �–�ƒ�€нал спе�†иализи�€�ƒе�‚ся на п�ƒблика�†ии на�ƒ�‡но-п�€ак�‚и�‡ески�… исследований в облас�‚и а�€�…и�‚ек�‚�ƒ�€�‹, с�‚�€ои�‚ел�Œс�‚ва, геодезии, ка�€�‚ог�€а�„ии, кадас�‚�€а и об�€азования."
 
 # my_articles.html
 msgid "Jami"
-msgstr "Ð’ÑÐµÐ³Ð¾"
+msgstr "�’сего"
 
 msgid "Taqrizda"
-msgstr "ÐÐ° Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ð¸"
+msgstr "На �€е�†ензии"
 
 msgid "ko'rish"
-msgstr "Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€Ð¾Ð²"
+msgstr "п�€осмо�‚�€ов"
 
 msgid "Jarayonda..."
-msgstr "Ð’ Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐµ..."
+msgstr "�’ п�€о�†ессе..."
 
 msgid "Hali maqola yubormagansiz"
-msgstr "Ð’Ñ‹ ÐµÑ‰Ñ‘ Ð½Ðµ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ð»Ð¸ ÑÑ‚Ð°Ñ‚ÑŒÑŽ"
+msgstr "�’�‹ е�‰�‘ не о�‚п�€авили с�‚а�‚�Œ�Ž"
 
 msgid "Tadqiqotingizni tahririyatga yuboring"
-msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ Ð²Ð°ÑˆÐµ Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð² Ñ€ÐµÐ´Ð°ÐºÑ†Ð¸ÑŽ"
+msgstr "�ž�‚п�€ав�Œ�‚е ва�ˆе исследование в �€едак�†и�Ž"
 
 msgid "Birinchi maqolangizni yuboring"
-msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ Ð²Ð°ÑˆÑƒ Ð¿ÐµÑ€Ð²ÑƒÑŽ ÑÑ‚Ð°Ñ‚ÑŒÑŽ"
+msgstr "�ž�‚п�€ав�Œ�‚е ва�ˆ�ƒ пе�€в�ƒ�Ž с�‚а�‚�Œ�Ž"
 
 # submit_article.html
 msgid "Maqola ma'lumotlari"
-msgstr "Ð”Ð°Ð½Ð½Ñ‹Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
+msgstr "�”анн�‹е с�‚а�‚�Œи"
 
 msgid "Word faylni bu yerga tashlang yoki bosing"
-msgstr "ÐŸÐµÑ€ÐµÑ‚Ð°Ñ‰Ð¸Ñ‚Ðµ Ñ„Ð°Ð¹Ð» Word ÑÑŽÐ´Ð° Ð¸Ð»Ð¸ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ"
+msgstr "�Ÿе�€е�‚а�‰и�‚е �„айл Word с�Žда или нажми�‚е"
 
 msgid "Faqat .docx format, maksimal hajm: 20MB"
-msgstr "Ð¢Ð¾Ð»ÑŒÐºÐ¾ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ .docx, Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ñ€Ð°Ð·Ð¼ÐµÑ€: 20MB"
+msgstr "Тол�Œко �„о�€ма�‚ .docx, максимал�Œн�‹й �€азме�€: 20MB"
 
 msgid "Maqola faqat Word (.docx) formatida yuboriladi"
-msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÑ Ð¿Ñ€Ð¸Ð½Ð¸Ð¼Ð°ÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ Word (.docx)"
+msgstr "С�‚а�‚�Œя п�€инимае�‚ся �‚ол�Œко в �„о�€ма�‚е Word (.docx)"
 
 msgid "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
-msgstr "ÐÐ½Ð½Ð¾Ñ‚Ð°Ñ†Ð¸Ñ Ð´Ð¾Ð»Ð¶Ð½Ð° ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ Ð½Ðµ Ð¼ÐµÐ½ÐµÐµ 150 ÑÐ»Ð¾Ð²"
+msgstr "Анно�‚а�†ия должна соде�€жа�‚�Œ не менее 150 слов"
 
 msgid "Kalit so'zlar vergul bilan ajratilsin"
-msgstr "ÐšÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ðµ ÑÐ»Ð¾Ð²Ð° Ñ€Ð°Ð·Ð´ÐµÐ»ÑÑŽÑ‚ÑÑ Ð·Ð°Ð¿ÑÑ‚Ñ‹Ð¼Ð¸"
+msgstr "�šл�Ž�‡ев�‹е слова �€азделя�Ž�‚ся запя�‚�‹ми"
 
 msgid "Fayl hajmi 20 MB dan oshmasin"
-msgstr "Ð Ð°Ð·Ð¼ÐµÑ€ Ñ„Ð°Ð¹Ð»Ð° Ð½Ðµ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð¿Ñ€ÐµÐ²Ñ‹ÑˆÐ°Ñ‚ÑŒ 20 ÐœÐ‘"
+msgstr "Разме�€ �„айла не должен п�€ев�‹�ˆа�‚�Œ 20 �œ�‘"
 
 msgid "Plagiatdan xoli originallik shart"
-msgstr "ÐžÑ€Ð¸Ð³Ð¸Ð½Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ Ð±ÐµÐ· Ð¿Ð»Ð°Ð³Ð¸Ð°Ñ‚Ð° Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð°"
+msgstr "�ž�€игинал�Œнос�‚�Œ без плагиа�‚а обяза�‚ел�Œна"
 
 msgid "Maqola yuborildi va ro'yxatga olindi"
-msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÑ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð° Ð¸ Ð·Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°"
+msgstr "С�‚а�‚�Œя о�‚п�€авлена и за�€егис�‚�€и�€ована"
 
 msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€ Ð¿Ñ€Ð¾Ð²Ð¾Ð´Ð¸Ñ‚ Ð¿Ñ€ÐµÐ´Ð²Ð°Ñ€Ð¸Ñ‚ÐµÐ»ÑŒÐ½ÑƒÑŽ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÑƒ (1-3 Ð´Ð½Ñ)"
+msgstr "Редак�‚о�€ п�€оводи�‚ п�€едва�€и�‚ел�Œн�ƒ�Ž п�€ове�€к�ƒ (1-3 дня)"
 
 msgid "Peer-review jarayoni (4-6 hafta)"
-msgstr "ÐŸÑ€Ð¾Ñ†ÐµÑÑ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ (4-6 Ð½ÐµÐ´ÐµÐ»ÑŒ)"
+msgstr "�Ÿ�€о�†есс �€е�†ензи�€ования (4-6 недел�Œ)"
 
 msgid "Qabul yoki rad qaroriga xabar beriladi"
-msgstr "Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ðµ Ð¾ Ñ€ÐµÑˆÐµÐ½Ð¸Ð¸ Ð¿Ñ€Ð¸Ð½ÑÑ‚Ð¸Ñ Ð¸Ð»Ð¸ Ð¾Ñ‚ÐºÐ»Ð¾Ð½ÐµÐ½Ð¸Ñ"
+msgstr "Уведомление о �€е�ˆении п�€иня�‚ия или о�‚клонения"
 
 # profile.html
 msgid "Nashr"
-msgstr "ÐžÐ¿ÑƒÐ±Ð»."
+msgstr "�žп�ƒбл."
 
 msgid "Profil ma'lumotlarini tahrirlash"
-msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ"
+msgstr "Редак�‚и�€ова�‚�Œ данн�‹е п�€о�„иля"
 
 msgid "Ism"
-msgstr "Ð˜Ð¼Ñ"
+msgstr "�˜мя"
 
 msgid "Familiya"
-msgstr "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"
+msgstr "Фамилия"
 
 msgid "Telefon"
-msgstr "Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½"
+msgstr "Теле�„он"
 
 msgid "Ish / O'qish joyi"
-msgstr "ÐœÐµÑÑ‚Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ / ÑƒÑ‡Ñ‘Ð±Ñ‹"
+msgstr "�œес�‚о �€або�‚�‹ / �ƒ�‡�‘б�‹"
 
 msgid "O'zim haqimda"
-msgstr "Ðž ÑÐµÐ±Ðµ"
+msgstr "�ž себе"
 
 # change_password.html
 msgid "O'zgartirish"
-msgstr "Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ"
+msgstr "�˜змени�‚�Œ"
 
 # dashboard_base.html
 msgid "Dashboard"
-msgstr "ÐŸÐ°Ð½ÐµÐ»ÑŒ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ"
+msgstr "�Ÿанел�Œ �ƒп�€авления"
 
 # login.html
 msgid "TIFT Ilmiy Jurnali platformasi"
-msgstr "ÐŸÐ»Ð°Ñ‚Ñ„Ð¾Ñ€Ð¼Ð° Ð½Ð°ÑƒÑ‡Ð½Ð¾Ð³Ð¾ Ð¶ÑƒÑ€Ð½Ð°Ð»Ð° Ð¢Ð˜Ð¤Ð¢"
+msgstr "�Ÿла�‚�„о�€ма на�ƒ�‡ного ж�ƒ�€нала Т�˜ФТ"
 
 msgid "Hali ro'yxatdan o'tmaganmisiz?"
-msgstr "Ð•Ñ‰Ñ‘ Ð½Ðµ Ð·Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ñ‹?"
+msgstr "�•�‰�‘ не за�€егис�‚�€и�€ован�‹?"
 
 # signup.html
 msgid "Muallif sifatida platformaga qo'shiling"
-msgstr "ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½ÑÐ¹Ñ‚ÐµÑÑŒ Ðº Ð¿Ð»Ð°Ñ‚Ñ„Ð¾Ñ€Ð¼Ðµ ÐºÐ°Ðº Ð°Ð²Ñ‚Ð¾Ñ€"
+msgstr "�Ÿ�€исоединяй�‚ес�Œ к пла�‚�„о�€ме как ав�‚о�€"
 
 msgid "Xatoliklar mavjud, iltimos tekshiring:"
-msgstr "ÐžÐ±Ð½Ð°Ñ€ÑƒÐ¶ÐµÐ½Ñ‹ Ð¾ÑˆÐ¸Ð±ÐºÐ¸, Ð¿Ð¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð°, Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑŒÑ‚Ðµ:"
+msgstr "�žбна�€�ƒжен�‹ о�ˆибки, пожал�ƒйс�‚а, п�€ове�€�Œ�‚е:"
 
 msgid "Allaqachon akkauntingiz bormi?"
-msgstr "Ð£Ð¶Ðµ ÐµÑÑ‚ÑŒ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚?"
+msgstr "Уже ес�‚�Œ акка�ƒн�‚?"
 
 # issue_detail.html
 msgid "Jurnal Arxivi"
-msgstr "ÐÑ€Ñ…Ð¸Ð² Ð¶ÑƒÑ€Ð½Ð°Ð»Ð°"
+msgstr "А�€�…ив ж�ƒ�€нала"
 
 msgid "Ushbu sondagi maqolalar"
-msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÐ¸ Ð² ÑÑ‚Ð¾Ð¼ Ð²Ñ‹Ð¿ÑƒÑÐºÐµ"
+msgstr "С�‚а�‚�Œи в э�‚ом в�‹п�ƒске"
 
 msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
-msgstr "Ð’ ÑÑ‚Ð¾Ñ‚ Ð²Ñ‹Ð¿ÑƒÑÐº Ð°Ñ€Ñ…Ð¸Ð²Ð° ÐµÑ‰Ñ‘ Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹ ÑÑ‚Ð°Ñ‚ÑŒÐ¸."
+msgstr "�’ э�‚о�‚ в�‹п�ƒск а�€�…ива е�‰�‘ не заг�€�ƒжен�‹ с�‚а�‚�Œи."
 
 msgid "%(count)s ta maqola"
-msgstr "%(count)s ÑÑ‚Ð°Ñ‚ÐµÐ¹"
+msgstr "%(count)s с�‚а�‚ей"
 
 msgid "%(y)s-yil"
-msgstr "%(y)s Ð³Ð¾Ð´"
+msgstr "%(y)s год"
