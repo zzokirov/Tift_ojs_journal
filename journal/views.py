@@ -630,13 +630,13 @@ def download_pdf(request, pk):
             return response
     except Exception as e:
         import traceback
-        traceback.print_exc()
-        # Vaqtinchalik xatoni ko'rish uchun (ishga tushgach olib tashlash mumkin)
-        # return HttpResponse(f"PDF yaratishda xatolik: {e}", status=500)
-        pass
-
-    # Fallback: asl faylni qaytarish
-    return _redirect(article.pdf_file.url)
+        err_detail = traceback.format_exc()
+        # Debug: xatolikni tekshirish uchun vaqtinchalik ko'rinadi
+        return HttpResponse(
+            f"<h2>PDF yaratishda xatolik</h2><pre>{err_detail}</pre>",
+            status=500,
+            content_type='text/html; charset=utf-8'
+        )
 
 
 def generate_article_pdf(request, pk):
