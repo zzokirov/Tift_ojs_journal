@@ -587,6 +587,9 @@ def _get_pdf_bytes(article_file):
     return None
 
 
+from django.views.decorators.cache import never_cache
+
+@never_cache
 def download_pdf(request, pk):
     """
     Word (.docx) faylni PDF ga aylantirib qaytaradi.
