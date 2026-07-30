@@ -262,6 +262,30 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="dashboard-panel h-100">
+                        <div class="panel-header">
+                            <h2><i class="fas fa-globe mr-2 text-primary"></i> Davlatlar kesimida</h2>
+                        </div>
+                        <div class="panel-body">
+                            <canvas id="countryChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="dashboard-panel h-100">
+                        <div class="panel-header">
+                            <h2><i class="fas fa-venus-mars mr-2 text-primary"></i> Mualliflar jinsi</h2>
+                        </div>
+                        <div class="panel-body">
+                            <canvas id="genderChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- Latest Articles -->
             <div class="dashboard-panel">
                 <div class="panel-header">
@@ -417,8 +441,53 @@ document.addEventListener("DOMContentLoaded", function() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '70%',
-            plugins: { legend: { position: 'right' } }
+            plugins: {
+                legend: { position: 'right' }
+            }
+        }
+    });
+
+    // Country Bar Chart
+    const ctxCountry = document.getElementById('countryChart').getContext('2d');
+    new Chart(ctxCountry, {
+        type: 'bar',
+        data: {
+            labels: chartData.country.labels,
+            datasets: [{
+                label: 'Maqolalar soni',
+                data: chartData.country.data,
+                backgroundColor: 'rgba(52, 211, 153, 0.7)',
+                borderColor: 'rgba(52, 211, 153, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 } }
+            }
+        }
+    });
+
+    // Gender Pie Chart
+    const ctxGender = document.getElementById('genderChart').getContext('2d');
+    new Chart(ctxGender, {
+        type: 'pie',
+        data: {
+            labels: chartData.gender.labels,
+            datasets: [{
+                data: chartData.gender.data,
+                backgroundColor: ['#3b82f6', '#ec4899'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
         }
     });
 });

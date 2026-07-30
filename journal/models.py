@@ -19,11 +19,17 @@ class User(AbstractUser):
         ('reviewer', 'Taqrizchi'),
         ('editor', 'Muharrir'),
     )
+    GENDER_CHOICES = (
+        ('male', 'Erkak'),
+        ('female', 'Ayol'),
+    )
     role        = models.CharField(max_length=10, choices=ROLE_CHOICES, default='author')
     institution = models.CharField(max_length=255, blank=True, verbose_name="Ish/O'qish joyi")
     avatar      = models.ImageField(upload_to=user_avatar_path, null=True, blank=True, verbose_name="Profil rasmi")
     bio         = models.TextField(blank=True, verbose_name="O'zim haqimda")
     phone       = models.CharField(max_length=20, blank=True, verbose_name="Telefon raqam")
+    gender      = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True, verbose_name="Jinsi")
+    country     = models.CharField(max_length=100, null=True, blank=True, default="O'zbekiston", verbose_name="Davlat")
 
     def __str__(self):
         return f"{self.get_full_name()} ({self.get_role_display()})"
