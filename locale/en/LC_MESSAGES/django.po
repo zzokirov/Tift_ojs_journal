@@ -10,7 +10,7 @@ msgstr ""
 msgid "O'zbek"
 msgstr "Uzbek"
 
-msgid "Р�ƒсский"
+msgid "Русский"
 msgstr "Russian"
 
 msgid "English"
@@ -254,14 +254,14 @@ msgstr "View all"
 msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
 msgstr "All submitted articles are reviewed and evaluated by experts according to Double-blind peer review requirements."
 
-msgid "Yuborildi �†’ Taqriz �†’ Qabul �†’ Chop etildi"
-msgstr "Submitted �†’ Review �†’ Accepted �†’ Published"
+msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
+msgstr "Submitted → Review → Accepted → Published"
 
 msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
 msgstr "Average review time: 4-6 weeks"
 
-msgid "Open Access �€” bepul kirish"
-msgstr "Open Access �€” free access"
+msgid "Open Access — bepul kirish"
+msgstr "Open Access — free access"
 
 msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
 msgstr "Share your research with the world. Register to submit an article."

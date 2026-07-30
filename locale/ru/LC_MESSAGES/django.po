@@ -10,416 +10,416 @@ msgstr ""
 msgid "O'zbek"
 msgstr "Узбекский"
 
-msgid "Р�ƒсский"
-msgstr "Р�ƒсский"
+msgid "Русский"
+msgstr "Русский"
 
 msgid "English"
 msgstr "Английский"
 
 msgid "Bosh sahifa"
-msgstr "�“лавная"
+msgstr "Главная"
 
 msgid "Arxiv"
-msgstr "А�€�…ив"
+msgstr "Архив"
 
 msgid "Yangiliklar"
-msgstr "Новос�‚и"
+msgstr "Новости"
 
 msgid "Konferensiyalar"
-msgstr "�šон�„е�€ен�†ии"
+msgstr "Конференции"
 
 msgid "Hujjatlar"
-msgstr "�”ок�ƒмен�‚�‹"
+msgstr "Документы"
 
 msgid "Jurnal haqida"
-msgstr "�ž ж�ƒ�€нале"
+msgstr "О журнале"
 
 msgid "Kirish"
-msgstr "�’ой�‚и"
+msgstr "Войти"
 
 msgid "A'zo bo'lish"
-msgstr "Регис�‚�€а�†ия"
+msgstr "Регистрация"
 
 msgid "Maqola yuborish"
-msgstr "�ž�‚п�€ави�‚�Œ с�‚а�‚�Œ�Ž"
+msgstr "Отправить статью"
 
 msgid "Maqolalarim"
-msgstr "�œои с�‚а�‚�Œи"
+msgstr "Мои статьи"
 
 msgid "Chiqish"
-msgstr "�’�‹й�‚и"
+msgstr "Выйти"
 
 msgid "Profilni tahrirlash"
-msgstr "Редак�‚и�€ова�‚�Œ п�€о�„ил�Œ"
+msgstr "Редактировать профиль"
 
 msgid "Parol o'zgartirish"
-msgstr "�˜змени�‚�Œ па�€ол�Œ"
+msgstr "Изменить пароль"
 
 msgid "Muallif paneli"
-msgstr "�Ÿанел�Œ ав�‚о�€а"
+msgstr "Панель автора"
 
 msgid "Profilim"
-msgstr "�œой п�€о�„ил�Œ"
+msgstr "Мой профиль"
 
 msgid "Jurnal Arxivlari"
-msgstr "А�€�…ив ж�ƒ�€нала"
+msgstr "Архив журнала"
 
 msgid "Barcha chop etilgan sonlar"
-msgstr "�’се оп�ƒбликованн�‹е номе�€а"
+msgstr "Все опубликованные номера"
 
 msgid "Annotatsiya"
-msgstr "Анно�‚а�†ия"
+msgstr "Аннотация"
 
 msgid "Kalit so'zlar"
-msgstr "�šл�Ž�‡ев�‹е слова"
+msgstr "Ключевые слова"
 
 msgid "Maqola matni"
-msgstr "Текс�‚ с�‚а�‚�Œи"
+msgstr "Текст статьи"
 
 msgid "Muallif"
-msgstr "Ав�‚о�€"
+msgstr "Автор"
 
 msgid "Ko'rish"
-msgstr "�Ÿ�€осмо�‚�€"
+msgstr "Просмотр"
 
 msgid "Yuklab olish"
-msgstr "Ска�‡а�‚�Œ"
+msgstr "Скачать"
 
 msgid "Batafsil"
-msgstr "�Ÿод�€обнее"
+msgstr "Подробнее"
 
 msgid "So'nggi maqolalar"
-msgstr "�Ÿоследние с�‚а�‚�Œи"
+msgstr "Последние статьи"
 
 msgid "Qidiruv natijalari"
-msgstr "Рез�ƒл�Œ�‚а�‚�‹ поиска"
+msgstr "Результаты поиска"
 
 msgid "Jurnal arxivlari"
-msgstr "А�€�…ив�‹ ж�ƒ�€нала"
+msgstr "Архивы журнала"
 
 msgid "Taqrizlash jarayoni"
-msgstr "�Ÿ�€о�†есс �€е�†ензи�€ования"
+msgstr "Процесс рецензирования"
 
 msgid "Maqolangizni yuboring"
-msgstr "�ž�‚п�€ав�Œ�‚е ва�ˆ�ƒ с�‚а�‚�Œ�Ž"
+msgstr "Отправьте вашу статью"
 
 msgid "Ro'yxatdan o'tish"
-msgstr "Регис�‚�€а�†ия"
+msgstr "Регистрация"
 
 msgid "Tizimga kirish"
-msgstr "�’ой�‚и в сис�‚ем�ƒ"
+msgstr "Войти в систему"
 
 msgid "Bosh sahifaga qaytish"
-msgstr "�’е�€н�ƒ�‚�Œся на главн�ƒ�Ž"
+msgstr "Вернуться на главную"
 
 msgid "Chop etildi"
-msgstr "�žп�ƒбликовано"
+msgstr "Опубликовано"
 
 msgid "Yuborildi"
-msgstr "�ž�‚п�€авлено"
+msgstr "Отправлено"
 
 msgid "Taqriz jarayonida"
-msgstr "На �€е�†ензи�€овании"
+msgstr "На рецензировании"
 
 msgid "Qabul qilindi"
-msgstr "�Ÿ�€иня�‚о"
+msgstr "Принято"
 
 msgid "Rad etildi"
-msgstr "�ž�‚клонено"
+msgstr "Отклонено"
 
 msgid "Jami tashriflar"
-msgstr "�’сего посе�‰ений"
+msgstr "Всего посещений"
 
 msgid "Bugungi tashriflar"
-msgstr "Сегодня посе�‰ений"
+msgstr "Сегодня посещений"
 
 msgid "Nashr maqolalar"
-msgstr "�žп�ƒбликованн�‹�… с�‚а�‚ей"
+msgstr "Опубликованных статей"
 
 msgid "Jonli statistika"
-msgstr "С�‚а�‚ис�‚ика в �€еал�Œном в�€емени"
+msgstr "Статистика в реальном времени"
 
 msgid "Maqolalarni ko'rish"
-msgstr "Смо�‚�€е�‚�Œ с�‚а�‚�Œи"
+msgstr "Смотреть статьи"
 
 msgid "Tashkil etilgan"
-msgstr "�žснован"
+msgstr "Основан"
 
 msgid "Arxiv sonlari"
-msgstr "Номе�€ов а�€�…ива"
+msgstr "Номеров архива"
 
 msgid "Maqolalar"
-msgstr "С�‚а�‚�Œи"
+msgstr "Статьи"
 
 msgid "Ilmiy tadbirlar va anjumanlar"
-msgstr "На�ƒ�‡н�‹е ме�€оп�€ия�‚ия и кон�„е�€ен�†ии"
+msgstr "Научные мероприятия и конференции"
 
 msgid "Me'yoriy hujjatlar va maqola talablari"
-msgstr "Но�€ма�‚ивн�‹е док�ƒмен�‚�‹ и �‚�€ебования к с�‚а�‚�Œям"
+msgstr "Нормативные документы и требования к статьям"
 
 msgid "Jurnal va universitetdagi so'nggi yangiliklar"
-msgstr "�Ÿоследние новос�‚и ж�ƒ�€нала и �ƒниве�€си�‚е�‚а"
+msgstr "Последние новости журнала и университета"
 
 msgid "Yuborish talablari"
-msgstr "Т�€ебования к п�ƒблика�†ии"
+msgstr "Требования к публикации"
 
 msgid "Ko'rib chiqish jarayoni"
-msgstr "�Ÿ�€о�†есс �€ассмо�‚�€ения"
+msgstr "Процесс рассмотрения"
 
 msgid "Maqolani tahririyatga yuborish"
-msgstr "�ž�‚п�€ави�‚�Œ с�‚а�‚�Œ�Ž в �€едак�†и�Ž"
+msgstr "Отправить статью в редакцию"
 
 msgid "Bekor qilish"
-msgstr "�ž�‚мена"
+msgstr "Отмена"
 
 msgid "Saqlash"
-msgstr "Со�…�€ани�‚�Œ"
+msgstr "Сохранить"
 
 msgid "Hisob"
-msgstr "Акка�ƒн�‚"
+msgstr "Аккаунт"
 
-# ============ Н�ž�’Ы�• �Ÿ�•Р�•�’�ž�”Ы ============
+# ============ НОВЫЕ ПЕРЕВОДЫ ============
 
 # base.html
 msgid "Arxitektura va Ta'lim"
-msgstr "А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование"
+msgstr "Архитектура и Образование"
 
 msgid "Tezkor havolalar"
-msgstr "�‘�‹с�‚�€�‹е сс�‹лки"
+msgstr "Быстрые ссылки"
 
 msgid "Jurnal ma'lumotlari"
-msgstr "�˜н�„о�€ма�†ия о ж�ƒ�€нале"
+msgstr "Информация о журнале"
 
 msgid "Chastotasi"
-msgstr "�Ÿе�€иоди�‡нос�‚�Œ"
+msgstr "Периодичность"
 
 msgid "Yiliga 4 marta"
-msgstr "4 �€аза в год"
+msgstr "4 раза в год"
 
 msgid "Manzil"
-msgstr "Ад�€ес"
+msgstr "Адрес"
 
 msgid "Toshkent, O'zbekiston"
-msgstr "Та�ˆкен�‚, Узбекис�‚ан"
+msgstr "Ташкент, Узбекистан"
 
 msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
-msgstr "Та�ˆкен�‚ский �œежд�ƒна�€одн�‹й Униве�€си�‚е�‚ Финансового Уп�€авления и Те�…нологий"
+msgstr "Ташкентский Международный Университет Финансового Управления и Технологий"
 
 msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
-msgstr "На�ƒ�‡но-элек�‚�€онн�‹й ж�ƒ�€нал Та�ˆкен�‚ского �œежд�ƒна�€одного Униве�€си�‚е�‚а Финансового Уп�€авления и Те�…нологий."
+msgstr "Научно-электронный журнал Ташкентского Международного Университета Финансового Управления и Технологий."
 
 msgid "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
-msgstr "Сов�€еменн�‹е исследования в облас�‚и «А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование»."
+msgstr "Современные исследования в области «Архитектура и Образование»."
 
 # index.html
 msgid "Ilmiy Jurnali"
-msgstr "На�ƒ�‡н�‹й �–�ƒ�€нал"
+msgstr "Научный Журнал"
 
 msgid "Qidirish"
-msgstr "�Ÿоиск"
+msgstr "Поиск"
 
 msgid "Tozalash"
-msgstr "�ž�‡ис�‚и�‚�Œ"
+msgstr "Очистить"
 
 msgid "ta maqola"
-msgstr "с�‚а�‚ей"
+msgstr "статей"
 
 msgid "ta ko'rish"
-msgstr "п�€осмо�‚�€ов"
+msgstr "просмотров"
 
 msgid "Hozircha arxivlar mavjud emas."
-msgstr "А�€�…ив�‹ пока о�‚с�ƒ�‚с�‚в�ƒ�Ž�‚."
+msgstr "Архивы пока отсутствуют."
 
 msgid "Maqolalar mavjud emas"
-msgstr "С�‚а�‚�Œи о�‚с�ƒ�‚с�‚в�ƒ�Ž�‚"
+msgstr "Статьи отсутствуют"
 
 msgid "Natijalar topilmadi"
-msgstr "Рез�ƒл�Œ�‚а�‚�‹ не найден�‹"
+msgstr "Результаты не найдены"
 
 msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
-msgstr "�žп�ƒбликованн�‹�… на�ƒ�‡н�‹�… с�‚а�‚ей пока не�‚."
+msgstr "Опубликованных научных статей пока нет."
 
 msgid "Qabul qilinadigan maqolalar yo'nalishlari"
-msgstr "�Ÿ�€инимаем�‹е нап�€авления с�‚а�‚ей"
+msgstr "Принимаемые направления статей"
 
 msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
-msgstr "�Ÿоиск по названи�Ž с�‚а�‚�Œи, анно�‚а�†ии или кл�Ž�‡ев�‹м словам..."
+msgstr "Поиск по названию статьи, аннотации или ключевым словам..."
 
 msgid "bo'yicha qidiruv natijalari"
-msgstr "�€ез�ƒл�Œ�‚а�‚�‹ поиска по зап�€ос�ƒ"
+msgstr "результаты поиска по запросу"
 
 msgid "Barchasini ko'rish"
-msgstr "�Ÿоказа�‚�Œ все"
+msgstr "Показать все"
 
 msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
-msgstr "�’се п�€едс�‚авленн�‹е с�‚а�‚�Œи �€е�†ензи�€�ƒ�Ž�‚ся экспе�€�‚ами в соо�‚ве�‚с�‚вии с �‚�€ебованиями двойного слепого �€е�†ензи�€ования (Double-blind peer review)."
+msgstr "Все представленные статьи рецензируются экспертами в соответствии с требованиями двойного слепого рецензирования (Double-blind peer review)."
 
-msgid "Yuborildi �†’ Taqriz �†’ Qabul �†’ Chop etildi"
-msgstr "�ž�‚п�€авлено �†’ Ре�†ензия �†’ �Ÿ�€иня�‚о �†’ �žп�ƒбликовано"
+msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
+msgstr "Отправлено → Рецензия → Принято → Опубликовано"
 
 msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
-msgstr "С�€едний с�€ок �€ассмо�‚�€ения: 4-6 недел�Œ"
+msgstr "Средний срок рассмотрения: 4-6 недель"
 
-msgid "Open Access �€” bepul kirish"
-msgstr "Open Access �€” свободн�‹й дос�‚�ƒп"
+msgid "Open Access — bepul kirish"
+msgstr "Open Access — свободный доступ"
 
 msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
-msgstr "�Ÿодели�‚ес�Œ своими исследованиями с ми�€ом. �—а�€егис�‚�€и�€�ƒй�‚ес�Œ для о�‚п�€авки с�‚а�‚�Œи."
+msgstr "Поделитесь своими исследованиями с миром. Зарегистрируйтесь для отправки статьи."
 
 #: index.html - blocktrans
 msgid "Jild %(vol)s, Son %(num)s"
-msgstr "Том %(vol)s, �’�‹п�ƒск %(num)s"
+msgstr "Том %(vol)s, Выпуск %(num)s"
 
 # index.html hero description
 msgid "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
-msgstr "�”анное издание нап�€авлено на пов�‹�ˆение э�„�„ек�‚ивнос�‚и �„�ƒндамен�‚ал�Œн�‹�… и п�€икладн�‹�… исследований в облас�‚и а�€�…и�‚ек�‚�ƒ�€�‹, г�€адос�‚�€ои�‚ел�Œс�‚ва, с�‚�€ои�‚ел�Œс�‚ва зданий и соо�€�ƒжений, геодезии, ка�€�‚ог�€а�„ии и гос�ƒда�€с�‚венного кадас�‚�€а. Также являе�‚ся ис�‚о�‡ником в�‹сокока�‡ес�‚венн�‹�… анали�‚и�‡ески�… данн�‹�… и иннова�†ионн�‹�… �€е�ˆений по сове�€�ˆенс�‚вовани�Ž сов�€еменной об�€азова�‚ел�Œной ме�‚одологии, гл�ƒбокой ин�‚ег�€а�†ии �†и�„�€ов�‹�… �‚е�…нологий, сис�‚ем BIM (Building Information Modeling) и алго�€и�‚мов иск�ƒсс�‚венного ин�‚еллек�‚а в о�‚�€асл�Œ."
+msgstr "Данное издание направлено на повышение эффективности фундаментальных и прикладных исследований в области архитектуры, градостроительства, строительства зданий и сооружений, геодезии, картографии и государственного кадастра. Также является источником высококачественных аналитических данных и инновационных решений по совершенствованию современной образовательной методологии, глубокой интеграции цифровых технологий, систем BIM (Building Information Modeling) и алгоритмов искусственного интеллекта в отрасль."
 
 msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
-msgstr "На�ƒ�‡но-элек�‚�€онн�‹й ж�ƒ�€нал «А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование»"
+msgstr "Научно-электронный журнал «Архитектура и Образование»"
 
 # about.html
 msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
-msgstr "На�ƒ�‡но-элек�‚�€онн�‹й ж�ƒ�€нал Т�˜ФТ «А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование»"
+msgstr "Научно-электронный журнал ТИФТ «Архитектура и Образование»"
 
 msgid "Yiliga chop etiladi"
-msgstr "�Ÿ�ƒблик�ƒе�‚ся в год"
+msgstr "Публикуется в год"
 
 msgid "Bepul kirish"
-msgstr "�‘еспла�‚н�‹й дос�‚�ƒп"
+msgstr "Бесплатный доступ"
 
 msgid "Yo'nalishlar"
-msgstr "Нап�€авления"
+msgstr "Направления"
 
 msgid "Tahririyat a'zolari"
-msgstr "Член�‹ �€едак�†ии"
+msgstr "Члены редакции"
 
 msgid "Tahririyat a'zolari hali qo'shilmagan."
-msgstr "Член�‹ �€едак�†ии е�‰�‘ не добавлен�‹."
+msgstr "Члены редакции ещё не добавлены."
 
 msgid "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
-msgstr "�’се п�€едс�‚авленн�‹е с�‚а�‚�Œи п�€о�…одя�‚ п�€о�†ед�ƒ�€�ƒ двойного слепого �€е�†ензи�€ования. С�€ок �€ассмо�‚�€ения 4-6 недел�Œ. Ав�‚о�€ и �€е�†ензен�‚ не зна�Ž�‚ д�€�ƒг д�€�ƒга."
+msgstr "Все представленные статьи проходят процедуру двойного слепого рецензирования. Срок рассмотрения 4-6 недель. Автор и рецензент не знают друг друга."
 
 msgid "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
-msgstr "На�ƒ�‡но-элек�‚�€онн�‹й ж�ƒ�€нал «А�€�…и�‚ек�‚�ƒ�€а и �žб�€азование» изда�‘�‚ся Та�ˆкен�‚ским �œежд�ƒна�€одн�‹м Униве�€си�‚е�‚ом Финансового Уп�€авления и Те�…нологий (Т�˜ФТ). �–�ƒ�€нал спе�†иализи�€�ƒе�‚ся на п�ƒблика�†ии на�ƒ�‡но-п�€ак�‚и�‡ески�… исследований в облас�‚и а�€�…и�‚ек�‚�ƒ�€�‹, с�‚�€ои�‚ел�Œс�‚ва, геодезии, ка�€�‚ог�€а�„ии, кадас�‚�€а и об�€азования."
+msgstr "Научно-электронный журнал «Архитектура и Образование» издаётся Ташкентским Международным Университетом Финансового Управления и Технологий (ТИФТ). Журнал специализируется на публикации научно-практических исследований в области архитектуры, строительства, геодезии, картографии, кадастра и образования."
 
 # my_articles.html
 msgid "Jami"
-msgstr "�’сего"
+msgstr "Всего"
 
 msgid "Taqrizda"
-msgstr "На �€е�†ензии"
+msgstr "На рецензии"
 
 msgid "ko'rish"
-msgstr "п�€осмо�‚�€ов"
+msgstr "просмотров"
 
 msgid "Jarayonda..."
-msgstr "�’ п�€о�†ессе..."
+msgstr "В процессе..."
 
 msgid "Hali maqola yubormagansiz"
-msgstr "�’�‹ е�‰�‘ не о�‚п�€авили с�‚а�‚�Œ�Ž"
+msgstr "Вы ещё не отправили статью"
 
 msgid "Tadqiqotingizni tahririyatga yuboring"
-msgstr "�ž�‚п�€ав�Œ�‚е ва�ˆе исследование в �€едак�†и�Ž"
+msgstr "Отправьте ваше исследование в редакцию"
 
 msgid "Birinchi maqolangizni yuboring"
-msgstr "�ž�‚п�€ав�Œ�‚е ва�ˆ�ƒ пе�€в�ƒ�Ž с�‚а�‚�Œ�Ž"
+msgstr "Отправьте вашу первую статью"
 
 # submit_article.html
 msgid "Maqola ma'lumotlari"
-msgstr "�”анн�‹е с�‚а�‚�Œи"
+msgstr "Данные статьи"
 
 msgid "Word faylni bu yerga tashlang yoki bosing"
-msgstr "�Ÿе�€е�‚а�‰и�‚е �„айл Word с�Žда или нажми�‚е"
+msgstr "Перетащите файл Word сюда или нажмите"
 
 msgid "Faqat .docx format, maksimal hajm: 20MB"
-msgstr "Тол�Œко �„о�€ма�‚ .docx, максимал�Œн�‹й �€азме�€: 20MB"
+msgstr "Только формат .docx, максимальный размер: 20MB"
 
 msgid "Maqola faqat Word (.docx) formatida yuboriladi"
-msgstr "С�‚а�‚�Œя п�€инимае�‚ся �‚ол�Œко в �„о�€ма�‚е Word (.docx)"
+msgstr "Статья принимается только в формате Word (.docx)"
 
 msgid "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
-msgstr "Анно�‚а�†ия должна соде�€жа�‚�Œ не менее 150 слов"
+msgstr "Аннотация должна содержать не менее 150 слов"
 
 msgid "Kalit so'zlar vergul bilan ajratilsin"
-msgstr "�šл�Ž�‡ев�‹е слова �€азделя�Ž�‚ся запя�‚�‹ми"
+msgstr "Ключевые слова разделяются запятыми"
 
 msgid "Fayl hajmi 20 MB dan oshmasin"
-msgstr "Разме�€ �„айла не должен п�€ев�‹�ˆа�‚�Œ 20 �œ�‘"
+msgstr "Размер файла не должен превышать 20 МБ"
 
 msgid "Plagiatdan xoli originallik shart"
-msgstr "�ž�€игинал�Œнос�‚�Œ без плагиа�‚а обяза�‚ел�Œна"
+msgstr "Оригинальность без плагиата обязательна"
 
 msgid "Maqola yuborildi va ro'yxatga olindi"
-msgstr "С�‚а�‚�Œя о�‚п�€авлена и за�€егис�‚�€и�€ована"
+msgstr "Статья отправлена и зарегистрирована"
 
 msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
-msgstr "Редак�‚о�€ п�€оводи�‚ п�€едва�€и�‚ел�Œн�ƒ�Ž п�€ове�€к�ƒ (1-3 дня)"
+msgstr "Редактор проводит предварительную проверку (1-3 дня)"
 
 msgid "Peer-review jarayoni (4-6 hafta)"
-msgstr "�Ÿ�€о�†есс �€е�†ензи�€ования (4-6 недел�Œ)"
+msgstr "Процесс рецензирования (4-6 недель)"
 
 msgid "Qabul yoki rad qaroriga xabar beriladi"
-msgstr "Уведомление о �€е�ˆении п�€иня�‚ия или о�‚клонения"
+msgstr "Уведомление о решении принятия или отклонения"
 
 # profile.html
 msgid "Nashr"
-msgstr "�žп�ƒбл."
+msgstr "Опубл."
 
 msgid "Profil ma'lumotlarini tahrirlash"
-msgstr "Редак�‚и�€ова�‚�Œ данн�‹е п�€о�„иля"
+msgstr "Редактировать данные профиля"
 
 msgid "Ism"
-msgstr "�˜мя"
+msgstr "Имя"
 
 msgid "Familiya"
 msgstr "Фамилия"
 
 msgid "Telefon"
-msgstr "Теле�„он"
+msgstr "Телефон"
 
 msgid "Ish / O'qish joyi"
-msgstr "�œес�‚о �€або�‚�‹ / �ƒ�‡�‘б�‹"
+msgstr "Место работы / учёбы"
 
 msgid "O'zim haqimda"
-msgstr "�ž себе"
+msgstr "О себе"
 
 # change_password.html
 msgid "O'zgartirish"
-msgstr "�˜змени�‚�Œ"
+msgstr "Изменить"
 
 # dashboard_base.html
 msgid "Dashboard"
-msgstr "�Ÿанел�Œ �ƒп�€авления"
+msgstr "Панель управления"
 
 # login.html
 msgid "TIFT Ilmiy Jurnali platformasi"
-msgstr "�Ÿла�‚�„о�€ма на�ƒ�‡ного ж�ƒ�€нала Т�˜ФТ"
+msgstr "Платформа научного журнала ТИФТ"
 
 msgid "Hali ro'yxatdan o'tmaganmisiz?"
-msgstr "�•�‰�‘ не за�€егис�‚�€и�€ован�‹?"
+msgstr "Ещё не зарегистрированы?"
 
 # signup.html
 msgid "Muallif sifatida platformaga qo'shiling"
-msgstr "�Ÿ�€исоединяй�‚ес�Œ к пла�‚�„о�€ме как ав�‚о�€"
+msgstr "Присоединяйтесь к платформе как автор"
 
 msgid "Xatoliklar mavjud, iltimos tekshiring:"
-msgstr "�žбна�€�ƒжен�‹ о�ˆибки, пожал�ƒйс�‚а, п�€ове�€�Œ�‚е:"
+msgstr "Обнаружены ошибки, пожалуйста, проверьте:"
 
 msgid "Allaqachon akkauntingiz bormi?"
-msgstr "Уже ес�‚�Œ акка�ƒн�‚?"
+msgstr "Уже есть аккаунт?"
 
 # issue_detail.html
 msgid "Jurnal Arxivi"
-msgstr "А�€�…ив ж�ƒ�€нала"
+msgstr "Архив журнала"
 
 msgid "Ushbu sondagi maqolalar"
-msgstr "С�‚а�‚�Œи в э�‚ом в�‹п�ƒске"
+msgstr "Статьи в этом выпуске"
 
 msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
-msgstr "�’ э�‚о�‚ в�‹п�ƒск а�€�…ива е�‰�‘ не заг�€�ƒжен�‹ с�‚а�‚�Œи."
+msgstr "В этот выпуск архива ещё не загружены статьи."
 
 msgid "%(count)s ta maqola"
-msgstr "%(count)s с�‚а�‚ей"
+msgstr "%(count)s статей"
 
 msgid "%(y)s-yil"
 msgstr "%(y)s год"
