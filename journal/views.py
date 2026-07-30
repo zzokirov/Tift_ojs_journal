@@ -625,7 +625,11 @@ def download_pdf(request, pk):
             response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
             response['Content-Disposition'] = f'attachment; filename="{filename}"'
             return response
-    except Exception:
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        # Vaqtinchalik xatoni ko'rish uchun (ishga tushgach olib tashlash mumkin)
+        # return HttpResponse(f"PDF yaratishda xatolik: {e}", status=500)
         pass
 
     # Fallback: asl faylni qaytarish

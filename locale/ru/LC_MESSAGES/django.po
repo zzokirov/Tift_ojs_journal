@@ -1,4 +1,4 @@
-# TIFT Journal - Russian Translation
+﻿# TIFT Journal - Russian Translation
 msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
@@ -8,418 +8,418 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "O'zbek"
-msgstr "Узбекский"
+msgstr "Ð£Ð·Ð±ÐµÐºÑÐºÐ¸Ð¹"
 
-msgid "Русский"
-msgstr "Русский"
+msgid "Ð ÑƒÑÑÐºÐ¸Ð¹"
+msgstr "Ð ÑƒÑÑÐºÐ¸Ð¹"
 
 msgid "English"
-msgstr "Английский"
+msgstr "ÐÐ½Ð³Ð»Ð¸Ð¹ÑÐºÐ¸Ð¹"
 
 msgid "Bosh sahifa"
-msgstr "Главная"
+msgstr "Ð“Ð»Ð°Ð²Ð½Ð°Ñ"
 
 msgid "Arxiv"
-msgstr "Архив"
+msgstr "ÐÑ€Ñ…Ð¸Ð²"
 
 msgid "Yangiliklar"
-msgstr "Новости"
+msgstr "ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸"
 
 msgid "Konferensiyalar"
-msgstr "Конференции"
+msgstr "ÐšÐ¾Ð½Ñ„ÐµÑ€ÐµÐ½Ñ†Ð¸Ð¸"
 
 msgid "Hujjatlar"
-msgstr "Документы"
+msgstr "Ð”Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ñ‹"
 
 msgid "Jurnal haqida"
-msgstr "О журнале"
+msgstr "Ðž Ð¶ÑƒÑ€Ð½Ð°Ð»Ðµ"
 
 msgid "Kirish"
-msgstr "Войти"
+msgstr "Ð’Ð¾Ð¹Ñ‚Ð¸"
 
 msgid "A'zo bo'lish"
-msgstr "Регистрация"
+msgstr "Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ"
 
 msgid "Maqola yuborish"
-msgstr "Отправить статью"
+msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ ÑÑ‚Ð°Ñ‚ÑŒÑŽ"
 
 msgid "Maqolalarim"
-msgstr "Мои статьи"
+msgstr "ÐœÐ¾Ð¸ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
 
 msgid "Chiqish"
-msgstr "Выйти"
+msgstr "Ð’Ñ‹Ð¹Ñ‚Ð¸"
 
 msgid "Profilni tahrirlash"
-msgstr "Редактировать профиль"
+msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ"
 
 msgid "Parol o'zgartirish"
-msgstr "Изменить пароль"
+msgstr "Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ"
 
 msgid "Muallif paneli"
-msgstr "Панель автора"
+msgstr "ÐŸÐ°Ð½ÐµÐ»ÑŒ Ð°Ð²Ñ‚Ð¾Ñ€Ð°"
 
 msgid "Profilim"
-msgstr "Мой профиль"
+msgstr "ÐœÐ¾Ð¹ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»ÑŒ"
 
 msgid "Jurnal Arxivlari"
-msgstr "Архив журнала"
+msgstr "ÐÑ€Ñ…Ð¸Ð² Ð¶ÑƒÑ€Ð½Ð°Ð»Ð°"
 
 msgid "Barcha chop etilgan sonlar"
-msgstr "Все опубликованные номера"
+msgstr "Ð’ÑÐµ Ð¾Ð¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð½Ñ‹Ðµ Ð½Ð¾Ð¼ÐµÑ€Ð°"
 
 msgid "Annotatsiya"
-msgstr "Аннотация"
+msgstr "ÐÐ½Ð½Ð¾Ñ‚Ð°Ñ†Ð¸Ñ"
 
 msgid "Kalit so'zlar"
-msgstr "Ключевые слова"
+msgstr "ÐšÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ðµ ÑÐ»Ð¾Ð²Ð°"
 
 msgid "Maqola matni"
-msgstr "Текст статьи"
+msgstr "Ð¢ÐµÐºÑÑ‚ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
 
 msgid "Muallif"
-msgstr "Автор"
+msgstr "ÐÐ²Ñ‚Ð¾Ñ€"
 
 msgid "Ko'rish"
-msgstr "Просмотр"
+msgstr "ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€"
 
 msgid "Yuklab olish"
-msgstr "Скачать"
+msgstr "Ð¡ÐºÐ°Ñ‡Ð°Ñ‚ÑŒ"
 
 msgid "Batafsil"
-msgstr "Подробнее"
+msgstr "ÐŸÐ¾Ð´Ñ€Ð¾Ð±Ð½ÐµÐµ"
 
 msgid "So'nggi maqolalar"
-msgstr "Последние статьи"
+msgstr "ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
 
 msgid "Qidiruv natijalari"
-msgstr "Результаты поиска"
+msgstr "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ð¿Ð¾Ð¸ÑÐºÐ°"
 
 msgid "Jurnal arxivlari"
-msgstr "Архивы журнала"
+msgstr "ÐÑ€Ñ…Ð¸Ð²Ñ‹ Ð¶ÑƒÑ€Ð½Ð°Ð»Ð°"
 
 msgid "Taqrizlash jarayoni"
-msgstr "Процесс рецензирования"
+msgstr "ÐŸÑ€Ð¾Ñ†ÐµÑÑ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ"
 
 msgid "Maqolangizni yuboring"
-msgstr "Отправьте вашу статью"
+msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ Ð²Ð°ÑˆÑƒ ÑÑ‚Ð°Ñ‚ÑŒÑŽ"
 
 msgid "Ro'yxatdan o'tish"
-msgstr "Регистрация"
+msgstr "Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ"
 
 msgid "Tizimga kirish"
-msgstr "Войти в систему"
+msgstr "Ð’Ð¾Ð¹Ñ‚Ð¸ Ð² ÑÐ¸ÑÑ‚ÐµÐ¼Ñƒ"
 
 msgid "Bosh sahifaga qaytish"
-msgstr "Вернуться на главную"
+msgstr "Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒÑÑ Ð½Ð° Ð³Ð»Ð°Ð²Ð½ÑƒÑŽ"
 
 msgid "Chop etildi"
-msgstr "Опубликовано"
+msgstr "ÐžÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð¾"
 
 msgid "Yuborildi"
-msgstr "Отправлено"
+msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾"
 
 msgid "Taqriz jarayonida"
-msgstr "На рецензировании"
+msgstr "ÐÐ° Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ð¸"
 
 msgid "Qabul qilindi"
-msgstr "Принято"
+msgstr "ÐŸÑ€Ð¸Ð½ÑÑ‚Ð¾"
 
 msgid "Rad etildi"
-msgstr "Отклонено"
+msgstr "ÐžÑ‚ÐºÐ»Ð¾Ð½ÐµÐ½Ð¾"
 
 msgid "Jami tashriflar"
-msgstr "Всего посещений"
+msgstr "Ð’ÑÐµÐ³Ð¾ Ð¿Ð¾ÑÐµÑ‰ÐµÐ½Ð¸Ð¹"
 
 msgid "Bugungi tashriflar"
-msgstr "Сегодня посещений"
+msgstr "Ð¡ÐµÐ³Ð¾Ð´Ð½Ñ Ð¿Ð¾ÑÐµÑ‰ÐµÐ½Ð¸Ð¹"
 
 msgid "Nashr maqolalar"
-msgstr "Опубликованных статей"
+msgstr "ÐžÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð½Ñ‹Ñ… ÑÑ‚Ð°Ñ‚ÐµÐ¹"
 
 msgid "Jonli statistika"
-msgstr "Статистика в реальном времени"
+msgstr "Ð¡Ñ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ° Ð² Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð¼ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸"
 
 msgid "Maqolalarni ko'rish"
-msgstr "Смотреть статьи"
+msgstr "Ð¡Ð¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
 
 msgid "Tashkil etilgan"
-msgstr "Основан"
+msgstr "ÐžÑÐ½Ð¾Ð²Ð°Ð½"
 
 msgid "Arxiv sonlari"
-msgstr "Номеров архива"
+msgstr "ÐÐ¾Ð¼ÐµÑ€Ð¾Ð² Ð°Ñ€Ñ…Ð¸Ð²Ð°"
 
 msgid "Maqolalar"
-msgstr "Статьи"
+msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÐ¸"
 
 msgid "Ilmiy tadbirlar va anjumanlar"
-msgstr "Научные мероприятия и конференции"
+msgstr "ÐÐ°ÑƒÑ‡Ð½Ñ‹Ðµ Ð¼ÐµÑ€Ð¾Ð¿Ñ€Ð¸ÑÑ‚Ð¸Ñ Ð¸ ÐºÐ¾Ð½Ñ„ÐµÑ€ÐµÐ½Ñ†Ð¸Ð¸"
 
 msgid "Me'yoriy hujjatlar va maqola talablari"
-msgstr "Нормативные документы и требования к статьям"
+msgstr "ÐÐ¾Ñ€Ð¼Ð°Ñ‚Ð¸Ð²Ð½Ñ‹Ðµ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð¸ Ñ‚Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸Ñ Ðº ÑÑ‚Ð°Ñ‚ÑŒÑÐ¼"
 
 msgid "Jurnal va universitetdagi so'nggi yangiliklar"
-msgstr "Последние новости журнала и университета"
+msgstr "ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ Ð½Ð¾Ð²Ð¾ÑÑ‚Ð¸ Ð¶ÑƒÑ€Ð½Ð°Ð»Ð° Ð¸ ÑƒÐ½Ð¸Ð²ÐµÑ€ÑÐ¸Ñ‚ÐµÑ‚Ð°"
 
 msgid "Yuborish talablari"
-msgstr "Требования к публикации"
+msgstr "Ð¢Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸Ñ Ðº Ð¿ÑƒÐ±Ð»Ð¸ÐºÐ°Ñ†Ð¸Ð¸"
 
 msgid "Ko'rib chiqish jarayoni"
-msgstr "Процесс рассмотрения"
+msgstr "ÐŸÑ€Ð¾Ñ†ÐµÑÑ Ñ€Ð°ÑÑÐ¼Ð¾Ñ‚Ñ€ÐµÐ½Ð¸Ñ"
 
 msgid "Maqolani tahririyatga yuborish"
-msgstr "Отправить статью в редакцию"
+msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ ÑÑ‚Ð°Ñ‚ÑŒÑŽ Ð² Ñ€ÐµÐ´Ð°ÐºÑ†Ð¸ÑŽ"
 
 msgid "Bekor qilish"
-msgstr "Отмена"
+msgstr "ÐžÑ‚Ð¼ÐµÐ½Ð°"
 
 msgid "Saqlash"
-msgstr "Сохранить"
+msgstr "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ"
 
 msgid "Hisob"
-msgstr "Аккаунт"
+msgstr "ÐÐºÐºÐ°ÑƒÐ½Ñ‚"
 
-# ============ НОВЫЕ ПЕРЕВОДЫ ============
+# ============ ÐÐžÐ’Ð«Ð• ÐŸÐ•Ð Ð•Ð’ÐžÐ”Ð« ============
 
 # base.html
 msgid "Arxitektura va Ta'lim"
-msgstr "Архитектура и Образование"
+msgstr "ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ"
 
 msgid "Tezkor havolalar"
-msgstr "Быстрые ссылки"
+msgstr "Ð‘Ñ‹ÑÑ‚Ñ€Ñ‹Ðµ ÑÑÑ‹Ð»ÐºÐ¸"
 
 msgid "Jurnal ma'lumotlari"
-msgstr "Информация о журнале"
+msgstr "Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¶ÑƒÑ€Ð½Ð°Ð»Ðµ"
 
 msgid "Chastotasi"
-msgstr "Периодичность"
+msgstr "ÐŸÐµÑ€Ð¸Ð¾Ð´Ð¸Ñ‡Ð½Ð¾ÑÑ‚ÑŒ"
 
 msgid "Yiliga 4 marta"
-msgstr "4 раза в год"
+msgstr "4 Ñ€Ð°Ð·Ð° Ð² Ð³Ð¾Ð´"
 
 msgid "Manzil"
-msgstr "Адрес"
+msgstr "ÐÐ´Ñ€ÐµÑ"
 
 msgid "Toshkent, O'zbekiston"
-msgstr "Ташкент, Узбекистан"
+msgstr "Ð¢Ð°ÑˆÐºÐµÐ½Ñ‚, Ð£Ð·Ð±ÐµÐºÐ¸ÑÑ‚Ð°Ð½"
 
 msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
-msgstr "Ташкентский Международный Университет Финансового Управления и Технологий"
+msgstr "Ð¢Ð°ÑˆÐºÐµÐ½Ñ‚ÑÐºÐ¸Ð¹ ÐœÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ñ‹Ð¹ Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ¸Ñ‚ÐµÑ‚ Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¸ Ð¢ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¹"
 
 msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
-msgstr "Научно-электронный журнал Ташкентского Международного Университета Финансового Управления и Технологий."
+msgstr "ÐÐ°ÑƒÑ‡Ð½Ð¾-ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ñ‹Ð¹ Ð¶ÑƒÑ€Ð½Ð°Ð» Ð¢Ð°ÑˆÐºÐµÐ½Ñ‚ÑÐºÐ¾Ð³Ð¾ ÐœÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ¸Ñ‚ÐµÑ‚Ð° Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¸ Ð¢ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¹."
 
 msgid "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
-msgstr "Современные исследования в области «Архитектура и Образование»."
+msgstr "Ð¡Ð¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ñ Ð² Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Â«ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸ÐµÂ»."
 
 # index.html
 msgid "Ilmiy Jurnali"
-msgstr "Научный Журнал"
+msgstr "ÐÐ°ÑƒÑ‡Ð½Ñ‹Ð¹ Ð–ÑƒÑ€Ð½Ð°Ð»"
 
 msgid "Qidirish"
-msgstr "Поиск"
+msgstr "ÐŸÐ¾Ð¸ÑÐº"
 
 msgid "Tozalash"
-msgstr "Очистить"
+msgstr "ÐžÑ‡Ð¸ÑÑ‚Ð¸Ñ‚ÑŒ"
 
 msgid "ta maqola"
-msgstr "статей"
+msgstr "ÑÑ‚Ð°Ñ‚ÐµÐ¹"
 
 msgid "ta ko'rish"
-msgstr "просмотров"
+msgstr "Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€Ð¾Ð²"
 
 msgid "Hozircha arxivlar mavjud emas."
-msgstr "Архивы пока отсутствуют."
+msgstr "ÐÑ€Ñ…Ð¸Ð²Ñ‹ Ð¿Ð¾ÐºÐ° Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‚."
 
 msgid "Maqolalar mavjud emas"
-msgstr "Статьи отсутствуют"
+msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÐ¸ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‚"
 
 msgid "Natijalar topilmadi"
-msgstr "Результаты не найдены"
+msgstr "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ñ‹"
 
 msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
-msgstr "Опубликованных научных статей пока нет."
+msgstr "ÐžÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð½Ñ‹Ñ… Ð½Ð°ÑƒÑ‡Ð½Ñ‹Ñ… ÑÑ‚Ð°Ñ‚ÐµÐ¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ‚."
 
 msgid "Qabul qilinadigan maqolalar yo'nalishlari"
-msgstr "Принимаемые направления статей"
+msgstr "ÐŸÑ€Ð¸Ð½Ð¸Ð¼Ð°ÐµÐ¼Ñ‹Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ ÑÑ‚Ð°Ñ‚ÐµÐ¹"
 
 msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
-msgstr "Поиск по названию статьи, аннотации или ключевым словам..."
+msgstr "ÐŸÐ¾Ð¸ÑÐº Ð¿Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸ÑŽ ÑÑ‚Ð°Ñ‚ÑŒÐ¸, Ð°Ð½Ð½Ð¾Ñ‚Ð°Ñ†Ð¸Ð¸ Ð¸Ð»Ð¸ ÐºÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ð¼ ÑÐ»Ð¾Ð²Ð°Ð¼..."
 
 msgid "bo'yicha qidiruv natijalari"
-msgstr "результаты поиска по запросу"
+msgstr "Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ð¿Ð¾Ð¸ÑÐºÐ° Ð¿Ð¾ Ð·Ð°Ð¿Ñ€Ð¾ÑÑƒ"
 
 msgid "Barchasini ko'rish"
-msgstr "Показать все"
+msgstr "ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð²ÑÐµ"
 
 msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
-msgstr "Все представленные статьи рецензируются экспертами в соответствии с требованиями двойного слепого рецензирования (Double-blind peer review)."
+msgstr "Ð’ÑÐµ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€ÑƒÑŽÑ‚ÑÑ ÑÐºÑÐ¿ÐµÑ€Ñ‚Ð°Ð¼Ð¸ Ð² ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²Ð¸Ð¸ Ñ Ñ‚Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸ÑÐ¼Ð¸ Ð´Ð²Ð¾Ð¹Ð½Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¿Ð¾Ð³Ð¾ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ (Double-blind peer review)."
 
-msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
-msgstr "Отправлено → Рецензия → Принято → Опубликовано"
+msgid "Yuborildi â†’ Taqriz â†’ Qabul â†’ Chop etildi"
+msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾ â†’ Ð ÐµÑ†ÐµÐ½Ð·Ð¸Ñ â†’ ÐŸÑ€Ð¸Ð½ÑÑ‚Ð¾ â†’ ÐžÐ¿ÑƒÐ±Ð»Ð¸ÐºÐ¾Ð²Ð°Ð½Ð¾"
 
 msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
-msgstr "Средний срок рассмотрения: 4-6 недель"
+msgstr "Ð¡Ñ€ÐµÐ´Ð½Ð¸Ð¹ ÑÑ€Ð¾Ðº Ñ€Ð°ÑÑÐ¼Ð¾Ñ‚Ñ€ÐµÐ½Ð¸Ñ: 4-6 Ð½ÐµÐ´ÐµÐ»ÑŒ"
 
-msgid "Open Access — bepul kirish"
-msgstr "Open Access — свободный доступ"
+msgid "Open Access â€” bepul kirish"
+msgstr "Open Access â€” ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ð¹ Ð´Ð¾ÑÑ‚ÑƒÐ¿"
 
 msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
-msgstr "Поделитесь своими исследованиями с миром. Зарегистрируйтесь для отправки статьи."
+msgstr "ÐŸÐ¾Ð´ÐµÐ»Ð¸Ñ‚ÐµÑÑŒ ÑÐ²Ð¾Ð¸Ð¼Ð¸ Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸ÑÐ¼Ð¸ Ñ Ð¼Ð¸Ñ€Ð¾Ð¼. Ð—Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€ÑƒÐ¹Ñ‚ÐµÑÑŒ Ð´Ð»Ñ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÐºÐ¸ ÑÑ‚Ð°Ñ‚ÑŒÐ¸."
 
 #: index.html - blocktrans
 msgid "Jild %(vol)s, Son %(num)s"
-msgstr "Том %(vol)s, Выпуск %(num)s"
+msgstr "Ð¢Ð¾Ð¼ %(vol)s, Ð’Ñ‹Ð¿ÑƒÑÐº %(num)s"
 
 # index.html hero description
 msgid "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
-msgstr "Данное издание направлено на повышение эффективности фундаментальных и прикладных исследований в области архитектуры, градостроительства, строительства зданий и сооружений, геодезии, картографии и государственного кадастра. Также является источником высококачественных аналитических данных и инновационных решений по совершенствованию современной образовательной методологии, глубокой интеграции цифровых технологий, систем BIM (Building Information Modeling) и алгоритмов искусственного интеллекта в отрасль."
+msgstr "Ð”Ð°Ð½Ð½Ð¾Ðµ Ð¸Ð·Ð´Ð°Ð½Ð¸Ðµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¾ Ð½Ð° Ð¿Ð¾Ð²Ñ‹ÑˆÐµÐ½Ð¸Ðµ ÑÑ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚Ð¸ Ñ„ÑƒÐ½Ð´Ð°Ð¼ÐµÐ½Ñ‚Ð°Ð»ÑŒÐ½Ñ‹Ñ… Ð¸ Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´Ð½Ñ‹Ñ… Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ð¹ Ð² Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Ð°Ñ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ñ‹, Ð³Ñ€Ð°Ð´Ð¾ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð°, ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð° Ð·Ð´Ð°Ð½Ð¸Ð¹ Ð¸ ÑÐ¾Ð¾Ñ€ÑƒÐ¶ÐµÐ½Ð¸Ð¹, Ð³ÐµÐ¾Ð´ÐµÐ·Ð¸Ð¸, ÐºÐ°Ñ€Ñ‚Ð¾Ð³Ñ€Ð°Ñ„Ð¸Ð¸ Ð¸ Ð³Ð¾ÑÑƒÐ´Ð°Ñ€ÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð³Ð¾ ÐºÐ°Ð´Ð°ÑÑ‚Ñ€Ð°. Ð¢Ð°ÐºÐ¶Ðµ ÑÐ²Ð»ÑÐµÑ‚ÑÑ Ð¸ÑÑ‚Ð¾Ñ‡Ð½Ð¸ÐºÐ¾Ð¼ Ð²Ñ‹ÑÐ¾ÐºÐ¾ÐºÐ°Ñ‡ÐµÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ñ… Ð°Ð½Ð°Ð»Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¸ Ð¸Ð½Ð½Ð¾Ð²Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ñ… Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹ Ð¿Ð¾ ÑÐ¾Ð²ÐµÑ€ÑˆÐµÐ½ÑÑ‚Ð²Ð¾Ð²Ð°Ð½Ð¸ÑŽ ÑÐ¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹ Ð¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ð¹ Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð»Ð¾Ð³Ð¸Ð¸, Ð³Ð»ÑƒÐ±Ð¾ÐºÐ¾Ð¹ Ð¸Ð½Ñ‚ÐµÐ³Ñ€Ð°Ñ†Ð¸Ð¸ Ñ†Ð¸Ñ„Ñ€Ð¾Ð²Ñ‹Ñ… Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¹, ÑÐ¸ÑÑ‚ÐµÐ¼ BIM (Building Information Modeling) Ð¸ Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð¾Ð² Ð¸ÑÐºÑƒÑÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¸Ð½Ñ‚ÐµÐ»Ð»ÐµÐºÑ‚Ð° Ð² Ð¾Ñ‚Ñ€Ð°ÑÐ»ÑŒ."
 
 msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
-msgstr "Научно-электронный журнал «Архитектура и Образование»"
+msgstr "ÐÐ°ÑƒÑ‡Ð½Ð¾-ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ñ‹Ð¹ Ð¶ÑƒÑ€Ð½Ð°Ð» Â«ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸ÐµÂ»"
 
 # about.html
 msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
-msgstr "Научно-электронный журнал ТИФТ «Архитектура и Образование»"
+msgstr "ÐÐ°ÑƒÑ‡Ð½Ð¾-ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ñ‹Ð¹ Ð¶ÑƒÑ€Ð½Ð°Ð» Ð¢Ð˜Ð¤Ð¢ Â«ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸ÐµÂ»"
 
 msgid "Yiliga chop etiladi"
-msgstr "Публикуется в год"
+msgstr "ÐŸÑƒÐ±Ð»Ð¸ÐºÑƒÐµÑ‚ÑÑ Ð² Ð³Ð¾Ð´"
 
 msgid "Bepul kirish"
-msgstr "Бесплатный доступ"
+msgstr "Ð‘ÐµÑÐ¿Ð»Ð°Ñ‚Ð½Ñ‹Ð¹ Ð´Ð¾ÑÑ‚ÑƒÐ¿"
 
 msgid "Yo'nalishlar"
-msgstr "Направления"
+msgstr "ÐÐ°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ"
 
 msgid "Tahririyat a'zolari"
-msgstr "Члены редакции"
+msgstr "Ð§Ð»ÐµÐ½Ñ‹ Ñ€ÐµÐ´Ð°ÐºÑ†Ð¸Ð¸"
 
 msgid "Tahririyat a'zolari hali qo'shilmagan."
-msgstr "Члены редакции ещё не добавлены."
+msgstr "Ð§Ð»ÐµÐ½Ñ‹ Ñ€ÐµÐ´Ð°ÐºÑ†Ð¸Ð¸ ÐµÑ‰Ñ‘ Ð½Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹."
 
 msgid "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
-msgstr "Все представленные статьи проходят процедуру двойного слепого рецензирования. Срок рассмотрения 4-6 недель. Автор и рецензент не знают друг друга."
+msgstr "Ð’ÑÐµ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸ Ð¿Ñ€Ð¾Ñ…Ð¾Ð´ÑÑ‚ Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ñƒ Ð´Ð²Ð¾Ð¹Ð½Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¿Ð¾Ð³Ð¾ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ. Ð¡Ñ€Ð¾Ðº Ñ€Ð°ÑÑÐ¼Ð¾Ñ‚Ñ€ÐµÐ½Ð¸Ñ 4-6 Ð½ÐµÐ´ÐµÐ»ÑŒ. ÐÐ²Ñ‚Ð¾Ñ€ Ð¸ Ñ€ÐµÑ†ÐµÐ½Ð·ÐµÐ½Ñ‚ Ð½Ðµ Ð·Ð½Ð°ÑŽÑ‚ Ð´Ñ€ÑƒÐ³ Ð´Ñ€ÑƒÐ³Ð°."
 
 msgid "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
-msgstr "Научно-электронный журнал «Архитектура и Образование» издаётся Ташкентским Международным Университетом Финансового Управления и Технологий (ТИФТ). Журнал специализируется на публикации научно-практических исследований в области архитектуры, строительства, геодезии, картографии, кадастра и образования."
+msgstr "ÐÐ°ÑƒÑ‡Ð½Ð¾-ÑÐ»ÐµÐºÑ‚Ñ€Ð¾Ð½Ð½Ñ‹Ð¹ Ð¶ÑƒÑ€Ð½Ð°Ð» Â«ÐÑ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ð° Ð¸ ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸ÐµÂ» Ð¸Ð·Ð´Ð°Ñ‘Ñ‚ÑÑ Ð¢Ð°ÑˆÐºÐµÐ½Ñ‚ÑÐºÐ¸Ð¼ ÐœÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ñ‹Ð¼ Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ¸Ñ‚ÐµÑ‚Ð¾Ð¼ Ð¤Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð¸ Ð¢ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¹ (Ð¢Ð˜Ð¤Ð¢). Ð–ÑƒÑ€Ð½Ð°Ð» ÑÐ¿ÐµÑ†Ð¸Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ÑÑ Ð½Ð° Ð¿ÑƒÐ±Ð»Ð¸ÐºÐ°Ñ†Ð¸Ð¸ Ð½Ð°ÑƒÑ‡Ð½Ð¾-Ð¿Ñ€Ð°ÐºÑ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ð¹ Ð² Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Ð°Ñ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ñ‹, ÑÑ‚Ñ€Ð¾Ð¸Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð°, Ð³ÐµÐ¾Ð´ÐµÐ·Ð¸Ð¸, ÐºÐ°Ñ€Ñ‚Ð¾Ð³Ñ€Ð°Ñ„Ð¸Ð¸, ÐºÐ°Ð´Ð°ÑÑ‚Ñ€Ð° Ð¸ Ð¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ."
 
 # my_articles.html
 msgid "Jami"
-msgstr "Всего"
+msgstr "Ð’ÑÐµÐ³Ð¾"
 
 msgid "Taqrizda"
-msgstr "На рецензии"
+msgstr "ÐÐ° Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ð¸"
 
 msgid "ko'rish"
-msgstr "просмотров"
+msgstr "Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€Ð¾Ð²"
 
 msgid "Jarayonda..."
-msgstr "В процессе..."
+msgstr "Ð’ Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐµ..."
 
 msgid "Hali maqola yubormagansiz"
-msgstr "Вы ещё не отправили статью"
+msgstr "Ð’Ñ‹ ÐµÑ‰Ñ‘ Ð½Ðµ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ð»Ð¸ ÑÑ‚Ð°Ñ‚ÑŒÑŽ"
 
 msgid "Tadqiqotingizni tahririyatga yuboring"
-msgstr "Отправьте ваше исследование в редакцию"
+msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ Ð²Ð°ÑˆÐµ Ð¸ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð² Ñ€ÐµÐ´Ð°ÐºÑ†Ð¸ÑŽ"
 
 msgid "Birinchi maqolangizni yuboring"
-msgstr "Отправьте вашу первую статью"
+msgstr "ÐžÑ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ Ð²Ð°ÑˆÑƒ Ð¿ÐµÑ€Ð²ÑƒÑŽ ÑÑ‚Ð°Ñ‚ÑŒÑŽ"
 
 # submit_article.html
 msgid "Maqola ma'lumotlari"
-msgstr "Данные статьи"
+msgstr "Ð”Ð°Ð½Ð½Ñ‹Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸"
 
 msgid "Word faylni bu yerga tashlang yoki bosing"
-msgstr "Перетащите файл Word сюда или нажмите"
+msgstr "ÐŸÐµÑ€ÐµÑ‚Ð°Ñ‰Ð¸Ñ‚Ðµ Ñ„Ð°Ð¹Ð» Word ÑÑŽÐ´Ð° Ð¸Ð»Ð¸ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ"
 
 msgid "Faqat .docx format, maksimal hajm: 20MB"
-msgstr "Только формат .docx, максимальный размер: 20MB"
+msgstr "Ð¢Ð¾Ð»ÑŒÐºÐ¾ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ .docx, Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ñ€Ð°Ð·Ð¼ÐµÑ€: 20MB"
 
 msgid "Maqola faqat Word (.docx) formatida yuboriladi"
-msgstr "Статья принимается только в формате Word (.docx)"
+msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÑ Ð¿Ñ€Ð¸Ð½Ð¸Ð¼Ð°ÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ Word (.docx)"
 
 msgid "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
-msgstr "Аннотация должна содержать не менее 150 слов"
+msgstr "ÐÐ½Ð½Ð¾Ñ‚Ð°Ñ†Ð¸Ñ Ð´Ð¾Ð»Ð¶Ð½Ð° ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ Ð½Ðµ Ð¼ÐµÐ½ÐµÐµ 150 ÑÐ»Ð¾Ð²"
 
 msgid "Kalit so'zlar vergul bilan ajratilsin"
-msgstr "Ключевые слова разделяются запятыми"
+msgstr "ÐšÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ðµ ÑÐ»Ð¾Ð²Ð° Ñ€Ð°Ð·Ð´ÐµÐ»ÑÑŽÑ‚ÑÑ Ð·Ð°Ð¿ÑÑ‚Ñ‹Ð¼Ð¸"
 
 msgid "Fayl hajmi 20 MB dan oshmasin"
-msgstr "Размер файла не должен превышать 20 МБ"
+msgstr "Ð Ð°Ð·Ð¼ÐµÑ€ Ñ„Ð°Ð¹Ð»Ð° Ð½Ðµ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð¿Ñ€ÐµÐ²Ñ‹ÑˆÐ°Ñ‚ÑŒ 20 ÐœÐ‘"
 
 msgid "Plagiatdan xoli originallik shart"
-msgstr "Оригинальность без плагиата обязательна"
+msgstr "ÐžÑ€Ð¸Ð³Ð¸Ð½Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ Ð±ÐµÐ· Ð¿Ð»Ð°Ð³Ð¸Ð°Ñ‚Ð° Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð°"
 
 msgid "Maqola yuborildi va ro'yxatga olindi"
-msgstr "Статья отправлена и зарегистрирована"
+msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÑ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð° Ð¸ Ð·Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð°"
 
 msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
-msgstr "Редактор проводит предварительную проверку (1-3 дня)"
+msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€ Ð¿Ñ€Ð¾Ð²Ð¾Ð´Ð¸Ñ‚ Ð¿Ñ€ÐµÐ´Ð²Ð°Ñ€Ð¸Ñ‚ÐµÐ»ÑŒÐ½ÑƒÑŽ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÑƒ (1-3 Ð´Ð½Ñ)"
 
 msgid "Peer-review jarayoni (4-6 hafta)"
-msgstr "Процесс рецензирования (4-6 недель)"
+msgstr "ÐŸÑ€Ð¾Ñ†ÐµÑÑ Ñ€ÐµÑ†ÐµÐ½Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ (4-6 Ð½ÐµÐ´ÐµÐ»ÑŒ)"
 
 msgid "Qabul yoki rad qaroriga xabar beriladi"
-msgstr "Уведомление о решении принятия или отклонения"
+msgstr "Ð£Ð²ÐµÐ´Ð¾Ð¼Ð»ÐµÐ½Ð¸Ðµ Ð¾ Ñ€ÐµÑˆÐµÐ½Ð¸Ð¸ Ð¿Ñ€Ð¸Ð½ÑÑ‚Ð¸Ñ Ð¸Ð»Ð¸ Ð¾Ñ‚ÐºÐ»Ð¾Ð½ÐµÐ½Ð¸Ñ"
 
 # profile.html
 msgid "Nashr"
-msgstr "Опубл."
+msgstr "ÐžÐ¿ÑƒÐ±Ð»."
 
 msgid "Profil ma'lumotlarini tahrirlash"
-msgstr "Редактировать данные профиля"
+msgstr "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ"
 
 msgid "Ism"
-msgstr "Имя"
+msgstr "Ð˜Ð¼Ñ"
 
 msgid "Familiya"
-msgstr "Фамилия"
+msgstr "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ"
 
 msgid "Telefon"
-msgstr "Телефон"
+msgstr "Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½"
 
 msgid "Ish / O'qish joyi"
-msgstr "Место работы / учёбы"
+msgstr "ÐœÐµÑÑ‚Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ / ÑƒÑ‡Ñ‘Ð±Ñ‹"
 
 msgid "O'zim haqimda"
-msgstr "О себе"
+msgstr "Ðž ÑÐµÐ±Ðµ"
 
 # change_password.html
 msgid "O'zgartirish"
-msgstr "Изменить"
+msgstr "Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ"
 
 # dashboard_base.html
 msgid "Dashboard"
-msgstr "Панель управления"
+msgstr "ÐŸÐ°Ð½ÐµÐ»ÑŒ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ"
 
 # login.html
 msgid "TIFT Ilmiy Jurnali platformasi"
-msgstr "Платформа научного журнала ТИФТ"
+msgstr "ÐŸÐ»Ð°Ñ‚Ñ„Ð¾Ñ€Ð¼Ð° Ð½Ð°ÑƒÑ‡Ð½Ð¾Ð³Ð¾ Ð¶ÑƒÑ€Ð½Ð°Ð»Ð° Ð¢Ð˜Ð¤Ð¢"
 
 msgid "Hali ro'yxatdan o'tmaganmisiz?"
-msgstr "Ещё не зарегистрированы?"
+msgstr "Ð•Ñ‰Ñ‘ Ð½Ðµ Ð·Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ñ‹?"
 
 # signup.html
 msgid "Muallif sifatida platformaga qo'shiling"
-msgstr "Присоединяйтесь к платформе как автор"
+msgstr "ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½ÑÐ¹Ñ‚ÐµÑÑŒ Ðº Ð¿Ð»Ð°Ñ‚Ñ„Ð¾Ñ€Ð¼Ðµ ÐºÐ°Ðº Ð°Ð²Ñ‚Ð¾Ñ€"
 
 msgid "Xatoliklar mavjud, iltimos tekshiring:"
-msgstr "Обнаружены ошибки, пожалуйста, проверьте:"
+msgstr "ÐžÐ±Ð½Ð°Ñ€ÑƒÐ¶ÐµÐ½Ñ‹ Ð¾ÑˆÐ¸Ð±ÐºÐ¸, Ð¿Ð¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð°, Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑŒÑ‚Ðµ:"
 
 msgid "Allaqachon akkauntingiz bormi?"
-msgstr "Уже есть аккаунт?"
+msgstr "Ð£Ð¶Ðµ ÐµÑÑ‚ÑŒ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚?"
 
 # issue_detail.html
 msgid "Jurnal Arxivi"
-msgstr "Архив журнала"
+msgstr "ÐÑ€Ñ…Ð¸Ð² Ð¶ÑƒÑ€Ð½Ð°Ð»Ð°"
 
 msgid "Ushbu sondagi maqolalar"
-msgstr "Статьи в этом выпуске"
+msgstr "Ð¡Ñ‚Ð°Ñ‚ÑŒÐ¸ Ð² ÑÑ‚Ð¾Ð¼ Ð²Ñ‹Ð¿ÑƒÑÐºÐµ"
 
 msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
-msgstr "В этот выпуск архива ещё не загружены статьи."
+msgstr "Ð’ ÑÑ‚Ð¾Ñ‚ Ð²Ñ‹Ð¿ÑƒÑÐº Ð°Ñ€Ñ…Ð¸Ð²Ð° ÐµÑ‰Ñ‘ Ð½Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹ ÑÑ‚Ð°Ñ‚ÑŒÐ¸."
 
 msgid "%(count)s ta maqola"
-msgstr "%(count)s статей"
+msgstr "%(count)s ÑÑ‚Ð°Ñ‚ÐµÐ¹"
 
 msgid "%(y)s-yil"
-msgstr "%(y)s год"
+msgstr "%(y)s Ð³Ð¾Ð´"

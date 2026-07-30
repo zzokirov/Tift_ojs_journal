@@ -1,4 +1,4 @@
-# TIFT Journal - Uzbek Translation
+﻿# TIFT Journal - Uzbek Translation
 msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
@@ -10,7 +10,7 @@ msgstr ""
 msgid "O'zbek"
 msgstr "O'zbek"
 
-msgid "Русский"
+msgid "Ð ÑƒÑÑÐºÐ¸Ð¹"
 msgstr "Rus"
 
 msgid "English"
@@ -254,14 +254,14 @@ msgstr "Barchasini ko'rish"
 msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
 msgstr "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
 
-msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
-msgstr "Yuborildi → Taqriz → Qabul → Chop etildi"
+msgid "Yuborildi â†’ Taqriz â†’ Qabul â†’ Chop etildi"
+msgstr "Yuborildi â†’ Taqriz â†’ Qabul â†’ Chop etildi"
 
 msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
 msgstr "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
 
-msgid "Open Access — bepul kirish"
-msgstr "Open Access — bepul kirish"
+msgid "Open Access â€” bepul kirish"
+msgstr "Open Access â€” bepul kirish"
 
 msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
 msgstr "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
