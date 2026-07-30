@@ -509,9 +509,9 @@ def _build_pdf_from_html_fitz(content_html, article):
         page.insert_text((ML, y), article.author.institution, fontsize=9, color=GRAY, fontname="Helvetica")
         y += 13
 
-    if article.issue:
-        page.insert_text((ML, y), issue_str, fontsize=9, color=GRAY, fontname="Helvetica")
-        y += 13
+    # if article.issue:
+    #     page.insert_text((ML, y), issue_str, fontsize=9, color=GRAY, fontname="Helvetica")
+    #     y += 13
 
     if article.published_at:
         page.insert_text((ML, y), f"Nashr sanasi: {article.published_at.strftime('%d.%m.%Y')}", fontsize=9, color=GRAY, fontname="Helvetica")
