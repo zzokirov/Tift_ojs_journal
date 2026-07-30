@@ -1,6 +1,6 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static i18n %}
-{% block title %}{% trans "Bosh sahifa" %} | TIFT Ilmiy Jurnali{% endblock %}
+{% block title %} TIFT Ilmiy Jurnali{% endblock %}
 
 {% block extra_head %}
 <script src="{% static 'js/chart.min.js' %}"></script>
@@ -73,12 +73,12 @@ if (ctx) {
             <!-- LEFT: MATN -->
             <div class="pt-0">
                 <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-6">
-                    <span class="block" style="color:#1e293b;">Arxitektura va Ta'lim</span>
-                    <span class="block italic" style="background: linear-gradient(135deg, #16a34a, #22c55e, #4ade80); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-bottom: 6px; line-height: 1.3;">Ilmiy Jurnali</span>
+                    <span class="block" style="color:#1e293b;">{% trans "Arxitektura va Ta'lim" %}</span>
+                    <span class="block italic" style="background: linear-gradient(135deg, #16a34a, #22c55e, #4ade80); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-bottom: 6px; line-height: 1.3;">{% trans "Ilmiy Jurnali" %}</span>
                 </h1>
 
                 <p class="text-base leading-relaxed mb-8" style="color: #334155;">
-                    "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
+                    {% trans "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir." %}
                 </p>
 
                 <!-- STATS -->
@@ -99,169 +99,17 @@ if (ctx) {
                     </div>
                 </div>
 
-                <div class="flex fRequirement already satisfied: asgiref==3.11.1 in ./venv/lib/python3.10/site-packages (from -r requirements.txt (line 1)) (3.11.1)
-Collecting brotli==1.2.0 (from -r requirements.txt (line 2))
-  Using cached brotli-1.2.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.1 kB)
-Collecting certifi==2026.6.17 (from -r requirements.txt (line 3))
-  Using cached certifi-2026.6.17-py3-none-any.whl.metadata (2.5 kB)
-Collecting cffi==2.0.0 (from -r requirements.txt (line 4))
-  Using cached cffi-2.0.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
-Collecting charset-normalizer==3.4.7 (from -r requirements.txt (line 5))
-  Using cached charset_normalizer-3.4.7-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
-Collecting cssselect2==0.9.0 (from -r requirements.txt (line 6))
-  Using cached cssselect2-0.9.0-py3-none-any.whl.metadata (2.9 kB)
-Requirement already satisfied: dj-database-url==3.1.2 in ./venv/lib/python3.10/site-packages (from -r requirements.txt (line 7)) (3.1.2)
-Requirement already satisfied: Django==5.2.16 in ./venv/lib/python3.10/site-packages (from -r requirements.txt (line 8)) (5.2.16)
-Collecting django-jazzmin==3.0.4 (from -r requirements.txt (line 9))
-  Downloading django_jazzmin-3.0.4-py3-none-any.whl.metadata (6.7 kB)
-Collecting fonttools==4.63.0 (from -r requirements.txt (line 10))
-  Downloading fonttools-4.63.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (118 kB)
-Requirement already satisfied: gunicorn==26.0.0 in ./venv/lib/python3.10/site-packages (from -r requirements.txt (line 11)) (26.0.0)
-Collecting idna==3.18 (from -r requirements.txt (line 12))
-  Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
-Requirement already satisfied: packaging==26.2 in ./venv/lib/python3.10/site-packages (from -r requirements.txt (line 13)) (26.2)
-Collecting pillow==12.2.0 (from -r requirements.txt (line 14))
-  Downloading pillow-12.2.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
-Requirement already satisfied: psycopg2-binary==2.9.12 in ./venv/lib/python3.10/site-packages (from -r requirements.txt (line 15)) (2.9.12)
-Collecting pycparser==3.0 (from -r requirements.txt (line 16))
-  Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
-Collecting pydyf==0.12.1 (from -r requirements.txt (line 17))
-  Downloading pydyf-0.12.1-py3-none-any.whl.metadata (2.5 kB)
-Collecting pymupdf==1.26.1 (from -r requirements.txt (line 18))
-  Downloading pymupdf-1.26.1-cp39-abi3-manylinux_2_28_x86_64.whl.metadata (3.4 kB)
-Collecting pyphen==0.17.2 (from -r requirements.txt (line 19))
-  Downloading pyphen-0.17.2-py3-none-any.whl.metadata (3.2 kB)
-Collecting python-docx==1.1.2 (from -r requirements.txt (line 20))
-  Downloading python_docx-1.1.2-py3-none-any.whl.metadata (2.0 kB)
-Collecting python-magic==0.4.27 (from -r requirements.txt (line 21))
-  Downloading python_magic-0.4.27-py2.py3-none-any.whl.metadata (5.8 kB)
-Collecting requests==2.34.2 (from -r requirements.txt (line 22))
-  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
-Collecting six==1.17.0 (from -r requirements.txt (line 23))
-  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
-Requirement already satisfied: sqlparse==0.5.5 in ./venv/lib/python3.10/site-packages (from -r requirements.txt (line 24)) (0.5.5)
-Collecting tinycss2==1.5.1 (from -r requirements.txt (line 25))
-  Downloading tinycss2-1.5.1-py3-none-any.whl.metadata (3.0 kB)
-Collecting tinyhtml5==2.1.0 (from -r requirements.txt (line 26))
-  Downloading tinyhtml5-2.1.0-py3-none-any.whl.metadata (2.9 kB)
-Collecting tzdata==2026.2 (from -r requirements.txt (line 27))
-  Downloading tzdata-2026.2-py2.py3-none-any.whl.metadata (1.4 kB)
-Collecting urllib3==2.7.0 (from -r requirements.txt (line 28))
-  Downloading urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
-Collecting weasyprint==69.0 (from -r requirements.txt (line 29))
-  Downloading weasyprint-69.0-py3-none-any.whl.metadata (3.8 kB)
-Collecting webencodings==0.5.1 (from -r requirements.txt (line 30))
-  Downloading webencodings-0.5.1-py2.py3-none-any.whl.metadata (2.1 kB)
-Requirement already satisfied: whitenoise==6.12.0 in ./venv/lib/python3.10/site-packages (from -r requirements.txt (line 31)) (6.12.0)
-Collecting xhtml2pdf==0.2.16 (from -r requirements.txt (line 32))
-  Downloading xhtml2pdf-0.2.16-py3-none-any.whl.metadata (22 kB)
-Collecting python-dotenv==1.1.1 (from -r requirements.txt (line 33))
-  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
-Requirement already satisfied: typing_extensions>=4 in ./venv/lib/python3.10/site-packages (from asgiref==3.11.1->-r requirements.txt (line 1)) (4.16.0)
-Collecting lxml>=3.1.0 (from python-docx==1.1.2->-r requirements.txt (line 20))
-  Downloading lxml-6.1.1-cp310-cp310-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.5 kB)
-Collecting arabic-reshaper>=3.0.0 (from xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading arabic_reshaper-3.0.1-py3-none-any.whl.metadata (13 kB)
-Collecting html5lib>=1.1 (from xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading html5lib-1.1-py2.py3-none-any.whl.metadata (16 kB)
-Collecting pyHanko>=0.12.1 (from xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading pyhanko-0.35.2-py3-none-any.whl.metadata (3.3 kB)
-Collecting pyhanko-certvalidator>=0.19.5 (from xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading pyhanko_certvalidator-0.31.1-py3-none-any.whl.metadata (4.9 kB)
-Collecting pypdf>=3.1.0 (from xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading pypdf-6.14.2-py3-none-any.whl.metadata (7.2 kB)
-Collecting python-bidi>=0.4.2 (from xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading python_bidi-0.6.11-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.3 kB)
-Collecting reportlab<5,>=4.0.4 (from xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading reportlab-4.5.1-py3-none-any.whl.metadata (1.7 kB)
-Collecting svglib>=1.2.1 (from xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading svglib-2.0.2-py3-none-any.whl.metadata (13 kB)
-Collecting zopfli>=0.1.4 (from fonttools[woff]>=4.59.2->weasyprint==69.0->-r requirements.txt (line 29))
-  Downloading zopfli-0.4.3-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.5 kB)
-Collecting asn1crypto>=1.5.1 (from pyHanko>=0.12.1->xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading asn1crypto-1.5.1-py2.py3-none-any.whl.metadata (13 kB)
-Collecting tzlocal>=4.3 (from pyHanko>=0.12.1->xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading tzlocal-5.4.4-py3-none-any.whl.metadata (7.7 kB)
-Collecting pyyaml>=6.0 (from pyHanko>=0.12.1->xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
-Collecting cryptography>=48.0.0 (from pyHanko>=0.12.1->xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading cryptography-49.0.0-cp39-abi3-manylinux_2_34_x86_64.whl.metadata (4.3 kB)
-Collecting oscrypto>=1.1.0 (from pyhanko-certvalidator>=0.19.5->xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading oscrypto-1.3.0-py2.py3-none-any.whl.metadata (15 kB)
-Collecting uritools>=3.0.1 (from pyhanko-certvalidator>=0.19.5->xhtml2pdf==0.2.16->-r requirements.txt (line 32))
-  Downloading uritools-6.1.2-py3-none-any.whl.metadata (5.1 kB)
-Downloading brotli-1.2.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.4 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 6.5 MB/s  0:00:00
-Downloading certifi-2026.6.17-py3-none-any.whl (133 kB)
-Downloading cffi-2.0.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (216 kB)
-Downloading charset_normalizer-3.4.7-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (216 kB)
-Downloading cssselect2-0.9.0-py3-none-any.whl (15 kB)
-Downloading django_jazzmin-3.0.4-py3-none-any.whl (2.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.5/2.5 MB 15.1 MB/s  0:00:00
-Downloading fonttools-4.63.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 14.9 MB/s  0:00:00
-Downloading idna-3.18-py3-none-any.whl (65 kB)
-Downloading pillow-12.2.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 15.1 MB/s  0:00:00
-Downloading pycparser-3.0-py3-none-any.whl (48 kB)
-Downloading pydyf-0.12.1-py3-none-any.whl (8.0 kB)
-Downloading pymupdf-1.26.1-cp39-abi3-manylinux_2_28_x86_64.whl (24.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.1/24.1 MB 14.7 MB/s  0:00:01
-Downloading pyphen-0.17.2-py3-none-any.whl (2.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 14.5 MB/s  0:00:00
-Downloading python_docx-1.1.2-py3-none-any.whl (244 kB)
-Downloading python_magic-0.4.27-py2.py3-none-any.whl (13 kB)
-Downloading requests-2.34.2-py3-none-any.whl (73 kB)
-Downloading urllib3-2.7.0-py3-none-any.whl (131 kB)
-Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
-Downloading tinycss2-1.5.1-py3-none-any.whl (28 kB)
-Downloading tinyhtml5-2.1.0-py3-none-any.whl (39 kB)
-Downloading tzdata-2026.2-py2.py3-none-any.whl (349 kB)
-Downloading weasyprint-69.0-py3-none-any.whl (322 kB)
-Downloading webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
-Downloading xhtml2pdf-0.2.16-py3-none-any.whl (125 kB)
-Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
-Downloading reportlab-4.5.1-py3-none-any.whl (2.0 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 14.2 MB/s  0:00:00
-Downloading arabic_reshaper-3.0.1-py3-none-any.whl (20 kB)
-Downloading html5lib-1.1-py2.py3-none-any.whl (112 kB)
-Downloading lxml-6.1.1-cp310-cp310-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (5.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 14.7 MB/s  0:00:00
-Downloading pyhanko-0.35.2-py3-none-any.whl (467 kB)
-Downloading pyhanko_certvalidator-0.31.1-py3-none-any.whl (111 kB)
-Downloading asn1crypto-1.5.1-py2.py3-none-any.whl (105 kB)
-Downloading cryptography-49.0.0-cp39-abi3-manylinux_2_34_x86_64.whl (4.7 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 14.9 MB/s  0:00:00
-Downloading oscrypto-1.3.0-py2.py3-none-any.whl (194 kB)
-Downloading pypdf-6.14.2-py3-none-any.whl (349 kB)
-Downloading python_bidi-0.6.11-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (299 kB)
-Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (770 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 770.3/770.3 kB 13.9 MB/s  0:00:00
-Downloading svglib-2.0.2-py3-none-any.whl (45 kB)
-Downloading tzlocal-5.4.4-py3-none-any.whl (18 kB)
-Downloading uritools-6.1.2-py3-none-any.whl (11 kB)
-Downloading zopfli-0.4.3-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (829 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 829.4/829.4 kB 13.9 MB/s  0:00:00
-Installing collected packages: webencodings, brotli, asn1crypto, zopfli, urllib3, uritools, tzlocal, tzdata, tinyhtml5, tinycss2, six, pyyaml, python-magic, python-dotenv, python-bidi, pyphen, pypdf, pymupdf, pydyf, pycparser, pillow, oscrypto, lxml, idna, fonttools, charset-normalizer, certifi, arabic-reshaper, requests, reportlab, python-docx, html5lib, cssselect2, cffi, weasyprint, svglib, django-jazzmin, cryptography, pyhanko-certvalidator, pyHanko, xhtml2pdf
-  Attempting uninstall: pillow
-    Found existing installation: pillow 12.3.0
-    Uninstalling pillow-12.3.0:
-      Successfully uninstalled pillow-12.3.0
-  Attempting uninstall: django-jazzmin
-    Found existing installation: django-jazzmin 3.0.5
-    Uninstalling django-jazzmin-3.0.5:
-      Successfully uninstalled django-jazzmin-3.0.5
-Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certifi-2026.6.17 cffi-2.0.0 charset-normalizer-3.4.7 cryptography-49.0.0 cssselect2-0.9.0 django-jazzmin-3.0.4 fonttools-4.63.0 html5lib-1.1 idna-3.18 lxml-6.1.1 oscrypto-1.3.0 pillow-12.2.0 pyHanko-0.35.2 pycparser-3.0 pydyf-0.12.1 pyhanko-certvalidator-0.31.1 pymupdf-1.26.1 pypdf-6.14.2 pyphen-0.17.2 python-bidi-0.6.11 python-docx-1.1.2 python-dotenv-1.1.1 python-magic-0.4.27 pyyaml-6.0.3 reportlab-4.5.1 requests-2.34.2 six-1.17.0 svglib-2.0.2 tinycss2-1.5.1 tinyhtml5-2.1.0 tzdata-2026.2 tzlocal-5.4.4 uritools-6.1.2 urllib3-2.7.0 weasyprint-69.0 webencodings-0.5.1 xhtml2pdf-0.2.16 zopfli-0.4.3lex-wrap gap-3">
+                <div class="flex flex-wrap gap-3">
                     <a href="#articles"
                        class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-all hover:scale-105 shadow-lg">
                         <i class="fas fa-arrow-down"></i>
-                        Maqolalarni ko'rish
+                        {% trans "Maqolalarni ko'rish" %}
                     </a>
                     <a href="{% if user.is_authenticated %}{% url 'submit_article' %}{% else %}{% url 'login' %}{% endif %}"
                        class="inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl transition-all border"
                        style="background:#1e3a5f; color:white; border-color:#2d5a8e;">
                         <i class="fas fa-paper-plane"></i>
-                        Maqola yuborish
+                        {% trans "Maqola yuborish" %}
                     </a>
                 </div>
 
@@ -269,24 +117,24 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                 <div class="mt-8 rounded-2xl p-5" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
                     <div class="flex items-center gap-2 mb-4">
                         <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                        <span style="color:#22c55e; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;">Jonli statistika</span>
+                        <span style="color:#22c55e; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;">{% trans "Jonli statistika" %}</span>
                     </div>
 
                     <!-- Raqamlar -->
                     <div class="flex gap-6 mb-5">
                         <div>
                             <div class="font-black text-3xl leading-none" style="color:#22c55e;">{{ total_visitors }}</div>
-                            <div class="text-gray-400 text-xs mt-1">Jami tashriflar</div>
+                            <div class="text-gray-400 text-xs mt-1">{% trans "Jami tashriflar" %}</div>
                         </div>
                         <div class="w-px" style="background:rgba(255,255,255,0.1);"></div>
                         <div>
                             <div class="font-black text-3xl leading-none" style="color:#22c55e;">{{ today_visitors }}</div>
-                            <div class="text-gray-400 text-xs mt-1">Bugungi tashriflar</div>
+                            <div class="text-gray-400 text-xs mt-1">{% trans "Bugungi tashriflar" %}</div>
                         </div>
                         <div class="w-px" style="background:rgba(255,255,255,0.1);"></div>
                         <div>
                             <div class="font-black text-3xl leading-none" style="color:#22c55e;">{{ recent_articles|length }}</div>
-                            <div class="text-gray-400 text-xs mt-1">Nashr maqolalar</div>
+                            <div class="text-gray-400 text-xs mt-1">{% trans "Nashr maqolalar" %}</div>
                         </div>
                     </div>
 
@@ -320,9 +168,9 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                             <!-- Sarlavha -->
                             <div class="text-center">
                                 <p class="text-white font-black text-sm leading-tight mb-0.5">
-                                    "Arxitektura va Ta'lim" Ilmiy-Elektron Jurnali
+                                    {% trans "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali" %}
                                 </p>
-                                <p class="text-xs mb-3" style="color:#22c55e;">Qabul qilinadigan maqolalar yo'nalishlari</p>
+                                <p class="text-xs mb-3" style="color:#22c55e;">{% trans "Qabul qilinadigan maqolalar yo'nalishlari" %}</p>
                                 <div class="w-16 h-0.5 mx-auto rounded" style="background:rgba(34,197,94,0.4);"></div>
                             </div>
 
@@ -390,7 +238,7 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                                class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105"
                                style="background:#22c55e; color:#0a1628;">
                                 <i class="fas fa-paper-plane text-xs"></i>
-                                Maqola yuborish
+                                {% trans "Maqola yuborish" %}
                             </a>
 
                         </div>
@@ -416,26 +264,26 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
             <div class="relative flex-1">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
                 <input type="text" name="q" value="{{ query|default:'' }}"
-                       placeholder="Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+                       placeholder="{% trans "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..." %}"
                        class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white transition-colors">
             </div>
             <button type="submit"
                     class="bg-navy-800 hover:bg-navy-700 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg">
                 <i class="fas fa-search"></i>
-                Qidirish
+                {% trans "Qidirish" %}
             </button>
             {% if query %}
                 <a href="{% url 'index' %}"
                    class="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-600 px-5 py-3 rounded-xl text-sm font-medium transition-colors">
                     <i class="fas fa-times"></i>
-                    Tozalash
+                    {% trans "Tozalash" %}
                 </a>
             {% endif %}
         </form>
         {% if query %}
             <div class="mt-3 text-xs text-gray-500 flex items-center gap-2">
                 <i class="fas fa-info-circle text-blue-400"></i>
-                "<span class="font-semibold text-gray-700">{{ query }}</span>" bo'yicha qidiruv natijalari
+                "<span class="font-semibold text-gray-700">{{ query }}</span>" {% trans "bo'yicha qidiruv natijalari" %}
             </div>
         {% endif %}
     </div>
@@ -452,13 +300,13 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
                         <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
-                        {% if query %}Qidiruv natijalari{% else %}So'nggi maqolalar{% endif %}
+                        {% if query %}{% trans "Qidiruv natijalari" %}{% else %}{% trans "So'nggi maqolalar" %}{% endif %}
                     </h2>
                     <div class="section-divider mt-2 ml-4"></div>
                 </div>
                 {% if not query %}
                     <span class="bg-navy-50 text-navy-700 border border-navy-100 px-3 py-1 rounded-full text-xs font-semibold">
-                        {{ recent_articles|length }} ta maqola
+                        {{ recent_articles|length }} {% trans "ta maqola" %}
                     </span>
                 {% endif %}
             </div>
@@ -470,11 +318,11 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                             <div class="flex-1">
                                 <div class="flex flex-wrap gap-2 mb-2">
                                     <span class="badge bg-navy-50 text-navy-700 border border-navy-100">
-                                        <i class="fas fa-check-circle mr-1 text-green-500"></i>Chop etildi
+                                        <i class="fas fa-check-circle mr-1 text-green-500"></i>{% trans "Chop etildi" %}
                                     </span>
                                     {% if article.issue %}
                                         <span class="badge bg-green-600/10 text-green-700 border border-green-500/20">
-                                            Jild {{ article.issue.volume }}, Son {{ article.issue.number }}
+                                            {% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
                                         </span>
                                     {% endif %}
                                 </div>
@@ -497,12 +345,12 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                             </span>
                             <span class="flex items-center gap-1">
                                 <i class="far fa-eye text-blue-400/70"></i>
-                                {{ article.views_count }} ta ko'rish
+                                {{ article.views_count }} {% trans "ta ko'rish" %}
                             </span>
                         </div>
 
                         <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3" style="word-break: break-word; overflow-wrap: break-word; overflow: hidden;">
-                            <span class="font-semibold text-navy-700">Annotatsiya:</span>
+                            <span class="font-semibold text-navy-700">{% trans "Annotatsiya" %}:</span>
                             {{ article.abstract|truncatewords:45 }}
                         </p>
 
@@ -517,7 +365,7 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                             <div class="flex items-center gap-2">
                                 <a href="{% url 'article_detail' article.pk %}"
                                    class="text-navy-700 hover:text-navy-900 text-xs font-semibold flex items-center gap-1 transition-colors">
-                                    Batafsil <i class="fas fa-arrow-right text-[10px]"></i>
+                                    {% trans "Batafsil" %} <i class="fas fa-arrow-right text-[10px]"></i>
                                 </a>
                                 <a href="{{ article.pdf_file.url }}"
                                    class="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-sm" download>
@@ -531,14 +379,14 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                     <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-14 text-center">
                         <i class="fas fa-file-alt text-4xl text-gray-300 mb-4 block"></i>
                         <h3 class="text-gray-500 font-semibold mb-1">
-                            {% if query %}Natijalar topilmadi{% else %}Maqolalar mavjud emas{% endif %}
+                            {% if query %}{% trans "Natijalar topilmadi" %}{% else %}{% trans "Maqolalar mavjud emas" %}{% endif %}
                         </h3>
                         <p class="text-gray-400 text-sm">
                             {% if query %}
-                                "<strong>{{ query }}</strong>" bo'yicha hech qanday maqola topilmadi.
-                                <a href="{% url 'index' %}" class="text-navy-600 hover:underline">Barchasini ko'rish</a>
+                                "<strong>{{ query }}</strong>" {% trans "bo'yicha hech qanday maqola topilmadi." %}
+                                <a href="{% url 'index' %}" class="text-navy-600 hover:underline">{% trans "Barchasini ko'rish" %}</a>
                             {% else %}
-                                Hozircha chop etilgan ilmiy maqolalar mavjud emas.
+                                {% trans "Hozircha chop etilgan ilmiy maqolalar mavjud emas." %}
                             {% endif %}
                         </p>
                     </div>
@@ -554,7 +402,7 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                 <div class="bg-navy-900 px-5 py-4">
                     <h3 class="text-white font-bold flex items-center gap-2">
                         <i class="fas fa-archive text-green-400 text-sm"></i>
-                        Jurnal arxivlari
+                        {% trans "Jurnal arxivlari" %}
                     </h3>
                 </div>
                 <div class="divide-y divide-gray-50">
@@ -563,10 +411,10 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                            class="flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 transition-colors group">
                             <div>
                                 <div class="text-navy-800 font-semibold text-sm group-hover:text-navy-600 transition-colors">
-                                    Jild {{ issue.volume }}, Son {{ issue.number }}
+                                    {% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
                                 </div>
                                 <div class="text-xs text-gray-400 mt-0.5">
-                                    {{ issue.articles.count }} ta maqola
+                                    {{ issue.articles.count }} {% trans "ta maqola" %}
                                 </div>
                             </div>
                             <div class="flex items-center gap-2">
@@ -579,7 +427,7 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                     {% empty %}
                         <div class="px-5 py-8 text-center text-gray-400 text-sm">
                             <i class="fas fa-inbox text-2xl mb-2 block"></i>
-                            Hozircha arxivlar mavjud emas.
+                            {% trans "Hozircha arxivlar mavjud emas." %}
                         </div>
                     {% endfor %}
                 </div>
@@ -591,24 +439,24 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
                     <div class="w-8 h-8 bg-green-600/20 rounded-lg flex items-center justify-center">
                         <i class="fas fa-shield-alt text-green-400 text-sm"></i>
                     </div>
-                    <h4 class="font-bold">Taqrizlash jarayoni</h4>
+                    <h4 class="font-bold">{% trans "Taqrizlash jarayoni" %}</h4>
                 </div>
                 <p class="text-blue-100 text-xs leading-relaxed mb-4">
-                    Barcha yuborilgan maqolalar mutaxassislar tomonidan <strong class="text-green-300">Double-blind peer review</strong>
-                    talablari asosida ko'rib chiqiladi va baholanadi.
+                    {% trans "Barcha yuborilgan maqolalar mutaxassislar tomonidan" %} <strong class="text-green-300">Double-blind peer review</strong>
+                    {% trans "talablari asosida ko'rib chiqiladi va baholanadi." %}
                 </p>
                 <div class="space-y-2 text-xs">
                     <div class="flex items-center gap-2 text-blue-200">
                         <i class="fas fa-check text-green-400 text-[10px]"></i>
-                        Yuborildi → Taqriz → Qabul → Chop etildi
+                        {% trans "Yuborildi → Taqriz → Qabul → Chop etildi" %}
                     </div>
                     <div class="flex items-center gap-2 text-blue-200">
                         <i class="fas fa-check text-green-400 text-[10px]"></i>
-                        O'rtacha ko'rib chiqish muddati: 4-6 hafta
+                        {% trans "O'rtacha ko'rib chiqish muddati: 4-6 hafta" %}
                     </div>
                     <div class="flex items-center gap-2 text-blue-200">
                         <i class="fas fa-check text-green-400 text-[10px]"></i>
-                        Open Access — bepul kirish
+                        {% trans "Open Access — bepul kirish" %}
                     </div>
                 </div>
             </div>
@@ -616,13 +464,13 @@ Successfully installed arabic-reshaper-3.0.1 asn1crypto-1.5.1 brotli-1.2.0 certi
             <!-- SUBMIT CTA -->
             <div class="bg-gradient-to-br from-green-600 to-green-700 rounded-2xl p-5 text-navy-900 shadow-lg">
                 <i class="fas fa-paper-plane text-2xl mb-3 block opacity-80"></i>
-                <h4 class="font-black text-lg leading-tight mb-2">Maqolangizni yuboring</h4>
+                <h4 class="font-black text-lg leading-tight mb-2">{% trans "Maqolangizni yuboring" %}</h4>
                 <p class="text-navy-800 text-xs leading-relaxed mb-4">
-                    Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting.
+                    {% trans "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting." %}
                 </p>
                 <a href="{% if user.is_authenticated %}{% url 'submit_article' %}{% else %}{% url 'signup' %}{% endif %}"
                    class="block text-center bg-navy-900 hover:bg-navy-800 text-white text-sm font-bold py-2.5 rounded-xl transition-all hover:scale-105">
-                    {% if user.is_authenticated %}Maqola yuborish{% else %}Ro'yxatdan o'tish{% endif %}
+                    {% if user.is_authenticated %}{% trans "Maqola yuborish" %}{% else %}{% trans "Ro'yxatdan o'tish" %}{% endif %}
                     <i class="fas fa-arrow-right ml-1 text-xs"></i>
                 </a>
             </div>

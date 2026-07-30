@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static i18n %}
 
 {% block title %}Kirish | TIFT Jurnali{% endblock %}
@@ -18,8 +18,8 @@
                     <div class="w-16 h-16 bg-white/10 border-2 border-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-sign-in-alt text-green-400 text-2xl"></i>
                     </div>
-                    <h1 class="text-2xl font-black text-white mb-1">Tizimga kirish</h1>
-                    <p class="text-gray-400 text-sm">TIFT Ilmiy Jurnali platformasi</p>
+                    <h1 class="text-2xl font-black text-white mb-1">{% trans "Tizimga kirish" %}</h1>
+                    <p class="text-gray-400 text-sm">{% trans "TIFT Ilmiy Jurnali platformasi" %}</p>
                 </div>
             </div>
 
@@ -68,21 +68,21 @@
                     <button type="submit"
                             class="w-full flex items-center justify-center gap-2 bg-navy-900 hover:bg-navy-800 text-white font-bold py-3.5 rounded-xl transition-all hover:scale-[1.01] shadow-lg text-sm mt-2">
                         <i class="fas fa-sign-in-alt"></i>
-                        Kirish
+                        {% trans "Kirish" %}
                     </button>
                 </form>
 
                 <div class="mt-6 pt-6 border-t border-gray-100 text-center text-sm text-gray-500">
-                    Hali ro'yxatdan o'tmaganmisiz?
+                    {% trans "Hali ro'yxatdan o'tmaganmisiz?" %}
                     <a href="{% url 'signup' %}" class="text-navy-700 font-bold hover:text-green-600 transition-colors ml-1">
-                        Ro'yxatdan o'tish
+                        {% trans "Ro'yxatdan o'tish" %}
                     </a>
                 </div>
 
                 <div class="mt-3 text-center">
                     <a href="{% url 'index' %}" class="text-xs text-gray-400 hover:text-gray-600 transition-colors flex items-center justify-center gap-1">
                         <i class="fas fa-arrow-left text-[10px]"></i>
-                        Bosh sahifaga qaytish
+                        {% trans "Bosh sahifaga qaytish" %}
                     </a>
                 </div>
             </div>

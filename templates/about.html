@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static i18n %}
 {% block title %}{% trans "Jurnal haqida" %} | TIFT Jurnali{% endblock %}
 
@@ -29,13 +29,13 @@ if (wrapper && img1 && img2) {
     <div class="site-container px-4 relative">
         <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
             <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
-                <i class="fas fa-home text-[10px]"></i> Bosh sahifa
+                <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
             </a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
-            <span class="text-gray-300">Jurnal haqida</span>
+            <span class="text-gray-300">{% trans "Jurnal haqida" %}</span>
         </nav>
-        <h1 class="text-3xl font-black text-white">Jurnal haqida</h1>
-        <p class="text-gray-400 text-sm mt-1">TIFT "Arxitektura va Ta'lim" ilmiy-elektron jurnali</p>
+        <h1 class="text-3xl font-black text-white">{% trans "Jurnal haqida" %}</h1>
+        <p class="text-gray-400 text-sm mt-1">{% trans "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali" %}</p>
     </div>
 </div>
 
@@ -70,13 +70,10 @@ if (wrapper && img1 && img2) {
             <div>
                 <h2 class="text-2xl font-black text-navy-900 mb-4 flex items-center gap-2">
                     <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
-                    Jurnal haqida
+                    {% trans "Jurnal haqida" %}
                 </h2>
                 <p class="text-gray-600 leading-relaxed text-sm">
-                    <strong>"Arxitektura va Ta'lim"</strong> ilmiy-elektron jurnali Toshkent Xalqaro
-                    Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi.
-                    Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi
-                    ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan.
+                    {% trans "<strong>\"Arxitektura va Ta'lim\"</strong> ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan." %}
                 </p>
             </div>
 
@@ -84,11 +81,11 @@ if (wrapper && img1 && img2) {
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
                     <div class="text-green-600 font-black text-2xl">2021</div>
-                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Tashkil etilgan</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">{% trans "Tashkil etilgan" %}</div>
                 </div>
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
                     <div class="text-green-600 font-black text-2xl">4x</div>
-                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Yiliga chop etiladi</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">{% trans "Yiliga chop etiladi" %}</div>
                 </div>
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
                     <div class="text-green-600 font-black text-sm font-mono">2181-XXXX</div>
@@ -96,7 +93,7 @@ if (wrapper && img1 && img2) {
                 </div>
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
                     <div class="text-green-600 font-black text-sm">Open Access</div>
-                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">Bepul kirish</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">{% trans "Bepul kirish" %}</div>
                 </div>
             </div>
 
@@ -107,14 +104,13 @@ if (wrapper && img1 && img2) {
                     Double-blind Peer Review
                 </h4>
                 <p class="text-gray-400 text-xs leading-relaxed">
-                    Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi.
-                    Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi.
+                    {% trans "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi." %}
                 </p>
             </div>
 
             <!-- Focus areas -->
             <div>
-                <h4 class="font-bold text-navy-900 mb-3 text-sm uppercase tracking-wider">Yo'nalishlar</h4>
+                <h4 class="font-bold text-navy-900 mb-3 text-sm uppercase tracking-wider">{% trans "Yo'nalishlar" %}</h4>
                 <div class="flex flex-wrap gap-2">
                     {% for area in areas %}
                         <span class="bg-green-600/10 text-green-700 border border-green-500/20 px-3 py-1 rounded-full text-xs font-medium">
@@ -131,7 +127,7 @@ if (wrapper && img1 && img2) {
         <div class="mb-6">
             <h2 class="text-2xl font-black text-navy-900 flex items-center gap-2 mb-2">
                 <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
-                Tahririyat a'zolari
+                {% trans "Tahririyat a'zolari" %}
             </h2>
             <div class="section-divider ml-3 mb-8"></div>
         </div>
@@ -188,7 +184,7 @@ if (wrapper && img1 && img2) {
     {% else %}
         <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center">
             <i class="fas fa-users text-4xl text-gray-300 mb-3 block"></i>
-            <p class="text-gray-400 text-sm">Tahririyat a'zolari hali qo'shilmagan.</p>
+            <p class="text-gray-400 text-sm">{% trans "Tahririyat a'zolari hali qo'shilmagan." %}</p>
         </div>
     {% endif %}
 </div>

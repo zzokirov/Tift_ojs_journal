@@ -7,17 +7,17 @@
     <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
     <div class="site-container px-4 relative">
         <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
-            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors"><i class="fas fa-home text-[10px]"></i> Bosh sahifa</a>
+            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors"><i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}</a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
-            <span class="text-gray-300">Yangiliklar</span>
+            <span class="text-gray-300">{% trans "Yangiliklar" %}</span>
         </nav>
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 bg-green-600/20 border border-green-500/30 rounded-xl flex items-center justify-center">
                 <i class="fas fa-newspaper text-green-400"></i>
             </div>
             <div>
-                <h1 class="text-3xl font-black text-white">Yangiliklar</h1>
-                <p class="text-gray-400 text-sm mt-0.5">Jurnal va universitetdagi so'nggi yangiliklar</p>
+                <h1 class="text-3xl font-black text-white">{% trans "Yangiliklar" %}</h1>
+                <p class="text-gray-400 text-sm mt-0.5">{% trans "Jurnal va universitetdagi so'nggi yangiliklar" %}</p>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@
     {% else %}
         <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
             <i class="fas fa-newspaper text-5xl text-gray-300 mb-4 block"></i>
-            <p class="text-gray-400">Hozircha yangiliklar mavjud emas.</p>
+            <p class="text-gray-400">{% trans "Hozircha yangiliklar mavjud emas." %}</p>
         </div>
     {% endif %}
 </div>

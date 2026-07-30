@@ -177,3 +177,249 @@ msgstr "Сохранить"
 
 msgid "Hisob"
 msgstr "Аккаунт"
+
+# ============ НОВЫЕ ПЕРЕВОДЫ ============
+
+# base.html
+msgid "Arxitektura va Ta'lim"
+msgstr "Архитектура и Образование"
+
+msgid "Tezkor havolalar"
+msgstr "Быстрые ссылки"
+
+msgid "Jurnal ma'lumotlari"
+msgstr "Информация о журнале"
+
+msgid "Chastotasi"
+msgstr "Периодичность"
+
+msgid "Yiliga 4 marta"
+msgstr "4 раза в год"
+
+msgid "Manzil"
+msgstr "Адрес"
+
+msgid "Toshkent, O'zbekiston"
+msgstr "Ташкент, Узбекистан"
+
+msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
+msgstr "Ташкентский Международный Университет Финансового Управления и Технологий"
+
+msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
+msgstr "Научно-электронный журнал Ташкентского Международного Университета Финансового Управления и Технологий."
+
+msgid "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
+msgstr "Современные исследования в области «Архитектура и Образование»."
+
+# index.html
+msgid "Ilmiy Jurnali"
+msgstr "Научный Журнал"
+
+msgid "Qidirish"
+msgstr "Поиск"
+
+msgid "Tozalash"
+msgstr "Очистить"
+
+msgid "ta maqola"
+msgstr "статей"
+
+msgid "ta ko'rish"
+msgstr "просмотров"
+
+msgid "Hozircha arxivlar mavjud emas."
+msgstr "Архивы пока отсутствуют."
+
+msgid "Maqolalar mavjud emas"
+msgstr "Статьи отсутствуют"
+
+msgid "Natijalar topilmadi"
+msgstr "Результаты не найдены"
+
+msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
+msgstr "Опубликованных научных статей пока нет."
+
+msgid "Qabul qilinadigan maqolalar yo'nalishlari"
+msgstr "Принимаемые направления статей"
+
+msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+msgstr "Поиск по названию статьи, аннотации или ключевым словам..."
+
+msgid "bo'yicha qidiruv natijalari"
+msgstr "результаты поиска по запросу"
+
+msgid "Barchasini ko'rish"
+msgstr "Показать все"
+
+msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
+msgstr "Все представленные статьи рецензируются экспертами в соответствии с требованиями двойного слепого рецензирования (Double-blind peer review)."
+
+msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
+msgstr "Отправлено → Рецензия → Принято → Опубликовано"
+
+msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
+msgstr "Средний срок рассмотрения: 4-6 недель"
+
+msgid "Open Access — bepul kirish"
+msgstr "Open Access — свободный доступ"
+
+msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
+msgstr "Поделитесь своими исследованиями с миром. Зарегистрируйтесь для отправки статьи."
+
+#: index.html - blocktrans
+msgid "Jild %(vol)s, Son %(num)s"
+msgstr "Том %(vol)s, Выпуск %(num)s"
+
+# index.html hero description
+msgid "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
+msgstr "Данное издание направлено на повышение эффективности фундаментальных и прикладных исследований в области архитектуры, градостроительства, строительства зданий и сооружений, геодезии, картографии и государственного кадастра. Также является источником высококачественных аналитических данных и инновационных решений по совершенствованию современной образовательной методологии, глубокой интеграции цифровых технологий, систем BIM (Building Information Modeling) и алгоритмов искусственного интеллекта в отрасль."
+
+msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
+msgstr "Научно-электронный журнал «Архитектура и Образование»"
+
+# about.html
+msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
+msgstr "Научно-электронный журнал ТИФТ «Архитектура и Образование»"
+
+msgid "Yiliga chop etiladi"
+msgstr "Публикуется в год"
+
+msgid "Bepul kirish"
+msgstr "Бесплатный доступ"
+
+msgid "Yo'nalishlar"
+msgstr "Направления"
+
+msgid "Tahririyat a'zolari"
+msgstr "Члены редакции"
+
+msgid "Tahririyat a'zolari hali qo'shilmagan."
+msgstr "Члены редакции ещё не добавлены."
+
+msgid "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
+msgstr "Все представленные статьи проходят процедуру двойного слепого рецензирования. Срок рассмотрения 4-6 недель. Автор и рецензент не знают друг друга."
+
+msgid "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
+msgstr "Научно-электронный журнал «Архитектура и Образование» издаётся Ташкентским Международным Университетом Финансового Управления и Технологий (ТИФТ). Журнал специализируется на публикации научно-практических исследований в области архитектуры, строительства, геодезии, картографии, кадастра и образования."
+
+# my_articles.html
+msgid "Jami"
+msgstr "Всего"
+
+msgid "Taqrizda"
+msgstr "На рецензии"
+
+msgid "ko'rish"
+msgstr "просмотров"
+
+msgid "Jarayonda..."
+msgstr "В процессе..."
+
+msgid "Hali maqola yubormagansiz"
+msgstr "Вы ещё не отправили статью"
+
+msgid "Tadqiqotingizni tahririyatga yuboring"
+msgstr "Отправьте ваше исследование в редакцию"
+
+msgid "Birinchi maqolangizni yuboring"
+msgstr "Отправьте вашу первую статью"
+
+# submit_article.html
+msgid "Maqola ma'lumotlari"
+msgstr "Данные статьи"
+
+msgid "Word faylni bu yerga tashlang yoki bosing"
+msgstr "Перетащите файл Word сюда или нажмите"
+
+msgid "Faqat .docx format, maksimal hajm: 20MB"
+msgstr "Только формат .docx, максимальный размер: 20MB"
+
+msgid "Maqola faqat Word (.docx) formatida yuboriladi"
+msgstr "Статья принимается только в формате Word (.docx)"
+
+msgid "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
+msgstr "Аннотация должна содержать не менее 150 слов"
+
+msgid "Kalit so'zlar vergul bilan ajratilsin"
+msgstr "Ключевые слова разделяются запятыми"
+
+msgid "Fayl hajmi 20 MB dan oshmasin"
+msgstr "Размер файла не должен превышать 20 МБ"
+
+msgid "Plagiatdan xoli originallik shart"
+msgstr "Оригинальность без плагиата обязательна"
+
+msgid "Maqola yuborildi va ro'yxatga olindi"
+msgstr "Статья отправлена и зарегистрирована"
+
+msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
+msgstr "Редактор проводит предварительную проверку (1-3 дня)"
+
+msgid "Peer-review jarayoni (4-6 hafta)"
+msgstr "Процесс рецензирования (4-6 недель)"
+
+msgid "Qabul yoki rad qaroriga xabar beriladi"
+msgstr "Уведомление о решении принятия или отклонения"
+
+# profile.html
+msgid "Nashr"
+msgstr "Опубл."
+
+msgid "Profil ma'lumotlarini tahrirlash"
+msgstr "Редактировать данные профиля"
+
+msgid "Ism"
+msgstr "Имя"
+
+msgid "Familiya"
+msgstr "Фамилия"
+
+msgid "Telefon"
+msgstr "Телефон"
+
+msgid "Ish / O'qish joyi"
+msgstr "Место работы / учёбы"
+
+msgid "O'zim haqimda"
+msgstr "О себе"
+
+# change_password.html
+msgid "O'zgartirish"
+msgstr "Изменить"
+
+# dashboard_base.html
+msgid "Dashboard"
+msgstr "Панель управления"
+
+# login.html
+msgid "TIFT Ilmiy Jurnali platformasi"
+msgstr "Платформа научного журнала ТИФТ"
+
+msgid "Hali ro'yxatdan o'tmaganmisiz?"
+msgstr "Ещё не зарегистрированы?"
+
+# signup.html
+msgid "Muallif sifatida platformaga qo'shiling"
+msgstr "Присоединяйтесь к платформе как автор"
+
+msgid "Xatoliklar mavjud, iltimos tekshiring:"
+msgstr "Обнаружены ошибки, пожалуйста, проверьте:"
+
+msgid "Allaqachon akkauntingiz bormi?"
+msgstr "Уже есть аккаунт?"
+
+# issue_detail.html
+msgid "Jurnal Arxivi"
+msgstr "Архив журнала"
+
+msgid "Ushbu sondagi maqolalar"
+msgstr "Статьи в этом выпуске"
+
+msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
+msgstr "В этот выпуск архива ещё не загружены статьи."
+
+msgid "%(count)s ta maqola"
+msgstr "%(count)s статей"
+
+msgid "%(y)s-yil"
+msgstr "%(y)s год"

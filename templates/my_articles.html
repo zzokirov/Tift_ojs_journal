@@ -1,4 +1,4 @@
-﻿{% extends 'dashboard_base.html' %}
+{% extends 'dashboard_base.html' %}
 {% load static i18n %}
 
 {% block title %}Mening maqolalarim | TIFT Jurnali{% endblock %}
@@ -9,23 +9,23 @@
 <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
     <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 text-center">
         <div class="text-2xl font-black text-gray-800">{{ articles|length }}</div>
-        <div class="text-xs text-gray-500 mt-1 uppercase tracking-wider">Jami</div>
+        <div class="text-xs text-gray-500 mt-1 uppercase tracking-wider">{% trans "Jami" %}</div>
     </div>
     <div class="bg-white rounded-xl border border-blue-100 shadow-sm p-4 text-center">
         <div class="text-2xl font-black text-blue-600">{{ status_counts.submitted }}</div>
-        <div class="text-xs text-blue-500 mt-1 uppercase tracking-wider">Yuborildi</div>
+        <div class="text-xs text-blue-500 mt-1 uppercase tracking-wider">{% trans "Yuborildi" %}</div>
     </div>
     <div class="bg-white rounded-xl border border-yellow-100 shadow-sm p-4 text-center">
         <div class="text-2xl font-black text-yellow-600">{{ status_counts.under_review }}</div>
-        <div class="text-xs text-yellow-500 mt-1 uppercase tracking-wider">Taqrizda</div>
+        <div class="text-xs text-yellow-500 mt-1 uppercase tracking-wider">{% trans "Taqrizda" %}</div>
     </div>
     <div class="bg-white rounded-xl border border-green-100 shadow-sm p-4 text-center">
         <div class="text-2xl font-black text-green-600">{{ status_counts.published }}</div>
-        <div class="text-xs text-green-500 mt-1 uppercase tracking-wider">Chop etildi</div>
+        <div class="text-xs text-green-500 mt-1 uppercase tracking-wider">{% trans "Chop etildi" %}</div>
     </div>
     <div class="bg-white rounded-xl border border-red-100 shadow-sm p-4 text-center">
         <div class="text-2xl font-black text-red-500">{{ status_counts.rejected }}</div>
-        <div class="text-xs text-red-400 mt-1 uppercase tracking-wider">Rad etildi</div>
+        <div class="text-xs text-red-400 mt-1 uppercase tracking-wider">{% trans "Rad etildi" %}</div>
     </div>
 </div>
 
@@ -54,17 +54,17 @@
                                 {% elif article.status == 'accepted' %}bg-teal-50 text-teal-700 border-teal-200
                                 {% elif article.status == 'rejected' %}bg-red-50 text-red-600 border-red-200
                                 {% endif %}">
-                                {% if article.status == 'published' %}<i class="fas fa-check-circle text-[10px]"></i> Chop etildi
-                                {% elif article.status == 'submitted' %}<i class="fas fa-paper-plane text-[10px]"></i> Yuborildi
-                                {% elif article.status == 'under_review' %}<i class="fas fa-search text-[10px]"></i> Taqriz jarayonida
-                                {% elif article.status == 'accepted' %}<i class="fas fa-thumbs-up text-[10px]"></i> Qabul qilindi
-                                {% elif article.status == 'rejected' %}<i class="fas fa-times-circle text-[10px]"></i> Rad etildi
+                                {% if article.status == 'published' %}<i class="fas fa-check-circle text-[10px]"></i> {% trans "Chop etildi" %}
+                                {% elif article.status == 'submitted' %}<i class="fas fa-paper-plane text-[10px]"></i> {% trans "Yuborildi" %}
+                                {% elif article.status == 'under_review' %}<i class="fas fa-search text-[10px]"></i> {% trans "Taqriz jarayonida" %}
+                                {% elif article.status == 'accepted' %}<i class="fas fa-thumbs-up text-[10px]"></i> {% trans "Qabul qilindi" %}
+                                {% elif article.status == 'rejected' %}<i class="fas fa-times-circle text-[10px]"></i> {% trans "Rad etildi" %}
                                 {% endif %}
                             </span>
                             {% if article.issue %}
                                 <span class="inline-flex items-center gap-1 bg-green-50 text-green-700 border border-green-200 px-2.5 py-1 rounded-full text-xs font-semibold">
                                     <i class="fas fa-book text-[9px]"></i>
-                                    Jild {{ article.issue.volume }}, Son {{ article.issue.number }}
+                                    {% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
                                 </span>
                             {% endif %}
                         </div>
@@ -91,7 +91,7 @@
                                 {% if article.status == 'published' %}
                                     <span class="flex items-center gap-1">
                                         <i class="far fa-eye text-blue-400/70"></i>
-                                        {{ article.views_count }} ko'rish
+                                        {{ article.views_count }} {% trans "ko'rish" %}
                                     </span>
                                 {% endif %}
                             </div>
@@ -99,7 +99,7 @@
                                 {% if article.status == 'published' %}
                                     <a href="{% url 'article_detail' article.pk %}"
                                        class="text-xs text-green-700 hover:text-green-900 font-semibold flex items-center gap-1">
-                                        Ko'rish <i class="fas fa-arrow-right text-[10px]"></i>
+                                        {% trans "Ko'rish" %} <i class="fas fa-arrow-right text-[10px]"></i>
                                     </a>
                                     <a href="{% url 'download_pdf' article.pk %}"
                                        class="flex items-center gap-1.5 bg-navy-800 hover:bg-navy-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition" download>
@@ -107,7 +107,7 @@
                                     </a>
                                 {% else %}
                                     <span class="text-xs text-gray-400 italic flex items-center gap-1">
-                                        <i class="fas fa-clock text-[10px]"></i> Jarayonda...
+                                        <i class="fas fa-clock text-[10px]"></i> {% trans "Jarayonda..." %}
                                     </span>
                                 {% endif %}
                             </div>
@@ -120,12 +120,12 @@
 {% else %}
     <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
         <i class="fas fa-file-alt text-5xl text-gray-300 mb-4 block"></i>
-        <h3 class="text-gray-500 font-semibold text-lg mb-2">Hali maqola yubormagansiz</h3>
-        <p class="text-gray-400 text-sm mb-6">Tadqiqotingizni tahririyatga yuboring</p>
+        <h3 class="text-gray-500 font-semibold text-lg mb-2">{% trans "Hali maqola yubormagansiz" %}</h3>
+        <p class="text-gray-400 text-sm mb-6">{% trans "Tadqiqotingizni tahririyatga yuboring" %}</p>
         <a href="{% url 'submit_article' %}"
            class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-all hover:scale-105 shadow-lg text-sm">
             <i class="fas fa-plus-circle"></i>
-            Birinchi maqolangizni yuboring
+            {% trans "Birinchi maqolangizni yuboring" %}
         </a>
     </div>
 {% endif %}

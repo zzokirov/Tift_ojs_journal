@@ -177,3 +177,249 @@ msgstr "Save"
 
 msgid "Hisob"
 msgstr "Account"
+
+# ============ NEW TRANSLATIONS ============
+
+# base.html
+msgid "Arxitektura va Ta'lim"
+msgstr "Architecture and Education"
+
+msgid "Tezkor havolalar"
+msgstr "Quick Links"
+
+msgid "Jurnal ma'lumotlari"
+msgstr "Journal Information"
+
+msgid "Chastotasi"
+msgstr "Frequency"
+
+msgid "Yiliga 4 marta"
+msgstr "4 times a year"
+
+msgid "Manzil"
+msgstr "Address"
+
+msgid "Toshkent, O'zbekiston"
+msgstr "Tashkent, Uzbekistan"
+
+msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
+msgstr "Tashkent International University of Financial Management and Technologies"
+
+msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
+msgstr "Scientific electronic journal of the Tashkent International University of Financial Management and Technologies."
+
+msgid "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
+msgstr "Modern research in the field of \"Architecture and Education\"."
+
+# index.html
+msgid "Ilmiy Jurnali"
+msgstr "Scientific Journal"
+
+msgid "Qidirish"
+msgstr "Search"
+
+msgid "Tozalash"
+msgstr "Clear"
+
+msgid "ta maqola"
+msgstr "articles"
+
+msgid "ta ko'rish"
+msgstr "views"
+
+msgid "Hozircha arxivlar mavjud emas."
+msgstr "No archives available yet."
+
+msgid "Maqolalar mavjud emas"
+msgstr "No articles available"
+
+msgid "Natijalar topilmadi"
+msgstr "No results found"
+
+msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
+msgstr "No published scientific articles available yet."
+
+msgid "Qabul qilinadigan maqolalar yo'nalishlari"
+msgstr "Accepted article directions"
+
+msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+msgstr "Search by article title, abstract, or keyword..."
+
+msgid "bo'yicha qidiruv natijalari"
+msgstr "search results for"
+
+msgid "Barchasini ko'rish"
+msgstr "View all"
+
+msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
+msgstr "All submitted articles are reviewed and evaluated by experts according to Double-blind peer review requirements."
+
+msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
+msgstr "Submitted → Review → Accepted → Published"
+
+msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
+msgstr "Average review time: 4-6 weeks"
+
+msgid "Open Access — bepul kirish"
+msgstr "Open Access — free access"
+
+msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
+msgstr "Share your research with the world. Register to submit an article."
+
+#: index.html - blocktrans
+msgid "Jild %(vol)s, Son %(num)s"
+msgstr "Volume %(vol)s, Issue %(num)s"
+
+# index.html hero description
+msgid "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
+msgstr "This publication aims to increase the efficiency of fundamental and applied research in the fields of architecture, urban planning, construction of buildings and structures, geodesy, cartography, and state cadastre systems. It is also a source of high-potential analytical data and innovative solutions dedicated to improving modern educational methodology and deeply integrating digital technologies, BIM (Building Information Modeling) systems, and artificial intelligence algorithms into the industry."
+
+msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
+msgstr "\"Architecture and Education\" Scientific-Electronic Journal"
+
+# about.html
+msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
+msgstr "TIFT \"Architecture and Education\" scientific-electronic journal"
+
+msgid "Yiliga chop etiladi"
+msgstr "Published annually"
+
+msgid "Bepul kirish"
+msgstr "Free access"
+
+msgid "Yo'nalishlar"
+msgstr "Directions"
+
+msgid "Tahririyat a'zolari"
+msgstr "Editorial Board Members"
+
+msgid "Tahririyat a'zolari hali qo'shilmagan."
+msgstr "Editorial board members have not been added yet."
+
+msgid "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
+msgstr "All submitted articles go through a double-blind peer review process. The review period is 4-6 weeks. The author and reviewer do not know each other."
+
+msgid "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
+msgstr "The scientific-electronic journal \"Architecture and Education\" is published by the Tashkent International University of Financial Management and Technologies (TIFT). The journal specializes in publishing scientific and practical research in the fields of architecture, construction, geodesy, cartography, cadastre, and education."
+
+# my_articles.html
+msgid "Jami"
+msgstr "Total"
+
+msgid "Taqrizda"
+msgstr "Under Review"
+
+msgid "ko'rish"
+msgstr "views"
+
+msgid "Jarayonda..."
+msgstr "Processing..."
+
+msgid "Hali maqola yubormagansiz"
+msgstr "You haven't submitted any articles yet"
+
+msgid "Tadqiqotingizni tahririyatga yuboring"
+msgstr "Submit your research to the editorial office"
+
+msgid "Birinchi maqolangizni yuboring"
+msgstr "Submit your first article"
+
+# submit_article.html
+msgid "Maqola ma'lumotlari"
+msgstr "Article Details"
+
+msgid "Word faylni bu yerga tashlang yoki bosing"
+msgstr "Drop Word file here or click"
+
+msgid "Faqat .docx format, maksimal hajm: 20MB"
+msgstr "Only .docx format, max size: 20MB"
+
+msgid "Maqola faqat Word (.docx) formatida yuboriladi"
+msgstr "Articles are submitted only in Word (.docx) format"
+
+msgid "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
+msgstr "Abstract must be at least 150 words"
+
+msgid "Kalit so'zlar vergul bilan ajratilsin"
+msgstr "Keywords should be separated by commas"
+
+msgid "Fayl hajmi 20 MB dan oshmasin"
+msgstr "File size must not exceed 20 MB"
+
+msgid "Plagiatdan xoli originallik shart"
+msgstr "Originality free of plagiarism is required"
+
+msgid "Maqola yuborildi va ro'yxatga olindi"
+msgstr "Article submitted and registered"
+
+msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
+msgstr "Initial review by editor (1-3 days)"
+
+msgid "Peer-review jarayoni (4-6 hafta)"
+msgstr "Peer-review process (4-6 weeks)"
+
+msgid "Qabul yoki rad qaroriga xabar beriladi"
+msgstr "Notification of acceptance or rejection decision"
+
+# profile.html
+msgid "Nashr"
+msgstr "Published"
+
+msgid "Profil ma'lumotlarini tahrirlash"
+msgstr "Edit Profile Information"
+
+msgid "Ism"
+msgstr "First Name"
+
+msgid "Familiya"
+msgstr "Last Name"
+
+msgid "Telefon"
+msgstr "Phone"
+
+msgid "Ish / O'qish joyi"
+msgstr "Workplace / Study Place"
+
+msgid "O'zim haqimda"
+msgstr "About Me"
+
+# change_password.html
+msgid "O'zgartirish"
+msgstr "Change"
+
+# dashboard_base.html
+msgid "Dashboard"
+msgstr "Dashboard"
+
+# login.html
+msgid "TIFT Ilmiy Jurnali platformasi"
+msgstr "TIFT Scientific Journal Platform"
+
+msgid "Hali ro'yxatdan o'tmaganmisiz?"
+msgstr "Not registered yet?"
+
+# signup.html
+msgid "Muallif sifatida platformaga qo'shiling"
+msgstr "Join the platform as an author"
+
+msgid "Xatoliklar mavjud, iltimos tekshiring:"
+msgstr "There are errors, please check:"
+
+msgid "Allaqachon akkauntingiz bormi?"
+msgstr "Already have an account?"
+
+# issue_detail.html
+msgid "Jurnal Arxivi"
+msgstr "Journal Archive"
+
+msgid "Ushbu sondagi maqolalar"
+msgstr "Articles in this issue"
+
+msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
+msgstr "No articles have been uploaded to this archive issue yet."
+
+msgid "%(count)s ta maqola"
+msgstr "%(count)s articles"
+
+msgid "%(y)s-yil"
+msgstr "%(y)s year"

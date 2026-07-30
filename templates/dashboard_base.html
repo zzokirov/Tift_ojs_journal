@@ -57,7 +57,7 @@
                 <button type="submit"
                         class="flex items-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 text-sm px-3 py-2 rounded-xl transition border border-red-500/20">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span class="hidden md:inline">Chiqish</span>
+                    <span class="hidden md:inline">{% trans "Chiqish" %}</span>
                 </button>
             </form>
         </div>
@@ -116,11 +116,11 @@
         <!-- Page title -->
         <div class="mb-6">
             <h1 class="text-2xl font-black text-navy-900">{% block page_title %}
-                {% if request.resolver_match.url_name == 'my_articles' %}Maqolalarim
-                {% elif request.resolver_match.url_name == 'submit_article' %}Maqola yuborish
-                {% elif request.resolver_match.url_name == 'profile' %}Profilim
-                {% elif request.resolver_match.url_name == 'change_password' %}Parol o'zgartirish
-                {% else %}Dashboard{% endif %}
+                {% if request.resolver_match.url_name == 'my_articles' %}{% trans "Maqolalarim" %}
+                {% elif request.resolver_match.url_name == 'submit_article' %}{% trans "Maqola yuborish" %}
+                {% elif request.resolver_match.url_name == 'profile' %}{% trans "Profilim" %}
+                {% elif request.resolver_match.url_name == 'change_password' %}{% trans "Parol o'zgartirish" %}
+                {% else %}{% trans "Dashboard" %}{% endif %}
             {% endblock %}</h1>
         </div>
 

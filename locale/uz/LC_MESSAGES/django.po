@@ -177,3 +177,249 @@ msgstr "Saqlash"
 
 msgid "Hisob"
 msgstr "Hisob"
+
+# ============ YANGI TARJIMALAR ============
+
+# base.html
+msgid "Arxitektura va Ta'lim"
+msgstr "Arxitektura va Ta'lim"
+
+msgid "Tezkor havolalar"
+msgstr "Tezkor havolalar"
+
+msgid "Jurnal ma'lumotlari"
+msgstr "Jurnal ma'lumotlari"
+
+msgid "Chastotasi"
+msgstr "Chastotasi"
+
+msgid "Yiliga 4 marta"
+msgstr "Yiliga 4 marta"
+
+msgid "Manzil"
+msgstr "Manzil"
+
+msgid "Toshkent, O'zbekiston"
+msgstr "Toshkent, O'zbekiston"
+
+msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
+msgstr "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
+
+msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
+msgstr "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
+
+msgid "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
+msgstr "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
+
+# index.html
+msgid "Ilmiy Jurnali"
+msgstr "Ilmiy Jurnali"
+
+msgid "Qidirish"
+msgstr "Qidirish"
+
+msgid "Tozalash"
+msgstr "Tozalash"
+
+msgid "ta maqola"
+msgstr "ta maqola"
+
+msgid "ta ko'rish"
+msgstr "ta ko'rish"
+
+msgid "Hozircha arxivlar mavjud emas."
+msgstr "Hozircha arxivlar mavjud emas."
+
+msgid "Maqolalar mavjud emas"
+msgstr "Maqolalar mavjud emas"
+
+msgid "Natijalar topilmadi"
+msgstr "Natijalar topilmadi"
+
+msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
+msgstr "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
+
+msgid "Qabul qilinadigan maqolalar yo'nalishlari"
+msgstr "Qabul qilinadigan maqolalar yo'nalishlari"
+
+msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+msgstr "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+
+msgid "bo'yicha qidiruv natijalari"
+msgstr "bo'yicha qidiruv natijalari"
+
+msgid "Barchasini ko'rish"
+msgstr "Barchasini ko'rish"
+
+msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
+msgstr "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
+
+msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
+msgstr "Yuborildi → Taqriz → Qabul → Chop etildi"
+
+msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
+msgstr "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
+
+msgid "Open Access — bepul kirish"
+msgstr "Open Access — bepul kirish"
+
+msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
+msgstr "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
+
+#: index.html - blocktrans
+msgid "Jild %(vol)s, Son %(num)s"
+msgstr "Jild %(vol)s, Son %(num)s"
+
+# index.html hero description
+msgid "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
+msgstr "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
+
+msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
+msgstr "\"Arxitektura va Ta'lim\" Ilmiy-Elektron Jurnali"
+
+# about.html
+msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
+msgstr "TIFT \"Arxitektura va Ta'lim\" ilmiy-elektron jurnali"
+
+msgid "Yiliga chop etiladi"
+msgstr "Yiliga chop etiladi"
+
+msgid "Bepul kirish"
+msgstr "Bepul kirish"
+
+msgid "Yo'nalishlar"
+msgstr "Yo'nalishlar"
+
+msgid "Tahririyat a'zolari"
+msgstr "Tahririyat a'zolari"
+
+msgid "Tahririyat a'zolari hali qo'shilmagan."
+msgstr "Tahririyat a'zolari hali qo'shilmagan."
+
+msgid "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
+msgstr "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
+
+msgid "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
+msgstr "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
+
+# my_articles.html
+msgid "Jami"
+msgstr "Jami"
+
+msgid "Taqrizda"
+msgstr "Taqrizda"
+
+msgid "ko'rish"
+msgstr "ko'rish"
+
+msgid "Jarayonda..."
+msgstr "Jarayonda..."
+
+msgid "Hali maqola yubormagansiz"
+msgstr "Hali maqola yubormagansiz"
+
+msgid "Tadqiqotingizni tahririyatga yuboring"
+msgstr "Tadqiqotingizni tahririyatga yuboring"
+
+msgid "Birinchi maqolangizni yuboring"
+msgstr "Birinchi maqolangizni yuboring"
+
+# submit_article.html
+msgid "Maqola ma'lumotlari"
+msgstr "Maqola ma'lumotlari"
+
+msgid "Word faylni bu yerga tashlang yoki bosing"
+msgstr "Word faylni bu yerga tashlang yoki bosing"
+
+msgid "Faqat .docx format, maksimal hajm: 20MB"
+msgstr "Faqat .docx format, maksimal hajm: 20MB"
+
+msgid "Maqola faqat Word (.docx) formatida yuboriladi"
+msgstr "Maqola faqat Word (.docx) formatida yuboriladi"
+
+msgid "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
+msgstr "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
+
+msgid "Kalit so'zlar vergul bilan ajratilsin"
+msgstr "Kalit so'zlar vergul bilan ajratilsin"
+
+msgid "Fayl hajmi 20 MB dan oshmasin"
+msgstr "Fayl hajmi 20 MB dan oshmasin"
+
+msgid "Plagiatdan xoli originallik shart"
+msgstr "Plagiatdan xoli originallik shart"
+
+msgid "Maqola yuborildi va ro'yxatga olindi"
+msgstr "Maqola yuborildi va ro'yxatga olindi"
+
+msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
+msgstr "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
+
+msgid "Peer-review jarayoni (4-6 hafta)"
+msgstr "Peer-review jarayoni (4-6 hafta)"
+
+msgid "Qabul yoki rad qaroriga xabar beriladi"
+msgstr "Qabul yoki rad qaroriga xabar beriladi"
+
+# profile.html
+msgid "Nashr"
+msgstr "Nashr"
+
+msgid "Profil ma'lumotlarini tahrirlash"
+msgstr "Profil ma'lumotlarini tahrirlash"
+
+msgid "Ism"
+msgstr "Ism"
+
+msgid "Familiya"
+msgstr "Familiya"
+
+msgid "Telefon"
+msgstr "Telefon"
+
+msgid "Ish / O'qish joyi"
+msgstr "Ish / O'qish joyi"
+
+msgid "O'zim haqimda"
+msgstr "O'zim haqimda"
+
+# change_password.html
+msgid "O'zgartirish"
+msgstr "O'zgartirish"
+
+# dashboard_base.html
+msgid "Dashboard"
+msgstr "Boshqaruv paneli"
+
+# login.html
+msgid "TIFT Ilmiy Jurnali platformasi"
+msgstr "TIFT Ilmiy Jurnali platformasi"
+
+msgid "Hali ro'yxatdan o'tmaganmisiz?"
+msgstr "Hali ro'yxatdan o'tmaganmisiz?"
+
+# signup.html
+msgid "Muallif sifatida platformaga qo'shiling"
+msgstr "Muallif sifatida platformaga qo'shiling"
+
+msgid "Xatoliklar mavjud, iltimos tekshiring:"
+msgstr "Xatoliklar mavjud, iltimos tekshiring:"
+
+msgid "Allaqachon akkauntingiz bormi?"
+msgstr "Allaqachon akkauntingiz bormi?"
+
+# issue_detail.html
+msgid "Jurnal Arxivi"
+msgstr "Jurnal Arxivi"
+
+msgid "Ushbu sondagi maqolalar"
+msgstr "Ushbu sondagi maqolalar"
+
+msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
+msgstr "Ushbu arxiv soniga hali maqolalar yuklanmagan."
+
+msgid "%(count)s ta maqola"
+msgstr "%(count)s ta maqola"
+
+msgid "%(y)s-yil"
+msgstr "%(y)s-yil"

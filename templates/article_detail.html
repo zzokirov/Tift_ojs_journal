@@ -16,7 +16,7 @@
         <!-- Breadcrumb -->
         <nav class="flex flex-wrap items-center gap-2 text-xs mb-4" style="color:#6b7280;">
             <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
-                <i class="fas fa-home text-[10px]"></i> Bosh sahifa
+                <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
             </a>
             <i class="fas fa-chevron-right text-[8px]"></i>
             {% if article.issue %}
@@ -33,7 +33,7 @@
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
                   style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);color:#22c55e;">
                 <span class="w-1.5 h-1.5 rounded-full" style="background:#22c55e;"></span>
-                Chop etilgan
+                {% trans "Chop etilgan" %}
             </span>
             {% if article.category %}
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
@@ -100,7 +100,7 @@
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
                     <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
-                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">Annotatsiya</h2>
+                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">{% trans "Annotatsiya" %}</h2>
                 </div>
                 <div class="px-6 py-5">
                     <p class="leading-relaxed text-justify italic"
@@ -113,7 +113,7 @@
             <!-- KALIT SO'ZLAR -->
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
                 <h3 class="font-bold text-navy-900 text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
-                    <i class="fas fa-tags text-green-500 text-xs"></i> Kalit so'zlar
+                    <i class="fas fa-tags text-green-500 text-xs"></i> {% trans "Kalit so'zlar" %}
                 </h3>
                 <div class="flex flex-wrap gap-2">
                     {% for tag in article.keywords.split %}
@@ -131,7 +131,7 @@
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
                     <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
-                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">Maqola matni</h2>
+                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">{% trans "Maqola matni" %}</h2>
                 </div>
                 <div class="px-6 py-6 prose prose-lg max-w-none"
                      style="color:#1e293b;line-height:1.8;font-size:clamp(0.9rem,1.05vw,1rem);">
@@ -143,7 +143,7 @@
             <!-- IQTIBOS -->
             <div class="rounded-2xl p-5" style="background:#f8fafc;border:1px solid #e2e8f0;">
                 <h3 class="font-bold text-sm mb-3 flex items-center gap-2 uppercase tracking-wider" style="color:#475569;">
-                    <i class="fas fa-quote-left text-green-500"></i> Iqtibos (APA)
+                    <i class="fas fa-quote-left text-green-500"></i> {% trans "Iqtibos (APA)" %}
                 </h3>
                 <div class="relative group">
                     <p class="font-mono leading-relaxed pr-10" id="citationText"
@@ -167,7 +167,7 @@
                 <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
                     <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
                     <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">
-                        Muallif boshqa maqolalari
+                        {% trans "Muallif boshqa maqolalari" %}
                     </h2>
                 </div>
                 <ul class="divide-y divide-gray-50">
@@ -242,21 +242,21 @@
                                 <i class="fas fa-file-pdf text-red-400"></i>
                             </div>
                             <div>
-                                <div class="text-white text-sm font-bold leading-none">Shablon PDF</div>
-                                <div class="text-xs mt-0.5" style="color:#6b7280;">Tahririyat shablonida</div>
+                                <div class="text-white text-sm font-bold leading-none">{% trans "Shablon PDF" %}</div>
+                                <div class="text-xs mt-0.5" style="color:#6b7280;">{% trans "Tahririyat shablonida" %}</div>
                             </div>
                         </div>
                         <a href="{% url 'download_pdf' article.pk %}"
                            class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
                            style="background:#22c55e;color:#0a1628;">
-                            <i class="fas fa-download text-xs"></i> Yuklab olish
+                            <i class="fas fa-download text-xs"></i> {% trans "Yuklab olish" %}
                         </a>
                     </div>
                     <div class="px-5 pb-4 pt-2">
                         <a href="{{ article.pdf_file.url }}" target="_blank"
                            class="flex items-center justify-center gap-2 font-semibold text-xs py-2 rounded-xl w-full transition-all"
                            style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#94a3b8;">
-                            <i class="fas fa-external-link-alt text-[10px]"></i> Muallif versiyasi
+                            <i class="fas fa-external-link-alt text-[10px]"></i> {% trans "Muallif versiyasi" %}
                         </a>
                     </div>
                 {% else %}
@@ -267,7 +267,7 @@
                                 <i class="fas fa-file-pdf text-red-400"></i>
                             </div>
                             <div>
-                                <div class="text-white text-sm font-bold leading-none">To'liq matn</div>
+                                <div class="text-white text-sm font-bold leading-none">{% trans "To'liq matn" %}</div>
                                 <div class="text-xs mt-0.5" style="color:#6b7280;">PDF formatda</div>
                             </div>
                         </div>

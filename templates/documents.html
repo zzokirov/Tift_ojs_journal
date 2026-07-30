@@ -7,17 +7,17 @@
     <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
     <div class="site-container px-4 relative">
         <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
-            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors"><i class="fas fa-home text-[10px]"></i> Bosh sahifa</a>
+            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors"><i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}</a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
-            <span class="text-gray-300">Hujjatlar</span>
+            <span class="text-gray-300">{% trans "Hujjatlar" %}</span>
         </nav>
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 bg-green-600/20 border border-green-500/30 rounded-xl flex items-center justify-center">
                 <i class="fas fa-file-alt text-green-400"></i>
             </div>
             <div>
-                <h1 class="text-3xl font-black text-white">Hujjatlar</h1>
-                <p class="text-gray-400 text-sm mt-0.5">Me'yoriy hujjatlar va maqola talablari</p>
+                <h1 class="text-3xl font-black text-white">{% trans "Hujjatlar" %}</h1>
+                <p class="text-gray-400 text-sm mt-0.5">{% trans "Me'yoriy hujjatlar va maqola talablari" %}</p>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
     <div>
         <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-5">
             <span class="w-1 h-6 bg-green-600 rounded-full block"></span>
-            Maqola talablari
+            {% trans "Maqola talablari" %}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {% for doc in requirements %}
@@ -46,12 +46,12 @@
                         {% if doc.file %}
                             <a href="{{ doc.file.url }}" download
                                class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-download text-[10px]"></i> Yuklab olish
+                                <i class="fas fa-download text-[10px]"></i> {% trans "Yuklab olish" %}
                             </a>
                         {% elif doc.url %}
                             <a href="{{ doc.url }}" target="_blank"
                                class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-external-link-alt text-[10px]"></i> Ko'rish
+                                <i class="fas fa-external-link-alt text-[10px]"></i> {% trans "Ko'rish" %}
                             </a>
                         {% endif %}
                     </div>
@@ -66,7 +66,7 @@
     <div>
         <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-5">
             <span class="w-1 h-6 bg-green-600 rounded-full block"></span>
-            Me'yoriy hujjatlar
+            {% trans "Me'yoriy hujjatlar" %}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {% for doc in normative %}
@@ -82,12 +82,12 @@
                         {% if doc.file %}
                             <a href="{{ doc.file.url }}" download
                                class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-download text-[10px]"></i> Yuklab olish
+                                <i class="fas fa-download text-[10px]"></i> {% trans "Yuklab olish" %}
                             </a>
                         {% elif doc.url %}
                             <a href="{{ doc.url }}" target="_blank"
                                class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-external-link-alt text-[10px]"></i> Ko'rish
+                                <i class="fas fa-external-link-alt text-[10px]"></i> {% trans "Ko'rish" %}
                             </a>
                         {% endif %}
                     </div>
@@ -102,7 +102,7 @@
     <div>
         <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-5">
             <span class="w-1 h-6 bg-green-600 rounded-full block"></span>
-            Shablonlar
+            {% trans "Shablonlar" %}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {% for doc in templates %}
@@ -118,12 +118,12 @@
                         {% if doc.file %}
                             <a href="{{ doc.file.url }}" download
                                class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-download text-[10px]"></i> Yuklab olish
+                                <i class="fas fa-download text-[10px]"></i> {% trans "Yuklab olish" %}
                             </a>
                         {% elif doc.url %}
                             <a href="{{ doc.url }}" target="_blank"
                                class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-external-link-alt text-[10px]"></i> Ko'rish
+                                <i class="fas fa-external-link-alt text-[10px]"></i> {% trans "Ko'rish" %}
                             </a>
                         {% endif %}
                     </div>
@@ -136,7 +136,7 @@
     {% if not requirements and not normative and not templates %}
         <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
             <i class="fas fa-file-alt text-5xl text-gray-300 mb-4 block"></i>
-            <p class="text-gray-400">Hozircha hujjatlar mavjud emas.</p>
+            <p class="text-gray-400">{% trans "Hozircha hujjatlar mavjud emas." %}</p>
         </div>
     {% endif %}
 
