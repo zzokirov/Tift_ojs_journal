@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static i18n %}
 
 {% block title %}{{ article.title }} | TIFT Jurnali{% endblock %}
@@ -341,7 +341,11 @@
                 <div class="flex items-start gap-3">
                     <div class="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg flex-shrink-0"
                          style="background:linear-gradient(135deg,#142d54,#0a1628);color:#22c55e;">
-                        {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                        {% if article.authors %}
+                            {{ article.authors|first|upper }}
+                        {% else %}
+                            {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                        {% endif %}
                     </div>
                     <div>
                         <div class="font-bold text-navy-900 text-sm">

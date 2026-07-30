@@ -76,9 +76,17 @@
                             <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-gray-500 mb-3">
                                 <span class="flex items-center gap-1.5">
                                     <div class="w-5 h-5 bg-navy-100 rounded-full flex items-center justify-center text-navy-700 font-bold text-[9px]">
-                                        {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                                        {% if article.authors %}
+                                            {{ article.authors|first|upper }}
+                                        {% else %}
+                                            {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                                        {% endif %}
                                     </div>
-                                    {{ article.author.get_full_name|default:article.author.username }}
+                                    {% if article.authors %}
+                                        {{ article.authors }}
+                                    {% else %}
+                                        {{ article.author.get_full_name|default:article.author.username }}
+                                    {% endif %}
                                     {% if article.author.institution %}
                                         <span class="text-gray-400">— {{ article.author.institution }}</span>
                                     {% endif %}
