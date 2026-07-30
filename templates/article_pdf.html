@@ -1,4 +1,4 @@
-{% load static %}
+﻿{% load static %}
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -11,31 +11,31 @@ body {
     font-size: 11pt;
     color: #000;
     background: #fff;
-    line-height: 1.65;
+    line-height: 1.4;
 }
 
 /* stylelint-disable */
 @page {
     size: A4;
-    margin-top: 3.6cm;
-    margin-bottom: 3.0cm;
+    margin-top: 2.5cm;
+    margin-bottom: 2.0cm;
     margin-left: 2.5cm;
     margin-right: 2.5cm;
 
     @frame header_frame {
         -pdf-frame-content: page-header;
         left: 2.5cm;
-        top: 0.5cm;
+        top: 1.0cm;
         right: 2.5cm;
-        height: 2.6cm;
+        height: 1.5cm;
     }
 
     @frame footer_frame {
         -pdf-frame-content: page-footer;
         left: 2.5cm;
-        bottom: 0.4cm;
+        bottom: 1.0cm;
         right: 2.5cm;
-        height: 2.0cm;
+        height: 1.0cm;
     }
 }
 /* stylelint-enable */
@@ -43,229 +43,157 @@ body {
 /* ── YUQORI KOLONTITUL ── */
 #page-header {
     width: 100%;
-    border-bottom: 2pt solid #15803d;
-    padding-bottom: 5pt;
+    border-bottom: 1pt solid #000;
+    padding-bottom: 4pt;
 }
 .hdr-table { width: 100%; border-collapse: collapse; }
-.hdr-logo-cell { width: 44pt; vertical-align: middle; }
+.hdr-logo-cell { width: 40pt; vertical-align: middle; }
 .hdr-logo {
-    width: 36pt;
-    height: 36pt;
+    width: 35pt;
+    height: 35pt;
     text-align: center;
-    padding: 0;
 }
-.hdr-center-cell { vertical-align: middle; padding-left: 7pt; }
+.hdr-center-cell { vertical-align: middle; padding-left: 8pt; }
 .hdr-journal-name {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', serif;
     font-size: 11pt;
-    font-weight: 900;
-    color: #0a1628;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
 }
-.hdr-journal-name-green { color: #15803d; }
 .hdr-journal-sub {
-    font-family: Arial, sans-serif;
-    font-size: 7.5pt;
-    color: #555;
-    letter-spacing: 0.5pt;
-    margin-top: 1pt;
+    font-family: 'Times New Roman', serif;
+    font-size: 9pt;
+    color: #333;
+    margin-top: 2pt;
 }
 .hdr-right-cell {
-    vertical-align: bottom;
+    vertical-align: middle;
     text-align: right;
-    font-size: 8pt;
-    color: #555;
-    font-family: Arial, sans-serif;
-    line-height: 1.7;
-    padding-bottom: 2pt;
+    font-size: 9pt;
+    color: #333;
+    font-family: 'Times New Roman', serif;
 }
 
 /* ── PASTKI KOLONTITUL ── */
 #page-footer {
     width: 100%;
-    border-top: 1pt solid #15803d;
+    border-top: 1pt solid #000;
     padding-top: 4pt;
-    font-family: Arial, sans-serif;
-    font-size: 7.5pt;
-    color: #555;
+    font-family: 'Times New Roman', serif;
+    font-size: 9pt;
+    color: #333;
     text-align: center;
-    line-height: 1.8;
 }
-.ftr-page {
-    font-weight: bold;
-    color: #0a1628;
-    font-size: 8.5pt;
-    margin-bottom: 2pt;
-}
-.ftr-info { font-size: 7pt; color: #666; }
+.ftr-table { width: 100%; border-collapse: collapse; }
+.ftr-left { text-align: left; width: 33%; }
+.ftr-center { text-align: center; width: 34%; }
+.ftr-right { text-align: right; width: 33%; }
 
 /* ── SARLAVHA BLOKI ── */
 .article-title {
-    font-family: Arial, sans-serif;
-    font-size: 15pt;
-    font-weight: 900;
-    color: #0a1628;
-    line-height: 1.3;
-    margin: 12pt 0 8pt 0;
+    font-family: 'Times New Roman', serif;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #000;
+    line-height: 1.2;
+    margin: 20pt 0 15pt 0;
     text-align: center;
 }
 .article-authors {
-    font-family: Arial, sans-serif;
-    font-size: 10.5pt;
-    font-weight: 700;
-    color: #1e293b;
-    text-align: right;
-    margin-bottom: 3pt;
+    font-family: 'Times New Roman', serif;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    margin-bottom: 4pt;
 }
 .article-institution {
-    font-family: Arial, sans-serif;
-    font-size: 9pt;
-    color: #555;
-    font-style: italic;
-    text-align: right;
-    margin-bottom: 3pt;
-}
-/* ── SECTION SARLAVHA ── */
-.sec-title {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', serif;
     font-size: 10pt;
-    font-weight: 700;
-    color: #0a1628;
-    margin: 12pt 0 4pt 0;
-    padding-left: 7pt;
-    border-left: 2.5pt solid #15803d;
-    text-transform: uppercase;
-    letter-spacing: 0.5pt;
+    color: #333;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 20pt;
 }
 
-/* ── ANNOTATSIYA ── */
+/* ── ANNOTATSIYA VA KALIT SO'ZLAR ── */
 .abstract-box {
-    background-color: #f8fafc;
-    border-left: 3pt solid #15803d;
-    padding: 8pt 10pt;
-    margin-bottom: 10pt;
+    margin-bottom: 15pt;
 }
-.abstract-box p {
+.abstract-title {
+    font-family: 'Times New Roman', serif;
     font-size: 10pt;
-    font-style: italic;
-    color: #374151;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 6pt;
+}
+.abstract-text {
+    font-size: 10pt;
+    color: #000;
     text-align: justify;
-    line-height: 1.6;
+    line-height: 1.4;
+    margin-bottom: 8pt;
 }
 
-/* ── KALIT SO'ZLAR ── */
 .keywords {
-    font-size: 9.5pt;
-    margin-bottom: 12pt;
-    line-height: 1.5;
+    font-size: 10pt;
+    line-height: 1.4;
+    text-align: justify;
+    margin-bottom: 20pt;
 }
 .kw-label {
-    font-weight: 700;
-    color: #15803d;
-}
-
-/* ── AJRATUVCHI CHIZIQ ── */
-.divider {
-    border: none;
-    border-top: 0.8pt solid #cbd5e1;
-    margin: 12pt 0;
-}
-.divider-thick {
-    border: none;
-    border-top: 1.5pt solid #0a1628;
-    margin: 14pt 0;
+    font-weight: bold;
+    font-style: italic;
 }
 
 /* ── ASOSIY MATN ── */
 .content {
     text-align: justify;
     font-size: 11pt;
-    line-height: 1.8;
+    line-height: 1.5;
     width: 100%;
 }
 .content p {
-    margin-bottom: 7pt;
-    text-indent: 1.5em;
+    margin-bottom: 6pt;
+    text-indent: 1.25cm;
     text-align: justify;
 }
-.content .doc-heading {
-    font-family: Arial, sans-serif;
-    font-size: 11.5pt;
-    font-weight: 700;
-    color: #0a1628;
-    margin: 14pt 0 5pt 0;
-    text-indent: 0;
-    border-left: 2.5pt solid #15803d;
-    padding-left: 7pt;
-}
-.content .doc-subheading {
-    font-family: Arial, sans-serif;
-    font-size: 11pt;
-    font-weight: 600;
-    color: #1e293b;
-    margin: 10pt 0 4pt 0;
-    text-indent: 0;
-}
 .content h1, .content h2, .content h3, .content h4 {
-    font-family: Arial, sans-serif;
-    color: #0a1628;
-    margin: 12pt 0 5pt 0;
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    color: #000;
+    margin: 12pt 0 6pt 0;
     text-indent: 0;
 }
+.content h1 { font-size: 12pt; text-transform: uppercase; }
+.content h2 { font-size: 11pt; font-style: italic; }
 
-/* ── JADVALLAR ── */
+/* ── JADVALLAR VA RASMLAR ── */
 .content .doc-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 10pt 0 12pt 0;
-    font-size: 9.5pt;
+    margin: 10pt 0;
+    font-size: 10pt;
     page-break-inside: avoid;
 }
-.content .doc-table th {
-    background-color: #0a1628;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    font-size: 9pt;
-    font-weight: 700;
-    padding: 5pt 6pt;
-    border: 0.5pt solid #334155;
-    text-align: left;
+.content .doc-table th, .content .doc-table td {
+    border: 0.5pt solid #000;
+    padding: 4pt;
+    text-align: center;
 }
-.content .doc-table td {
-    border: 0.5pt solid #cbd5e1;
-    padding: 4pt 6pt;
-    vertical-align: top;
-}
-.content .doc-table tr:nth-child(even) td {
-    background-color: #f8fafc;
-}
-
-/* ── RASMLAR ── */
 .doc-img-wrap {
-    width: 100%;
     text-align: center;
     margin: 10pt 0;
     page-break-inside: avoid;
 }
 .doc-img-wrap img { max-width: 100%; height: auto; }
 p.img-caption {
-    font-size: 9pt;
-    color: #555;
-    font-style: italic;
-    text-align: center;
-    text-indent: 0;
-    margin-bottom: 8pt;
-}
-
-/* ── MATN YO'Q ── */
-.pdf-notice {
     font-size: 10pt;
-    color: #666;
     font-style: italic;
-    padding: 12pt;
     text-align: center;
-    border: 0.5pt dashed #ccc;
-    margin: 10pt 0;
-    background-color: #fafafa;
+    margin-top: 4pt;
 }
 
 </style>
@@ -280,22 +208,23 @@ p.img-caption {
                 <div class="hdr-logo">
                     {% if logo_base64 %}
                         <img src="{{ logo_base64 }}"
-                             style="width:30pt;height:30pt;object-fit:contain;display:block;margin:auto;"/>
+                             style="width:35pt;height:35pt;object-fit:contain;display:block;margin:auto;"/>
                     {% else %}
-                        <span style="font-family:Arial;font-weight:900;font-size:18pt;color:#22c55e;line-height:36pt;">T</span>
+                        <span style="font-family:Arial;font-weight:bold;font-size:18pt;color:#000;">TIFT</span>
                     {% endif %}
                 </div>
             </td>
             <td class="hdr-center-cell">
-                <div class="hdr-journal-name">
-                    TIFT <span class="hdr-journal-name-green">JOURNAL</span>
-                </div>
-                <div class="hdr-journal-sub">"Arxitektura va Ta'lim" Ilmiy-Elektron Jurnali</div>
+                <div class="hdr-journal-name">TIFT "ARXITEKTURA VA TA'LIM"</div>
+                <div class="hdr-journal-sub">Ilmiy-elektron jurnali</div>
             </td>
             <td class="hdr-right-cell">
                 {% if article.issue %}
-                    Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}
+                    Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}<br>
+                {% else %}
+                    Qabul qilingan maqola<br>
                 {% endif %}
+                <span style="font-size: 8pt; color:#555;">architect-edu.tift.uz</span>
             </td>
         </tr>
     </table>
@@ -303,22 +232,16 @@ p.img-caption {
 
 <!-- ══ PASTKI KOLONTITUL ══ -->
 <div id="page-footer">
-    <div class="ftr-page">&ndash; <pdf:pagenumber> / <pdf:pagecount> &ndash;</div>
-    <div class="ftr-info">
-        Toshkent sh., Amir Temur ko'chasi, 108 &nbsp;|&nbsp; Tel: +998 71 238-74-80 &nbsp;|&nbsp;
-        journal@tift.uz &nbsp;|&nbsp; www.tift.uz
-    </div>
+    <table class="ftr-table">
+        <tr>
+            <td class="ftr-left">Toshkent, O'zbekiston</td>
+            <td class="ftr-center">- <pdf:pagenumber> -</td>
+            <td class="ftr-right">journal@tift.uz</td>
+        </tr>
+    </table>
 </div>
 
 <!-- ══ MAQOLA MA'LUMOTLARI ══ -->
-
-<!-- Kategoriya badge -->
-{% if article.category %}
-<div style="font-family:Arial,sans-serif; font-size:8pt; color:#15803d; font-weight:700;
-            text-transform:uppercase; letter-spacing:0.6pt; margin-bottom:6pt;">
-    {{ article.category.code }} &mdash; {{ article.category.name }}
-</div>
-{% endif %}
 
 <!-- Sarlavha -->
 <div class="article-title">{{ article.title }}</div>
@@ -337,31 +260,32 @@ p.img-caption {
     <div class="article-institution">{{ article.author.institution }}</div>
 {% endif %}
 
-<!-- Email kerak emas -->
-
 <!-- Annotatsiya -->
-<div class="sec-title">Annotatsiya</div>
 <div class="abstract-box">
-    <p>{{ article.abstract }}</p>
+    <div class="abstract-title">Abstract / Annotatsiya</div>
+    <div class="abstract-text">{{ article.abstract }}</div>
 </div>
 
 <!-- Kalit so'zlar -->
 <div class="keywords">
-    <span class="kw-label">Kalit so'zlar:</span> {{ article.keywords }}
+    <span class="kw-label">Keywords / Kalit so'zlar:</span> {{ article.keywords }}
 </div>
 
-<hr class="divider-thick"/>
+<!-- Kategoriya belgisi (ixtiyoriy) -->
+{% if article.category %}
+<div style="font-size:9pt; color:#555; text-align:right; margin-bottom: 15pt; font-style:italic;">
+    Yo'nalish: {{ article.category.name }}
+</div>
+{% endif %}
 
 <!-- Maqola matni -->
 {% if pdf_content_html %}
     <div class="content">{{ pdf_content_html|safe }}</div>
 {% else %}
-    <div class="pdf-notice">
-        Maqola matni o'qib bo'lmadi yoki fayl mavjud emas.
+    <div style="font-style:italic; text-align:center; color:#555;">
+        Maqola matni o'qib bo'lmadi.
     </div>
 {% endif %}
-
-<hr class="divider"/>
 
 </body>
 </html>
