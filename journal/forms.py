@@ -86,9 +86,10 @@ def validate_image_file(file):
 class ArticleSubmissionForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'abstract', 'keywords', 'pdf_file']
+        fields = ['title', 'authors', 'abstract', 'keywords', 'pdf_file']
         widgets = {
             'title':    forms.TextInput(attrs={'class': css_input, 'placeholder': 'Maqola sarlavhasi'}),
+            'authors':  forms.TextInput(attrs={'class': css_input, 'placeholder': 'Barcha mualliflar (Ism Familiya, ...)'}),
             'abstract': forms.Textarea(attrs={'class': css_textarea, 'rows': 5}),
             'keywords': forms.TextInput(attrs={'class': css_input, 'placeholder': 'Kalit so\'zlar (vergul bilan)'}),
             'pdf_file': forms.FileInput(attrs={'class': 'hidden', 'accept': '.pdf,.docx'}),
