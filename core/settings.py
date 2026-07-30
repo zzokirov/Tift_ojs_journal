@@ -178,6 +178,27 @@ JAZZMIN_SETTINGS = {
         "journal.JournalIssue",
         "journal.User",
     ],
+    "custom_links": {
+        "journal": [
+            {"name": "Yangi maqolalar", "url": "admin:journal_article_changelist", "query": "status__exact=submitted", "icon": "fas fa-envelope-open-text"},
+            {"name": "Dastlabki tekshiruv", "url": "admin:journal_article_changelist", "query": "status__exact=initial_review", "icon": "fas fa-search"},
+            {"name": "Taqriz jarayonida", "url": "admin:journal_article_changelist", "query": "status__exact=under_review", "icon": "fas fa-glasses"},
+            {"name": "Tuzatish uchun qaytarilgan", "url": "admin:journal_article_changelist", "query": "status__exact=returned", "icon": "fas fa-undo"},
+            {"name": "Qabul qilingan", "url": "admin:journal_article_changelist", "query": "status__exact=accepted", "icon": "fas fa-check-circle"},
+            {"name": "Rad etilgan", "url": "admin:journal_article_changelist", "query": "status__exact=rejected", "icon": "fas fa-times-circle"},
+            {"name": "Nashrga tayyor", "url": "admin:journal_article_changelist", "query": "status__exact=ready_to_publish", "icon": "fas fa-print"},
+            {"name": "Nashr etilgan", "url": "admin:journal_article_changelist", "query": "status__exact=published", "icon": "fas fa-globe"},
+            {"name": "Taqrizchilar", "url": "#", "icon": "fas fa-gavel"},
+            {"name": "Tahririyat", "url": "#", "icon": "fas fa-users-cog"},
+            {"name": "Yo'nalishlar", "url": "admin:journal_articlecategory_changelist", "icon": "fas fa-tags"},
+            {"name": "Statistika", "url": "#", "icon": "fas fa-chart-pie"},
+            {"name": "Hisobotlar", "url": "#", "icon": "fas fa-chart-line"},
+            {"name": "Sertifikatlar", "url": "#", "icon": "fas fa-certificate"},
+            {"name": "Bildirishnomalar", "url": "#", "icon": "fas fa-bell"},
+            {"name": "Sozlamalar", "url": "#", "icon": "fas fa-cogs"},
+            {"name": "Tizim jurnali", "url": "admin:admin_logentry_changelist", "icon": "fas fa-history"},
+        ]
+    },
 
     "icons": {
         "auth": "fas fa-shield-alt",

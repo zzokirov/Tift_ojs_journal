@@ -1,0 +1,427 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static admin_dashboard %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    :root {
+        --primary-blue: #2563eb;
+        --primary-light: #dbeafe;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
+        --bg-light: #f8fafc;
+        --border-light: #e2e8f0;
+    }
+    
+    .content-wrapper {
+        background-color: var(--bg-light) !important;
+    }
+    
+    .dashboard-header {
+        margin-bottom: 2rem;
+    }
+    
+    .dashboard-header h1 {
+        font-weight: 700;
+        color: var(--text-dark);
+        font-size: 1.75rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 12px;
+        border: 1px solid var(--border-light);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+
+    .stat-icon.blue { background: var(--primary-light); color: var(--primary-blue); }
+    .stat-icon.green { background: #dcfce7; color: #16a34a; }
+    .stat-icon.orange { background: #ffedd5; color: #ea580c; }
+    .stat-icon.red { background: #fee2e2; color: #dc2626; }
+
+    .stat-info h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0;
+    }
+
+    .stat-info p {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .dashboard-panel {
+        background: white;
+        border-radius: 12px;
+        border: 1px solid var(--border-light);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+    }
+
+    .panel-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .panel-header h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin: 0;
+    }
+
+    .panel-body {
+        padding: 1.5rem;
+    }
+
+    .table-custom th {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        font-weight: 600;
+        border-top: none;
+        border-bottom: 2px solid var(--border-light);
+    }
+
+    .table-custom td {
+        vertical-align: middle;
+        font-size: 0.875rem;
+        color: var(--text-dark);
+        border-top: 1px solid var(--border-light);
+    }
+
+    .badge-status {
+        padding: 0.35em 0.65em;
+        border-radius: 9999px;
+        font-weight: 600;
+        font-size: 0.75rem;
+    }
+    
+    .badge-status.submitted { background: #e0e7ff; color: #4338ca; }
+    .badge-status.initial_review { background: #fef3c7; color: #d97706; }
+    .badge-status.under_review { background: #ffedd5; color: #ea580c; }
+    .badge-status.accepted { background: #d1fae5; color: #059669; }
+    .badge-status.published { background: #dcfce7; color: #16a34a; }
+    .badge-status.rejected { background: #fee2e2; color: #dc2626; }
+    .badge-status.returned { background: #f3f4f6; color: #4b5563; }
+    .badge-status.ready_to_publish { background: #cffafe; color: #0891b2; }
+
+    .quick-actions .btn {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        transition: all 0.2s;
+    }
+    
+    .quick-actions .btn:hover {
+        transform: translateX(4px);
+    }
+
+    .activity-timeline {
+        position: relative;
+        padding-left: 1.5rem;
+        border-left: 2px solid var(--border-light);
+        margin-left: 1rem;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -1.85rem;
+        top: 0.25rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--primary-blue);
+        border: 2px solid white;
+    }
+
+    .timeline-time {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-bottom: 0.25rem;
+    }
+
+    .timeline-content {
+        font-size: 0.875rem;
+        color: var(--text-dark);
+    }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+{% get_dashboard_stats as stats %}
+
+<div class="container-fluid">
+    <div class="dashboard-header">
+        <h1>TIFT Ilmiy Jurnali Boshqaruvi</h1>
+        <p class="text-muted">Tizim holati va maqolalar monitoringi</p>
+    </div>
+
+    <!-- Top Cards -->
+    <div class="row mb-4">
+        <div class="col-12 col-sm-6 col-xl-3 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fas fa-file-alt"></i></div>
+                <div class="stat-info">
+                    <h3>{{ stats.total_articles }}</h3>
+                    <p>Jami maqolalar</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon orange"><i class="fas fa-inbox"></i></div>
+                <div class="stat-info">
+                    <h3>{{ stats.new_articles }}</h3>
+                    <p>Yangi yuborilgan</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon red"><i class="fas fa-search"></i></div>
+                <div class="stat-info">
+                    <h3>{{ stats.in_review }}</h3>
+                    <p>Ko'rib chiqilmoqda</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <h3>{{ stats.accepted }}</h3>
+                    <p>Qabul qilingan</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <!-- Analytics Charts -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="dashboard-panel h-100">
+                        <div class="panel-header">
+                            <h2><i class="fas fa-chart-line mr-2 text-primary"></i> Oylik maqolalar tushumi</h2>
+                        </div>
+                        <div class="panel-body">
+                            <canvas id="monthlyChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="dashboard-panel h-100">
+                        <div class="panel-header">
+                            <h2><i class="fas fa-chart-pie mr-2 text-primary"></i> Holatlar taqsimoti</h2>
+                        </div>
+                        <div class="panel-body">
+                            <canvas id="statusChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latest Articles -->
+            <div class="dashboard-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-list mr-2 text-primary"></i> So'nggi maqolalar</h2>
+                    <a href="{% url 'admin:journal_article_changelist' %}" class="btn btn-sm btn-outline-primary">Barchasini ko'rish</a>
+                </div>
+                <div class="panel-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-custom mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="pl-4">Nomi</th>
+                                    <th>Muallif</th>
+                                    <th>Sana</th>
+                                    <th>Holati</th>
+                                    <th class="pr-4 text-right">Amal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% get_latest_articles limit=5 as latest_articles %}
+                                {% for article in latest_articles %}
+                                <tr>
+                                    <td class="pl-4"><strong>{{ article.title|truncatechars:40 }}</strong></td>
+                                    <td>{{ article.author.get_full_name|default:article.author.username }}</td>
+                                    <td>{{ article.created_at|date:"d M, Y" }}</td>
+                                    <td><span class="badge-status {{ article.status }}">{{ article.get_status_display }}</span></td>
+                                    <td class="pr-4 text-right">
+                                        <a href="{% url 'admin:journal_article_change' article.pk %}" class="btn btn-sm btn-light text-primary"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr><td colspan="5" class="text-center py-4">Hozircha maqolalar yo'q.</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Widgets -->
+        <div class="col-lg-4">
+            <!-- Quick Actions -->
+            <div class="dashboard-panel quick-actions">
+                <div class="panel-header">
+                    <h2><i class="fas fa-bolt mr-2 text-warning"></i> Tezkor amallar</h2>
+                </div>
+                <div class="panel-body d-flex flex-column">
+                    <a href="{% url 'admin:journal_journalissue_add' %}" class="btn btn-outline-primary"><i class="fas fa-plus-circle mr-2"></i> Yangi jurnal soni yaratish</a>
+                    <a href="{% url 'admin:journal_article_add' %}" class="btn btn-outline-success"><i class="fas fa-file-upload mr-2"></i> Maqola qo'shish</a>
+                    <a href="{% url 'admin:journal_user_add' %}" class="btn btn-outline-info"><i class="fas fa-user-plus mr-2"></i> Foydalanuvchi qo'shish</a>
+                </div>
+            </div>
+
+            <!-- Upcoming Issue -->
+            <div class="dashboard-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-book-open mr-2 text-primary"></i> Kelgusi nashr</h2>
+                </div>
+                <div class="panel-body">
+                    {% get_upcoming_issue as issue %}
+                    {% if issue %}
+                    <h5 class="font-weight-bold mb-1">{{ issue.title }}</h5>
+                    <p class="text-muted text-sm mb-3">Jild {{ issue.volume }}, Son {{ issue.number }} ({{ issue.year }})</p>
+                    
+                    <div class="d-flex justify-content-between text-sm mb-1">
+                        <span>Nashrga tayyorgarlik</span>
+                        <span class="font-weight-bold">{{ issue.articles.count }} ta maqola</span>
+                    </div>
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {% if issue.articles.count > 10 %}100{% else %}{{ issue.articles.count }}0{% endif %}%"></div>
+                    </div>
+                    
+                    <a href="{% url 'admin:journal_journalissue_change' issue.pk %}" class="btn btn-block btn-primary mt-2">Boshqarish</a>
+                    {% else %}
+                    <p class="text-center text-muted mb-0">Faol rejalashtirilgan nashr yo'q.</p>
+                    <a href="{% url 'admin:journal_journalissue_add' %}" class="btn btn-sm btn-outline-primary mt-3 d-block">Yaratish</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-history mr-2 text-secondary"></i> So'nggi amallar</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="activity-timeline">
+                        {% get_recent_activity limit=5 as logs %}
+                        {% for log in logs %}
+                        <div class="timeline-item">
+                            <div class="timeline-time">{{ log.action_time|date:"d M, H:i" }} — {{ log.user.get_username }}</div>
+                            <div class="timeline-content">
+                                {% if log.is_addition %}<span class="text-success"><i class="fas fa-plus"></i> Yaratildi:</span>{% endif %}
+                                {% if log.is_change %}<span class="text-primary"><i class="fas fa-edit"></i> Tahrirlandi:</span>{% endif %}
+                                {% if log.is_deletion %}<span class="text-danger"><i class="fas fa-trash"></i> O'chirildi:</span>{% endif %}
+                                {{ log.object_repr }}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted text-sm">Harakatlar tarixi bo'sh.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    {% get_chart_data as raw_chart_data %}
+    const chartData = {{ raw_chart_data|safe }};
+    
+    // Monthly Line Chart
+    const ctxMonthly = document.getElementById('monthlyChart').getContext('2d');
+    new Chart(ctxMonthly, {
+        type: 'line',
+        data: {
+            labels: chartData.monthly.labels,
+            datasets: [{
+                label: 'Yuborilgan maqolalar',
+                data: chartData.monthly.data,
+                borderColor: '#2563eb',
+                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 } }
+            }
+        }
+    });
+
+    // Status Donut Chart
+    const ctxStatus = document.getElementById('statusChart').getContext('2d');
+    new Chart(ctxStatus, {
+        type: 'doughnut',
+        data: {
+            labels: chartData.status.labels,
+            datasets: [{
+                data: chartData.status.data,
+                backgroundColor: ['#e0e7ff', '#fef3c7', '#ffedd5', '#f3f4f6', '#d1fae5', '#fee2e2', '#cffafe', '#dcfce7'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: { legend: { position: 'right' } }
+        }
+    });
+});
+</script>
+
+{% endblock %}

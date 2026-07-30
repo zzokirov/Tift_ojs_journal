@@ -1,0 +1,5 @@
+- [x] `journal/models.py` da yangi statuslarni qo'shish va ma'lumotlar bazasiga migratsiya qilish.
+- [x] `core/templatetags/admin_dashboard.py` faylini yaratish va dashboard uchun zarur ma'lumotlarni yig'uvchi funksiyalarni yozish.
+- [x] `core/settings.py` faylida Jazzmin menyusini (yon panelni) yangi maqola holatlariga moslashtirish.
+- [x] `templates/admin/index.html` faylini yaratish va dashboard dizaynini (HTML/CSS, Chart.js) to'liq qayta yozish.
+- [ ] O'zgarishlarni tekshirish va GitHub ga yuklash.

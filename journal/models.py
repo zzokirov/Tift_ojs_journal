@@ -82,11 +82,14 @@ class ArticleCategory(models.Model):
 
 class Article(models.Model):
     STATUS_CHOICES = (
-        ('submitted',    'Yuborildi'),
+        ('submitted', 'Yangi maqola'),
+        ('initial_review', 'Dastlabki tekshiruv'),
         ('under_review', 'Taqriz jarayonida'),
-        ('accepted',     'Qabul qilindi'),
-        ('rejected',     'Rad etildi'),
-        ('published',    'Chop etildi'),
+        ('returned', 'Tuzatish uchun qaytarilgan'),
+        ('accepted', 'Qabul qilingan'),
+        ('rejected', 'Rad etilgan'),
+        ('ready_to_publish', 'Nashrga tayyor'),
+        ('published', 'Nashr etilgan'),
     )
 
     # Asosiy ma'lumotlar
@@ -101,7 +104,7 @@ class Article(models.Model):
     category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Yo'nalish / Kategoriya")
 
     # Holat
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='submitted', verbose_name="Maqola holati")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='submitted', verbose_name="Maqola holati")
 
     # Maqola matni (HTML)
     content = models.TextField(blank=True, verbose_name="Maqola matni (HTML)")
