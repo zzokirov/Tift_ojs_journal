@@ -238,17 +238,6 @@ p.img-caption {
     <div class="article-institution">{{ article.author.institution }}</div>
 {% endif %}
 
-<!-- Annotatsiya -->
-<div class="abstract-box">
-    <div class="abstract-title">Abstract / Annotatsiya</div>
-    <div class="abstract-text">{{ article.abstract }}</div>
-</div>
-
-<!-- Kalit so'zlar -->
-<div class="keywords">
-    <span class="kw-label">Keywords / Kalit so'zlar:</span> {{ article.keywords }}
-</div>
-
 <!-- Kategoriya belgisi (ixtiyoriy) -->
 {% if article.category %}
 <div style="font-size:9pt; color:#555; text-align:right; margin-bottom: 15pt; font-style:italic;">
