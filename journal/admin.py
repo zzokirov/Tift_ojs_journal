@@ -74,7 +74,7 @@ class JournalIssueAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Jurnal soni ma'lumotlari", {
-            'fields': ('volume', 'number', 'year', 'period', 'cover_image', 'is_published')
+            'fields': ('volume', 'number', 'year', 'period', 'cover_image', 'full_pdf', 'is_published')
         }),
     )
 
@@ -124,6 +124,10 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ("Muallif va jurnal", {
             'fields': ('author', 'issue', 'category')
+        }),
+        ("Sahifalash (Paginatsiya)", {
+            'fields': ('start_page', 'end_page'),
+            'description': "Agar maqola uchun alohida PDF yuklanmasa, To'plam PDF faylidan shu sahifalar oralig'i avtomatik qirqib olinadi."
         }),
         ("Holat va fayllar", {
             'fields': ('status', 'published_at', 'pdf_file', 'pdf_link', 'template_pdf')

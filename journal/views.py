@@ -797,8 +797,8 @@ from django.views.decorators.cache import never_cache
 @never_cache
 def download_pdf(request, pk):
     """
-    Maqolani shablonda PDF qilib qaytaradi.
-    PyMuPDF (fitz) ishlatiladi — xhtml2pdf talab qilinmaydi.
+    Maqolani PDF qilib qaytaradi.
+    Agar maqolada maxsus PDF bo'lmasa, Jurnal to'plami (full_pdf) dan qirqib olinadi.
     """
     from django.http import HttpResponse, Http404
     import io, os, fitz
@@ -809,24 +809,44 @@ def download_pdf(request, pk):
     safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
     filename = f"TIFT_{safe_title}.pdf"
 
-    if not article.pdf_file:
+    if not article.pdf_file and not (article.issue and article.issue.full_pdf and article.start_page and article.end_page):
         raise Http404("Maqola fayli topilmadi.")
 
     try:
-        # 1) Fayl nomiga qarab DOCX yoki PDF
-        file_name = getattr(article.pdf_file, 'name', '') or ''
-        ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0]
-
-        if ext in ('doc', 'docx'):
-            # --- DOCX → PyMuPDF yordamida yangi PDF yaratish ---
-            content_html = _get_article_content_html(article.pdf_file)
-            pdf_bytes = _build_pdf_from_html_fitz(content_html, article)
+        if article.pdf_file:
+            # Mavjud PDF faylni qaytarish
+            file_name = getattr(article.pdf_file, 'name', '') or ''
+            ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0]
+    
+            if ext in ('doc', 'docx'):
+                content_html = _get_article_content_html(article.pdf_file)
+                pdf_bytes = _build_pdf_from_html_fitz(content_html, article)
+            else:
+                raw = _get_pdf_bytes(article.pdf_file)
+                if not raw:
+                    raise ValueError("Fayl o'qib bo'lmadi")
+                pdf_bytes = _add_header_footer_to_pdf(raw, article)
         else:
-            # --- Mavjud PDF → header/footer qo'shish ---
-            raw = _get_pdf_bytes(article.pdf_file)
+            # To'plam PDF'idan qirqib olish (asl dizayn saqlanadi, shtamp qo'shilmaydi)
+            raw = _get_pdf_bytes(article.issue.full_pdf)
             if not raw:
-                raise ValueError("Fayl o'qib bo'lmadi")
-            pdf_bytes = _add_header_footer_to_pdf(raw, article)
+                raise ValueError("To'plam faylini o'qib bo'lmadi")
+            
+            doc = fitz.open(stream=raw, filetype="pdf")
+            new_doc = fitz.open()
+            
+            # fitz indekslari 0 dan boshlanadi
+            start_idx = max(0, article.start_page - 1)
+            end_idx = min(doc.page_count - 1, article.end_page - 1)
+            
+            if start_idx <= end_idx:
+                new_doc.insert_pdf(doc, from_page=start_idx, to_page=end_idx)
+                pdf_bytes = new_doc.write()
+            else:
+                raise ValueError("Sahifalar oralig'i noto'g'ri ko'rsatilgan")
+            
+            doc.close()
+            new_doc.close()
 
         if pdf_bytes:
             response = HttpResponse(pdf_bytes, content_type='application/pdf')

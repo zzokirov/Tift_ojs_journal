@@ -41,6 +41,7 @@ class JournalIssue(models.Model):
     year = models.PositiveIntegerField(verbose_name="Chop etilgan yili")
     period = models.CharField(max_length=100, blank=True, null=True, verbose_name="Davri (Masalan: 1-chorak, Yanvar-Mart)")
     cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Jild muqovasi (rasmi)")
+    full_pdf = models.FileField(upload_to='issues_pdf/', blank=True, null=True, verbose_name="To'liq to'plam (PDF)")
     is_published = models.BooleanField(default=False, verbose_name="Saytda ko'rsatish")
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -109,7 +110,11 @@ class Article(models.Model):
     # Muallif (tizim foydalanuvchisi) va jurnal
     author   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name="Muallif (foydalanuvchi)")
     issue    = models.ForeignKey(JournalIssue, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Jurnal soni")
-    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Yo'nalish / Kategoriya")
+    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Yo'nalish")
+
+    # Sahifalash (Paginatsiya)
+    start_page = models.PositiveIntegerField(null=True, blank=True, verbose_name="Boshlanish sahifasi (To'plamda)")
+    end_page   = models.PositiveIntegerField(null=True, blank=True, verbose_name="Tugash sahifasi (To'plamda)")
 
     # Holat
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='submitted', verbose_name="Maqola holati")

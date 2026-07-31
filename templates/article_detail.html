@@ -259,7 +259,7 @@
                             <i class="fas fa-external-link-alt text-[10px]"></i> {% trans "Muallif versiyasi" %}
                         </a>
                     </div>
-                {% else %}
+                {% elif article.pdf_file or article.issue.full_pdf and article.start_page and article.end_page %}
                     <div class="px-5 py-5">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -303,13 +303,19 @@
                         </dd>
                     </div>
                     <div class="flex justify-between px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Yil</dt>
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Yil" %}</dt>
                         <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.issue.year }}</dd>
                     </div>
+                    {% if article.start_page and article.end_page %}
+                    <div class="flex justify-between px-5 py-3">
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Sahifalar" %}</dt>
+                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.start_page }}-{{ article.end_page }}</dd>
+                    </div>
+                    {% endif %}
                     {% endif %}
                     {% if article.published_at %}
                     <div class="flex justify-between px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Chop etilgan</dt>
+                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Chop etilgan" %}</dt>
                         <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.published_at|date:"d.m.Y" }}</dd>
                     </div>
                     {% endif %}
