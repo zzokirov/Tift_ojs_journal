@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Arxitektura va Ta'lim Ilmiy Jurnali{% endblock %}</title>
-    <link rel="icon" type="image/png" href="{% static 'images/tift.png?v=3' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/tift.png?v=3' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
 
     <!-- Google Fonts (lokal) -->
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
@@ -99,7 +99,7 @@
                 <a href="{% url 'index' %}" class="flex items-center gap-3 group">
                     <div class="relative">
                         <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
-                            <img src="{% static 'images/tift.png?v=3' %}" alt="TIFT" class="w-10 h-10 object-contain"
+                            <img src="{% static 'images/tift.png' %}?v=3" alt="TIFT" class="w-10 h-10 object-contain"
                                  onerror="this.style.display='none'; this.nextSibling.style.display='flex'">
                             <div class="hidden w-10 h-10 items-center justify-center bg-navy-800 rounded-lg">
                                 <span class="text-green-400 font-black text-sm">T</span>

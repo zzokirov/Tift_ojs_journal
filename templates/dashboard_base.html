@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Dashboard | Arxitektura va Ta'lim Ilmiy Jurnali{% endblock %}</title>
-    <link rel="icon" type="image/png" href="{% static 'images/tift.png?v=3' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/tift.png?v=3' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
     <script src="{% static 'js/tailwind.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
@@ -39,7 +39,7 @@
         <!-- Logo -->
         <a href="{% url 'index' %}" class="flex items-center gap-3 group">
             <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow overflow-hidden">
-                <img src="{% static 'images/tift.png?v=3' %}" alt="TIFT" class="w-8 h-8 object-contain"
+                <img src="{% static 'images/tift.png' %}?v=3" alt="TIFT" class="w-8 h-8 object-contain"
                      onerror="this.style.display='none'">
             </div>
             <div>
