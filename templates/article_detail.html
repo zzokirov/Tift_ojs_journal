@@ -339,35 +339,60 @@
                 </dl>
             </div>
 
-            <!-- MUALLIF -->
+                        <!-- MUALLIF -->
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
                 <h3 class="font-bold text-navy-900 text-sm mb-4 flex items-center gap-2">
-                    <i class="fas fa-user-circle text-green-500 text-sm"></i> Muallif
+                    <i class="fas fa-users text-green-500 text-sm"></i> {% trans "Mualliflar" %}
                 </h3>
-                <div class="flex items-start gap-3">
-                    <div class="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg flex-shrink-0"
-                         style="background:linear-gradient(135deg,#142d54,#0a1628);color:#22c55e;">
-                        {% if article.authors %}
-                            {{ article.authors|first|upper }}
-                        {% else %}
-                            {{ article.author.get_full_name|default:article.author.username|first|upper }}
-                        {% endif %}
-                    </div>
-                    <div>
-                        <div class="font-bold text-navy-900 text-sm">
-                            {% if article.authors %}
-                                {{ article.authors|truncatewords:4 }}
-                            {% else %}
-                                {{ article.author.get_full_name|default:article.author.username }}
+                
+                <div class="space-y-4">
+                {% if authors_list %}
+                    {% for auth in authors_list %}
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-base flex-shrink-0"
+                             style="background:linear-gradient(135deg,#142d54,#0a1628);color:#22c55e;">
+                            {{ auth.name|first|upper }}
+                        </div>
+                        <div>
+                            <div class="font-bold text-navy-900 text-sm">
+                                {{ auth.name }}
+                            </div>
+                            {% if auth.inst %}
+                                <div class="text-xs mt-1 flex items-start gap-1.5" style="color:#64748b; line-height: 1.3;">
+                                    <i class="fas fa-university text-green-500 text-[9px] mt-0.5"></i>
+                                    {{ auth.inst }}
+                                </div>
                             {% endif %}
                         </div>
-                        {% if article.author.institution %}
-                            <div class="text-xs mt-1 flex items-center gap-1.5" style="color:#64748b;">
-                                <i class="fas fa-university text-green-500 text-[9px]"></i>
-                                {{ article.author.institution }}
-                            </div>
-                        {% endif %}
                     </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="flex items-start gap-3">
+                        <div class="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg flex-shrink-0"
+                             style="background:linear-gradient(135deg,#142d54,#0a1628);color:#22c55e;">
+                            {% if article.authors %}
+                                {{ article.authors|first|upper }}
+                            {% else %}
+                                {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                            {% endif %}
+                        </div>
+                        <div>
+                            <div class="font-bold text-navy-900 text-sm">
+                                {% if article.authors %}
+                                    {{ article.authors }}
+                                {% else %}
+                                    {{ article.author.get_full_name|default:article.author.username }}
+                                {% endif %}
+                            </div>
+                            {% if article.author.institution %}
+                                <div class="text-xs mt-1 flex items-center gap-1.5" style="color:#64748b;">
+                                    <i class="fas fa-university text-green-500 text-[9px]"></i>
+                                    {{ article.author.institution }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
                 </div>
             </div>
 

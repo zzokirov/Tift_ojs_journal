@@ -20,6 +20,61 @@
                     {% csrf_token %}
 
                     {% for field in form %}
+                        {% if field.name == 'authors' %}
+                            <div class="mb-5">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    {% trans "Mualliflar va ish joyi" %} <span class="text-red-500">*</span>
+                                </label>
+                                <div id="authorsContainer" class="space-y-3"></div>
+                                <button type="button" id="addAuthorBtn" class="mt-3 text-sm font-medium text-navy-600 hover:text-navy-800 flex items-center gap-1.5">
+                                    <i class="fas fa-plus-circle"></i> {% trans "Yana muallif qo'shish" %}
+                                </button>
+                                <input type="hidden" name="{{ field.name }}" id="{{ field.id_for_label }}" value="">
+                            </div>
+                            
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    const container = document.getElementById("authorsContainer");
+                                    const addBtn = document.getElementById("addAuthorBtn");
+                                    const hiddenInput = document.getElementById("{{ field.id_for_label }}");
+                                    
+                                    function createRow() {
+                                        const row = document.createElement("div");
+                                        row.className = "flex flex-col md:flex-row gap-3 p-4 bg-gray-50 border border-gray-200 rounded-xl relative";
+                                        row.innerHTML = 
+                                            <div class="w-full md:w-1/2">
+                                                <input type="text" class="author-name w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:border-navy-500 outline-none bg-white" placeholder="Ism Familiya" required>
+                                            </div>
+                                            <div class="w-full md:w-1/2">
+                                                <input type="text" class="author-inst w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:border-navy-500 outline-none bg-white" placeholder="Ish yoki o'qish joyi" required>
+                                            </div>
+                                            <button type="button" class="remove-author absolute -top-2 -right-2 bg-red-100 text-red-500 hover:bg-red-500 hover:text-white rounded-full w-6 h-6 flex items-center justify-center transition-colors shadow-sm">
+                                                <i class="fas fa-times text-xs"></i>
+                                            </button>
+                                        ;
+                                        row.querySelector('.remove-author').addEventListener('click', () => {
+                                            if (container.children.length > 1) { row.remove(); updateValue(); }
+                                        });
+                                        row.querySelectorAll('input').forEach(i => i.addEventListener('input', updateValue));
+                                        container.appendChild(row);
+                                    }
+                                    
+                                    function updateValue() {
+                                        let data = [];
+                                        container.querySelectorAll('.flex.flex-col').forEach(row => {
+                                            const n = row.querySelector('.author-name').value.trim();
+                                            const i = row.querySelector('.author-inst').value.trim();
+                                            if (n || i) data.push(n + " | " + i);
+                                        });
+                                        hiddenInput.value = data.join(' ; ');
+                                    }
+                                    
+                                    createRow();
+                                    addBtn.addEventListener('click', createRow);
+                                    hiddenInput.closest('form').addEventListener('submit', updateValue);
+                                });
+                            </script>
+                        {% else %}
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">
                                 {{ field.label }}
@@ -75,6 +130,7 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
+                        {% endif %}
                     {% endfor %}
 
                     <div class="pt-4 border-t border-gray-100">
