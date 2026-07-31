@@ -76,28 +76,31 @@ body {
 
 /* -- SARLAVHA BLOKI -- */
 .article-title {
+    background-color: #0a2540;
+    color: #ffffff;
     font-family: 'Times New Roman', serif;
     font-size: 16pt;
     font-weight: bold;
-    color: #000;
-    line-height: 1.2;
-    margin: 20pt 0 15pt 0;
+    text-transform: uppercase;
     text-align: center;
+    padding: 15pt;
+    margin: 0 0 15pt 0;
+    line-height: 1.2;
 }
 .article-authors {
     font-family: 'Times New Roman', serif;
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: bold;
-    color: #000;
-    text-align: center;
+    color: #990000;
+    text-align: left;
     margin-bottom: 4pt;
 }
 .article-institution {
     font-family: 'Times New Roman', serif;
-    font-size: 10pt;
-    color: #333;
-    font-style: italic;
-    text-align: center;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #000;
+    text-align: left;
     margin-bottom: 20pt;
 }
 
@@ -183,6 +186,38 @@ p.img-caption {
 </style>
 </head>
 <body>
+
+<!-- BIRINCHI SAHIFA UCHUN MAXSUS SARLAVHA -->
+<div style="background-color: #0b2242; padding: 15px; margin-bottom: 20pt; width: 100%;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="width: 15%; vertical-align: middle; text-align: left;">
+                {% if logo_base64 %}
+                    <img src="{{ logo_base64 }}" style="width: 50pt; height: 50pt;" />
+                {% endif %}
+            </td>
+            <td style="width: 65%; vertical-align: middle; text-align: center;">
+                <div style="color: #ffffff; font-family: 'Times New Roman', serif; font-size: 14pt; font-weight: bold; text-transform: uppercase;">
+                    "ARXITEKTURA VA TA'LIM"
+                </div>
+                <div style="color: #ffcc00; font-family: 'Times New Roman', serif; font-size: 11pt; font-weight: bold; text-transform: uppercase; margin-top: 5px;">
+                    ILMIY-ELEKTRON JURNAL
+                </div>
+            </td>
+            <td style="width: 20%; vertical-align: middle; text-align: right;">
+                <div style="color: #ffcc00; font-family: 'Times New Roman', serif; font-size: 14pt; font-weight: bold;">
+                    {% if article.issue %}{{ article.issue.year }}{% else %}2024{% endif %}
+                </div>
+                <div style="color: #ffffff; font-family: 'Times New Roman', serif; font-size: 10pt; font-weight: bold; margin-top: 2px;">
+                    {% if article.issue %}№{{ article.issue.number }}{% else %}Maxsus son{% endif %}
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div style="width: 100%; border-top: 1pt solid #ffffff; margin-top: 10pt; padding-top: 5pt; text-align: center;">
+        <span style="color: #ffffff; font-size: 9pt; font-family: 'Times New Roman', serif;">http://architect-edu.tift.uz</span>
+    </div>
+</div>
 
 <!-- -- MAQOLA MA'LUMOTLARI -- -->
 

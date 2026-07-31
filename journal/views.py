@@ -501,14 +501,9 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
         doc = fitz.open(stream=pdf_bytes, filetype="pdf")
 
         # Ranglar
-        DARK_BLUE = (0.04, 0.086, 0.157)   # #0a1628
-        GREEN     = (0.086, 0.502, 0.239)   # #15803d
+        DARK_BLUE = (0.04, 0.133, 0.259)   # #0b2242
+        WHITE     = (1.0, 1.0, 1.0)
         GRAY      = (0.4, 0.4, 0.4)
-
-        # Jurnal ma'lumotlari
-        journal_name  = "TIFT JOURNAL"
-        journal_sub   = '"Arxitektura va Ta\'lim" Ilmiy-Elektron Jurnali'
-        footer_text   = "Toshkent sh., Amir Temur ko'chasi, 108  |  Tel: +998 71 238-74-80  |  journal@tift.uz  |  www.tift.uz"
 
         if article.issue:
             issue_text = f"Jild {article.issue.volume}, Son {article.issue.number}, {article.issue.year}"
@@ -519,87 +514,74 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
             w = page.rect.width    # sahifa kengligi (pt)
             h = page.rect.height   # sahifa balandligi (pt)
 
-            margin_x = 71.0  # 2.5cm
-            header_y = 22.0  # yuqoridan 0.77cm
-            footer_y = h - 25.0  # pastdan
+            margin_left = 85.0   # 3.0cm
+            margin_right = 42.5  # 1.5cm
+            header_y = 30.0
+            footer_y = h - 30.0
 
-            # ── YUQORI KOLONTITUL ──
+            # --- YUQORI KOLONTITUL (Faqat 2-sahifadan boshlab) ---
+            if page.number > 0:
+                # Yuqori qalin ko'k chiziq
+                page.draw_line(
+                    (margin_left, header_y),
+                    (w - margin_right, header_y),
+                    color=DARK_BLUE, width=3.0
+                )
 
-            # Logo kvadrat (chap)
-            logo_rect = fitz.Rect(margin_x, header_y - 2, margin_x + 28, header_y + 26)
-            page.draw_rect(logo_rect, color=DARK_BLUE, fill=DARK_BLUE, width=0)
-            page.insert_text(
-                (margin_x + 7, header_y + 19),
-                "T", fontsize=16,
-                color=(0.133, 0.773, 0.369),  # #22c55e
-                fontname="Helvetica-Bold"
-            )
-
-            # Jurnal nomi (o'rta)
-            page.insert_text(
-                (margin_x + 34, header_y + 10),
-                journal_name, fontsize=10,
-                color=DARK_BLUE, fontname="Helvetica-Bold"
-            )
-            page.insert_text(
-                (margin_x + 34, header_y + 22),
-                journal_sub, fontsize=7,
-                color=GRAY, fontname="Helvetica"
-            )
-
-            # Jurnal soni (o'ng)
-            page.insert_text(
-                (w - margin_x - 100, header_y + 10),
-                issue_text, fontsize=8,
-                color=GRAY, fontname="Helvetica"
-            )
-            page.insert_text(
-                (w - margin_x - 70, header_y + 20),
-                "ISSN: 2181-XXXX", fontsize=7,
-                color=GRAY, fontname="Helvetica"
-            )
-
-            # Yuqori chiziq (yashil)
+            # --- PASTKI KOLONTITUL (Hamma sahifada) ---
+            
+            # Pastki qalin ko'k chiziq
             page.draw_line(
-                (margin_x, header_y + 30),
-                (w - margin_x, header_y + 30),
-                color=GREEN, width=1.2
-            )
-
-            # ── PASTKI KOLONTITUL ──
-
-            # Pastki chiziq (yashil)
-            page.draw_line(
-                (margin_x, footer_y - 4),
-                (w - margin_x, footer_y - 4),
-                color=GREEN, width=0.8
+                (margin_left, footer_y),
+                (w - margin_right, footer_y),
+                color=DARK_BLUE, width=3.0
             )
 
             # Sahifa raqami
+            current_page = 1
             if getattr(article, 'start_page', None):
                 current_page = article.start_page + page.number
-                page_num = f"- {current_page} -"
             else:
-                page_num = f"- {page.number + 1} -"
-
+                current_page = page.number + 1
+                
+            page_str = str(current_page)
+            
+            # Kvadrat o'lchamlari
+            box_width = 40.0
+            box_height = 15.0
+            
+            if current_page % 2 == 0:
+                # Juft sahifa - Chapda
+                x0 = margin_left
+            else:
+                # Toq sahifa - O'ngda
+                x0 = w - margin_right - box_width
+                
+            y0 = footer_y + 4
+            x1 = x0 + box_width
+            y1 = y0 + box_height
+            
+            # To'rtburchak chizish
+            rect = fitz.Rect(x0, y0, x1, y1)
+            page.draw_rect(rect, color=DARK_BLUE, fill=DARK_BLUE, width=0)
+            
+            # Matnni markazga joylash
+            tw = fitz.get_text_length(page_str, fontname="Helvetica-Bold", fontsize=10)
+            tx = x0 + (box_width - tw) / 2
+            ty = y0 + 11
+            
             page.insert_text(
-                (w / 2 - 20, footer_y + 8),
-                page_num, fontsize=8,
-                color=DARK_BLUE, fontname="Helvetica-Bold"
+                (tx, ty),
+                page_str, fontsize=10,
+                color=WHITE, fontname="Helvetica-Bold"
             )
 
-            # Manzil
-            page.insert_text(
-                (margin_left, footer_y + 18),
-                footer_text, fontsize=6.5,
-                color=GRAY, fontname="Helvetica"
-            )
-
-        # Yangi PDF bytes
         out = io.BytesIO()
         doc.save(out)
-        doc.close()
         return out.getvalue()
+    except Exception as e:
+        print("PDF header xatosi:", e)
+        return pdf_bytes
 
     except Exception as e:
         # Xatolik bo'lsa asl bytes qaytaradi
