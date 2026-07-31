@@ -600,6 +600,24 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
                 color=WHITE, fontname="Helvetica-Bold"
             )
 
+            # --- Footer Text (Jurnal nomi) ---
+            year = article.issue.year if article.issue else "2026"
+            footer_text = f"TIFT | © {year} Arxitektura va Ta'lim Ilmiy Elektron Jurnali"
+            tw_footer = fitz.get_text_length(footer_text, fontname="Helvetica", fontsize=9)
+            
+            if current_page % 2 == 0:
+                tx_footer = w - margin_right - tw_footer
+            else:
+                tx_footer = margin_left
+                
+            ty_footer = footer_y + 11
+            
+            page.insert_text(
+                (tx_footer, ty_footer),
+                footer_text, fontsize=9,
+                color=DARK_BLUE, fontname="Helvetica"
+            )
+
         out = io.BytesIO()
         doc.save(out)
         return out.getvalue()
