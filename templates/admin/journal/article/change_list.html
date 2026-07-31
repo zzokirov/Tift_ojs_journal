@@ -1,0 +1,40 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static %}
+
+{% block result_list %}
+<div class="issues-tabs-container" style="margin-bottom: 20px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+    <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 16px; font-weight: bold; color: #333;">
+        <i class="fas fa-book-open" style="margin-right: 8px; color: #2563EB;"></i>{% trans "Jildlar bo'yicha saralash" %}
+    </h3>
+    <div style="display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px;" class="scroll-container">
+        <a href="?" class="issue-tab" style="padding: 8px 16px; border-radius: 20px; font-weight: 600; white-space: nowrap; text-decoration: none; transition: all 0.2s; {% if not selected_issue %}background: #2563EB; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);{% else %}background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;{% endif %}">
+            Barcha maqolalar
+        </a>
+        
+        {% for issue in all_issues %}
+        <a href="?issue__id__exact={{ issue.id }}" class="issue-tab" style="padding: 8px 16px; border-radius: 20px; font-weight: 600; white-space: nowrap; text-decoration: none; transition: all 0.2s; {% if selected_issue == issue.id|stringformat:'s' %}background: #2563EB; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);{% else %}background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;{% endif %}">
+            {% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %} ({{ issue.year }})
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .issue-tab:hover {
+        transform: translateY(-2px);
+    }
+    .scroll-container::-webkit-scrollbar {
+        height: 6px;
+    }
+    .scroll-container::-webkit-scrollbar-track {
+        background: #f1f5f9; 
+        border-radius: 4px;
+    }
+    .scroll-container::-webkit-scrollbar-thumb {
+        background: #cbd5e1; 
+        border-radius: 4px;
+    }
+</style>
+
+{{ block.super }}
+{% endblock %}

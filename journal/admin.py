@@ -94,6 +94,14 @@ class JournalIssueAdmin(admin.ModelAdmin):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/journal/article/change_list.html'
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['all_issues'] = JournalIssue.objects.all().order_by('-year', '-number')
+        extra_context['selected_issue'] = request.GET.get('issue__id__exact')
+        return super().changelist_view(request, extra_context=extra_context)
+
     list_display = (
         'title_short', 'author_name', 'issue',
         'status', 'views_count', 'downloads_count', 'created_at'

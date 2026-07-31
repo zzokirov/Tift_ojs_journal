@@ -35,7 +35,15 @@ def index(request):
         week_data = []
 
     query = request.GET.get('q')
-    recent_articles = Article.objects.filter(status='published').order_by('-created_at')
+    issues = JournalIssue.objects.all().order_by('-year', '-number')
+    latest_issue = issues.first()
+    total_articles = Article.objects.filter(status='published').count()
+    
+    if latest_issue:
+        recent_articles = Article.objects.filter(issue=latest_issue, status='published').order_by('-created_at')
+    else:
+        recent_articles = Article.objects.filter(status='published').order_by('-created_at')
+        
     if query:
         recent_articles = recent_articles.filter(
             Q(title__icontains=query) |
@@ -46,10 +54,12 @@ def index(request):
             Q(author__last_name__icontains=query) |
             Q(author__username__icontains=query)
         )
-    recent_articles = recent_articles[:10]
-    issues = JournalIssue.objects.all().order_by('-year', '-number')
+    recent_articles = recent_articles[:4]
+    
     return render(request, 'index.html', {
         'recent_articles': recent_articles,
+        'latest_issue': latest_issue,
+        'total_articles': total_articles,
         'issues': issues,
         'query': query,
         'total_visitors': total_visitors,
