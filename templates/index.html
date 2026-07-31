@@ -418,24 +418,47 @@ if (ctx) {
                     </h3>
                 </div>
                 <div class="divide-y divide-gray-50">
-                    {% for issue in issues %}
-                        <a href="{% url 'issue_detail' issue.pk %}"
-                           class="flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 transition-colors group">
-                            <div>
-                                <div class="text-navy-800 font-semibold text-sm group-hover:text-navy-600 transition-colors">
-                                    {% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
-                                </div>
-                                <div class="text-xs text-gray-400 mt-0.5">
-                                    {{ issue.articles.count }} {% trans "ta maqola" %}
-                                </div>
+                    {% regroup issues by volume as volume_list %}
+                    {% for vol in volume_list %}
+                        <!-- Jild (Volume) Header -->
+                        <div class="flex items-center justify-between px-5 py-3.5 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleVolume('vol-{{ vol.grouper }}')">
+                            <div class="font-bold text-navy-800 text-sm flex items-center gap-2">
+                                <i class="fas fa-folder text-green-500/70"></i>
+                                {% blocktrans with vol=vol.grouper %}Jild {{ vol }}{% endblocktrans %}
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="bg-green-600/10 text-green-700 text-xs font-bold px-2.5 py-1 rounded-lg border border-green-500/20">
-                                    {{ issue.year }}
+                            <div class="flex items-center gap-3">
+                                <span class="bg-navy-100 text-navy-700 text-xs font-bold px-2 py-0.5 rounded-md">
+                                    {{ vol.list.0.year }}
                                 </span>
-                                <i class="fas fa-chevron-right text-[10px] text-gray-400 group-hover:text-navy-600 group-hover:translate-x-0.5 transition-all"></i>
+                                <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-300" id="icon-vol-{{ vol.grouper }}"></i>
                             </div>
-                        </a>
+                        </div>
+                        
+                        <!-- Sonlar (Issues) List -->
+                        <div id="vol-{{ vol.grouper }}" class="hidden divide-y divide-gray-50 bg-white">
+                            {% for issue in vol.list %}
+                                <a href="{% url 'issue_detail' issue.pk %}"
+                                   class="flex items-center justify-between px-5 py-3 pl-10 hover:bg-green-50/50 transition-colors group">
+                                    <div>
+                                        <div class="text-navy-800 font-semibold text-sm group-hover:text-green-700 transition-colors">
+                                            {% blocktrans with num=issue.number %}Son {{ num }}{% endblocktrans %}
+                                        </div>
+                                        <div class="text-xs text-gray-400 mt-0.5 flex items-center gap-1">
+                                            <i class="fas fa-file-alt text-[10px]"></i>
+                                            {{ issue.articles.count }} {% trans "ta maqola" %}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        {% if issue.period %}
+                                        <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wider">
+                                            {{ issue.period }}
+                                        </span>
+                                        {% endif %}
+                                        <i class="fas fa-arrow-right text-[10px] text-gray-300 group-hover:text-green-600 group-hover:translate-x-1 transition-all"></i>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
                     {% empty %}
                         <div class="px-5 py-8 text-center text-gray-400 text-sm">
                             <i class="fas fa-inbox text-2xl mb-2 block"></i>
@@ -443,6 +466,20 @@ if (ctx) {
                         </div>
                     {% endfor %}
                 </div>
+                
+                <script>
+                function toggleVolume(id) {
+                    const el = document.getElementById(id);
+                    const icon = document.getElementById('icon-' + id);
+                    if (el.classList.contains('hidden')) {
+                        el.classList.remove('hidden');
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        el.classList.add('hidden');
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                }
+                </script>
             </div>
 
             <!-- ABOUT SECTION -->
