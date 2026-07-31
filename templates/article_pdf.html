@@ -222,6 +222,23 @@ p.img-caption {
 
 <!-- -- MAQOLA MA'LUMOTLARI -- -->
 
+<!-- Sarlavha -->
+<div class="article-title">{{ article.title }}</div>
+
+<!-- Mualliflar -->
+<div class="article-authors">
+    {% if article.authors %}
+        {{ article.authors }}
+    {% else %}
+        {{ article.author.get_full_name|default:article.author.username }}
+    {% endif %}
+</div>
+
+<!-- Muassasa -->
+{% if article.author.institution %}
+    <div class="article-institution">{{ article.author.institution }}</div>
+{% endif %}
+
 <!-- Kategoriya belgisi (ixtiyoriy) -->
 {% if article.category %}
 <div style="font-size:9pt; color:#555; text-align:right; margin-bottom: 15pt; font-style:italic;">
