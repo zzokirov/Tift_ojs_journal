@@ -377,7 +377,31 @@ def _extract_docx_text_as_html(docx_path):
                 table_html.append('</table>')
                 result_html.append('\n'.join(table_html))
 
-        return '\n'.join(result_html)
+        html_content = '\n'.join(result_html)
+        
+        import re
+        # Style abstracts and keywords
+        keywords = ["Annotatsiya", "Аннотация", "Annotation", "Abstract", "Kalit so'zlar", "Keywords", "Ключевые слова"]
+        for kw in keywords:
+            html_content = re.sub(
+                r'(<p[^>]*>)\s*(?:<strong>)?\s*(' + kw + r')\s*(?:</strong>)?\s*(:)?\s*(</p>)?',
+                r'\g<1><span style="color:#004080; font-style:italic; font-weight:bold;">\g<2>\g<3></span>\g<4>',
+                html_content,
+                flags=re.IGNORECASE
+            )
+
+        # Remove multiple empty paragraphs that cause huge empty spaces
+        html_content = re.sub(r'(<p[^>]*>\s*</p>\s*)+', '', html_content)
+        
+        # Also remove <br> tags at the end of paragraphs
+        html_content = re.sub(r'<br\s*/?>\s*</p>', '</p>', html_content)
+
+        # Strip DOCX title and authors by cutting before Abstract
+        match = re.search(r'<p[^>]*>\s*<span style="color:#004080; font-style:italic; font-weight:bold;">\s*(?:Annotatsiya|Аннотация|Annotation|Abstract)', html_content, flags=re.IGNORECASE)
+        if match:
+            html_content = html_content[match.start():]
+        
+        return html_content
     except Exception:
         return ''
 
