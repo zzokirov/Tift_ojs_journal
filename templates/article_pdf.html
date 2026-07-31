@@ -21,22 +21,6 @@ body {
     margin-bottom: 2.0cm;
     margin-left: 2.5cm;
     margin-right: 2.5cm;
-
-    @frame header_frame {
-        -pdf-frame-content: page-header;
-        left: 2.5cm;
-        top: 1.0cm;
-        right: 2.5cm;
-        height: 1.5cm;
-    }
-
-    @frame footer_frame {
-        -pdf-frame-content: page-footer;
-        left: 2.5cm;
-        bottom: 1.0cm;
-        right: 2.5cm;
-        height: 1.0cm;
-    }
 }
 /* stylelint-enable */
 
@@ -199,47 +183,6 @@ p.img-caption {
 </style>
 </head>
 <body>
-
-<!-- -- YUQORI KOLONTITUL -- -->
-<div id="page-header">
-    <table class="hdr-table">
-        <tr>
-            <td class="hdr-logo-cell">
-                <div class="hdr-logo">
-                    {% if logo_base64 %}
-                        <img src="{{ logo_base64 }}"
-                             style="width:35pt;height:35pt;object-fit:contain;display:block;margin:auto;"/>
-                    {% else %}
-                        <span style="font-family:Arial;font-weight:bold;font-size:18pt;color:#000;">TIFT</span>
-                    {% endif %}
-                </div>
-            </td>
-            <td class="hdr-center-cell">
-                <div class="hdr-journal-name">TIFT "ARXITEKTURA VA TA'LIM"</div>
-                <div class="hdr-journal-sub">Ilmiy-elektron jurnali</div>
-            </td>
-            <td class="hdr-right-cell">
-                {% if article.issue %}
-                    Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}<br>
-                {% else %}
-                    Qabul qilingan maqola<br>
-                {% endif %}
-                <span style="font-size: 8pt; color:#555;">architect-edu.tift.uz</span>
-            </td>
-        </tr>
-    </table>
-</div>
-
-<!-- -- PASTKI KOLONTITUL -- -->
-<div id="page-footer">
-    <table class="ftr-table">
-        <tr>
-            <td class="ftr-left">Toshkent, O'zbekiston</td>
-            <td class="ftr-center">- <pdf:pagenumber> -</td>
-            <td class="ftr-right">journal@tift.uz</td>
-        </tr>
-    </table>
-</div>
 
 <!-- -- MAQOLA MA'LUMOTLARI -- -->
 

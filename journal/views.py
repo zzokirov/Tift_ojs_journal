@@ -404,199 +404,33 @@ def _get_logo_base64():
         return ''
 
 
-def _build_pdf_from_html_fitz(content_html, article):
-    """
-    DOCX matnidan PyMuPDF (fitz) bilan shablonli PDF yaratadi.
-    xhtml2pdf talab qilinmaydi.
-    """
-    import fitz, io
-    from html.parser import HTMLParser
+def _build_pdf_from_html_xhtml2pdf(article, request=None):
+    from django.template.loader import render_to_string
+    from django.conf import settings as django_settings
+    import io
+    try:
+        from xhtml2pdf import pisa
+    except ImportError:
+        return b''
+    
+    content_html = ''
+    if article.pdf_file:
+        try:
+            content_html = _get_article_content_html(article.pdf_file)
+        except Exception:
+            pass
 
-    # HTML dan toza matn olish
-    class HTMLTextExtractor(HTMLParser):
-        def __init__(self):
-            super().__init__()
-            self.text_parts = []
-            self.in_skip = False
-        def handle_starttag(self, tag, attrs):
-            if tag in ('style', 'script'):
-                self.in_skip = True
-            if tag in ('p', 'br', 'h1', 'h2', 'h3', 'h4', 'li', 'tr'):
-                self.text_parts.append('\n')
-        def handle_endtag(self, tag):
-            if tag in ('style', 'script'):
-                self.in_skip = False
-        def handle_data(self, data):
-            if not self.in_skip:
-                self.text_parts.append(data)
-        def get_text(self):
-            return ''.join(self.text_parts)
-
-    parser = HTMLTextExtractor()
-    parser.feed(content_html or '')
-    article_text = parser.get_text().strip()
-
-    # Sahifa o'lchamlari (A4)
-    W, H = 595.0, 842.0
-    ML, MR, MT, MB = 71.0, 71.0, 75.0, 65.0   # margins
-    LINE_H = 14.0   # qator balandligi
-
-    DARK   = (0.04, 0.086, 0.157)   # #0a1628
-    GREEN  = (0.086, 0.502, 0.239)  # #15803d
-    GRAY   = (0.40, 0.40, 0.40)
-
-    doc = fitz.open()
-
-    journal_name = "TIFT JOURNAL"
-    journal_sub  = '"Arxitektura va Ta\'lim" Ilmiy-Elektron Jurnali'
-    footer_info  = "Toshkent sh., Amir Temur ko'chasi, 108  |  journal@tift.uz  |  www.tift.uz"
-    if article.issue:
-        issue_str = f"Jild {article.issue.volume}, Son {article.issue.number}, {article.issue.year}"
-    else:
-        issue_str = "ISSN: 2181-XXXX"
-
-    authors_str = (article.authors or '').strip()
-    if not authors_str:
-        full = article.author.get_full_name()
-        authors_str = full if full else article.author.username
-
-    def draw_header_footer(page, page_num, total):
-        """Har bir sahifaga header va footer chizadi."""
-        # Header background line
-        page.draw_rect(fitz.Rect(0, 0, W, 52), color=None, fill=(0.98, 0.98, 0.98))
-        # Logo block
-        page.draw_rect(fitz.Rect(ML, 11, ML+26, 42), color=DARK, fill=DARK)
-        page.insert_text((ML+6, 33), "T", fontsize=16, color=(0.133, 0.773, 0.369), fontname="helv")
-        # Journal name
-        page.insert_text((ML+32, 26), journal_name, fontsize=10, color=DARK, fontname="Helvetica-Bold")
-        page.insert_text((ML+32, 38), journal_sub, fontsize=7, color=GRAY, fontname="Helvetica")
-        # Issue top right
-        page.insert_text((W-MR-110, 26), issue_str, fontsize=8, color=GRAY, fontname="Helvetica")
-        page.insert_text((W-MR-95, 37), "ISSN: 2181-XXXX", fontsize=7, color=GRAY, fontname="Helvetica")
-        # Header line
-        page.draw_line((ML, 52), (W-MR, 52), color=GREEN, width=1.2)
-
-        # Footer line
-        fy = H - MB + 8
-        page.draw_line((ML, fy), (W-MR, fy), color=GREEN, width=0.8)
-        page.insert_text((W/2-18, fy+14), f"– {page_num} / {total} –", fontsize=8, color=DARK, fontname="Helvetica-Bold")
-        page.insert_text((ML, fy+24), footer_info, fontsize=6.5, color=GRAY, fontname="Helvetica")
-
-    def new_page():
-        pg = doc.new_page(width=W, height=H)
-        return pg, MT + 20   # y start after header
-
-    # ── Sahifa 1: Sarlavha ──
-    page, y = new_page()
-
-    # Sarlavha
-    title_words = article.title.split()
-    line, lines = [], []
-    for w in title_words:
-        test = ' '.join(line + [w])
-        if len(test) > 62:
-            lines.append(' '.join(line))
-            line = [w]
-        else:
-            line.append(w)
-    if line:
-        lines.append(' '.join(line))
-
-    for ln in lines:
-        page.insert_text((ML, y), ln, fontsize=14, color=DARK, fontname="Helvetica-Bold")
-        y += 18
-
-    y += 6
-    page.draw_line((ML, y), (W-MR, y), color=GREEN, width=0.8)
-    y += 12
-
-    # Mualliflar
-    page.insert_text((ML, y), f"Mualliflar: {authors_str}", fontsize=10, color=DARK, fontname="Helvetica-Bold")
-    y += 14
-
-    # Muassasa
-    if hasattr(article.author, 'institution') and article.author.institution:
-        page.insert_text((ML, y), article.author.institution, fontsize=9, color=GRAY, fontname="Helvetica")
-        y += 13
-
-    # if article.issue:
-    #     page.insert_text((ML, y), issue_str, fontsize=9, color=GRAY, fontname="Helvetica")
-    #     y += 13
-
-    if article.published_at:
-        page.insert_text((ML, y), f"Nashr sanasi: {article.published_at.strftime('%d.%m.%Y')}", fontsize=9, color=GRAY, fontname="Helvetica")
-        y += 13
-
-    y += 8
-    page.draw_line((ML, y), (W-MR, y), color=GREEN, width=0.5)
-    y += 14
-
-    # Annotatsiya
-    if article.abstract:
-        page.insert_text((ML, y), "Annotatsiya:", fontsize=10, color=DARK, fontname="Helvetica-Bold")
-        y += 14
-        abstract_lines = []
-        words = article.abstract.split()
-        ln = []
-        for w in words:
-            if len(' '.join(ln + [w])) > 78:
-                abstract_lines.append(' '.join(ln))
-                ln = [w]
-            else:
-                ln.append(w)
-        if ln:
-            abstract_lines.append(' '.join(ln))
-        for al in abstract_lines:
-            if y > H - MB - 30:
-                draw_header_footer(page, doc.page_count, 0)
-                page, y = new_page()
-            page.insert_text((ML, y), al, fontsize=9.5, color=(0.2, 0.2, 0.2), fontname="Helvetica")
-            y += 12
-        y += 8
-        page.draw_line((ML, y), (W-MR, y), color=GREEN, width=0.5)
-        y += 14
-
-    # Kalit so'zlar
-    if article.keywords:
-        page.insert_text((ML, y), f"Kalit so'zlar: {article.keywords}", fontsize=9, color=GRAY, fontname="Helvetica")
-        y += 18
-        page.draw_line((ML, y), (W-MR, y), color=GREEN, width=0.5)
-        y += 16
-
-    # ── Asosiy matn ──
-    for para in article_text.split('\n'):
-        para = para.strip()
-        if not para:
-            y += 5
-            continue
-        words = para.split()
-        ln = []
-        for w in words:
-            if len(' '.join(ln + [w])) > 80:
-                if y > H - MB - 20:
-                    draw_header_footer(page, doc.page_count, 0)
-                    page, y = new_page()
-                page.insert_text((ML, y), ' '.join(ln), fontsize=10, color=(0.1, 0.1, 0.1), fontname="Helvetica")
-                y += LINE_H
-                ln = [w]
-            else:
-                ln.append(w)
-        if ln:
-            if y > H - MB - 20:
-                draw_header_footer(page, doc.page_count, 0)
-                page, y = new_page()
-            page.insert_text((ML, y), ' '.join(ln), fontsize=10, color=(0.1, 0.1, 0.1), fontname="Helvetica")
-            y += LINE_H
-
-    # Barcha sahifalarga header/footer
-    total = doc.page_count
-    for i, pg in enumerate(doc):
-        draw_header_footer(pg, i+1, total)
-
-    out = io.BytesIO()
-    doc.save(out)
-    doc.close()
-    return out.getvalue()
+    html_string = render_to_string('article_pdf.html', {
+        'article': article,
+        'request': request,
+        'pdf_content_html': content_html,
+        'static_root': django_settings.STATIC_ROOT,
+        'logo_base64': _get_logo_base64(),
+    })
+    buffer = io.BytesIO()
+    base_url = request.build_absolute_uri('/') if request else ''
+    pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
+    return buffer.getvalue()
 
 
 def _get_article_content_html(article_file):
@@ -742,7 +576,12 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
             )
 
             # Sahifa raqami
-            page_num = f"– {page.number + 1} / {doc.page_count} –"
+            if getattr(article, 'start_page', None):
+                current_page = article.start_page + page.number
+                page_num = f"- {current_page} -"
+            else:
+                page_num = f"- {page.number + 1} -"
+
             page.insert_text(
                 (w / 2 - 20, footer_y + 8),
                 page_num, fontsize=8,
@@ -819,8 +658,8 @@ def download_pdf(request, pk):
             ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0]
     
             if ext in ('doc', 'docx'):
-                content_html = _get_article_content_html(article.pdf_file)
-                pdf_bytes = _build_pdf_from_html_fitz(content_html, article)
+                raw_pdf = _build_pdf_from_html_xhtml2pdf(article, request)
+                pdf_bytes = _add_header_footer_to_pdf(raw_pdf, article)
             else:
                 raw = _get_pdf_bytes(article.pdf_file)
                 if not raw:
@@ -879,31 +718,14 @@ def generate_article_pdf(request, pk):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
         request.session[f'pdf_viewed_{pk}'] = True
 
-    from django.conf import settings as django_settings
-
-    content_html = ''
-    if article.pdf_file:
-        try:
-            content_html = _get_article_content_html(article.pdf_file)
-        except Exception:
-            pass
-
-    html_string = render_to_string('article_pdf.html', {
-        'article': article,
-        'request': request,
-        'pdf_content_html': content_html,
-        'static_root': django_settings.STATIC_ROOT,
-        'logo_base64': _get_logo_base64(),
-    })
-    buffer = io.BytesIO()
-    base_url = request.build_absolute_uri('/')
-    pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
-
-    if pisa_status.err:
+    pdf_bytes = _build_pdf_from_html_xhtml2pdf(article, request)
+    if not pdf_bytes:
         return HttpResponse("PDF yaratishda xatolik yuz berdi.", status=500)
+    
+    final_pdf_bytes = _add_header_footer_to_pdf(pdf_bytes, article)
 
     safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
-    response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
+    response = HttpResponse(final_pdf_bytes, content_type='application/pdf')
     response['Content-Disposition'] = f'inline; filename="TIFT_{safe_title}.pdf"'
     return response
 
