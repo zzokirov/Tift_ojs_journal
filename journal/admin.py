@@ -63,7 +63,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
 @admin.register(JournalIssue)
 class JournalIssueAdmin(admin.ModelAdmin):
     list_display = (
-        'issue_label', 'year', 'article_count_tag',
+        'issue_label', 'year', 'period', 'article_count_tag',
         'is_published', 'created_at'
     )
     list_display_links = ('issue_label',)
@@ -74,7 +74,7 @@ class JournalIssueAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Jurnal soni ma'lumotlari", {
-            'fields': ('volume', 'number', 'year', 'is_published')
+            'fields': ('volume', 'number', 'year', 'period', 'cover_image', 'is_published')
         }),
     )
 

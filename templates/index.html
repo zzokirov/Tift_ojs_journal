@@ -506,24 +506,42 @@ if (ctx) {
     <div class="relative overflow-hidden group py-4">
         <div class="flex space-x-6 animate-marquee group-hover:pause" style="width: max-content;">
             {% for issue in issues %}
-            <a href="{% url 'issue_detail' issue.pk %}" class="block bg-white border border-gray-100 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all shrink-0 w-64 card-hover">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="bg-navy-50 text-navy-700 px-3 py-1 rounded-lg text-xs font-bold">{{ issue.year }}</span>
-                    <i class="fas fa-book-open text-gray-300"></i>
+            <a href="{% url 'issue_detail' issue.pk %}" class="block bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all shrink-0 w-64 card-hover overflow-hidden flex flex-col h-full">
+                {% if issue.cover_image %}
+                <div class="h-32 w-full overflow-hidden bg-gray-50">
+                    <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover">
                 </div>
-                <h3 class="font-black text-lg text-gray-900 mb-1">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
-                <p class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
+                {% endif %}
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-navy-50 text-navy-700 px-3 py-1 rounded-lg text-xs font-bold">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
+                        {% if not issue.cover_image %}
+                        <i class="fas fa-book-open text-gray-300"></i>
+                        {% endif %}
+                    </div>
+                    <h3 class="font-black text-lg text-gray-900 mb-1 mt-auto">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
+                    <p class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
+                </div>
             </a>
             {% endfor %}
             <!-- Double the content for smooth infinite scrolling -->
             {% for issue in issues %}
-            <a href="{% url 'issue_detail' issue.pk %}" class="block bg-white border border-gray-100 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all shrink-0 w-64 card-hover">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="bg-navy-50 text-navy-700 px-3 py-1 rounded-lg text-xs font-bold">{{ issue.year }}</span>
-                    <i class="fas fa-book-open text-gray-300"></i>
+            <a href="{% url 'issue_detail' issue.pk %}" class="block bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all shrink-0 w-64 card-hover overflow-hidden flex flex-col h-full">
+                {% if issue.cover_image %}
+                <div class="h-32 w-full overflow-hidden bg-gray-50">
+                    <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover">
                 </div>
-                <h3 class="font-black text-lg text-gray-900 mb-1">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
-                <p class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
+                {% endif %}
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-navy-50 text-navy-700 px-3 py-1 rounded-lg text-xs font-bold">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
+                        {% if not issue.cover_image %}
+                        <i class="fas fa-book-open text-gray-300"></i>
+                        {% endif %}
+                    </div>
+                    <h3 class="font-black text-lg text-gray-900 mb-1 mt-auto">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
+                    <p class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
+                </div>
             </a>
             {% endfor %}
         </div>

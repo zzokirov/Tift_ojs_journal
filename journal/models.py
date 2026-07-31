@@ -39,6 +39,8 @@ class JournalIssue(models.Model):
     volume = models.PositiveIntegerField(verbose_name="Jurnal jildi (Volume)")
     number = models.PositiveIntegerField(verbose_name="Jurnal soni (Issue)")
     year = models.PositiveIntegerField(verbose_name="Chop etilgan yili")
+    period = models.CharField(max_length=100, blank=True, null=True, verbose_name="Davri (Masalan: 1-chorak, Yanvar-Mart)")
+    cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Jild muqovasi (rasmi)")
     is_published = models.BooleanField(default=False, verbose_name="Saytda ko'rsatish")
     created_at = models.DateTimeField(auto_now_add=True)
 
