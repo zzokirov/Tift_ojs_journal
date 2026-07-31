@@ -379,9 +379,9 @@ def _get_logo_base64():
     import base64, os, io
     from django.conf import settings
 
-    logo_path = os.path.join(settings.STATIC_ROOT, 'images', 'tift_logo_wide.png')
+    logo_path = os.path.join(settings.STATIC_ROOT, 'images', 'tift.png')
     if not os.path.exists(logo_path):
-        logo_path = os.path.join(settings.BASE_DIR, 'static', 'images', 'tift_logo_wide.png')
+        logo_path = os.path.join(settings.BASE_DIR, 'static', 'images', 'tift.png')
 
     try:
         from PIL import Image
