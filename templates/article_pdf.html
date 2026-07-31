@@ -189,36 +189,39 @@ p.img-caption {
 <body>
 
 <!-- BIRINCHI SAHIFA UCHUN MAXSUS SARLAVHA -->
-<div style="background-color: #0b2242; padding: 15px; margin-bottom: 20pt; width: 100%;">
-    <table style="width: 100%; border-collapse: collapse;">
-        <tr>
-            <td style="width: 15%; vertical-align: middle; text-align: left;">
-                {% if logo_base64 %}
-                    <img src="{{ logo_base64 }}" style="width: 50pt; height: 50pt;" />
-                {% endif %}
-            </td>
-            <td style="width: 65%; vertical-align: middle; text-align: center;">
-                <div style="color: #ffffff; font-family: 'Times New Roman', serif; font-size: 14pt; font-weight: bold; text-transform: uppercase;">
-                    "ARXITEKTURA VA TA'LIM"
-                </div>
-                <div style="color: #ffcc00; font-family: 'Times New Roman', serif; font-size: 11pt; font-weight: bold; text-transform: uppercase; margin-top: 5px;">
-                    ILMIY-ELEKTRON JURNAL
-                </div>
-            </td>
-            <td style="width: 20%; vertical-align: middle; text-align: right;">
-                <div style="color: #ffcc00; font-family: 'Times New Roman', serif; font-size: 14pt; font-weight: bold;">
-                    {% if article.issue %}{{ article.issue.year }}{% else %}2024{% endif %}
-                </div>
-                <div style="color: #ffffff; font-family: 'Times New Roman', serif; font-size: 10pt; font-weight: bold; margin-top: 2px;">
-                    {% if article.issue %}№{{ article.issue.number }}{% else %}Maxsus son{% endif %}
-                </div>
-            </td>
-        </tr>
-    </table>
-    <div style="width: 100%; border-top: 1pt solid #ffffff; margin-top: 10pt; padding-top: 5pt; text-align: center;">
-        <span style="color: #ffffff; font-size: 9pt; font-family: 'Times New Roman', serif;">http://architect-edu.tift.uz</span>
-    </div>
-</div>
+<table style="width: 100%; border-collapse: collapse; background-color: #0b2242; margin-bottom: 20pt;">
+    <tr>
+        <td style="width: 2%; padding: 12pt 0;"></td>
+        <td style="width: 15%; vertical-align: middle; text-align: left; padding: 12pt 0;">
+            {% if logo_base64 %}
+                <img src="{{ logo_base64 }}" style="width: 55pt; height: 55pt;" />
+            {% endif %}
+        </td>
+        <td style="width: 63%; vertical-align: middle; text-align: center; padding: 12pt 0;">
+            <div style="color: #ffffff; font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-transform: uppercase;">
+                "ARXITEKTURA VA TA'LIM"
+            </div>
+            <div style="color: #ffcc00; font-family: 'Times New Roman', serif; font-size: 11pt; font-weight: bold; text-transform: uppercase; margin-top: 6pt;">
+                ILMIY-ELEKTRON JURNALI
+            </div>
+            <div style="color: #ffffff; font-size: 10pt; font-family: 'Times New Roman', serif; margin-top: 8pt; border-top: 1pt solid #ffffff; padding-top: 4pt; display: inline-block;">
+                http://architect-edu.tift.uz
+            </div>
+        </td>
+        <td style="width: 18%; vertical-align: middle; text-align: right; padding: 12pt 0;">
+            <div style="color: #ffcc00; font-family: 'Times New Roman', serif; font-size: 12pt; font-weight: bold;">
+                {% if article.issue %}{{ article.issue.year }}{% else %}2024{% endif %}-yil
+            </div>
+            <div style="color: #ffffff; font-family: 'Times New Roman', serif; font-size: 10pt; font-weight: bold; margin-top: 4pt;">
+                {% if article.issue %}Jild {{ article.issue.volume }}{% else %}Jild 1{% endif %}
+            </div>
+            <div style="color: #ffffff; font-family: 'Times New Roman', serif; font-size: 10pt; font-weight: bold; margin-top: 2pt;">
+                {% if article.issue %}Son {{ article.issue.number }}{% else %}Maxsus son{% endif %}
+            </div>
+        </td>
+        <td style="width: 2%; padding: 12pt 0;"></td>
+    </tr>
+</table>
 
 <!-- -- MAQOLA MA'LUMOTLARI -- -->
 
