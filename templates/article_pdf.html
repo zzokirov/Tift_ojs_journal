@@ -163,7 +163,7 @@ body {
     border-collapse: collapse;
     margin: 10pt 0;
     font-size: 10pt;
-    page-break-inside: avoid;
+    page-break-inside: auto;
 }
 .content .doc-table th, .content .doc-table td {
     border: 0.5pt solid #000;
@@ -173,9 +173,9 @@ body {
 .doc-img-wrap {
     text-align: center;
     margin: 10pt 0;
-    page-break-inside: avoid;
+    page-break-inside: auto;
 }
-.doc-img-wrap img { max-width: 100%; height: auto; }
+.doc-img-wrap img { max-width: 100%; max-height: 400pt; height: auto; width: auto; }
 p.img-caption {
     font-size: 10pt;
     font-style: italic;
@@ -183,6 +183,7 @@ p.img-caption {
     margin-top: 4pt;
 }
 
+    img { max-height: 400pt; }
 </style>
 </head>
 <body>
