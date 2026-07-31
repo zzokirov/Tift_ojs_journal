@@ -590,7 +590,7 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
 
             # Manzil
             page.insert_text(
-                (margin_x, footer_y + 18),
+                (margin_left, footer_y + 18),
                 footer_text, fontsize=6.5,
                 color=GRAY, fontname="Helvetica"
             )
