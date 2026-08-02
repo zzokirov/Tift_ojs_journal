@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import JournalIssue, Article, StaffMember, SiteVisit, Conference, News, Document
+from .models import JournalIssue, Article, StaffMember, SiteVisit, Conference, News, Document, ArticleCategory
 from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateForm, CustomPasswordChangeForm
 
 
@@ -38,7 +38,9 @@ def index(request):
         week_data = []
 
     query = request.GET.get('q')
+    category_id = request.GET.get('category')
     issues = JournalIssue.objects.all().order_by('-year', '-number')
+    categories = ArticleCategory.objects.all().order_by('order', 'code')
     latest_issue = issues.first()
     total_articles = Article.objects.filter(status='published').count()
     
@@ -57,10 +59,16 @@ def index(request):
             Q(author__last_name__icontains=query) |
             Q(author__username__icontains=query)
         )
-    recent_articles = recent_articles[:6]
+        
+    if category_id:
+        recent_articles = recent_articles.filter(category_id=category_id)
+        
+    recent_articles = recent_articles[:12]  # show up to 12 when searching/filtering
     
     return render(request, 'index.html', {
         'recent_articles': recent_articles,
+        'categories': categories,
+        'current_category': category_id,
         'latest_issue': latest_issue,
         'total_articles': total_articles,
         'issues': issues,
@@ -79,13 +87,8 @@ def archive(request):
 
 def about(request):
     staff = StaffMember.objects.filter(is_active=True).order_by('order', 'full_name')
-    areas = [
-        "Arxitektura nazariyasi", "Binolar konstruksiyasi",
-        "Shaharsozlik va landshaft", "Geodeziya va kartografiya",
-        "Ta'lim metodikasi", "Raqamli texnologiyalar",
-        "Sun'iy idrok", "Kadastr va er resurslari",
-    ]
-    return render(request, 'about.html', {'staff': staff, 'areas': areas})
+    categories = ArticleCategory.objects.all().order_by('order', 'code')
+    return render(request, 'about.html', {'staff': staff, 'categories': categories})
 
 
 def issue_detail(request, issue_pk):
