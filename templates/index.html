@@ -580,13 +580,47 @@ if (ctx) {
 <script>
 function scrollCarousel(direction) {
     const container = document.getElementById('issuesCarousel');
-    const scrollAmount = 264; // card width (64 * 4 = 256) + gap (24) = 280
+    const scrollAmount = 264; // card width + gap
     if (direction === 'left') {
         container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     } else {
         container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('issuesCarousel');
+    if (!container) return;
+    
+    const wrapper = container.parentElement;
+    let autoScrollInterval;
+    const scrollAmount = 264;
+
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            // Check if reached the end (with a 5px buffer)
+            if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
+                // Scroll back to start
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }, 3000); // 3 soniyada bir marta siljiydi
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+
+    // Start initially
+    startAutoScroll();
+
+    // Pause when user interacts (hover or touch)
+    wrapper.addEventListener('mouseenter', stopAutoScroll);
+    wrapper.addEventListener('mouseleave', startAutoScroll);
+    wrapper.addEventListener('touchstart', stopAutoScroll);
+    wrapper.addEventListener('touchend', startAutoScroll);
+});
 </script>
 
 {% endblock %}
