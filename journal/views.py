@@ -825,27 +825,36 @@ def submit_article(request):
 
 @login_required
 def my_articles(request):
-    articles = Article.objects.filter(author=request.user).order_by('-created_at')
-    status_counts = {
-        'submitted':    articles.filter(status='submitted').count(),
-        'under_review': articles.filter(status='under_review').count(),
-        'accepted':     articles.filter(status='accepted').count(),
-        'published':    articles.filter(status='published').count(),
-        'rejected':     articles.filter(status='rejected').count(),
-    }
+    try:
+        articles = Article.objects.filter(author=request.user).order_by('-created_at')
+        status_counts = {
+            'submitted':    articles.filter(status='submitted').count(),
+            'under_review': articles.filter(status='under_review').count(),
+            'accepted':     articles.filter(status='accepted').count(),
+            'published':    articles.filter(status='published').count(),
+            'rejected':     articles.filter(status='rejected').count(),
+        }
 
-    # Data for Chart.js
-    chart_labels = [a.title[:20] + "..." if len(a.title) > 20 else a.title for a in articles]
-    chart_views = [a.views_count for a in articles]
-    chart_downloads = [a.downloads_count for a in articles]
+        # Data for Chart.js (handle possible None values)
+        chart_labels = []
+        for a in articles:
+            title = a.title or ""
+            chart_labels.append(title[:20] + "..." if len(title) > 20 else title)
+        
+        chart_views = [a.views_count or 0 for a in articles]
+        chart_downloads = [a.downloads_count or 0 for a in articles]
 
-    return render(request, 'my_articles.html', {
-        'articles': articles,
-        'status_counts': status_counts,
-        'chart_labels': json.dumps(chart_labels),
-        'chart_views': json.dumps(chart_views),
-        'chart_downloads': json.dumps(chart_downloads),
-    })
+        return render(request, 'my_articles.html', {
+            'articles': articles,
+            'status_counts': status_counts,
+            'chart_labels': json.dumps(chart_labels),
+            'chart_views': json.dumps(chart_views),
+            'chart_downloads': json.dumps(chart_downloads),
+        })
+    except Exception as e:
+        import traceback
+        from django.http import HttpResponse
+        return HttpResponse(f"<pre><h1>ERROR in my_articles!</h1><br>{traceback.format_exc()}</pre>")
 
 
 @login_required
