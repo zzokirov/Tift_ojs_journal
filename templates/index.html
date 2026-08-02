@@ -550,20 +550,20 @@ if (ctx) {
         
         <div id="issuesCarousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-6 px-4 -mx-4" style="scrollbar-width: none; -ms-overflow-style: none;">
             {% for issue in issues %}
-            <a href="{% url 'issue_detail' issue.pk %}" class="block snap-start bg-white rounded-2xl shadow-lg ring-1 ring-gray-900/5 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ease-out shrink-0 w-72 overflow-hidden flex flex-col h-full group/card relative">
+            <a href="{% url 'issue_detail' issue.pk %}" class="block snap-start bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[1.04] transition-all duration-300 ease-out shrink-0 w-60 overflow-hidden flex flex-col h-full group/card relative">
                 {% if issue.cover_image %}
-                <div class="h-40 w-full overflow-hidden bg-gray-50 relative">
+                <div class="h-32 w-full overflow-hidden bg-gray-50 relative">
                     <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
                 </div>
                 {% else %}
-                <div class="h-40 w-full bg-gradient-to-br from-navy-800 to-navy-900 relative overflow-hidden">
+                <div class="h-32 w-full bg-gradient-to-br from-navy-800 to-navy-900 relative overflow-hidden">
                     <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
                     <i class="fas fa-book-open absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-white/20"></i>
                 </div>
                 {% endif %}
                 
-                <div class="p-6 flex-1 flex flex-col relative bg-white">
+                <div class="p-4 flex-1 flex flex-col relative bg-white">
                     <div class="flex items-center justify-between mb-4">
                         <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
                     </div>
@@ -580,7 +580,7 @@ if (ctx) {
 <script>
 function scrollCarousel(direction) {
     const container = document.getElementById('issuesCarousel');
-    const scrollAmount = 280; // card width (64 * 4 = 256) + gap (24) = 280
+    const scrollAmount = 264; // card width (64 * 4 = 256) + gap (24) = 280
     if (direction === 'left') {
         container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     } else {
