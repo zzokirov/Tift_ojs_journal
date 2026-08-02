@@ -204,7 +204,7 @@
                                         {% if a.issue %}
                                         <span class="text-xs flex items-center gap-1" style="color:#94a3b8;">
                                             <i class="fas fa-book text-[9px] text-green-400"></i>
-                                            Jild {{ a.issue.volume }}, Son {{ a.issue.number }}, {{ a.issue.year }}
+                                            {{ a.issue.year }}-yil {{ a.issue.number }}-son
                                         </span>
                                         {% endif %}
                                         <span class="text-xs flex items-center gap-1" style="color:#94a3b8;">
@@ -326,7 +326,7 @@
                         <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Jurnal soni</dt>
                         <dd class="text-xs font-semibold" style="color:#1e293b;">
                             <a href="{% url 'issue_detail' article.issue.pk %}" class="hover:text-green-600 transition-colors">
-                                Jild {{ article.issue.volume }}, Son {{ article.issue.number }}
+                                {{ article.issue.year }}-yil {{ article.issue.number }}-son
                             </a>
                         </dd>
                     </div>

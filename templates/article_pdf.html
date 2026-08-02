@@ -207,9 +207,8 @@ p.img-caption {
             <div style="color: #0a2540; font-size: 10pt; font-family: 'Times New Roman', serif; margin-top: 8pt; border-top: 1pt solid #0a2540; padding-top: 4pt; display: inline-block;">
                 http://architect-edu.tift.uz
                 &nbsp;|&nbsp;
-                {% if article.issue %}{{ article.issue.year }}{% else %}2024{% endif %}-yil,
-                {% if article.issue %}Jild {{ article.issue.volume }}{% else %}Jild 1{% endif %},
-                {% if article.issue %}Son {{ article.issue.number }}{% else %}Maxsus son{% endif %}
+                {% if article.issue %}{{ article.issue.year }}{% else %}2026{% endif %}-yil,
+                {% if article.issue %}{{ article.issue.number }}-son{% else %}Maxsus son{% endif %}
             </div>
         </td>
         <td style="width: 18%; vertical-align: middle; text-align: right; padding: 12pt 0;">

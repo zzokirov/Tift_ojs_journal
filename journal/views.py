@@ -5,7 +5,7 @@ try:
 except ImportError:
     qrcode = None
 from io import BytesIO
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -43,7 +43,9 @@ def index(request):
 
     query = request.GET.get('q')
     category_id = request.GET.get('category')
-    issues = JournalIssue.objects.all().order_by('-year', '-number')
+    issues = JournalIssue.objects.annotate(
+        pub_count=Count('articles', filter=Q(articles__status='published'))
+    ).filter(pub_count__gt=0, is_published=True).order_by('-year', '-number')
     categories = ArticleCategory.objects.all().order_by('order', 'code')
     latest_issue = issues.first()
     total_articles = Article.objects.filter(status='published').count()
@@ -81,7 +83,9 @@ def index(request):
 
 
 def archive(request):
-    issues = JournalIssue.objects.all().order_by('-year', '-number')
+    issues = JournalIssue.objects.annotate(
+        pub_count=Count('articles', filter=Q(articles__status='published'))
+    ).filter(pub_count__gt=0, is_published=True).order_by('-year', '-number')
     return render(request, 'archive.html', {'issues': issues})
 
 

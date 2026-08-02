@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% block title %}Jild {{ issue.volume }}, Son {{ issue.number }} | TIFT Jurnali{% endblock %}
+{% block title %}{{ issue.year }}-yil, {{ issue.number }}-son | TIFT Jurnali{% endblock %}
 
 {% block content %}
 
@@ -17,7 +17,7 @@
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
             <a href="{% url 'index' %}#arxiv" class="hover:text-green-400 transition-colors">{% trans "Arxiv" %}</a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
-            <span class="text-gray-300">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</span>
+            <span class="text-gray-300">{{ issue.year }}-yil, {{ issue.number }}-son</span>
         </nav>
 
         <div class="flex flex-wrap items-end justify-between gap-4">
@@ -27,7 +27,7 @@
                     {% trans "Jurnal Arxivi" %}
                 </span>
                 <h1 class="font-serif text-3xl md:text-4xl font-black text-white">
-                    {% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
+                    {{ issue.year }}-yil, {{ issue.number }}-son
                 </h1>
                 <p class="text-gray-400 mt-2 flex items-center gap-3">
                     <span class="flex items-center gap-1.5">

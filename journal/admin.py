@@ -79,7 +79,7 @@ class JournalIssueAdmin(admin.ModelAdmin):
     )
 
     def issue_label(self, obj):
-        return f"Jild {obj.volume}, Son {obj.number}"
+        return f"{obj.year}-yil, {obj.number}-son"
     issue_label.short_description = 'Jurnal soni'
 
     def article_count_tag(self, obj):

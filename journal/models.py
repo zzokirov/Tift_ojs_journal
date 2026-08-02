@@ -40,7 +40,7 @@ class JournalIssue(models.Model):
     number = models.PositiveIntegerField(verbose_name="Jurnal soni (Issue)")
     year = models.PositiveIntegerField(verbose_name="Chop etilgan yili")
     period = models.CharField(max_length=100, blank=True, null=True, verbose_name="Davri (Masalan: 1-chorak, Yanvar-Mart)")
-    cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Jild muqovasi (rasmi)")
+    cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Nashr muqovasi (rasmi)")
     full_pdf = models.FileField(upload_to='issues_pdf/', blank=True, null=True, verbose_name="To'liq to'plam (PDF)")
     is_published = models.BooleanField(default=False, verbose_name="Saytda ko'rsatish")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -51,7 +51,7 @@ class JournalIssue(models.Model):
         verbose_name_plural = "Jurnal sonlari"
 
     def __str__(self):
-        return f"Jild {self.volume}, Son {self.number} ({self.year})"
+        return f"{self.year}-yil, {self.number}-son"
 
 
 def article_upload_path(instance, filename):
