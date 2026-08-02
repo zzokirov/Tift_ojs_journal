@@ -638,26 +638,31 @@ document.addEventListener('DOMContentLoaded', function() {
         slidesPerView: "auto",
         spaceBetween: 24,
         loop: true,
+        loopAdditionalSlides: 4,
         centeredSlides: true,
         grabCursor: true,
-        speed: 600,
+        speed: 700,
         autoplay: {
             delay: 2500,
             disableOnInteraction: false,
-            pauseOnMouseEnter: false,  // biz qo'lda boshqaramiz
+            pauseOnMouseEnter: false,
         },
         mousewheel: {
             forceToAxis: true,
             sensitivity: 1,
-            invert: false,
         },
         navigation: {
             nextEl: ".swiper-button-next-custom",
             prevEl: ".swiper-button-prev-custom",
         },
+        on: {
+            init: function() {
+                this.autoplay.start();
+            }
+        }
     });
 
-    // Jild kartasi ustiga kelganda to'xtasin, ketganda davom etsin
+    // Jild ustiga sichqoncha kelganda to'xtatish
     const swiperEl = document.querySelector('.issuesSwiper');
     if (swiperEl) {
         swiperEl.addEventListener('mouseenter', function() {
