@@ -259,30 +259,13 @@ if (ctx) {
 
 <!-- SEARCH BAR -->
 <section class="site-container px-4 -mt-2 mb-10">
-    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-5 relative z-40">
-        <form action="{% url 'index' %}" method="GET" class="flex flex-col md:flex-row gap-3 relative">
+    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-5">
+        <form action="{% url 'index' %}" method="GET" class="flex flex-col md:flex-row gap-3">
             <div class="relative flex-1">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                <input type="text" name="q" id="searchInput" value="{{ query|default:'' }}" autocomplete="off"
-                       placeholder="{% trans "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..." %}"
+                <input type="text" name="q" id="searchInput" value="{{ query|default:'' }}"
+                       placeholder="{% trans "Maqola nomi, muallifi yoki kalit so'z bo'yicha qidiring..." %}"
                        class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500/20 transition-all outline-none">
-                       
-                <!-- CATEGORY DROPDOWN (EXACT KEYWORDS PILL STYLE) -->
-                <div id="categoryPanel" class="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.12)] border border-gray-100 p-5 hidden opacity-0 transition-all duration-300 transform translate-y-2 z-50">
-                    <div class="flex items-center gap-2 mb-3.5 px-1">
-                        <i class="fas fa-tag text-green-500 text-sm"></i>
-                        <h4 class="text-xs font-black text-navy-900 uppercase tracking-wider">{% trans "YO'NALISHLAR" %}</h4>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2.5 max-h-[50vh] overflow-y-auto pr-1">
-                        {% for cat in categories %}
-                        <a href="?category={{ cat.id }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 border {% if current_category == cat.id|stringformat:'s' %}bg-green-600 text-white border-green-600 shadow-md shadow-green-200{% else %}bg-green-50/80 text-green-800 border-green-200/80 hover:bg-green-600 hover:text-white hover:border-green-600 hover:shadow-md hover:scale-[1.03]{% endif %} group/tag">
-                            <i class="fas fa-tag text-[10px] {% if current_category == cat.id|stringformat:'s' %}text-white{% else %}text-green-500 group-hover/tag:text-white{% endif %} transition-colors"></i>
-                            <span>{{ cat.name }}</span>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
             </div>
             
             <button type="submit"
@@ -291,7 +274,7 @@ if (ctx) {
                 {% trans "Qidirish" %}
             </button>
             
-            {% if query or current_category %}
+            {% if query %}
                 <a href="{% url 'index' %}"
                    class="flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 px-5 py-3 rounded-xl text-sm font-medium transition-colors border border-red-100">
                     <i class="fas fa-times"></i>
@@ -300,50 +283,14 @@ if (ctx) {
             {% endif %}
         </form>
         
-        {% if query or current_category %}
-            <div class="mt-4 text-xs text-gray-500 flex flex-wrap items-center gap-2">
+        {% if query %}
+            <div class="mt-4 text-xs text-gray-500 flex items-center gap-2">
                 <i class="fas fa-info-circle text-blue-400"></i>
-                {% if query %}
-                    "<span class="font-semibold text-gray-700">{{ query }}</span>" {% trans "bo'yicha natijalar" %}
-                {% endif %}
-                {% if current_category %}
-                    {% for cat in categories %}
-                        {% if cat.id|stringformat:'s' == current_category %}
-                            <span class="inline-flex items-center gap-1.5 bg-green-50 text-green-700 px-3 py-1 rounded-full text-xs font-bold border border-green-200 shadow-sm">
-                                <i class="fas fa-tag text-green-500 text-[10px]"></i> {{ cat.name }}
-                            </span>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
+                "<span class="font-semibold text-gray-700">{{ query }}</span>" {% trans "bo'yicha qidiruv natijalari" %}
             </div>
         {% endif %}
     </div>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    const categoryPanel = document.getElementById('categoryPanel');
-    
-    if (searchInput && categoryPanel) {
-        searchInput.addEventListener('focus', function() {
-            categoryPanel.classList.remove('hidden');
-            setTimeout(() => {
-                categoryPanel.classList.remove('opacity-0', 'translate-y-2');
-            }, 10);
-        });
-        
-        document.addEventListener('click', function(event) {
-            if (!searchInput.contains(event.target) && !categoryPanel.contains(event.target)) {
-                categoryPanel.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => {
-                    categoryPanel.classList.add('hidden');
-                }, 300);
-            }
-        });
-    }
-});
-</script>
 
 <!-- MAIN CONTENT -->
 <section id="articles" class="site-container px-4 pb-16">

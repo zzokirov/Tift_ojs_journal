@@ -48,43 +48,20 @@ def index(request):
     latest_issue = issues.first()
     total_articles = Article.objects.filter(status='published').count()
     
-    if query or category_id:
-        recent_articles = Article.objects.filter(status='published').order_by('-created_at')
-    elif latest_issue:
-        recent_articles = Article.objects.filter(issue=latest_issue, status='published').order_by('-created_at')
-    else:
-        recent_articles = Article.objects.filter(status='published').order_by('-created_at')
-
-    if category_id:
-        cat_obj = None
-        if category_id.isdigit():
-            cat_obj = categories.filter(id=int(category_id)).first()
-        else:
-            cat_obj = categories.filter(code=category_id).first()
-
-        if cat_obj:
-            cat_keyword = cat_obj.name.split()[0][:4]  # e.g., 'Texn', 'Arxi', 'Fizi'
-            recent_articles = recent_articles.filter(
-                Q(category=cat_obj) |
-                Q(title__icontains=cat_keyword) |
-                Q(abstract__icontains=cat_keyword) |
-                Q(keywords__icontains=cat_keyword)
-            ).distinct()
-        else:
-            recent_articles = recent_articles.filter(category_id=category_id)
-
     if query:
-        recent_articles = recent_articles.filter(
+        recent_articles = Article.objects.filter(status='published').filter(
             Q(title__icontains=query) |
             Q(abstract__icontains=query) |
             Q(keywords__icontains=query) |
             Q(authors__icontains=query) |
             Q(author__first_name__icontains=query) |
             Q(author__last_name__icontains=query) |
-            Q(author__username__icontains=query) |
-            Q(category__name__icontains=query) |
-            Q(category__code__icontains=query)
-        ).distinct()
+            Q(author__username__icontains=query)
+        ).distinct().order_by('-created_at')
+    elif latest_issue:
+        recent_articles = Article.objects.filter(issue=latest_issue, status='published').order_by('-created_at')
+    else:
+        recent_articles = Article.objects.filter(status='published').order_by('-created_at')
 
     recent_articles = recent_articles[:20]
     
