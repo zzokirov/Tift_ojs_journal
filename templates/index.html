@@ -608,18 +608,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000); // 3 soniyada bir marta siljiydi
     }
 
-    function stopAutoScroll() {
-        clearInterval(autoScrollInterval);
-    }
-
     // Start initially
     startAutoScroll();
-
-    // Pause when user interacts (hover or touch)
-    wrapper.addEventListener('mouseenter', stopAutoScroll);
-    wrapper.addEventListener('mouseleave', startAutoScroll);
-    wrapper.addEventListener('touchstart', stopAutoScroll);
-    wrapper.addEventListener('touchend', startAutoScroll);
 });
 </script>
 
