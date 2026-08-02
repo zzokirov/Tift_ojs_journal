@@ -1,5 +1,4 @@
 import json
-import qrcode
 import base64
 from io import BytesIO
 from django.db.models import Q
@@ -473,8 +472,7 @@ def _build_pdf_from_html_xhtml2pdf(article, request=None):
     # Generate QR Code for PDF
     qr_code_base64 = ""
     try:
-        import qrcode
-        from io import BytesIO
+                from io import BytesIO
         import base64
         qr = qrcode.QRCode(version=1, box_size=5, border=0)
         qr_url = request.build_absolute_uri(f"/article/{article.pk}/") if request else f"https://tift.uz/article/{article.pk}/"
