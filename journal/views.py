@@ -469,12 +469,31 @@ def _build_pdf_from_html_xhtml2pdf(article, request=None):
         except Exception:
             pass
 
+    
+    # Generate QR Code for PDF
+    qr_code_base64 = ""
+    try:
+        import qrcode
+        from io import BytesIO
+        import base64
+        qr = qrcode.QRCode(version=1, box_size=5, border=0)
+        qr_url = request.build_absolute_uri(f"/article/{article.pk}/") if request else f"https://tift.uz/article/{article.pk}/"
+        qr.add_data(qr_url)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        buffer = BytesIO()
+        img.save(buffer, format="PNG")
+        qr_code_base64 = base64.b64encode(buffer.getvalue()).decode()
+    except:
+        pass
+        
     html_string = render_to_string('article_pdf.html', {
         'article': article,
         'request': request,
         'pdf_content_html': content_html,
         'static_root': django_settings.STATIC_ROOT,
         'logo_base64': _get_logo_base64(),
+        'qr_code_base64': qr_code_base64,
     })
     buffer = io.BytesIO()
     base_url = request.build_absolute_uri('/') if request else ''
@@ -567,27 +586,6 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
             margin_right = 42.5  # 1.5cm
             header_y = 30.0
             footer_y = h - 30.0
-
-            # --- YUQORI O'NG BURCHAKDA QR KOD (Faqat 1-sahifada) ---
-            if page.number == 0:
-                try:
-                    import qrcode
-                    from io import BytesIO
-                    qr = qrcode.QRCode(version=1, box_size=5, border=1)
-                    qr_url = f"https://tift.uz/article/{article.pk}/" # assuming absolute url based on domain
-                    qr.add_data(qr_url)
-                    qr.make(fit=True)
-                    img = qr.make_image(fill_color="black", back_color="white")
-                    buffer = BytesIO()
-                    img.save(buffer, format="PNG")
-                    qr_bytes = buffer.getvalue()
-                    
-                    # Yuqori o'ng burchak rect: (x0, y0, x1, y1)
-                    qr_size = 60.0
-                    qr_rect = fitz.Rect(w - margin_right - qr_size, header_y, w - margin_right, header_y + qr_size)
-                    page.insert_image(qr_rect, stream=qr_bytes)
-                except Exception as e:
-                    pass
 
             # --- YUQORI KOLONTITUL (Faqat 2-sahifadan boshlab) ---
             if page.number > 0:

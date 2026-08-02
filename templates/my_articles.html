@@ -1,78 +1,7 @@
 {% extends 'dashboard_base.html' %}
 {% load static i18n %}
 
-{% block title %}Mening maqolalarim | TIFT Jurnali
-{% if articles %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const ctx = document.getElementById('authorChart');
-    if (ctx) {
-        const labels = {{ chart_labels|safe }};
-        const views = {{ chart_views|safe }};
-        const downloads = {{ chart_downloads|safe }};
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: '{% trans "Ko\'rishlar soni" %}',
-                        data: views,
-                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                        borderColor: 'rgb(59, 130, 246)',
-                        borderWidth: 1,
-                        borderRadius: 4
-                    },
-                    {
-                        label: '{% trans "Yuklab olishlar" %}',
-                        data: downloads,
-                        backgroundColor: 'rgba(34, 197, 94, 0.7)',
-                        borderColor: 'rgb(34, 197, 94)',
-                        borderWidth: 1,
-                        borderRadius: 4
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            color: document.documentElement.classList.contains('dark') ? '#cbd5e1' : '#475569',
-                            font: { family: "'Inter', sans-serif" }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b'
-                        },
-                        grid: {
-                            color: document.documentElement.classList.contains('dark') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            color: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b'
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-    }
-});
-</script>
-{% endif %}
-{% endblock %}
+{% block title %}Mening maqolalarim | TIFT Jurnali{% endblock %}
 
 {% block dashboard_content %}
 
