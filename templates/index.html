@@ -525,7 +525,7 @@ if (ctx) {
 </section>
 
 <!-- BARCHA JILDLAR KARUSELI -->
-<section class="site-container px-4 pb-16">
+<section class="site-container px-4 pb-16 relative">
     <div class="flex items-center justify-between mb-6">
         <div>
             <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
@@ -534,32 +534,25 @@ if (ctx) {
             </h2>
             <div class="section-divider mt-2 ml-4"></div>
         </div>
+        
+        <!-- Sroll tugmalari -->
+        <div class="flex items-center gap-2">
+            <button onclick="scrollCarousel('left')" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-navy-800 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button onclick="scrollCarousel('right')" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-navy-800 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
     </div>
     
-    <div class="relative overflow-hidden group py-4">
-        <div class="flex space-x-6 animate-marquee group-hover:pause" style="width: max-content;">
+    <div class="relative py-4 -mx-4 px-4">
+        <style>
+            #issuesCarousel::-webkit-scrollbar { display: none; }
+        </style>
+        <div id="issuesCarousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4" style="scrollbar-width: none; -ms-overflow-style: none;">
             {% for issue in issues %}
-            <a href="{% url 'issue_detail' issue.pk %}" class="block bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all shrink-0 w-64 card-hover overflow-hidden flex flex-col h-full">
-                {% if issue.cover_image %}
-                <div class="h-32 w-full overflow-hidden bg-gray-50">
-                    <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover">
-                </div>
-                {% endif %}
-                <div class="p-5 flex-1 flex flex-col">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="bg-navy-50 text-navy-700 px-3 py-1 rounded-lg text-xs font-bold">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
-                        {% if not issue.cover_image %}
-                        <i class="fas fa-book-open text-gray-300"></i>
-                        {% endif %}
-                    </div>
-                    <h3 class="font-black text-lg text-gray-900 mb-1 mt-auto">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
-                    <p class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
-                </div>
-            </a>
-            {% endfor %}
-            <!-- Double the content for smooth infinite scrolling -->
-            {% for issue in issues %}
-            <a href="{% url 'issue_detail' issue.pk %}" class="block bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all shrink-0 w-64 card-hover overflow-hidden flex flex-col h-full">
+            <a href="{% url 'issue_detail' issue.pk %}" class="block snap-start bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all shrink-0 w-64 card-hover overflow-hidden flex flex-col h-full">
                 {% if issue.cover_image %}
                 <div class="h-32 w-full overflow-hidden bg-gray-50">
                     <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover">
@@ -581,17 +574,16 @@ if (ctx) {
     </div>
 </section>
 
-<style>
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+<script>
+function scrollCarousel(direction) {
+    const container = document.getElementById('issuesCarousel');
+    const scrollAmount = 280; // card width (64 * 4 = 256) + gap (24) = 280
+    if (direction === 'left') {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
 }
-.animate-marquee {
-    animation: marquee 30s linear infinite;
-}
-.group-hover\:pause:hover {
-    animation-play-state: paused;
-}
-</style>
+</script>
 
 {% endblock %}
