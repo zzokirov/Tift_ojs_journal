@@ -120,9 +120,9 @@
                     </div>
                 </a>
 
-                <!-- NAV LINKS — faqat login qilmagan userlar uchun -->
-                {% if not user.is_authenticated %}
-                <div class="hidden md:flex items-center gap-6 text-sm">
+                <!-- NAV LINKS + TIL TANLASH DROPDOWN -->
+                <div class="hidden md:flex items-center gap-6 lg:gap-7 text-sm">
+                    {% if not user.is_authenticated %}
                     <a href="{% url 'about' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
                         <i class="fas fa-info-circle mr-1.5 text-xs text-green-500/70"></i>{% trans "Jurnal haqida" %}
                     </a>
@@ -138,40 +138,40 @@
                     <a href="{% url 'documents' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
                         <i class="fas fa-file-alt mr-1.5 text-xs text-green-500/70"></i>{% trans "Hujjatlar" %}
                     </a>
-                </div>
-                {% endif %}
+                    {% endif %}
 
-                <!-- TIL TANLASH DROPDOWN -->
-                <div class="hidden md:flex items-center relative" id="langDropdownWrapper">
-                    {% get_current_language as CURRENT_LANG %}
-                    <button id="langBtn"
-                            class="flex items-center gap-1.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg px-3 py-1.5 text-xs font-bold text-gray-300 hover:text-white transition-all focus:outline-none">
-                        <i class="fas fa-globe text-green-400 text-[10px]"></i>
-                        {% if CURRENT_LANG == 'ru' %}RU{% elif CURRENT_LANG == 'en' %}EN{% else %}UZ{% endif %}
-                        <i class="fas fa-chevron-down text-[8px] text-gray-500"></i>
-                    </button>
-                    <!-- Dropdown -->
-                    <div id="langDropdown"
-                         class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
-                        <form action="{% url 'set_language' %}" method="post">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                            <button type="submit" name="language" value="uz"
-                                    class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
-                                           {% if CURRENT_LANG == 'uz' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
-                                <span class="text-xs font-bold w-6">UZ</span> O'zbek
-                            </button>
-                            <button type="submit" name="language" value="ru"
-                                    class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
-                                           {% if CURRENT_LANG == 'ru' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
-                                <span class="text-xs font-bold w-6">RU</span> Русский
-                            </button>
-                            <button type="submit" name="language" value="en"
-                                    class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
-                                           {% if CURRENT_LANG == 'en' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
-                                <span class="text-xs font-bold w-6">EN</span> English
-                            </button>
-                        </form>
+                    <!-- TIL TANLASH DROPDOWN -->
+                    <div class="relative" id="langDropdownWrapper">
+                        {% get_current_language as CURRENT_LANG %}
+                        <button id="langBtn"
+                                class="flex items-center gap-1.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg px-3 py-1.5 text-xs font-bold text-gray-300 hover:text-white transition-all focus:outline-none">
+                            <i class="fas fa-globe text-green-400 text-[10px]"></i>
+                            {% if CURRENT_LANG == 'ru' %}RU{% elif CURRENT_LANG == 'en' %}EN{% else %}UZ{% endif %}
+                            <i class="fas fa-chevron-down text-[8px] text-gray-500"></i>
+                        </button>
+                        <!-- Dropdown -->
+                        <div id="langDropdown"
+                             class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+                            <form action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                                <button type="submit" name="language" value="uz"
+                                        class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
+                                               {% if CURRENT_LANG == 'uz' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
+                                    <span class="text-xs font-bold w-6">UZ</span> O'zbek
+                                </button>
+                                <button type="submit" name="language" value="ru"
+                                        class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
+                                               {% if CURRENT_LANG == 'ru' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
+                                    <span class="text-xs font-bold w-6">RU</span> Русский
+                                </button>
+                                <button type="submit" name="language" value="en"
+                                        class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
+                                               {% if CURRENT_LANG == 'en' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
+                                    <span class="text-xs font-bold w-6">EN</span> English
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
