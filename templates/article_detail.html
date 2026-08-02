@@ -63,9 +63,15 @@
 
         <!-- Authors row -->
         <div class="flex flex-wrap items-center gap-4 text-sm" style="color:#94a3b8;">
-            <span class="flex items-center gap-2">
-                <i class="fas fa-users text-green-500 text-xs"></i>
-                {% if article.authors %}
+            <span class="flex items-start gap-2">
+                <i class="fas fa-users text-green-500 text-xs mt-1"></i>
+                {% if article.parsed_authors %}
+                    <div class="flex flex-col gap-1">
+                        {% for auth in article.parsed_authors %}
+                            <span>{{ auth.name }} | {{ auth.inst }}</span>
+                        {% endfor %}
+                    </div>
+                {% elif article.authors %}
                     {{ article.authors }}
                 {% else %}
                     {{ article.author.get_full_name|default:article.author.username }}
