@@ -1,3 +1,7 @@
+import json
+import qrcode
+import base64
+from io import BytesIO
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, update_session_auth_hash
