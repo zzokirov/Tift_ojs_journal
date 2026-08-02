@@ -634,27 +634,42 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    new Swiper(".issuesSwiper", {
+    const swiper = new Swiper(".issuesSwiper", {
         slidesPerView: "auto",
         spaceBetween: 24,
         loop: true,
         centeredSlides: true,
         grabCursor: true,
+        speed: 600,
         autoplay: {
             delay: 2500,
             disableOnInteraction: false,
+            pauseOnMouseEnter: false,  // biz qo'lda boshqaramiz
         },
         mousewheel: {
             forceToAxis: true,
             sensitivity: 1,
+            invert: false,
         },
         navigation: {
             nextEl: ".swiper-button-next-custom",
             prevEl: ".swiper-button-prev-custom",
         },
     });
+
+    // Jild kartasi ustiga kelganda to'xtasin, ketganda davom etsin
+    const swiperEl = document.querySelector('.issuesSwiper');
+    if (swiperEl) {
+        swiperEl.addEventListener('mouseenter', function() {
+            swiper.autoplay.stop();
+        });
+        swiperEl.addEventListener('mouseleave', function() {
+            swiper.autoplay.start();
+        });
+    }
 });
 </script>
+
 
 {% endblock %}
 
