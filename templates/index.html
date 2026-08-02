@@ -525,48 +525,51 @@ if (ctx) {
 </section>
 
 <!-- BARCHA JILDLAR KARUSELI -->
-<section class="site-container px-4 pb-16 relative">
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                <span class="w-1 h-7 bg-navy-600 rounded-full block"></span>
-                {% trans "Barcha jildlar" %}
-            </h2>
-            <div class="section-divider mt-2 ml-4"></div>
-        </div>
-        
-        <!-- Sroll tugmalari -->
-        <div class="flex items-center gap-2">
-            <button onclick="scrollCarousel('left')" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-navy-800 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button onclick="scrollCarousel('right')" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-navy-800 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
+<section class="site-container px-4 pb-20 relative">
+    <div class="mb-8">
+        <h2 class="text-3xl font-black text-navy-900 flex items-center gap-3">
+            <span class="w-1.5 h-8 bg-gradient-to-b from-green-400 to-green-600 rounded-full block"></span>
+            {% trans "Barcha jildlar" %}
+        </h2>
+        <p class="text-gray-500 text-sm mt-2 ml-5">{% trans "Jurnalimizning barcha oldingi nashrlari bilan tanishing" %}</p>
     </div>
     
-    <div class="relative py-4 -mx-4 px-4">
+    <div class="relative group">
+        <!-- Floating Glassmorphic Scroll Buttons -->
+        <button onclick="scrollCarousel('left')" class="absolute top-1/2 -left-5 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white/50 flex items-center justify-center text-navy-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:scale-110 hover:bg-white hover:text-green-600 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none">
+            <i class="fas fa-chevron-left text-lg"></i>
+        </button>
+        
+        <button onclick="scrollCarousel('right')" class="absolute top-1/2 -right-5 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white/50 flex items-center justify-center text-navy-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:scale-110 hover:bg-white hover:text-green-600 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none">
+            <i class="fas fa-chevron-right text-lg"></i>
+        </button>
+
         <style>
             #issuesCarousel::-webkit-scrollbar { display: none; }
         </style>
-        <div id="issuesCarousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4" style="scrollbar-width: none; -ms-overflow-style: none;">
+        
+        <div id="issuesCarousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-6 px-4 -mx-4" style="scrollbar-width: none; -ms-overflow-style: none;">
             {% for issue in issues %}
-            <a href="{% url 'issue_detail' issue.pk %}" class="block snap-start bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all shrink-0 w-64 card-hover overflow-hidden flex flex-col h-full">
+            <a href="{% url 'issue_detail' issue.pk %}" class="block snap-start bg-white rounded-2xl shadow-lg ring-1 ring-gray-900/5 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ease-out shrink-0 w-72 overflow-hidden flex flex-col h-full group/card relative">
                 {% if issue.cover_image %}
-                <div class="h-32 w-full overflow-hidden bg-gray-50">
-                    <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover">
+                <div class="h-40 w-full overflow-hidden bg-gray-50 relative">
+                    <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
+                </div>
+                {% else %}
+                <div class="h-40 w-full bg-gradient-to-br from-navy-800 to-navy-900 relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                    <i class="fas fa-book-open absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-white/20"></i>
                 </div>
                 {% endif %}
-                <div class="p-5 flex-1 flex flex-col">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="bg-navy-50 text-navy-700 px-3 py-1 rounded-lg text-xs font-bold">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
-                        {% if not issue.cover_image %}
-                        <i class="fas fa-book-open text-gray-300"></i>
-                        {% endif %}
+                
+                <div class="p-6 flex-1 flex flex-col relative bg-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
                     </div>
-                    <h3 class="font-black text-lg text-gray-900 mb-1 mt-auto">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
-                    <p class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
+                    <h3 class="font-black text-xl text-gray-900 mb-2 mt-auto leading-tight group-hover/card:text-green-600 transition-colors">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
+                    <div class="w-10 h-1 bg-green-500 rounded-full mb-3 mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
+                    <p class="text-sm text-gray-500 flex items-center font-medium"><i class="fas fa-file-alt mr-2 text-gray-400"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
                 </div>
             </a>
             {% endfor %}
