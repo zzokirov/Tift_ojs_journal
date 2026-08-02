@@ -586,13 +586,15 @@ document.addEventListener('DOMContentLoaded', function() {
         slidesPerView: "auto",
         spaceBetween: 24,
         loop: true,
+        centeredSlides: true,
+        grabCursor: true,
         autoplay: {
-            delay: 3000,
+            delay: 2500,
             disableOnInteraction: false,
-            pauseOnMouseEnter: true,
         },
         mousewheel: {
             forceToAxis: true,
+            sensitivity: 1,
         },
         navigation: {
             nextEl: ".swiper-button-next-custom",
