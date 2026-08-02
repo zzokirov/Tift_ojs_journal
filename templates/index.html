@@ -611,7 +611,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="flex items-center justify-between mb-4">
                                 <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
                             </div>
-                            <h3 class="font-black text-xl text-gray-900 mb-2 mt-auto leading-tight group-hover/card:text-green-600 transition-colors">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
+                            <h3 class="font-black text-xl text-gray-900 mb-2 mt-auto leading-tight group-hover/card:text-green-600 transition-colors">{{ issue.number }}-son</h3>
                             <div class="w-10 h-1 bg-green-500 rounded-full mb-3 mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
                             <p class="text-sm text-gray-500 flex items-center font-medium"><i class="fas fa-file-alt mr-2 text-gray-400"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
                         </div>
