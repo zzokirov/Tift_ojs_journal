@@ -206,18 +206,16 @@ p.img-caption {
             </div>
             <div style="color: #0a2540; font-size: 10pt; font-family: 'Times New Roman', serif; margin-top: 8pt; border-top: 1pt solid #0a2540; padding-top: 4pt; display: inline-block;">
                 http://architect-edu.tift.uz
+                &nbsp;|&nbsp;
+                {% if article.issue %}{{ article.issue.year }}{% else %}2024{% endif %}-yil,
+                {% if article.issue %}Jild {{ article.issue.volume }}{% else %}Jild 1{% endif %},
+                {% if article.issue %}Son {{ article.issue.number }}{% else %}Maxsus son{% endif %}
             </div>
         </td>
         <td style="width: 18%; vertical-align: middle; text-align: right; padding: 12pt 0;">
-            <div style="color: #0a2540; font-family: 'Times New Roman', serif; font-size: 12pt; font-weight: bold;">
-                {% if article.issue %}{{ article.issue.year }}{% else %}2024{% endif %}-yil
-            </div>
-            <div style="color: #0a2540; font-family: 'Times New Roman', serif; font-size: 10pt; font-weight: bold; margin-top: 4pt;">
-                {% if article.issue %}Jild {{ article.issue.volume }}{% else %}Jild 1{% endif %}
-            </div>
-            <div style="color: #0a2540; font-family: 'Times New Roman', serif; font-size: 10pt; font-weight: bold; margin-top: 2pt;">
-                {% if article.issue %}Son {{ article.issue.number }}{% else %}Maxsus son{% endif %}
-            </div>
+            {% if qr_code_base64 %}
+                <img src="data:image/png;base64,{{ qr_code_base64 }}" style="width: 70pt; height: 70pt;" />
+            {% endif %}
         </td>
         <td style="width: 2%; padding: 12pt 0;"></td>
     </tr>
