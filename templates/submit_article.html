@@ -230,9 +230,23 @@ document.querySelectorAll('input[type="file"]').forEach(function(input) {
         const name = this.name;
         const preview = document.getElementById('filePreview_' + name);
         const fileName = document.getElementById('fileName_' + name);
+        
         if (this.files && this.files[0]) {
+            const file = this.files[0];
+            const ext = file.name.split('.').pop().toLowerCase();
+            
+            if (name === 'pdf_file' && ext !== 'doc' && ext !== 'docx') {
+                alert("Faqat Word (.docx, .doc) format qabul qilamiz!");
+                this.value = ''; // clear the input
+                if (preview) {
+                    preview.classList.add('hidden');
+                    preview.classList.remove('flex');
+                }
+                return;
+            }
+            
             if (preview && fileName) {
-                fileName.textContent = this.files[0].name;
+                fileName.textContent = file.name;
                 preview.classList.remove('hidden');
                 preview.classList.add('flex');
             }

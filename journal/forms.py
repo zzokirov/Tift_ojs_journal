@@ -11,7 +11,6 @@ css_textarea = 'w-full px-4 py-3 border border-gray-200 rounded-xl text-sm bg-gr
 
 # Ruxsat etilgan MIME turlari va ularning kengaytmalari
 ALLOWED_ARTICLE_MIME = {
-    'application/pdf': ['.pdf'],
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
     'application/msword': ['.doc'],
 }
@@ -53,7 +52,7 @@ def validate_article_file(file):
     ext = os.path.splitext(file.name)[1].lower()
     allowed_exts = [e for exts in ALLOWED_ARTICLE_MIME.values() for e in exts]
     if ext not in allowed_exts:
-        raise ValidationError(f"Faqat PDF va DOCX fayllar qabul qilinadi. Yuborilgan: {ext}")
+        raise ValidationError(f"Faqat Word (.docx, .doc) format qabul qilinadi. Yuborilgan: {ext}")
 
     # MIME tekshiruvi
     mime = _get_mime_type(file)
@@ -92,7 +91,7 @@ class ArticleSubmissionForm(forms.ModelForm):
             'authors':  forms.TextInput(attrs={'class': css_input, 'placeholder': 'Barcha mualliflar (Ism Familiya, ...)'}),
             'abstract': forms.Textarea(attrs={'class': css_textarea, 'rows': 5}),
             'keywords': forms.TextInput(attrs={'class': css_input, 'placeholder': 'Kalit so\'zlar (vergul bilan)'}),
-            'pdf_file': forms.FileInput(attrs={'class': 'hidden', 'accept': '.pdf,.docx'}),
+            'pdf_file': forms.FileInput(attrs={'class': 'hidden', 'accept': '.docx,.doc'}),
         }
 
     def clean_pdf_file(self):
