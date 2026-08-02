@@ -1,122 +1,202 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load static i18n %}
 
 {% block title %}Ro'yxatdan o'tish | TIFT Jurnali{% endblock %}
 
 {% block content %}
-<div class="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-4 bg-gray-50">
-    <div class="w-full max-w-lg">
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
 
-        <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+  <div class="w-full" style="max-width:420px;">
 
-            <!-- Header -->
-            <div class="hero-gradient px-8 py-8 text-center relative overflow-hidden">
-                <div class="absolute inset-0 opacity-10"
-                     style="background-image: linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px);
-                            background-size: 20px 20px;"></div>
-                <div class="relative">
-                    <div class="w-16 h-16 bg-white/10 border-2 border-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-user-plus text-green-400 text-2xl"></i>
-                    </div>
-                    <h1 class="text-2xl font-black text-white mb-1">{% trans "Ro'yxatdan o'tish" %}</h1>
-                    <p class="text-gray-400 text-sm">{% trans "Muallif sifatida platformaga qo'shiling" %}</p>
-                </div>
+    <!-- Logo + Brand -->
+    <div class="text-center mb-8">
+      <a href="{% url 'index' %}" class="inline-flex flex-col items-center gap-3 group">
+        <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-md border border-gray-100 group-hover:shadow-lg transition-shadow">
+          <img src="{% static 'images/tift.png' %}" alt="TIFT Logo" class="w-full h-full object-contain bg-white p-1">
+        </div>
+        <div>
+          <div class="text-navy-900 font-black text-lg leading-tight">Arxitektura va Ta'lim</div>
+          <div class="text-gray-500 text-xs tracking-wide">Ilmiy-elektron jurnal</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 px-8 py-8">
+
+      <h1 class="text-xl font-black text-gray-900 mb-1">Ro'yxatdan o'tish</h1>
+      <p class="text-sm text-gray-500 mb-7">Ilmiy jurnal tizimida yangi hisob yarating.</p>
+
+      <!-- Errors -->
+      {% if form.errors %}
+        <div class="bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-5">
+          <div class="flex items-center gap-2 font-semibold text-red-700 text-sm mb-1.5">
+            <i class="fas fa-exclamation-circle"></i>
+            {% trans "Xatoliklar mavjud:" %}
+          </div>
+          {% for field in form %}{% for error in field.errors %}
+            <div class="text-xs text-red-600 flex items-start gap-1.5 mt-0.5">
+              <i class="fas fa-times-circle mt-0.5 flex-shrink-0"></i>
+              <span><strong>{{ field.label }}:</strong> {{ error }}</span>
             </div>
+          {% endfor %}{% endfor %}
+          {% for error in form.non_field_errors %}
+            <div class="text-xs text-red-600 mt-0.5">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
 
-            <div class="px-8 py-8">
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
 
-                <!-- XATOLAR YUQORIDA -->
-                {% if form.errors %}
-                    <div class="bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-6">
-                        <div class="flex items-center gap-2 text-red-700 font-semibold text-sm mb-2">
-                            <i class="fas fa-exclamation-circle"></i>
-                            {% trans "Xatoliklar mavjud, iltimos tekshiring:" %}
-                        </div>
-                        <ul class="space-y-1">
-                            {% for field in form %}
-                                {% for error in field.errors %}
-                                    <li class="text-red-600 text-xs flex items-start gap-2">
-                                        <i class="fas fa-times-circle mt-0.5 flex-shrink-0"></i>
-                                        <span><strong>{{ field.label }}:</strong> {{ error }}</span>
-                                    </li>
-                                {% endfor %}
-                            {% endfor %}
-                            {% for error in form.non_field_errors %}
-                                <li class="text-red-600 text-xs flex items-start gap-2">
-                                    <i class="fas fa-times-circle mt-0.5 flex-shrink-0"></i>
-                                    <span>{{ error }}</span>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-
-                <form method="post" class="space-y-4">
-                    {% csrf_token %}
-
-                    {% for field in form %}
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1.5" for="{{ field.id_for_label }}">
-                                {{ field.label }}
-                                {% if field.field.required %}
-                                    <span class="text-red-500 ml-0.5">*</span>
-                                {% endif %}
-                            </label>
-
-                            <div class="relative">
-                                <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 z-10 pointer-events-none">
-                                    {% if field.name == 'username' %}
-                                        <i class="fas fa-user text-sm"></i>
-                                    {% elif 'password' in field.name %}
-                                        <i class="fas fa-lock text-sm"></i>
-                                    {% elif field.name == 'email' %}
-                                        <i class="fas fa-envelope text-sm"></i>
-                                    {% elif field.name == 'first_name' or field.name == 'last_name' %}
-                                        <i class="fas fa-id-card text-sm"></i>
-                                    {% else %}
-                                        <i class="fas fa-pen text-sm"></i>
-                                    {% endif %}
-                                </div>
-                                <div class="pl-10 {% if field.errors %}ring-1 ring-red-400 rounded-xl{% endif %}">
-                                    {{ field }}
-                                </div>
-                            </div>
-
-                            {% if field.help_text %}
-                                <p class="text-xs text-gray-400 mt-1.5 flex items-start gap-1.5">
-                                    <i class="fas fa-info-circle text-blue-400 mt-0.5 flex-shrink-0"></i>
-                                    {{ field.help_text }}
-                                </p>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-
-                    <div class="pt-2">
-                        <button type="submit"
-                                class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold py-3.5 rounded-xl transition-all hover:scale-[1.01] shadow-lg text-sm">
-                            <i class="fas fa-user-plus"></i>
-                            {% trans "A'zo bo'lish" %}
-                        </button>
-                    </div>
-                </form>
-
-                <div class="mt-6 pt-6 border-t border-gray-100 text-center text-sm text-gray-500">
-                    {% trans "Allaqachon akkauntingiz bormi?" %}
-                    <a href="{% url 'login' %}" class="text-green-600 font-bold hover:text-green-700 transition-colors ml-1">
-                        {% trans "Tizimga kirish" %}
-                    </a>
-                </div>
-
-                <div class="mt-3 text-center">
-                    <a href="{% url 'index' %}" class="text-xs text-gray-400 hover:text-gray-600 transition-colors flex items-center justify-center gap-1">
-                        <i class="fas fa-arrow-left text-[10px]"></i>
-                        {% trans "Bosh sahifaga qaytish" %}
-                    </a>
-                </div>
+        <!-- First + Last name (2 column) -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="id_first_name" class="block text-sm font-semibold text-gray-700 mb-1.5">
+              {% trans "Ism" %}
+            </label>
+            <div class="relative">
+              <i class="fas fa-id-card absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+              <input type="text" name="first_name" id="id_first_name"
+                     value="{{ form.first_name.value|default:'' }}"
+                     class="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400 {% if form.first_name.errors %}border-red-400{% endif %}"
+                     placeholder="Ism">
             </div>
+          </div>
+          <div>
+            <label for="id_last_name" class="block text-sm font-semibold text-gray-700 mb-1.5">
+              {% trans "Familiya" %}
+            </label>
+            <div class="relative">
+              <i class="fas fa-id-card absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+              <input type="text" name="last_name" id="id_last_name"
+                     value="{{ form.last_name.value|default:'' }}"
+                     class="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400 {% if form.last_name.errors %}border-red-400{% endif %}"
+                     placeholder="Familiya">
+            </div>
+          </div>
         </div>
 
+        <!-- Username -->
+        <div>
+          <label for="id_username" class="block text-sm font-semibold text-gray-700 mb-1.5">
+            {% trans "Foydalanuvchi nomi" %} <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <i class="fas fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+            <input type="text" name="username" id="id_username"
+                   value="{{ form.username.value|default:'' }}"
+                   autocomplete="username" required
+                   class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400 {% if form.username.errors %}border-red-400{% endif %}"
+                   placeholder="username123">
+          </div>
+          {% if form.username.errors %}
+            <p class="text-xs text-red-500 mt-1">{{ form.username.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="id_email" class="block text-sm font-semibold text-gray-700 mb-1.5">
+            {% trans "Email" %}
+          </label>
+          <div class="relative">
+            <i class="fas fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+            <input type="email" name="email" id="id_email"
+                   value="{{ form.email.value|default:'' }}"
+                   autocomplete="email"
+                   class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400"
+                   placeholder="email@example.com">
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="id_password1" class="block text-sm font-semibold text-gray-700 mb-1.5">
+            {% trans "Parol" %} <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <i class="fas fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+            <input type="password" name="password1" id="id_password1"
+                   autocomplete="new-password" required
+                   class="w-full pl-10 pr-11 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400 {% if form.password1.errors %}border-red-400{% endif %}"
+                   placeholder="••••••••">
+            <button type="button" onclick="togglePwd('id_password1','eye1')"
+                    class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors focus:outline-none"
+                    aria-label="Parolni ko'rsat">
+              <i id="eye1" class="fas fa-eye-slash text-sm"></i>
+            </button>
+          </div>
+          {% if form.password1.errors %}
+            <p class="text-xs text-red-500 mt-1">{{ form.password1.errors.0 }}</p>
+          {% endif %}
+          {% if form.password1.help_text %}
+            <p class="text-xs text-gray-400 mt-1.5">{{ form.password1.help_text }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Password Confirm -->
+        <div>
+          <label for="id_password2" class="block text-sm font-semibold text-gray-700 mb-1.5">
+            {% trans "Parolni tasdiqlash" %} <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <i class="fas fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+            <input type="password" name="password2" id="id_password2"
+                   autocomplete="new-password" required
+                   class="w-full pl-10 pr-11 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400 {% if form.password2.errors %}border-red-400{% endif %}"
+                   placeholder="••••••••">
+            <button type="button" onclick="togglePwd('id_password2','eye2')"
+                    class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors focus:outline-none"
+                    aria-label="Parolni ko'rsat">
+              <i id="eye2" class="fas fa-eye-slash text-sm"></i>
+            </button>
+          </div>
+          {% if form.password2.errors %}
+            <p class="text-xs text-red-500 mt-1">{{ form.password2.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Terms checkbox -->
+        <div class="flex items-start gap-2.5 pt-1">
+          <input type="checkbox" id="terms" required
+                 class="w-4 h-4 mt-0.5 rounded border-gray-300 accent-green-600 cursor-pointer flex-shrink-0">
+          <label for="terms" class="text-sm text-gray-600 cursor-pointer leading-relaxed">
+            {% trans "Foydalanish shartlari va Maxfiylik siyosatiga roziman." %}
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit"
+                class="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm bg-green-600 hover:bg-green-500 text-white shadow-[0_4px_14px_rgba(22,163,74,0.35)] hover:shadow-[0_6px_20px_rgba(22,163,74,0.45)] transition-all duration-200 hover:scale-[1.01] active:scale-[0.99]">
+          <i class="fas fa-user-plus"></i>
+          {% trans "Ro'yxatdan o'tish" %}
+        </button>
+      </form>
+
+      <div class="mt-6 pt-6 border-t border-gray-100 text-center text-sm text-gray-500">
+        {% trans "Hisobingiz bormi?" %}
+        <a href="{% url 'login' %}" class="text-green-600 font-bold hover:text-green-700 transition-colors ml-1">
+          {% trans "Kirish" %}
+        </a>
+      </div>
     </div>
+
+    <div class="mt-5 text-center">
+      <a href="{% url 'index' %}" class="text-xs text-gray-400 hover:text-gray-600 transition-colors inline-flex items-center gap-1.5">
+        <i class="fas fa-arrow-left text-[10px]"></i>
+        {% trans "Bosh sahifaga qaytish" %}
+      </a>
+    </div>
+  </div>
 </div>
+
+<script>
+function togglePwd(inputId, iconId) {
+  var inp = document.getElementById(inputId);
+  var ico = document.getElementById(iconId);
+  if (inp.type === 'password') { inp.type = 'text'; ico.className = 'fas fa-eye text-sm'; }
+  else { inp.type = 'password'; ico.className = 'fas fa-eye-slash text-sm'; }
+}
+</script>
 {% endblock %}
