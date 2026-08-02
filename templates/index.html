@@ -373,13 +373,7 @@ if (ctx) {
                         </p>
 
                         <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-gray-50">
-                            <div class="flex flex-wrap gap-1.5">
-                                {% for tag in article.keywords.split %}
-                                    <span class="text-[11px] bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-full border border-gray-200">
-                                        {{ tag|cut:"," }}
-                                    </span>
-                                {% endfor %}
-                            </div>
+
                             <div class="flex items-center gap-2">
                                 <a href="{% url 'article_detail' article.pk %}"
                                    class="text-navy-700 hover:text-navy-900 text-xs font-semibold flex items-center gap-1 transition-colors">

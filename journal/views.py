@@ -54,7 +54,7 @@ def index(request):
             Q(author__last_name__icontains=query) |
             Q(author__username__icontains=query)
         )
-    recent_articles = recent_articles[:4]
+    recent_articles = recent_articles[:6]
     
     return render(request, 'index.html', {
         'recent_articles': recent_articles,

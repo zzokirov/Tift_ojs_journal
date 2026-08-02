@@ -142,18 +142,25 @@
 
             <!-- IQTIBOS -->
             <div class="rounded-2xl p-5" style="background:#f8fafc;border:1px solid #e2e8f0;">
-                <h3 class="font-bold text-sm mb-3 flex items-center gap-2 uppercase tracking-wider" style="color:#475569;">
-                    <i class="fas fa-quote-left text-green-500"></i> {% trans "Iqtibos (APA)" %}
-                </h3>
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-bold text-sm flex items-center gap-2 uppercase tracking-wider" style="color:#475569;">
+                        <i class="fas fa-quote-left text-green-500"></i> {% trans "Iqtibos" %}
+                    </h3>
+                    <select id="citationFormat" onchange="updateCitation()" class="text-xs bg-white border border-gray-200 rounded-lg px-2 py-1 outline-none focus:border-navy-500 text-gray-700 font-semibold cursor-pointer shadow-sm">
+                        <option value="apa">APA</option>
+                        <option value="mla">MLA</option>
+                        <option value="chicago">Chicago</option>
+                        <option value="harvard">Harvard</option>
+                        <option value="vancouver">Vancouver</option>
+                        <option value="ieee">IEEE</option>
+                    </select>
+                </div>
                 <div class="relative group">
                     <p class="font-mono leading-relaxed pr-10" id="citationText"
                        style="font-size:0.82rem;color:#64748b;word-break:break-word;">
-                        {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
-                        ({% if article.published_at %}{{ article.published_at.year }}{% elif article.issue %}{{ article.issue.year }}{% else %}2026{% endif %}).
-                        {{ article.title }}.
-                        <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %}, <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
+                       <!-- JS updates this -->
                     </p>
-                    <button onclick="copyAPA()"
+                    <button onclick="copyCitation()"
                             class="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg"
                             style="background:#0f172a;color:white;" title="Nusxa olish">
                         <i class="fas fa-copy text-xs"></i>
@@ -411,13 +418,56 @@
 
 {% block extra_scripts %}
 <script>
-function copyAPA() {
-    const t = document.getElementById('citationText').innerText;
-    navigator.clipboard.writeText(t).then(() => {
-        const btn = event.currentTarget;
-        btn.innerHTML = '<i class="fas fa-check text-xs text-green-400"></i>';
-        setTimeout(() => btn.innerHTML = '<i class="fas fa-copy text-xs"></i>', 2000);
-    });
-}
+    const authorsArr = [
+        {% if authors_list %}
+            {% for auth in authors_list %}"{{ auth.name|escapejs }}"{% if not forloop.last %},{% endif %}{% endfor %}
+        {% else %}
+            "{% if article.authors %}{{ article.authors|escapejs }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}"
+        {% endif %}
+    ];
+    
+    const articleData = {
+        authors: authorsArr.join(', '),
+        title: "{{ article.title|escapejs }}",
+        year: "{% if article.published_at %}{{ article.published_at.year }}{% elif article.issue %}{{ article.issue.year }}{% else %}2026{% endif %}",
+        journal: "Arxitektura va Ta'lim Ilmiy Jurnali",
+        volume: "{% if article.issue %}{{ article.issue.volume }}{% else %}{% endif %}",
+        number: "{% if article.issue %}{{ article.issue.number }}{% else %}{% endif %}"
+    };
+
+    function updateCitation() {
+        const format = document.getElementById('citationFormat').value;
+        const c = articleData;
+        const volNum = c.volume ? (c.number ? ${c.volume}() : c.volume) : '';
+        const volNo = c.volume ? ol.  + (c.number ? , no.  : '') : '';
+        
+        let txt = '';
+        if (format === 'apa') {
+            txt = ${c.authors} (). . <em></em>.;
+        } else if (format === 'mla') {
+            txt = ${c.authors}. "." <em></em>, , .;
+        } else if (format === 'chicago') {
+            txt = ${c.authors}. "." <em></em>  ().;
+        } else if (format === 'harvard') {
+            txt = ${c.authors}, . . <em></em>, .;
+        } else if (format === 'vancouver') {
+            txt = ${c.authors}. . . ; .;
+        } else if (format === 'ieee') {
+            txt = ${c.authors}, "," <em></em>, , .;
+        }
+        document.getElementById('citationText').innerHTML = txt;
+    }
+
+    function copyCitation() {
+        const t = document.getElementById('citationText').innerText;
+        navigator.clipboard.writeText(t).then(() => {
+            const btn = event.currentTarget;
+            btn.innerHTML = '<i class="fas fa-check text-xs text-green-400"></i>';
+            setTimeout(() => btn.innerHTML = '<i class="fas fa-copy text-xs"></i>', 2000);
+        });
+    }
+
+    // Init on load
+    document.addEventListener('DOMContentLoaded', updateCitation);
 </script>
 {% endblock %}
