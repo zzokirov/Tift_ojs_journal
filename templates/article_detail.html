@@ -438,22 +438,22 @@
     function updateCitation() {
         const format = document.getElementById('citationFormat').value;
         const c = articleData;
-        const volNum = c.volume ? (c.number ? ${c.volume}() : c.volume) : '';
-        const volNo = c.volume ? ol.  + (c.number ? , no.  : '') : '';
+        const volNum = c.volume ? (c.number ? c.volume + '(' + c.number + ')' : c.volume) : '';
+        const volNo = c.volume ? 'vol. ' + c.volume + (c.number ? ', no. ' + c.number : '') : '';
         
         let txt = '';
         if (format === 'apa') {
-            txt = ${c.authors} (). . <em></em>.;
+            txt = c.authors + ' (' + c.year + '). ' + c.title + '. <em>' + c.journal + '</em>' + (volNum ? ', <em>' + c.volume + '</em>(' + (c.number||'') + ')' : '') + '.';
         } else if (format === 'mla') {
-            txt = ${c.authors}. "." <em></em>, , .;
+            txt = c.authors + '. "' + c.title + '." <em>' + c.journal + '</em>, ' + volNo + ', ' + c.year + '.';
         } else if (format === 'chicago') {
-            txt = ${c.authors}. "." <em></em>  ().;
+            txt = c.authors + '. "' + c.title + '." <em>' + c.journal + '</em> ' + (c.volume||'') + (c.number ? ', no. ' + c.number : '') + ' (' + c.year + ').';
         } else if (format === 'harvard') {
-            txt = ${c.authors}, . . <em></em>, .;
+            txt = c.authors + ', ' + c.year + '. ' + c.title + '. <em>' + c.journal + '</em>, ' + volNum + '.';
         } else if (format === 'vancouver') {
-            txt = ${c.authors}. . . ; .;
+            txt = c.authors + '. ' + c.title + '. ' + c.journal + '. ' + c.year + '; ' + volNum + '.';
         } else if (format === 'ieee') {
-            txt = ${c.authors}, "," <em></em>, , .;
+            txt = c.authors + ', "' + c.title + '," <em>' + c.journal + '</em>, ' + volNo + ', ' + c.year + '.';
         }
         document.getElementById('citationText').innerHTML = txt;
     }
