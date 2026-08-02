@@ -267,19 +267,17 @@ if (ctx) {
                        placeholder="{% trans "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..." %}"
                        class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500/20 transition-all outline-none">
                        
-                <!-- CATEGORY DROPDOWN (KEYWORDS STYLE WITHOUT CODES) -->
+                <!-- CATEGORY DROPDOWN (EXACT KEYWORDS PILL STYLE) -->
                 <div id="categoryPanel" class="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.12)] border border-gray-100 p-5 hidden opacity-0 transition-all duration-300 transform translate-y-2 z-50">
-                    <div class="flex items-center justify-between mb-3 px-1">
-                        <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fas fa-tags text-green-600"></i>
-                            {% trans "Yo'nalishlar bo'yicha qidiruv" %}
-                        </h4>
-                        <span class="text-[11px] text-gray-400">{% trans "Yo'nalishni tanlang" %}</span>
+                    <div class="flex items-center gap-2 mb-3.5 px-1">
+                        <i class="fas fa-tag text-green-500 text-sm"></i>
+                        <h4 class="text-xs font-black text-navy-900 uppercase tracking-wider">{% trans "YO'NALISHLAR" %}</h4>
                     </div>
                     
-                    <div class="flex flex-wrap gap-2 max-h-[50vh] overflow-y-auto pr-1">
+                    <div class="flex flex-wrap gap-2.5 max-h-[50vh] overflow-y-auto pr-1">
                         {% for cat in categories %}
-                        <a href="?category={{ cat.id }}" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-medium transition-all duration-200 shadow-sm border border-gray-200/80 hover:shadow-md hover:scale-[1.02] {% if current_category == cat.id|stringformat:'s' %}bg-green-600 text-white border-green-600 shadow-green-200{% else %}bg-gray-50 text-gray-700 hover:bg-green-600 hover:text-white hover:border-green-600{% endif %}">
+                        <a href="?category={{ cat.id }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 border {% if current_category == cat.id|stringformat:'s' %}bg-green-600 text-white border-green-600 shadow-md shadow-green-200{% else %}bg-green-50/80 text-green-800 border-green-200/80 hover:bg-green-600 hover:text-white hover:border-green-600 hover:shadow-md hover:scale-[1.03]{% endif %} group/tag">
+                            <i class="fas fa-tag text-[10px] {% if current_category == cat.id|stringformat:'s' %}text-white{% else %}text-green-500 group-hover/tag:text-white{% endif %} transition-colors"></i>
                             <span>{{ cat.name }}</span>
                         </a>
                         {% endfor %}
