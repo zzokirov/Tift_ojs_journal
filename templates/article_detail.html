@@ -285,6 +285,21 @@
                         </a>
                     </div>
                 {% endif %}
+                
+                <!-- QR Code Block -->
+                {% if qr_code %}
+                <div class="px-5 pb-5">
+                    <div class="w-full bg-white rounded-xl p-3 flex flex-col items-center justify-center gap-2" style="border: 1px dashed rgba(255,255,255,0.2);">
+                        <div class="bg-white p-1 rounded-lg shadow-sm">
+                            <img src="data:image/png;base64,{{ qr_code }}" alt="Article QR Code" class="w-24 h-24 object-contain">
+                        </div>
+                        <div class="text-center">
+                            <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{% trans "Smart Skan" %}</div>
+                            <div class="text-xs mt-0.5 text-gray-500">{% trans "Telefon kamerasi orqali skanerlang" %}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             </div>
 
             <!-- MAQOLA MA'LUMOTLARI -->

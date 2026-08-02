@@ -94,6 +94,21 @@ def issue_detail(request, issue_pk):
     })
 
 
+
+def _generate_qr_base64(url):
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=0,
+    )
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    buffer = BytesIO()
+    img.save(buffer, format="PNG")
+    return base64.b64encode(buffer.getvalue()).decode()
+
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if not request.session.get(f'viewed_article_{pk}'):
@@ -107,9 +122,15 @@ def article_detail(request, pk):
         status='published'
     ).exclude(pk=pk).order_by('-created_at')[:8]
 
+    
+    # Generate QR Code for the article URL
+    article_url = request.build_absolute_uri()
+    qr_code_base64 = _generate_qr_base64(article_url)
+    
     return render(request, 'article_detail.html', {
         'article': article,
         'author_articles': author_articles,
+        'qr_code': qr_code_base64,
     })
 
 
@@ -543,6 +564,27 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
             header_y = 30.0
             footer_y = h - 30.0
 
+            # --- YUQORI O'NG BURCHAKDA QR KOD (Faqat 1-sahifada) ---
+            if page.number == 0:
+                try:
+                    import qrcode
+                    from io import BytesIO
+                    qr = qrcode.QRCode(version=1, box_size=5, border=1)
+                    qr_url = f"https://tift.uz/article/{article.pk}/" # assuming absolute url based on domain
+                    qr.add_data(qr_url)
+                    qr.make(fit=True)
+                    img = qr.make_image(fill_color="black", back_color="white")
+                    buffer = BytesIO()
+                    img.save(buffer, format="PNG")
+                    qr_bytes = buffer.getvalue()
+                    
+                    # Yuqori o'ng burchak rect: (x0, y0, x1, y1)
+                    qr_size = 60.0
+                    qr_rect = fitz.Rect(w - margin_right - qr_size, header_y, w - margin_right, header_y + qr_size)
+                    page.insert_image(qr_rect, stream=qr_bytes)
+                except Exception as e:
+                    pass
+
             # --- YUQORI KOLONTITUL (Faqat 2-sahifadan boshlab) ---
             if page.number > 0:
                 # Yuqori qalin ko'k chiziq
@@ -791,9 +833,18 @@ def my_articles(request):
         'published':    articles.filter(status='published').count(),
         'rejected':     articles.filter(status='rejected').count(),
     }
+
+    # Data for Chart.js
+    chart_labels = [a.title[:20] + "..." if len(a.title) > 20 else a.title for a in articles]
+    chart_views = [a.views_count for a in articles]
+    chart_downloads = [a.downloads_count for a in articles]
+
     return render(request, 'my_articles.html', {
         'articles': articles,
         'status_counts': status_counts,
+        'chart_labels': json.dumps(chart_labels),
+        'chart_views': json.dumps(chart_views),
+        'chart_downloads': json.dumps(chart_downloads),
     })
 
 
