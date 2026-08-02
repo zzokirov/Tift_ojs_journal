@@ -24,14 +24,14 @@
     <!-- Card -->
     <div class="bg-white rounded-2xl shadow-lg border border-gray-100 px-8 py-8">
 
-      <h1 class="text-xl font-black text-gray-900 mb-1">Kirish</h1>
-      <p class="text-sm text-gray-500 mb-7">Hisobingizga kiring.</p>
+      <h1 class="text-2xl font-black text-gray-900 mb-1">Kirish</h1>
+      <p class="text-sm text-gray-500 mb-6">Hisobingizga kiring.</p>
 
       {% if form.errors %}
         <div class="bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-5 text-sm text-red-700">
           <div class="flex items-center gap-2 font-semibold mb-1">
             <i class="fas fa-exclamation-circle"></i>
-            {% trans "Login yoki parol noto'g'ri." %}
+            {% trans "Email yoki parol noto'g'ri." %}
           </div>
           {% for error in form.non_field_errors %}
             <div class="text-xs mt-0.5 text-red-600">{{ error }}</div>
@@ -42,18 +42,18 @@
       <form method="post" class="space-y-5">
         {% csrf_token %}
 
-        <!-- Username -->
+        <!-- Email -->
         <div>
           <label for="id_username" class="block text-sm font-semibold text-gray-700 mb-1.5">
-            {% trans "Foydalanuvchi nomi" %} <span class="text-red-500">*</span>
+            {% trans "Elektron pochta (Email)" %} <span class="text-red-500">*</span>
           </label>
           <div class="relative">
-            <i class="fas fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
-            <input type="text" name="username" id="id_username"
+            <i class="fas fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+            <input type="email" name="username" id="id_username"
                    value="{{ form.username.value|default:'' }}"
-                   autocomplete="username" required
+                   autocomplete="email" required
                    class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400"
-                   placeholder="Username">
+                   placeholder="email@example.com">
           </div>
           {% if form.username.errors %}
             <p class="text-xs text-red-500 mt-1">{{ form.username.errors.0 }}</p>

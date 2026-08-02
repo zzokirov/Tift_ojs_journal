@@ -102,21 +102,55 @@ class ArticleSubmissionForm(forms.ModelForm):
 
 
 class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(
+        required=True,
+        label='Email',
+        widget=forms.EmailInput(attrs={
+            'class': css_input,
+            'placeholder': 'email@example.com',
+            'autocomplete': 'email',
+        })
+    )
+
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields + ('email', 'first_name', 'last_name')
+        fields = ('email', 'first_name', 'last_name', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # username ni majburiy emas qilamiz (auto-generatsiya)
+        if 'username' in self.fields:
+            self.fields['username'].required = False
         for field in self.fields.values():
             existing = field.widget.attrs.get('class', '')
-            field.widget.attrs['class'] = css_input + ' ' + existing
-        self.fields['username'].widget.attrs['placeholder']   = 'Foydalanuvchi nomi'
-        self.fields['email'].widget.attrs['placeholder']      = 'Email manzil'
+            if css_input not in existing:
+                field.widget.attrs['class'] = css_input + ' ' + existing
+        self.fields['email'].widget.attrs['placeholder']      = 'email@example.com'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Ism'
         self.fields['last_name'].widget.attrs['placeholder']  = 'Familiya'
         self.fields['password1'].widget.attrs['placeholder']  = 'Parol'
         self.fields['password2'].widget.attrs['placeholder']  = 'Parolni tasdiqlang'
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email', '').lower().strip()
+        if User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError("Bu email allaqachon ro'yxatdan o'tgan.")
+        return email
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        email = self.cleaned_data['email'].lower().strip()
+        user.email = email
+        # Username: email local part + random digits if taken
+        base = email.split('@')[0][:28]
+        import random, string
+        username = base
+        while User.objects.filter(username=username).exists():
+            username = base + ''.join(random.choices(string.digits, k=4))
+        user.username = username
+        if commit:
+            user.save()
+        return user
 
 
 class ProfileUpdateForm(forms.ModelForm):

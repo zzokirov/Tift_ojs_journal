@@ -814,7 +814,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='journal.backends.EmailAuthBackend')
             return redirect('my_articles')
     else:
         form = CustomUserCreationForm()
