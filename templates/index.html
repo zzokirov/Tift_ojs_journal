@@ -417,30 +417,30 @@ if (ctx) {
                     </h3>
                 </div>
                 <div class="divide-y divide-gray-50">
-                    {% regroup issues by volume as volume_list %}
-                    {% for vol in volume_list %}
-                        <!-- Jild (Volume) Header -->
-                        <div class="flex items-center justify-between px-5 py-3.5 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleVolume('vol-{{ vol.grouper }}')">
+                    {% regroup issues by year as year_list %}
+                    {% for yr in year_list %}
+                        <!-- Yil (Year) Header -->
+                        <div class="flex items-center justify-between px-5 py-3.5 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors" onclick="toggleVolume('yr-{{ yr.grouper }}')">
                             <div class="font-bold text-navy-800 text-sm flex items-center gap-2">
-                                <i class="fas fa-folder text-green-500/70"></i>
-                                {% blocktrans with vol=vol.grouper %}Jild {{ vol }}{% endblocktrans %}
+                                <i class="fas fa-folder-open text-green-500"></i>
+                                {{ yr.grouper }}-yil nashrlari
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="bg-navy-100 text-navy-700 text-xs font-bold px-2 py-0.5 rounded-md">
-                                    {{ vol.list.0.year }}
+                                <span class="bg-navy-100 text-navy-700 text-xs font-bold px-2.5 py-0.5 rounded-full">
+                                    {{ yr.list|length }} ta son
                                 </span>
-                                <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-300" id="icon-vol-{{ vol.grouper }}"></i>
+                                <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-300" id="icon-yr-{{ yr.grouper }}"></i>
                             </div>
                         </div>
                         
                         <!-- Sonlar (Issues) List -->
-                        <div id="vol-{{ vol.grouper }}" class="hidden divide-y divide-gray-50 bg-white">
-                            {% for issue in vol.list %}
+                        <div id="yr-{{ yr.grouper }}" class="hidden divide-y divide-gray-50 bg-white">
+                            {% for issue in yr.list %}
                                 <a href="{% url 'issue_detail' issue.pk %}"
                                    class="flex items-center justify-between px-5 py-3 pl-10 hover:bg-green-50/50 transition-colors group">
                                     <div>
                                         <div class="text-navy-800 font-semibold text-sm group-hover:text-green-700 transition-colors">
-                                            {% blocktrans with num=issue.number %}Son {{ num }}{% endblocktrans %}
+                                            {{ issue.number }}-son
                                         </div>
                                         <div class="text-xs text-gray-400 mt-0.5 flex items-center gap-1">
                                             <i class="fas fa-file-alt text-[10px]"></i>
