@@ -638,31 +638,22 @@ document.addEventListener('DOMContentLoaded', function() {
         slidesPerView: "auto",
         spaceBetween: 24,
         loop: true,
-        loopAdditionalSlides: 4,
-        centeredSlides: true,
         grabCursor: true,
-        speed: 700,
+        speed: 600,
         autoplay: {
-            delay: 2500,
+            delay: 3000,
             disableOnInteraction: false,
-            pauseOnMouseEnter: false,
         },
         mousewheel: {
             forceToAxis: true,
-            sensitivity: 1,
         },
         navigation: {
             nextEl: ".swiper-button-next-custom",
             prevEl: ".swiper-button-prev-custom",
         },
-        on: {
-            init: function() {
-                this.autoplay.start();
-            }
-        }
     });
 
-    // Jild ustiga sichqoncha kelganda to'xtatish
+    // Jild ustiga kelganda to'xtatish, ketganda davom
     const swiperEl = document.querySelector('.issuesSwiper');
     if (swiperEl) {
         swiperEl.addEventListener('mouseenter', function() {
