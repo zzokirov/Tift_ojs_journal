@@ -84,7 +84,7 @@ if (ctx) {
                 <!-- STATS -->
                 <div class="flex flex-wrap gap-6 mb-10">
                     <div class="text-center">
-                        <div class="text-3xl font-black" style="color:#16a34a;">{{ recent_articles|length }}+</div>
+                        <div class="text-3xl font-black" style="color:#16a34a;">{{ total_articles }}+</div>
                         <div class="text-xs uppercase tracking-wider mt-1" style="color:#64748b;">{% trans "Maqolalar" %}</div>
                     </div>
                     <div class="w-px self-stretch" style="background:rgba(0,0,0,0.1);"></div>
@@ -133,7 +133,7 @@ if (ctx) {
                         </div>
                         <div class="w-px" style="background:rgba(255,255,255,0.1);"></div>
                         <div>
-                            <div class="font-black text-3xl leading-none" style="color:#22c55e;">{{ recent_articles|length }}</div>
+                            <div class="font-black text-3xl leading-none" style="color:#22c55e;">{{ total_articles }}</div>
                             <div class="text-gray-400 text-xs mt-1">{% trans "Nashr maqolalar" %}</div>
                         </div>
                     </div>
@@ -310,7 +310,7 @@ if (ctx) {
                 </div>
                 {% if not query %}
                     <span class="bg-navy-50 text-navy-700 border border-navy-100 px-3 py-1 rounded-full text-xs font-semibold">
-                        {{ recent_articles|length }} {% trans "ta maqola" %}
+                        {{ total_articles }} {% trans "ta maqola" %}
                     </span>
                 {% endif %}
             </div>
