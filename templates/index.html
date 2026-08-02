@@ -524,7 +524,9 @@ if (ctx) {
     </div>
 </section>
 
-<!-- BARCHA JILDLAR KARUSELI -->
+<!-- BARCHA JILDLAR KARUSELI (SWIPER JS) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 <section class="site-container px-4 pb-20 relative">
     <div class="mb-8">
         <h2 class="text-3xl font-black text-navy-900 flex items-center gap-3">
@@ -534,83 +536,67 @@ if (ctx) {
         <p class="text-gray-500 text-sm mt-2 ml-5">{% trans "Jurnalimizning barcha oldingi nashrlari bilan tanishing" %}</p>
     </div>
     
-    <div class="relative group">
-        <!-- Floating Glassmorphic Scroll Buttons -->
-        <button onclick="scrollCarousel('left')" class="absolute top-1/2 -left-5 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white/50 flex items-center justify-center text-navy-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:scale-110 hover:bg-white hover:text-green-600 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none">
-            <i class="fas fa-chevron-left text-lg"></i>
-        </button>
-        
-        <button onclick="scrollCarousel('right')" class="absolute top-1/2 -right-5 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white/50 flex items-center justify-center text-navy-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:scale-110 hover:bg-white hover:text-green-600 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none">
-            <i class="fas fa-chevron-right text-lg"></i>
-        </button>
+    <div class="relative group px-2">
+        <!-- Swiper Container -->
+        <div class="swiper issuesSwiper py-6">
+            <div class="swiper-wrapper">
+                {% for issue in issues %}
+                <div class="swiper-slide" style="width: auto;">
+                    <a href="{% url 'issue_detail' issue.pk %}" class="block bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[1.04] transition-all duration-300 ease-out w-60 overflow-hidden flex flex-col h-full group/card relative mx-auto">
+                        {% if issue.cover_image %}
+                        <div class="h-32 w-full overflow-hidden bg-gray-50 relative">
+                            <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
+                        </div>
+                        {% else %}
+                        <div class="h-32 w-full bg-gradient-to-br from-navy-800 to-navy-900 relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                            <i class="fas fa-book-open absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-white/20"></i>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="p-4 flex-1 flex flex-col relative bg-white">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
+                            </div>
+                            <h3 class="font-black text-xl text-gray-900 mb-2 mt-auto leading-tight group-hover/card:text-green-600 transition-colors">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
+                            <div class="w-10 h-1 bg-green-500 rounded-full mb-3 mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
+                            <p class="text-sm text-gray-500 flex items-center font-medium"><i class="fas fa-file-alt mr-2 text-gray-400"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
 
-        <style>
-            #issuesCarousel::-webkit-scrollbar { display: none; }
-        </style>
-        
-        <div id="issuesCarousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth py-6 px-4 -mx-4" style="scrollbar-width: none; -ms-overflow-style: none;">
-            {% for issue in issues %}
-            <a href="{% url 'issue_detail' issue.pk %}" class="block snap-start bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[1.04] transition-all duration-300 ease-out shrink-0 w-60 overflow-hidden flex flex-col h-full group/card relative">
-                {% if issue.cover_image %}
-                <div class="h-32 w-full overflow-hidden bg-gray-50 relative">
-                    <img src="{{ issue.cover_image.url }}" alt="Muqova" class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
-                </div>
-                {% else %}
-                <div class="h-32 w-full bg-gradient-to-br from-navy-800 to-navy-900 relative overflow-hidden">
-                    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-                    <i class="fas fa-book-open absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-white/20"></i>
-                </div>
-                {% endif %}
-                
-                <div class="p-4 flex-1 flex flex-col relative bg-white">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase">{{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}</span>
-                    </div>
-                    <h3 class="font-black text-xl text-gray-900 mb-2 mt-auto leading-tight group-hover/card:text-green-600 transition-colors">{% blocktrans with vol=issue.volume num=issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</h3>
-                    <div class="w-10 h-1 bg-green-500 rounded-full mb-3 mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
-                    <p class="text-sm text-gray-500 flex items-center font-medium"><i class="fas fa-file-alt mr-2 text-gray-400"></i>{{ issue.articles.count }} {% trans "ta maqola" %}</p>
-                </div>
-            </a>
-            {% endfor %}
+        <!-- Custom Navigation Buttons -->
+        <div class="swiper-button-prev-custom absolute top-1/2 -left-4 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white/50 flex items-center justify-center text-navy-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:scale-110 hover:bg-white hover:text-green-600 transition-all duration-300 opacity-0 group-hover:opacity-100 cursor-pointer">
+            <i class="fas fa-chevron-left text-lg"></i>
+        </div>
+        <div class="swiper-button-next-custom absolute top-1/2 -right-4 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white/50 flex items-center justify-center text-navy-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:scale-110 hover:bg-white hover:text-green-600 transition-all duration-300 opacity-0 group-hover:opacity-100 cursor-pointer">
+            <i class="fas fa-chevron-right text-lg"></i>
         </div>
     </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-function scrollCarousel(direction) {
-    const container = document.getElementById('issuesCarousel');
-    const scrollAmount = 264; // card width + gap
-    if (direction === 'left') {
-        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    } else {
-        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('issuesCarousel');
-    if (!container) return;
-    
-    const wrapper = container.parentElement;
-    let autoScrollInterval;
-    const scrollAmount = 264;
-
-    function startAutoScroll() {
-        autoScrollInterval = setInterval(() => {
-            // Check if reached the end (with a 5px buffer)
-            if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
-                // Scroll back to start
-                container.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            }
-        }, 3000); // 3 soniyada bir marta siljiydi
-    }
-
-    // Start initially
-    startAutoScroll();
+    new Swiper(".issuesSwiper", {
+        slidesPerView: "auto",
+        spaceBetween: 24,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+        },
+    });
 });
 </script>
 
 {% endblock %}
+
