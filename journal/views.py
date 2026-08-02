@@ -101,16 +101,6 @@ def article_detail(request, pk):
         article.save()
         request.session[f'viewed_article_{pk}'] = True
 
-    # Parse authors array
-    authors_list = []
-    if article.authors and '|' in article.authors:
-        for block in article.authors.split(';'):
-            parts = [p.strip() for p in block.split('|')]
-            if len(parts) >= 2:
-                authors_list.append({"name": parts[0], "inst": parts[1]})
-            elif len(parts) == 1:
-                authors_list.append({"name": parts[0], "inst": ""})
-
     # Shu muallifning boshqa nashr etilgan maqolalari
     author_articles = Article.objects.filter(
         author=article.author,
@@ -120,7 +110,6 @@ def article_detail(request, pk):
     return render(request, 'article_detail.html', {
         'article': article,
         'author_articles': author_articles,
-        'authors_list': authors_list,
     })
 
 
@@ -455,23 +444,12 @@ def _build_pdf_from_html_xhtml2pdf(article, request=None):
         except Exception:
             pass
 
-    # Parse authors array
-    authors_list = []
-    if article.authors and '|' in article.authors:
-        for block in article.authors.split(';'):
-            parts = [p.strip() for p in block.split('|')]
-            if len(parts) >= 2:
-                authors_list.append({"name": parts[0], "inst": parts[1]})
-            elif len(parts) == 1:
-                authors_list.append({"name": parts[0], "inst": ""})
-
     html_string = render_to_string('article_pdf.html', {
         'article': article,
         'request': request,
         'pdf_content_html': content_html,
         'static_root': django_settings.STATIC_ROOT,
         'logo_base64': _get_logo_base64(),
-        'authors_list': authors_list,
     })
     buffer = io.BytesIO()
     base_url = request.build_absolute_uri('/') if request else ''

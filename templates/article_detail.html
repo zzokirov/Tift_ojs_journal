@@ -346,8 +346,8 @@
                 </h3>
                 
                 <div class="space-y-4">
-                {% if authors_list %}
-                    {% for auth in authors_list %}
+                {% if article.parsed_authors %}
+                    {% for auth in article.parsed_authors %}
                     <div class="flex items-start gap-3">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-base flex-shrink-0"
                              style="background:linear-gradient(135deg,#142d54,#0a1628);color:#22c55e;">

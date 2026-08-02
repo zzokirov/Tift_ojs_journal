@@ -345,7 +345,13 @@ if (ctx) {
                                         {{ article.author.get_full_name|default:article.author.username|first|upper }}
                                     {% endif %}
                                 </div>
-                                {% if article.authors %}
+                                {% if article.parsed_authors %}
+                                    <div class="flex flex-col gap-1">
+                                        {% for auth in article.parsed_authors %}
+                                            <span>{{ auth.name }} | {{ auth.inst }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% elif article.authors %}
                                     {{ article.authors }}
                                 {% else %}
                                     {{ article.author.get_full_name|default:article.author.username }}

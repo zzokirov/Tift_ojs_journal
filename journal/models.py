@@ -136,6 +136,18 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yuborilgan sana")
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
+    def parsed_authors(self):
+        authors_list = []
+        if self.authors and '|' in self.authors:
+            for block in self.authors.split(';'):
+                parts = [p.strip() for p in block.split('|')]
+                if len(parts) >= 2:
+                    authors_list.append({"name": parts[0], "inst": parts[1]})
+                elif len(parts) == 1:
+                    authors_list.append({"name": parts[0], "inst": ""})
+        return authors_list
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = "Maqola"

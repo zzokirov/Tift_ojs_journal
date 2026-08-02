@@ -225,22 +225,31 @@ p.img-caption {
 
 <!-- -- MAQOLA MA'LUMOTLARI -- -->
 
-<!-- Sarlavha -->
-<div class="article-title">{{ article.title }}</div>
-
-<!-- Mualliflar -->
-<div class="article-authors">
-    {% if article.authors %}
-        {{ article.authors }}
-    {% else %}
-        {{ article.author.get_full_name|default:article.author.username }}
-    {% endif %}
-</div>
-
-<!-- Muassasa -->
-{% if article.author.institution %}
-    <div class="article-institution">{{ article.author.institution }}</div>
-{% endif %}
+  <!-- Sarlavha -->
+  <div class="article-title">{{ article.title }}</div>
+  
+  <!-- Mualliflar -->
+  {% if article.parsed_authors %}
+      {% for auth in article.parsed_authors %}
+          <div class="article-authors" style="margin-bottom: 5pt;">{{ auth.name }}</div>
+          {% if auth.inst %}
+              <div class="article-institution" style="margin-bottom: 15pt;">{{ auth.inst }}</div>
+          {% endif %}
+      {% endfor %}
+  {% else %}
+      <div class="article-authors">
+          {% if article.authors %}
+              {{ article.authors }}
+          {% else %}
+              {{ article.author.get_full_name|default:article.author.username }}
+          {% endif %}
+      </div>
+      
+      <!-- Muassasa -->
+      {% if article.author.institution %}
+      <div class="article-institution">{{ article.author.institution }}</div>
+      {% endif %}
+  {% endif %}
 
 <!-- Kategoriya belgisi (ixtiyoriy) -->
 {% if article.category %}
