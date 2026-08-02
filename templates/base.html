@@ -123,20 +123,20 @@
                 <!-- NAV LINKS — faqat login qilmagan userlar uchun -->
                 {% if not user.is_authenticated %}
                 <div class="hidden md:flex items-center gap-6 text-sm">
-                    <a href="{% url 'archive' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-book-open mr-1.5 text-xs text-green-500/70"></i>{% trans "Arxiv" %}
-                    </a>
-                    <a href="{% url 'news' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-newspaper mr-1.5 text-xs text-green-500/70"></i>{% trans "Yangiliklar" %}
+                    <a href="{% url 'about' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
+                        <i class="fas fa-info-circle mr-1.5 text-xs text-green-500/70"></i>{% trans "Jurnal haqida" %}
                     </a>
                     <a href="{% url 'conferences' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
                         <i class="fas fa-calendar-check mr-1.5 text-xs text-green-500/70"></i>{% trans "Konferensiyalar" %}
                     </a>
+                    <a href="{% url 'news' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
+                        <i class="fas fa-newspaper mr-1.5 text-xs text-green-500/70"></i>{% trans "Yangiliklar" %}
+                    </a>
+                    <a href="{% url 'archive' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
+                        <i class="fas fa-book-open mr-1.5 text-xs text-green-500/70"></i>{% trans "Arxiv" %}
+                    </a>
                     <a href="{% url 'documents' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
                         <i class="fas fa-file-alt mr-1.5 text-xs text-green-500/70"></i>{% trans "Hujjatlar" %}
-                    </a>
-                    <a href="{% url 'about' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-info-circle mr-1.5 text-xs text-green-500/70"></i>{% trans "Jurnal haqida" %}
                     </a>
                 </div>
                 {% endif %}
@@ -269,22 +269,21 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-white/10 px-4 py-4 space-y-2">
-            <a href="{% url 'archive' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-book-open mr-2 text-green-500/70"></i>{% trans "Arxiv" %}
-            </a>
-            <a href="{% url 'news' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-newspaper mr-2 text-green-500/70"></i>{% trans "Yangiliklar" %}
+            <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+                <i class="fas fa-info-circle mr-2 text-green-500/70"></i>{% trans "Jurnal haqida" %}
             </a>
             <a href="{% url 'conferences' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
                 <i class="fas fa-calendar-check mr-2 text-green-500/70"></i>{% trans "Konferensiyalar" %}
             </a>
+            <a href="{% url 'news' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+                <i class="fas fa-newspaper mr-2 text-green-500/70"></i>{% trans "Yangiliklar" %}
+            </a>
+            <a href="{% url 'archive' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+                <i class="fas fa-book-open mr-2 text-green-500/70"></i>{% trans "Arxiv" %}
+            </a>
             <a href="{% url 'documents' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
                 <i class="fas fa-file-alt mr-2 text-green-500/70"></i>{% trans "Hujjatlar" %}
-            </a>
-            <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-info-circle mr-2 text-green-500/70"></i>{% trans "Jurnal haqida" %}
             </a>
             {% if user.is_authenticated %}
                 <a href="{% url 'submit_article' %}" class="block bg-green-600 text-navy-900 py-2 px-3 rounded-lg text-sm font-bold text-center mt-2">
