@@ -123,9 +123,6 @@
                 <!-- NAV LINKS — faqat login qilmagan userlar uchun -->
                 {% if not user.is_authenticated %}
                 <div class="hidden md:flex items-center gap-6 text-sm">
-                    <a href="{% url 'index' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-home mr-1.5 text-xs text-green-500/70"></i>{% trans "Bosh sahifa" %}
-                    </a>
                     <a href="{% url 'archive' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
                         <i class="fas fa-book-open mr-1.5 text-xs text-green-500/70"></i>{% trans "Arxiv" %}
                     </a>
@@ -274,9 +271,6 @@
 
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-white/10 px-4 py-4 space-y-2">
-            <a href="{% url 'index' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-home mr-2 text-green-500/70"></i>{% trans "Bosh sahifa" %}
-            </a>
             <a href="{% url 'archive' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
                 <i class="fas fa-book-open mr-2 text-green-500/70"></i>{% trans "Arxiv" %}
             </a>
