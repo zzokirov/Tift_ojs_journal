@@ -943,10 +943,10 @@ def download_issue_pdf(request, issue_pk):
     """
     Jurnalning to'liq sonini PDF sifatida yaratadi va yuklab beradi.
     Ketma-ketlik:
-    1. Muqova va Tahririyat a'zolari (Admin yuklagan Word fayl yoki standart dizayn)
-    2. Avtomatik shakllantirilgan Mundarija (Table of Contents)
+    1. Muqova va Tahririyat a'zolari (Admin yuklagan Word/PDF fayl)
+    2. Avtomatik shakllantirilgan Kitob shaklidagi Mundarija (Table of Contents)
     3. Nashrdagi barcha chop etilgan maqolalar ketma-ketligi
-    4. Barcha sahifalarda uzluksiz raqamlash (1, 2, 3...)
+    4. Faqat maqolalar sahifalarida uzluksiz raqamlash (Muqova va Mundarijada raqamlash bo'lmaydi)
     """
     import io
     import base64
@@ -960,44 +960,48 @@ def download_issue_pdf(request, issue_pk):
     if not articles:
         return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
 
-    # 1. MUQOVA VA TAHRIRIYAT SAHIFASI (Section 1)
+    # 1. MUQOVA VA TAHRIRIYAT SAHIFASI (Faqat Admin yuklagan fayl ishlatiladi)
     doc_cover = None
-    if issue.editorial_doc and issue.editorial_doc.name.lower().endswith(('.doc', '.docx')):
-        try:
-            editorial_html = _extract_docx_text_as_html(issue.editorial_doc.path)
-            if editorial_html:
-                html_full = f"""
-                <!DOCTYPE html><html><head><meta charset="utf-8">
-                <style>@page {{ size: A4; margin: 2cm; }} body {{ font-family: 'Times New Roman', serif; font-size: 11pt; line-height: 1.4; }}</style>
-                </head><body>{editorial_html}</body></html>
-                """
-                buf = io.BytesIO()
-                pisa.CreatePDF(src=html_full, dest=buf, encoding='utf-8')
-                doc_cover = fitz.open(stream=buf.getvalue(), filetype="pdf")
-        except Exception as e:
-            print("Editorial doc conversion error:", e)
-
-    if not doc_cover or len(doc_cover) == 0:
-        logo_b64 = _get_logo_base64()
-        cover_b64 = None
-        if issue.cover_image:
+    if issue.editorial_doc and issue.editorial_doc.name:
+        ext_ed = issue.editorial_doc.name.lower().rsplit('.', 1)[-1].split('?')[0]
+        if ext_ed == 'pdf':
             try:
-                with open(issue.cover_image.path, 'rb') as f:
-                    ext = issue.cover_image.name.split('.')[-1].lower()
-                    cover_b64 = f"data:image/{ext};base64," + base64.b64encode(f.read()).decode('ascii')
-            except Exception:
-                pass
+                doc_cover = fitz.open(issue.editorial_doc.path)
+            except Exception as e:
+                print("Editorial PDF error:", e)
+        elif ext_ed in ('doc', 'docx'):
+            try:
+                editorial_html = _extract_docx_text_as_html(issue.editorial_doc.path)
+                if editorial_html:
+                    html_full = f"""
+                    <!DOCTYPE html><html><head><meta charset="utf-8">
+                    <style>@page {{ size: A4; margin: 2cm; }} body {{ font-family: 'Times New Roman', serif; font-size: 11pt; line-height: 1.4; }}</style>
+                    </head><body>{editorial_html}</body></html>
+                    """
+                    buf = io.BytesIO()
+                    pisa.CreatePDF(src=html_full, dest=buf, encoding='utf-8')
+                    doc_cover = fitz.open(stream=buf.getvalue(), filetype="pdf")
+            except Exception as e:
+                print("Editorial doc conversion error:", e)
 
-        cover_html = render_to_string('issue_cover_pdf.html', {
-            'issue': issue,
-            'logo_base64': logo_b64,
-            'cover_image_base64': cover_b64,
-        })
-        buf = io.BytesIO()
-        pisa.CreatePDF(src=cover_html, dest=buf, encoding='utf-8')
-        doc_cover = fitz.open(stream=buf.getvalue(), filetype="pdf")
+    elif issue.cover_image and issue.cover_image.name:
+        try:
+            logo_b64 = _get_logo_base64()
+            with open(issue.cover_image.path, 'rb') as f:
+                ext_img = issue.cover_image.name.split('.')[-1].lower()
+                cover_b64 = f"data:image/{ext_img};base64," + base64.b64encode(f.read()).decode('ascii')
+            cover_html = render_to_string('issue_cover_pdf.html', {
+                'issue': issue,
+                'logo_base64': logo_b64,
+                'cover_image_base64': cover_b64,
+            })
+            buf = io.BytesIO()
+            pisa.CreatePDF(src=cover_html, dest=buf, encoding='utf-8')
+            doc_cover = fitz.open(stream=buf.getvalue(), filetype="pdf")
+        except Exception as e:
+            print("Cover image error:", e)
 
-    cover_page_count = len(doc_cover)
+    cover_page_count = len(doc_cover) if doc_cover else 0
 
     # 2. MAQOLALAR PDF NUSHASINI TAYYORLASH
     prepared_articles = []
@@ -1069,27 +1073,34 @@ def download_issue_pdf(request, issue_pk):
 
     # 4. BARCHA QISMLARNI BITTA MASTER PDF G'A BIRLASHTIRISH
     master_doc = fitz.open()
-    master_doc.insert_pdf(doc_cover)
+    if doc_cover and len(doc_cover) > 0:
+        master_doc.insert_pdf(doc_cover)
     master_doc.insert_pdf(toc_doc)
     for item in prepared_articles:
         master_doc.insert_pdf(item['doc'])
 
-    # 5. UZLUKSIZ RAQAMLASH VA HEADER/FOOTER QO'SHISH (1, 2, 3...)
+    # 5. UZLUKSIZ RAQAMLASH VA HEADER/FOOTER QO'SHISH
+    # MUQOVA VA MUNDARIJA SAHIFALARIDA RAQAMLASH BO'LMAYDI!
     total_pages = len(master_doc)
+    unbound_count = cover_page_count + len(toc_doc)  # Muqova va Mundarija sahifalari soni
     hdr_text = f"TIFT \"Arxitektura va Ta'lim\" Ilmiy-elektron jurnali | {issue.year}-yil, {issue.number}-son"
 
     for idx in range(total_pages):
         page = master_doc[idx]
-        page_num = idx + 1
+
+        # Muqova va Mundarija sahifalarida header/footer va sahifa raqami qo'yilmaydi!
+        if idx < unbound_count:
+            continue
+
+        page_num = idx + 1  # Maqola sahifa raqami
 
         rect = page.rect
         width, height = rect.width, rect.height
 
-        # Yuqori kolontitul (Header) - muqova sahifasida ko'rsatilmaydi
-        if idx > 0:
-            header_y = 25
-            page.insert_text((40, header_y), hdr_text, fontsize=8, fontname="helv", color=(0.2, 0.2, 0.2))
-            page.draw_line(fitz.Point(40, header_y + 4), fitz.Point(width - 40, header_y + 4), color=(0.6, 0.6, 0.6), width=0.5)
+        # Yuqori kolontitul (Header)
+        header_y = 25
+        page.insert_text((40, header_y), hdr_text, fontsize=8, fontname="helv", color=(0.2, 0.2, 0.2))
+        page.draw_line(fitz.Point(40, header_y + 4), fitz.Point(width - 40, header_y + 4), color=(0.6, 0.6, 0.6), width=0.5)
 
         # Pastki kolontitul (Footer)
         footer_y = height - 30
