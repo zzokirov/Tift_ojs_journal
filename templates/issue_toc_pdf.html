@@ -1,0 +1,118 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    line-height: 1.4;
+}
+@page {
+    size: A4;
+    margin-top: 2.0cm;
+    margin-bottom: 2.0cm;
+    margin-left: 2.5cm;
+    margin-right: 2.0cm;
+}
+.header-box {
+    text-align: center;
+    border-bottom: 2pt solid #064e3b;
+    padding-bottom: 10pt;
+    margin-bottom: 20pt;
+}
+.journal-title {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #064e3b;
+    text-transform: uppercase;
+}
+.issue-title {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #333333;
+    margin-top: 3pt;
+}
+.toc-heading {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 15pt;
+    margin-bottom: 20pt;
+    letter-spacing: 2pt;
+    color: #000;
+}
+.toc-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.toc-row {
+    vertical-align: bottom;
+}
+.toc-title-cell {
+    padding-top: 8pt;
+    padding-bottom: 8pt;
+}
+.art-title {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #000;
+}
+.art-authors {
+    font-size: 9.5pt;
+    font-style: italic;
+    color: #444;
+    margin-top: 2pt;
+}
+.toc-page-cell {
+    width: 55pt;
+    text-align: right;
+    font-weight: bold;
+    font-size: 11pt;
+    vertical-align: bottom;
+    padding-bottom: 8pt;
+    white-space: nowrap;
+}
+.dots-cell {
+    border-bottom: 1pt dotted #888;
+    margin-bottom: 3pt;
+}
+</style>
+</head>
+<body>
+<div class="header-box">
+    <div class="journal-title">TIFT "Arxitektura va Ta'lim" Ilmiy-Elektron Jurnali</div>
+    <div class="issue-title">{{ issue.year }}-yil, {{ issue.number }}-son</div>
+</div>
+
+<div class="toc-heading">MUNDARIJA / CONTENTS</div>
+
+<table class="toc-table">
+    {% for item in article_items %}
+    <tr class="toc-row">
+        <td class="toc-title-cell">
+            <div class="art-title">{{ forloop.counter }}. {{ item.article.title }}</div>
+            <div class="art-authors">
+                <span style="color: #666;">Muallif:</span> {{ item.article.authors|default:item.article.author.get_full_name }}
+            </div>
+        </td>
+        <td class="dots-cell">&nbsp;</td>
+        <td class="toc-page-cell">
+            {% if item.start_page == item.end_page %}
+                {{ item.start_page }}
+            {% else %}
+                {{ item.start_page }}–{{ item.end_page }}
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="height: 10pt;"></td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

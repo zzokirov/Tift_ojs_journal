@@ -41,6 +41,7 @@ class JournalIssue(models.Model):
     year = models.PositiveIntegerField(verbose_name="Chop etilgan yili")
     period = models.CharField(max_length=100, blank=True, null=True, verbose_name="Davri (Masalan: 1-chorak, Yanvar-Mart)")
     cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Nashr muqovasi (rasmi)")
+    editorial_doc = models.FileField(upload_to='issues_docs/', blank=True, null=True, verbose_name="Muqova va Tahririyat Word hujjati (.docx)", help_text="Word (.docx) fayl. Nashr boshidagi muqova va tahririyat a'zolari sahifasi uchun.")
     full_pdf = models.FileField(upload_to='issues_pdf/', blank=True, null=True, verbose_name="To'liq to'plam (PDF)")
     is_published = models.BooleanField(default=False, verbose_name="Saytda ko'rsatish")
     created_at = models.DateTimeField(auto_now_add=True)

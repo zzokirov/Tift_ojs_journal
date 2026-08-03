@@ -565,38 +565,47 @@ if (ctx) {
             <div class="swiper-wrapper">
                 {% for issue in issues %}
                 <div class="swiper-slide">
-                    <a href="{% url 'issue_detail' issue.pk %}"
-                       class="block bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[1.04] transition-all duration-300 ease-out overflow-hidden flex flex-col h-full group/card relative">
-                        {% if issue.cover_image %}
-                        <div class="h-32 w-full overflow-hidden bg-gray-50 relative">
-                            <img src="{{ issue.cover_image.url }}"
-                                 alt="{{ issue.number }}-son muqovasi"
-                                 loading="lazy"
-                                 class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
-                        </div>
-                        {% else %}
-                        <div class="h-32 w-full bg-gradient-to-br from-navy-800 to-navy-900 relative overflow-hidden">
-                            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-                            <i class="fas fa-book-open absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-white/20" aria-hidden="true"></i>
-                        </div>
-                        {% endif %}
+                    <div class="bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-2xl transition-all duration-300 ease-out overflow-hidden flex flex-col h-full group/card relative">
+                        <a href="{% url 'issue_detail' issue.pk %}" class="block">
+                            {% if issue.cover_image %}
+                            <div class="h-32 w-full overflow-hidden bg-gray-50 relative">
+                                <img src="{{ issue.cover_image.url }}"
+                                     alt="{{ issue.number }}-son muqovasi"
+                                     loading="lazy"
+                                     class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
+                            </div>
+                            {% else %}
+                            <div class="h-32 w-full bg-gradient-to-br from-navy-800 to-navy-900 relative overflow-hidden">
+                                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                                <i class="fas fa-book-open absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-white/20" aria-hidden="true"></i>
+                            </div>
+                            {% endif %}
+                        </a>
                         <div class="p-4 flex-1 flex flex-col relative bg-white">
-                            <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center justify-between mb-2">
                                 <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase">
                                     {{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}
                                 </span>
                             </div>
-                            <h3 class="font-black text-xl text-gray-900 mb-2 mt-auto leading-tight group-hover/card:text-green-600 transition-colors">
-                                {{ issue.number }}-son
-                            </h3>
-                            <div class="w-10 h-1 bg-green-500 rounded-full mb-3 mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
-                            <p class="text-sm text-gray-500 flex items-center font-medium">
-                                <i class="fas fa-file-alt mr-2 text-gray-400" aria-hidden="true"></i>
-                                {{ issue.articles.count }} {% trans "ta maqola" %}
-                            </p>
+                            <a href="{% url 'issue_detail' issue.pk %}" class="block">
+                                <h3 class="font-black text-xl text-gray-900 mb-1 leading-tight group-hover/card:text-green-600 transition-colors">
+                                    {{ issue.number }}-son
+                                </h3>
+                                <p class="text-xs text-gray-500 flex items-center font-medium mb-3">
+                                    <i class="fas fa-file-alt mr-1.5 text-gray-400" aria-hidden="true"></i>
+                                    {{ issue.articles.count }} {% trans "ta maqola" %}
+                                </p>
+                            </a>
+                            
+                            <a href="{% url 'download_issue_pdf' issue.pk %}"
+                               class="mt-auto w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                               title="To'liq sonni PDF formatida yuklab olish">
+                                <i class="fas fa-file-pdf text-sm"></i>
+                                {% trans "To'liq sonni yuklab olish" %}
+                            </a>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 {% endfor %}
             </div>

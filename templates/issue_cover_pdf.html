@@ -1,0 +1,109 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    color: #1a202c;
+    background: #ffffff;
+}
+@page {
+    size: A4;
+    margin: 2.0cm;
+}
+.cover-container {
+    text-align: center;
+    border: 3pt double #064e3b;
+    padding: 30pt 20pt;
+    min-height: 700pt;
+}
+.org-title {
+    font-size: 11pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #1e293b;
+    margin-bottom: 20pt;
+}
+.journal-main-title {
+    font-size: 24pt;
+    font-weight: bold;
+    color: #064e3b;
+    margin-top: 15pt;
+    margin-bottom: 5pt;
+}
+.journal-sub-title {
+    font-size: 13pt;
+    font-style: italic;
+    color: #334155;
+    margin-bottom: 30pt;
+}
+.cover-img-box {
+    margin: 20pt auto;
+    text-align: center;
+}
+.cover-img {
+    max-width: 320pt;
+    max-height: 250pt;
+    border-radius: 6pt;
+}
+.issue-info-badge {
+    margin-top: 30pt;
+    padding: 12pt;
+    background-color: #f1f5f9;
+    border: 1pt solid #cbd5e1;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #0f172a;
+}
+.footer-city {
+    margin-top: 50pt;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #475569;
+}
+</style>
+</head>
+<body>
+<div class="cover-container">
+    <div class="org-title">
+        Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti
+    </div>
+    
+    {% if logo_base64 %}
+    <div style="margin-top: 20pt;">
+        <img src="{{ logo_base64 }}" style="width: 70pt; height: 70pt;" />
+    </div>
+    {% endif %}
+
+    <div class="journal-main-title">
+        ARXITEKTURA VA TA'LIM
+    </div>
+    <div class="journal-sub-title">
+        Ilmiy-elektron jurnali / Scientific-electronic journal
+    </div>
+
+    {% if cover_image_base64 %}
+    <div class="cover-img-box">
+        <img src="{{ cover_image_base64 }}" class="cover-img" />
+    </div>
+    {% endif %}
+
+    <div class="issue-info-badge">
+        {{ issue.year }}-YIL, {{ issue.number }}-SON
+        {% if issue.period %}
+        <div style="font-size: 10pt; font-weight: normal; margin-top: 4pt; color: #64748b;">
+            ({{ issue.period }})
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="footer-city">
+        TOSHKENT — {{ issue.year }}
+    </div>
+</div>
+</body>
+</html>

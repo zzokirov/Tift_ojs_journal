@@ -20,4 +20,5 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/password/', views.change_password, name='change_password'),
     path('issue/<int:issue_pk>/', views.issue_detail, name='issue_detail'),
+    path('issue/<int:issue_pk>/download/', views.download_issue_pdf, name='download_issue_pdf'),
 ]
