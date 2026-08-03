@@ -962,7 +962,7 @@ def download_issue_pdf(request, issue_pk):
 
     # 1. MUQOVA VA TAHRIRIYAT SAHIFASI (Section 1)
     doc_cover = None
-    if issue.editorial_doc and issue.editorial_doc.name.endswith(('.doc', '.docx')):
+    if issue.editorial_doc and issue.editorial_doc.name.lower().endswith(('.doc', '.docx')):
         try:
             editorial_html = _extract_docx_text_as_html(issue.editorial_doc.path)
             if editorial_html:
@@ -999,16 +999,19 @@ def download_issue_pdf(request, issue_pk):
 
     cover_page_count = len(doc_cover)
 
-    # 2. MAQOLALAR PDF NUSHASINI VA SAHIFALARINI HISOB-KITOB QILISH
+    # 2. MAQOLALAR PDF NUSHASINI TAYYORLASH
     prepared_articles = []
     for art in articles:
         try:
             raw_bytes = None
-            if art.pdf_file:
+            file_name = getattr(art.pdf_file, 'name', '') or ''
+            ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0] if art.pdf_file else ''
+
+            if ext == 'pdf':
                 raw_bytes = _get_pdf_bytes(art.pdf_file)
-                if not raw_bytes and art.pdf_file.name.endswith(('.doc', '.docx')):
-                    raw_bytes = _build_pdf_from_html_xhtml2pdf(art, request)
-            else:
+            
+            # Fayl PDF bo'lmasa yoki PDF bo'lib yuklab olinmasa, HTML/DOCX dan render qilamiz
+            if not raw_bytes:
                 raw_bytes = _build_pdf_from_html_xhtml2pdf(art, request)
 
             if raw_bytes:
@@ -1027,6 +1030,8 @@ def download_issue_pdf(request, issue_pk):
 
     # 3. MUNDARIJA (TABLE OF CONTENTS) YARATISH VA SAHIFALARNI HISOBLASH
     toc_doc = None
+    article_items = []
+    
     for attempt in range(2):
         article_items = []
         current_page = cover_page_count + (len(toc_doc) if toc_doc else 1) + 1
@@ -1036,6 +1041,13 @@ def download_issue_pdf(request, issue_pk):
             pages = item['pages']
             start_p = current_page
             end_p = current_page + pages - 1
+
+            # Database da ham saqlash
+            if art.start_page != start_p or art.end_page != end_p:
+                Article.objects.filter(pk=art.pk).update(start_page=start_p, end_page=end_p)
+                art.start_page = start_p
+                art.end_page = end_p
+
             article_items.append({
                 'article': art,
                 'start_page': start_p,
