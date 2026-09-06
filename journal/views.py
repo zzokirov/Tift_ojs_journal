@@ -91,8 +91,15 @@ def archive(request):
 
 def about(request):
     staff = StaffMember.objects.filter(is_active=True).order_by('order', 'full_name')
+    leadership = staff.filter(position__in=['editor_in_chief', 'deputy_editor', 'secretary'])
+    editorial_board = staff.filter(position='member')
     categories = ArticleCategory.objects.all().order_by('order', 'code')
-    return render(request, 'about.html', {'staff': staff, 'categories': categories})
+    return render(request, 'about.html', {
+        'staff': staff,
+        'leadership': leadership,
+        'editorial_board': editorial_board,
+        'categories': categories
+    })
 
 
 def issue_detail(request, issue_pk):
