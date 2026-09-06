@@ -967,36 +967,17 @@ def download_issue_pdf(request, issue_pk):
     if not articles:
         return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
 
-    # 1. MUQOVA VA TAHRIRIYAT SAHIFASI (Faqat Admin yuklagan fayl ishlatiladi)
+    # 1. MUQOVA SAHIFASI (Faqat Admin yuklagan rasm (cover_image) ishlatiladi)
     doc_cover = None
-    if issue.editorial_doc and issue.editorial_doc.name:
-        ext_ed = issue.editorial_doc.name.lower().rsplit('.', 1)[-1].split('?')[0]
-        if ext_ed == 'pdf':
-            try:
-                doc_cover = fitz.open(issue.editorial_doc.path)
-            except Exception as e:
-                print("Editorial PDF error:", e)
-        elif ext_ed in ('doc', 'docx'):
-            try:
-                editorial_html = _extract_docx_text_as_html(issue.editorial_doc.path)
-                if editorial_html:
-                    html_full = f"""
-                    <!DOCTYPE html><html><head><meta charset="utf-8">
-                    <style>@page {{ size: A4; margin: 2cm; }} body {{ font-family: 'Times New Roman', serif; font-size: 11pt; line-height: 1.4; }}</style>
-                    </head><body>{editorial_html}</body></html>
-                    """
-                    buf = io.BytesIO()
-                    pisa.CreatePDF(src=html_full, dest=buf, encoding='utf-8')
-                    doc_cover = fitz.open(stream=buf.getvalue(), filetype="pdf")
-            except Exception as e:
-                print("Editorial doc conversion error:", e)
-
-    elif issue.cover_image and issue.cover_image.name:
+    if issue.cover_image and issue.cover_image.name:
         try:
             logo_b64 = _get_logo_base64()
             with open(issue.cover_image.path, 'rb') as f:
                 ext_img = issue.cover_image.name.split('.')[-1].lower()
                 cover_b64 = f"data:image/{ext_img};base64," + base64.b64encode(f.read()).decode('ascii')
+            
+            # Agar muqova rasm butun sahifani egallashini xohlasa:
+            # Hozirgi issue_cover_pdf.html dizayni ishlatiladi.
             cover_html = render_to_string('issue_cover_pdf.html', {
                 'issue': issue,
                 'logo_base64': logo_b64,
