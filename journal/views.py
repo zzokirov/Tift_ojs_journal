@@ -967,7 +967,7 @@ def download_issue_pdf(request, issue_pk):
     if not articles:
         return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
 
-    # 1. MUQOVA SAHIFASI (Faqat Admin yuklagan rasm (cover_image) ishlatiladi)
+    # 1. OLDI MUQOVA SAHIFASI
     doc_cover = None
     if issue.cover_image and issue.cover_image.name:
         try:
@@ -990,6 +990,26 @@ def download_issue_pdf(request, issue_pk):
         except Exception as e:
             print("Cover image error:", e)
 
+    # 1.2. ORQA MUQOVA SAHIFASI (Mavjud bo'lsa)
+    doc_back_cover = None
+    if issue.back_cover_image and issue.back_cover_image.name:
+        try:
+            back_bytes = _get_pdf_bytes(issue.back_cover_image)
+            if back_bytes:
+                ext_img = issue.back_cover_image.name.split('.')[-1].lower().split('?')[0]
+                if ext_img not in ('jpg', 'jpeg', 'png', 'webp'):
+                    ext_img = 'jpeg'
+                back_b64 = f"data:image/{ext_img};base64," + base64.b64encode(back_bytes).decode('ascii')
+                back_html = render_to_string('issue_cover_pdf.html', {
+                    'issue': issue,
+                    'cover_image_base64': back_b64,
+                })
+                buf_back = io.BytesIO()
+                pisa.CreatePDF(src=back_html, dest=buf_back, encoding='utf-8')
+                doc_back_cover = fitz.open(stream=buf_back.getvalue(), filetype="pdf")
+        except Exception as e:
+            print("Back cover image error:", e)
+
     # 1.5. TAHRIRIYAT A'ZOLARI SAHIFASI (Avtomatik yaratish)
     doc_editorial = None
     try:
@@ -1007,7 +1027,7 @@ def download_issue_pdf(request, issue_pk):
     except Exception as e:
         print("Editorial page generation error:", e)
 
-    cover_page_count = (len(doc_cover) if doc_cover else 0) + (len(doc_editorial) if doc_editorial else 0)
+    cover_page_count = (len(doc_cover) if doc_cover else 0) + (len(doc_back_cover) if doc_back_cover else 0) + (len(doc_editorial) if doc_editorial else 0)
 
     # 2. MAQOLALAR PDF NUSHASINI TAYYORLASH
     prepared_articles = []
@@ -1081,6 +1101,8 @@ def download_issue_pdf(request, issue_pk):
     master_doc = fitz.open()
     if doc_cover and len(doc_cover) > 0:
         master_doc.insert_pdf(doc_cover)
+    if doc_back_cover and len(doc_back_cover) > 0:
+        master_doc.insert_pdf(doc_back_cover)
     if doc_editorial and len(doc_editorial) > 0:
         master_doc.insert_pdf(doc_editorial)
     master_doc.insert_pdf(toc_doc)
