@@ -16,7 +16,8 @@ def run():
     stdin, stdout, stderr = client.exec_command(
         'cd /home/devuser/apps/architect-edu/Tift_ojs_journal && '
         'git pull origin main && '
-        './venv/bin/python manage.py migrate'
+        './venv/bin/python manage.py migrate && '
+        './venv/bin/python update_pages.py'
     )
     print("DEPLOY OUT:", stdout.read().decode().strip())
     if stderr:

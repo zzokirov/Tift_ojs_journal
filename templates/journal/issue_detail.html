@@ -99,6 +99,12 @@
                                         <span class="text-gray-400">— {{ article.author.institution }}</span>
                                     {% endif %}
                                 </span>
+                                {% if article.start_page and article.end_page %}
+                                    <span class="flex items-center gap-1 font-bold text-gray-800 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">
+                                        <i class="fas fa-file-alt text-green-600"></i>
+                                        {{ article.start_page }}-{{ article.end_page }}
+                                    </span>
+                                {% endif %}
                                 <span class="flex items-center gap-1">
                                     <i class="far fa-eye text-blue-400/70"></i>
                                     {{ article.views_count }}

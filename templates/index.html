@@ -320,9 +320,15 @@ if (ctx) {
                         <div class="flex items-start justify-between gap-4 mb-3">
                             <div class="flex-1">
                                 <div class="flex flex-wrap gap-2 mb-2">
-                                    <span class="badge bg-navy-50 text-navy-700 border border-navy-100">
-                                        <i class="fas fa-check-circle mr-1 text-green-500"></i>{% trans "Chop etildi" %}
-                                    </span>
+                                    {% if article.start_page and article.end_page %}
+                                        <span class="badge bg-navy-50 text-navy-700 border border-navy-100 font-semibold">
+                                            <i class="fas fa-file-alt mr-1 text-green-600"></i>{{ article.start_page }}-{{ article.end_page }}
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-navy-50 text-navy-700 border border-navy-100">
+                                            <i class="fas fa-check-circle mr-1 text-green-500"></i>{% trans "Chop etildi" %}
+                                        </span>
+                                    {% endif %}
                                     {% if article.issue %}
                                         <span class="badge bg-green-600/10 text-green-700 border border-green-500/20">
                                             {{ article.issue.year }}-yil {{ article.issue.number }}-son
