@@ -971,16 +971,17 @@ def download_issue_pdf(request, issue_pk):
     doc_cover = None
     if issue.cover_image and issue.cover_image.name:
         try:
-            logo_b64 = _get_logo_base64()
-            with open(issue.cover_image.path, 'rb') as f:
-                ext_img = issue.cover_image.name.split('.')[-1].lower()
-                cover_b64 = f"data:image/{ext_img};base64," + base64.b64encode(f.read()).decode('ascii')
-            
-            # Agar muqova rasm butun sahifani egallashini xohlasa:
-            # Hozirgi issue_cover_pdf.html dizayni ishlatiladi.
+            cover_bytes = _get_pdf_bytes(issue.cover_image)
+            if cover_bytes:
+                ext_img = issue.cover_image.name.split('.')[-1].lower().split('?')[0]
+                if ext_img not in ('jpg', 'jpeg', 'png', 'webp'):
+                    ext_img = 'jpeg'
+                cover_b64 = f"data:image/{ext_img};base64," + base64.b64encode(cover_bytes).decode('ascii')
+            else:
+                cover_b64 = None
+
             cover_html = render_to_string('issue_cover_pdf.html', {
                 'issue': issue,
-                'logo_base64': logo_b64,
                 'cover_image_base64': cover_b64,
             })
             buf = io.BytesIO()
