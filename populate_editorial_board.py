@@ -14,201 +14,201 @@ def populate():
     staff_data = [
         # Rahbariyat (Leadership)
         {
-            'full_name': 'Нодиров Азизхон Асрорович',
+            'full_name': 'Nodirov Azizxon Asrorovich',
             'position': 'editor_in_chief',
-            'workplace': 'ТИФТ университети',
-            'bio': 'ТИФТ университетининг Ректори.',
+            'workplace': 'TIFT universiteti',
+            'bio': 'TIFT universitetining Rektori.',
             'order': 1
         },
         {
-            'full_name': 'Усмонов Низомжон Арипович',
+            'full_name': 'Usmonov Nizomjon Aripovich',
             'position': 'deputy_editor',
-            'workplace': 'ТИФТ университети',
-            'bio': 'ф.м.ф бўйича PhD, доцент. ТИФТ университетининг Илмий бўлим бошлиғи.',
+            'workplace': 'TIFT universiteti',
+            'bio': 'f.m.f. bo\'yicha PhD, docent. TIFT universitetining Ilmiy bo\'lim boshlig\'i.',
             'order': 2
         },
         {
-            'full_name': 'Зокиров Санжар Зохиджон ўғли',
+            'full_name': 'Zokirov Sanjar Zohidjon o\'g\'li',
             'position': 'secretary',
-            'workplace': 'ТИФТ университети',
-            'bio': 'ТИФТ университетининг «Архитектура ва рақамли технологиялар» кафедраси катта ўқитувчиси.',
+            'workplace': 'TIFT universiteti',
+            'bio': 'TIFT universitetining «Arxitektura va raqamli texnologiyalar» kafedrasi katta o\'qituvchisi.',
             'order': 3
         },
 
-        # Таҳририят ҳайъати (24 та аъзо)
+        # Tahririyat hay'ati (24 ta a'zo)
         {
-            'full_name': 'Душанов Рустам Хўжамович',
+            'full_name': 'Dushanov Rustam Xo\'jamovich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'п.ф.д., проф., ТИФТ университетининг «Педагогика ва психология» кафедраси мудири (Педагогика ва психология йўналишидаги мақолалар бўйича масъул).',
+            'workplace': 'TIFT universiteti',
+            'bio': 'p.f.d., prof., TIFT universitetining «Pedagogika va psixologiya» kafedrasi mudiri (Pedagogika va psixologiya yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 4
         },
         {
-            'full_name': 'Шералиев Жавохирбек Жахонгир ўғли',
+            'full_name': 'Sheraliyev Javohirbek Jahongir o\'g\'li',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'и.ф.б.ф.д. (PhD), доц., ТИФТ университетининг «Иқтисодиёт ва бошқарув» кафедраси мудири (Иқтисодиёт ва бошқарув йўналишидаги мақолалар бўйича масъул).',
+            'workplace': 'TIFT universiteti',
+            'bio': 'i.f.b.f.d. (PhD), doc., TIFT universitetining «Iqtisodiyot va boshqaruv» kafedrasi mudiri (Iqtisodiyot va boshqaruv yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 5
         },
         {
-            'full_name': 'Сайфуллаев Бехруз Дилшод ўғли',
+            'full_name': 'Sayfullayev Behruz Dilshod o\'g\'li',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'т.ф.б.ф.д. (PhD), доц., ТИФТ университетининг «Ижтимоий гуманитар фанлар ва тарих» кафедраси мудири (Ижтимоий гуманитар фанлар ва тарих йўналишидаги мақолалар бўйича масъул).',
+            'workplace': 'TIFT universiteti',
+            'bio': 't.f.b.f.d. (PhD), doc., TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi mudiri (Ijtimoiy-gumanitar fanlar va tarix yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 6
         },
         {
-            'full_name': 'Хайруллаев Рахматилла Сайдиллаевич',
+            'full_name': 'Xayrullayev Rahmatilla Saydillayevich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'т.ф.б.ф.д. (PhD), доц., ТИФТ университетининг «Архитектура ва рақамли технологиялар» кафедраси мудири (Архитектура ва рақамли технологиялар йўналишидаги мақолалар бўйича масъул).',
+            'workplace': 'TIFT universiteti',
+            'bio': 't.f.b.f.d. (PhD), doc., TIFT universitetining «Arxitektura va raqamli texnologiyalar» kafedrasi mudiri (Arxitektura va raqamli texnologiyalar yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 7
         },
         {
-            'full_name': 'Холмўминов Илхом Абдихалилович',
+            'full_name': 'Xolmo\'minov Ilxom Abdixalilovich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'ф.ф.б.ф.д. (PhD), доц., ТИФТ университетининг «Хорижий филология» кафедраси мудири (Хорижий филология йўналишидаги мақолалар бўйича масъул).',
+            'workplace': 'TIFT universiteti',
+            'bio': 'f.f.b.f.d. (PhD), doc., TIFT universitetining «Xorijiy filologiya» kafedrasi mudiri (Xorijiy filologiya yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 8
         },
         {
-            'full_name': 'Холтўраев Холсаид Файзуллаевич',
+            'full_name': 'Xolto\'rayev Xolsaid Fayzullayevich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'ф.м.ф.б.ф.д. (PhD), доц., ТИФТ университетининг «Математика» кафедраси мудири (Математика йўналишидаги мақолалар бўйича масъул).',
+            'workplace': 'TIFT universiteti',
+            'bio': 'f.m.f.b.f.d. (PhD), doc., TIFT universitetining «Matematika» kafedrasi mudiri (Matematika yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 9
         },
         {
-            'full_name': 'Исмоилов Фаррух Исраил ўғли',
+            'full_name': 'Ismoilov Farrux Israil o\'g\'li',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'ф.ф.б.ф.д. (PhD), проф., ТИФТ университетининг «Жисмоний тарбия ва спорт» кафедраси мудири (Жисмоний тарбия ва спорт йўналишидаги мақолалар бўйича масъул).',
+            'workplace': 'TIFT universiteti',
+            'bio': 'f.f.b.f.d. (PhD), prof., TIFT universitetining «Jismoniy tarbiya va sport» kafedrasi mudiri (Jismoniy tarbiya va sport yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 10
         },
         {
-            'full_name': 'Асқаров Аҳмадали Аскарович',
+            'full_name': 'Asqarov Ahmadali Askarovich',
             'position': 'member',
-            'workplace': 'Ўзбекистон миллий педагогика университети',
-            'bio': 'Ўзбекистон Фанлар академияси академиги, т.ф.д., Ўзбекистон миллий педагогика университети Тарих кафедраси профессори.',
+            'workplace': 'O\'zbekiston milliy pedagogika universiteti',
+            'bio': 'O\'zbekiston Fanlar akademiyasi akademigi, t.f.d., O\'zbekiston milliy pedagogika universiteti Tarix kafedrasi professori.',
             'order': 11
         },
         {
-            'full_name': 'Шоумаров Ғайрат Бахромович',
+            'full_name': 'Shoumarov G\'ayrat Baxromovich',
             'position': 'member',
             'workplace': '"Profi University"',
-            'bio': 'Ўзбекистон Фанлар академияси академиги, п.ф.д., "Profi University" ректори.',
+            'bio': 'O\'zbekiston Fanlar akademiyasi akademigi, p.f.d., "Profi University" rektori.',
             'order': 12
         },
         {
-            'full_name': 'Мухторов Азамат',
+            'full_name': 'Muxtorov Azamat',
             'position': 'member',
-            'workplace': 'Тошкент давлат иқтисодиёт университети',
-            'bio': 'ф.ф.д., проф., Тошкент давлат иқтисодиёт университетининг «Фалсафа» кафедраси мудири.',
+            'workplace': 'Toshkent davlat iqtisodiyot universiteti',
+            'bio': 'f.f.d., prof., Toshkent davlat iqtisodiyot universitetining «Falsafa» kafedrasi mudiri.',
             'order': 13
         },
         {
-            'full_name': 'Жўраев Сайфиддин Ахматович',
+            'full_name': 'Jo\'rayev Sayfiddin Axmatovich',
             'position': 'member',
-            'workplace': 'Тошкент давлат шарқшунослик университети',
-            'bio': 'с.ф.д., Тошкент давлат шарқшунослик университети Халқаро муносабатлар кафедраси профессори.',
+            'workplace': 'Toshkent davlat sharqshunoslik universiteti',
+            'bio': 's.f.d., Toshkent davlat sharqshunoslik universiteti Xalqaro munosabatlar kafedrasi professori.',
             'order': 14
         },
         {
-            'full_name': 'Булатов Саидахбор Собитович',
+            'full_name': 'Bulatov Saidaxbor Sobitovich',
             'position': 'member',
-            'workplace': 'Ўзбекистон миллий педагогика университети',
-            'bio': 'п.ф.д., Ўзбекистон миллий педагогика университети “Тасвирий санъат ва муҳандислик графикаси” кафедраси профессори.',
+            'workplace': 'O\'zbekiston milliy pedagogika universiteti',
+            'bio': 'p.f.d., O\'zbekiston milliy pedagogika universiteti «Tasviriy san\'at va muhandislik grafikasi» kafedrasi professori.',
             'order': 15
         },
         {
-            'full_name': 'Жумабоев Абдувохид',
+            'full_name': 'Jumabayev Abduvohid',
             'position': 'member',
-            'workplace': 'Самарқанд давлат университети',
-            'bio': 'ф.м.ф.д., Самарқанд давлат университети “Оптика ва спектроскопия” кафедраси профессори.',
+            'workplace': 'Samarqand davlat universiteti',
+            'bio': 'f.m.f.d., Samarqand davlat universiteti «Optika va spektroskopiya» kafedrasi professori.',
             'order': 16
         },
         {
-            'full_name': 'Холбеков Абдуғани Жуманазарович',
+            'full_name': 'Xolbekov Abdug\'ani Jumanazarovich',
             'position': 'member',
-            'workplace': 'Ўзбекистон Миллий университети',
-            'bio': 'с.ф.д., Ўзбекистон Миллий университетининг «Социология» кафедраси профессори.',
+            'workplace': 'O\'zbekiston Milliy universiteti',
+            'bio': 's.f.d., O\'zbekiston Milliy universitetining «Sotsiologiya» kafedrasi professori.',
             'order': 17
         },
         {
-            'full_name': 'Калонов Камил Кулахматович',
+            'full_name': 'Kalonov Kamil Kulaxmatovich',
             'position': 'member',
-            'workplace': 'Ижтимоий-маънавий тадқиқотлар институти',
-            'bio': 'с.ф.н., профессор. Ижтимоий-маънавий тадқиқотлар институти бош илмий ходими.',
+            'workplace': 'Ijtimoiy-ma\'naviy tadqiqotlar instituti',
+            'bio': 's.f.n., professor, Ijtimoiy-ma\'naviy tadqiqotlar instituti bosh ilmiy xodimi.',
             'order': 18
         },
         {
-            'full_name': 'Махмудов Бехзод Хамидович',
+            'full_name': 'Mahmudov Behzod Xamidovich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'т.ф.н., доцент. ТИФТ университетининг "Ижтимоий-гуманитар фанлар ва тарих" кафедраси доценти.',
+            'workplace': 'TIFT universiteti',
+            'bio': 't.f.n., docent, TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi docenti.',
             'order': 19
         },
         {
-            'full_name': 'Эргашев Уралбек Беркинович',
+            'full_name': 'Ergashev Uralbek Berkinovich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'ф.ф.б.ф.д. (PhD), ТИФТ университетининг "Ижтимоий-гуманитар фанлар ва тарих" кафедраси доценти.',
+            'workplace': 'TIFT universiteti',
+            'bio': 'f.f.b.f.d. (PhD), TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi docenti.',
             'order': 20
         },
         {
-            'full_name': 'Хайдаров Фазлиддин Икромович',
+            'full_name': 'Xaydarov Fazliddin Ikromovich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'п.ф.н., ТИФТ университетининг «Педагогика ва психология» кафедраси профессори.',
+            'workplace': 'TIFT universiteti',
+            'bio': 'p.f.n., TIFT universitetining «Pedagogika va psixologiya» kafedrasi professori.',
             'order': 21
         },
         {
-            'full_name': 'Сойипова Мадина Саидахборовна',
+            'full_name': 'Soyipova Madina Saidaxborovna',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'т.ф.б.ф.д. (PhD), ТИФТ университетининг «Архитектура ва рақамли технологиялар» кафедраси доценти.',
+            'workplace': 'TIFT universiteti',
+            'bio': 't.f.b.f.d. (PhD), TIFT universitetining «Arxitektura va raqamli texnologiyalar» kafedrasi docenti.',
             'order': 22
         },
         {
-            'full_name': 'Ҳакимова Гулмира Тўхтатошевна',
+            'full_name': 'Hakimova Gulmira To\'xtatoshevna',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'ТИФТ университетининг «Таълим сифатини назорат қилиш» бошқармаси бошлиғи.',
+            'workplace': 'TIFT universiteti',
+            'bio': 'TIFT universitetining «Ta\'lim sifatini nazorat qilish» boshqarmasi boshlig\'i.',
             'order': 23
         },
         {
-            'full_name': 'Жўраев Иброхим Боходир ўғли',
+            'full_name': 'Jo\'rayev Ibrohim Bohodir o\'g\'li',
             'position': 'member',
-            'workplace': 'ЎзДЖТСУ',
-            'bio': 'п.ф.б.ф.д. (PhD), ЎзДЖТСУ, Инсон ресурсларини бошқариш бўлими бош мутахассиси, профессор.',
+            'workplace': 'O\'zDJTSU',
+            'bio': 'p.f.b.f.d. (PhD), O\'zDJTSU, Inson resurslarini boshqarish bo\'limi bosh mutaxassisi, professor.',
             'order': 24
         },
         {
-            'full_name': 'Игамбердиев Обиджон Рубдулла ўғли',
+            'full_name': 'Igamberdiyev Obidjon Rubdulla o\'g\'li',
             'position': 'member',
-            'workplace': 'ЎзДЖТСУ',
-            'bio': 'п.ф.д. (PhD), ЎзДЖТСУ, Футбол назарияси ва услубияти кафедраси доценти.',
+            'workplace': 'O\'zDJTSU',
+            'bio': 'p.f.d. (PhD), O\'zDJTSU, Futbol nazariyasi va uslubiyati kafedrasi docenti.',
             'order': 25
         },
         {
-            'full_name': 'Рахимов Шерзод Абдувахобжонович',
+            'full_name': 'Rahimov Sherzod Abduvaxobjonovich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'т.ф.б.ф.д. (PhD), ТИФТ университетининг «Таълимни рақамлаштириш ва талабаларни амалиётини ташкил этиш» бошқармаси менежери.',
+            'workplace': 'TIFT universiteti',
+            'bio': 't.f.b.f.d. (PhD), TIFT universitetining «Ta\'limni raqamlashtirish va talabalarni amaliyotini tashkil etish» boshqarmasi menejeri.',
             'order': 26
         },
         {
-            'full_name': 'Аҳроров Суҳрабхон Юнусович',
+            'full_name': 'Ahrorov Suhrabxon Yunusovich',
             'position': 'member',
-            'workplace': 'ТИФТ университети',
-            'bio': 'с.ф.н., ТИФТ университетининг «Педагогика ва психология» кафедраси доценти.',
+            'workplace': 'TIFT universiteti',
+            'bio': 's.f.n., TIFT universitetining «Pedagogika va psixologiya» kafedrasi docenti.',
             'order': 27
         },
     ]
 
     for item in staff_data:
         StaffMember.objects.create(**item)
-    print(f"Jami {len(staff_data)} ta tahririyat a'zosi saqlandi!")
+    print(f"Jami {len(staff_data)} ta tahririyat a'zosi Latin alifbosida saqlandi!")
 
 if __name__ == '__main__':
     populate()
