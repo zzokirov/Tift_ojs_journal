@@ -946,26 +946,21 @@ def documents(request):
     })
 
 
-def download_issue_pdf(request, issue_pk):
+def recalculate_issue_pages(issue, request=None):
     """
-    Jurnalning to'liq sonini PDF sifatida yaratadi va yuklab beradi.
-    Ketma-ketlik:
-    1. Muqova va Tahririyat a'zolari (Admin yuklagan Word/PDF fayl)
-    2. Avtomatik shakllantirilgan Kitob shaklidagi Mundarija (Table of Contents)
-    3. Nashrdagi barcha chop etilgan maqolalar ketma-ketligi
-    4. Faqat maqolalar sahifalarida uzluksiz raqamlash (Muqova va Mundarijada raqamlash bo'lmaydi)
+    Jurnal sonidagi barcha maqolalarning PDF dagi haqiqiy sahifa raqamlarini (start_page, end_page)
+    Mundarija va Muqovalarga 100% mos ravishda hisoblaydi va bazada yangilaydi.
+    Qaytaradi: (master_doc, article_items)
     """
     import io
     import base64
     import fitz
     from xhtml2pdf import pisa
     from django.template.loader import render_to_string
-    from django.http import HttpResponse, Http404
 
-    issue = get_object_or_404(JournalIssue, pk=issue_pk)
     articles = list(Article.objects.filter(issue=issue, status='published').order_by('created_at', 'id'))
     if not articles:
-        return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
+        return None, []
 
     # 1. OLDI MUQOVA SAHIFASI
     doc_cover = None
@@ -990,7 +985,7 @@ def download_issue_pdf(request, issue_pk):
         except Exception as e:
             print("Cover image error:", e)
 
-    # 1.2. ORQA MUQOVA SAHIFASI (Mavjud bo'lsa)
+    # 1.2. ORQA MUQOVA SAHIFASI
     doc_back_cover = None
     if issue.back_cover_image and issue.back_cover_image.name:
         try:
@@ -1010,7 +1005,7 @@ def download_issue_pdf(request, issue_pk):
         except Exception as e:
             print("Back cover image error:", e)
 
-    # 1.5. TAHRIRIYAT A'ZOLARI SAHIFASI (Avtomatik yaratish)
+    # 1.5. TAHRIRIYAT A'ZOLARI SAHIFASI
     doc_editorial = None
     try:
         staff = StaffMember.objects.filter(is_active=True).order_by('order', 'full_name')
@@ -1040,7 +1035,6 @@ def download_issue_pdf(request, issue_pk):
             if ext == 'pdf':
                 raw_bytes = _get_pdf_bytes(art.pdf_file)
             
-            # Fayl PDF bo'lmasa yoki PDF bo'lib yuklab olinmasa, HTML/DOCX dan render qilamiz
             if not raw_bytes:
                 raw_bytes = _build_pdf_from_html_xhtml2pdf(art, request)
 
@@ -1056,7 +1050,7 @@ def download_issue_pdf(request, issue_pk):
             print(f"Error preparing article {art.pk}:", e)
 
     if not prepared_articles:
-        return HttpResponse("Maqolalar PDF larini shakllantirishda xatolik yuz berdi.", status=500)
+        return None, []
 
     # 3. MUNDARIJA (TABLE OF CONTENTS) YARATISH VA SAHIFALARNI HISOBLASH
     toc_doc = None
@@ -1072,7 +1066,6 @@ def download_issue_pdf(request, issue_pk):
             start_p = current_page
             end_p = current_page + pages - 1
 
-            # Database da ham saqlash
             if art.start_page != start_p or art.end_page != end_p:
                 Article.objects.filter(pk=art.pk).update(start_page=start_p, end_page=end_p)
                 art.start_page = start_p
@@ -1110,37 +1103,43 @@ def download_issue_pdf(request, issue_pk):
         master_doc.insert_pdf(item['doc'])
 
     # 5. UZLUKSIZ RAQAMLASH VA HEADER/FOOTER QO'SHISH
-    # MUQOVA VA MUNDARIJA SAHIFALARIDA RAQAMLASH BO'LMAYDI!
     total_pages = len(master_doc)
-    unbound_count = cover_page_count + len(toc_doc)  # Muqova va Mundarija sahifalari soni
+    unbound_count = cover_page_count + len(toc_doc)
     hdr_text = f"TIFT \"Arxitektura va Ta'lim\" Ilmiy-elektron jurnali | {issue.year}-yil, {issue.number}-son"
 
     for idx in range(total_pages):
         page = master_doc[idx]
-
-        # Muqova va Mundarija sahifalarida header/footer va sahifa raqami qo'yilmaydi!
         if idx < unbound_count:
             continue
 
-        page_num = idx + 1  # Maqola sahifa raqami
-
+        page_num = idx + 1
         rect = page.rect
         width, height = rect.width, rect.height
 
-        # Yuqori kolontitul (Header)
         header_y = 25
         page.insert_text((40, header_y), hdr_text, fontsize=8, fontname="helv", color=(0.2, 0.2, 0.2))
         page.draw_line(fitz.Point(40, header_y + 4), fitz.Point(width - 40, header_y + 4), color=(0.6, 0.6, 0.6), width=0.5)
 
-        # Pastki kolontitul (Footer)
         footer_y = height - 30
         page.draw_line(fitz.Point(40, footer_y - 8), fitz.Point(width - 40, footer_y - 8), color=(0.6, 0.6, 0.6), width=0.5)
         
-        # Sahifa raqami (Centered)
         num_str = str(page_num)
         page.insert_text((width / 2 - 5, footer_y), num_str, fontsize=9, fontname="helv", color=(0, 0, 0))
 
-    # 6. YUKLAB OLISH UCHUN QAYTARISH
+    return master_doc, article_items
+
+
+def download_issue_pdf(request, issue_pk):
+    """
+    Jurnalning to'liq sonini PDF sifatida yaratadi va yuklab beradi.
+    """
+    from django.http import HttpResponse, Http404
+
+    issue = get_object_or_404(JournalIssue, pk=issue_pk)
+    master_doc, article_items = recalculate_issue_pages(issue, request)
+    if not master_doc:
+        return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
+
     final_bytes = master_doc.tobytes()
     response = HttpResponse(final_bytes, content_type='application/pdf')
     filename = f"TIFT_Journal_{issue.year}_Son_{issue.number}.pdf"
