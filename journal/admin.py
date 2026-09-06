@@ -222,7 +222,7 @@ class ConferenceAdmin(admin.ModelAdmin):
     list_per_page = 20
     fieldsets = (
         ("Konferensiya ma'lumotlari", {
-            'fields': ('title', 'description', 'date', 'location', 'url', 'is_active')
+            'fields': ('title', 'description', 'pdf_file', 'date', 'location', 'url', 'is_active')
         }),
     )
 

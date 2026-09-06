@@ -213,6 +213,7 @@ class StaffMember(models.Model):
 class Conference(models.Model):
     title       = models.CharField(max_length=300, verbose_name="Nomi")
     description = models.TextField(blank=True, verbose_name="Tavsif")
+    pdf_file    = models.FileField(upload_to="conferences/pdfs/", blank=True, null=True, verbose_name="Axborot xati / Fayl (PDF)")
     date        = models.DateField(verbose_name="Sana")
     location    = models.CharField(max_length=255, blank=True, verbose_name="Joyi")
     url         = models.URLField(blank=True, verbose_name="Havola")
