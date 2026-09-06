@@ -1008,7 +1008,24 @@ def download_issue_pdf(request, issue_pk):
         except Exception as e:
             print("Cover image error:", e)
 
-    cover_page_count = len(doc_cover) if doc_cover else 0
+    # 1.5. TAHRIRIYAT A'ZOLARI SAHIFASI (Avtomatik yaratish)
+    doc_editorial = None
+    try:
+        staff = StaffMember.objects.filter(is_active=True).order_by('order', 'full_name')
+        leadership = staff.filter(position__in=['editor_in_chief', 'deputy_editor', 'secretary'])
+        editorial_board = staff.filter(position='member')
+        
+        editorial_html = render_to_string('issue_editorial_pdf.html', {
+            'leadership': leadership,
+            'editorial_board': editorial_board,
+        })
+        buf_ed = io.BytesIO()
+        pisa.CreatePDF(src=editorial_html, dest=buf_ed, encoding='utf-8')
+        doc_editorial = fitz.open(stream=buf_ed.getvalue(), filetype="pdf")
+    except Exception as e:
+        print("Editorial page generation error:", e)
+
+    cover_page_count = (len(doc_cover) if doc_cover else 0) + (len(doc_editorial) if doc_editorial else 0)
 
     # 2. MAQOLALAR PDF NUSHASINI TAYYORLASH
     prepared_articles = []
@@ -1082,6 +1099,8 @@ def download_issue_pdf(request, issue_pk):
     master_doc = fitz.open()
     if doc_cover and len(doc_cover) > 0:
         master_doc.insert_pdf(doc_cover)
+    if doc_editorial and len(doc_editorial) > 0:
+        master_doc.insert_pdf(doc_editorial)
     master_doc.insert_pdf(toc_doc)
     for item in prepared_articles:
         master_doc.insert_pdf(item['doc'])
