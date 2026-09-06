@@ -24,7 +24,7 @@ def populate():
             'full_name': 'Usmonov Nizomjon Aripovich',
             'position': 'deputy_editor',
             'workplace': 'TIFT universiteti',
-            'bio': 'f.m.f. bo\'yicha PhD, docent. TIFT universitetining Ilmiy bo\'lim boshlig\'i.',
+            'bio': 'f.-m.f. bo\'yicha PhD, dotsent. TIFT universitetining Ilmiy bo\'lim boshlig\'i.',
             'order': 2
         },
         {
@@ -47,35 +47,35 @@ def populate():
             'full_name': 'Sheraliyev Javohirbek Jahongir o\'g\'li',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 'i.f.b.f.d. (PhD), doc., TIFT universitetining «Iqtisodiyot va boshqaruv» kafedrasi mudiri (Iqtisodiyot va boshqaruv yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
+            'bio': 'i.f.b.f.d. (PhD), dots., TIFT universitetining «Iqtisodiyot va boshqaruv» kafedrasi mudiri (Iqtisodiyot va boshqaruv yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 5
         },
         {
             'full_name': 'Sayfullayev Behruz Dilshod o\'g\'li',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 't.f.b.f.d. (PhD), doc., TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi mudiri (Ijtimoiy-gumanitar fanlar va tarix yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
+            'bio': 't.f.b.f.d. (PhD), dots., TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi mudiri (Ijtimoiy-gumanitar fanlar va tarix yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 6
         },
         {
             'full_name': 'Xayrullayev Rahmatilla Saydillayevich',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 't.f.b.f.d. (PhD), doc., TIFT universitetining «Arxitektura va raqamli texnologiyalar» kafedrasi mudiri (Arxitektura va raqamli texnologiyalar yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
+            'bio': 't.f.b.f.d. (PhD), dots., TIFT universitetining «Arxitektura va raqamli texnologiyalar» kafedrasi mudiri (Arxitektura va raqamli texnologiyalar yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 7
         },
         {
-            'full_name': 'Xolmo\'minov Ilxom Abdixalilovich',
+            'full_name': 'Xolmo\'minov Ilhom Abdixalilovich',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 'f.f.b.f.d. (PhD), doc., TIFT universitetining «Xorijiy filologiya» kafedrasi mudiri (Xorijiy filologiya yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
+            'bio': 'f.f.b.f.d. (PhD), dots., TIFT universitetining «Xorijiy filologiya» kafedrasi mudiri (Xorijiy filologiya yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 8
         },
         {
             'full_name': 'Xolto\'rayev Xolsaid Fayzullayevich',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 'f.m.f.b.f.d. (PhD), doc., TIFT universitetining «Matematika» kafedrasi mudiri (Matematika yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
+            'bio': 'f.-m.f.b.f.d. (PhD), dots., TIFT universitetining «Matematika» kafedrasi mudiri (Matematika yo\'nalishidagi maqolalar bo\'yicha mas\'ul).',
             'order': 9
         },
         {
@@ -93,7 +93,7 @@ def populate():
             'order': 11
         },
         {
-            'full_name': 'Shoumarov G\'ayrat Baxromovich',
+            'full_name': 'Shoumarov G\'ayrat Bahromovich',
             'position': 'member',
             'workplace': '"Profi University"',
             'bio': 'O\'zbekiston Fanlar akademiyasi akademigi, p.f.d., "Profi University" rektori.',
@@ -107,7 +107,7 @@ def populate():
             'order': 13
         },
         {
-            'full_name': 'Jo\'rayev Sayfiddin Axmatovich',
+            'full_name': 'Jo\'rayev Sayfiddin Ahmatovich',
             'position': 'member',
             'workplace': 'Toshkent davlat sharqshunoslik universiteti',
             'bio': 's.f.d., Toshkent davlat sharqshunoslik universiteti Xalqaro munosabatlar kafedrasi professori.',
@@ -124,7 +124,7 @@ def populate():
             'full_name': 'Jumabayev Abduvohid',
             'position': 'member',
             'workplace': 'Samarqand davlat universiteti',
-            'bio': 'f.m.f.d., Samarqand davlat universiteti «Optika va spektroskopiya» kafedrasi professori.',
+            'bio': 'f.-m.f.d., Samarqand davlat universiteti «Optika va spektroskopiya» kafedrasi professori.',
             'order': 16
         },
         {
@@ -142,17 +142,17 @@ def populate():
             'order': 18
         },
         {
-            'full_name': 'Mahmudov Behzod Xamidovich',
+            'full_name': 'Mahmudov Behzod Hamidovich',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 't.f.n., docent, TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi docenti.',
+            'bio': 't.f.n., dotsent, TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi dotsenti.',
             'order': 19
         },
         {
-            'full_name': 'Ergashev Uralbek Berkinovich',
+            'full_name': 'Ergashev O\'ralbek Berkinovich',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 'f.f.b.f.d. (PhD), TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi docenti.',
+            'bio': 'f.f.b.f.d. (PhD), TIFT universitetining «Ijtimoiy-gumanitar fanlar va tarix» kafedrasi dotsenti.',
             'order': 20
         },
         {
@@ -166,7 +166,7 @@ def populate():
             'full_name': 'Soyipova Madina Saidaxborovna',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 't.f.b.f.d. (PhD), TIFT universitetining «Arxitektura va raqamli texnologiyalar» kafedrasi docenti.',
+            'bio': 't.f.b.f.d. (PhD), TIFT universitetining «Arxitektura va raqamli texnologiyalar» kafedrasi dotsenti.',
             'order': 22
         },
         {
@@ -177,7 +177,7 @@ def populate():
             'order': 23
         },
         {
-            'full_name': 'Jo\'rayev Ibrohim Bohodir o\'g\'li',
+            'full_name': 'Jo\'rayev Ibrohim Bahodir o\'g\'li',
             'position': 'member',
             'workplace': 'O\'zDJTSU',
             'bio': 'p.f.b.f.d. (PhD), O\'zDJTSU, Inson resurslarini boshqarish bo\'limi bosh mutaxassisi, professor.',
@@ -187,28 +187,28 @@ def populate():
             'full_name': 'Igamberdiyev Obidjon Rubdulla o\'g\'li',
             'position': 'member',
             'workplace': 'O\'zDJTSU',
-            'bio': 'p.f.d. (PhD), O\'zDJTSU, Futbol nazariyasi va uslubiyati kafedrasi docenti.',
+            'bio': 'p.f.d. (PhD), O\'zDJTSU, Futbol nazariyasi va uslubiyati kafedrasi dotsenti.',
             'order': 25
         },
         {
-            'full_name': 'Rahimov Sherzod Abduvaxobjonovich',
+            'full_name': 'Rahimov Sherzod Abduvahobjonovich',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 't.f.b.f.d. (PhD), TIFT universitetining «Ta\'limni raqamlashtirish va talabalarni amaliyotini tashkil etish» boshqarmasi menejeri.',
+            'bio': 't.f.b.f.d. (PhD), TIFT universitetining «Ta\'limni raqamlashtirish va talabalarning amaliyotini tashkil etish» boshqarmasi menejeri.',
             'order': 26
         },
         {
-            'full_name': 'Ahrorov Suhrabxon Yunusovich',
+            'full_name': 'Ahrorov Suhrobxon Yunusovich',
             'position': 'member',
             'workplace': 'TIFT universiteti',
-            'bio': 's.f.n., TIFT universitetining «Pedagogika va psixologiya» kafedrasi docenti.',
+            'bio': 's.f.n., TIFT universitetining «Pedagogika va psixologiya» kafedrasi dotsenti.',
             'order': 27
         },
     ]
 
     for item in staff_data:
         StaffMember.objects.create(**item)
-    print(f"Jami {len(staff_data)} ta tahririyat a'zosi Latin alifbosida saqlandi!")
+    print(f"Jami {len(staff_data)} ta tahririyat a'zosi imloviy tuzatilgan Latin alifbosida saqlandi!")
 
 if __name__ == '__main__':
     populate()
