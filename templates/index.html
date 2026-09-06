@@ -605,10 +605,10 @@ if (ctx) {
                             </a>
                             
                             <a href="{% url 'download_issue_pdf' issue.pk %}"
-                               class="mt-auto w-full py-2.5 px-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                               class="mt-auto w-full py-2.5 px-3 bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 hover:from-green-700 hover:to-emerald-600 text-white rounded-xl text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:shadow-green-900/20 group/btn"
                                title="To'liq sonni PDF formatida yuklab olish">
-                                <i class="fas fa-file-pdf text-sm"></i>
-                                {% trans "To'liq sonni yuklab olish" %}
+                                <i class="fas fa-download text-xs text-green-400 group-hover/btn:text-white group-hover/btn:translate-y-0.5 transition-all"></i>
+                                <span>{% trans "To'liq sonni yuklab olish" %}</span>
                             </a>
                         </div>
                     </div>

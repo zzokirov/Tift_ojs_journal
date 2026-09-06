@@ -44,9 +44,9 @@
             
             <div>
                 <a href="{% url 'download_issue_pdf' issue.pk %}"
-                   class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg hover:scale-105">
-                    <i class="fas fa-file-pdf text-lg"></i>
-                    {% trans "To'liq sonni yuklab olish (PDF)" %}
+                   class="inline-flex items-center gap-2.5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-green-900/30 hover:shadow-green-500/20 hover:scale-105 group/btn">
+                    <i class="fas fa-download text-base group-hover/btn:translate-y-0.5 transition-transform"></i>
+                    <span>{% trans "To'liq sonni yuklab olish (PDF)" %}</span>
                 </a>
             </div>
         </div>
