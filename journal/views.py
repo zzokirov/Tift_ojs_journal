@@ -88,30 +88,45 @@ def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     try:
         if not request.session.get(f'viewed_article_{pk}'):
-            article.views_count += 1
-            article.save()
+            article.views_count = (article.views_count or 0) + 1
+            article.save(update_fields=['views_count'])
             request.session[f'viewed_article_{pk}'] = True
     except Exception:
         pass
 
     # Shu muallifning boshqa nashr etilgan maqolalari
-    author_articles = Article.objects.filter(
-        author=article.author,
-        status='published'
-    ).exclude(pk=pk).order_by('-created_at')[:8]
+    author_articles = []
+    try:
+        author_obj = article.author
+        if author_obj:
+            author_articles = Article.objects.filter(
+                author=author_obj,
+                status='published'
+            ).exclude(pk=pk).order_by('-created_at')[:8]
+    except Exception:
+        author_articles = []
 
     # Maqola matnini HTML formatda olish (reader uchun)
     article_content_html = ''
     if article.pdf_file:
         try:
-            article_content_html = _get_article_content_html(article.pdf_file)
+            article_content_html = _get_article_content_html(article.pdf_file) or ''
         except Exception:
-            pass
+            article_content_html = ''
+
+    # Kalit so'zlar ro'yxati
+    keywords_list = []
+    if article.keywords:
+        try:
+            keywords_list = [k.strip() for k in str(article.keywords).replace(';', ',').split(',') if k.strip()]
+        except Exception:
+            keywords_list = []
 
     return render(request, 'article_detail.html', {
         'article': article,
         'author_articles': author_articles,
         'article_content_html': article_content_html,
+        'keywords_list': keywords_list,
     })
 
 
@@ -380,6 +395,9 @@ def _get_logo_base64():
         return 'data:image/png;base64,' + b64
     except Exception:
         return ''
+
+
+def _get_file_bytes(article_file):
     """
     Fayl maydonidan bytes qaytaradi.
     Lokal (path) bo'lsa — disk dan o'qiydi.
@@ -457,13 +475,15 @@ def _get_article_content_html(article_file):
 
     try:
         url_or_name = getattr(article_file, 'name', '') or ''
-        ext = url_or_name.lower().rsplit('.', 1)[-1].split('?')[0]
+        ext = url_or_name.lower().rsplit('.', 1)[-1].split('?')[0] if '.' in url_or_name else ''
         if ext in ('doc', 'docx'):
-            return _extract_docx_text_as_html(file_path)
+            return _extract_docx_text_as_html(file_path) or ''
         else:
-            return _extract_pdf_text_as_html(file_path)
+            return _extract_pdf_text_as_html(file_path) or ''
+    except Exception:
+        return ''
     finally:
-        if is_tmp:
+        if is_tmp and file_path:
             try:
                 os.unlink(file_path)
             except Exception:
