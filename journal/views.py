@@ -709,135 +709,35 @@ def recalculate_issue_page_numbers(issue):
 
 def _add_header_footer_to_pdf(pdf_bytes, article):
     """
-    PyMuPDF yordamida asl PDF faylning har sahifasiga
-    yuqori va pastki kolontitullarni qo'shadi.
-    Matn, rasmlar, jadvallar o'zgarmaydi.
+    PyMuPDF yordamida asl PDF faylining pastki qismiga 
+    faqatgina toza sahifa raqamini qo'shadi.
+    Yuqori header va ortiqcha liniyalar olib tashlangan.
     """
     try:
         import fitz
         import io
 
         doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-
-        # Ranglar
         DARK_BLUE = (0.04, 0.086, 0.157)   # #0a1628
-        GREEN     = (0.086, 0.502, 0.239)   # #15803d
-        GRAY      = (0.4, 0.4, 0.4)
-
-        # Jurnal ma'lumotlari
-        journal_name  = "TIFT JOURNAL"
-        journal_sub   = '"Arxitektura va Ta\'lim" Ilmiy-Elektron Jurnali'
-        footer_text   = "Toshkent sh., Amir Temur ko'chasi, 108  |  Tel: +998 71 238-74-80  |  journal@tift.uz  |  www.tift.uz"
-
-        if article.issue:
-            if article.start_page and article.end_page:
-                page_info = f"S. {article.start_page}-{article.end_page}"
-            elif article.start_page:
-                page_info = f"S. {article.start_page}"
-            else:
-                page_info = ""
-
-            if page_info:
-                issue_text = f"Jild {article.issue.volume}, Son {article.issue.number} ({article.issue.year}), {page_info}"
-            else:
-                issue_text = f"Jild {article.issue.volume}, Son {article.issue.number} ({article.issue.year})"
-        else:
-            issue_text = "ISSN: 2181-XXXX"
 
         for page in doc:
             w = page.rect.width    # sahifa kengligi (pt)
             h = page.rect.height   # sahifa balandligi (pt)
 
-            margin_x = 71.0  # 2.5cm
-            header_y = 22.0  # yuqoridan 0.77cm
-            footer_y = h - 25.0  # pastdan
+            footer_y = h - 20.0  # Sahifa pastida xavfsiz masofa
 
-            # ── YUQORI KOLONTITUL ──
-
-            # Logo kvadrat (chap)
-            logo_rect = fitz.Rect(margin_x, header_y - 2, margin_x + 28, header_y + 26)
-            page.draw_rect(logo_rect, color=DARK_BLUE, fill=DARK_BLUE, width=0)
-            page.insert_text(
-                (margin_x + 7, header_y + 19),
-                "T", fontsize=16,
-                color=(0.133, 0.773, 0.369),  # #22c55e
-                fontname="Helvetica-Bold"
-            )
-
-            # Jurnal nomi (o'rta)
-            page.insert_text(
-                (margin_x + 34, header_y + 10),
-                journal_name, fontsize=10,
-                color=DARK_BLUE, fontname="Helvetica-Bold"
-            )
-            page.insert_text(
-                (margin_x + 34, header_y + 22),
-                journal_sub, fontsize=7,
-                color=GRAY, fontname="Helvetica"
-            )
-
-            # Jurnal soni va sahifasi (o'ng)
-            page.insert_text(
-                (w - margin_x - 170, header_y + 10),
-                issue_text, fontsize=8,
-                color=GRAY, fontname="Helvetica"
-            )
-            page.insert_text(
-                (w - margin_x - 170, header_y + 20),
-                "ISSN: 2181-XXXX", fontsize=7,
-                color=GRAY, fontname="Helvetica"
-            )
-
-            # QR kod (1-sahifada o'ng yuqori burchakda haqiqiyligini tekshirish uchun)
-            if page.number == 0:
-                try:
-                    import qrcode
-                    qr = qrcode.QRCode(version=1, box_size=4, border=0)
-                    qr_url = f"https://architect-edu.tift.uz/article/{article.pk}/"
-                    qr.add_data(qr_url)
-                    qr.make(fit=True)
-                    img = qr.make_image(fill_color="black", back_color="white")
-                    qr_buf = io.BytesIO()
-                    img.save(qr_buf, format="PNG")
-                    qr_rect = fitz.Rect(w - margin_x - 30, header_y - 2, w - margin_x, header_y + 28)
-                    page.insert_image(qr_rect, stream=qr_buf.getvalue())
-                except Exception as qr_err:
-                    print("QR insert error:", qr_err)
-
-            # Yuqori chiziq (yashil)
-            page.draw_line(
-                (margin_x, header_y + 30),
-                (w - margin_x, header_y + 30),
-                color=GREEN, width=1.2
-            )
-
-            # ── PASTKI KOLONTITUL ──
-
-            # Pastki chiziq (yashil)
-            page.draw_line(
-                (margin_x, footer_y - 4),
-                (w - margin_x, footer_y - 4),
-                color=GREEN, width=0.8
-            )
-
-            # Sahifa raqami (To'plamdagi haqiqiy sahifa raqami)
+            # Sahifa raqami
             if article.start_page:
                 actual_page_num = article.start_page + page.number
                 page_num_str = f"– {actual_page_num} –"
             else:
                 page_num_str = f"– {page.number + 1} / {doc.page_count} –"
 
+            # Sahifa pastining o'rtasida toza raqam
             page.insert_text(
-                (w / 2 - 15, footer_y + 8),
-                page_num_str, fontsize=8,
+                (w / 2 - 14, footer_y),
+                page_num_str, fontsize=9,
                 color=DARK_BLUE, fontname="Helvetica-Bold"
-            )
-
-            # Manzil
-            page.insert_text(
-                (margin_x, footer_y + 18),
-                footer_text, fontsize=6.5,
-                color=GRAY, fontname="Helvetica"
             )
 
         # Yangi PDF bytes
@@ -847,7 +747,6 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
         return out.getvalue()
 
     except Exception as e:
-        # Xatolik bo'lsa asl bytes qaytaradi
         return pdf_bytes
 
 
@@ -1324,10 +1223,9 @@ def download_issue_pdf(request, issue_pk):
     for item in prepared_articles:
         master_doc.insert_pdf(item['doc'])
 
-    # 5. UZLUKSIZ RAQAMLASH VA HEADER/FOOTER QO'SHISH
+    # 5. UZLUKSIZ RAQAMLASH QO'SHISH
     total_pages = len(master_doc)
     unbound_count = cover_page_count + len(toc_doc)
-    hdr_text = f"TIFT \"Arxitektura va Ta'lim\" Ilmiy-elektron jurnali | {issue.year}-yil, {issue.number}-son"
 
     for idx in range(total_pages):
         page = master_doc[idx]
@@ -1338,15 +1236,9 @@ def download_issue_pdf(request, issue_pk):
         rect = page.rect
         width, height = rect.width, rect.height
 
-        header_y = 25
-        page.insert_text((40, header_y), hdr_text, fontsize=8, fontname="helv", color=(0.2, 0.2, 0.2))
-        page.draw_line(fitz.Point(40, header_y + 4), fitz.Point(width - 40, header_y + 4), color=(0.6, 0.6, 0.6), width=0.5)
-
-        footer_y = height - 30
-        page.draw_line(fitz.Point(40, footer_y - 8), fitz.Point(width - 40, footer_y - 8), color=(0.6, 0.6, 0.6), width=0.5)
-        
-        num_str = str(page_num)
-        page.insert_text((width / 2 - 5, footer_y), num_str, fontsize=9, fontname="helv", color=(0, 0, 0))
+        footer_y = height - 20.0
+        num_str = f"– {page_num} –"
+        page.insert_text((width / 2 - 14, footer_y), num_str, fontsize=9, fontname="helv-bold", color=(0.04, 0.086, 0.157))
 
     # 6. YUKLAB OLISH UCHUN QAYTARISH
     final_bytes = master_doc.tobytes()
