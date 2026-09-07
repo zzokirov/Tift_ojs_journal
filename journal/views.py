@@ -85,13 +85,20 @@ def archive(request):
 
 def about(request):
     staff = StaffMember.objects.filter(is_active=True).order_by('order', 'full_name')
+    leadership = staff.filter(position__in=['editor_in_chief', 'deputy_editor', 'secretary'])
+    editorial_board = staff.filter(position='member')
     areas = [
         "Arxitektura nazariyasi", "Binolar konstruksiyasi",
         "Shaharsozlik va landshaft", "Geodeziya va kartografiya",
         "Ta'lim metodikasi", "Raqamli texnologiyalar",
         "Sun'iy idrok", "Kadastr va er resurslari",
     ]
-    return render(request, 'about.html', {'staff': staff, 'areas': areas})
+    return render(request, 'about.html', {
+        'staff': staff,
+        'leadership': leadership,
+        'editorial_board': editorial_board,
+        'areas': areas
+    })
 
 
 def issue_detail(request, issue_pk):
