@@ -220,8 +220,8 @@ p.img-caption {
     </tr>
 </table>
 
-<!-- -- MAQOLA MA'LUMOTLARI -- -->
-
+<!-- -- MAQOLA MA'LUMOTLARI (faqat content_html bo'lmaganda) -- -->
+{% if not pdf_content_html %}
   <!-- Sarlavha -->
   <div class="article-title">{{ article.title }}</div>
   
@@ -248,11 +248,11 @@ p.img-caption {
       {% endif %}
   {% endif %}
 
-<!-- Kategoriya belgisi (ixtiyoriy) -->
-{% if article.category %}
-<div style="font-size:9pt; color:#555; text-align:right; margin-bottom: 15pt; font-style:italic;">
-    Yo'nalish: {{ article.category.name }}
-</div>
+  {% if article.category %}
+  <div style="font-size:9pt; color:#555; text-align:right; margin-bottom: 15pt; font-style:italic;">
+      Yo'nalish: {{ article.category.name }}
+  </div>
+  {% endif %}
 {% endif %}
 
 <!-- Maqola matni -->
