@@ -15,8 +15,11 @@ def run():
     # Deploy steps
     stdin, stdout, stderr = client.exec_command(
         'cd /home/devuser/apps/architect-edu/Tift_ojs_journal && '
-        'git pull origin main && '
+        'git fetch origin && '
+        'git reset --hard origin/main && '
+        './venv/bin/python populate_editorial_board.py && '
         './venv/bin/python manage.py migrate && '
+        './venv/bin/python manage.py collectstatic --noinput && '
         './venv/bin/python update_pages.py'
     )
     print("DEPLOY OUT:", stdout.read().decode().strip())
