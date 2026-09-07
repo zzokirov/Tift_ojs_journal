@@ -7,9 +7,7 @@ django.setup()
 from journal.models import StaffMember
 
 def populate():
-    # Eski a'zolarni tozalash
-    StaffMember.objects.all().delete()
-    print("Eski staff memberlar o'chirildi.")
+    print("Staff memberlar ma'lumotlari tekshirilmoqda va yangilanmoqda...")
 
     staff_data = [
         # Rahbariyat (Leadership)
@@ -207,8 +205,18 @@ def populate():
     ]
 
     for item in staff_data:
-        StaffMember.objects.create(**item)
-    print(f"Jami {len(staff_data)} ta tahririyat a'zosi imloviy tuzatilgan Latin alifbosida saqlandi!")
+        full_name = item['full_name']
+        staff = StaffMember.objects.filter(full_name=full_name).first()
+        if staff:
+            staff.position = item['position']
+            staff.workplace = item['workplace']
+            staff.bio = item['bio']
+            staff.order = item['order']
+            staff.save(update_fields=['position', 'workplace', 'bio', 'order'])
+        else:
+            StaffMember.objects.create(**item)
+
+    print(f"Jami {len(staff_data)} ta tahririyat a'zosi saqlandi va ularning rasmlari daxlsiz saqlandi!")
 
 if __name__ == '__main__':
     populate()
