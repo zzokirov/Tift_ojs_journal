@@ -86,9 +86,9 @@
         </h2>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {% for doc in normative %}
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden card-hover group">
-                    <div class="p-6">
-                        <div class="flex items-start gap-4">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-md overflow-hidden card-hover group flex flex-col justify-between">
+                    <div class="p-6 pb-4">
+                        <div class="flex items-start gap-4 mb-4">
                             <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
                                  style="background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(16,185,129,0.2));border:1px solid rgba(16,185,129,0.3);">
                                 <svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,19 +96,55 @@
                                 </svg>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <h3 class="font-bold text-navy-900 leading-snug mb-1">{{ doc.title }}</h3>
+                                <h3 class="font-bold text-navy-900 leading-snug text-base mb-1">{{ doc.title }}</h3>
                                 {% if doc.description %}
-                                    <p class="text-gray-500 text-sm leading-relaxed">{{ doc.description }}</p>
+                                    <p class="text-gray-500 text-sm leading-relaxed mb-3">{{ doc.description }}</p>
                                 {% endif %}
                             </div>
                         </div>
+
+                        <!-- LIVE PDF DOCUMENT EMBEDDED VIEWER -->
+                        {% if doc.file %}
+                            <div class="mt-2 rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-slate-900">
+                                <div class="bg-navy-900 text-white px-4 py-2.5 flex items-center justify-between text-xs font-bold border-b border-navy-800">
+                                    <span class="flex items-center gap-2 text-green-400">
+                                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse inline-block"></span>
+                                        <i class="fas fa-file-pdf text-red-400 text-sm"></i> Jonli ko'rinish (Live Document View)
+                                    </span>
+                                    <a href="{{ doc.file.url }}" target="_blank" class="text-gray-300 hover:text-white transition-colors flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-lg">
+                                        <i class="fas fa-expand text-[10px]"></i> To'liq ekran
+                                    </a>
+                                </div>
+                                <div class="relative w-full h-[400px] md:h-[500px] bg-slate-800">
+                                    <iframe src="{{ doc.file.url }}#toolbar=1&navpanes=0&view=FitH" 
+                                            class="w-full h-full border-0 rounded-b-xl" 
+                                            title="{{ doc.title }}">
+                                    </iframe>
+                                </div>
+                            </div>
+                        {% elif doc.url %}
+                            <div class="mt-2 rounded-xl overflow-hidden border border-gray-200 shadow-inner bg-slate-900">
+                                <div class="bg-navy-900 text-white px-4 py-2.5 flex items-center justify-between text-xs font-bold border-b border-navy-800">
+                                    <span class="flex items-center gap-2 text-green-400">
+                                        <i class="fas fa-link text-blue-400 text-sm"></i> Rasmiy havolaga biriktirilgan hujjat
+                                    </span>
+                                    <a href="{{ doc.url }}" target="_blank" class="text-gray-300 hover:text-white transition-colors flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-lg">
+                                        <i class="fas fa-external-link-alt text-[10px]"></i> O'tish
+                                    </a>
+                                </div>
+                                <div class="relative w-full h-[380px] md:h-[480px] bg-slate-800">
+                                    <iframe src="{{ doc.url }}" class="w-full h-full border-0 rounded-b-xl" title="{{ doc.title }}"></iframe>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
+
                     <div class="px-6 py-4 flex gap-3" style="background:#f8fafc;border-top:1px solid #f1f5f9;">
                         {% if doc.file %}
                             <a href="{{ doc.file.url }}" target="_blank"
                                class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
                                style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;">
-                                <i class="fas fa-eye text-xs"></i> Ko'rish
+                                <i class="fas fa-eye text-xs"></i> Alohida oynada ko'rish
                             </a>
                             <a href="{{ doc.file.url }}" download
                                class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
@@ -119,7 +155,7 @@
                             <a href="{{ doc.url }}" target="_blank"
                                class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
                                style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;">
-                                <i class="fas fa-external-link-alt text-xs"></i> Ko'rish
+                                <i class="fas fa-external-link-alt text-xs"></i> Tashqi havolada ko'rish
                             </a>
                         {% endif %}
                     </div>
