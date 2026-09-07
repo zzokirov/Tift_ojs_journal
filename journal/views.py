@@ -887,14 +887,259 @@ def documents(request):
     })
 
 
+def _build_pdf_from_html_xhtml2pdf(article, request=None):
+    from django.template.loader import render_to_string
+    from django.conf import settings as django_settings
+    import io
+    try:
+        from xhtml2pdf import pisa
+    except ImportError:
+        return b''
+    
+    content_html = ''
+    if article.pdf_file:
+        try:
+            content_html = _get_article_content_html(article.pdf_file)
+        except Exception:
+            pass
+
+    # Generate QR Code for PDF
+    qr_code_base64 = ""
+    try:
+        import qrcode
+        from io import BytesIO
+        import base64
+        qr = qrcode.QRCode(version=1, box_size=5, border=0)
+        qr_url = request.build_absolute_uri(f"/article/{article.pk}/") if request else f"https://architect-edu.tift.uz/article/{article.pk}/"
+        qr.add_data(qr_url)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        buffer = BytesIO()
+        img.save(buffer, format="PNG")
+        qr_code_base64 = base64.b64encode(buffer.getvalue()).decode()
+    except Exception:
+        pass
+        
+    html_string = render_to_string('article_pdf.html', {
+        'article': article,
+        'request': request,
+        'pdf_content_html': content_html,
+        'static_root': django_settings.STATIC_ROOT,
+        'logo_base64': _get_logo_base64(),
+        'qr_code_base64': qr_code_base64,
+    })
+    buffer = io.BytesIO()
+    base_url = request.build_absolute_uri('/') if request else ''
+    pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
+    return buffer.getvalue()
+
+
 def download_issue_pdf(request, issue_pk):
-    """Jurnalning to'liq sonini (PDF) yuklab olish."""
-    from django.http import Http404
+    """
+    Jurnalning to'liq sonini PDF sifatida yaratadi va yuklab beradi.
+    Ketma-ketlik:
+    1. Oldi muqova rasm (cover_image)
+    2. Orqa muqova rasm (back_cover_image)
+    3. Tahririyat a'zolari (issue_editorial_pdf.html)
+    4. Kitob shaklidagi Mundarija (Table of Contents)
+    5. Nashrdagi barcha chop etilgan maqolalar ketma-ketligi
+    """
+    import io
+    import base64
     from django.shortcuts import redirect
+    from django.template.loader import render_to_string
+    from django.http import HttpResponse, Http404
+
     issue = get_object_or_404(JournalIssue, pk=issue_pk)
+
+    # 0. Agar admin tayyor full_pdf yuklagan bo'lsa
     if issue.full_pdf:
         try:
             return redirect(issue.full_pdf.url)
         except Exception:
             pass
-    raise Http404("To'liq to'plam fayli topilmadi.")
+
+    articles = list(Article.objects.filter(issue=issue, status='published').order_by('created_at', 'id'))
+    if not articles:
+        return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
+
+    try:
+        import fitz
+        from xhtml2pdf import pisa
+    except ImportError:
+        return HttpResponse("PDF yaratish kutubxonalari topilmadi.", status=500)
+
+    # 1. OLDI MUQOVA SAHIFASI
+    doc_cover = None
+    if issue.cover_image and issue.cover_image.name:
+        try:
+            cover_bytes = _get_pdf_bytes(issue.cover_image)
+            if cover_bytes:
+                ext_img = issue.cover_image.name.split('.')[-1].lower().split('?')[0]
+                if ext_img not in ('jpg', 'jpeg', 'png', 'webp'):
+                    ext_img = 'jpeg'
+                cover_b64 = f"data:image/{ext_img};base64," + base64.b64encode(cover_bytes).decode('ascii')
+            else:
+                cover_b64 = None
+
+            cover_html = render_to_string('issue_cover_pdf.html', {
+                'issue': issue,
+                'cover_image_base64': cover_b64,
+            })
+            buf = io.BytesIO()
+            pisa.CreatePDF(src=cover_html, dest=buf, encoding='utf-8')
+            doc_cover = fitz.open(stream=buf.getvalue(), filetype="pdf")
+        except Exception as e:
+            print("Cover image error:", e)
+
+    # 1.2. ORQA MUQOVA SAHIFASI
+    doc_back_cover = None
+    if issue.back_cover_image and issue.back_cover_image.name:
+        try:
+            back_bytes = _get_pdf_bytes(issue.back_cover_image)
+            if back_bytes:
+                ext_img = issue.back_cover_image.name.split('.')[-1].lower().split('?')[0]
+                if ext_img not in ('jpg', 'jpeg', 'png', 'webp'):
+                    ext_img = 'jpeg'
+                back_b64 = f"data:image/{ext_img};base64," + base64.b64encode(back_bytes).decode('ascii')
+            else:
+                back_b64 = None
+
+            back_html = render_to_string('issue_cover_pdf.html', {
+                'issue': issue,
+                'cover_image_base64': back_b64,
+            })
+            buf = io.BytesIO()
+            pisa.CreatePDF(src=back_html, dest=buf, encoding='utf-8')
+            doc_back_cover = fitz.open(stream=buf.getvalue(), filetype="pdf")
+        except Exception as e:
+            print("Back cover error:", e)
+
+    # 1.5. TAHRIRIYAT A'ZOLARI SAHIFASI
+    doc_editorial = None
+    try:
+        staff = StaffMember.objects.filter(is_active=True).order_by('order', 'full_name')
+        leadership = staff.filter(position__in=['editor_in_chief', 'deputy_editor', 'secretary'])
+        editorial_board = staff.filter(position='member')
+        
+        editorial_html = render_to_string('issue_editorial_pdf.html', {
+            'leadership': leadership,
+            'editorial_board': editorial_board,
+        })
+        buf_ed = io.BytesIO()
+        pisa.CreatePDF(src=editorial_html, dest=buf_ed, encoding='utf-8')
+        doc_editorial = fitz.open(stream=buf_ed.getvalue(), filetype="pdf")
+    except Exception as e:
+        print("Editorial page generation error:", e)
+
+    cover_page_count = (len(doc_cover) if doc_cover else 0) + (len(doc_back_cover) if doc_back_cover else 0) + (len(doc_editorial) if doc_editorial else 0)
+
+    # 2. MAQOLALAR PDF NUSXASINI TAYYORLASH
+    prepared_articles = []
+    for art in articles:
+        try:
+            raw_bytes = None
+            file_name = getattr(art.pdf_file, 'name', '') or ''
+            ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0] if art.pdf_file else ''
+
+            if ext == 'pdf':
+                raw_bytes = _get_pdf_bytes(art.pdf_file)
+            
+            if not raw_bytes:
+                raw_bytes = _build_pdf_from_html_xhtml2pdf(art, request)
+
+            if raw_bytes:
+                art_doc = fitz.open(stream=raw_bytes, filetype="pdf")
+                if len(art_doc) > 0:
+                    prepared_articles.append({
+                        'article': art,
+                        'doc': art_doc,
+                        'pages': len(art_doc)
+                    })
+        except Exception as e:
+            print(f"Error preparing article {art.pk}:", e)
+
+    if not prepared_articles:
+        return HttpResponse("Maqolalar PDF larini shakllantirishda xatolik yuz berdi.", status=500)
+
+    # 3. MUNDARIJA (TABLE OF CONTENTS) YARATISH VA SAHIFALARNI HISOBLASH
+    toc_doc = None
+    article_items = []
+    
+    for attempt in range(2):
+        article_items = []
+        current_page = cover_page_count + (len(toc_doc) if toc_doc else 1) + 1
+
+        for item in prepared_articles:
+            art = item['article']
+            pages = item['pages']
+            start_p = current_page
+            end_p = current_page + pages - 1
+
+            if art.start_page != start_p or art.end_page != end_p:
+                Article.objects.filter(pk=art.pk).update(start_page=start_p, end_page=end_p)
+                art.start_page = start_p
+                art.end_page = end_p
+
+            article_items.append({
+                'article': art,
+                'start_page': start_p,
+                'end_page': end_p,
+            })
+            current_page = end_p + 1
+
+        toc_html = render_to_string('issue_toc_pdf.html', {
+            'issue': issue,
+            'article_items': article_items,
+        })
+        buf_toc = io.BytesIO()
+        pisa.CreatePDF(src=toc_html, dest=buf_toc, encoding='utf-8')
+        new_toc_doc = fitz.open(stream=buf_toc.getvalue(), filetype="pdf")
+        
+        if toc_doc and len(new_toc_doc) == len(toc_doc):
+            break
+        toc_doc = new_toc_doc
+
+    # 4. BARCHA QISMLARNI BITTA MASTER PDF GA BIRLASHTIRISH
+    master_doc = fitz.open()
+    if doc_cover and len(doc_cover) > 0:
+        master_doc.insert_pdf(doc_cover)
+    if doc_back_cover and len(doc_back_cover) > 0:
+        master_doc.insert_pdf(doc_back_cover)
+    if doc_editorial and len(doc_editorial) > 0:
+        master_doc.insert_pdf(doc_editorial)
+    if toc_doc and len(toc_doc) > 0:
+        master_doc.insert_pdf(toc_doc)
+    for item in prepared_articles:
+        master_doc.insert_pdf(item['doc'])
+
+    # 5. UZLUKSIZ RAQAMLASH VA HEADER/FOOTER QO'SHISH
+    total_pages = len(master_doc)
+    unbound_count = cover_page_count + len(toc_doc)
+    hdr_text = f"TIFT \"Arxitektura va Ta'lim\" Ilmiy-elektron jurnali | {issue.year}-yil, {issue.number}-son"
+
+    for idx in range(total_pages):
+        page = master_doc[idx]
+        if idx < unbound_count:
+            continue
+
+        page_num = idx + 1
+        rect = page.rect
+        width, height = rect.width, rect.height
+
+        header_y = 25
+        page.insert_text((40, header_y), hdr_text, fontsize=8, fontname="helv", color=(0.2, 0.2, 0.2))
+        page.draw_line(fitz.Point(40, header_y + 4), fitz.Point(width - 40, header_y + 4), color=(0.6, 0.6, 0.6), width=0.5)
+
+        footer_y = height - 30
+        page.draw_line(fitz.Point(40, footer_y - 8), fitz.Point(width - 40, footer_y - 8), color=(0.6, 0.6, 0.6), width=0.5)
+        
+        num_str = str(page_num)
+        page.insert_text((width / 2 - 5, footer_y), num_str, fontsize=9, fontname="helv", color=(0, 0, 0))
+
+    # 6. YUKLAB OLISH UCHUN QAYTARISH
+    final_bytes = master_doc.tobytes()
+    response = HttpResponse(final_bytes, content_type='application/pdf')
+    filename = f"TIFT_Journal_{issue.year}_Son_{issue.number}.pdf"
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response
