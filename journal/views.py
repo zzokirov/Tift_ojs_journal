@@ -86,10 +86,13 @@ def issue_detail(request, issue_pk):
 
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    if not request.session.get(f'viewed_article_{pk}'):
-        article.views_count += 1
-        article.save()
-        request.session[f'viewed_article_{pk}'] = True
+    try:
+        if not request.session.get(f'viewed_article_{pk}'):
+            article.views_count += 1
+            article.save()
+            request.session[f'viewed_article_{pk}'] = True
+    except Exception:
+        pass
 
     # Shu muallifning boshqa nashr etilgan maqolalari
     author_articles = Article.objects.filter(
@@ -97,9 +100,18 @@ def article_detail(request, pk):
         status='published'
     ).exclude(pk=pk).order_by('-created_at')[:8]
 
+    # Maqola matnini HTML formatda olish (reader uchun)
+    article_content_html = ''
+    if article.pdf_file:
+        try:
+            article_content_html = _get_article_content_html(article.pdf_file)
+        except Exception:
+            pass
+
     return render(request, 'article_detail.html', {
         'article': article,
         'author_articles': author_articles,
+        'article_content_html': article_content_html,
     })
 
 

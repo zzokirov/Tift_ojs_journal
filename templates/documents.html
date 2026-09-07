@@ -28,30 +28,44 @@
     <!-- MAQOLA TALABLARI -->
     {% if requirements %}
     <div>
-        <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-5">
+        <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-6">
             <span class="w-1 h-6 bg-green-600 rounded-full block"></span>
             Maqola talablari
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {% for doc in requirements %}
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-start gap-4 card-hover">
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0 border border-blue-100">
-                        <i class="fas fa-file-word text-blue-500 text-xl"></i>
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden card-hover group">
+                    <div class="p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
+                                 style="background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(59,130,246,0.15));border:1px solid rgba(59,130,246,0.2);">
+                                <i class="fas fa-file-word text-blue-500 text-2xl"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-navy-900 leading-snug mb-1">{{ doc.title }}</h3>
+                                {% if doc.description %}
+                                    <p class="text-gray-500 text-sm leading-relaxed">{{ doc.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-navy-900 text-sm leading-snug mb-1">{{ doc.title }}</h3>
-                        {% if doc.description %}
-                            <p class="text-gray-500 text-xs mb-3">{{ doc.description }}</p>
-                        {% endif %}
+                    <div class="px-6 py-4 flex gap-3" style="background:#f8fafc;border-top:1px solid #f1f5f9;">
                         {% if doc.file %}
+                            <a href="{{ doc.file.url }}" target="_blank"
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;">
+                                <i class="fas fa-eye text-xs"></i> Ko'rish
+                            </a>
                             <a href="{{ doc.file.url }}" download
-                               class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-download text-[10px]"></i> Yuklab olish
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#16a34a,#22c55e);color:#0a1628;">
+                                <i class="fas fa-download text-xs"></i> Yuklab olish
                             </a>
                         {% elif doc.url %}
                             <a href="{{ doc.url }}" target="_blank"
-                               class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-external-link-alt text-[10px]"></i> Ko'rish
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;">
+                                <i class="fas fa-external-link-alt text-xs"></i> Ko'rish
                             </a>
                         {% endif %}
                     </div>
@@ -64,30 +78,44 @@
     <!-- ME'YORIY HUJJATLAR -->
     {% if normative %}
     <div>
-        <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-5">
+        <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-6">
             <span class="w-1 h-6 bg-green-600 rounded-full block"></span>
             Me'yoriy hujjatlar
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {% for doc in normative %}
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-start gap-4 card-hover">
-                    <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0 border border-red-100">
-                        <i class="fas fa-file-pdf text-red-500 text-xl"></i>
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden card-hover group">
+                    <div class="p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
+                                 style="background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(239,68,68,0.15));border:1px solid rgba(239,68,68,0.2);">
+                                <i class="fas fa-file-pdf text-red-500 text-2xl"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-navy-900 leading-snug mb-1">{{ doc.title }}</h3>
+                                {% if doc.description %}
+                                    <p class="text-gray-500 text-sm leading-relaxed">{{ doc.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-navy-900 text-sm leading-snug mb-1">{{ doc.title }}</h3>
-                        {% if doc.description %}
-                            <p class="text-gray-500 text-xs mb-3">{{ doc.description }}</p>
-                        {% endif %}
+                    <div class="px-6 py-4 flex gap-3" style="background:#f8fafc;border-top:1px solid #f1f5f9;">
                         {% if doc.file %}
+                            <a href="{{ doc.file.url }}" target="_blank"
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;">
+                                <i class="fas fa-eye text-xs"></i> Ko'rish
+                            </a>
                             <a href="{{ doc.file.url }}" download
-                               class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-download text-[10px]"></i> Yuklab olish
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#16a34a,#22c55e);color:#0a1628;">
+                                <i class="fas fa-download text-xs"></i> Yuklab olish
                             </a>
                         {% elif doc.url %}
                             <a href="{{ doc.url }}" target="_blank"
-                               class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-external-link-alt text-[10px]"></i> Ko'rish
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;">
+                                <i class="fas fa-external-link-alt text-xs"></i> Ko'rish
                             </a>
                         {% endif %}
                     </div>
@@ -100,30 +128,44 @@
     <!-- SHABLONLAR -->
     {% if templates %}
     <div>
-        <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-5">
+        <h2 class="text-xl font-black text-navy-900 flex items-center gap-2 mb-6">
             <span class="w-1 h-6 bg-green-600 rounded-full block"></span>
             Shablonlar
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {% for doc in templates %}
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-start gap-4 card-hover">
-                    <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0 border border-green-100">
-                        <i class="fas fa-file-alt text-green-500 text-xl"></i>
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden card-hover group">
+                    <div class="p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110"
+                                 style="background:linear-gradient(135deg,rgba(34,197,94,0.08),rgba(34,197,94,0.15));border:1px solid rgba(34,197,94,0.2);">
+                                <i class="fas fa-file-alt text-green-500 text-2xl"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-navy-900 leading-snug mb-1">{{ doc.title }}</h3>
+                                {% if doc.description %}
+                                    <p class="text-gray-500 text-sm leading-relaxed">{{ doc.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-navy-900 text-sm leading-snug mb-1">{{ doc.title }}</h3>
-                        {% if doc.description %}
-                            <p class="text-gray-500 text-xs mb-3">{{ doc.description }}</p>
-                        {% endif %}
+                    <div class="px-6 py-4 flex gap-3" style="background:#f8fafc;border-top:1px solid #f1f5f9;">
                         {% if doc.file %}
+                            <a href="{{ doc.file.url }}" target="_blank"
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;">
+                                <i class="fas fa-eye text-xs"></i> Ko'rish
+                            </a>
                             <a href="{{ doc.file.url }}" download
-                               class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-download text-[10px]"></i> Yuklab olish
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#16a34a,#22c55e);color:#0a1628;">
+                                <i class="fas fa-download text-xs"></i> Yuklab olish
                             </a>
                         {% elif doc.url %}
                             <a href="{{ doc.url }}" target="_blank"
-                               class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
-                                <i class="fas fa-external-link-alt text-[10px]"></i> Ko'rish
+                               class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                               style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;">
+                                <i class="fas fa-external-link-alt text-xs"></i> Ko'rish
                             </a>
                         {% endif %}
                     </div>

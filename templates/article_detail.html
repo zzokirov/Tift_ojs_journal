@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}{{ article.title }} | TIFT Jurnali{% endblock %}
@@ -9,7 +9,6 @@
 <div class="bg-navy-900 text-white relative overflow-hidden" style="padding:2.5rem 0;">
     <div class="absolute inset-0 opacity-5"
          style="background-image:linear-gradient(rgba(255,255,255,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:32px 32px;"></div>
-    <!-- Green accent line -->
     <div class="absolute left-0 top-0 bottom-0 w-1" style="background:linear-gradient(180deg,#22c55e,#16a34a);"></div>
 
     <div class="site-container px-4 relative">
@@ -49,10 +48,6 @@
                     Jild {{ article.issue.volume }}, Son {{ article.issue.number }}, {{ article.issue.year }}
                 </span>
             {% endif %}
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
-                  style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#6ee7b7;">
-                <i class="fas fa-unlock text-[9px]"></i> Open Access
-            </span>
         </div>
 
         <!-- Title -->
@@ -111,6 +106,7 @@
             </div>
 
             <!-- KALIT SO'ZLAR -->
+            {% if article.keywords %}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
                 <h3 class="font-bold text-navy-900 text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
                     <i class="fas fa-tags text-green-500 text-xs"></i> Kalit so'zlar
@@ -125,8 +121,78 @@
                     {% endfor %}
                 </div>
             </div>
+            {% endif %}
 
-            <!-- MAQOLA MATNI -->
+            <!-- ═══ MAQOLANI O'QISH (INTERACTIVE READER) ═══ -->
+            {% if article_content_html or article.pdf_file %}
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden" id="readerSection">
+                <!-- Reader Header -->
+                <div class="flex items-center justify-between px-6 py-4 border-b border-gray-50">
+                    <div class="flex items-center gap-3">
+                        <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
+                        <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">Maqolani o'qish</h2>
+                    </div>
+                    <!-- Reader Controls -->
+                    <div class="flex items-center gap-2">
+                        <button onclick="adjustFontSize(-1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-all hover:scale-110"
+                                style="background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;" title="Kichiklashtirish">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span id="fontSizeLabel" class="text-xs font-medium px-2" style="color:#64748b;">16px</span>
+                        <button onclick="adjustFontSize(1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-all hover:scale-110"
+                                style="background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;" title="Kattalashtirish">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <div class="w-px h-6 mx-1" style="background:#e2e8f0;"></div>
+                        <button onclick="toggleFullscreen()" class="w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-all hover:scale-110"
+                                style="background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;" title="To'liq ekran">
+                            <i class="fas fa-expand" id="fullscreenIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reader Content -->
+                {% if article_content_html %}
+                <div id="readerContent" class="px-8 py-8 overflow-y-auto"
+                     style="max-height:650px;line-height:1.9;color:#1e293b;font-size:16px;scroll-behavior:smooth;">
+                    <div class="max-w-none prose prose-lg" style="font-family:'Georgia','Playfair Display',serif;">
+                        {{ article_content_html|safe }}
+                    </div>
+                </div>
+                <!-- Scroll Progress -->
+                <div class="h-1 w-full" style="background:#f1f5f9;">
+                    <div id="readProgress" class="h-full transition-all duration-300" style="width:0%;background:linear-gradient(90deg,#22c55e,#4ade80);border-radius:0 4px 4px 0;"></div>
+                </div>
+                {% else %}
+                <div class="px-8 py-16 text-center">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                         style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);">
+                        <i class="fas fa-file-pdf text-2xl" style="color:#ef4444;"></i>
+                    </div>
+                    <p class="font-semibold text-navy-900 mb-1">PDF formatdagi maqola</p>
+                    <p class="text-sm" style="color:#64748b;">Maqolani quyidagi tugmalar orqali ko'rishingiz yoki yuklab olishingiz mumkin</p>
+                </div>
+                {% endif %}
+
+                <!-- Action Buttons -->
+                <div class="px-6 py-4 flex flex-wrap gap-3" style="background:#f8fafc;border-top:1px solid #f1f5f9;">
+                    {% if article.pdf_file %}
+                    <a href="{% url 'article_pdf' article.pk %}" target="_blank"
+                       class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-3 rounded-xl transition-all hover:scale-[1.02] hover:shadow-lg"
+                       style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;min-width:200px;">
+                        <i class="fas fa-eye"></i> PDF ko'rish
+                    </a>
+                    <a href="{% url 'download_pdf' article.pk %}"
+                       class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-3 rounded-xl transition-all hover:scale-[1.02] hover:shadow-lg"
+                       style="background:linear-gradient(135deg,#16a34a,#22c55e);color:#0a1628;min-width:200px;">
+                        <i class="fas fa-download"></i> Yuklab olish
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- MAQOLA MATNI (agar content bor bo'lsa) -->
             {% if article.content %}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
@@ -175,18 +241,15 @@
                     <li class="px-6 py-4 hover:bg-gray-50 transition-colors">
                         <a href="{% url 'article_detail' a.pk %}" class="group block">
                             <div class="flex items-start gap-3">
-                                <!-- Raqam -->
                                 <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mt-0.5"
                                       style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;">
                                     {{ forloop.counter }}
                                 </span>
                                 <div class="flex-1 min-w-0">
-                                    <!-- Sarlavha -->
                                     <p class="font-semibold text-sm leading-snug group-hover:text-green-700 transition-colors line-clamp-2"
                                        style="color:#1e293b;">
                                         {{ a.title }}
                                     </p>
-                                    <!-- Meta -->
                                     <div class="flex flex-wrap items-center gap-3 mt-1.5">
                                         {% if a.issue %}
                                         <span class="text-xs flex items-center gap-1" style="color:#94a3b8;">
@@ -221,7 +284,6 @@
             <!-- TIFT BREND KARTASI -->
             <div class="rounded-2xl overflow-hidden shadow-xl text-white"
                  style="background:linear-gradient(160deg,#0a1628 0%,#142d54 60%,#1a3a6b 100%);">
-                <!-- Logo header -->
                 <div class="px-5 py-4 flex items-center gap-3" style="border-bottom:1px solid rgba(255,255,255,0.08);">
                     <div class="w-9 h-9 bg-white rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
                         <img src="{% static 'images/tift.png' %}" alt="TIFT" class="w-7 h-7 object-contain"
@@ -233,51 +295,31 @@
                     </div>
                 </div>
 
-                <!-- PDF Yuklab olish -->
-                {% if article.template_pdf %}
-                    <div class="px-5 pt-5 pb-2">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                                 style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);">
-                                <i class="fas fa-file-pdf text-red-400"></i>
-                            </div>
-                            <div>
-                                <div class="text-white text-sm font-bold leading-none">Shablon PDF</div>
-                                <div class="text-xs mt-0.5" style="color:#6b7280;">Tahririyat shablonida</div>
-                            </div>
+                <!-- PDF Actions -->
+                <div class="px-5 py-5 space-y-3">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                             style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);">
+                            <i class="fas fa-file-pdf text-red-400"></i>
                         </div>
-                        <a href="{% url 'download_pdf' article.pk %}"
-                           class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
-                           style="background:#22c55e;color:#0a1628;">
-                            <i class="fas fa-download text-xs"></i> Yuklab olish
-                        </a>
-                    </div>
-                    <div class="px-5 pb-4 pt-2">
-                        <a href="{{ article.pdf_file.url }}" target="_blank"
-                           class="flex items-center justify-center gap-2 font-semibold text-xs py-2 rounded-xl w-full transition-all"
-                           style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#94a3b8;">
-                            <i class="fas fa-external-link-alt text-[10px]"></i> Muallif versiyasi
-                        </a>
-                    </div>
-                {% else %}
-                    <div class="px-5 py-5">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                                 style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);">
-                                <i class="fas fa-file-pdf text-red-400"></i>
-                            </div>
-                            <div>
-                                <div class="text-white text-sm font-bold leading-none">To'liq matn</div>
-                                <div class="text-xs mt-0.5" style="color:#6b7280;">PDF formatda</div>
-                            </div>
+                        <div>
+                            <div class="text-white text-sm font-bold leading-none">To'liq matn</div>
+                            <div class="text-xs mt-0.5" style="color:#6b7280;">PDF formatda</div>
                         </div>
-                        <a href="{% url 'download_pdf' article.pk %}"
-                           class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
-                           style="background:#22c55e;color:#0a1628;">
-                            <i class="fas fa-download text-xs"></i> PDF Yuklab olish
-                        </a>
                     </div>
-                {% endif %}
+                    {% if article.pdf_file %}
+                    <a href="#readerSection" onclick="document.getElementById('readerSection').scrollIntoView({behavior:'smooth'})"
+                       class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
+                       style="background:linear-gradient(135deg,#0a1628,#1a3a6b);color:white;border:1px solid rgba(255,255,255,0.15);">
+                        <i class="fas fa-book-reader text-xs"></i> O'qish
+                    </a>
+                    <a href="{% url 'download_pdf' article.pk %}"
+                       class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
+                       style="background:#22c55e;color:#0a1628;">
+                        <i class="fas fa-download text-xs"></i> Yuklab olish
+                    </a>
+                    {% endif %}
+                </div>
             </div>
 
             <!-- MAQOLA MA'LUMOTLARI -->
@@ -320,15 +362,6 @@
                     <div class="flex justify-between px-5 py-3">
                         <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Yuklamalar</dt>
                         <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.downloads_count }}</dd>
-                    </div>
-                    <div class="flex justify-between items-center px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">Kirish</dt>
-                        <dd>
-                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold"
-                                  style="background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;">
-                                <i class="fas fa-unlock text-[9px]"></i> Open Access
-                            </span>
-                        </dd>
                     </div>
                 </dl>
             </div>
@@ -376,12 +409,69 @@
 
 {% block extra_scripts %}
 <script>
+// Copy APA citation
 function copyAPA() {
     const t = document.getElementById('citationText').innerText;
     navigator.clipboard.writeText(t).then(() => {
         const btn = event.currentTarget;
         btn.innerHTML = '<i class="fas fa-check text-xs text-green-400"></i>';
         setTimeout(() => btn.innerHTML = '<i class="fas fa-copy text-xs"></i>', 2000);
+    });
+}
+
+// Font size adjustment for reader
+let currentFontSize = 16;
+function adjustFontSize(delta) {
+    const reader = document.getElementById('readerContent');
+    if (!reader) return;
+    currentFontSize = Math.max(12, Math.min(24, currentFontSize + delta));
+    reader.style.fontSize = currentFontSize + 'px';
+    document.getElementById('fontSizeLabel').textContent = currentFontSize + 'px';
+}
+
+// Fullscreen toggle
+function toggleFullscreen() {
+    const section = document.getElementById('readerSection');
+    const icon = document.getElementById('fullscreenIcon');
+    if (!section) return;
+
+    if (section.style.position === 'fixed') {
+        // Exit fullscreen
+        section.style.position = '';
+        section.style.top = '';
+        section.style.left = '';
+        section.style.right = '';
+        section.style.bottom = '';
+        section.style.zIndex = '';
+        section.style.borderRadius = '';
+        const reader = document.getElementById('readerContent');
+        if (reader) reader.style.maxHeight = '650px';
+        icon.className = 'fas fa-expand';
+        document.body.style.overflow = '';
+    } else {
+        // Enter fullscreen
+        section.style.position = 'fixed';
+        section.style.top = '0';
+        section.style.left = '0';
+        section.style.right = '0';
+        section.style.bottom = '0';
+        section.style.zIndex = '9999';
+        section.style.borderRadius = '0';
+        const reader = document.getElementById('readerContent');
+        if (reader) reader.style.maxHeight = 'calc(100vh - 130px)';
+        icon.className = 'fas fa-compress';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Scroll progress indicator
+const readerEl = document.getElementById('readerContent');
+if (readerEl) {
+    readerEl.addEventListener('scroll', function() {
+        const scrollTop = this.scrollTop;
+        const scrollHeight = this.scrollHeight - this.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        document.getElementById('readProgress').style.width = progress + '%';
     });
 }
 </script>
