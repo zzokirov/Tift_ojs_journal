@@ -461,6 +461,30 @@ def _get_logo_base64():
         return ''
 
 
+def _get_qr_code_base64(article, request=None):
+    """
+    Maqola sahifasiga yo'naltiruvchi QR kodni tayyorlaydi (base64 string).
+    """
+    try:
+        import qrcode
+        import io
+        import base64
+        qr = qrcode.QRCode(version=1, box_size=5, border=0)
+        if request:
+            qr_url = request.build_absolute_uri(f"/article/{article.pk}/")
+        else:
+            qr_url = f"https://architect-edu.tift.uz/article/{article.pk}/"
+        qr.add_data(qr_url)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        return base64.b64encode(buf.getvalue()).decode('ascii')
+    except Exception as e:
+        print("QR code generation error:", e)
+        return ""
+
+
 def _get_file_bytes(article_file):
     """
     Fayl maydonidan bytes qaytaradi.
@@ -697,15 +721,31 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
 
             # Jurnal soni (o'ng)
             page.insert_text(
-                (w - margin_x - 100, header_y + 10),
+                (w - margin_x - 140, header_y + 10),
                 issue_text, fontsize=8,
                 color=GRAY, fontname="Helvetica"
             )
             page.insert_text(
-                (w - margin_x - 70, header_y + 20),
+                (w - margin_x - 140, header_y + 20),
                 "ISSN: 2181-XXXX", fontsize=7,
                 color=GRAY, fontname="Helvetica"
             )
+
+            # QR kod (1-sahifada o'ng yuqori burchakda haqiqiyligini tekshirish uchun)
+            if page.number == 0:
+                try:
+                    import qrcode
+                    qr = qrcode.QRCode(version=1, box_size=4, border=0)
+                    qr_url = f"https://architect-edu.tift.uz/article/{article.pk}/"
+                    qr.add_data(qr_url)
+                    qr.make(fit=True)
+                    img = qr.make_image(fill_color="black", back_color="white")
+                    qr_buf = io.BytesIO()
+                    img.save(qr_buf, format="PNG")
+                    qr_rect = fitz.Rect(w - margin_x - 30, header_y - 2, w - margin_x, header_y + 28)
+                    page.insert_image(qr_rect, stream=qr_buf.getvalue())
+                except Exception as qr_err:
+                    print("QR insert error:", qr_err)
 
             # Yuqori chiziq (yashil)
             page.draw_line(
@@ -804,6 +844,7 @@ def download_pdf(request, pk):
             'pdf_content_html': content_html,
             'static_root': settings.STATIC_ROOT,
             'logo_base64': _get_logo_base64(),
+            'qr_code_base64': _get_qr_code_base64(article, request),
         })
         buffer = io.BytesIO()
         base_url = request.build_absolute_uri('/')
@@ -850,6 +891,7 @@ def generate_article_pdf(request, pk):
         'pdf_content_html': content_html,
         'static_root': django_settings.STATIC_ROOT,
         'logo_base64': _get_logo_base64(),
+        'qr_code_base64': _get_qr_code_base64(article, request),
     })
     buffer = io.BytesIO()
     base_url = request.build_absolute_uri('/')
@@ -992,30 +1034,13 @@ def _build_pdf_from_html_xhtml2pdf(article, request=None):
         except Exception:
             pass
 
-    # Generate QR Code for PDF
-    qr_code_base64 = ""
-    try:
-        import qrcode
-        from io import BytesIO
-        import base64
-        qr = qrcode.QRCode(version=1, box_size=5, border=0)
-        qr_url = request.build_absolute_uri(f"/article/{article.pk}/") if request else f"https://architect-edu.tift.uz/article/{article.pk}/"
-        qr.add_data(qr_url)
-        qr.make(fit=True)
-        img = qr.make_image(fill_color="black", back_color="white")
-        buffer = BytesIO()
-        img.save(buffer, format="PNG")
-        qr_code_base64 = base64.b64encode(buffer.getvalue()).decode()
-    except Exception:
-        pass
-        
     html_string = render_to_string('article_pdf.html', {
         'article': article,
         'request': request,
         'pdf_content_html': content_html,
         'static_root': django_settings.STATIC_ROOT,
         'logo_base64': _get_logo_base64(),
-        'qr_code_base64': qr_code_base64,
+        'qr_code_base64': _get_qr_code_base64(article, request),
     })
     buffer = io.BytesIO()
     base_url = request.build_absolute_uri('/') if request else ''

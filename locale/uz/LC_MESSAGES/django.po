@@ -252,7 +252,7 @@ msgid "Barchasini ko'rish"
 msgstr "Barchasini ko'rish"
 
 msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
-msgstr "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
+msgstr "Barcha yuborilgan maqolalar mutaxassislar tomonidan ikki tomonlama anonim taqrizlash talablari asosida ko'rib chiqiladi va baholanadi."
 
 msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
 msgstr "Yuborildi → Taqriz → Qabul → Chop etildi"
@@ -297,7 +297,7 @@ msgid "Tahririyat a'zolari hali qo'shilmagan."
 msgstr "Tahririyat a'zolari hali qo'shilmagan."
 
 msgid "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
-msgstr "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
+msgstr "Barcha yuborilgan maqolalar ikki tomonlama anonim taqrizlash jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
 
 msgid "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
 msgstr "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
@@ -356,7 +356,7 @@ msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
 msgstr "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
 
 msgid "Peer-review jarayoni (4-6 hafta)"
-msgstr "Peer-review jarayoni (4-6 hafta)"
+msgstr "Anonim taqrizlash jarayoni (4-6 hafta)"
 
 msgid "Qabul yoki rad qaroriga xabar beriladi"
 msgstr "Qabul yoki rad qaroriga xabar beriladi"
