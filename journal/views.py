@@ -785,15 +785,6 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('my_articles')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
 
 
 @login_required
@@ -894,3 +885,16 @@ def documents(request):
         'templates': templates,
         'other': other,
     })
+
+
+def download_issue_pdf(request, issue_pk):
+    """Jurnalning to'liq sonini (PDF) yuklab olish."""
+    from django.http import Http404
+    from django.shortcuts import redirect
+    issue = get_object_or_404(JournalIssue, pk=issue_pk)
+    if issue.full_pdf:
+        try:
+            return redirect(issue.full_pdf.url)
+        except Exception:
+            pass
+    raise Http404("To'liq to'plam fayli topilmadi.")
