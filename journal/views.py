@@ -123,6 +123,13 @@ def article_detail(request, pk):
         except Exception:
             pass
 
+        if article.issue and article.start_page is None:
+            try:
+                recalculate_issue_page_numbers(article.issue)
+                article.refresh_from_db()
+            except Exception:
+                pass
+
         # 2. Muallif ma'lumotlari
         author_name = ''
         author_initial = 'A'
@@ -660,6 +667,46 @@ def _get_article_content_html(article_file, article=None):
                 pass
 
 
+def recalculate_issue_page_numbers(issue):
+    """
+    Jurnal sonidagi barcha chop etilgan maqolalarning to'plamdagi
+    boshlanish (start_page) va tugash (end_page) sahifalarini avtomatik hisoblaydi va saqlaydi.
+    """
+    if not issue:
+        return
+    articles = list(Article.objects.filter(issue=issue, status='published').order_by('created_at', 'id'))
+    if not articles:
+        return
+
+    # Muqovalar va tahririyat sahifalari (taxminan 5 sahifa)
+    cover_pages = 5
+    current_page = cover_pages + 1
+
+    for art in articles:
+        pages = 1
+        if art.pdf_file:
+            try:
+                raw_bytes = _get_pdf_bytes(art.pdf_file)
+                if raw_bytes:
+                    import fitz
+                    art_doc = fitz.open(stream=raw_bytes, filetype="pdf")
+                    if len(art_doc) > 0:
+                        pages = len(art_doc)
+                    art_doc.close()
+            except Exception:
+                pass
+
+        start_p = current_page
+        end_p = current_page + pages - 1
+
+        if art.start_page != start_p or art.end_page != end_p:
+            Article.objects.filter(pk=art.pk).update(start_page=start_p, end_page=end_p)
+            art.start_page = start_p
+            art.end_page = end_p
+
+        current_page = end_p + 1
+
+
 def _add_header_footer_to_pdf(pdf_bytes, article):
     """
     PyMuPDF yordamida asl PDF faylning har sahifasiga
@@ -683,7 +730,17 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
         footer_text   = "Toshkent sh., Amir Temur ko'chasi, 108  |  Tel: +998 71 238-74-80  |  journal@tift.uz  |  www.tift.uz"
 
         if article.issue:
-            issue_text = f"Jild {article.issue.volume}, Son {article.issue.number}, {article.issue.year}"
+            if article.start_page and article.end_page:
+                page_info = f"S. {article.start_page}-{article.end_page}"
+            elif article.start_page:
+                page_info = f"S. {article.start_page}"
+            else:
+                page_info = ""
+
+            if page_info:
+                issue_text = f"Jild {article.issue.volume}, Son {article.issue.number} ({article.issue.year}), {page_info}"
+            else:
+                issue_text = f"Jild {article.issue.volume}, Son {article.issue.number} ({article.issue.year})"
         else:
             issue_text = "ISSN: 2181-XXXX"
 
@@ -719,14 +776,14 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
                 color=GRAY, fontname="Helvetica"
             )
 
-            # Jurnal soni (o'ng)
+            # Jurnal soni va sahifasi (o'ng)
             page.insert_text(
-                (w - margin_x - 140, header_y + 10),
+                (w - margin_x - 170, header_y + 10),
                 issue_text, fontsize=8,
                 color=GRAY, fontname="Helvetica"
             )
             page.insert_text(
-                (w - margin_x - 140, header_y + 20),
+                (w - margin_x - 170, header_y + 20),
                 "ISSN: 2181-XXXX", fontsize=7,
                 color=GRAY, fontname="Helvetica"
             )
@@ -763,11 +820,16 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
                 color=GREEN, width=0.8
             )
 
-            # Sahifa raqami
-            page_num = f"– {page.number + 1} / {doc.page_count} –"
+            # Sahifa raqami (To'plamdagi haqiqiy sahifa raqami)
+            if article.start_page:
+                actual_page_num = article.start_page + page.number
+                page_num_str = f"– {actual_page_num} –"
+            else:
+                page_num_str = f"– {page.number + 1} / {doc.page_count} –"
+
             page.insert_text(
-                (w / 2 - 20, footer_y + 8),
-                page_num, fontsize=8,
+                (w / 2 - 15, footer_y + 8),
+                page_num_str, fontsize=8,
                 color=DARK_BLUE, fontname="Helvetica-Bold"
             )
 
@@ -816,15 +878,20 @@ def _get_pdf_bytes(article_file):
 
 def download_pdf(request, pk):
     """
-    Word (.docx) faylni PDF ga aylantirib qaytaradi.
-    Kolontitullar bilan birga xhtml2pdf shablon ishlatiladi.
+    Maqola PDF ini tayyorlab yuklab beradi.
+    Colontitullar, QR kod va to'plamdagi haqiqiy sahifa raqamlarini bosib beradi.
     """
     from django.http import HttpResponse, Http404
     from django.shortcuts import redirect as _redirect
     from django.template.loader import render_to_string
+    from django.conf import settings
 
     article = get_object_or_404(Article, pk=pk, status='published')
     Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
+
+    if article.issue and article.start_page is None:
+        recalculate_issue_page_numbers(article.issue)
+        article.refresh_from_db()
 
     safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
     filename = f"TIFT_{safe_title}.pdf"
@@ -832,10 +899,22 @@ def download_pdf(request, pk):
     if not article.pdf_file:
         raise Http404("Maqola fayli topilmadi.")
 
+    file_name = getattr(article.pdf_file, 'name', '') or ''
+    ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0] if article.pdf_file else ''
+
+    # 1. Asl fayl tayyor PDF bo'lsa
+    if ext == 'pdf':
+        raw_bytes = _get_pdf_bytes(article.pdf_file)
+        if raw_bytes:
+            stamped = _add_header_footer_to_pdf(raw_bytes, article)
+            response = HttpResponse(stamped, content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+
+    # 2. Word (.docx) yoki HTML matn bo'lsa xhtml2pdf orqali
     try:
         from xhtml2pdf import pisa
         import io
-        from django.conf import settings
 
         content_html = _get_article_content_html(article.pdf_file, article=article)
         html_string = render_to_string('article_pdf.html', {
@@ -850,60 +929,78 @@ def download_pdf(request, pk):
         base_url = request.build_absolute_uri('/')
         res = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
         if not res.err:
-            response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
+            stamped = _add_header_footer_to_pdf(buffer.getvalue(), article)
+            response = HttpResponse(stamped, content_type='application/pdf')
             response['Content-Disposition'] = f'attachment; filename="{filename}"'
             return response
-    except Exception:
-        pass
+    except Exception as e:
+        print("download_pdf xhtml2pdf error:", e)
 
-    # Fallback: asl faylni qaytarish
     return _redirect(article.pdf_file.url)
 
 
 def generate_article_pdf(request, pk):
-    """Maqolani brauzerda ko'rish uchun PDF ga aylantiradi (Word → PDF)."""
+    """Maqolani brauzerda inline ko'rish uchun PDF ga aylantiradi."""
     from django.template.loader import render_to_string
-    from django.http import HttpResponse
+    from django.http import HttpResponse, Http404
+    from django.shortcuts import redirect as _redirect
     import io
-
-    try:
-        from xhtml2pdf import pisa
-    except ImportError:
-        return HttpResponse("xhtml2pdf o'rnatilmagan.", status=500)
 
     article = get_object_or_404(Article, pk=pk, status='published')
     if not request.session.get(f'pdf_viewed_{pk}'):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
         request.session[f'pdf_viewed_{pk}'] = True
 
-    from django.conf import settings as django_settings
-
-    content_html = ''
-    if article.pdf_file:
-        try:
-            content_html = _get_article_content_html(article.pdf_file, article=article)
-        except Exception:
-            pass
-
-    html_string = render_to_string('article_pdf.html', {
-        'article': article,
-        'request': request,
-        'pdf_content_html': content_html,
-        'static_root': django_settings.STATIC_ROOT,
-        'logo_base64': _get_logo_base64(),
-        'qr_code_base64': _get_qr_code_base64(article, request),
-    })
-    buffer = io.BytesIO()
-    base_url = request.build_absolute_uri('/')
-    pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
-
-    if pisa_status.err:
-        return HttpResponse("PDF yaratishda xatolik yuz berdi.", status=500)
+    if article.issue and article.start_page is None:
+        recalculate_issue_page_numbers(article.issue)
+        article.refresh_from_db()
 
     safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
-    response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
-    response['Content-Disposition'] = f'inline; filename="TIFT_{safe_title}.pdf"'
-    return response
+    filename = f"TIFT_{safe_title}.pdf"
+
+    if article.pdf_file:
+        file_name = getattr(article.pdf_file, 'name', '') or ''
+        ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0]
+        if ext == 'pdf':
+            raw_bytes = _get_pdf_bytes(article.pdf_file)
+            if raw_bytes:
+                stamped = _add_header_footer_to_pdf(raw_bytes, article)
+                response = HttpResponse(stamped, content_type='application/pdf')
+                response['Content-Disposition'] = f'inline; filename="{filename}"'
+                return response
+
+    try:
+        from xhtml2pdf import pisa
+        from django.conf import settings as django_settings
+
+        content_html = ''
+        if article.pdf_file:
+            try:
+                content_html = _get_article_content_html(article.pdf_file, article=article)
+            except Exception:
+                pass
+
+        html_string = render_to_string('article_pdf.html', {
+            'article': article,
+            'request': request,
+            'pdf_content_html': content_html,
+            'static_root': django_settings.STATIC_ROOT,
+            'logo_base64': _get_logo_base64(),
+            'qr_code_base64': _get_qr_code_base64(article, request),
+        })
+        buffer = io.BytesIO()
+        base_url = request.build_absolute_uri('/')
+        pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
+
+        if not pisa_status.err:
+            stamped = _add_header_footer_to_pdf(buffer.getvalue(), article)
+            response = HttpResponse(stamped, content_type='application/pdf')
+            response['Content-Disposition'] = f'inline; filename="{filename}"'
+            return response
+    except Exception as e:
+        print("generate_article_pdf error:", e)
+
+    return _redirect(article.pdf_file.url if article.pdf_file else '/')
 
 
 def signup(request):
