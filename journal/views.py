@@ -85,49 +85,87 @@ def issue_detail(request, issue_pk):
 
 
 def article_detail(request, pk):
-    article = get_object_or_404(Article, pk=pk)
     try:
-        if not request.session.get(f'viewed_article_{pk}'):
-            article.views_count = (article.views_count or 0) + 1
-            article.save(update_fields=['views_count'])
-            request.session[f'viewed_article_{pk}'] = True
-    except Exception:
-        pass
+        article = get_object_or_404(Article, pk=pk)
 
-    # Shu muallifning boshqa nashr etilgan maqolalari
-    author_articles = []
-    try:
-        author_obj = article.author
-        if author_obj:
-            author_articles = Article.objects.filter(
-                author=author_obj,
-                status='published'
-            ).exclude(pk=pk).order_by('-created_at')[:8]
-    except Exception:
+        # 1. Views count update
+        try:
+            if not request.session.get(f'viewed_article_{pk}'):
+                article.views_count = (article.views_count or 0) + 1
+                article.save(update_fields=['views_count'])
+                request.session[f'viewed_article_{pk}'] = True
+        except Exception:
+            pass
+
+        # 2. Muallif ma'lumotlari
+        author_name = ''
+        author_initial = 'A'
+        author_institution = ''
+        try:
+            if article.authors:
+                author_name = article.authors
+                author_initial = article.authors[0].upper()
+            elif article.author:
+                author_name = article.author.get_full_name() or article.author.username
+                author_initial = (author_name[0] if author_name else 'A').upper()
+                author_institution = getattr(article.author, 'institution', '') or ''
+        except Exception:
+            pass
+
+        # 3. Shu muallifning boshqa nashr etilgan maqolalari
         author_articles = []
-
-    # Maqola matnini HTML formatda olish (reader uchun)
-    article_content_html = ''
-    if article.pdf_file:
         try:
-            article_content_html = _get_article_content_html(article.pdf_file) or ''
+            author_obj = getattr(article, 'author', None)
+            if author_obj:
+                author_articles = Article.objects.filter(
+                    author=author_obj,
+                    status='published'
+                ).exclude(pk=pk).order_by('-created_at')[:8]
         except Exception:
-            article_content_html = ''
+            author_articles = []
 
-    # Kalit so'zlar ro'yxati
-    keywords_list = []
-    if article.keywords:
+        # 4. Maqola matnini HTML formatda olish (reader uchun)
+        article_content_html = ''
+        if article.pdf_file:
+            try:
+                article_content_html = _get_article_content_html(article.pdf_file) or ''
+            except Exception:
+                article_content_html = ''
+
+        # 5. Kalit so'zlar ro'yxati
+        keywords_list = []
+        if article.keywords:
+            try:
+                keywords_list = [k.strip() for k in str(article.keywords).replace(';', ',').split(',') if k.strip()]
+            except Exception:
+                keywords_list = []
+
+        return render(request, 'article_detail.html', {
+            'article': article,
+            'author_name': author_name,
+            'author_initial': author_initial,
+            'author_institution': author_institution,
+            'author_articles': author_articles,
+            'article_content_html': article_content_html,
+            'keywords_list': keywords_list,
+        })
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
         try:
-            keywords_list = [k.strip() for k in str(article.keywords).replace(';', ',').split(',') if k.strip()]
+            article = get_object_or_404(Article, pk=pk)
+            return render(request, 'article_detail.html', {
+                'article': article,
+                'author_name': getattr(article, 'authors', '') or 'Muallif',
+                'author_initial': 'A',
+                'author_institution': '',
+                'author_articles': [],
+                'article_content_html': '',
+                'keywords_list': [],
+            })
         except Exception:
-            keywords_list = []
-
-    return render(request, 'article_detail.html', {
-        'article': article,
-        'author_articles': author_articles,
-        'article_content_html': article_content_html,
-        'keywords_list': keywords_list,
-    })
+            from django.http import HttpResponse
+            return HttpResponse("Maqola topilmadi yoki xatolik yuz berdi.", status=404)
 
 
 def _clean_text(text):

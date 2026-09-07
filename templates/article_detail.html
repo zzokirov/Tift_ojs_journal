@@ -60,11 +60,7 @@
         <div class="flex flex-wrap items-center gap-4 text-sm" style="color:#94a3b8;">
             <span class="flex items-center gap-2">
                 <i class="fas fa-users text-green-500 text-xs"></i>
-                {% if article.authors %}
-                    {{ article.authors }}
-                {% else %}
-                    {{ article.author.get_full_name|default:article.author.username }}
-                {% endif %}
+                {{ author_name|default:"Muallif ko'rsatilmagan" }}
             </span>
             {% if article.published_at %}
                 <span class="flex items-center gap-1.5">
@@ -374,20 +370,16 @@
                 <div class="flex items-start gap-3">
                     <div class="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg flex-shrink-0"
                          style="background:linear-gradient(135deg,#142d54,#0a1628);color:#22c55e;">
-                        {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                        {{ author_initial }}
                     </div>
                     <div>
                         <div class="font-bold text-navy-900 text-sm">
-                            {% if article.authors %}
-                                {{ article.authors|truncatewords:4 }}
-                            {% else %}
-                                {{ article.author.get_full_name|default:article.author.username }}
-                            {% endif %}
+                            {{ author_name|default:"Muallif"|truncatewords:4 }}
                         </div>
-                        {% if article.author.institution %}
+                        {% if author_institution %}
                             <div class="text-xs mt-1 flex items-center gap-1.5" style="color:#64748b;">
                                 <i class="fas fa-university text-green-500 text-[9px]"></i>
-                                {{ article.author.institution }}
+                                {{ author_institution }}
                             </div>
                         {% endif %}
                     </div>
