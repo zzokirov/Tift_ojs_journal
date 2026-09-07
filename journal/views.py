@@ -492,20 +492,35 @@ def _get_file_bytes(article_file):
 
 def _strip_duplicate_header_from_html(html_str, title="", authors_str=""):
     """
-    pdf_content_html boshidagi qaytarilgan sarlavha va muallif matnlarini olib tashlaydi.
+    pdf_content_html boshidagi barcha takroriy sarlavha, muallif ismlari,
+    ish joylari va e-mail manzillari (ABSTRACT bo'limigacha) olib tashlaydi.
     """
     if not html_str:
         return ''
 
     import re
-    norm_title = re.sub(r'\s+', ' ', (title or '').lower().strip())
-    norm_authors = re.sub(r'\s+', ' ', (authors_str or '').lower().strip())
 
+    # Abstract/Annotatsiya sarlavhasini izlash
+    abstract_pattern = re.compile(
+        r'(<p[^>]*>\s*(?:<[^>]+>)*\s*(?:abstract|annotatsiya|аннотация|abstrakt|summary)[\s:]*.*?</p>|'
+        r'<h[1-6][^>]*>.*?(?:abstract|annotatsiya|аннотация|abstrakt|summary).*?</h[1-6]>|'
+        r'<div[^>]*>.*?(?:abstract|annotatsiya|аннотация|abstrakt|summary).*?</div>)',
+        re.IGNORECASE | re.DOTALL
+    )
+
+    match = abstract_pattern.search(html_str)
+    if match:
+        start_pos = match.start()
+        return html_str[start_pos:]
+
+    # Gar abstract sarlavhasi topilmasa, e-mail/muallif/sarlavha bloklarini tozalaymiz
     blocks = re.split(r'(</(?:p|h1|h2|h3|h4|div)>)', html_str, flags=re.IGNORECASE)
     reconstructed = []
     i = 0
     skip_mode = True
 
+    norm_title = re.sub(r'\s+', ' ', (title or '').lower().strip())
+    norm_authors = re.sub(r'\s+', ' ', (authors_str or '').lower().strip())
     title_words = set(w for w in norm_title.split() if len(w) > 3)
     author_words = set(w for w in norm_authors.split() if len(w) > 3)
 
@@ -521,24 +536,30 @@ def _strip_duplicate_header_from_html(html_str, title="", authors_str=""):
         if not norm_clean:
             continue
 
-        # Abstract/Annotatsiya bo'limi boshlansa, to'xtaymiz
-        if 'abstract' in norm_clean or 'annotatsiya' in norm_clean or 'key words' in norm_clean or 'kalit so' in norm_clean:
+        if 'abstract' in norm_clean or 'annotatsiya' in norm_clean or 'key words' in norm_clean or 'kalit so' in norm_clean or 'kirish' in norm_clean or 'introduction' in norm_clean:
             skip_mode = False
 
         if skip_mode:
+            # E-mail, PhD, Student, Agency, University va h.k. bo'lsa tashlab yuboramiz
+            if ('e-mail' in norm_clean or 'email' in norm_clean or '@' in norm_clean or 
+                'phd' in norm_clean or 'student' in norm_clean or 'tashkent' in norm_clean or 
+                'university' in norm_clean or 'agency' in norm_clean or 'institut' in norm_clean or 
+                'academy' in norm_clean or len(norm_clean) < 15):
+                continue
+
             words_in_block = set(w for w in norm_clean.split() if len(w) > 3)
-            
-            # Sarlavhaga o'xshashlik tekshirish (35%+ mos tushsa)
+
             if len(title_words) > 0 and len(words_in_block) > 0:
                 overlap = title_words.intersection(words_in_block)
-                if len(overlap) / len(title_words) >= 0.35:
+                if len(overlap) / len(title_words) >= 0.25:
                     continue
 
-            # Muallif nomiga o'xshashlik tekshirish
             if len(author_words) > 0 and len(words_in_block) > 0:
                 auth_overlap = author_words.intersection(words_in_block)
-                if len(auth_overlap) / len(author_words) >= 0.4:
+                if len(auth_overlap) / len(author_words) >= 0.3:
                     continue
+
+            skip_mode = False
 
         reconstructed.append(full_block)
 
