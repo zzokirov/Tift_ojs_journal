@@ -8,11 +8,18 @@ from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateF
 
 
 def index(request):
-    # Login qilgan user bosh sahifaga kelsa — hisobiga yo'naltir
-    if request.user.is_authenticated:
-        return redirect('my_articles')
+    try:
+        # Login qilgan user bosh sahifaga kelsa — hisobiga yo'naltir
+        if request.user.is_authenticated:
+            return redirect('my_articles')
+    except Exception:
+        pass
 
     # Tashrif buyuruvchilarni sanash
+    total_visitors = 0
+    today_visitors = 0
+    week_labels = []
+    week_data = []
     try:
         ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR', '127.0.0.1'))
         if ',' in ip:
@@ -22,32 +29,43 @@ def index(request):
         total_visitors = SiteVisit.objects.count()
         today_visitors = SiteVisit.objects.filter(date=date.today()).count()
         # So'nggi 7 kunlik statistika
-        week_labels = []
-        week_data = []
         for i in range(6, -1, -1):
             d = date.today() - timedelta(days=i)
             week_labels.append(d.strftime('%d.%m'))
             week_data.append(SiteVisit.objects.filter(date=d).count())
     except Exception:
-        total_visitors = 0
-        today_visitors = 0
-        week_labels = []
-        week_data = []
+        pass
 
     query = request.GET.get('q')
-    recent_articles = Article.objects.filter(status='published').order_by('-created_at')
-    if query:
-        recent_articles = recent_articles.filter(
-            Q(title__icontains=query) |
-            Q(abstract__icontains=query) |
-            Q(keywords__icontains=query) |
-            Q(authors__icontains=query) |
-            Q(author__first_name__icontains=query) |
-            Q(author__last_name__icontains=query) |
-            Q(author__username__icontains=query)
-        )
-    recent_articles = recent_articles[:10]
-    issues = JournalIssue.objects.all().order_by('-year', '-number')
+    recent_articles = []
+    try:
+        recent_qs = Article.objects.filter(status='published').order_by('-created_at')
+        if query:
+            recent_qs = recent_qs.filter(
+                Q(title__icontains=query) |
+                Q(abstract__icontains=query) |
+                Q(keywords__icontains=query) |
+                Q(authors__icontains=query) |
+                Q(author__first_name__icontains=query) |
+                Q(author__last_name__icontains=query) |
+                Q(author__username__icontains=query)
+            )
+        recent_articles = list(recent_qs[:10])
+    except Exception:
+        recent_articles = []
+
+    issues = []
+    try:
+        issues = list(JournalIssue.objects.all().order_by('-year', '-number'))
+    except Exception:
+        issues = []
+
+    total_articles = 0
+    try:
+        total_articles = Article.objects.filter(status='published').count()
+    except Exception:
+        total_articles = 0
+
     return render(request, 'index.html', {
         'recent_articles': recent_articles,
         'issues': issues,
@@ -56,6 +74,7 @@ def index(request):
         'today_visitors': today_visitors,
         'week_labels': week_labels,
         'week_data': week_data,
+        'total_articles': total_articles,
     })
 
 
