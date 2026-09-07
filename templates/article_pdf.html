@@ -220,12 +220,11 @@ p.img-caption {
     </tr>
 </table>
 
-<!-- -- MAQOLA MA'LUMOTLARI (faqat content_html bo'lmaganda) -- -->
-{% if not pdf_content_html %}
-  <!-- Sarlavha -->
+<!-- -- MAQOLA MA'LUMOTLARI -- -->
+  <!-- Sarlavha (To'q ko'k box) -->
   <div class="article-title">{{ article.title }}</div>
   
-  <!-- Mualliflar -->
+  <!-- Mualliflar va Muassasa -->
   {% if article.parsed_authors %}
       {% for auth in article.parsed_authors %}
           <div class="article-authors" style="margin-bottom: 5pt;">{{ auth.name }}</div>
@@ -242,7 +241,6 @@ p.img-caption {
           {% endif %}
       </div>
       
-      <!-- Muassasa -->
       {% if article.author.institution %}
       <div class="article-institution">{{ article.author.institution }}</div>
       {% endif %}
@@ -253,7 +251,6 @@ p.img-caption {
       Yo'nalish: {{ article.category.name }}
   </div>
   {% endif %}
-{% endif %}
 
 <!-- Maqola matni -->
 {% if pdf_content_html %}

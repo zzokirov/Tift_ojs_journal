@@ -490,7 +490,62 @@ def _get_file_bytes(article_file):
     return None, None
 
 
-def _get_article_content_html(article_file):
+def _strip_duplicate_header_from_html(html_str, title="", authors_str=""):
+    """
+    pdf_content_html boshidagi qaytarilgan sarlavha va muallif matnlarini olib tashlaydi.
+    """
+    if not html_str:
+        return ''
+
+    import re
+    norm_title = re.sub(r'\s+', ' ', (title or '').lower().strip())
+    norm_authors = re.sub(r'\s+', ' ', (authors_str or '').lower().strip())
+
+    blocks = re.split(r'(</(?:p|h1|h2|h3|h4|div)>)', html_str, flags=re.IGNORECASE)
+    reconstructed = []
+    i = 0
+    skip_mode = True
+
+    title_words = set(w for w in norm_title.split() if len(w) > 3)
+    author_words = set(w for w in norm_authors.split() if len(w) > 3)
+
+    while i < len(blocks):
+        block = blocks[i]
+        tag_close = blocks[i+1] if i+1 < len(blocks) else ''
+        full_block = block + tag_close
+        i += 2
+
+        clean_text = re.sub(r'<[^>]+>', '', block).strip()
+        norm_clean = re.sub(r'\s+', ' ', clean_text.lower())
+
+        if not norm_clean:
+            continue
+
+        # Abstract/Annotatsiya bo'limi boshlansa, to'xtaymiz
+        if 'abstract' in norm_clean or 'annotatsiya' in norm_clean or 'key words' in norm_clean or 'kalit so' in norm_clean:
+            skip_mode = False
+
+        if skip_mode:
+            words_in_block = set(w for w in norm_clean.split() if len(w) > 3)
+            
+            # Sarlavhaga o'xshashlik tekshirish (35%+ mos tushsa)
+            if len(title_words) > 0 and len(words_in_block) > 0:
+                overlap = title_words.intersection(words_in_block)
+                if len(overlap) / len(title_words) >= 0.35:
+                    continue
+
+            # Muallif nomiga o'xshashlik tekshirish
+            if len(author_words) > 0 and len(words_in_block) > 0:
+                auth_overlap = author_words.intersection(words_in_block)
+                if len(auth_overlap) / len(author_words) >= 0.4:
+                    continue
+
+        reconstructed.append(full_block)
+
+    return ''.join(reconstructed) if reconstructed else html_str
+
+
+def _get_article_content_html(article_file, article=None):
     """
     Fayl ob'ektidan (FileField) matn/rasm HTML qaytaradi.
     Lokal va Cloudinary (URL) ni qo'llab-quvvatlaydi.
@@ -534,9 +589,15 @@ def _get_article_content_html(article_file):
         url_or_name = getattr(article_file, 'name', '') or ''
         ext = url_or_name.lower().rsplit('.', 1)[-1].split('?')[0] if '.' in url_or_name else ''
         if ext in ('doc', 'docx'):
-            return _extract_docx_text_as_html(file_path) or ''
+            res = _extract_docx_text_as_html(file_path) or ''
         else:
-            return _extract_pdf_text_as_html(file_path) or ''
+            res = _extract_pdf_text_as_html(file_path) or ''
+
+        if article and res:
+            authors_str = getattr(article, 'authors', '') or (article.author.get_full_name() if getattr(article, 'author', None) else '')
+            res = _strip_duplicate_header_from_html(res, title=getattr(article, 'title', ''), authors_str=authors_str)
+
+        return res
     except Exception:
         return ''
     finally:
@@ -708,7 +769,7 @@ def download_pdf(request, pk):
         import io
         from django.conf import settings
 
-        content_html = _get_article_content_html(article.pdf_file)
+        content_html = _get_article_content_html(article.pdf_file, article=article)
         html_string = render_to_string('article_pdf.html', {
             'article': article,
             'request': request,
@@ -751,7 +812,7 @@ def generate_article_pdf(request, pk):
     content_html = ''
     if article.pdf_file:
         try:
-            content_html = _get_article_content_html(article.pdf_file)
+            content_html = _get_article_content_html(article.pdf_file, article=article)
         except Exception:
             pass
 
@@ -899,7 +960,7 @@ def _build_pdf_from_html_xhtml2pdf(article, request=None):
     content_html = ''
     if article.pdf_file:
         try:
-            content_html = _get_article_content_html(article.pdf_file)
+            content_html = _get_article_content_html(article.pdf_file, article=article)
         except Exception:
             pass
 
