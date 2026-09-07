@@ -1,7 +1,7 @@
-﻿{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %}
+{% load static i18n %}
 
-{% block title %}Jild {{ issue.volume }}, Son {{ issue.number }} | TIFT Jurnali{% endblock %}
+{% block title %}{{ issue.year }}-yil, {{ issue.number }}-son | TIFT Jurnali{% endblock %}
 
 {% block content %}
 
@@ -12,34 +12,42 @@
     <div class="site-container px-4 relative">
         <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
             <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
-                <i class="fas fa-home text-[10px]"></i> Bosh sahifa
+                <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
             </a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
-            <a href="{% url 'index' %}#arxiv" class="hover:text-green-400 transition-colors">Arxiv</a>
+            <a href="{% url 'index' %}#arxiv" class="hover:text-green-400 transition-colors">{% trans "Arxiv" %}</a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
-            <span class="text-gray-300">Jild {{ issue.volume }}, Son {{ issue.number }}</span>
+            <span class="text-gray-300">{{ issue.year }}-yil, {{ issue.number }}-son</span>
         </nav>
 
         <div class="flex flex-wrap items-end justify-between gap-4">
             <div>
                 <span class="inline-flex items-center gap-2 bg-green-600/10 border border-green-500/30 text-green-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
                     <i class="fas fa-archive text-[10px]"></i>
-                    Jurnal Arxivi
+                    {% trans "Jurnal Arxivi" %}
                 </span>
                 <h1 class="font-serif text-3xl md:text-4xl font-black text-white">
-                    Jild {{ issue.volume }}, Son {{ issue.number }}
+                    {{ issue.year }}-yil, {{ issue.number }}-son
                 </h1>
                 <p class="text-gray-400 mt-2 flex items-center gap-3">
                     <span class="flex items-center gap-1.5">
                         <i class="fas fa-calendar text-green-500/70 text-sm"></i>
-                        {{ issue.year }}-yil
+                        {% blocktrans with y=issue.year %}{{ y }}-yil{% endblocktrans %}
                     </span>
                     <span class="w-1 h-1 bg-gray-600 rounded-full"></span>
                     <span class="flex items-center gap-1.5">
                         <i class="fas fa-file-alt text-blue-400/70 text-sm"></i>
-                        {{ articles|length }} ta maqola
+                        {% blocktrans with count=issue.articles.count %}{{ count }} ta maqola{% endblocktrans %}
                     </span>
                 </p>
+            </div>
+            
+            <div>
+                <a href="{% url 'download_issue_pdf' issue.pk %}"
+                   class="inline-flex items-center gap-2.5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-green-900/30 hover:shadow-green-500/20 hover:scale-105 group/btn">
+                    <i class="fas fa-download text-base group-hover/btn:translate-y-0.5 transition-transform"></i>
+                    <span>{% trans "To'liq sonni yuklab olish (PDF)" %}</span>
+                </a>
             </div>
         </div>
     </div>
@@ -52,10 +60,10 @@
         <div class="mb-6 flex items-center gap-3">
             <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
                 <span class="w-1 h-6 bg-green-600 rounded-full block"></span>
-                Ushbu sondagi maqolalar
+                {% trans "Ushbu sondagi maqolalar" %}
             </h2>
             <span class="bg-navy-50 text-navy-700 border border-navy-100 px-3 py-1 rounded-full text-xs font-semibold">
-                {{ articles|length }} ta
+                {% blocktrans with count=articles|length %}{{ count }} ta{% endblocktrans %}
             </span>
         </div>
 
@@ -76,13 +84,27 @@
                             <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-gray-500 mb-3">
                                 <span class="flex items-center gap-1.5">
                                     <div class="w-5 h-5 bg-navy-100 rounded-full flex items-center justify-center text-navy-700 font-bold text-[9px]">
-                                        {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                                        {% if article.authors %}
+                                            {{ article.authors|first|upper }}
+                                        {% else %}
+                                            {{ article.author.get_full_name|default:article.author.username|first|upper }}
+                                        {% endif %}
                                     </div>
-                                    {{ article.author.get_full_name|default:article.author.username }}
+                                    {% if article.authors %}
+                                        {{ article.authors }}
+                                    {% else %}
+                                        {{ article.author.get_full_name|default:article.author.username }}
+                                    {% endif %}
                                     {% if article.author.institution %}
                                         <span class="text-gray-400">— {{ article.author.institution }}</span>
                                     {% endif %}
                                 </span>
+                                {% if article.start_page and article.end_page %}
+                                    <span class="flex items-center gap-1 font-bold text-gray-800 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">
+                                        <i class="fas fa-file-alt text-green-600"></i>
+                                        {{ article.start_page }}-{{ article.end_page }}
+                                    </span>
+                                {% endif %}
                                 <span class="flex items-center gap-1">
                                     <i class="far fa-eye text-blue-400/70"></i>
                                     {{ article.views_count }}
@@ -104,7 +126,7 @@
                                 <div class="flex items-center gap-2">
                                     <a href="{% url 'article_detail' article.pk %}"
                                        class="text-navy-700 hover:text-navy-900 text-xs font-semibold flex items-center gap-1 transition-colors">
-                                        Batafsil <i class="fas fa-arrow-right text-[10px]"></i>
+                                        {% trans "Batafsil" %} <i class="fas fa-arrow-right text-[10px]"></i>
                                     </a>
                                     <a href="{% url 'download_pdf' article.pk %}"
                                        class="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-sm" download>
@@ -122,8 +144,8 @@
     {% else %}
         <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
             <i class="fas fa-file-alt text-5xl text-gray-300 mb-4 block"></i>
-            <h3 class="text-gray-500 font-semibold text-lg mb-2">Maqolalar mavjud emas</h3>
-            <p class="text-gray-400 text-sm">Ushbu arxiv soniga hali maqolalar yuklanmagan.</p>
+            <h3 class="text-gray-500 font-semibold text-lg mb-2">{% trans "Maqolalar mavjud emas" %}</h3>
+            <p class="text-gray-400 text-sm">{% trans "Ushbu arxiv soniga hali maqolalar yuklanmagan." %}</p>
         </div>
     {% endif %}
 
@@ -131,7 +153,7 @@
         <a href="{% url 'index' %}#arxiv"
            class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-3 rounded-xl text-sm font-medium transition-colors">
             <i class="fas fa-arrow-left text-xs"></i>
-            Bosh sahifaga qaytish
+            {% trans "Bosh sahifaga qaytish" %}
         </a>
     </div>
 </div>

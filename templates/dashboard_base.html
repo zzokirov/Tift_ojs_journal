@@ -1,14 +1,15 @@
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="{{ LANGUAGE_CODE|default:'uz' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Dashboard | TIFT Jurnali{% endblock %}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>{% block title %}Dashboard | Arxitektura va Ta'lim Ilmiy Jurnali{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
+    <script src="{% static 'js/tailwind.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
     <script>
         tailwind.config = {
             theme: {
@@ -34,31 +35,43 @@
 
 <!-- TOP HEADER -->
 <header class="bg-navy-900 border-b-2 border-green-600 sticky top-0 z-50 shadow-xl">
-    <div class="flex items-center justify-between px-6 py-3">
+    <div class="flex items-center justify-between px-6 py-3 relative">
         <!-- Logo -->
-        <a href="{% url 'index' %}" class="flex items-center gap-3 group">
+        <a href="{% url 'index' %}" class="flex items-center gap-3 group z-10">
             <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow overflow-hidden">
-                <img src="{% static 'images/tift.png' %}" alt="TIFT" class="w-8 h-8 object-contain"
+                <img src="{% static 'images/tift.png' %}?v=3" alt="TIFT" class="w-8 h-8 object-contain"
                      onerror="this.style.display='none'">
             </div>
             <div>
                 <div class="text-white font-black text-base leading-none">TIFT <span class="text-green-400">JOURNAL</span></div>
-                <div class="text-gray-500 text-[9px] uppercase tracking-widest mt-0.5">Muallif paneli</div>
+                <div class="text-gray-500 text-[9px] uppercase tracking-widest mt-0.5">{% trans "Muallif paneli" %}</div>
             </div>
         </a>
 
+        <!-- Center Text -->
+        <div class="hidden lg:flex flex-col items-center justify-center absolute left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none w-full text-center">
+            <div class="flex items-center justify-center gap-3">
+                <i class="fas fa-gem text-green-400 text-[10px] opacity-70"></i>
+                <div class="text-green-400 font-bold text-[10px] tracking-[0.2em] uppercase">{% trans "Hush kelibsiz" %}</div>
+                <i class="fas fa-gem text-green-400 text-[10px] opacity-70"></i>
+            </div>
+            <div class="text-white/80 text-[13px] font-medium mt-1 tracking-wide">
+                {% trans "Arxitektura va ta'lim ilmiy-elektron jurnalini tanlaganingizdan minnatdormiz" %}
+            </div>
+        </div>
+
         <!-- Right actions -->
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 z-10">
             <a href="{% url 'submit_article' %}"
                class="hidden md:flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-sm font-bold px-4 py-2 rounded-xl transition-all hover:scale-105 shadow">
-                <i class="fas fa-plus-circle"></i> Maqola yuborish
+                <i class="fas fa-plus-circle"></i> {% trans "Maqola yuborish" %}
             </a>
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit"
                         class="flex items-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 text-sm px-3 py-2 rounded-xl transition border border-red-500/20">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span class="hidden md:inline">Chiqish</span>
+                    <span class="hidden md:inline">{% trans "Chiqish" %}</span>
                 </button>
             </form>
         </div>
@@ -92,19 +105,19 @@
         <nav class="flex-1 space-y-1">
             <a href="{% url 'my_articles' %}"
                class="sidebar-link {% if request.resolver_match.url_name == 'my_articles' %}active{% endif %}">
-                <i class="fas fa-file-alt"></i> Maqolalarim
+                <i class="fas fa-file-alt"></i> {% trans "Maqolalarim" %}
             </a>
             <a href="{% url 'submit_article' %}"
                class="sidebar-link {% if request.resolver_match.url_name == 'submit_article' %}active{% endif %}">
-                <i class="fas fa-plus-circle"></i> Maqola yuborish
+                <i class="fas fa-plus-circle"></i> {% trans "Maqola yuborish" %}
             </a>
             <a href="{% url 'profile' %}"
                class="sidebar-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
-                <i class="fas fa-user-circle"></i> Profilim
+                <i class="fas fa-user-circle"></i> {% trans "Profilim" %}
             </a>
             <a href="{% url 'change_password' %}"
                class="sidebar-link {% if request.resolver_match.url_name == 'change_password' %}active{% endif %}">
-                <i class="fas fa-lock"></i> Parol o'zgartirish
+                <i class="fas fa-lock"></i> {% trans "Parol o'zgartirish" %}
             </a>
         </nav>
 
@@ -117,11 +130,11 @@
         <!-- Page title -->
         <div class="mb-6">
             <h1 class="text-2xl font-black text-navy-900">{% block page_title %}
-                {% if request.resolver_match.url_name == 'my_articles' %}Maqolalarim
-                {% elif request.resolver_match.url_name == 'submit_article' %}Maqola yuborish
-                {% elif request.resolver_match.url_name == 'profile' %}Profilim
-                {% elif request.resolver_match.url_name == 'change_password' %}Parol o'zgartirish
-                {% else %}Dashboard{% endif %}
+                {% if request.resolver_match.url_name == 'my_articles' %}{% trans "Maqolalarim" %}
+                {% elif request.resolver_match.url_name == 'submit_article' %}{% trans "Maqola yuborish" %}
+                {% elif request.resolver_match.url_name == 'profile' %}{% trans "Profilim" %}
+                {% elif request.resolver_match.url_name == 'change_password' %}{% trans "Parol o'zgartirish" %}
+                {% else %}{% trans "Dashboard" %}{% endif %}
             {% endblock %}</h1>
         </div>
 

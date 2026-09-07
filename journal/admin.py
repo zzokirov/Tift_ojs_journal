@@ -63,7 +63,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
 @admin.register(JournalIssue)
 class JournalIssueAdmin(admin.ModelAdmin):
     list_display = (
-        'issue_label', 'year', 'article_count_tag',
+        'issue_label', 'year', 'period', 'article_count_tag',
         'is_published', 'created_at'
     )
     list_display_links = ('issue_label',)
@@ -74,12 +74,12 @@ class JournalIssueAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Jurnal soni ma'lumotlari", {
-            'fields': ('volume', 'number', 'year', 'is_published')
+            'fields': ('volume', 'number', 'year', 'period', 'cover_image', 'back_cover_image', 'editorial_doc', 'full_pdf', 'is_published')
         }),
     )
 
     def issue_label(self, obj):
-        return f"Jild {obj.volume}, Son {obj.number}"
+        return f"{obj.year}-yil, {obj.number}-son"
     issue_label.short_description = 'Jurnal soni'
 
     def article_count_tag(self, obj):
@@ -94,6 +94,14 @@ class JournalIssueAdmin(admin.ModelAdmin):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/journal/article/change_list.html'
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['all_issues'] = JournalIssue.objects.all().order_by('-year', '-number')
+        extra_context['selected_issue'] = request.GET.get('issue__id__exact')
+        return super().changelist_view(request, extra_context=extra_context)
+
     list_display = (
         'title_short', 'author_name', 'issue',
         'status', 'views_count', 'downloads_count', 'created_at'
@@ -116,6 +124,10 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ("Muallif va jurnal", {
             'fields': ('author', 'issue', 'category')
+        }),
+        ("Sahifalash (Paginatsiya)", {
+            'fields': ('start_page', 'end_page'),
+            'description': "Agar maqola uchun alohida PDF yuklanmasa, To'plam PDF faylidan shu sahifalar oralig'i avtomatik qirqib olinadi."
         }),
         ("Holat va fayllar", {
             'fields': ('status', 'published_at', 'pdf_file', 'pdf_link', 'template_pdf')
@@ -210,7 +222,7 @@ class ConferenceAdmin(admin.ModelAdmin):
     list_per_page = 20
     fieldsets = (
         ("Konferensiya ma'lumotlari", {
-            'fields': ('title', 'description', 'date', 'location', 'url', 'is_active')
+            'fields': ('title', 'description', 'pdf_file', 'date', 'location', 'url', 'is_active')
         }),
     )
 
@@ -247,3 +259,17 @@ class DocumentAdmin(admin.ModelAdmin):
             'fields': ('title', 'category', 'description', 'file', 'url', 'order', 'is_active')
         }),
     )
+
+
+# --- LOG ENTRY ADMIN ---
+
+from django.contrib.admin.models import LogEntry
+@admin.register(LogEntry)
+class LogEntryAdmin(admin.ModelAdmin):
+    list_display = ('action_time', 'user', 'content_type', 'object_repr', 'action_flag')
+    list_filter = ('action_time', 'action_flag', 'content_type', 'user')
+    search_fields = ('object_repr', 'change_message')
+    date_hierarchy = 'action_time'
+    def has_add_permission(self, request): return False
+    def has_change_permission(self, request, obj=None): return False
+    def has_delete_permission(self, request, obj=None): return False

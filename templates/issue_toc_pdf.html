@@ -1,0 +1,108 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    line-height: 1.45;
+}
+@page {
+    size: A4;
+    margin-top: 2.2cm;
+    margin-bottom: 2.2cm;
+    margin-left: 2.5cm;
+    margin-right: 2.0cm;
+}
+.toc-heading {
+    text-align: center;
+    font-size: 15pt;
+    font-weight: bold;
+    margin-top: 10pt;
+    margin-bottom: 30pt;
+    letter-spacing: 2pt;
+    color: #000;
+    text-transform: uppercase;
+}
+.toc-container {
+    width: 100%;
+}
+.toc-item {
+    width: 100%;
+    margin-bottom: 16pt;
+}
+.toc-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.art-title {
+    font-size: 11.5pt;
+    font-weight: bold;
+    color: #000;
+    line-height: 1.35;
+    padding-right: 15pt;
+}
+.art-authors {
+    font-size: 9.5pt;
+    font-style: italic;
+    color: #555555;
+    margin-top: 4pt;
+    line-height: 1.3;
+    padding-right: 15pt;
+}
+.toc-page-cell {
+    width: 65pt;
+    text-align: right;
+    font-weight: bold;
+    font-size: 11.5pt;
+    vertical-align: bottom;
+    padding-bottom: 2pt;
+    white-space: nowrap;
+    color: #000;
+}
+.separator-line {
+    width: 50%;
+    margin-left: auto;
+    margin-top: 10pt;
+    border-top: 1pt solid #999999;
+}
+</style>
+</head>
+<body>
+
+<div class="toc-heading">MUNDARIJA / CONTENTS</div>
+
+<div class="toc-container">
+    {% for item in article_items %}
+    <div class="toc-item">
+        <table class="toc-table">
+            <tr>
+                <td style="vertical-align: top;">
+                    <div class="art-title">{{ forloop.counter }}. {{ item.article.title }}</div>
+                    <div class="art-authors">
+                        <i>Muallif:</i> {{ item.article.authors|default:item.article.author.get_full_name }}
+                    </div>
+                </td>
+                <td class="toc-page-cell">
+                    {% if item.start_page == item.end_page %}
+                        {{ item.start_page }}
+                    {% else %}
+                        {{ item.start_page }}–{{ item.end_page }}
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        {% if not forloop.last %}
+        <div class="separator-line"></div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

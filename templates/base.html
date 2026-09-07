@@ -1,24 +1,25 @@
-﻿{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}TIFT Ilmiy Jurnali{% endblock %}</title>
+    <title>{% block title %}Arxitektura va Ta'lim Ilmiy Jurnali{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (lokal) -->
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome (lokal) -->
+    <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Tailwind CSS (lokal) -->
+    <script src="{% static 'js/tailwind.min.js' %}"></script>
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     screens: {
@@ -64,14 +65,14 @@
         /* Responsive container — to'liq full-width, faqat padding */
         .site-container {
             width: 100%;
-            padding-left: clamp(1rem, 3vw, 5rem);
-            padding-right: clamp(1rem, 3vw, 5rem);
+            padding-left: clamp(1rem, 2vw, 3rem);
+            padding-right: clamp(1rem, 2vw, 3rem);
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Katta ekran uchun clamp-based shrift o'lchamlari */
-        html { font-size: clamp(14px, 1.1vw, 18px); }
+        /* Katta ekran uchun clamp-based shrift o'lchamlari - kattalashtirildi */
+        html { font-size: clamp(14px, 1.25vw, 24px); }
 
         .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
@@ -95,55 +96,92 @@
         <div class="site-container px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-18 py-3">
 
-                <!-- LOGO -->
-                <a href="{% url 'index' %}" class="flex items-center gap-3 group">
-                    <div class="relative">
-                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
-                            <img src="{% static 'images/tift.png' %}" alt="TIFT" class="w-10 h-10 object-contain"
-                                 onerror="this.style.display='none'; this.nextSibling.style.display='flex'">
-                            <div class="hidden w-10 h-10 items-center justify-center bg-navy-800 rounded-lg">
-                                <span class="text-green-400 font-black text-sm">T</span>
+                <!-- LEFT SIDE: LOGO + NAV LINKS -->
+                <div class="flex items-center gap-8 lg:gap-10">
+                    <!-- LOGO -->
+                    <a href="{% url 'index' %}" class="flex items-center gap-3 group">
+                        <div class="relative">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
+                                <img src="{% static 'images/tift.png' %}?v=3" alt="TIFT" class="w-10 h-10 object-contain"
+                                     onerror="this.style.display='none'; this.nextSibling.style.display='flex'">
+                                <div class="hidden w-10 h-10 items-center justify-center bg-navy-800 rounded-lg">
+                                    <span class="text-green-400 font-black text-sm">T</span>
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-star text-white text-[6px]"></i>
                             </div>
                         </div>
-                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-star text-white text-[6px]"></i>
+                        <div>
+                            <div class="text-white font-black text-lg leading-none tracking-tight">
+                                TIFT <span class="gradient-text">JOURNAL</span>
+                            </div>
+                            <div class="text-gray-500 text-[9px] uppercase tracking-[0.2em] mt-0.5 font-medium">
+                                {% trans "Arxitektura va Ta'lim" %}
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="text-white font-black text-lg leading-none tracking-tight">
-                            TIFT <span class="gradient-text">JOURNAL</span>
-                        </div>
-                        <div class="text-gray-500 text-[9px] uppercase tracking-[0.2em] mt-0.5 font-medium">
-                            Arxitektura va Ta'lim
-                        </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- NAV LINKS — faqat login qilmagan userlar uchun -->
-                {% if not user.is_authenticated %}
-                <div class="hidden md:flex items-center gap-6 text-sm">
-                    <a href="{% url 'index' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-home mr-1.5 text-xs text-green-500/70"></i>Bosh sahifa
-                    </a>
-                    <a href="{% url 'archive' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-book-open mr-1.5 text-xs text-green-500/70"></i>Arxiv
-                    </a>
-                    <a href="{% url 'news' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-newspaper mr-1.5 text-xs text-green-500/70"></i>Yangiliklar
-                    </a>
-                    <a href="{% url 'conferences' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-calendar-check mr-1.5 text-xs text-green-500/70"></i>Konferensiyalar
-                    </a>
-                    <a href="{% url 'documents' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-file-alt mr-1.5 text-xs text-green-500/70"></i>Hujjatlar
-                    </a>
-                    <a href="{% url 'about' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
-                        <i class="fas fa-info-circle mr-1.5 text-xs text-green-500/70"></i>Jurnal haqida
-                    </a>
+                    <!-- NAV LINKS -->
+                    {% if not user.is_authenticated %}
+                    <div class="hidden md:flex items-center gap-5 lg:gap-6 text-sm">
+                        <a href="{% url 'about' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
+                            <i class="fas fa-info-circle mr-1.5 text-xs text-green-500/70"></i>{% trans "Jurnal haqida" %}
+                        </a>
+                        <a href="{% url 'conferences' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
+                            <i class="fas fa-calendar-check mr-1.5 text-xs text-green-500/70"></i>{% trans "Konferensiyalar" %}
+                        </a>
+                        <a href="{% url 'news' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
+                            <i class="fas fa-newspaper mr-1.5 text-xs text-green-500/70"></i>{% trans "Yangiliklar" %}
+                        </a>
+                        <a href="{% url 'archive' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
+                            <i class="fas fa-book-open mr-1.5 text-xs text-green-500/70"></i>{% trans "Arxiv" %}
+                        </a>
+                        <a href="{% url 'documents' %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors">
+                            <i class="fas fa-file-alt mr-1.5 text-xs text-green-500/70"></i>{% trans "Hujjatlar" %}
+                        </a>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
 
-                <!-- AUTH BUTTONS -->
+                <!-- RIGHT SIDE: LANG + AUTH BUTTONS -->
+                <div class="flex items-center gap-4">
+
+                    <!-- TIL TANLASH DROPDOWN -->
+                    <div class="hidden md:flex items-center relative" id="langDropdownWrapper">
+                        {% get_current_language as CURRENT_LANG %}
+                        <button id="langBtn"
+                                class="flex items-center gap-1.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg px-3 py-1.5 text-xs font-bold text-gray-300 hover:text-white transition-all focus:outline-none">
+                            <i class="fas fa-globe text-green-400 text-[10px]"></i>
+                            {% if CURRENT_LANG == 'ru' %}RU{% elif CURRENT_LANG == 'en' %}EN{% else %}UZ{% endif %}
+                            <i class="fas fa-chevron-down text-[8px] text-gray-500"></i>
+                        </button>
+                        <!-- Dropdown -->
+                        <div id="langDropdown"
+                             class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+                            <form action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                                <button type="submit" name="language" value="uz"
+                                        class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
+                                               {% if CURRENT_LANG == 'uz' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
+                                    <span class="text-xs font-bold w-6">UZ</span> O'zbek
+                                </button>
+                                <button type="submit" name="language" value="ru"
+                                        class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
+                                               {% if CURRENT_LANG == 'ru' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
+                                    <span class="text-xs font-bold w-6">RU</span> Русский
+                                </button>
+                                <button type="submit" name="language" value="en"
+                                        class="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors
+                                               {% if CURRENT_LANG == 'en' %}text-green-600 font-bold{% else %}text-gray-700{% endif %}">
+                                    <span class="text-xs font-bold w-6">EN</span> English
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- AUTH BUTTONS -->
                 <div class="flex items-center gap-2">
 
                     {% if user.is_authenticated %}
@@ -173,28 +211,28 @@
                                 <div id="avatarDropdown"
                                      class="hidden absolute right-0 top-full mt-2 w-52 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50">
                                     <div class="px-4 py-3 border-b border-gray-50 bg-gray-50">
-                                        <div class="text-xs text-gray-400 uppercase tracking-wider">Hisob</div>
+                                        <div class="text-xs text-gray-400 uppercase tracking-wider">{% trans "Hisob" %}</div>
                                         <div class="font-bold text-navy-900 text-sm mt-0.5 truncate">{{ user.get_full_name|default:user.username }}</div>
                                     </div>
                                     <div class="py-1">
                                         <a href="{% url 'my_articles' %}"
                                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
-                                            <i class="fas fa-file-alt text-green-500 w-4 text-center"></i> Maqolalarim
+                                            <i class="fas fa-file-alt text-green-500 w-4 text-center"></i> {% trans "Maqolalarim" %}
                                         </a>
                                         <a href="{% url 'profile' %}"
                                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
-                                            <i class="fas fa-user-edit text-green-500 w-4 text-center"></i> Profilni tahrirlash
+                                            <i class="fas fa-user-edit text-green-500 w-4 text-center"></i> {% trans "Profilni tahrirlash" %}
                                         </a>
                                         <a href="{% url 'change_password' %}"
                                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
-                                            <i class="fas fa-lock text-green-500 w-4 text-center"></i> Parol o'zgartirish
+                                            <i class="fas fa-lock text-green-500 w-4 text-center"></i> {% trans "Parol o'zgartirish" %}
                                         </a>
                                         <div class="border-t border-gray-100 my-1"></div>
                                         <form action="{% url 'logout' %}" method="post">
                                             {% csrf_token %}
                                             <button type="submit"
                                                     class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
-                                                <i class="fas fa-sign-out-alt w-4 text-center"></i> Chiqish
+                                                <i class="fas fa-sign-out-alt w-4 text-center"></i> {% trans "Chiqish" %}
                                             </button>
                                         </form>
                                     </div>
@@ -205,7 +243,7 @@
                             <a href="{% url 'submit_article' %}"
                                class="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-lg hover:scale-105">
                                 <i class="fas fa-plus-circle"></i>
-                                Maqola yuborish
+                                {% trans "Maqola yuborish" %}
                             </a>
 
                             <!-- Logout -->
@@ -220,12 +258,12 @@
                     {% else %}
                         <a href="{% url 'login' %}"
                            class="text-gray-300 hover:text-white text-sm font-medium transition-colors px-3 py-2 rounded-lg hover:bg-white/5">
-                            <i class="fas fa-sign-in-alt mr-1.5"></i>Kirish
+                            <i class="fas fa-sign-in-alt mr-1.5"></i>{% trans "Kirish" %}
                         </a>
                         <a href="{% url 'signup' %}"
                            class="flex items-center gap-2 bg-green-600 hover:bg-green-500 text-navy-900 px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-lg hover:scale-105">
                             <i class="fas fa-user-plus"></i>
-                            A'zo bo'lish
+                            {% trans "A'zo bo'lish" %}
                         </a>
                     {% endif %}
 
@@ -234,32 +272,29 @@
                         <i class="fas fa-bars text-lg"></i>
                     </button>
                 </div>
+                </div>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-white/10 px-4 py-4 space-y-2">
-            <a href="{% url 'index' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-home mr-2 text-green-500/70"></i>Bosh sahifa
-            </a>
-            <a href="{% url 'archive' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-book-open mr-2 text-green-500/70"></i>Arxiv
-            </a>
-            <a href="{% url 'news' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-newspaper mr-2 text-green-500/70"></i>Yangiliklar
+            <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+                <i class="fas fa-info-circle mr-2 text-green-500/70"></i>{% trans "Jurnal haqida" %}
             </a>
             <a href="{% url 'conferences' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-calendar-check mr-2 text-green-500/70"></i>Konferensiyalar
+                <i class="fas fa-calendar-check mr-2 text-green-500/70"></i>{% trans "Konferensiyalar" %}
+            </a>
+            <a href="{% url 'news' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+                <i class="fas fa-newspaper mr-2 text-green-500/70"></i>{% trans "Yangiliklar" %}
+            </a>
+            <a href="{% url 'archive' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+                <i class="fas fa-book-open mr-2 text-green-500/70"></i>{% trans "Arxiv" %}
             </a>
             <a href="{% url 'documents' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-file-alt mr-2 text-green-500/70"></i>Hujjatlar
-            </a>
-            <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
-                <i class="fas fa-info-circle mr-2 text-green-500/70"></i>Jurnal haqida
+                <i class="fas fa-file-alt mr-2 text-green-500/70"></i>{% trans "Hujjatlar" %}
             </a>
             {% if user.is_authenticated %}
                 <a href="{% url 'submit_article' %}" class="block bg-green-600 text-navy-900 py-2 px-3 rounded-lg text-sm font-bold text-center mt-2">
-                    <i class="fas fa-plus-circle mr-2"></i>Maqola yuborish
+                    <i class="fas fa-plus-circle mr-2"></i>{% trans "Maqola yuborish" %}
                 </a>
             {% endif %}
         </div>
@@ -283,34 +318,37 @@
                         <span class="text-white font-bold">TIFT Journal</span>
                     </div>
                     <p class="text-sm text-gray-500 leading-relaxed">
-                        Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali.
-                        "Arxitektura va Ta'lim" yo'nalishida zamonaviy tadqiqotlar.
+                        {% trans "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali." %}<br>
+                        {% trans "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar." %}
                     </p>
                     <div class="flex gap-3 mt-4">
-                        <a href="#" class="w-8 h-8 bg-white/5 hover:bg-green-600/20 rounded-lg flex items-center justify-center transition-colors border border-white/10 hover:border-green-500/30">
+                        <a href="https://t.me/tiftuz" target="_blank" class="w-8 h-8 bg-white/5 hover:bg-green-600/20 rounded-lg flex items-center justify-center transition-colors border border-white/10 hover:border-green-500/30">
                             <i class="fab fa-telegram text-xs text-gray-400 hover:text-green-400"></i>
+                        </a>
+                        <a href="https://www.instagram.com/tiftuz/" target="_blank" class="w-8 h-8 bg-white/5 hover:bg-green-600/20 rounded-lg flex items-center justify-center transition-colors border border-white/10 hover:border-green-500/30">
+                            <i class="fab fa-instagram text-xs text-gray-400 hover:text-green-400"></i>
                         </a>
                         <a href="#" class="w-8 h-8 bg-white/5 hover:bg-green-600/20 rounded-lg flex items-center justify-center transition-colors border border-white/10 hover:border-green-500/30">
                             <i class="fab fa-linkedin text-xs text-gray-400 hover:text-green-400"></i>
                         </a>
-                        <a href="#" class="w-8 h-8 bg-white/5 hover:bg-green-600/20 rounded-lg flex items-center justify-center transition-colors border border-white/10 hover:border-green-500/30">
+                        <a href="mailto:journal@tift.uz" class="w-8 h-8 bg-white/5 hover:bg-green-600/20 rounded-lg flex items-center justify-center transition-colors border border-white/10 hover:border-green-500/30">
                             <i class="fas fa-envelope text-xs text-gray-400 hover:text-green-400"></i>
                         </a>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Tezkor havolalar</h4>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">{% trans "Tezkor havolalar" %}</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>Bosh sahifa</a></li>
-                        <li><a href="{% url 'index' %}#arxiv" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>Jurnal arxivlari</a></li>
-                        <li><a href="{% url 'submit_article' %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>Maqola yuborish</a></li>
-                        <li><a href="{% url 'login' %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>Tizimga kirish</a></li>
+                        <li><a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Bosh sahifa" %}</a></li>
+                        <li><a href="{% url 'index' %}#arxiv" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Jurnal arxivlari" %}</a></li>
+                        <li><a href="{% url 'submit_article' %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Maqola yuborish" %}</a></li>
+                        <li><a href="{% url 'login' %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Tizimga kirish" %}</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Jurnal ma'lumotlari</h4>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">{% trans "Jurnal ma'lumotlari" %}</h4>
                     <div class="space-y-3 text-sm">
                         <div class="flex items-start gap-3">
                             <i class="fas fa-hashtag text-green-500 text-xs mt-1"></i>
@@ -322,15 +360,15 @@
                         <div class="flex items-start gap-3">
                             <i class="fas fa-calendar text-green-500 text-xs mt-1"></i>
                             <div>
-                                <div class="text-white text-xs font-medium">Chastotasi</div>
-                                <div class="text-gray-500">Yiliga 4 marta</div>
+                                <div class="text-white text-xs font-medium">{% trans "Nashr davriyligi" %}</div>
+                                <div class="text-gray-500">{% trans "Yiliga 4 marta" %}</div>
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
                             <i class="fas fa-map-marker-alt text-green-500 text-xs mt-1"></i>
                             <div>
-                                <div class="text-white text-xs font-medium">Manzil</div>
-                                <div class="text-gray-500">Toshkent, O'zbekiston</div>
+                                <div class="text-white text-xs font-medium">{% trans "Manzil" %}</div>
+                                <div class="text-gray-500">15 Amir Temur Shoh Street,<br>Tashkent, Uzbekistan</div>
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
@@ -346,7 +384,7 @@
 
             <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
                 <p>"Arxitektura va Ta'lim" ilmiy-elektron jurnali &copy; 2026. Barcha huquqlar himoyalangan.</p>
-                <p>Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti</p>
+                <p>{% trans "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti" %}</p>
             </div>
         </div>
     </footer>
@@ -365,13 +403,48 @@
         document.getElementById('avatarBtn')?.addEventListener('click', function(e) {
             e.stopPropagation();
             document.getElementById('avatarDropdown').classList.toggle('hidden');
+            document.getElementById('langDropdown')?.classList.add('hidden');
         });
-        // Tashqariga bosganda yopilsin
+
+        // Til dropdown toggle
+        document.getElementById('langBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('langDropdown').classList.toggle('hidden');
+            document.getElementById('avatarDropdown')?.classList.add('hidden');
+        });
+
+        // Tashqariga bosganda ikkalasi ham yopilsin
         document.addEventListener('click', function() {
             document.getElementById('avatarDropdown')?.classList.add('hidden');
+            document.getElementById('langDropdown')?.classList.add('hidden');
         });
     </script>
 
     {% block extra_scripts %}{% endblock %}
+
+<!-- Dark Mode Logic -->
+<script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const htmlElement = document.documentElement;
+
+    // Check localStorage
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+    } else {
+        htmlElement.classList.remove('dark');
+    }
+
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
+</script>
+
 </body>
 </html>

@@ -45,8 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',
-    'cloudinary',
     'journal',
 ]
 
@@ -54,6 +52,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -115,7 +114,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGE_CODE = 'uz'
+
+LANGUAGES = [
+    ('uz', _('O\'zbek')),
+    ('ru', _('Русский')),
+    ('en', _('English')),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 TIME_ZONE = 'UTC'
 
@@ -127,22 +138,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
 
-
-# Media fayllar (PDF maqolalar saqlanadigan joy)
+# Media fayllar (foydalanuvchi yuklaydigan fayllar — lokal server)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-# Cloudinary — media fayllar uchun (production)
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', ''),
-    'API_KEY':    os.environ.get('CLOUDINARY_API_KEY', ''),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', ''),
-}
-
-if os.environ.get('CLOUDINARY_CLOUD_NAME'):
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Djangoga biz yozadigan maxsus foydalanuvchilar modelini tanitish
 AUTH_USER_MODEL = 'journal.User'
@@ -245,10 +244,35 @@ import os
 DJANGO_SUPERUSER_USERNAME = os.environ.get('DJANGO_SUPERUSER_USERNAME', '')
 DJANGO_SUPERUSER_PASSWORD = os.environ.get('DJANGO_SUPERUSER_PASSWORD', '')
 DJANGO_SUPERUSER_EMAIL    = os.environ.get('DJANGO_SUPERUSER_EMAIL', '')
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com', 'https://architect-edu.tift.uz']
+
+# Til cookie sozlamalari
+LANGUAGE_COOKIE_NAME = 'django_language'
+LANGUAGE_COOKIE_AGE = 365 * 24 * 60 * 60  # 1 yil
+
+# ── XAVFSIZLIK SOZLAMALARI ────────────────────────────────────────────────────
+# Production da HTTPS orqali ishlanganda qo'shimcha himoya
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER        = True
+    SECURE_CONTENT_TYPE_NOSNIFF      = True
+    X_FRAME_OPTIONS                  = 'DENY'
+    SESSION_COOKIE_SECURE            = True
+    CSRF_COOKIE_SECURE               = True
+    SECURE_HSTS_SECONDS              = 31536000   # 1 yil
+    SECURE_HSTS_INCLUDE_SUBDOMAINS   = True
+    SECURE_HSTS_PRELOAD              = True
+
+# Fayl yuklash cheklovlari (zip bomba, piksel bomba himoyasi)
+DATA_UPLOAD_MAX_MEMORY_SIZE    = 25 * 1024 * 1024   # 25 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE    = 25 * 1024 * 1024   # 25 MB
+DATA_UPLOAD_MAX_NUMBER_FIELDS  = 100
+AUTHENTICATION_BACKENDS = [
+    'journal.backends.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

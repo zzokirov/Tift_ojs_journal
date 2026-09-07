@@ -1,0 +1,43 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@page {
+    size: A4 portrait;
+    margin: 0cm;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+.cover-wrapper {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.cover-img {
+    width: 100%;
+    height: 100%;
+}
+</style>
+</head>
+<body>
+{% if cover_image_base64 %}
+    <div class="cover-wrapper">
+        <img src="{{ cover_image_base64 }}" class="cover-img" />
+    </div>
+{% else %}
+    <div style="padding: 120pt 30pt; text-align: center;">
+        <h1 style="font-family: 'Times New Roman', Times, serif; font-size: 28pt; color: #064e3b; margin-bottom: 20pt;">ARXITEKTURA VA TA'LIM</h1>
+        <p style="font-size: 16pt; font-weight: bold; color: #1e293b;">{{ issue.year }}-YIL, {{ issue.number }}-SON</p>
+    </div>
+{% endif %}
+</body>
+</html>
+

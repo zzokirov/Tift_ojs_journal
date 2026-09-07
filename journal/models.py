@@ -4,7 +4,12 @@ from django.contrib.auth.models import AbstractUser
 
 
 def user_avatar_path(instance, filename):
-    ext = filename.split('.')[-1]
+    # Path traversal himoyasi: faqat kengaytmani olish, yo'lni butunlay almashtirish
+    import os
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    allowed = {'jpg', 'jpeg', 'png', 'webp', 'gif'}
+    if ext not in allowed:
+        ext = 'jpg'
     return f"avatars/{uuid.uuid4()}.{ext}"
 
 
@@ -14,11 +19,17 @@ class User(AbstractUser):
         ('reviewer', 'Taqrizchi'),
         ('editor', 'Muharrir'),
     )
+    GENDER_CHOICES = (
+        ('male', 'Erkak'),
+        ('female', 'Ayol'),
+    )
     role        = models.CharField(max_length=10, choices=ROLE_CHOICES, default='author')
     institution = models.CharField(max_length=255, blank=True, verbose_name="Ish/O'qish joyi")
     avatar      = models.ImageField(upload_to=user_avatar_path, null=True, blank=True, verbose_name="Profil rasmi")
     bio         = models.TextField(blank=True, verbose_name="O'zim haqimda")
     phone       = models.CharField(max_length=20, blank=True, verbose_name="Telefon raqam")
+    gender      = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True, verbose_name="Jinsi")
+    country     = models.CharField(max_length=100, null=True, blank=True, default="O'zbekiston", verbose_name="Davlat")
 
     def __str__(self):
         return f"{self.get_full_name()} ({self.get_role_display()})"
@@ -28,6 +39,11 @@ class JournalIssue(models.Model):
     volume = models.PositiveIntegerField(verbose_name="Jurnal jildi (Volume)")
     number = models.PositiveIntegerField(verbose_name="Jurnal soni (Issue)")
     year = models.PositiveIntegerField(verbose_name="Chop etilgan yili")
+    period = models.CharField(max_length=100, blank=True, null=True, verbose_name="Davri (Masalan: 1-chorak, Yanvar-Mart)")
+    cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Oldi muqovasi (rasmi)")
+    back_cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Orqa muqovasi (rasmi)")
+    editorial_doc = models.FileField(upload_to='issues_docs/', blank=True, null=True, verbose_name="Muqova va Tahririyat Word hujjati (.docx)", help_text="Word (.docx) fayl. Nashr boshidagi muqova va tahririyat a'zolari sahifasi uchun.")
+    full_pdf = models.FileField(upload_to='issues_pdf/', blank=True, null=True, verbose_name="To'liq to'plam (PDF)")
     is_published = models.BooleanField(default=False, verbose_name="Saytda ko'rsatish")
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -37,17 +53,25 @@ class JournalIssue(models.Model):
         verbose_name_plural = "Jurnal sonlari"
 
     def __str__(self):
-        return f"Jild {self.volume}, Son {self.number} ({self.year})"
+        return f"{self.year}-yil, {self.number}-son"
 
 
 def article_upload_path(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = f"{uuid.uuid4()}.{ext}"
-    return f"articles_pdf/{filename}"
+    # Path traversal himoyasi: kengaytmani tekshirish
+    import os
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    allowed = {'pdf', 'doc', 'docx'}
+    if ext not in allowed:
+        ext = 'pdf'
+    return f"articles_pdf/{uuid.uuid4()}.{ext}"
 
 
 def article_template_pdf_path(instance, filename):
-    ext = filename.split('.')[-1]
+    import os
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    allowed = {'pdf', 'docx'}
+    if ext not in allowed:
+        ext = 'pdf'
     return f"articles_template/{uuid.uuid4()}.{ext}"
 
 
@@ -69,11 +93,14 @@ class ArticleCategory(models.Model):
 
 class Article(models.Model):
     STATUS_CHOICES = (
-        ('submitted',    'Yuborildi'),
+        ('submitted', 'Yangi maqola'),
+        ('initial_review', 'Dastlabki tekshiruv'),
         ('under_review', 'Taqriz jarayonida'),
-        ('accepted',     'Qabul qilindi'),
-        ('rejected',     'Rad etildi'),
-        ('published',    'Chop etildi'),
+        ('returned', 'Tuzatish uchun qaytarilgan'),
+        ('accepted', 'Qabul qilingan'),
+        ('rejected', 'Rad etilgan'),
+        ('ready_to_publish', 'Nashrga tayyor'),
+        ('published', 'Nashr etilgan'),
     )
 
     # Asosiy ma'lumotlar
@@ -85,10 +112,14 @@ class Article(models.Model):
     # Muallif (tizim foydalanuvchisi) va jurnal
     author   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name="Muallif (foydalanuvchi)")
     issue    = models.ForeignKey(JournalIssue, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Jurnal soni")
-    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Yo'nalish / Kategoriya")
+    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Yo'nalish")
+
+    # Sahifalash (Paginatsiya)
+    start_page = models.PositiveIntegerField(null=True, blank=True, verbose_name="Boshlanish sahifasi (To'plamda)")
+    end_page   = models.PositiveIntegerField(null=True, blank=True, verbose_name="Tugash sahifasi (To'plamda)")
 
     # Holat
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='submitted', verbose_name="Maqola holati")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='submitted', verbose_name="Maqola holati")
 
     # Maqola matni (HTML)
     content = models.TextField(blank=True, verbose_name="Maqola matni (HTML)")
@@ -106,6 +137,18 @@ class Article(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yuborilgan sana")
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def parsed_authors(self):
+        authors_list = []
+        if self.authors and '|' in self.authors:
+            for block in self.authors.split(';'):
+                parts = [p.strip() for p in block.split('|')]
+                if len(parts) >= 2:
+                    authors_list.append({"name": parts[0], "inst": parts[1]})
+                elif len(parts) == 1:
+                    authors_list.append({"name": parts[0], "inst": ""})
+        return authors_list
 
     class Meta:
         ordering = ['-created_at']
@@ -130,7 +173,11 @@ class SiteVisit(models.Model):
 
 
 def staff_photo_path(instance, filename):
-    ext = filename.split('.')[-1]
+    import os
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    allowed = {'jpg', 'jpeg', 'png', 'webp'}
+    if ext not in allowed:
+        ext = 'jpg'
     return f"staff_photos/{uuid.uuid4()}.{ext}"
 
 
@@ -167,6 +214,7 @@ class StaffMember(models.Model):
 class Conference(models.Model):
     title       = models.CharField(max_length=300, verbose_name="Nomi")
     description = models.TextField(blank=True, verbose_name="Tavsif")
+    pdf_file    = models.FileField(upload_to="conferences/pdfs/", blank=True, null=True, verbose_name="Axborot xati / Fayl (PDF)")
     date        = models.DateField(verbose_name="Sana")
     location    = models.CharField(max_length=255, blank=True, verbose_name="Joyi")
     url         = models.URLField(blank=True, verbose_name="Havola")

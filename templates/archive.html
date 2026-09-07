@@ -1,6 +1,6 @@
-﻿{% extends 'base.html' %}
-{% load static %}
-{% block title %}Arxiv | TIFT Jurnali{% endblock %}
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "Arxiv" %} | TIFT Jurnali{% endblock %}
 
 {% block content %}
 
@@ -13,18 +13,18 @@
     <div class="site-container px-4 relative">
         <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
             <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
-                <i class="fas fa-home text-[10px]"></i> Bosh sahifa
+                <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
             </a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
-            <span class="text-gray-300">Arxiv</span>
+            <span class="text-gray-300">{% trans "Arxiv" %}</span>
         </nav>
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 bg-green-600/20 border border-green-500/30 rounded-xl flex items-center justify-center">
                 <i class="fas fa-archive text-green-400"></i>
             </div>
             <div>
-                <h1 class="text-3xl font-black text-white">Jurnal Arxivlari</h1>
-                <p class="text-gray-400 text-sm mt-0.5">Barcha chop etilgan sonlar</p>
+                <h1 class="text-3xl font-black text-white">{% trans "Jurnal Arxivlari" %}</h1>
+                <p class="text-gray-400 text-sm mt-0.5">{% trans "Barcha chop etilgan sonlar" %}</p>
             </div>
         </div>
     </div>
@@ -49,16 +49,16 @@
                             </span>
                         </div>
                         <h3 class="font-black text-navy-900 text-lg leading-tight group-hover:text-green-700 transition-colors">
-                            Jild {{ issue.volume }}
+                            {{ issue.year }}-yil
                         </h3>
-                        <p class="text-gray-500 text-sm mt-1">Son {{ issue.number }}</p>
+                        <p class="text-gray-500 text-sm mt-1">{{ issue.number }}-son</p>
                         <div class="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
                             <span class="text-xs text-gray-400 flex items-center gap-1">
                                 <i class="fas fa-file-alt text-green-500/70"></i>
                                 {{ issue.articles.count }} ta maqola
                             </span>
                             <span class="text-green-600 text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                Ko'rish <i class="fas fa-arrow-right text-[10px]"></i>
+                                {% trans "Ko'rish" %} <i class="fas fa-arrow-right text-[10px]"></i>
                             </span>
                         </div>
                     </div>
@@ -68,8 +68,8 @@
     {% else %}
         <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
             <i class="fas fa-archive text-5xl text-gray-300 mb-4 block"></i>
-            <h3 class="text-gray-500 font-semibold text-lg mb-2">Arxivlar mavjud emas</h3>
-            <p class="text-gray-400 text-sm">Hozircha hech qanday jurnal soni chop etilmagan.</p>
+            <h3 class="text-gray-500 font-semibold text-lg mb-2">{% trans "Arxivlar mavjud emas" %}</h3>
+            <p class="text-gray-400 text-sm">{% trans "Hozircha hech qanday jurnal soni chop etilmagan." %}</p>
         </div>
     {% endif %}
 </div>

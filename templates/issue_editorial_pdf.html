@@ -1,0 +1,75 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    color: #000000;
+    background: #ffffff;
+}
+@page {
+    size: A4;
+    margin: 2.0cm;
+}
+h2 {
+    text-align: center;
+    font-size: 16pt;
+    font-weight: bold;
+    margin-bottom: 20pt;
+    text-transform: uppercase;
+}
+h3 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 20pt;
+    margin-bottom: 10pt;
+    text-decoration: underline;
+}
+.staff-item {
+    margin-bottom: 8pt;
+    line-height: 1.3;
+}
+.staff-name {
+    font-weight: bold;
+    font-size: 12pt;
+}
+.staff-bio {
+    font-style: italic;
+    font-size: 10pt;
+    color: #333333;
+}
+</style>
+</head>
+<body>
+<h2>TAHRIRIYAT A'ZOLARI</h2>
+
+{% if leadership %}
+{% for person in leadership %}
+<div class="staff-item">
+    <div class="staff-name">{{ person.full_name }}</div>
+    <div class="staff-bio">
+        {{ person.get_position_display }}{% if person.workplace %} - {{ person.workplace }}{% endif %}
+        {% if person.bio %}({{ person.bio }}){% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if editorial_board %}
+{% for person in editorial_board %}
+<div class="staff-item">
+    <div class="staff-name">{{ person.full_name }}</div>
+    <div class="staff-bio">
+        {% if person.workplace %}{{ person.workplace }}{% endif %}
+        {% if person.bio %} - {{ person.bio }}{% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+</body>
+</html>
