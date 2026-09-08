@@ -9,8 +9,8 @@ from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateF
 
 def index(request):
     try:
-        # Login qilgan user bosh sahifaga kelsa — hisobiga yo'naltir
-        if request.user.is_authenticated:
+        # Login qilgan user bosh sahifaga kelsa — hisobiga yo'naltir (agar qidiruv so'rovi bo'lmasa)
+        if request.user.is_authenticated and not request.GET.get('q'):
             return redirect('my_articles')
     except Exception:
         pass
