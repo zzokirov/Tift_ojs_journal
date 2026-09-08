@@ -122,16 +122,16 @@ class ArticleAdmin(admin.ModelAdmin):
         return super().changelist_view(request, extra_context=extra_context)
 
     list_display = (
-        'title_short', 'author_name', 'issue',
+        'title_short', 'author_name', 'category', 'assigned_reviewer', 'issue',
         'status', 'views_count', 'downloads_count', 'created_at'
     )
     list_display_links = ('title_short',)
-    list_filter = ('status', 'issue__year', 'issue')
+    list_filter = ('status', 'assigned_reviewer', 'category', 'issue__year', 'issue')
     search_fields = (
         'title', 'abstract', 'keywords',
-        'author__first_name', 'author__last_name', 'author__username'
+        'author__first_name', 'author__last_name', 'author__email'
     )
-    list_editable = ('status', 'issue')
+    list_editable = ('assigned_reviewer', 'status', 'issue')
     ordering = ('-created_at',)
     list_per_page = 20
     date_hierarchy = 'created_at'
@@ -143,6 +143,9 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ("Muallif va jurnal", {
             'fields': ('author', 'issue', 'category')
+        }),
+        ("Taqrizchi va ko'rib chiqish", {
+            'fields': ('assigned_reviewer', 'review_notes', 'reviewed_by', 'reviewed_at')
         }),
         ("Sahifalash (Paginatsiya)", {
             'fields': ('start_page', 'end_page'),

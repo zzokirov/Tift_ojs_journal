@@ -149,6 +149,7 @@ class Article(models.Model):
     template_pdf = models.FileField(upload_to=article_template_pdf_path, null=True, blank=True, verbose_name="Shablon PDF (tahririyat tomonidan)")
 
     # Taqriz va tahririyat xulosasi
+    assigned_reviewer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_articles', verbose_name="Biriktirilgan taqrizchi")
     review_notes = models.TextField(blank=True, verbose_name="Taqrizchi izohi / Rad etish sababi")
     reviewed_by  = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='reviewed_articles', verbose_name="Taqrizchi / Muharrir")
     reviewed_at  = models.DateTimeField(null=True, blank=True, verbose_name="Taqriz qilingan sana")

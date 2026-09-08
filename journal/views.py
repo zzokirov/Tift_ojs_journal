@@ -1022,16 +1022,24 @@ def change_password(request):
 def reviewer_dashboard(request):
     """
     Taqrizchilar va Muharrirlar uchun maxsus ishchi paneli.
-    Maqolalarni ko'rib chiqish, tahrirlash, chop etish (publish) va rad etish / izoh berish (reject/return with notes).
+    Maqolalarni ko'rib chiqish, taqrizchiga biriktirish, tahrirlash, chop etish (publish) va rad etish / izoh berish.
     """
     if not (request.user.role in ['reviewer', 'editor'] or request.user.is_staff or request.user.is_superuser):
         messages.error(request, "Ushbu sahifa faqat taqrizchi va muharrirlar uchun mo'ljallangan.")
         return redirect('my_articles')
 
-    tab = request.GET.get('tab', 'pending')
+    tab = request.GET.get('tab', '')
     query = request.GET.get('q', '').strip()
 
-    all_articles = Article.objects.all().select_related('author', 'category', 'issue').order_by('-created_at')
+    is_editor = (request.user.role == 'editor' or request.user.is_staff or request.user.is_superuser)
+
+    # Oddiy taqrizchi uchun standart tab = 'my_assigned'
+    if not is_editor and not tab:
+        tab = 'my_assigned'
+    elif not tab:
+        tab = 'pending'
+
+    all_articles = Article.objects.all().select_related('author', 'category', 'issue', 'assigned_reviewer', 'reviewed_by').order_by('-created_at')
 
     if query:
         all_articles = all_articles.filter(
@@ -1040,29 +1048,38 @@ def reviewer_dashboard(request):
             Q(keywords__icontains=query) |
             Q(author__first_name__icontains=query) |
             Q(author__last_name__icontains=query) |
-            Q(author__username__icontains=query)
+            Q(author__email__icontains=query)
         )
 
-    # Status counts
+    # Oddiy taqrizchiga faqat o'ziga biriktirilgan yoki o'zi taqriz qilgan maqolalarni ko'rsatamiz
+    if not is_editor:
+        user_articles = all_articles.filter(Q(assigned_reviewer=request.user) | Q(reviewed_by=request.user))
+    else:
+        user_articles = all_articles
+
     counts = {
-        'pending': all_articles.filter(status__in=['submitted', 'initial_review', 'under_review']).count(),
-        'published': all_articles.filter(status__in=['published', 'accepted', 'ready_to_publish']).count(),
-        'rejected': all_articles.filter(status__in=['rejected', 'returned']).count(),
-        'all': all_articles.count(),
+        'my_assigned': all_articles.filter(assigned_reviewer=request.user).count(),
+        'pending': user_articles.filter(status__in=['submitted', 'initial_review', 'under_review']).count(),
+        'published': user_articles.filter(status__in=['published', 'accepted', 'ready_to_publish']).count(),
+        'rejected': user_articles.filter(status__in=['rejected', 'returned']).count(),
+        'all': user_articles.count(),
     }
 
     # Tab filtering
-    if tab == 'pending':
-        articles = all_articles.filter(status__in=['submitted', 'initial_review', 'under_review'])
+    if tab == 'my_assigned':
+        articles = all_articles.filter(assigned_reviewer=request.user)
+    elif tab == 'pending':
+        articles = user_articles.filter(status__in=['submitted', 'initial_review', 'under_review'])
     elif tab == 'published':
-        articles = all_articles.filter(status__in=['published', 'accepted', 'ready_to_publish'])
+        articles = user_articles.filter(status__in=['published', 'accepted', 'ready_to_publish'])
     elif tab == 'rejected':
-        articles = all_articles.filter(status__in=['rejected', 'returned'])
+        articles = user_articles.filter(status__in=['rejected', 'returned'])
     else:
-        articles = all_articles
+        articles = user_articles
 
     issues = JournalIssue.objects.all().order_by('-year', '-number')
     categories = ArticleCategory.objects.all().order_by('order', 'code')
+    reviewers = User.objects.filter(Q(role__in=['reviewer', 'editor']) | Q(is_staff=True) | Q(is_superuser=True)).order_by('first_name', 'last_name', 'email')
 
     return render(request, 'reviewer_dashboard.html', {
         'articles': articles,
@@ -1071,7 +1088,37 @@ def reviewer_dashboard(request):
         'query': query,
         'issues': issues,
         'categories': categories,
+        'reviewers': reviewers,
+        'is_editor': is_editor,
     })
+
+
+@login_required
+def assign_reviewer_action(request, pk):
+    """
+    Muharrir yoki admin maqolaga taqrizchini biriktiradi yoki almashtiradi.
+    """
+    if not (request.user.role in ['editor', 'reviewer'] or request.user.is_staff or request.user.is_superuser):
+        messages.error(request, "Ushbu harakatni bajarishga ruxsat yo'q.")
+        return redirect('reviewer_dashboard')
+
+    if request.method == 'POST':
+        article = get_object_or_404(Article, pk=pk)
+        reviewer_id = request.POST.get('reviewer_id', '').strip()
+        if reviewer_id:
+            reviewer = get_object_or_404(User, pk=reviewer_id)
+            article.assigned_reviewer = reviewer
+            if article.status in ['submitted', 'initial_review']:
+                article.status = 'under_review'
+            article.save()
+            rev_name = reviewer.get_full_name() or reviewer.email
+            messages.success(request, f"Maqola taqrizchi {rev_name}ga muvaffaqiyatli biriktirildi!")
+        else:
+            article.assigned_reviewer = None
+            article.save()
+            messages.info(request, "Taqrizchi biriktiruvi bekor qilindi.")
+
+    return redirect(request.META.get('HTTP_REFERER', 'reviewer_dashboard'))
 
 
 @login_required

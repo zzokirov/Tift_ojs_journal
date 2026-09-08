@@ -62,6 +62,12 @@
 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
     <!-- Tabs -->
     <div class="flex flex-wrap items-center gap-2">
+        <a href="?tab=my_assigned{% if query %}&q={{ query }}{% endif %}"
+           class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5
+                  {% if tab == 'my_assigned' %}bg-blue-600 text-white shadow-md shadow-blue-600/20{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+            <i class="fas fa-user-check"></i> Menga biriktirilganlar
+            <span class="px-1.5 py-0.5 rounded-full text-[10px] {% if tab == 'my_assigned' %}bg-white/20 text-white{% else %}bg-gray-200 text-gray-700{% endif %}">{{ counts.my_assigned }}</span>
+        </a>
         <a href="?tab=pending{% if query %}&q={{ query }}{% endif %}"
            class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5
                   {% if tab == 'pending' %}bg-amber-500 text-white shadow-md shadow-amber-500/20{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
@@ -133,6 +139,16 @@
                                 {% elif article.status == 'rejected' %}<i class="fas fa-times-circle"></i> Rad etilgan
                                 {% endif %}
                             </span>
+
+                            {% if article.assigned_reviewer %}
+                                <span class="bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                                    <i class="fas fa-user-check text-blue-600"></i> Taqrizchi: {{ article.assigned_reviewer.get_full_name|default:article.assigned_reviewer.email }}
+                                </span>
+                            {% else %}
+                                <span class="bg-gray-100 text-gray-500 border border-gray-200 px-2.5 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                                    <i class="fas fa-user-clock text-gray-400"></i> Biriktirilmagan
+                                </span>
+                            {% endif %}
 
                             {% if article.category %}
                                 <span class="bg-gray-100 text-gray-700 border border-gray-200 px-2.5 py-1 rounded-full text-xs font-semibold">
@@ -213,6 +229,28 @@
 
                     <!-- Reviewer Action Buttons -->
                     <div class="flex flex-wrap items-center gap-2">
+                        <!-- Assign Reviewer Form for Editors -->
+                        {% if is_editor %}
+                            <form action="{% url 'assign_reviewer_action' article.pk %}" method="post" class="inline-flex items-center gap-1 bg-blue-50 border border-blue-200 p-1 rounded-xl shadow-sm">
+                                {% csrf_token %}
+                                <i class="fas fa-user-plus text-blue-600 text-xs ml-1.5"></i>
+                                <select name="reviewer_id" onchange="this.form.submit()"
+                                        class="bg-transparent text-navy-900 text-xs px-2 py-1 outline-none font-bold cursor-pointer max-w-[190px] truncate">
+                                    <option value="">-- Taqrizchi biriktirish --</option>
+                                    {% for r in reviewers %}
+                                        <option value="{{ r.pk }}" {% if article.assigned_reviewer_id == r.pk %}selected{% endif %}>
+                                            {{ r.get_full_name|default:r.email }} ({{ r.get_role_display }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                {% if article.assigned_reviewer %}
+                                    <button type="submit" name="reviewer_id" value="" class="text-red-400 hover:text-red-600 text-xs px-1.5 py-0.5 transition" title="Biriktiruvni bekor qilish">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                {% endif %}
+                            </form>
+                        {% endif %}
+
                         <!-- Under Review Status Change -->
                         {% if article.status == 'submitted' %}
                             <form action="{% url 'review_article_action' article.pk %}" method="post" class="inline">

@@ -24,4 +24,5 @@ urlpatterns = [
     path('issue/<int:issue_pk>/download/', views.download_issue_pdf, name='download_issue_pdf'),
     path('reviewer/', views.reviewer_dashboard, name='reviewer_dashboard'),
     path('reviewer/article/<int:pk>/action/', views.review_article_action, name='review_article_action'),
+    path('reviewer/article/<int:pk>/assign/', views.assign_reviewer_action, name='assign_reviewer_action'),
 ]
