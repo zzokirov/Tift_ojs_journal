@@ -29,11 +29,7 @@
 
         <!-- Badges -->
         <div class="flex flex-wrap gap-2 mb-4">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
-                  style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);color:#22c55e;">
-                <span class="w-1.5 h-1.5 rounded-full" style="background:#22c55e;"></span>
-                Chop etilgan
-            </span>
+
             {% if article.category %}
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
                       style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);color:#a5b4fc;">
@@ -202,23 +198,31 @@
             </div>
             {% endif %}
 
-            <!-- IQTIBOS -->
-            <div class="rounded-2xl p-5" style="background:#f8fafc;border:1px solid #e2e8f0;">
-                <h3 class="font-bold text-sm mb-3 flex items-center gap-2 uppercase tracking-wider" style="color:#475569;">
-                    <i class="fas fa-quote-left text-green-500"></i> Iqtibos (APA)
-                </h3>
-                <div class="relative group">
-                    <p class="font-mono leading-relaxed pr-10" id="citationText"
-                       style="font-size:0.82rem;color:#64748b;word-break:break-word;">
-                        {% if article.authors %}{{ article.authors }}{% else %}{{ article.author.last_name }}, {{ article.author.first_name|slice:":1" }}.{% endif %}
-                        ({% if article.published_at %}{{ article.published_at.year }}{% elif article.issue %}{{ article.issue.year }}{% else %}2026{% endif %}).
-                        {{ article.title }}.
-                        <em>Arxitektura va Ta'lim Ilmiy Jurnali</em>{% if article.issue %}, <em>{{ article.issue.volume }}</em>({{ article.issue.number }}){% endif %}.
-                    </p>
-                    <button onclick="copyAPA()"
-                            class="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg"
-                            style="background:#0f172a;color:white;" title="Nusxa olish">
-                        <i class="fas fa-copy text-xs"></i>
+            <!-- IQTIBOS KELTIRISH (CITATIONS DROPDOWN) -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4 border-b border-gray-100 pb-3">
+                    <h3 class="font-bold text-navy-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fas fa-quote-left text-green-500 text-base"></i> Iqtibos keltirish
+                    </h3>
+                    <div class="flex items-center gap-2">
+                        <label for="citationFormatSelect" class="text-xs font-medium text-gray-500">Format:</label>
+                        <select id="citationFormatSelect" onchange="updateCitationDisplay()"
+                                class="bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl px-3 py-1.5 text-xs font-bold text-navy-900 focus:ring-2 focus:ring-green-500/20 focus:border-green-500 focus:outline-none transition-all cursor-pointer shadow-sm">
+                            <option value="apa" selected>APA (7-nashr)</option>
+                            <option value="mla">MLA (9-nashr)</option>
+                            <option value="chicago">Chicago</option>
+                            <option value="harvard">Harvard</option>
+                            <option value="ieee">IEEE</option>
+                            <option value="bibtex">BibTeX</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="relative bg-gray-50 rounded-xl p-4 border border-gray-200/80 group">
+                    <pre id="citationTextDisplay" class="font-mono text-xs text-gray-700 leading-relaxed whitespace-pre-wrap break-words pr-24 font-normal" style="font-family:'Courier New',Courier,monospace;"></pre>
+                    <button id="copyCitationBtn" onclick="copyCitation()"
+                            class="absolute top-3 right-3 bg-green-600 hover:bg-green-500 text-navy-900 font-bold px-3.5 py-1.5 rounded-lg text-xs flex items-center gap-1.5 shadow transition-all hover:scale-105 active:scale-95">
+                        <i class="fas fa-copy text-xs"></i> Nusxalash
                     </button>
                 </div>
             </div>
@@ -401,15 +405,68 @@
 
 {% block extra_scripts %}
 <script>
-// Copy APA citation
-function copyAPA() {
-    const t = document.getElementById('citationText').innerText;
-    navigator.clipboard.writeText(t).then(() => {
-        const btn = event.currentTarget;
-        btn.innerHTML = '<i class="fas fa-check text-xs text-green-400"></i>';
-        setTimeout(() => btn.innerHTML = '<i class="fas fa-copy text-xs"></i>', 2000);
+// Citation manager
+const articleData = {
+    authors: "{% if article.authors %}{{ article.authors|escapejs }}{% elif author_name %}{{ author_name|escapejs }}{% else %}{{ article.author.last_name|escapejs }}, {{ article.author.first_name|slice:':1'|escapejs }}.{% endif %}",
+    title: "{{ article.title|escapejs }}",
+    journal: "Arxitektura va Ta'lim Ilmiy Jurnali",
+    year: "{% if article.published_at %}{{ article.published_at.year }}{% elif article.issue %}{{ article.issue.year }}{% else %}2026{% endif %}",
+    volume: "{{ article.issue.volume|default:'1' }}",
+    number: "{{ article.issue.number|default:'1' }}",
+    pages: "{% if article.start_page and article.end_page %}{{ article.start_page }}-{{ article.end_page }}{% else %}6-14{% endif %}",
+    pk: "{{ article.pk }}"
+};
+
+function getFormattedCitation(format) {
+    const a = articleData;
+    switch(format) {
+        case 'apa':
+            return `${a.authors} (${a.year}). ${a.title}. ${a.journal}, ${a.volume}(${a.number}), S. ${a.pages}.`;
+        case 'mla':
+            return `${a.authors}. "${a.title}." ${a.journal}, vol. ${a.volume}, no. ${a.number}, ${a.year}, pp. ${a.pages}.`;
+        case 'chicago':
+            return `${a.authors}. "${a.title}." ${a.journal} ${a.volume}, no. ${a.number} (${a.year}): ${a.pages}.`;
+        case 'harvard':
+            return `${a.authors}, ${a.year}. ${a.title}. ${a.journal}, ${a.volume}(${a.number}), pp.${a.pages}.`;
+        case 'ieee':
+            return `${a.authors}, "${a.title}," ${a.journal}, vol. ${a.volume}, no. ${a.number}, pp. ${a.pages}, ${a.year}.`;
+        case 'bibtex':
+            return `@article{tift_${a.pk},\n  title={${a.title}},\n  author={${a.authors}},\n  journal={${a.journal}},\n  volume={${a.volume}},\n  number={${a.number}},\n  pages={${a.pages}},\n  year={${a.year}}\n}`;
+        default:
+            return `${a.authors} (${a.year}). ${a.title}. ${a.journal}, ${a.volume}(${a.number}).`;
+    }
+}
+
+function updateCitationDisplay() {
+    const select = document.getElementById('citationFormatSelect');
+    const textEl = document.getElementById('citationTextDisplay');
+    if (select && textEl) {
+        textEl.textContent = getFormattedCitation(select.value);
+    }
+}
+
+function copyCitation() {
+    const textEl = document.getElementById('citationTextDisplay');
+    if (!textEl) return;
+    navigator.clipboard.writeText(textEl.textContent).then(() => {
+        const btn = document.getElementById('copyCitationBtn');
+        if (btn) {
+            btn.innerHTML = '<i class="fas fa-check text-xs"></i> Nusxalandi!';
+            btn.classList.remove('bg-green-600', 'hover:bg-green-500');
+            btn.classList.add('bg-emerald-700', 'text-white');
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-copy text-xs"></i> Nusxalash';
+                btn.classList.remove('bg-emerald-700', 'text-white');
+                btn.classList.add('bg-green-600', 'hover:bg-green-500');
+            }, 2000);
+        }
     });
 }
+
+// Initial citation render
+document.addEventListener('DOMContentLoaded', function() {
+    updateCitationDisplay();
+});
 
 // Font size adjustment for reader
 let currentFontSize = 16;
