@@ -1001,6 +1001,15 @@ def news_list(request):
     return render(request, 'news.html', {'items': items})
 
 
+def news_detail(request, pk):
+    item = get_object_or_404(News, pk=pk, is_active=True)
+    recent_news = News.objects.filter(is_active=True).exclude(pk=pk).order_by('-created_at')[:5]
+    return render(request, 'news_detail.html', {
+        'item': item,
+        'recent_news': recent_news
+    })
+
+
 def documents(request):
     normative = Document.objects.filter(is_active=True, category='normative').order_by('order')
     requirements = Document.objects.filter(is_active=True, category='requirement').order_by('order')

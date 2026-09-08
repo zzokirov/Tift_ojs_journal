@@ -8,6 +8,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('conferences/', views.conferences, name='conferences'),
     path('news/', views.news_list, name='news'),
+    path('news/<int:pk>/', views.news_detail, name='news_detail'),
     path('documents/', views.documents, name='documents'),
     path('article/<int:pk>/', views.article_detail, name='article_detail'),
     path('article/<int:pk>/download/', views.download_pdf, name='download_pdf'),

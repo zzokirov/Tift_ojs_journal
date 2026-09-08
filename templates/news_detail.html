@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block title %}{{ item.title }} | {% trans "Yangiliklar" %} | TIFT Jurnali{% endblock %}
+
+{% block content %}
+<!-- HEADER -->
+<div class="bg-navy-900 text-white py-8 relative overflow-hidden border-b border-navy-800">
+    <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
+    <div class="site-container px-4 relative">
+        <nav class="flex items-center gap-2 text-xs text-gray-400 mb-4">
+            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
+                <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
+            </a>
+            <i class="fas fa-chevron-right text-[8px] text-gray-600"></i>
+            <a href="{% url 'news' %}" class="hover:text-green-400 transition-colors">{% trans "Yangiliklar" %}</a>
+            <i class="fas fa-chevron-right text-[8px] text-gray-600"></i>
+            <span class="text-gray-200 font-medium truncate max-w-xs">{{ item.title }}</span>
+        </nav>
+
+        <h1 class="text-2xl md:text-3xl font-bold text-white leading-tight max-w-4xl">{{ item.title }}</h1>
+        <div class="flex items-center gap-4 text-xs text-gray-400 mt-3">
+            <span class="flex items-center gap-1.5">
+                <i class="far fa-calendar-alt text-green-400"></i>
+                {{ item.created_at|date:"d.m.Y" }}
+            </span>
+            <span class="flex items-center gap-1.5">
+                <i class="fas fa-newspaper text-green-400 text-[10px]"></i>
+                {% trans "Yangilik" %}
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="site-container px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- MAIN NEWS CONTENT -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden p-6 md:p-8">
+                {% if item.image %}
+                    <div class="rounded-xl overflow-hidden mb-6 max-h-96 shadow-md border border-gray-100">
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover">
+                    </div>
+                {% endif %}
+
+                <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed font-sans" style="word-break: break-word;">
+                    {{ item.content|linebreaks }}
+                </div>
+            </div>
+
+            <!-- BACK TO NEWS LINK -->
+            <a href="{% url 'news' %}" class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors">
+                <i class="fas fa-arrow-left text-[10px]"></i> {% trans "Barcha yangiliklarga qaytish" %}
+            </a>
+        </div>
+
+        <!-- RECENT NEWS SIDEBAR -->
+        {% if recent_news %}
+        <aside class="lg:col-span-1 space-y-4">
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+                <h3 class="font-bold text-navy-900 text-sm mb-4 flex items-center gap-2 uppercase tracking-wider border-b border-gray-100 pb-3">
+                    <i class="fas fa-newspaper text-green-500 text-xs"></i> {% trans "Boshqa yangiliklar" %}
+                </h3>
+                <ul class="divide-y divide-gray-50 space-y-3">
+                    {% for n in recent_news %}
+                    <li class="pt-3 first:pt-0">
+                        <a href="{% url 'news_detail' n.pk %}" class="group block">
+                            <div class="text-[11px] text-gray-400 mb-1 flex items-center gap-1">
+                                <i class="far fa-calendar-alt text-green-500"></i>
+                                {{ n.created_at|date:"d.m.Y" }}
+                            </div>
+                            <h4 class="font-semibold text-xs leading-snug text-navy-900 group-hover:text-green-600 transition-colors line-clamp-2">
+                                {{ n.title }}
+                            </h4>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </aside>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

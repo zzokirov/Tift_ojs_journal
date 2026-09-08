@@ -27,24 +27,37 @@
     {% if items %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for item in items %}
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden card-hover">
-                    {% if item.image %}
-                        <div class="h-48 overflow-hidden">
-                            <img src="{{ item.image.url }}" alt="{{ item.title }}"
-                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden card-hover flex flex-col justify-between">
+                    <div>
+                        <a href="{% url 'news_detail' item.pk %}" class="block overflow-hidden">
+                            {% if item.image %}
+                                <div class="h-48 overflow-hidden">
+                                    <img src="{{ item.image.url }}" alt="{{ item.title }}"
+                                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                </div>
+                            {% else %}
+                                <div class="h-24 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1628, #1a3a6b);">
+                                    <i class="fas fa-newspaper text-green-400 text-3xl opacity-50"></i>
+                                </div>
+                            {% endif %}
+                        </a>
+                        <div class="p-5">
+                            <div class="text-xs text-gray-400 mb-2 flex items-center gap-1">
+                                <i class="far fa-calendar-alt text-green-500"></i>
+                                {{ item.created_at|date:"d.m.Y" }}
+                            </div>
+                            <h3 class="font-bold text-navy-900 text-base leading-snug mb-2 hover:text-green-600 transition-colors">
+                                <a href="{% url 'news_detail' item.pk %}">{{ item.title }}</a>
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">{{ item.content|truncatewords:30 }}</p>
                         </div>
-                    {% else %}
-                        <div class="h-20 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1628, #1a3a6b);">
-                            <i class="fas fa-newspaper text-green-400 text-3xl opacity-50"></i>
-                        </div>
-                    {% endif %}
-                    <div class="p-5">
-                        <div class="text-xs text-gray-400 mb-2 flex items-center gap-1">
-                            <i class="far fa-calendar-alt text-green-500"></i>
-                            {{ item.created_at|date:"d.m.Y" }}
-                        </div>
-                        <h3 class="font-bold text-navy-900 text-base leading-snug mb-2">{{ item.title }}</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">{{ item.content|truncatewords:30 }}</p>
+                    </div>
+                    <div class="px-5 pb-5 pt-0">
+                        <a href="{% url 'news_detail' item.pk %}"
+                           class="inline-flex items-center gap-1.5 text-xs font-bold text-green-600 hover:text-green-700 transition-colors group">
+                            {% trans "Batafsil o'qish" %}
+                            <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                        </a>
                     </div>
                 </div>
             {% endfor %}
