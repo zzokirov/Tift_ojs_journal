@@ -10,22 +10,23 @@ from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, C
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     list_display = (
-        'username', 'get_full_name', 'email',
+        'email', 'get_full_name',
         'role', 'institution', 'article_count',
         'is_active', 'is_staff', 'date_joined'
     )
-    list_display_links = ('username',)
+    list_display_links = ('email', 'get_full_name')
     list_filter = ('role', 'is_staff', 'is_superuser', 'is_active')
-    search_fields = ('username', 'email', 'first_name', 'last_name', 'institution')
+    search_fields = ('email', 'first_name', 'last_name', 'institution')
     ordering = ('-date_joined',)
     list_per_page = 20
+    filter_horizontal = ('groups', 'user_permissions')
 
     fieldsets = (
         ("Asosiy ma'lumotlar", {
-            'fields': ('username', 'password')
+            'fields': ('email', 'password')
         }),
         ("Shaxsiy ma'lumotlar", {
-            'fields': ('first_name', 'last_name', 'email', 'institution')
+            'fields': ('first_name', 'last_name', 'institution', 'phone', 'gender', 'country', 'bio', 'avatar')
         }),
         ("Rol va ruxsatlar", {
             'fields': ('role', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
@@ -39,10 +40,20 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'first_name', 'last_name',
+            'fields': ('email', 'first_name', 'last_name',
                        'institution', 'role', 'password1', 'password2'),
         }),
     )
+
+    def save_model(self, request, obj, form, change):
+        if not obj.username and obj.email:
+            base = obj.email.split('@')[0][:25]
+            import random, string
+            un = base
+            while User.objects.filter(username=un).exists():
+                un = base + ''.join(random.choices(string.digits, k=4))
+            obj.username = un
+        super().save_model(request, obj, form, change)
 
     def article_count(self, obj):
         return obj.articles.count()
