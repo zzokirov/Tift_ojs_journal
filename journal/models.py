@@ -248,6 +248,53 @@ class News(models.Model):
         return self.title
 
 
+def news_media_path(instance, filename):
+    import os, uuid
+    ext = os.path.splitext(filename)[1].lower().lstrip('.')
+    return f"news_media/{uuid.uuid4()}.{ext}"
+
+
+class NewsMedia(models.Model):
+    MEDIA_TYPES = (
+        ('image', 'Rasm'),
+        ('video', 'Video fayl (MP4/WebM)'),
+        ('video_url', 'Video havola (YouTube/Vimeo/Web URL)'),
+    )
+    news        = models.ForeignKey(News, on_delete=models.CASCADE, related_name='media_files', verbose_name="Yangilik")
+    media_type  = models.CharField(max_length=20, choices=MEDIA_TYPES, default='image', verbose_name="Media turi")
+    file        = models.FileField(upload_to=news_media_path, null=True, blank=True, verbose_name="Fayl (Rasm yoki Video)")
+    video_url   = models.URLField(blank=True, verbose_name="Video URL (YouTube/Vimeo/MP4 havolasi)")
+    caption     = models.CharField(max_length=255, blank=True, verbose_name="Izoh / Sarlavha")
+    order       = models.PositiveIntegerField(default=0, verbose_name="Tartib")
+    created_at  = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name = "Yangilik media fayli"
+        verbose_name_plural = "Yangilik media fayllari (Rasmlar va Videolar)"
+
+    def __str__(self):
+        return f"{self.news.title[:25]} - {self.get_media_type_display()}"
+
+    @property
+    def youtube_embed_url(self):
+        if not self.video_url:
+            return ''
+        url = self.video_url.strip()
+        if 'youtube.com/watch' in url:
+            import urllib.parse
+            parsed = urllib.parse.urlparse(url)
+            params = urllib.parse.parse_qs(parsed.query)
+            v = params.get('v', [''])[0]
+            if v:
+                return f"https://www.youtube.com/embed/{v}"
+        elif 'youtu.be/' in url:
+            v = url.split('youtu.be/')[-1].split('?')[0]
+            if v:
+                return f"https://www.youtube.com/embed/{v}"
+        return url
+
+
 # ─── ME'YORIY HUJJATLAR ──────────────────────────────────────────────────────
 
 class Document(models.Model):

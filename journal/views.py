@@ -66,6 +66,8 @@ def index(request):
     except Exception:
         total_articles = 0
 
+    categories = ArticleCategory.objects.all().order_by('order', 'code')
+
     return render(request, 'index.html', {
         'recent_articles': recent_articles,
         'issues': issues,
@@ -75,6 +77,7 @@ def index(request):
         'week_labels': week_labels,
         'week_data': week_data,
         'total_articles': total_articles,
+        'categories': categories,
     })
 
 
@@ -87,17 +90,12 @@ def about(request):
     staff = StaffMember.objects.filter(is_active=True).order_by('order', 'full_name')
     leadership = staff.filter(position__in=['editor_in_chief', 'deputy_editor', 'secretary'])
     editorial_board = staff.filter(position='member')
-    areas = [
-        "Arxitektura nazariyasi", "Binolar konstruksiyasi",
-        "Shaharsozlik va landshaft", "Geodeziya va kartografiya",
-        "Ta'lim metodikasi", "Raqamli texnologiyalar",
-        "Sun'iy idrok", "Kadastr va er resurslari",
-    ]
+    categories = ArticleCategory.objects.all().order_by('order', 'code')
     return render(request, 'about.html', {
         'staff': staff,
         'leadership': leadership,
         'editorial_board': editorial_board,
-        'areas': areas
+        'categories': categories,
     })
 
 

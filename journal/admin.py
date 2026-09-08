@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
-from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, Document
+from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, NewsMedia, Document
 
 
 # ─── USER ADMIN ───────────────────────────────────────────────────────────────
@@ -229,6 +229,12 @@ class ConferenceAdmin(admin.ModelAdmin):
 
 # ─── NEWS ADMIN ───────────────────────────────────────────────────────────────
 
+class NewsMediaInline(admin.TabularInline):
+    model = NewsMedia
+    extra = 2
+    fields = ('media_type', 'file', 'video_url', 'caption', 'order')
+
+
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_active', 'created_at')
@@ -237,6 +243,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_editable = ('is_active',)
     ordering = ('-created_at',)
     list_per_page = 20
+    inlines = [NewsMediaInline]
     fieldsets = (
         ("Yangilik ma'lumotlari", {
             'fields': ('title', 'content', 'image', 'is_active')

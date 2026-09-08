@@ -18,6 +18,7 @@ def run():
         'git fetch origin && '
         'git reset --hard origin/main && '
         './venv/bin/python populate_editorial_board.py && '
+        './venv/bin/python manage.py makemigrations && '
         './venv/bin/python manage.py migrate && '
         './venv/bin/python manage.py collectstatic --noinput && '
         './venv/bin/python update_pages.py'
