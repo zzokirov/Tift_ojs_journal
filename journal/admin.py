@@ -82,7 +82,7 @@ class JournalIssueAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Jurnal soni ma'lumotlari", {
-            'fields': ('volume', 'number', 'year', 'period', 'cover_image', 'back_cover_image', 'editorial_doc', 'full_pdf', 'is_published')
+            'fields': ('volume', 'number', 'year', 'period', 'cover_image', 'back_cover_image', 'full_pdf', 'is_published')
         }),
     )
 
@@ -91,8 +91,8 @@ class JournalIssueAdmin(admin.ModelAdmin):
     issue_label.short_description = 'Jurnal soni'
 
     def article_count_tag(self, obj):
-        return obj.articles.count()
-    article_count_tag.short_description = "Maqolalar soni"
+        return obj.articles.filter(status='published').count()
+    article_count_tag.short_description = "Chop etilgan maqolalar soni"
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('articles')
@@ -174,8 +174,8 @@ class ArticleAdmin(admin.ModelAdmin):
 
     @admin.action(description='Rad etish')
     def make_rejected(self, request, queryset):
-        updated = queryset.update(status='rejected')
-        self.message_user(request, f'{updated} ta maqola rad etildi.')
+        updated = queryset.update(status='rejected', issue=None)
+        self.message_user(request, f'{updated} ta maqola rad etildi va jurnaldan chiqarildi.')
 
 
 # ─── STAFF MEMBER ADMIN ───────────────────────────────────────────────────────

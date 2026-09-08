@@ -711,9 +711,9 @@ def recalculate_issue_page_numbers(issue):
 
 def _add_header_footer_to_pdf(pdf_bytes, article):
     """
-    PyMuPDF yordamida har bir PDF sahifasiga xalqaro ilmiy jurnal standartidagi
-    yuqori (Running Header) va pastki (Running Footer) kolontitullarni qo'shadi.
-    2-sahifadan boshlab jurnal nomi, soni, mualliflar va sahifa raqami joylashtiriladi.
+    PyMuPDF yordamida har bir PDF sahifasining pastki qismiga (Running Footer)
+    toza va chiroyli kolontitul qo'shadi. Yuqori header olib tashlangan.
+    Sahifa raqamlari toza ASCII matn shaklida ('Sahifa 7') bosiladi.
     """
     try:
         import fitz
@@ -725,92 +725,42 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
         LINE_COLOR = (0.82, 0.85, 0.88)  # Och kulrang chiziq
         PRIMARY_LINE = (0.04, 0.145, 0.251)
 
-        authors_raw = getattr(article, 'authors', '') or (article.author.get_full_name() if getattr(article, 'author', None) else "Muallif")
-        title_raw = getattr(article, 'title', '') or "Maqola"
-
-        # Qisqartirilgan matnlar
-        short_authors = authors_raw[:35] + ("..." if len(authors_raw) > 35 else "")
-        short_title = title_raw[:45] + ("..." if len(title_raw) > 45 else "")
-
         if article.issue:
             issue_full = f"{article.issue.year}-yil, {article.issue.number}-son (Jild {article.issue.volume})"
-            issue_short = f"{article.issue.year}, {article.issue.number}-son"
         else:
             issue_full = "Maxsus son, 2026"
-            issue_short = "2026-yil"
 
         for idx, page in enumerate(doc):
             w = page.rect.width
             h = page.rect.height
             margin_x = 36.0
+            footer_line_y = h - 40.0
 
-            if idx == 0:
-                # 1-SAHIFA PASTKI KOLONTITUL
-                footer_line_y = h - 40.0
-                try:
-                    page.draw_line(fitz.Point(margin_x, footer_line_y), fitz.Point(w - margin_x, footer_line_y), color=PRIMARY_LINE, width=0.75)
-                except Exception:
-                    pass
+            # PASTKI KOLONTITUL CHIZIQ
+            try:
+                line_color = PRIMARY_LINE if idx == 0 else LINE_COLOR
+                page.draw_line(fitz.Point(margin_x, footer_line_y), fitz.Point(w - margin_x, footer_line_y), color=line_color, width=0.75 if idx == 0 else 0.5)
+            except Exception:
+                pass
 
-                rect_left = fitz.Rect(margin_x, footer_line_y + 4, w - 120, h - 15)
-                try:
-                    page.insert_textbox(rect_left, f"Maqola | \"Arxitektura va Ta'lim\" jurnali | {issue_full} | http://architect-edu.tift.uz", fontsize=8, color=GRAY_TEXT, align=0)
-                except Exception:
-                    pass
+            # CHAP TOMON MATNI
+            rect_f_left = fitz.Rect(margin_x, footer_line_y + 4, w - 120, h - 15)
+            try:
+                page.insert_textbox(rect_f_left, f"\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali | {issue_full} | http://architect-edu.tift.uz", fontsize=8, color=GRAY_TEXT, align=0)
+            except Exception:
+                pass
 
-                rect_right = fitz.Rect(w - 120, footer_line_y + 4, w - margin_x, h - 15)
-                if article.start_page:
-                    p_str = f"S. {article.start_page}"
-                else:
-                    p_str = f"S. 1 / {doc.page_count}"
-                try:
-                    page.insert_textbox(rect_right, p_str, fontsize=8, color=NAVY, align=2)
-                except Exception:
-                    pass
-
+            # O'NG TOMON SAHIFA RAQAMI
+            rect_f_right = fitz.Rect(w - 120, footer_line_y + 4, w - margin_x, h - 15)
+            if article.start_page:
+                actual_p = article.start_page + idx
+                p_str = f"Sahifa {actual_p}"
             else:
-                # 2-SAHIFADAN BOSHLAB YUQORI KOLONTITUL (RUNNING HEADER)
-                header_line_y = 36.0
-                try:
-                    page.draw_line(fitz.Point(margin_x, header_line_y), fitz.Point(w - margin_x, header_line_y), color=LINE_COLOR, width=0.5)
-                except Exception:
-                    pass
-
-                rect_h_left = fitz.Rect(margin_x, 18, w - 180, header_line_y - 2)
-                try:
-                    page.insert_textbox(rect_h_left, f"{short_authors} // {short_title}", fontsize=8, color=GRAY_TEXT, align=0)
-                except Exception:
-                    pass
-
-                rect_h_right = fitz.Rect(w - 180, 18, w - margin_x, header_line_y - 2)
-                try:
-                    page.insert_textbox(rect_h_right, f"TIFT JOURNAL | {issue_short}", fontsize=8, color=NAVY, align=2)
-                except Exception:
-                    pass
-
-                # 2-SAHIFADAN BOSHLAB PASTKI KOLONTITUL (RUNNING FOOTER)
-                footer_line_y = h - 40.0
-                try:
-                    page.draw_line(fitz.Point(margin_x, footer_line_y), fitz.Point(w - margin_x, footer_line_y), color=LINE_COLOR, width=0.5)
-                except Exception:
-                    pass
-
-                rect_f_left = fitz.Rect(margin_x, footer_line_y + 4, w - 140, h - 15)
-                try:
-                    page.insert_textbox(rect_f_left, f"\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali | ISSN: 2181-3422 | http://architect-edu.tift.uz", fontsize=8, color=GRAY_TEXT, align=0)
-                except Exception:
-                    pass
-
-                rect_f_right = fitz.Rect(w - 140, footer_line_y + 4, w - margin_x, h - 15)
-                if article.start_page:
-                    actual_p = article.start_page + idx
-                    p_str = f"– {actual_p} –"
-                else:
-                    p_str = f"– {idx + 1} / {doc.page_count} –"
-                try:
-                    page.insert_textbox(rect_f_right, p_str, fontsize=8.5, color=NAVY, align=2)
-                except Exception:
-                    pass
+                p_str = f"Sahifa {idx + 1} / {doc.page_count}"
+            try:
+                page.insert_textbox(rect_f_right, p_str, fontsize=8.5, color=NAVY, align=2)
+            except Exception:
+                pass
 
         out = io.BytesIO()
         doc.save(out)
@@ -818,7 +768,7 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
         return out.getvalue()
 
     except Exception as e:
-        print("Error stamping PDF headers/footers:", e)
+        print("Error stamping PDF footers:", e)
         return pdf_bytes
 
 
@@ -1168,6 +1118,7 @@ def review_article_action(request, pk):
         elif action in ['reject', 'return', 'returned', 'rejected']:
             new_status = 'rejected' if action in ['reject', 'rejected'] else 'returned'
             article.status = new_status
+            article.issue = None
             if review_notes:
                 article.review_notes = review_notes
             article.save()
@@ -1232,11 +1183,7 @@ def news_list(request):
 
 def news_detail(request, pk):
     item = get_object_or_404(News, pk=pk, is_active=True)
-    recent_news = News.objects.filter(is_active=True).exclude(pk=pk).order_by('-created_at')[:5]
-    return render(request, 'news_detail.html', {
-        'item': item,
-        'recent_news': recent_news
-    })
+    return render(request, 'news_detail.html', {'item': item})
 
 
 def documents(request):
@@ -1294,12 +1241,7 @@ def _build_pdf_from_html_xhtml2pdf(article, request=None):
 def download_issue_pdf(request, issue_pk):
     """
     Jurnalning to'liq sonini PDF sifatida yaratadi va yuklab beradi.
-    Ketma-ketlik:
-    1. Oldi muqova rasm (cover_image)
-    2. Orqa muqova rasm (back_cover_image)
-    3. Tahririyat a'zolari (issue_editorial_pdf.html)
-    4. Kitob shaklidagi Mundarija (Table of Contents)
-    5. Nashrdagi barcha chop etilgan maqolalar ketma-ketligi
+    Faqat chop etilgan ('published') maqolalarni ketma-ket bir joyga yig'adi.
     """
     import io
     import base64
@@ -1324,9 +1266,7 @@ def download_issue_pdf(request, issue_pk):
 
     articles = list(Article.objects.filter(issue=issue, status='published').order_by('created_at', 'id'))
     if not articles:
-        articles = list(Article.objects.filter(issue=issue).order_by('created_at', 'id'))
-    if not articles:
-        return HttpResponse("Ushbu sonda hali maqolalar mavjud emas.", status=404)
+        return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
 
     try:
         import fitz
@@ -1492,28 +1432,42 @@ def download_issue_pdf(request, issue_pk):
     for item in prepared_articles:
         master_doc.insert_pdf(item['doc'])
 
-    # 5. UZLUKSIZ RAQAMLASH QO'SHISH
+    # 5. UZLUKSIZ RAQAMLASH VA FOOTER QO'SHISH
     total_pages = len(master_doc)
-    unbound_count = cover_page_count + len(toc_doc)
+    unbound_count = cover_page_count + (len(toc_doc) if toc_doc else 0)
+
+    issue_full = f"{issue.year}-yil, {issue.number}-son (Jild {issue.volume})"
+    NAVY = (0.04, 0.145, 0.251)
+    GRAY_TEXT = (0.35, 0.35, 0.35)
+    LINE_COLOR = (0.82, 0.85, 0.88)
 
     for idx in range(total_pages):
         page = master_doc[idx]
         if idx < unbound_count:
             continue
 
-        page_num = idx + 1
-        rect = page.rect
-        width, height = rect.width, rect.height
+        w = page.rect.width
+        h = page.rect.height
+        margin_x = 36.0
+        footer_line_y = h - 40.0
 
-        footer_y = height - 20.0
-        num_str = f"– {page_num} –"
         try:
-            page.insert_text((width / 2 - 14, footer_y), num_str, fontsize=9, fontname="helv", color=(0.04, 0.086, 0.157))
+            page.draw_line(fitz.Point(margin_x, footer_line_y), fitz.Point(w - margin_x, footer_line_y), color=LINE_COLOR, width=0.5)
         except Exception:
-            try:
-                page.insert_text((width / 2 - 14, footer_y), num_str, fontsize=9, color=(0.04, 0.086, 0.157))
-            except Exception:
-                pass
+            pass
+
+        rect_f_left = fitz.Rect(margin_x, footer_line_y + 4, w - 120, h - 15)
+        try:
+            page.insert_textbox(rect_f_left, f"\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali | {issue_full} | http://architect-edu.tift.uz", fontsize=8, color=GRAY_TEXT, align=0)
+        except Exception:
+            pass
+
+        rect_f_right = fitz.Rect(w - 120, footer_line_y + 4, w - margin_x, h - 15)
+        page_num = idx + 1
+        try:
+            page.insert_textbox(rect_f_right, f"Sahifa {page_num}", fontsize=8.5, color=NAVY, align=2)
+        except Exception:
+            pass
 
     # 6. YUKLAB OLISH UCHUN QAYTARISH
     final_bytes = master_doc.tobytes()
