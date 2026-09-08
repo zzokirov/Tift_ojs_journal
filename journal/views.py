@@ -897,7 +897,10 @@ def download_pdf(request, pk):
             'qr_code_base64': _get_qr_code_base64(article, request),
         })
         buffer = io.BytesIO()
-        base_url = request.build_absolute_uri('/')
+        try:
+            base_url = request.build_absolute_uri('/') if request else 'https://architect-edu.tift.uz/'
+        except Exception:
+            base_url = 'https://architect-edu.tift.uz/'
         res = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
         if not res.err:
             stamped = _add_header_footer_to_pdf(buffer.getvalue(), article)
@@ -953,14 +956,16 @@ def generate_article_pdf(request, pk):
 
         html_string = render_to_string('article_pdf.html', {
             'article': article,
-            'request': request,
             'pdf_content_html': content_html,
             'static_root': django_settings.STATIC_ROOT,
             'logo_base64': _get_logo_base64(),
             'qr_code_base64': _get_qr_code_base64(article, request),
         })
         buffer = io.BytesIO()
-        base_url = request.build_absolute_uri('/')
+        try:
+            base_url = request.build_absolute_uri('/') if request else 'https://architect-edu.tift.uz/'
+        except Exception:
+            base_url = 'https://architect-edu.tift.uz/'
         pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
 
         if not pisa_status.err:
