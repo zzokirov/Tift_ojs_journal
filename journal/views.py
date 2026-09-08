@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import JournalIssue, Article, ArticleCategory, StaffMember, SiteVisit, Conference, News, Document
+from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, SiteVisit, Conference, News, Document
 from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateForm, CustomPasswordChangeForm
 
 
