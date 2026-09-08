@@ -141,17 +141,16 @@
                         </a>
 
                         <!-- NAVBAR SEARCH INPUT -->
-                        <form action="{% url 'index' %}" method="get" class="relative flex items-center group ml-1">
+                        <form action="{% url 'index' %}" method="get" class="relative flex items-center group ml-1 mr-4 lg:mr-6">
                             <div class="relative flex items-center">
                                 <input type="text"
                                        name="q"
                                        value="{{ request.GET.q|default:'' }}"
                                        placeholder="{% trans "Muallif yoki mavzu..." %}"
                                        title="{% trans "Maqola muallifi va mavzusi bo'yicha qidirish" %}"
-                                       class="bg-white/10 hover:bg-white/15 focus:bg-white/20 text-white placeholder-gray-400 text-xs rounded-full pl-8 pr-7 py-1.5 border border-white/20 focus:border-green-400 focus:outline-none transition-all duration-300 w-36 lg:w-44 focus:w-60 focus:ring-2 focus:ring-green-400/30">
-                                <i class="fas fa-search absolute left-2.5 text-green-400 text-xs pointer-events-none group-focus-within:text-green-300"></i>
-                                <button type="submit" title="{% trans 'Qidirish' %}" class="absolute right-1 w-5 h-5 rounded-full bg-green-500 hover:bg-green-400 text-navy-900 flex items-center justify-center text-[9px] font-bold transition-all shadow group-focus-within:scale-105">
-                                    <i class="fas fa-arrow-right"></i>
+                                       class="bg-white/10 hover:bg-white/15 focus:bg-white/20 text-white placeholder-gray-400 text-xs rounded-full pl-8 pr-3 py-1.5 border border-white/20 focus:border-green-400 focus:outline-none transition-all duration-300 w-36 lg:w-44 focus:w-56 focus:ring-2 focus:ring-green-400/30">
+                                <button type="submit" title="{% trans 'Qidirish' %}" class="absolute left-2.5 text-green-400 hover:text-green-300 text-xs transition-colors focus:outline-none">
+                                    <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </form>
@@ -297,10 +296,9 @@
                        name="q"
                        value="{{ request.GET.q|default:'' }}"
                        placeholder="{% trans "Maqola muallifi yoki mavzusi bo'yicha qidirish..." %}"
-                       class="w-full bg-white/10 text-white placeholder-gray-400 text-xs rounded-xl pl-9 pr-9 py-2.5 border border-white/20 focus:border-green-400 focus:outline-none">
-                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-green-400 text-xs"></i>
-                <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-lg bg-green-500 text-navy-900 flex items-center justify-center text-xs">
-                    <i class="fas fa-arrow-right"></i>
+                       class="w-full bg-white/10 text-white placeholder-gray-400 text-xs rounded-xl pl-9 pr-4 py-2.5 border border-white/20 focus:border-green-400 focus:outline-none">
+                <button type="submit" class="absolute left-3 top-1/2 -translate-y-1/2 text-green-400 hover:text-green-300 text-xs">
+                    <i class="fas fa-search"></i>
                 </button>
             </form>
             <a href="{% url 'about' %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
