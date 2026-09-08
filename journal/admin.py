@@ -54,11 +54,12 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(ArticleCategory)
 class ArticleCategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'code', 'name', 'order', 'article_count')
-    list_display_links = ('id',)
-    list_editable = ('code', 'name', 'order')
+    list_display = ('code', 'name', 'order', 'article_count')
+    list_display_links = ('code', 'name')
+    list_editable = ('order',)
     search_fields = ('code', 'name')
     ordering = ('order', 'code')
+    list_per_page = 30
 
     def article_count(self, obj):
         return obj.articles.count()

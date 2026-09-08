@@ -86,9 +86,12 @@ class ArticleSubmissionForm(forms.ModelForm):
     category = forms.ModelChoiceField(
         queryset=ArticleCategory.objects.all().order_by('order', 'code'),
         required=False,
-        empty_label="--- Yo'nalishni tanlang (Ixtiyoriy) ---",
-        label="Yo'nalish (Kategoriya)",
-        widget=forms.Select(attrs={'class': css_input})
+        empty_label="--- Maqola yo'nalishini tanlang ---",
+        label="Maqola yo'nalishi (Kategoriya)",
+        help_text="Maqolangiz tegishli bo'lgan ilmiy yo'nalishni ro'yxatdan tanlang.",
+        widget=forms.Select(attrs={
+            'class': css_input + ' cursor-pointer'
+        })
     )
 
     class Meta:
