@@ -54,9 +54,9 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(ArticleCategory)
 class ArticleCategoryAdmin(admin.ModelAdmin):
-    list_display = ('code', 'name', 'order', 'article_count')
+    list_display = ('code', 'name', 'icon', 'order', 'article_count')
     list_display_links = ('code', 'name')
-    list_editable = ('order',)
+    list_editable = ('icon', 'order')
     search_fields = ('code', 'name')
     ordering = ('order', 'code')
     list_per_page = 30

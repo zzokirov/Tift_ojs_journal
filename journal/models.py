@@ -80,6 +80,7 @@ def article_template_pdf_path(instance, filename):
 class ArticleCategory(models.Model):
     code  = models.CharField(max_length=20, unique=True, verbose_name="Kod (masalan: 18.00.00)")
     name  = models.CharField(max_length=200, verbose_name="Nomi")
+    icon  = models.CharField(max_length=50, blank=True, default='', verbose_name="Ikona klasi (masalan: fa-building)", help_text="FontAwesome ikona klasi (bo'sh bo'lsa avtomatik mos ikona tanlanadi)")
     order = models.PositiveIntegerField(default=0, verbose_name="Tartib")
 
     class Meta:
@@ -89,6 +90,25 @@ class ArticleCategory(models.Model):
 
     def __str__(self):
         return f"{self.code} — {self.name}"
+
+    @property
+    def icon_class(self):
+        if self.icon:
+            return self.icon
+        mapping = {
+            "18.00.00": "fa-building",         # Arxitektura va shaharsozlik fanlari
+            "05.00.00": "fa-tools",            # Texnika fanlari va qurilish muhandisligi
+            "13.00.00": "fa-graduation-cap",   # Pedagogika va ta'lim texnologiyalari
+            "17.00.00": "fa-palette",          # San'atshunoslik va dizayn fanlari
+            "08.00.00": "fa-chart-line",       # Iqtisodiyot va biznesni boshqarish
+            "10.00.00": "fa-language",         # Filologiya va tillarni o'qitish metodikasi
+            "01.00.00": "fa-atom",             # Fizika-matematika fanlari
+            "07.00.00": "fa-landmark",         # Tarix va madaniy meros fanlari
+            "09.00.00": "fa-brain",            # Falsafa va ijtimoy-gumanitar fanlar
+            "19.00.00": "fa-user-friends",     # Psixologiya va inson resurslari
+            "22.00.00": "fa-users",            # Sotsiologiya va jamiyatshunoslik
+        }
+        return mapping.get(self.code, "fa-microscope")
 
 
 class Article(models.Model):

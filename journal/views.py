@@ -754,9 +754,9 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
             rect_f_right = fitz.Rect(w - 120, footer_line_y + 4, w - margin_x, h - 15)
             if article.start_page:
                 actual_p = article.start_page + idx
-                p_str = f"Sahifa {actual_p}"
+                p_str = f"{actual_p}"
             else:
-                p_str = f"Sahifa {idx + 1} / {doc.page_count}"
+                p_str = f"{idx + 1}"
             try:
                 page.insert_textbox(rect_f_right, p_str, fontsize=8.5, color=NAVY, align=2)
             except Exception:
@@ -1465,7 +1465,7 @@ def download_issue_pdf(request, issue_pk):
         rect_f_right = fitz.Rect(w - 120, footer_line_y + 4, w - margin_x, h - 15)
         page_num = idx + 1
         try:
-            page.insert_textbox(rect_f_right, f"Sahifa {page_num}", fontsize=8.5, color=NAVY, align=2)
+            page.insert_textbox(rect_f_right, f"{page_num}", fontsize=8.5, color=NAVY, align=2)
         except Exception:
             pass
 

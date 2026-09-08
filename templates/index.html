@@ -178,6 +178,7 @@ if (ctx) {
                             <div class="flex flex-col gap-1.5 flex-1 py-2 overflow-y-auto max-h-64 pr-1">
                                 {% for cat in categories %}
                                     <div class="flex items-center gap-2 rounded-lg px-3 py-1.5" style="background:rgba(255,255,255,0.05); border:1px solid rgba(34,197,94,0.15);">
+                                        <i class="fas {{ cat.icon_class }} text-xs flex-shrink-0" style="color:#22c55e;"></i>
                                         <span class="font-black text-xs flex-shrink-0 font-mono" style="color:#22c55e; min-width:52px;">{{ cat.code }}</span>
                                         <div class="w-px h-3 flex-shrink-0" style="background:rgba(34,197,94,0.4);"></div>
                                         <span class="text-xs leading-tight truncate" style="color:#e2e8f0;">{{ cat.name }}</span>
