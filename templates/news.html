@@ -31,12 +31,36 @@
                     <div>
                         <a href="{% url 'news_detail' item.pk %}" class="block overflow-hidden">
                             {% if item.image %}
-                                <div class="h-48 overflow-hidden">
+                                <div class="h-48 overflow-hidden relative">
                                     <img src="{{ item.image.url }}" alt="{{ item.title }}"
                                          class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                    {% if item.media_files.exists %}
+                                        <div class="absolute bottom-2 right-2 bg-navy-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm border border-white/10">
+                                            <i class="fas fa-photo-video text-green-400"></i> {{ item.media_files.count }} media
+                                        </div>
+                                    {% endif %}
                                 </div>
+                            {% elif item.media_files.exists %}
+                                {% with first_media=item.media_files.first %}
+                                    {% if first_media.media_type == 'image' and first_media.file %}
+                                        <div class="h-48 overflow-hidden relative">
+                                            <img src="{{ first_media.file.url }}" alt="{{ item.title }}"
+                                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                            <div class="absolute bottom-2 right-2 bg-navy-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm border border-white/10">
+                                                <i class="fas fa-photo-video text-green-400"></i> {{ item.media_files.count }} media
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="h-48 flex items-center justify-center relative" style="background: linear-gradient(135deg, #0a1628, #1a3a6b);">
+                                            <i class="fas fa-video text-green-400 text-3xl opacity-60"></i>
+                                            <div class="absolute bottom-2 right-2 bg-navy-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm border border-white/10">
+                                                <i class="fas fa-video text-green-400"></i> {{ item.media_files.count }} media
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endwith %}
                             {% else %}
-                                <div class="h-24 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1628, #1a3a6b);">
+                                <div class="h-32 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1628, #1a3a6b);">
                                     <i class="fas fa-newspaper text-green-400 text-3xl opacity-50"></i>
                                 </div>
                             {% endif %}

@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
@@ -53,9 +54,15 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(ArticleCategory)
 class ArticleCategoryAdmin(admin.ModelAdmin):
-    list_display = ('code', 'name', 'order')
-    list_editable = ('order',)
+    list_display = ('id', 'code', 'name', 'order', 'article_count')
+    list_display_links = ('id',)
+    list_editable = ('code', 'name', 'order')
+    search_fields = ('code', 'name')
     ordering = ('order', 'code')
+
+    def article_count(self, obj):
+        return obj.articles.count()
+    article_count.short_description = "Maqolalar soni"
 
 
 
@@ -229,15 +236,56 @@ class ConferenceAdmin(admin.ModelAdmin):
 
 # ─── NEWS ADMIN ───────────────────────────────────────────────────────────────
 
+class MultipleFileInput(forms.FileInput):
+    allow_multiple_selected = True
+
+class MultipleFileField(forms.FileField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", MultipleFileInput())
+        super().__init__(*args, **kwargs)
+
+    def clean(self, data, initial=None):
+        if not data:
+            return []
+        if isinstance(data, (list, tuple)):
+            return [super(MultipleFileField, self).clean(d, initial) for d in data]
+        return [super(MultipleFileField, self).clean(data, initial)]
+
+class NewsAdminForm(forms.ModelForm):
+    upload_images = MultipleFileField(
+        widget=MultipleFileInput(attrs={'accept': 'image/*'}),
+        required=False,
+        label="Ko'plab rasmlar yuklash (Bir vaqtda bir nechta rasm tanlash)",
+        help_text="Kompyuteringizdan bir nechta rasmni bir vaqtda belgilab (Ctrl/Shift) yuklashingiz mumkin."
+    )
+    upload_videos = MultipleFileField(
+        widget=MultipleFileInput(attrs={'accept': 'video/*'}),
+        required=False,
+        label="Ko'plab video fayllar yuklash (MP4/WebM)",
+        help_text="Bir nechta video fayllarni bir vaqtning o'zida tanlab yuklashingiz mumkin."
+    )
+    video_urls_text = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 3, 'placeholder': "https://www.youtube.com/watch?v=...\nhttps://youtu.be/...\nhttps://vimeo.com/..."}),
+        required=False,
+        label="Video havolalar (YouTube/Vimeo)",
+        help_text="Har bir satrga bittadan video havolasini yozing."
+    )
+
+    class Meta:
+        model = News
+        fields = '__all__'
+
+
 class NewsMediaInline(admin.TabularInline):
     model = NewsMedia
-    extra = 2
+    extra = 1
     fields = ('media_type', 'file', 'video_url', 'caption', 'order')
 
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active', 'created_at')
+    form = NewsAdminForm
+    list_display = ('title', 'media_count_display', 'is_active', 'created_at')
     list_filter = ('is_active',)
     search_fields = ('title', 'content')
     list_editable = ('is_active',)
@@ -248,7 +296,57 @@ class NewsAdmin(admin.ModelAdmin):
         ("Yangilik ma'lumotlari", {
             'fields': ('title', 'content', 'image', 'is_active')
         }),
+        ("Ommaviy foto va video yuklash (Ko'plab rasmlar va videolar)", {
+            'fields': ('upload_images', 'upload_videos', 'video_urls_text'),
+            'description': "Bu yerda bir vaqtning o'zida 10-20 ta rasmlarni tanlab yuklashingiz, ko'plab video fayllarni yoki YouTube/Vimeo havolalarini joylashingiz mumkin."
+        }),
     )
+
+    def media_count_display(self, obj):
+        images_count = obj.media_files.filter(media_type='image').count()
+        videos_count = obj.media_files.exclude(media_type='image').count()
+        res = []
+        if images_count:
+            res.append(f"📷 {images_count} rasm")
+        if videos_count:
+            res.append(f"🎥 {videos_count} video")
+        return " | ".join(res) if res else "Media yo'q"
+    media_count_display.short_description = "Media fayllar"
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+
+        # 1. Multiple images
+        images = request.FILES.getlist('upload_images')
+        for idx, img in enumerate(images):
+            NewsMedia.objects.create(
+                news=obj,
+                media_type='image',
+                file=img,
+                order=idx + 10
+            )
+
+        # 2. Multiple videos
+        videos = request.FILES.getlist('upload_videos')
+        for idx, vid in enumerate(videos):
+            NewsMedia.objects.create(
+                news=obj,
+                media_type='video',
+                file=vid,
+                order=idx + 20
+            )
+
+        # 3. Multiple video URLs
+        video_urls = form.cleaned_data.get('video_urls_text')
+        if video_urls:
+            lines = [l.strip() for l in video_urls.splitlines() if l.strip()]
+            for idx, url in enumerate(lines):
+                NewsMedia.objects.create(
+                    news=obj,
+                    media_type='video_url',
+                    video_url=url,
+                    order=idx + 30
+                )
 
 
 # ─── DOCUMENT ADMIN ───────────────────────────────────────────────────────────

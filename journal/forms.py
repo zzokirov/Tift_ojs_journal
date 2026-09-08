@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from .models import Article
+from .models import Article, ArticleCategory
 
 User = get_user_model()
 
@@ -83,9 +83,25 @@ def validate_image_file(file):
 
 
 class ArticleSubmissionForm(forms.ModelForm):
+    category = forms.ModelChoiceField(
+        queryset=ArticleCategory.objects.all().order_by('order', 'code'),
+        required=False,
+        empty_label="--- Yo'nalishni tanlang (Ixtiyoriy) ---",
+        label="Yo'nalish (Kategoriya)",
+        widget=forms.Select(attrs={'class': css_input})
+    )
+
     class Meta:
         model = Article
-        fields = ['title', 'authors', 'abstract', 'keywords', 'pdf_file']
+        fields = ['title', 'category', 'authors', 'abstract', 'keywords', 'pdf_file']
+        labels = {
+            'title': "Maqola sarlavhasi",
+            'category': "Yo'nalish (Kategoriya)",
+            'authors': "Mualliflar va ularning ish joyi",
+            'abstract': "Annotatsiya / Abstract",
+            'keywords': "Kalit so'zlar",
+            'pdf_file': "Maqola fayli (.docx)",
+        }
         widgets = {
             'title':    forms.TextInput(attrs={'class': css_input, 'placeholder': 'Maqola sarlavhasi'}),
             'authors':  forms.TextInput(attrs={'class': css_input, 'placeholder': 'Barcha mualliflar (Ism Familiya, ...)'}),
