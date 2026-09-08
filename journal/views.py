@@ -1432,7 +1432,13 @@ def download_issue_pdf(request, issue_pk):
 
         footer_y = height - 20.0
         num_str = f"– {page_num} –"
-        page.insert_text((width / 2 - 14, footer_y), num_str, fontsize=9, fontname="helv-bold", color=(0.04, 0.086, 0.157))
+        try:
+            page.insert_text((width / 2 - 14, footer_y), num_str, fontsize=9, fontname="helv", color=(0.04, 0.086, 0.157))
+        except Exception:
+            try:
+                page.insert_text((width / 2 - 14, footer_y), num_str, fontsize=9, color=(0.04, 0.086, 0.157))
+            except Exception:
+                pass
 
     # 6. YUKLAB OLISH UCHUN QAYTARISH
     final_bytes = master_doc.tobytes()
