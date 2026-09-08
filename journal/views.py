@@ -733,25 +733,26 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
         for idx, page in enumerate(doc):
             w = page.rect.width
             h = page.rect.height
-            margin_x = 36.0
+            margin_left = 85.0    # 3.0 cm (maqola matni bilan bir liniyada)
+            margin_right = 42.5   # 1.5 cm
             footer_line_y = h - 40.0
 
             # PASTKI KOLONTITUL CHIZIQ
             try:
                 line_color = PRIMARY_LINE if idx == 0 else LINE_COLOR
-                page.draw_line(fitz.Point(margin_x, footer_line_y), fitz.Point(w - margin_x, footer_line_y), color=line_color, width=0.75 if idx == 0 else 0.5)
+                page.draw_line(fitz.Point(margin_left, footer_line_y), fitz.Point(w - margin_right, footer_line_y), color=line_color, width=0.75 if idx == 0 else 0.5)
             except Exception:
                 pass
 
-            # CHAP TOMON MATNI
-            rect_f_left = fitz.Rect(margin_x, footer_line_y + 4, w - 120, h - 15)
+            # CHAP TOMON MATNI (3cm uzoqlikdan)
+            rect_f_left = fitz.Rect(margin_left, footer_line_y + 4, w - 100, h - 15)
             try:
                 page.insert_textbox(rect_f_left, f"\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali | {issue_full} | http://architect-edu.tift.uz", fontsize=8, color=GRAY_TEXT, align=0)
             except Exception:
                 pass
 
             # O'NG TOMON SAHIFA RAQAMI
-            rect_f_right = fitz.Rect(w - 120, footer_line_y + 4, w - margin_x, h - 15)
+            rect_f_right = fitz.Rect(w - 100, footer_line_y + 4, w - margin_right, h - 15)
             if article.start_page:
                 actual_p = article.start_page + idx
                 p_str = f"{actual_p}"
@@ -807,7 +808,19 @@ def download_pdf(request, pk):
     from django.template.loader import render_to_string
     from django.conf import settings
 
-    article = get_object_or_404(Article, pk=pk, status='published')
+    article = get_object_or_404(Article, pk=pk)
+
+    # Huquq tekshiruvi: Chop etilgan bo'lsa barchaga, aks holda muallif, taqrizchi va xodimlarga
+    is_author = request.user.is_authenticated and article.author_id == request.user.pk
+    is_reviewer_or_staff = request.user.is_authenticated and (
+        request.user.role in ['reviewer', 'editor'] or
+        request.user.is_staff or
+        request.user.is_superuser or
+        article.assigned_reviewer_id == request.user.pk
+    )
+    if article.status != 'published' and not (is_author or is_reviewer_or_staff):
+        raise Http404("Maqola hali chop etilmagan.")
+
     Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
 
     if article.issue and article.start_page is None:
@@ -870,7 +883,18 @@ def generate_article_pdf(request, pk):
     from django.shortcuts import redirect as _redirect
     import io
 
-    article = get_object_or_404(Article, pk=pk, status='published')
+    article = get_object_or_404(Article, pk=pk)
+
+    is_author = request.user.is_authenticated and article.author_id == request.user.pk
+    is_reviewer_or_staff = request.user.is_authenticated and (
+        request.user.role in ['reviewer', 'editor'] or
+        request.user.is_staff or
+        request.user.is_superuser or
+        article.assigned_reviewer_id == request.user.pk
+    )
+    if article.status != 'published' and not (is_author or is_reviewer_or_staff):
+        raise Http404("Maqola hali chop etilmagan.")
+
     if not request.session.get(f'pdf_viewed_{pk}'):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
         request.session[f'pdf_viewed_{pk}'] = True
@@ -1495,21 +1519,22 @@ def download_issue_pdf(request, issue_pk):
 
         w = page.rect.width
         h = page.rect.height
-        margin_x = 36.0
+        margin_left = 85.0    # 3.0 cm (maqola matni bilan bir liniyada)
+        margin_right = 42.5   # 1.5 cm
         footer_line_y = h - 40.0
 
         try:
-            page.draw_line(fitz.Point(margin_x, footer_line_y), fitz.Point(w - margin_x, footer_line_y), color=LINE_COLOR, width=0.5)
+            page.draw_line(fitz.Point(margin_left, footer_line_y), fitz.Point(w - margin_right, footer_line_y), color=LINE_COLOR, width=0.5)
         except Exception:
             pass
 
-        rect_f_left = fitz.Rect(margin_x, footer_line_y + 4, w - 120, h - 15)
+        rect_f_left = fitz.Rect(margin_left, footer_line_y + 4, w - 100, h - 15)
         try:
             page.insert_textbox(rect_f_left, f"\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali | {issue_full} | http://architect-edu.tift.uz", fontsize=8, color=GRAY_TEXT, align=0)
         except Exception:
             pass
 
-        rect_f_right = fitz.Rect(w - 120, footer_line_y + 4, w - margin_x, h - 15)
+        rect_f_right = fitz.Rect(w - 100, footer_line_y + 4, w - margin_right, h - 15)
         page_num = idx + 1
         try:
             page.insert_textbox(rect_f_right, f"{page_num}", fontsize=8.5, color=NAVY, align=2)
