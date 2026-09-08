@@ -103,6 +103,12 @@
 
         <!-- Nav links -->
         <nav class="flex-1 space-y-1">
+            {% if user.role == 'reviewer' or user.role == 'editor' or user.is_staff or user.is_superuser %}
+            <a href="{% url 'reviewer_dashboard' %}"
+               class="sidebar-link {% if request.resolver_match.url_name == 'reviewer_dashboard' %}active{% endif %}">
+                <i class="fas fa-clipboard-check text-green-600"></i> {% trans "Taqrizchi paneli" %}
+            </a>
+            {% endif %}
             <a href="{% url 'my_articles' %}"
                class="sidebar-link {% if request.resolver_match.url_name == 'my_articles' %}active{% endif %}">
                 <i class="fas fa-file-alt"></i> {% trans "Maqolalarim" %}
@@ -130,7 +136,8 @@
         <!-- Page title -->
         <div class="mb-6">
             <h1 class="text-2xl font-black text-navy-900">{% block page_title %}
-                {% if request.resolver_match.url_name == 'my_articles' %}{% trans "Maqolalarim" %}
+                {% if request.resolver_match.url_name == 'reviewer_dashboard' %}{% trans "Taqrizchi va Muharrirlar Paneli" %}
+                {% elif request.resolver_match.url_name == 'my_articles' %}{% trans "Maqolalarim" %}
                 {% elif request.resolver_match.url_name == 'submit_article' %}{% trans "Maqola yuborish" %}
                 {% elif request.resolver_match.url_name == 'profile' %}{% trans "Profilim" %}
                 {% elif request.resolver_match.url_name == 'change_password' %}{% trans "Parol o'zgartirish" %}

@@ -1,0 +1,482 @@
+{% extends 'dashboard_base.html' %}
+{% load static i18n %}
+
+{% block title %}Taqrizchi va Muharrirlar paneli | TIFT Jurnali{% endblock %}
+
+{% block page_title %}Taqrizchi va Muharrirlar Ishchi Paneli{% endblock %}
+
+{% block dashboard_content %}
+
+<!-- STATS OVERVIEW -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <a href="?tab=pending{% if query %}&q={{ query }}{% endif %}"
+       class="bg-white rounded-2xl border p-4 shadow-sm transition hover:shadow-md flex items-center justify-between
+              {% if tab == 'pending' %}border-amber-400 ring-2 ring-amber-400/20 bg-amber-50/20{% else %}border-gray-100{% endif %}">
+        <div>
+            <div class="text-xs font-bold text-amber-600 uppercase tracking-wider">Taqriz kutayotganlar</div>
+            <div class="text-2xl font-black text-gray-800 mt-1">{{ counts.pending }}</div>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl">
+            <i class="fas fa-hourglass-half"></i>
+        </div>
+    </a>
+
+    <a href="?tab=published{% if query %}&q={{ query }}{% endif %}"
+       class="bg-white rounded-2xl border p-4 shadow-sm transition hover:shadow-md flex items-center justify-between
+              {% if tab == 'published' %}border-emerald-400 ring-2 ring-emerald-400/20 bg-emerald-50/20{% else %}border-gray-100{% endif %}">
+        <div>
+            <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Chop etilganlar</div>
+            <div class="text-2xl font-black text-gray-800 mt-1">{{ counts.published }}</div>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl">
+            <i class="fas fa-check-circle"></i>
+        </div>
+    </a>
+
+    <a href="?tab=rejected{% if query %}&q={{ query }}{% endif %}"
+       class="bg-white rounded-2xl border p-4 shadow-sm transition hover:shadow-md flex items-center justify-between
+              {% if tab == 'rejected' %}border-rose-400 ring-2 ring-rose-400/20 bg-rose-50/20{% else %}border-gray-100{% endif %}">
+        <div>
+            <div class="text-xs font-bold text-rose-600 uppercase tracking-wider">Rad etilgan / Qaytarilgan</div>
+            <div class="text-2xl font-black text-gray-800 mt-1">{{ counts.rejected }}</div>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl">
+            <i class="fas fa-times-circle"></i>
+        </div>
+    </a>
+
+    <a href="?tab=all{% if query %}&q={{ query }}{% endif %}"
+       class="bg-white rounded-2xl border p-4 shadow-sm transition hover:shadow-md flex items-center justify-between
+              {% if tab == 'all' %}border-indigo-400 ring-2 ring-indigo-400/20 bg-indigo-50/20{% else %}border-gray-100{% endif %}">
+        <div>
+            <div class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Barcha maqolalar</div>
+            <div class="text-2xl font-black text-gray-800 mt-1">{{ counts.all }}</div>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl">
+            <i class="fas fa-layer-group"></i>
+        </div>
+    </a>
+</div>
+
+<!-- FILTER TOOLBAR & SEARCH -->
+<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <!-- Tabs -->
+    <div class="flex flex-wrap items-center gap-2">
+        <a href="?tab=pending{% if query %}&q={{ query }}{% endif %}"
+           class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5
+                  {% if tab == 'pending' %}bg-amber-500 text-white shadow-md shadow-amber-500/20{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+            <i class="fas fa-clock"></i> Taqriz kutayotganlar
+            <span class="px-1.5 py-0.5 rounded-full text-[10px] {% if tab == 'pending' %}bg-white/20 text-white{% else %}bg-gray-200 text-gray-700{% endif %}">{{ counts.pending }}</span>
+        </a>
+        <a href="?tab=published{% if query %}&q={{ query }}{% endif %}"
+           class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5
+                  {% if tab == 'published' %}bg-emerald-600 text-white shadow-md shadow-emerald-600/20{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+            <i class="fas fa-book"></i> Chop etilganlar
+            <span class="px-1.5 py-0.5 rounded-full text-[10px] {% if tab == 'published' %}bg-white/20 text-white{% else %}bg-gray-200 text-gray-700{% endif %}">{{ counts.published }}</span>
+        </a>
+        <a href="?tab=rejected{% if query %}&q={{ query }}{% endif %}"
+           class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5
+                  {% if tab == 'rejected' %}bg-rose-600 text-white shadow-md shadow-rose-600/20{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+            <i class="fas fa-ban"></i> Rad etilgan / Qaytarilgan
+            <span class="px-1.5 py-0.5 rounded-full text-[10px] {% if tab == 'rejected' %}bg-white/20 text-white{% else %}bg-gray-200 text-gray-700{% endif %}">{{ counts.rejected }}</span>
+        </a>
+        <a href="?tab=all{% if query %}&q={{ query }}{% endif %}"
+           class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5
+                  {% if tab == 'all' %}bg-navy-900 text-white shadow-md shadow-navy-900/20{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+            <i class="fas fa-list"></i> Barchasi
+            <span class="px-1.5 py-0.5 rounded-full text-[10px] {% if tab == 'all' %}bg-white/20 text-white{% else %}bg-gray-200 text-gray-700{% endif %}">{{ counts.all }}</span>
+        </a>
+    </div>
+
+    <!-- Search input -->
+    <form method="get" class="flex items-center gap-2 w-full md:w-auto">
+        <input type="hidden" name="tab" value="{{ tab }}">
+        <div class="relative w-full md:w-64">
+            <input type="text" name="q" value="{{ query }}" placeholder="Maqola, muallif bo'yicha..."
+                   class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-8 py-2 text-xs text-gray-800 focus:outline-none focus:border-green-500 focus:bg-white transition">
+            <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-xs"></i>
+            {% if query %}
+                <a href="?tab={{ tab }}" class="absolute right-2.5 top-2 text-gray-400 hover:text-gray-600 text-xs">
+                    <i class="fas fa-times-circle"></i>
+                </a>
+            {% endif %}
+        </div>
+        <button type="submit" class="bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition">
+            Izlash
+        </button>
+    </form>
+</div>
+
+<!-- ARTICLES LIST -->
+{% if articles %}
+    <div class="space-y-4">
+        {% for article in articles %}
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition p-5">
+                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4 mb-3">
+                    <div class="flex-1 min-w-0">
+                        <!-- Top Metadata Row -->
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <!-- Status Badge -->
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold border
+                                {% if article.status == 'published' %}bg-emerald-50 text-emerald-700 border-emerald-200
+                                {% elif article.status == 'submitted' %}bg-blue-50 text-blue-700 border-blue-200
+                                {% elif article.status == 'under_review' %}bg-amber-50 text-amber-700 border-amber-200
+                                {% elif article.status == 'accepted' %}bg-teal-50 text-teal-700 border-teal-200
+                                {% elif article.status == 'returned' %}bg-orange-50 text-orange-700 border-orange-200
+                                {% elif article.status == 'rejected' %}bg-rose-50 text-rose-700 border-rose-200
+                                {% endif %}">
+                                {% if article.status == 'published' %}<i class="fas fa-check-circle"></i> Nashr etilgan
+                                {% elif article.status == 'submitted' %}<i class="fas fa-paper-plane"></i> Yangi kelib tushgan
+                                {% elif article.status == 'under_review' %}<i class="fas fa-search"></i> Taqriz jarayonida
+                                {% elif article.status == 'accepted' %}<i class="fas fa-thumbs-up"></i> Qabul qilingan
+                                {% elif article.status == 'returned' %}<i class="fas fa-undo"></i> Tuzatishga qaytarilgan
+                                {% elif article.status == 'rejected' %}<i class="fas fa-times-circle"></i> Rad etilgan
+                                {% endif %}
+                            </span>
+
+                            {% if article.category %}
+                                <span class="bg-gray-100 text-gray-700 border border-gray-200 px-2.5 py-1 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-tag text-[10px] text-gray-400"></i> {{ article.category.code }}
+                                </span>
+                            {% endif %}
+
+                            {% if article.issue %}
+                                <span class="bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-book text-[10px]"></i> {{ article.issue.year }}-yil {{ article.issue.number }}-son
+                                </span>
+                            {% endif %}
+
+                            <span class="text-xs text-gray-400 ml-auto">
+                                <i class="far fa-calendar-alt"></i> {{ article.created_at|date:"d.m.Y H:i" }}
+                            </span>
+                        </div>
+
+                        <!-- Article Title -->
+                        <h3 class="font-bold text-gray-900 text-lg leading-snug mb-2 hover:text-green-700 transition">
+                            <a href="{% url 'article_detail' article.pk %}" target="_blank">
+                                {{ article.title }}
+                            </a>
+                        </h3>
+
+                        <!-- Author & Contributor Info -->
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600 mb-3 bg-gray-50 p-2.5 rounded-xl">
+                            <span class="font-bold text-gray-800">
+                                <i class="fas fa-user text-green-600"></i> Muallif: {{ article.authors|default:article.author.get_full_name }}
+                            </span>
+                            {% if article.author.email %}
+                                <span><i class="far fa-envelope text-gray-400"></i> {{ article.author.email }}</span>
+                            {% endif %}
+                            {% if article.start_page %}
+                                <span class="font-semibold text-gray-700">
+                                    <i class="fas fa-file-alt text-gray-400"></i> Sahifalar: {{ article.start_page }}-{{ article.end_page }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Abstract -->
+                        <p class="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-3">
+                            {{ article.abstract }}
+                        </p>
+
+                        <!-- Existing Review Notes Callout -->
+                        {% if article.review_notes %}
+                            <div class="p-3 rounded-xl mb-3 text-xs leading-relaxed border
+                                        {% if article.status == 'rejected' %}bg-rose-50 border-rose-200 text-rose-900
+                                        {% elif article.status == 'returned' %}bg-orange-50 border-orange-200 text-orange-900
+                                        {% elif article.status == 'published' %}bg-emerald-50 border-emerald-200 text-emerald-900
+                                        {% else %}bg-blue-50 border-blue-200 text-blue-900{% endif %}">
+                                <div class="font-bold flex items-center gap-1.5 mb-1">
+                                    <i class="fas fa-comment-dots"></i> Taqrizchi izohi
+                                    {% if article.reviewed_by %}<span class="font-normal opacity-75">({{ article.reviewed_by.get_full_name|default:article.reviewed_by.username }})</span>{% endif %}:
+                                </div>
+                                <div class="whitespace-pre-line">{{ article.review_notes }}</div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- ACTION BUTTONS TOOLBAR -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-gray-100">
+                    <!-- File Download / View -->
+                    <div class="flex items-center gap-2">
+                        {% if article.pdf_file %}
+                            <a href="{{ article.pdf_file.url }}" target="_blank"
+                               class="inline-flex items-center gap-1.5 bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition shadow-sm">
+                                <i class="fas fa-file-pdf text-red-400"></i> Original Fayl
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'download_pdf' article.pk %}" target="_blank"
+                           class="inline-flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-3 py-1.5 rounded-lg transition">
+                            <i class="fas fa-print"></i> PDF Jurnal Ko'rinishi
+                        </a>
+                    </div>
+
+                    <!-- Reviewer Action Buttons -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <!-- Under Review Status Change -->
+                        {% if article.status == 'submitted' %}
+                            <form action="{% url 'review_article_action' article.pk %}" method="post" class="inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="under_review">
+                                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                                    <i class="fas fa-search"></i> Taqrizga o'tkazish
+                                </button>
+                            </form>
+                        {% endif %}
+
+                        <!-- Edit Details Modal Trigger -->
+                        <button type="button" onclick="openModal('editModal_{{ article.pk }}')"
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                            <i class="fas fa-edit"></i> Tahrirlash
+                        </button>
+
+                        <!-- Publish Modal Trigger -->
+                        <button type="button" onclick="openModal('publishModal_{{ article.pk }}')"
+                                class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                            <i class="fas fa-upload"></i> Chop etish (Publish)
+                        </button>
+
+                        <!-- Reject / Return Modal Trigger -->
+                        <button type="button" onclick="openModal('rejectModal_{{ article.pk }}')"
+                                class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                            <i class="fas fa-ban"></i> Rad etish / Izoh berish
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL 1: EDIT DETAILS -->
+            <div id="editModal_{{ article.pk }}" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+                <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative my-8">
+                    <div class="flex items-center justify-between border-b pb-3 mb-4">
+                        <h3 class="font-bold text-gray-900 text-base flex items-center gap-2">
+                            <i class="fas fa-edit text-blue-600"></i> Maqola ma'lumotlarini tahrirlash
+                        </h3>
+                        <button type="button" onclick="closeModal('editModal_{{ article.pk }}')" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+                    </div>
+
+                    <form action="{% url 'review_article_action' article.pk %}" method="post" enctype="multipart/form-data" class="space-y-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="edit_details">
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Maqola sarlavhasi</label>
+                            <input type="text" name="title" value="{{ article.title }}" required
+                                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Mualliflar va ish joylari</label>
+                            <input type="text" name="authors" value="{{ article.authors }}"
+                                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 mb-1">Bo'lim / Yo'nalish</label>
+                                <select name="category_id" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">
+                                    <option value="">-- Yo'nalishni tanlang --</option>
+                                    {% for cat in categories %}
+                                        <option value="{{ cat.pk }}" {% if article.category_id == cat.pk %}selected{% endif %}>
+                                            {{ cat.code }} - {{ cat.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-700 mb-1">Boshlanish sahifasi</label>
+                                    <input type="number" name="start_page" value="{{ article.start_page|default:'' }}" placeholder="masalan: 12"
+                                           class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-700 mb-1">Tugash sahifasi</label>
+                                    <input type="number" name="end_page" value="{{ article.end_page|default:'' }}" placeholder="masalan: 18"
+                                           class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Annotatsiya (Abstract)</label>
+                            <textarea name="abstract" rows="4" required
+                                      class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">{{ article.abstract }}</textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Kalit so'zlar</label>
+                            <input type="text" name="keywords" value="{{ article.keywords }}"
+                                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Yangi PDF/Docx fayli yuklash (ixtiyoriy)</label>
+                            <input type="file" name="pdf_file" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Taqrizchi izohi (ixtiyoriy saqlash)</label>
+                            <textarea name="review_notes" rows="2" placeholder="O'zgartirishlar haqida izoh kiritish..."
+                                      class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">{{ article.review_notes }}</textarea>
+                        </div>
+
+                        <div class="flex items-center justify-end gap-2 pt-3 border-t">
+                            <button type="button" onclick="closeModal('editModal_{{ article.pk }}')"
+                                    class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-4 py-2 rounded-xl transition">
+                                Bekor qilish
+                            </button>
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-5 py-2 rounded-xl transition shadow">
+                                Saqlash
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL 2: PUBLISH ARTICLE -->
+            <div id="publishModal_{{ article.pk }}" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+                <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8">
+                    <div class="flex items-center justify-between border-b pb-3 mb-4">
+                        <h3 class="font-bold text-gray-900 text-base flex items-center gap-2">
+                            <i class="fas fa-upload text-emerald-600"></i> Maqolani Chop Etish (Nashr Qilish)
+                        </h3>
+                        <button type="button" onclick="closeModal('publishModal_{{ article.pk }}')" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+                    </div>
+
+                    <form action="{% url 'review_article_action' article.pk %}" method="post" class="space-y-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="publish">
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Jurnal sonini tanlang</label>
+                            <select name="issue_id" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">
+                                <option value="">-- Jurnal sonini tanlang --</option>
+                                {% for issue in issues %}
+                                    <option value="{{ issue.pk }}" {% if article.issue_id == issue.pk %}selected{% endif %}>
+                                        {{ issue.year }}-yil, {{ issue.number }}-son (Volume {{ issue.volume }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Chop etilgan sana</label>
+                            <input type="date" name="published_at" value="{% if article.published_at %}{{ article.published_at|date:'Y-m-d' }}{% endif %}"
+                                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">
+                            <p class="text-[10px] text-gray-400 mt-1">Tanlanmasa, bugungi sana avtomatik qo'yiladi.</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Muallif uchun tabrik / izoh (ixtiyoriy)</label>
+                            <textarea name="review_notes" rows="3" placeholder="Masalan: Maqolangiz muvaffaqiyatli nashr etildi!"
+                                      class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-green-500 focus:outline-none">{{ article.review_notes }}</textarea>
+                        </div>
+
+                        <div class="flex items-center justify-end gap-2 pt-3 border-t">
+                            <button type="button" onclick="closeModal('publishModal_{{ article.pk }}')"
+                                    class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-4 py-2 rounded-xl transition">
+                                Bekor qilish
+                            </button>
+                            <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-5 py-2 rounded-xl transition shadow">
+                                <i class="fas fa-check"></i> Rasman Nashr Etish
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MODAL 3: REJECT OR RETURN WITH REASON -->
+            <div id="rejectModal_{{ article.pk }}" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+                <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8">
+                    <div class="flex items-center justify-between border-b pb-3 mb-4">
+                        <h3 class="font-bold text-gray-900 text-base flex items-center gap-2">
+                            <i class="fas fa-ban text-rose-600"></i> Maqolani Rad etish yoki Tuzatishga Qaytarish
+                        </h3>
+                        <button type="button" onclick="closeModal('rejectModal_{{ article.pk }}')" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+                    </div>
+
+                    <form action="{% url 'review_article_action' article.pk %}" method="post" class="space-y-4">
+                        {% csrf_token %}
+
+                        <!-- Decision options -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-2">Qabul qilingan qaror:</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="border-2 border-rose-200 rounded-xl p-3 flex items-center gap-2 cursor-pointer hover:bg-rose-50 transition">
+                                    <input type="radio" name="action" value="reject" checked class="text-rose-600 focus:ring-rose-500">
+                                    <div>
+                                        <div class="font-bold text-xs text-rose-700">Rad etish</div>
+                                        <div class="text-[10px] text-gray-500">Butunlay rad etiladi</div>
+                                    </div>
+                                </label>
+
+                                <label class="border-2 border-amber-200 rounded-xl p-3 flex items-center gap-2 cursor-pointer hover:bg-amber-50 transition">
+                                    <input type="radio" name="action" value="return" class="text-amber-600 focus:ring-amber-500">
+                                    <div>
+                                        <div class="font-bold text-xs text-amber-700">Tuzatishga qaytarish</div>
+                                        <div class="text-[10px] text-gray-500">Qayta ishlash uchun</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Mandatory Reviewer Notes -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">
+                                Rad etish / Tuzatish sababi (Muallifga ko'rinadi) <span class="text-rose-500">*</span>
+                            </label>
+                            <textarea name="review_notes" rows="4" required
+                                      placeholder="Nima uchun maqola rad etildi yoki qaysi joylarini tuzatish kerakligi haqida batafsil izoh yozing..."
+                                      class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:bg-white focus:border-rose-500 focus:outline-none">{{ article.review_notes }}</textarea>
+                        </div>
+
+                        <div class="flex items-center justify-end gap-2 pt-3 border-t">
+                            <button type="button" onclick="closeModal('rejectModal_{{ article.pk }}')"
+                                    class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-4 py-2 rounded-xl transition">
+                                Bekor qilish
+                            </button>
+                            <button type="submit" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-5 py-2 rounded-xl transition shadow">
+                                <i class="fas fa-paper-plane"></i> Qarorni Saqlash va Muallifga Yuborish
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
+        <i class="fas fa-folder-open text-5xl text-gray-300 mb-4 block"></i>
+        <h3 class="text-gray-500 font-semibold text-lg mb-2">Maqolalar topilmadi</h3>
+        <p class="text-gray-400 text-sm">Ushbu bo'limda ko'rib chiqish uchun maqolalar mavjud emas.</p>
+    </div>
+{% endif %}
+
+<script>
+function openModal(modalId) {
+    const el = document.getElementById(modalId);
+    if (el) {
+        el.classList.remove('hidden');
+        el.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeModal(modalId) {
+    const el = document.getElementById(modalId);
+    if (el) {
+        el.classList.add('hidden');
+        el.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+    }
+}
+</script>
+
+{% endblock %}

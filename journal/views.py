@@ -475,18 +475,22 @@ def _get_qr_code_base64(article, request=None):
         import io
         import base64
         qr = qrcode.QRCode(version=1, box_size=5, border=0)
+        qr_url = None
         if request:
-            qr_url = request.build_absolute_uri(f"/article/{article.pk}/")
-        else:
+            try:
+                qr_url = request.build_absolute_uri(f"/article/{article.pk}/")
+            except BaseException:
+                pass
+        if not qr_url:
             qr_url = f"https://architect-edu.tift.uz/article/{article.pk}/"
+
         qr.add_data(qr_url)
         qr.make(fit=True)
         img = qr.make_image(fill_color="black", back_color="white")
         buf = io.BytesIO()
         img.save(buf, format="PNG")
         return base64.b64encode(buf.getvalue()).decode('ascii')
-    except Exception as e:
-        print("QR code generation error:", e)
+    except BaseException:
         return ""
 
 
@@ -989,6 +993,158 @@ def change_password(request):
     return render(request, 'change_password.html', {'form': form})
 
 
+@login_required
+def reviewer_dashboard(request):
+    """
+    Taqrizchilar va Muharrirlar uchun maxsus ishchi paneli.
+    Maqolalarni ko'rib chiqish, tahrirlash, chop etish (publish) va rad etish / izoh berish (reject/return with notes).
+    """
+    if not (request.user.role in ['reviewer', 'editor'] or request.user.is_staff or request.user.is_superuser):
+        messages.error(request, "Ushbu sahifa faqat taqrizchi va muharrirlar uchun mo'ljallangan.")
+        return redirect('my_articles')
+
+    tab = request.GET.get('tab', 'pending')
+    query = request.GET.get('q', '').strip()
+
+    all_articles = Article.objects.all().select_related('author', 'category', 'issue').order_by('-created_at')
+
+    if query:
+        all_articles = all_articles.filter(
+            Q(title__icontains=query) |
+            Q(authors__icontains=query) |
+            Q(keywords__icontains=query) |
+            Q(author__first_name__icontains=query) |
+            Q(author__last_name__icontains=query) |
+            Q(author__username__icontains=query)
+        )
+
+    # Status counts
+    counts = {
+        'pending': all_articles.filter(status__in=['submitted', 'initial_review', 'under_review']).count(),
+        'published': all_articles.filter(status__in=['published', 'accepted', 'ready_to_publish']).count(),
+        'rejected': all_articles.filter(status__in=['rejected', 'returned']).count(),
+        'all': all_articles.count(),
+    }
+
+    # Tab filtering
+    if tab == 'pending':
+        articles = all_articles.filter(status__in=['submitted', 'initial_review', 'under_review'])
+    elif tab == 'published':
+        articles = all_articles.filter(status__in=['published', 'accepted', 'ready_to_publish'])
+    elif tab == 'rejected':
+        articles = all_articles.filter(status__in=['rejected', 'returned'])
+    else:
+        articles = all_articles
+
+    issues = JournalIssue.objects.all().order_by('-year', '-number')
+    categories = ArticleCategory.objects.all().order_by('order', 'code')
+
+    return render(request, 'reviewer_dashboard.html', {
+        'articles': articles,
+        'counts': counts,
+        'tab': tab,
+        'query': query,
+        'issues': issues,
+        'categories': categories,
+    })
+
+
+@login_required
+def review_article_action(request, pk):
+    """
+    Taqrizchi/Muharrir maqolani tahrirlash, chop etish (publish) va rad etish / izoh berish (reject/return with notes) harakatlari.
+    """
+    if not (request.user.role in ['reviewer', 'editor'] or request.user.is_staff or request.user.is_superuser):
+        messages.error(request, "Ruxsat etilmagan harakat.")
+        return redirect('my_articles')
+
+    article = get_object_or_404(Article, pk=pk)
+
+    if request.method == 'POST':
+        action = request.POST.get('action')  # 'publish', 'reject', 'return', 'under_review', 'edit_details'
+        review_notes = request.POST.get('review_notes', '').strip()
+        issue_id = request.POST.get('issue_id')
+        published_at_str = request.POST.get('published_at')
+
+        from django.utils import timezone
+        import datetime
+
+        article.reviewed_by = request.user
+        article.reviewed_at = timezone.now()
+
+        if action == 'publish':
+            article.status = 'published'
+            if issue_id:
+                issue = JournalIssue.objects.filter(pk=issue_id).first()
+                if issue:
+                    article.issue = issue
+            if published_at_str:
+                try:
+                    article.published_at = datetime.datetime.strptime(published_at_str, '%Y-%m-%d').date()
+                except Exception:
+                    pass
+            if not article.published_at:
+                article.published_at = datetime.date.today()
+            if review_notes:
+                article.review_notes = review_notes
+            article.save()
+            messages.success(request, f"Maqola ('{article.title[:35]}...') muvaffaqiyatli nashr etildi!")
+
+        elif action in ['reject', 'return', 'returned', 'rejected']:
+            new_status = 'rejected' if action in ['reject', 'rejected'] else 'returned'
+            article.status = new_status
+            if review_notes:
+                article.review_notes = review_notes
+            article.save()
+            msg_text = "rad etildi" if new_status == 'rejected' else "tuzatish uchun qaytarildi"
+            messages.warning(request, f"Maqola {msg_text} va muallif uchun izoh saqlandi!")
+
+        elif action == 'under_review':
+            article.status = 'under_review'
+            if review_notes:
+                article.review_notes = review_notes
+            article.save()
+            messages.info(request, "Maqola holati 'Taqriz jarayonida' ga o'tkazildi.")
+
+        elif action == 'edit_details':
+            title = request.POST.get('title', '').strip()
+            authors = request.POST.get('authors', '').strip()
+            abstract = request.POST.get('abstract', '').strip()
+            keywords = request.POST.get('keywords', '').strip()
+            category_id = request.POST.get('category_id')
+            start_page = request.POST.get('start_page')
+            end_page = request.POST.get('end_page')
+
+            if title: article.title = title
+            if authors: article.authors = authors
+            if abstract: article.abstract = abstract
+            if keywords: article.keywords = keywords
+            if category_id:
+                cat = ArticleCategory.objects.filter(pk=category_id).first()
+                if cat: article.category = cat
+            if start_page:
+                try: article.start_page = int(start_page)
+                except Exception: pass
+            if end_page:
+                try: article.end_page = int(end_page)
+                except Exception: pass
+
+            if 'pdf_file' in request.FILES:
+                article.pdf_file = request.FILES['pdf_file']
+            if 'template_pdf' in request.FILES:
+                article.template_pdf = request.FILES['template_pdf']
+
+            if review_notes:
+                article.review_notes = review_notes
+
+            article.save()
+            messages.success(request, "Maqola ma'lumotlari muvaffaqiyatli tahrirlandi!")
+
+        return redirect(request.META.get('HTTP_REFERER', 'reviewer_dashboard'))
+
+    return redirect('reviewer_dashboard')
+
+
 def conferences(request):
     items = Conference.objects.filter(is_active=True).order_by('-date')
     return render(request, 'conferences.html', {'items': items})
@@ -1027,28 +1183,37 @@ def _build_pdf_from_html_xhtml2pdf(article, request=None):
     import io
     try:
         from xhtml2pdf import pisa
-    except ImportError:
-        return b''
-    
-    content_html = ''
-    if article.pdf_file:
-        try:
-            content_html = _get_article_content_html(article.pdf_file, article=article)
-        except Exception:
-            pass
+        content_html = ''
+        if article.pdf_file:
+            try:
+                content_html = _get_article_content_html(article.pdf_file, article=article)
+            except Exception:
+                pass
 
-    html_string = render_to_string('article_pdf.html', {
-        'article': article,
-        'request': request,
-        'pdf_content_html': content_html,
-        'static_root': django_settings.STATIC_ROOT,
-        'logo_base64': _get_logo_base64(),
-        'qr_code_base64': _get_qr_code_base64(article, request),
-    })
-    buffer = io.BytesIO()
-    base_url = request.build_absolute_uri('/') if request else ''
-    pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
-    return buffer.getvalue()
+        safe_logo = _get_logo_base64()
+        safe_qr = _get_qr_code_base64(article, request)
+
+        html_string = render_to_string('article_pdf.html', {
+            'article': article,
+            'pdf_content_html': content_html,
+            'static_root': django_settings.STATIC_ROOT,
+            'logo_base64': safe_logo,
+            'qr_code_base64': safe_qr,
+        })
+
+        buffer = io.BytesIO()
+        base_url = 'https://architect-edu.tift.uz/'
+        if request:
+            try:
+                base_url = request.build_absolute_uri('/')
+            except BaseException:
+                pass
+
+        pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
+        return buffer.getvalue()
+    except BaseException as e:
+        print(f"Error building PDF for article {getattr(article, 'pk', None)}:", e)
+        return b''
 
 
 def download_issue_pdf(request, issue_pk):
@@ -1072,13 +1237,21 @@ def download_issue_pdf(request, issue_pk):
     # 0. Agar admin tayyor full_pdf yuklagan bo'lsa
     if issue.full_pdf:
         try:
-            return redirect(issue.full_pdf.url)
-        except Exception:
-            pass
+            import os
+            from django.http import FileResponse
+            if hasattr(issue.full_pdf, 'path') and os.path.exists(issue.full_pdf.path):
+                filename = f"TIFT_Journal_{issue.year}_Son_{issue.number}.pdf"
+                return FileResponse(open(issue.full_pdf.path, 'rb'), content_type='application/pdf', as_attachment=True, filename=filename)
+            elif issue.full_pdf.url:
+                return redirect(issue.full_pdf.url)
+        except Exception as e:
+            print("full_pdf redirect error:", e)
 
     articles = list(Article.objects.filter(issue=issue, status='published').order_by('created_at', 'id'))
     if not articles:
-        return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
+        articles = list(Article.objects.filter(issue=issue).order_by('created_at', 'id'))
+    if not articles:
+        return HttpResponse("Ushbu sonda hali maqolalar mavjud emas.", status=404)
 
     try:
         import fitz
@@ -1177,7 +1350,21 @@ def download_issue_pdf(request, issue_pk):
             print(f"Error preparing article {art.pk}:", e)
 
     if not prepared_articles:
-        return HttpResponse("Maqolalar PDF larini shakllantirishda xatolik yuz berdi.", status=500)
+        master_doc = fitz.open()
+        if doc_cover and len(doc_cover) > 0:
+            master_doc.insert_pdf(doc_cover)
+        if doc_back_cover and len(doc_back_cover) > 0:
+            master_doc.insert_pdf(doc_back_cover)
+        if doc_editorial and len(doc_editorial) > 0:
+            master_doc.insert_pdf(doc_editorial)
+
+        if len(master_doc) > 0:
+            final_bytes = master_doc.tobytes()
+            response = HttpResponse(final_bytes, content_type='application/pdf')
+            filename = f"TIFT_Journal_{issue.year}_Son_{issue.number}.pdf"
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+        return HttpResponse("Ushbu jurnal soni va uning maqolalari hali to'liq shakllantirilmagan.", status=404)
 
     # 3. MUNDARIJA (TABLE OF CONTENTS) YARATISH VA SAHIFALARNI HISOBLASH
     toc_doc = None

@@ -22,4 +22,6 @@ urlpatterns = [
     path('profile/password/', views.change_password, name='change_password'),
     path('issue/<int:issue_pk>/', views.issue_detail, name='issue_detail'),
     path('issue/<int:issue_pk>/download/', views.download_issue_pdf, name='download_issue_pdf'),
+    path('reviewer/', views.reviewer_dashboard, name='reviewer_dashboard'),
+    path('reviewer/article/<int:pk>/action/', views.review_article_action, name='review_article_action'),
 ]
