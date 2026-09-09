@@ -1541,6 +1541,53 @@ def download_issue_pdf(request, issue_pk):
         except Exception:
             pass
 
+    # 5.5. MUNDARIJADAGI MAVZULARGA VA NATIVE PDF BOOKMARK (OUTLINE) GA INTERAKTIV GOTO HAVOLALAR QO'SHISH
+    try:
+        toc_page_offset = cover_page_count  # Mundarija boshlanadigan 0-indeksli sahifa
+        toc_num_pages = len(toc_doc) if toc_doc else 0
+        pdf_toc_outline = []
+
+        if toc_num_pages > 0:
+            pdf_toc_outline.append([1, "Mundarija / Contents", toc_page_offset + 1])
+
+        for item_idx, item in enumerate(article_items, 1):
+            art = item['article']
+            target_page_idx = item['start_page'] - 1  # Maqola boshlanadigan 0-indeksli sahifa
+            art_title = _clean_text(art.title)
+            
+            # PDF native bookmark outline ro'yxatiga qo'shish
+            pdf_toc_outline.append([1, f"{item_idx}. {art_title[:75]}", item['start_page']])
+
+            # Mundarija sahifalarida matnni izlash va bosiladigan ichki havolalar (internal links) o'rnatish
+            title_query = _clean_text(art.title[:30]).strip()
+            num_query = f"{item_idx}."
+
+            for p_offset in range(toc_num_pages):
+                current_toc_p_idx = toc_page_offset + p_offset
+                if current_toc_p_idx >= total_pages:
+                    break
+                toc_page = master_doc[current_toc_p_idx]
+
+                # Sarlavha matnini topish
+                rects = toc_page.search_for(title_query) if title_query else []
+                if not rects:
+                    rects = toc_page.search_for(num_query)
+
+                for r in rects:
+                    # Mundarijadagi ushbu qatorni to'liq bosiladigan zona (link rect) qilish
+                    link_rect = fitz.Rect(36.0, max(0.0, r.y0 - 4.0), toc_page.rect.width - 36.0, min(toc_page.rect.height, r.y1 + 14.0))
+                    toc_page.insert_link({
+                        'kind': fitz.LINK_GOTO,
+                        'from': link_rect,
+                        'page': target_page_idx,
+                        'to': fitz.Point(0.0, 0.0),
+                    })
+
+        if pdf_toc_outline:
+            master_doc.set_toc(pdf_toc_outline)
+    except Exception as e:
+        print("Error adding interactive TOC links/bookmarks:", e)
+
     # 6. YUKLAB OLISH UCHUN QAYTARISH
     final_bytes = master_doc.tobytes()
     response = HttpResponse(final_bytes, content_type='application/pdf')
