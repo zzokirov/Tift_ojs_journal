@@ -41,7 +41,7 @@
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
                       style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#cbd5e1;">
                     <i class="fas fa-book text-[9px]"></i>
-                    {% blocktrans with vol=article.issue.volume num=article.issue.number year=article.issue.year start=article.start_page end=article.end_page %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% if start %} (S. {{ start }}-{{ end }}){% endif %}{% endblocktrans %}
+                    {% blocktrans with vol=article.issue.volume num=article.issue.number year=article.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}{% if article.start_page %} {% blocktrans with start=article.start_page end=article.end_page %}(S. {{ start }}-{{ end }}){% endblocktrans %}{% endif %}
                 </span>
             {% endif %}
         </div>

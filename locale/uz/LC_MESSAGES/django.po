@@ -2,424 +2,2708 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-21 09:46+0500\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: .\core\settings.py:122
 msgid "O'zbek"
 msgstr "O'zbek"
 
+#: .\core\settings.py:123
 msgid "Русский"
 msgstr "Rus"
 
+#: .\core\settings.py:124
 msgid "English"
 msgstr "Ingliz"
 
-msgid "Bosh sahifa"
-msgstr "Bosh sahifa"
+# submit_article.html
+#: .\journal\admin.py:26
+#, fuzzy
+#| msgid "Maqola ma'lumotlari"
+msgid "Asosiy ma'lumotlar"
+msgstr "Maqola ma'lumotlari"
 
-msgid "Arxiv"
-msgstr "Arxiv"
-
-msgid "Yangiliklar"
-msgstr "Yangiliklar"
-
-msgid "Konferensiyalar"
-msgstr "Konferensiyalar"
-
-msgid "Hujjatlar"
-msgstr "Hujjatlar"
-
-msgid "Jurnal haqida"
-msgstr "Jurnal haqida"
-
-msgid "Kirish"
-msgstr "Kirish"
-
-msgid "A'zo bo'lish"
-msgstr "A'zo bo'lish"
-
-msgid "Maqola yuborish"
-msgstr "Maqola yuborish"
-
-msgid "Maqolalarim"
-msgstr "Maqolalarim"
-
-msgid "Chiqish"
-msgstr "Chiqish"
-
-msgid "Profilni tahrirlash"
-msgstr "Profilni tahrirlash"
-
-msgid "Parol o'zgartirish"
-msgstr "Parol o'zgartirish"
-
-msgid "Muallif paneli"
-msgstr "Muallif paneli"
-
-msgid "Profilim"
-msgstr "Profilim"
-
-msgid "Jurnal Arxivlari"
-msgstr "Jurnal Arxivlari"
-
-msgid "Barcha chop etilgan sonlar"
-msgstr "Barcha chop etilgan sonlar"
-
-msgid "Annotatsiya"
-msgstr "Annotatsiya"
-
-msgid "Kalit so'zlar"
-msgstr "Kalit so'zlar"
-
-msgid "Maqola matni"
-msgstr "Maqola matni"
-
-msgid "Muallif"
-msgstr "Muallif"
-
-msgid "Ko'rish"
-msgstr "Ko'rish"
-
-msgid "Yuklab olish"
-msgstr "Yuklab olish"
-
-msgid "Batafsil"
-msgstr "Batafsil"
-
-msgid "So'nggi maqolalar"
-msgstr "So'nggi maqolalar"
-
-msgid "Qidiruv natijalari"
-msgstr "Qidiruv natijalari"
-
-msgid "Jurnal arxivlari"
-msgstr "Jurnal arxivlari"
-
-msgid "Taqrizlash jarayoni"
-msgstr "Taqrizlash jarayoni"
-
-msgid "Maqolangizni yuboring"
-msgstr "Maqolangizni yuboring"
-
-msgid "Ro'yxatdan o'tish"
-msgstr "Ro'yxatdan o'tish"
-
-msgid "Tizimga kirish"
-msgstr "Tizimga kirish"
-
-msgid "Bosh sahifaga qaytish"
-msgstr "Bosh sahifaga qaytish"
-
-msgid "Chop etildi"
-msgstr "Chop etildi"
-
-msgid "Yuborildi"
-msgstr "Yuborildi"
-
-msgid "Taqriz jarayonida"
-msgstr "Taqriz jarayonida"
-
-msgid "Qabul qilindi"
-msgstr "Qabul qilindi"
-
-msgid "Rad etildi"
-msgstr "Rad etildi"
-
-msgid "Jami tashriflar"
-msgstr "Jami tashriflar"
-
-msgid "Bugungi tashriflar"
-msgstr "Bugungi tashriflar"
-
-msgid "Nashr maqolalar"
-msgstr "Nashr maqolalar"
-
-msgid "Jonli statistika"
-msgstr "Jonli statistika"
-
-msgid "Maqolalarni ko'rish"
-msgstr "Maqolalarni ko'rish"
-
-msgid "Tashkil etilgan"
-msgstr "Tashkil etilgan"
-
-msgid "Arxiv sonlari"
-msgstr "Arxiv sonlari"
-
-msgid "Maqolalar"
-msgstr "Maqolalar"
-
-msgid "Ilmiy tadbirlar va anjumanlar"
-msgstr "Ilmiy tadbirlar va anjumanlar"
-
-msgid "Me'yoriy hujjatlar va maqola talablari"
-msgstr "Me'yoriy hujjatlar va maqola talablari"
-
-msgid "Jurnal va universitetdagi so'nggi yangiliklar"
-msgstr "Jurnal va universitetdagi so'nggi yangiliklar"
-
-msgid "Yuborish talablari"
-msgstr "Yuborish talablari"
-
-msgid "Ko'rib chiqish jarayoni"
-msgstr "Ko'rib chiqish jarayoni"
-
-msgid "Maqolani tahririyatga yuborish"
-msgstr "Maqolani tahririyatga yuborish"
-
-msgid "Bekor qilish"
-msgstr "Bekor qilish"
-
-msgid "Saqlash"
-msgstr "Saqlash"
-
-msgid "Hisob"
-msgstr "Hisob"
-
-# ============ YANGI TARJIMALAR ============
-
-# base.html
-msgid "Arxitektura va Ta'lim"
-msgstr "Arxitektura va Ta'lim"
-
-msgid "Tezkor havolalar"
-msgstr "Tezkor havolalar"
-
-msgid "Jurnal ma'lumotlari"
+#: .\journal\admin.py:29 .\journal\admin.py:209
+#, fuzzy
+#| msgid "Jurnal ma'lumotlari"
+msgid "Shaxsiy ma'lumotlar"
 msgstr "Jurnal ma'lumotlari"
 
-msgid "Chastotasi"
-msgstr "Chastotasi"
+#: .\journal\admin.py:32
+msgid "Rol va ruxsatlar"
+msgstr "Rol va ruxsatlar"
 
-msgid "Yiliga 4 marta"
-msgstr "Yiliga 4 marta"
+#: .\journal\admin.py:35
+msgid "Muhim sanalar"
+msgstr "Muhim sanalar"
 
-msgid "Manzil"
-msgstr "Manzil"
+#: .\journal\admin.py:61 .\journal\admin.py:78
+#: .\templates\admin\index.html:457
+#, fuzzy
+#| msgid "Maqolalarim"
+msgid "Maqolalar soni"
+msgstr "Maqolalarim"
 
-msgid "Toshkent, O'zbekiston"
-msgstr "Toshkent, O'zbekiston"
+#: .\journal\admin.py:96
+#, fuzzy
+#| msgid "Jurnal ma'lumotlari"
+msgid "Jurnal soni ma'lumotlari"
+msgstr "Jurnal ma'lumotlari"
 
-msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
-msgstr "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
+#: .\journal\admin.py:103 .\journal\models.py:53 .\journal\models.py:135
+#: .\templates\article_detail.html:340
+#, fuzzy
+#| msgid "Jurnal haqida"
+msgid "Jurnal soni"
+msgstr "Jurnal haqida"
 
-msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
-msgstr "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-elektron jurnali."
-
-msgid "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
-msgstr "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
-
-# index.html
-msgid "Ilmiy Jurnali"
-msgstr "Ilmiy Jurnali"
-
-msgid "Qidirish"
-msgstr "Qidirish"
-
-msgid "Tozalash"
-msgstr "Tozalash"
-
-msgid "ta maqola"
-msgstr "ta maqola"
-
-msgid "ta ko'rish"
-msgstr "ta ko'rish"
-
-msgid "Hozircha arxivlar mavjud emas."
-msgstr "Hozircha arxivlar mavjud emas."
-
-msgid "Maqolalar mavjud emas"
-msgstr "Maqolalar mavjud emas"
-
-msgid "Natijalar topilmadi"
-msgstr "Natijalar topilmadi"
-
-msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
-msgstr "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
-
-msgid "Qabul qilinadigan maqolalar yo'nalishlari"
-msgstr "Qabul qilinadigan maqolalar yo'nalishlari"
-
-msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
-msgstr "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
-
-msgid "bo'yicha qidiruv natijalari"
-msgstr "bo'yicha qidiruv natijalari"
-
-msgid "Barchasini ko'rish"
-msgstr "Barchasini ko'rish"
-
-msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review talablari asosida ko'rib chiqiladi va baholanadi."
-msgstr "Barcha yuborilgan maqolalar mutaxassislar tomonidan ikki tomonlama anonim taqrizlash talablari asosida ko'rib chiqiladi va baholanadi."
-
-msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
-msgstr "Yuborildi → Taqriz → Qabul → Chop etildi"
-
-msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
-msgstr "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
-
-msgid "Open Access — bepul kirish"
-msgstr "Open Access — bepul kirish"
-
-msgid "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
-msgstr "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting."
-
-#: index.html - blocktrans
-msgid "Jild %(vol)s, Son %(num)s"
-msgstr "Jild %(vol)s, Son %(num)s"
-
-# index.html hero description
-msgid "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
-msgstr "Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va innovatsion yechimlar manbaidir."
-
-msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
-msgstr "\"Arxitektura va Ta'lim\" Ilmiy-Elektron Jurnali"
-
-# about.html
-msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
-msgstr "TIFT \"Arxitektura va Ta'lim\" ilmiy-elektron jurnali"
-
-msgid "Yiliga chop etiladi"
-msgstr "Yiliga chop etiladi"
-
-msgid "Bepul kirish"
-msgstr "Bepul kirish"
-
-msgid "Yo'nalishlar"
-msgstr "Yo'nalishlar"
-
-msgid "Tahririyat a'zolari"
-msgstr "Tahririyat a'zolari"
-
-msgid "Tahririyat a'zolari hali qo'shilmagan."
-msgstr "Tahririyat a'zolari hali qo'shilmagan."
-
-msgid "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
-msgstr "Barcha yuborilgan maqolalar ikki tomonlama anonim taqrizlash jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
-
-msgid "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
-msgstr "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
-
-# my_articles.html
-msgid "Jami"
-msgstr "Jami"
-
-msgid "Taqrizda"
-msgstr "Taqrizda"
-
-msgid "ko'rish"
-msgstr "ko'rish"
-
-msgid "Jarayonda..."
-msgstr "Jarayonda..."
-
-msgid "Hali maqola yubormagansiz"
-msgstr "Hali maqola yubormagansiz"
-
-msgid "Tadqiqotingizni tahririyatga yuboring"
-msgstr "Tadqiqotingizni tahririyatga yuboring"
-
-msgid "Birinchi maqolangizni yuboring"
-msgstr "Birinchi maqolangizni yuboring"
+#: .\journal\admin.py:107
+#, fuzzy
+#| msgid "Barcha chop etilgan sonlar"
+msgid "Chop etilgan maqolalar soni"
+msgstr "Barcha chop etilgan sonlar"
 
 # submit_article.html
+#: .\journal\admin.py:142 .\templates\article_detail.html:329
+#: .\templates\submit_article.html:16
 msgid "Maqola ma'lumotlari"
 msgstr "Maqola ma'lumotlari"
 
-msgid "Word faylni bu yerga tashlang yoki bosing"
-msgstr "Word faylni bu yerga tashlang yoki bosing"
+#: .\journal\admin.py:145
+#, fuzzy
+#| msgid "Muallif paneli"
+msgid "Muallif va jurnal"
+msgstr "Muallif paneli"
 
-msgid "Faqat .docx format, maksimal hajm: 20MB"
-msgstr "Faqat .docx format, maksimal hajm: 20MB"
+#: .\journal\admin.py:148
+msgid "Taqrizchi va ko'rib chiqish"
+msgstr "Taqrizchi va ko'rib chiqish"
 
-msgid "Maqola faqat Word (.docx) formatida yuboriladi"
+#: .\journal\admin.py:151
+msgid "Sahifalash (Paginatsiya)"
+msgstr "Sahifalash (Paginatsiya)"
+
+#: .\journal\admin.py:153
+msgid ""
+"Agar maqola uchun alohida PDF yuklanmasa, To'plam PDF faylidan shu sahifalar"
+" oralig'i avtomatik qirqib olinadi."
+msgstr ""
+"Agar maqola uchun alohida PDF yuklanmasa, To'plam PDF faylidan shu sahifalar"
+" oralig'i avtomatik qirqib olinadi."
+
+#: .\journal\admin.py:155
+msgid "Holat va fayllar"
+msgstr "Holat va fayllar"
+
+#: .\journal\admin.py:158
+#, fuzzy
+#| msgid "Jonli statistika"
+msgid "Statistika"
+msgstr "Jonli statistika"
+
+#: .\journal\admin.py:168 .\journal\models.py:263
+msgid "Sarlavha"
+msgstr "Sarlavha"
+
+#: .\journal\admin.py:172 .\journal\models.py:19 .\journal\views.py:191
+#: .\templates\admin\index.html:301 .\templates\article_detail.html:372
+#: .\templates\article_detail.html:381
+msgid "Muallif"
+msgstr "Muallif"
+
+#: .\journal\admin.py:176
+msgid "PDF ni ochish"
+msgstr "PDF ni ochish"
+
+#: .\journal\admin.py:178
+msgid "PDF fayl"
+msgstr "PDF fayl"
+
+#: .\journal\admin.py:180
+#, fuzzy
+#| msgid "Qabul qilinadigan maqolalar yo'nalishlari"
+msgid "Tanlangan maqolalarni nashr etish"
+msgstr "Qabul qilinadigan maqolalar yo'nalishlari"
+
+#: .\journal\admin.py:183
+#, python-brace-format
+msgid "{updated} ta maqola nashr etildi."
+msgstr "{updated} ta maqola nashr etildi."
+
+#: .\journal\admin.py:185
+#, fuzzy
+#| msgid "Taqriz jarayonida"
+msgid "Taqriz jarayoniga o'tkazish"
+msgstr "Taqriz jarayonida"
+
+#: .\journal\admin.py:188
+#, python-brace-format
+msgid "{updated} ta maqola taqriz jarayoniga o'tkazildi."
+msgstr "{updated} ta maqola taqriz jarayoniga o'tkazildi."
+
+#: .\journal\admin.py:190 .\templates\reviewer_dashboard.html:452
+#, fuzzy
+#| msgid "Rad etildi"
+msgid "Rad etish"
+msgstr "Rad etildi"
+
+#: .\journal\admin.py:193
+#, python-brace-format
+msgid "{updated} ta maqola rad etildi va jurnaldan chiqarildi."
+msgstr "{updated} ta maqola rad etildi va jurnaldan chiqarildi."
+
+#: .\journal\admin.py:212
+#, fuzzy
+#| msgid "Jurnal ma'lumotlari"
+msgid "Ish ma'lumotlari"
+msgstr "Jurnal ma'lumotlari"
+
+#: .\journal\admin.py:215
+#, fuzzy
+#| msgid "Maqolalar"
+msgid "Sozlamalar"
+msgstr "Maqolalar"
+
+#: .\journal\admin.py:233 .\journal\models.py:265 .\journal\models.py:286
+#: .\templates\news_detail.html:111
+msgid "Rasm"
+msgstr "Rasm"
+
+#: .\journal\admin.py:247
+#, fuzzy
+#| msgid "Konferensiyalar"
+msgid "Konferensiya ma'lumotlari"
+msgstr "Konferensiyalar"
+
+#: .\journal\admin.py:274
+msgid "Ko'plab rasmlar yuklash (Bir vaqtda bir nechta rasm tanlash)"
+msgstr "Ko'plab rasmlar yuklash (Bir vaqtda bir nechta rasm tanlash)"
+
+#: .\journal\admin.py:275
+msgid ""
+"Kompyuteringizdan bir nechta rasmni bir vaqtda belgilab (Ctrl/Shift) "
+"yuklashingiz mumkin."
+msgstr ""
+"Kompyuteringizdan bir nechta rasmni bir vaqtda belgilab (Ctrl/Shift) "
+"yuklashingiz mumkin."
+
+#: .\journal\admin.py:280
+msgid "Ko'plab video fayllar yuklash (MP4/WebM)"
+msgstr "Ko'plab video fayllar yuklash (MP4/WebM)"
+
+#: .\journal\admin.py:281
+msgid ""
+"Bir nechta video fayllarni bir vaqtning o'zida tanlab yuklashingiz mumkin."
+msgstr ""
+"Bir nechta video fayllarni bir vaqtning o'zida tanlab yuklashingiz mumkin."
+
+#: .\journal\admin.py:286
+msgid "Video havolalar (YouTube/Vimeo)"
+msgstr "Video havolalar (YouTube/Vimeo)"
+
+#: .\journal\admin.py:287
+msgid "Har bir satrga bittadan video havolasini yozing."
+msgstr "Har bir satrga bittadan video havolasini yozing."
+
+#: .\journal\admin.py:312
+#, fuzzy
+#| msgid "Jurnal ma'lumotlari"
+msgid "Yangilik ma'lumotlari"
+msgstr "Jurnal ma'lumotlari"
+
+#: .\journal\admin.py:315
+msgid "Ommaviy foto va video yuklash (Ko'plab rasmlar va videolar)"
+msgstr "Ommaviy foto va video yuklash (Ko'plab rasmlar va videolar)"
+
+#: .\journal\admin.py:317
+msgid ""
+"Bu yerda bir vaqtning o'zida 10-20 ta rasmlarni tanlab yuklashingiz, ko'plab"
+" video fayllarni yoki YouTube/Vimeo havolalarini joylashingiz mumkin."
+msgstr ""
+"Bu yerda bir vaqtning o'zida 10-20 ta rasmlarni tanlab yuklashingiz, ko'plab"
+" video fayllarni yoki YouTube/Vimeo havolalarini joylashingiz mumkin."
+
+#: .\journal\admin.py:330
+msgid "Media fayllar"
+msgstr "Media fayllar"
+
+#: .\journal\admin.py:379
+#, fuzzy
+#| msgid "Jurnal ma'lumotlari"
+msgid "Hujjat ma'lumotlari"
+msgstr "Jurnal ma'lumotlari"
+
+#: .\journal\apps.py:7
+#, fuzzy
+#| msgid "Jurnal haqida"
+msgid "Jurnal"
+msgstr "Jurnal haqida"
+
+#: .\journal\forms.py:49
+msgid ""
+"Fayl hajmi 20 MB dan oshmasligi kerak. Hozirgi hajm: {file.size // "
+"(1024*1024)} MB"
+msgstr ""
+"Fayl hajmi 20 MB dan oshmasligi kerak. Hozirgi hajm: {file.size // "
+"(1024*1024)} MB"
+
+#: .\journal\forms.py:56
+#, fuzzy, python-brace-format
+#| msgid "Maqola faqat Word (.docx) formatida yuboriladi"
+msgid "Faqat Word (.docx, .doc) format qabul qilinadi. Yuborilgan: {ext}"
 msgstr "Maqola faqat Word (.docx) formatida yuboriladi"
 
-msgid "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
-msgstr "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
+#: .\journal\forms.py:61
+#, python-brace-format
+msgid "Fayl turi qabul qilinmaydi. Aniqlangan tur: {mime}"
+msgstr "Fayl turi qabul qilinmaydi. Aniqlangan tur: {mime}"
 
-msgid "Kalit so'zlar vergul bilan ajratilsin"
-msgstr "Kalit so'zlar vergul bilan ajratilsin"
-
-msgid "Fayl hajmi 20 MB dan oshmasin"
+#: .\journal\forms.py:71
+#, fuzzy
+#| msgid "Fayl hajmi 20 MB dan oshmasin"
+msgid "Rasm hajmi 5 MB dan oshmasligi kerak."
 msgstr "Fayl hajmi 20 MB dan oshmasin"
 
-msgid "Plagiatdan xoli originallik shart"
-msgstr "Plagiatdan xoli originallik shart"
+#: .\journal\forms.py:78
+msgid "Faqat JPG, PNG, WEBP, GIF rasmlari qabul qilinadi."
+msgstr "Faqat JPG, PNG, WEBP, GIF rasmlari qabul qilinadi."
 
-msgid "Maqola yuborildi va ro'yxatga olindi"
-msgstr "Maqola yuborildi va ro'yxatga olindi"
+#: .\journal\forms.py:83
+#, python-brace-format
+msgid "Rasm turi qabul qilinmaydi. Aniqlangan tur: {mime}"
+msgstr "Rasm turi qabul qilinmaydi. Aniqlangan tur: {mime}"
 
-msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
-msgstr "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
+#: .\journal\forms.py:90
+msgid "--- Maqola yo'nalishini tanlang ---"
+msgstr "--- Maqola yo'nalishini tanlang ---"
 
-msgid "Peer-review jarayoni (4-6 hafta)"
-msgstr "Anonim taqrizlash jarayoni (4-6 hafta)"
+#: .\journal\forms.py:91
+msgid "Maqola yo'nalishi (Kategoriya)"
+msgstr "Maqola yo'nalishi (Kategoriya)"
 
-msgid "Qabul yoki rad qaroriga xabar beriladi"
-msgstr "Qabul yoki rad qaroriga xabar beriladi"
+#: .\journal\forms.py:92
+msgid "Maqolangiz tegishli bo'lgan ilmiy yo'nalishni ro'yxatdan tanlang."
+msgstr "Maqolangiz tegishli bo'lgan ilmiy yo'nalishni ro'yxatdan tanlang."
 
-# profile.html
-msgid "Nashr"
-msgstr "Nashr"
+#: .\journal\forms.py:102 .\journal\forms.py:110 .\journal\models.py:128
+#: .\templates\reviewer_dashboard.html:303
+#, fuzzy
+#| msgid "Maqolalarim"
+msgid "Maqola sarlavhasi"
+msgstr "Maqolalarim"
 
-msgid "Profil ma'lumotlarini tahrirlash"
-msgstr "Profil ma'lumotlarini tahrirlash"
+#: .\journal\forms.py:103
+#, fuzzy
+#| msgid "Yo'nalishlar"
+msgid "Yo'nalish (Kategoriya)"
+msgstr "Yo'nalishlar"
 
+#: .\journal\forms.py:104
+msgid "Mualliflar va ularning ish joyi"
+msgstr "Mualliflar va ularning ish joyi"
+
+#: .\journal\forms.py:105 .\journal\models.py:130
+#, fuzzy
+#| msgid "Annotatsiya"
+msgid "Annotatsiya / Abstract"
+msgstr "Annotatsiya"
+
+#: .\journal\forms.py:106 .\templates\article_detail.html:104
+#: .\templates\reviewer_dashboard.html:347
+msgid "Kalit so'zlar"
+msgstr "Kalit so'zlar"
+
+#: .\journal\forms.py:107
+msgid "Maqola fayli (.docx)"
+msgstr "Maqola fayli (.docx)"
+
+#: .\journal\forms.py:111
+msgid "Barcha mualliflar (Ism Familiya, ...)"
+msgstr "Barcha mualliflar (Ism Familiya, ...)"
+
+#: .\journal\forms.py:113
+#, fuzzy
+#| msgid "Kalit so'zlar vergul bilan ajratilsin"
+msgid "Kalit so'zlar (vergul bilan)"
+msgstr "Kalit so'zlar vergul bilan ajratilsin"
+
+#: .\journal\forms.py:127 .\journal\forms.py:184 .\templates\profile.html:99
+msgid "Email"
+msgstr "Email"
+
+#: .\journal\forms.py:130 .\journal\forms.py:148
+msgid "email@example.com"
+msgstr "email@example.com"
+
+#: .\journal\forms.py:149 .\journal\forms.py:182 .\templates\profile.html:91
+#: .\templates\registration\signup.html:56
+#: .\templates\registration\signup.html:63
 msgid "Ism"
 msgstr "Ism"
 
+#: .\journal\forms.py:150 .\journal\forms.py:183 .\templates\profile.html:95
+#: .\templates\registration\signup.html:68
+#: .\templates\registration\signup.html:75
 msgid "Familiya"
 msgstr "Familiya"
 
-msgid "Telefon"
-msgstr "Telefon"
+#: .\journal\forms.py:151 .\templates\registration\login.html:66
+#: .\templates\registration\signup.html:101
+msgid "Parol"
+msgstr "Parol"
 
-msgid "Ish / O'qish joyi"
+#: .\journal\forms.py:152
+#, fuzzy
+#| msgid "Profilni tahrirlash"
+msgid "Parolni tasdiqlang"
+msgstr "Profilni tahrirlash"
+
+#: .\journal\forms.py:157
+msgid "Bu email allaqachon ro'yxatdan o'tgan."
+msgstr "Bu email allaqachon ro'yxatdan o'tgan."
+
+#: .\journal\forms.py:185
+msgid "Universitet / Tashkilot"
+msgstr "Universitet / Tashkilot"
+
+#: .\journal\forms.py:186
+msgid "+998 XX XXX XX XX"
+msgstr "+998 XX XXX XX XX"
+
+#: .\journal\forms.py:187
+msgid "O'zingiz haqingizda qisqacha..."
+msgstr "O'zingiz haqingizda qisqacha..."
+
+#: .\journal\forms.py:204
+msgid "Joriy parol"
+msgstr "Joriy parol"
+
+#: .\journal\forms.py:205
+#, fuzzy
+#| msgid "Yangiliklar"
+msgid "Yangi parol"
+msgstr "Yangiliklar"
+
+#: .\journal\forms.py:206
+msgid "Yangi parolni tasdiqlang"
+msgstr "Yangi parolni tasdiqlang"
+
+#: .\journal\models.py:20 .\journal\models.py:216
+#, fuzzy
+#| msgid "Taqrizda"
+msgid "Taqrizchi"
+msgstr "Taqrizda"
+
+#: .\journal\models.py:21 .\journal\models.py:215
+msgid "Muharrir"
+msgstr "Muharrir"
+
+#: .\journal\models.py:24
+msgid "Erkak"
+msgstr "Erkak"
+
+#: .\journal\models.py:25
+msgid "Ayol"
+msgstr "Ayol"
+
+#: .\journal\models.py:28
+#, fuzzy
+#| msgid "Ish / O'qish joyi"
+msgid "Ish/O'qish joyi"
 msgstr "Ish / O'qish joyi"
 
+#: .\journal\models.py:29
+#, fuzzy
+#| msgid "Profilim"
+msgid "Profil rasmi"
+msgstr "Profilim"
+
+#: .\journal\models.py:30 .\templates\profile.html:111
 msgid "O'zim haqimda"
 msgstr "O'zim haqimda"
 
+#: .\journal\models.py:31
+#, fuzzy
+#| msgid "Telefon"
+msgid "Telefon raqam"
+msgstr "Telefon"
+
+#: .\journal\models.py:32
+msgid "Jinsi"
+msgstr "Jinsi"
+
+#: .\journal\models.py:33
+msgid "Davlat"
+msgstr "Davlat"
+
+#: .\journal\models.py:40
+msgid "Jurnal jildi (Volume)"
+msgstr "Jurnal jildi (Volume)"
+
+#: .\journal\models.py:41
+msgid "Jurnal soni (Issue)"
+msgstr "Jurnal soni (Issue)"
+
+#: .\journal\models.py:42
+#, fuzzy
+#| msgid "Chop etildi"
+msgid "Chop etilgan yili"
+msgstr "Chop etildi"
+
+#: .\journal\models.py:43
+msgid "Davri (Masalan: 1-chorak, Yanvar-Mart)"
+msgstr "Davri (Masalan: 1-chorak, Yanvar-Mart)"
+
+#: .\journal\models.py:44
+msgid "Oldi muqovasi (rasmi)"
+msgstr "Oldi muqovasi (rasmi)"
+
+#: .\journal\models.py:45
+msgid "Orqa muqovasi (rasmi)"
+msgstr "Orqa muqovasi (rasmi)"
+
+#: .\journal\models.py:46
+msgid "Muqova va Tahririyat Word hujjati (.docx)"
+msgstr "Muqova va Tahririyat Word hujjati (.docx)"
+
+#: .\journal\models.py:46
+msgid ""
+"Word (.docx) fayl. Nashr boshidagi muqova va tahririyat a'zolari sahifasi "
+"uchun."
+msgstr ""
+"Word (.docx) fayl. Nashr boshidagi muqova va tahririyat a'zolari sahifasi "
+"uchun."
+
+#: .\journal\models.py:47
+msgid "To'liq to'plam (PDF)"
+msgstr "To'liq to'plam (PDF)"
+
+#: .\journal\models.py:48
+#, fuzzy
+#| msgid "ta ko'rish"
+msgid "Saytda ko'rsatish"
+msgstr "ta ko'rish"
+
+#: .\journal\models.py:54
+#, fuzzy
+#| msgid "Jurnal Arxivlari"
+msgid "Jurnal sonlari"
+msgstr "Jurnal Arxivlari"
+
+#: .\journal\models.py:82
+msgid "Kod (masalan: 18.00.00)"
+msgstr "Kod (masalan: 18.00.00)"
+
+#: .\journal\models.py:83 .\journal\models.py:242 .\journal\models.py:334
+#: .\templates\admin\index.html:300
+msgid "Nomi"
+msgstr "Nomi"
+
+#: .\journal\models.py:84
+msgid "Ikona klasi (masalan: fa-building)"
+msgstr "Ikona klasi (masalan: fa-building)"
+
+#: .\journal\models.py:84
+msgid "FontAwesome ikona klasi (bo'sh bo'lsa avtomatik mos ikona tanlanadi)"
+msgstr "FontAwesome ikona klasi (bo'sh bo'lsa avtomatik mos ikona tanlanadi)"
+
+#: .\journal\models.py:85 .\journal\models.py:295 .\journal\models.py:340
+msgid "Tartib"
+msgstr "Tartib"
+
+#: .\journal\models.py:89 .\journal\models.py:136
+#: .\templates\article_detail.html:334
+#, fuzzy
+#| msgid "Yo'nalishlar"
+msgid "Yo'nalish"
+msgstr "Yo'nalishlar"
+
+#: .\journal\models.py:90
+msgid "Yo'nalishlar"
+msgstr "Yo'nalishlar"
+
+#: .\journal\models.py:117
+#, fuzzy
+#| msgid "ta maqola"
+msgid "Yangi maqola"
+msgstr "ta maqola"
+
+#: .\journal\models.py:118
+msgid "Dastlabki tekshiruv"
+msgstr "Dastlabki tekshiruv"
+
+#: .\journal\models.py:119 .\templates\my_articles.html:74
+#: .\templates\reviewer_dashboard.html:136
+msgid "Taqriz jarayonida"
+msgstr "Taqriz jarayonida"
+
+#: .\journal\models.py:120
+msgid "Tuzatish uchun qaytarilgan"
+msgstr "Tuzatish uchun qaytarilgan"
+
+#: .\journal\models.py:121 .\templates\admin\index.html:232
+#: .\templates\reviewer_dashboard.html:137
+#, fuzzy
+#| msgid "Qabul qilindi"
+msgid "Qabul qilingan"
+msgstr "Qabul qilindi"
+
+#: .\journal\models.py:122 .\templates\reviewer_dashboard.html:139
+#, fuzzy
+#| msgid "Rad etildi"
+msgid "Rad etilgan"
+msgstr "Rad etildi"
+
+#: .\journal\models.py:123
+#, fuzzy
+#| msgid "Nashr maqolalar"
+msgid "Nashrga tayyor"
+msgstr "Nashr maqolalar"
+
+#: .\journal\models.py:124 .\templates\reviewer_dashboard.html:134
+#, fuzzy
+#| msgid "Tashkil etilgan"
+msgid "Nashr etilgan"
+msgstr "Tashkil etilgan"
+
+#: .\journal\models.py:129
+msgid "Mualliflar (to'liq ro'yxat)"
+msgstr "Mualliflar (to'liq ro'yxat)"
+
+#: .\journal\models.py:131
+#, fuzzy
+#| msgid "Kalit so'zlar vergul bilan ajratilsin"
+msgid "Kalit so'zlar (vergul bilan ajrating)"
+msgstr "Kalit so'zlar vergul bilan ajratilsin"
+
+#: .\journal\models.py:134
+msgid "Muallif (foydalanuvchi)"
+msgstr "Muallif (foydalanuvchi)"
+
+#: .\journal\models.py:139
+msgid "Boshlanish sahifasi (To'plamda)"
+msgstr "Boshlanish sahifasi (To'plamda)"
+
+#: .\journal\models.py:140
+msgid "Tugash sahifasi (To'plamda)"
+msgstr "Tugash sahifasi (To'plamda)"
+
+#: .\journal\models.py:143
+#, fuzzy
+#| msgid "Maqola matni"
+msgid "Maqola holati"
+msgstr "Maqola matni"
+
+#: .\journal\models.py:146
+#, fuzzy
+#| msgid "Maqola matni"
+msgid "Maqola matni (HTML)"
+msgstr "Maqola matni"
+
+#: .\journal\models.py:149
+msgid "Fayl (PDF yoki Word .docx)"
+msgstr "Fayl (PDF yoki Word .docx)"
+
+#: .\journal\models.py:150
+msgid "Shablon PDF (tahririyat tomonidan)"
+msgstr "Shablon PDF (tahririyat tomonidan)"
+
+#: .\journal\models.py:153
+msgid "Biriktirilgan taqrizchi"
+msgstr "Biriktirilgan taqrizchi"
+
+#: .\journal\models.py:154
+msgid "Taqrizchi izohi / Rad etish sababi"
+msgstr "Taqrizchi izohi / Rad etish sababi"
+
+#: .\journal\models.py:155
+msgid "Taqrizchi / Muharrir"
+msgstr "Taqrizchi / Muharrir"
+
+#: .\journal\models.py:156
+msgid "Taqriz qilingan sana"
+msgstr "Taqriz qilingan sana"
+
+#: .\journal\models.py:159 .\templates\reviewer_dashboard.html:405
+#, fuzzy
+#| msgid "Barcha chop etilgan sonlar"
+msgid "Chop etilgan sana"
+msgstr "Barcha chop etilgan sonlar"
+
+#: .\journal\models.py:162 .\templates\my_articles.html:171
+#, fuzzy
+#| msgid "Ko'rish"
+msgid "Ko'rishlar soni"
+msgstr "Ko'rish"
+
+#: .\journal\models.py:163
+#, fuzzy
+#| msgid "Yuklab olish"
+msgid "Yuklab olishlar soni"
+msgstr "Yuklab olish"
+
+#: .\journal\models.py:165
+msgid "Yuborilgan sana"
+msgstr "Yuborilgan sana"
+
+#: .\journal\models.py:182
+#, fuzzy
+#| msgid "Maqolalar"
+msgid "Maqola"
+msgstr "Maqolalar"
+
+#: .\journal\models.py:183 .\templates\index.html:88
+msgid "Maqolalar"
+msgstr "Maqolalar"
+
+#: .\journal\models.py:190 .\journal\models.py:245
+#: .\templates\admin\index.html:302
+msgid "Sana"
+msgstr "Sana"
+
+#: .\journal\models.py:191
+#, fuzzy
+#| msgid "Manzil"
+msgid "IP manzil"
+msgstr "Manzil"
+
+# profile.html
+#: .\journal\models.py:194
+#, fuzzy
+#| msgid "Nashr"
+msgid "Tashrif"
+msgstr "Nashr"
+
+#: .\journal\models.py:195 .\templates\index.html:18
+#, fuzzy
+#| msgid "Jami tashriflar"
+msgid "Tashriflar"
+msgstr "Jami tashriflar"
+
+#: .\journal\models.py:213 .\templates\about.html:202
+msgid "Bosh muharrir"
+msgstr "Bosh muharrir"
+
+#: .\journal\models.py:217
+msgid "Kotib"
+msgstr "Kotib"
+
+#: .\journal\models.py:221 .\templates\submit_article.html:46
+#, fuzzy
+#| msgid "Familiya"
+msgid "Ism Familiya"
+msgstr "Familiya"
+
+#: .\journal\models.py:222
+msgid "Lavozim"
+msgstr "Lavozim"
+
+#: .\journal\models.py:223
+#, fuzzy
+#| msgid "Ish / O'qish joyi"
+msgid "Ish joyi"
+msgstr "Ish / O'qish joyi"
+
+#: .\journal\models.py:224
+msgid "Yoshi"
+msgstr "Yoshi"
+
+#: .\journal\models.py:225
+msgid "Rasmi"
+msgstr "Rasmi"
+
+# submit_article.html
+#: .\journal\models.py:226
+#, fuzzy
+#| msgid "Maqola ma'lumotlari"
+msgid "Qisqacha ma'lumot"
+msgstr "Maqola ma'lumotlari"
+
+#: .\journal\models.py:227
+msgid "Tartib raqami"
+msgstr "Tartib raqami"
+
+#: .\journal\models.py:228 .\journal\models.py:248 .\journal\models.py:266
+#: .\journal\models.py:339
+#, fuzzy
+#| msgid "Ko'rish"
+msgid "Ko'rsatish"
+msgstr "Ko'rish"
+
+#: .\journal\models.py:232
+#, fuzzy
+#| msgid "Jurnal haqida"
+msgid "Jurnal a'zosi"
+msgstr "Jurnal haqida"
+
+#: .\journal\models.py:233
+#, fuzzy
+#| msgid "Jurnal ma'lumotlari"
+msgid "Jurnal a'zolari"
+msgstr "Jurnal ma'lumotlari"
+
+#: .\journal\models.py:243 .\journal\models.py:336
+msgid "Tavsif"
+msgstr "Tavsif"
+
+#: .\journal\models.py:244
+msgid "Axborot xati / Fayl (PDF)"
+msgstr "Axborot xati / Fayl (PDF)"
+
+#: .\journal\models.py:246
+msgid "Joyi"
+msgstr "Joyi"
+
+#: .\journal\models.py:247
+msgid "Havola"
+msgstr "Havola"
+
+#: .\journal\models.py:253
+#, fuzzy
+#| msgid "Konferensiyalar"
+msgid "Konferensiya"
+msgstr "Konferensiyalar"
+
+#: .\journal\models.py:254 .\templates\base.html:131 .\templates\base.html:324
+#: .\templates\conferences.html:14 .\templates\conferences.html:21
+msgid "Konferensiyalar"
+msgstr "Konferensiyalar"
+
+#: .\journal\models.py:264
+msgid "Matn"
+msgstr "Matn"
+
+#: .\journal\models.py:271 .\journal\models.py:290
+#: .\templates\news_detail.html:28
+#, fuzzy
+#| msgid "Yangiliklar"
+msgid "Yangilik"
+msgstr "Yangiliklar"
+
+#: .\journal\models.py:272 .\templates\base.html:134 .\templates\base.html:327
+#: .\templates\news.html:14 .\templates\news.html:21
+#: .\templates\news_detail.html:15
+msgid "Yangiliklar"
+msgstr "Yangiliklar"
+
+#: .\journal\models.py:287
+msgid "Video fayl (MP4/WebM)"
+msgstr "Video fayl (MP4/WebM)"
+
+#: .\journal\models.py:288
+msgid "Video havola (YouTube/Vimeo/Web URL)"
+msgstr "Video havola (YouTube/Vimeo/Web URL)"
+
+#: .\journal\models.py:291
+msgid "Media turi"
+msgstr "Media turi"
+
+#: .\journal\models.py:292
+msgid "Fayl (Rasm yoki Video)"
+msgstr "Fayl (Rasm yoki Video)"
+
+#: .\journal\models.py:293
+msgid "Video URL (YouTube/Vimeo/MP4 havolasi)"
+msgstr "Video URL (YouTube/Vimeo/MP4 havolasi)"
+
+#: .\journal\models.py:294
+msgid "Izoh / Sarlavha"
+msgstr "Izoh / Sarlavha"
+
+#: .\journal\models.py:300
+msgid "Yangilik media fayli"
+msgstr "Yangilik media fayli"
+
+#: .\journal\models.py:301
+msgid "Yangilik media fayllari (Rasmlar va Videolar)"
+msgstr "Yangilik media fayllari (Rasmlar va Videolar)"
+
+# submit_article.html
+#: .\journal\models.py:330 .\templates\documents.html:35
+#, fuzzy
+#| msgid "Maqola ma'lumotlari"
+msgid "Maqola talablari"
+msgstr "Maqola ma'lumotlari"
+
+#: .\journal\models.py:331
+msgid "Shablon"
+msgstr "Shablon"
+
+#: .\journal\models.py:332
+msgid "Boshqa"
+msgstr "Boshqa"
+
+#: .\journal\models.py:335
+msgid "Kategoriya"
+msgstr "Kategoriya"
+
+#: .\journal\models.py:337
+msgid "Fayl"
+msgstr "Fayl"
+
+#: .\journal\models.py:338
+msgid "Tashqi havola"
+msgstr "Tashqi havola"
+
+#: .\journal\models.py:345
+#, fuzzy
+#| msgid "Hujjatlar"
+msgid "Hujjat"
+msgstr "Hujjatlar"
+
+#: .\journal\models.py:346 .\templates\base.html:140 .\templates\base.html:333
+#: .\templates\documents.html:3 .\templates\documents.html:14
+#: .\templates\documents.html:23
+msgid "Hujjatlar"
+msgstr "Hujjatlar"
+
+#: .\journal\views.py:200
+msgid "Maqola topilmadi yoki xatolik yuz berdi."
+msgstr "Maqola topilmadi yoki xatolik yuz berdi."
+
+#: .\journal\views.py:732
+msgid "Maxsus son, 2026"
+msgstr "Maxsus son, 2026"
+
+#: .\journal\views.py:823 .\journal\views.py:897
+#, fuzzy
+#| msgid "Barcha chop etilgan sonlar"
+msgid "Maqola hali chop etilmagan."
+msgstr "Barcha chop etilgan sonlar"
+
+#: .\journal\views.py:835
+#, fuzzy
+#| msgid "Natijalar topilmadi"
+msgid "Maqola fayli topilmadi."
+msgstr "Natijalar topilmadi"
+
+#: .\journal\views.py:1007
+msgid "Profil muvaffaqiyatli yangilandi!"
+msgstr "Profil muvaffaqiyatli yangilandi!"
+
+#: .\journal\views.py:1010
+msgid "Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
+msgstr "Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
+
+#: .\journal\views.py:1037
+#, fuzzy
+#| msgid "Parol o'zgartirish"
+msgid "Parol muvaffaqiyatli o'zgartirildi!"
+msgstr "Parol o'zgartirish"
+
+#: .\journal\views.py:1040
+msgid "Xatolik yuz berdi."
+msgstr "Xatolik yuz berdi."
+
+#: .\journal\views.py:1053
+msgid "Ushbu sahifa faqat taqrizchi va muharrirlar uchun mo'ljallangan."
+msgstr "Ushbu sahifa faqat taqrizchi va muharrirlar uchun mo'ljallangan."
+
+#: .\journal\views.py:1127
+msgid "Ushbu harakatni bajarishga ruxsat yo'q."
+msgstr "Ushbu harakatni bajarishga ruxsat yo'q."
+
+#: .\journal\views.py:1140
+#, python-format
+msgid "Maqola taqrizchi %(name)sga muvaffaqiyatli biriktirildi!"
+msgstr "Maqola taqrizchi %(name)sga muvaffaqiyatli biriktirildi!"
+
+#: .\journal\views.py:1144
+msgid "Taqrizchi biriktiruvi bekor qilindi."
+msgstr "Taqrizchi biriktiruvi bekor qilindi."
+
+#: .\journal\views.py:1155
+msgid "Ruxsat etilmagan harakat."
+msgstr "Ruxsat etilmagan harakat."
+
+#: .\journal\views.py:1188
+#, python-format
+msgid "Maqola ('%(title)s...') muvaffaqiyatli nashr etildi!"
+msgstr "Maqola ('%(title)s...') muvaffaqiyatli nashr etildi!"
+
+#: .\journal\views.py:1197
+#, fuzzy
+#| msgid "Rad etildi"
+msgid "rad etildi"
+msgstr "Rad etildi"
+
+#: .\journal\views.py:1197
+msgid "tuzatish uchun qaytarildi"
+msgstr "tuzatish uchun qaytarildi"
+
+#: .\journal\views.py:1198
+#, python-format
+msgid "Maqola %(status)s va muallif uchun izoh saqlandi!"
+msgstr "Maqola %(status)s va muallif uchun izoh saqlandi!"
+
+#: .\journal\views.py:1205
+msgid "Maqola holati 'Taqriz jarayonida' ga o'tkazildi."
+msgstr "Maqola holati 'Taqriz jarayonida' ga o'tkazildi."
+
+#: .\journal\views.py:1239
+#, fuzzy
+#| msgid "Profil ma'lumotlarini tahrirlash"
+msgid "Maqola ma'lumotlari muvaffaqiyatli tahrirlandi!"
+msgstr "Profil ma'lumotlarini tahrirlash"
+
+#: .\journal\views.py:1341
+#, fuzzy
+#| msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
+msgid "Ushbu sonda hali chop etilgan maqolalar mavjud emas."
+msgstr "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
+
+#: .\journal\views.py:1347
+#, fuzzy
+#| msgid "Natijalar topilmadi"
+msgid "PDF yaratish kutubxonalari topilmadi."
+msgstr "Natijalar topilmadi"
+
+#: .\journal\views.py:1454
+#, fuzzy
+#| msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
+msgid "Ushbu jurnal soni va uning maqolalari hali to'liq shakllantirilmagan."
+msgstr "Ushbu arxiv soniga hali maqolalar yuklanmagan."
+
+#: .\journal\views.py:1552
+msgid "Mundarija / Contents"
+msgstr "Mundarija / Contents"
+
+#: .\templates\about.html:3
+#, fuzzy
+#| msgid "Jurnal haqida"
+msgid "Jurnal haqida | TIFT Jurnali"
+msgstr "Jurnal haqida"
+
+#: .\templates\about.html:31 .\templates\about.html:39
+#: .\templates\about.html:75 .\templates\base.html:128
+#: .\templates\base.html:321
+msgid "Jurnal haqida"
+msgstr "Jurnal haqida"
+
+# about.html
+#: .\templates\about.html:32
+msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
+msgstr "TIFT \"Arxitektura va Ta'lim\" ilmiy-elektron jurnali"
+
+#: .\templates\about.html:36 .\templates\archive.html:25
+#: .\templates\article_detail.html:18 .\templates\base.html:383
+#: .\templates\conferences.html:19 .\templates\documents.html:20
+#: .\templates\journal\issue_detail.html:15 .\templates\news.html:19
+#: .\templates\news_detail.html:12
+msgid "Bosh sahifa"
+msgstr "Bosh sahifa"
+
+# login.html
+#: .\templates\about.html:56 .\templates\index.html:161
+#, fuzzy
+#| msgid "TIFT Ilmiy Jurnali platformasi"
+msgid "TIFT Jurnali muqovasi"
+msgstr "TIFT Ilmiy Jurnali platformasi"
+
+# login.html
+#: .\templates\about.html:62
+#, fuzzy
+#| msgid "TIFT Ilmiy Jurnali platformasi"
+msgid "TIFT Jurnali muqovasi 2"
+msgstr "TIFT Ilmiy Jurnali platformasi"
+
+#: .\templates\about.html:78
+msgid "<strong>\\"
+msgstr "<strong>\\"
+
+#: .\templates\about.html:86 .\templates\index.html:98
+msgid "Tashkil etilgan"
+msgstr "Tashkil etilgan"
+
+#: .\templates\about.html:90
+msgid "Yiliga chop etiladi"
+msgstr "Yiliga chop etiladi"
+
+#: .\templates\about.html:102
+msgid "Ikki tomonlama anonim taqrizlash"
+msgstr "Ikki tomonlama anonim taqrizlash"
+
+#: .\templates\about.html:105
+#, fuzzy
+#| msgid ""
+#| "Barcha yuborilgan maqolalar ikki tomonlama ko'r taqriz jarayonidan o'tadi. "
+#| "Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi."
+msgid ""
+"Barcha yuborilgan maqolalar ikki tomonlama anonim taqrizlash jarayonidan "
+"o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini "
+"bilmaydi."
+msgstr ""
+"Barcha yuborilgan maqolalar ikki tomonlama anonim taqrizlash jarayonidan "
+"o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini "
+"bilmaydi."
+
+#: .\templates\about.html:118
+#, fuzzy
+#| msgid "Qabul qilinadigan maqolalar yo'nalishlari"
+msgid "Jurnal qabul qiladigan yo'nalishlar"
+msgstr "Qabul qilinadigan maqolalar yo'nalishlari"
+
+#: .\templates\about.html:121
+msgid ""
+"Tahririyat hay'ati quyidagi ilmiy yo'nalishlar va shifrlar bo'yicha "
+"maqolalar qabul qiladi:"
+msgstr ""
+"Tahririyat hay'ati quyidagi ilmiy yo'nalishlar va shifrlar bo'yicha "
+"maqolalar qabul qiladi:"
+
+#: .\templates\about.html:145
+#, fuzzy
+#| msgid "Hozircha arxivlar mavjud emas."
+msgid "Hozircha yo'nalishlar mavjud emas."
+msgstr "Hozircha arxivlar mavjud emas."
+
+# index.html
+#: .\templates\about.html:153
+#, fuzzy
+#| msgid "Ilmiy Jurnali"
+msgid "Ilmiy yo'nalish"
+msgstr "Ilmiy Jurnali"
+
+#: .\templates\about.html:157
+msgid "Onlayn qabul"
+msgstr "Onlayn qabul"
+
+#: .\templates\about.html:161
+msgid "Hafta taqriz muddati"
+msgstr "Hafta taqriz muddati"
+
+#: .\templates\about.html:174
+#, fuzzy
+#| msgid "Jurnal haqida"
+msgid "Jurnal rahbariyati"
+msgstr "Jurnal haqida"
+
+#: .\templates\about.html:191
+msgid "3x4 Rasm"
+msgstr "3x4 Rasm"
+
+#: .\templates\about.html:204
+msgid "Bosh muharrir o'rinbosari"
+msgstr "Bosh muharrir o'rinbosari"
+
+#: .\templates\about.html:206
+msgid "Mas'ul kotib"
+msgstr "Mas'ul kotib"
+
+#: .\templates\about.html:236
+#, fuzzy
+#| msgid "Tahririyat a'zolari"
+msgid "Tahririyat hay'ati"
+msgstr "Tahririyat a'zolari"
+
+#: .\templates\about.html:251
+msgid "3x4"
+msgstr "3x4"
+
+#: .\templates\about.html:283
+msgid "Tahririyat a'zolari hali qo'shilmagan."
+msgstr "Tahririyat a'zolari hali qo'shilmagan."
+
+#: .\templates\admin\base_site.html:4
+msgid "Django site admin"
+msgstr "Django site admin"
+
+# ============ YANGI TARJIMALAR ============
+# base.html
+#: .\templates\admin\base_site.html:9 .\templates\base.html:120
+#: .\templates\index.html:76 .\templates\registration\login.html:18
+#: .\templates\registration\signup.html:18
+msgid "Arxitektura va Ta'lim"
+msgstr "Arxitektura va Ta'lim"
+
+#: .\templates\admin\base_site.html:9
+msgid "Admin Panel"
+msgstr "Admin Panel"
+
+# login.html
+#: .\templates\admin\index.html:194
+#, fuzzy
+#| msgid "TIFT Ilmiy Jurnali platformasi"
+msgid "TIFT Ilmiy Jurnali Boshqaruvi"
+msgstr "TIFT Ilmiy Jurnali platformasi"
+
+#: .\templates\admin\index.html:195
+msgid "Tizim holati va maqolalar monitoringi"
+msgstr "Tizim holati va maqolalar monitoringi"
+
+#: .\templates\admin\index.html:205
+#, fuzzy
+#| msgid "Nashr maqolalar"
+msgid "Jami maqolalar"
+msgstr "Nashr maqolalar"
+
+#: .\templates\admin\index.html:214
+#, fuzzy
+#| msgid "Maqolangizni yuboring"
+msgid "Yangi yuborilgan"
+msgstr "Maqolangizni yuboring"
+
+#: .\templates\admin\index.html:223
+#, fuzzy
+#| msgid "Ko'rib chiqish jarayoni"
+msgid "Ko'rib chiqilmoqda"
+msgstr "Ko'rib chiqish jarayoni"
+
+#: .\templates\admin\index.html:246
+msgid "Oylik maqolalar tushumi"
+msgstr "Oylik maqolalar tushumi"
+
+#: .\templates\admin\index.html:256
+msgid "Holatlar taqsimoti"
+msgstr "Holatlar taqsimoti"
+
+#: .\templates\admin\index.html:269
+msgid "Davlatlar kesimida"
+msgstr "Davlatlar kesimida"
+
+#: .\templates\admin\index.html:279
+#, fuzzy
+#| msgid "Muallif paneli"
+msgid "Mualliflar jinsi"
+msgstr "Muallif paneli"
+
+#: .\templates\admin\index.html:292
+msgid "So'nggi maqolalar"
+msgstr "So'nggi maqolalar"
+
+#: .\templates\admin\index.html:293 .\templates\index.html:355
+msgid "Barchasini ko'rish"
+msgstr "Barchasini ko'rish"
+
+#: .\templates\admin\index.html:303
+msgid "Holati"
+msgstr "Holati"
+
+#: .\templates\admin\index.html:304
+msgid "Amal"
+msgstr "Amal"
+
+#: .\templates\admin\index.html:320
+msgid "Hozircha maqolalar yo'q."
+msgstr "Hozircha maqolalar yo'q."
+
+#: .\templates\admin\index.html:334
+#, fuzzy
+#| msgid "Tezkor havolalar"
+msgid "Tezkor amallar"
+msgstr "Tezkor havolalar"
+
+#: .\templates\admin\index.html:337
+msgid "Yangi jurnal soni yaratish"
+msgstr "Yangi jurnal soni yaratish"
+
+#: .\templates\admin\index.html:338
+#, fuzzy
+#| msgid "Maqola yuborish"
+msgid "Maqola qo'shish"
+msgstr "Maqola yuborish"
+
+#: .\templates\admin\index.html:339
+msgid "Foydalanuvchi qo'shish"
+msgstr "Foydalanuvchi qo'shish"
+
+#: .\templates\admin\index.html:346
+msgid "Kelgusi nashr"
+msgstr "Kelgusi nashr"
+
+#: .\templates\admin\index.html:352 .\templates\article_pdf.html:211
+#: .\templates\journal\issue_detail.html:20
+#: .\templates\journal\issue_detail.html:30
+#, python-format
+msgid "%(year)s-yil, %(num)s-son"
+msgstr "%(year)s-yil, %(num)s-son"
+
+#: .\templates\admin\index.html:355
+msgid "Nashrga tayyorgarlik"
+msgstr "Nashrga tayyorgarlik"
+
+#: .\templates\admin\index.html:356 .\templates\archive.html:58
+#, fuzzy, python-format
+#| msgid "%(count)s ta maqola"
+msgid "%(counter)s ta maqola"
+msgid_plural "%(counter)s ta maqola"
+msgstr[0] "%(counter)s ta maqola"
+msgstr[1] "%(counter)s ta maqola"
+msgstr[2] "%(counter)s ta maqola"
+msgstr[3] "%(counter)s ta maqola"
+
+#: .\templates\admin\index.html:362
+msgid "Boshqarish"
+msgstr "Boshqarish"
+
+#: .\templates\admin\index.html:364
+msgid "Faol rejalashtirilgan nashr yo'q."
+msgstr "Faol rejalashtirilgan nashr yo'q."
+
+#: .\templates\admin\index.html:365
+msgid "Yaratish"
+msgstr "Yaratish"
+
+#: .\templates\admin\index.html:373
+#, fuzzy
+#| msgid "So'nggi maqolalar"
+msgid "So'nggi amallar"
+msgstr "So'nggi maqolalar"
+
+#: .\templates\admin\index.html:382
+#, fuzzy
+#| msgid "Yuborildi"
+msgid "Yaratildi:"
+msgstr "Yuborildi"
+
+#: .\templates\admin\index.html:383
+msgid "Tahrirlandi:"
+msgstr "Tahrirlandi:"
+
+#: .\templates\admin\index.html:384
+msgid "O'chirildi:"
+msgstr "O'chirildi:"
+
+#: .\templates\admin\index.html:389
+msgid "Harakatlar tarixi bo'sh."
+msgstr "Harakatlar tarixi bo'sh."
+
+#: .\templates\admin\index.html:410
+#, fuzzy
+#| msgid "Yuborish talablari"
+msgid "Yuborilgan maqolalar"
+msgstr "Yuborish talablari"
+
+#: .\templates\admin\journal\article\change_list.html:7
+msgid "Jildlar bo'yicha saralash"
+msgstr "Jildlar bo'yicha saralash"
+
+#: .\templates\admin\journal\article\change_list.html:11
+#: .\templates\reviewer_dashboard.html:52
+#, fuzzy
+#| msgid "Nashr maqolalar"
+msgid "Barcha maqolalar"
+msgstr "Nashr maqolalar"
+
+#: .\templates\admin\journal\article\change_list.html:16
+#: .\templates\article_detail.html:23 .\templates\article_detail.html:343
+#, python-format
+msgid "Jild %(vol)s, Son %(num)s"
+msgstr "Jild %(vol)s, Son %(num)s"
+
+#: .\templates\archive.html:3
+msgid "Arxiv | TIFT Jurnali"
+msgstr "Arxiv | TIFT Jurnali"
+
+#: .\templates\archive.html:19
+msgid "Jurnal Arxivlari"
+msgstr "Jurnal Arxivlari"
+
+#: .\templates\archive.html:20
+msgid "Barcha chop etilgan sonlar"
+msgstr "Barcha chop etilgan sonlar"
+
+#: .\templates\archive.html:28 .\templates\base.html:137
+#: .\templates\base.html:330 .\templates\journal\issue_detail.html:18
+msgid "Arxiv"
+msgstr "Arxiv"
+
+#: .\templates\archive.html:45 .\templates\registration\login.html:15
+#: .\templates\registration\signup.html:15
+msgid "TIFT Logo"
+msgstr "TIFT Logo"
+
+#: .\templates\archive.html:52
+#, fuzzy, python-format
+#| msgid "%(y)s-yil"
+msgid "%(year)s-yil"
+msgstr "-yil"
+
+#: .\templates\archive.html:54 .\templates\index.html:400
+#: .\templates\index.html:546
+#, python-format
+msgid "%(num)s-son"
+msgstr "%(num)s-son"
+
+#: .\templates\archive.html:61 .\templates\documents.html:58
+#: .\templates\documents.html:69 .\templates\documents.html:184
+#: .\templates\documents.html:195 .\templates\my_articles.html:131
+msgid "Ko'rish"
+msgstr "Ko'rish"
+
+#: .\templates\archive.html:71
+#, fuzzy
+#| msgid "Hozircha arxivlar mavjud emas."
+msgid "Arxivlar mavjud emas"
+msgstr "Hozircha arxivlar mavjud emas."
+
+#: .\templates\archive.html:72
+msgid "Hozircha hech qanday jurnal soni chop etilmagan."
+msgstr "Hozircha hech qanday jurnal soni chop etilmagan."
+
+# index.html
+#: .\templates\article_detail.html:4 .\templates\documents.html:3
+#: .\templates\reviewer_dashboard.html:4
+#, fuzzy
+#| msgid "Ilmiy Jurnali"
+msgid "TIFT Jurnali"
+msgstr "Ilmiy Jurnali"
+
+#: .\templates\article_detail.html:44 .\templates\article_detail.html:257
+#, fuzzy, python-format
+#| msgid "Jild %(vol)s, Son %(num)s"
+msgid "Jild %(vol)s, Son %(num)s, %(year)s"
+msgstr "Jild %(vol)s, Son %(num)s"
+
+#: .\templates\article_detail.html:44
+#, python-format
+msgid "(S. %(start)s-%(end)s)"
+msgstr "(S. %(start)s-%(end)s)"
+
+#: .\templates\article_detail.html:59
+msgid "Muallif ko'rsatilmagan"
+msgstr "Muallif ko'rsatilmagan"
+
+#: .\templates\article_detail.html:69
+#, fuzzy, python-format
+#| msgid "ta ko'rish"
+msgid "%(count)s ko'rish"
+msgstr "ta ko'rish"
+
+#: .\templates\article_detail.html:73
+#, fuzzy, python-format
+#| msgid "%(count)s ta maqola"
+msgid "%(count)s yuklab olish"
+msgstr "%(count)s ta maqola"
+
+#: .\templates\article_detail.html:90 .\templates\index.html:327
+msgid "Annotatsiya"
+msgstr "Annotatsiya"
+
+#: .\templates\article_detail.html:125
+#, fuzzy
+#| msgid "Maqolalarni ko'rish"
+msgid "Maqolani o'qish"
+msgstr "Maqolalarni ko'rish"
+
+#: .\templates\article_detail.html:130
+msgid "Kichiklashtirish"
+msgstr "Kichiklashtirish"
+
+#: .\templates\article_detail.html:135
+msgid "Kattalashtirish"
+msgstr "Kattalashtirish"
+
+#: .\templates\article_detail.html:140
+msgid "To\\"
+msgstr "To\\"
+
+#: .\templates\article_detail.html:164
+#, fuzzy
+#| msgid "ta maqola"
+msgid "PDF formatdagi maqola"
+msgstr "ta maqola"
+
+#: .\templates\article_detail.html:165
+msgid ""
+"Maqolani quyidagi tugmalar orqali ko'rishingiz yoki yuklab olishingiz mumkin"
+msgstr ""
+"Maqolani quyidagi tugmalar orqali ko'rishingiz yoki yuklab olishingiz mumkin"
+
+#: .\templates\article_detail.html:175
+#, fuzzy
+#| msgid "ko'rish"
+msgid "PDF ko'rish"
+msgstr "ko'rish"
+
+#: .\templates\article_detail.html:180 .\templates\article_detail.html:319
+#: .\templates\documents.html:63 .\templates\documents.html:140
+#: .\templates\documents.html:189
+msgid "Yuklab olish"
+msgstr "Yuklab olish"
+
+#: .\templates\article_detail.html:192
+msgid "Maqola matni"
+msgstr "Maqola matni"
+
+#: .\templates\article_detail.html:205
+msgid "Iqtibos keltirish"
+msgstr "Iqtibos keltirish"
+
+#: .\templates\article_detail.html:208
+msgid "Format:"
+msgstr "Format:"
+
+#: .\templates\article_detail.html:225 .\templates\article_detail.html:458
+#, fuzzy
+#| msgid "Saqlash"
+msgid "Nusxalash"
+msgstr "Saqlash"
+
+#: .\templates\article_detail.html:236
+#, fuzzy
+#| msgid "Nashr maqolalar"
+msgid "Muallif boshqa maqolalari"
+msgstr "Nashr maqolalar"
+
+#: .\templates\article_detail.html:306
+#, fuzzy
+#| msgid "Maqola matni"
+msgid "To'liq matn"
+msgstr "Maqola matni"
+
+#: .\templates\article_detail.html:307
+msgid "PDF formatda"
+msgstr "PDF formatda"
+
+#: .\templates\article_detail.html:314
+#, fuzzy
+#| msgid "Chiqish"
+msgid "O'qish"
+msgstr "Chiqish"
+
+#: .\templates\article_detail.html:348
+msgid "Yil"
+msgstr "Yil"
+
+#: .\templates\article_detail.html:354
+#, fuzzy
+#| msgid "Chop etildi"
+msgid "Chop etilgan"
+msgstr "Chop etildi"
+
+#: .\templates\article_detail.html:359
+#, fuzzy
+#| msgid "Ko'rish"
+msgid "Ko'rishlar"
+msgstr "Ko'rish"
+
+#: .\templates\article_detail.html:363
+msgid "Yuklamalar"
+msgstr "Yuklamalar"
+
+#: .\templates\article_detail.html:397
+#: .\templates\journal\issue_detail.html:159
+#: .\templates\registration\login.html:110
+#: .\templates\registration\signup.html:170
+msgid "Bosh sahifaga qaytish"
+msgstr "Bosh sahifaga qaytish"
+
+# ============ YANGI TARJIMALAR ============
+# base.html
+#: .\templates\article_detail.html:412
+#, fuzzy
+#| msgid "Arxitektura va Ta'lim"
+msgid "Arxitektura va Ta\\"
+msgstr "Arxitektura va Ta'lim"
+
+#: .\templates\article_detail.html:454
+msgid "Nusxalandi!"
+msgstr "Nusxalandi!"
+
+#: .\templates\article_pdf.html:205
+msgid "ILMIY-ELEKTRON JURNALI"
+msgstr "ILMIY-ELEKTRON JURNALI"
+
+#: .\templates\article_pdf.html:213
+msgid "2026-yil, Maxsus son"
+msgstr "2026-yil, Maxsus son"
+
+#: .\templates\article_pdf.html:254
+#, fuzzy
+#| msgid "Yo'nalishlar"
+msgid "Yo'nalish:"
+msgstr "Yo'nalishlar"
+
+#: .\templates\article_pdf.html:263
+#, fuzzy
+#| msgid "Maqola matni"
+msgid "Maqola matni o'qib bo'lmadi."
+msgstr "Maqola matni"
+
+#: .\templates\base.html:7 .\templates\index.html:3
+#, fuzzy
+#| msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
+msgid "Arxitektura va Ta'lim Ilmiy Jurnali"
+msgstr "\"Arxitektura va Ta'lim\" Ilmiy-Elektron Jurnali"
+
+#: .\templates\base.html:150
+msgid "Muallif yoki mavzu..."
+msgstr "Muallif yoki mavzu..."
+
+#: .\templates\base.html:151
+msgid "Maqola muallifi va mavzusi bo'yicha qidirish"
+msgstr "Maqola muallifi va mavzusi bo'yicha qidirish"
+
+#: .\templates\base.html:153 .\templates\index.html:229
+msgid "Qidirish"
+msgstr "Qidirish"
+
+#: .\templates\base.html:209
+#, fuzzy
+#| msgid "Muallif paneli"
+msgid "Taqriz paneli"
+msgstr "Muallif paneli"
+
+#: .\templates\base.html:237
+msgid "Hisob"
+msgstr "Hisob"
+
+#: .\templates\base.html:244
+#, fuzzy
+#| msgid "Taqrizlash jarayoni"
+msgid "Taqrizchi Paneli"
+msgstr "Taqrizlash jarayoni"
+
+#: .\templates\base.html:249 .\templates\dashboard_base.html:114
+#: .\templates\dashboard_base.html:140 .\templates\profile.html:66
+msgid "Maqolalarim"
+msgstr "Maqolalarim"
+
+#: .\templates\base.html:253
+msgid "Profilni tahrirlash"
+msgstr "Profilni tahrirlash"
+
+#: .\templates\base.html:257 .\templates\change_password.html:21
+#: .\templates\dashboard_base.html:126 .\templates\dashboard_base.html:143
+#: .\templates\profile.html:72 .\templates\profile.html:131
+msgid "Parol o'zgartirish"
+msgstr "Parol o'zgartirish"
+
+#: .\templates\base.html:264 .\templates\base.html:281
+#: .\templates\dashboard_base.html:74
+msgid "Chiqish"
+msgstr "Chiqish"
+
+#: .\templates\base.html:275 .\templates\base.html:337
+#: .\templates\base.html:385 .\templates\dashboard_base.html:67
+#: .\templates\dashboard_base.html:118 .\templates\dashboard_base.html:141
+#: .\templates\index.html:112 .\templates\index.html:196
+#: .\templates\index.html:474 .\templates\profile.html:69
+msgid "Maqola yuborish"
+msgstr "Maqola yuborish"
+
+#: .\templates\base.html:290 .\templates\registration\login.html:27
+#: .\templates\registration\login.html:95
+#: .\templates\registration\signup.html:162
+msgid "Kirish"
+msgstr "Kirish"
+
+#: .\templates\base.html:295 .\templates\index.html:474
+#: .\templates\registration\login.html:102
+#: .\templates\registration\signup.html:27
+#: .\templates\registration\signup.html:155
+msgid "Ro'yxatdan o'tish"
+msgstr "Ro'yxatdan o'tish"
+
+#: .\templates\base.html:314
+#, fuzzy
+#| msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+msgid "Maqola muallifi yoki mavzusi bo'yicha qidirish..."
+msgstr "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+
+#: .\templates\base.html:361
+msgid ""
+"Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-"
+"elektron jurnali."
+msgstr ""
+"Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy-"
+"elektron jurnali."
+
+#: .\templates\base.html:362
+msgid "\\"
+msgstr "\\"
+
+#: .\templates\base.html:381
+msgid "Tezkor havolalar"
+msgstr "Tezkor havolalar"
+
+#: .\templates\base.html:384 .\templates\index.html:373
+msgid "Jurnal arxivlari"
+msgstr "Jurnal arxivlari"
+
+#: .\templates\base.html:386
+msgid "Tizimga kirish"
+msgstr "Tizimga kirish"
+
+#: .\templates\base.html:391
+msgid "Jurnal ma'lumotlari"
+msgstr "Jurnal ma'lumotlari"
+
+#: .\templates\base.html:403
+msgid "Nashr davriyligi"
+msgstr "Nashr davriyligi"
+
+#: .\templates\base.html:404
+msgid "Yiliga 4 marta"
+msgstr "Yiliga 4 marta"
+
+#: .\templates\base.html:410
+msgid "Manzil"
+msgstr "Manzil"
+
+#: .\templates\base.html:411
+msgid "15 Amir Temur Shoh Street,"
+msgstr "15 Amir Temur Shoh Street,"
+
+#: .\templates\base.html:411
+#, fuzzy
+#| msgid "Toshkent, O'zbekiston"
+msgid "Tashkent, Uzbekistan"
+msgstr "Toshkent, O'zbekiston"
+
+# ============ YANGI TARJIMALAR ============
+# base.html
+#: .\templates\base.html:426
+#, fuzzy
+#| msgid "Arxitektura va Ta'lim"
+msgid "\"Arxitektura va Ta\\"
+msgstr "Arxitektura va Ta'lim"
+
+#: .\templates\base.html:427
+msgid "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
+msgstr "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti"
+
+#: .\templates\change_password.html:3
+#, fuzzy
+#| msgid "Parol o'zgartirish"
+msgid "Parol o'zgartirish | TIFT Jurnali"
+msgstr "Parol o'zgartirish"
+
 # change_password.html
+#: .\templates\change_password.html:49
 msgid "O'zgartirish"
 msgstr "O'zgartirish"
 
+#: .\templates\change_password.html:53 .\templates\reviewer_dashboard.html:366
+#: .\templates\reviewer_dashboard.html:420
+#: .\templates\reviewer_dashboard.html:480 .\templates\submit_article.html:160
+msgid "Bekor qilish"
+msgstr "Bekor qilish"
+
+#: .\templates\conferences.html:3
+#, fuzzy
+#| msgid "Konferensiyalar"
+msgid "Konferensiyalar | TIFT Jurnali"
+msgstr "Konferensiyalar"
+
+#: .\templates\conferences.html:15
+msgid "Ilmiy tadbirlar va anjumanlar"
+msgstr "Ilmiy tadbirlar va anjumanlar"
+
+#: .\templates\conferences.html:50 .\templates\index.html:336
+#: .\templates\journal\issue_detail.html:132
+msgid "Batafsil"
+msgstr "Batafsil"
+
+#: .\templates\conferences.html:56
+msgid "Axborot xatini yuklash"
+msgstr "Axborot xatini yuklash"
+
+#: .\templates\conferences.html:67
+#, fuzzy
+#| msgid "Hozircha arxivlar mavjud emas."
+msgid "Hozircha konferensiyalar mavjud emas."
+msgstr "Hozircha arxivlar mavjud emas."
+
+#: .\templates\dashboard_base.html:7
+#, fuzzy
+#| msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
+msgid "Dashboard | Arxitektura va Ta'lim Ilmiy Jurnali"
+msgstr "\"Arxitektura va Ta'lim\" Ilmiy-Elektron Jurnali"
+
+#: .\templates\dashboard_base.html:42
+msgid "TIFT"
+msgstr "TIFT"
+
+#: .\templates\dashboard_base.html:47
+msgid "Muallif paneli"
+msgstr "Muallif paneli"
+
+#: .\templates\dashboard_base.html:55
+msgid "Hush kelibsiz"
+msgstr "Hush kelibsiz"
+
+# about.html
+#: .\templates\dashboard_base.html:59
+#, fuzzy
+#| msgid "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali"
+msgid ""
+"Arxitektura va ta'lim ilmiy-elektron jurnalini tanlaganingizdan minnatdormiz"
+msgstr "TIFT \"Arxitektura va Ta'lim\" ilmiy-elektron jurnali"
+
+#: .\templates\dashboard_base.html:109
+#, fuzzy
+#| msgid "Taqrizlash jarayoni"
+msgid "Taqrizchi paneli"
+msgstr "Taqrizlash jarayoni"
+
+#: .\templates\dashboard_base.html:122 .\templates\dashboard_base.html:142
+msgid "Profilim"
+msgstr "Profilim"
+
+#: .\templates\dashboard_base.html:139
+msgid "Taqrizchi va Muharrirlar Paneli"
+msgstr "Taqrizchi va Muharrirlar Paneli"
+
 # dashboard_base.html
+#: .\templates\dashboard_base.html:144
 msgid "Dashboard"
 msgstr "Boshqaruv paneli"
 
-# login.html
-msgid "TIFT Ilmiy Jurnali platformasi"
-msgstr "TIFT Ilmiy Jurnali platformasi"
+#: .\templates\documents.html:15
+msgid "Me'yoriy hujjatlar va maqola talablari"
+msgstr "Me'yoriy hujjatlar va maqola talablari"
 
-msgid "Hali ro'yxatdan o'tmaganmisiz?"
-msgstr "Hali ro'yxatdan o'tmaganmisiz?"
+#: .\templates\documents.html:84
+#, fuzzy
+#| msgid "Me'yoriy hujjatlar va maqola talablari"
+msgid "Me'yoriy hujjatlar"
+msgstr "Me'yoriy hujjatlar va maqola talablari"
 
-# signup.html
-msgid "Muallif sifatida platformaga qo'shiling"
-msgstr "Muallif sifatida platformaga qo'shiling"
+#: .\templates\documents.html:105
+msgid "Jonli ko'rinish (Live Document View)"
+msgstr "Jonli ko'rinish (Live Document View)"
 
-msgid "Xatoliklar mavjud, iltimos tekshiring:"
-msgstr "Xatoliklar mavjud, iltimos tekshiring:"
+#: .\templates\documents.html:108
+msgid "To'liq ekran"
+msgstr "To'liq ekran"
 
-msgid "Allaqachon akkauntingiz bormi?"
-msgstr "Allaqachon akkauntingiz bormi?"
+#: .\templates\documents.html:122
+msgid "Rasmiy havolaga biriktirilgan hujjat"
+msgstr "Rasmiy havolaga biriktirilgan hujjat"
+
+#: .\templates\documents.html:125
+msgid "O'tish"
+msgstr "O'tish"
+
+#: .\templates\documents.html:146
+#, fuzzy
+#| msgid "Maqolalarni ko'rish"
+msgid "Tashqi havolada ko'rish"
+msgstr "Maqolalarni ko'rish"
+
+#: .\templates\documents.html:161
+msgid "Shablonlar"
+msgstr "Shablonlar"
+
+#: .\templates\documents.html:208
+#, fuzzy
+#| msgid "Hozircha arxivlar mavjud emas."
+msgid "Hozircha hujjatlar mavjud emas."
+msgstr "Hozircha arxivlar mavjud emas."
+
+# index.html
+#: .\templates\index.html:77
+msgid "Ilmiy Jurnali"
+msgstr "Ilmiy Jurnali"
+
+# index.html hero description
+#: .\templates\index.html:81
+msgid ""
+"Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, "
+"geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan "
+"fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad "
+"qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, "
+"tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) "
+"tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish "
+"masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va "
+"innovatsion yechimlar manbaidir."
+msgstr ""
+"Mazkur nashr arxitektura, shaharsozlik, bino va inshootlar qurilishi, "
+"geodeziya, kartografiya hamda davlat kadastri tizimlarida olib borilayotgan "
+"fundamental va amaliy tadqiqotlarning samaradorligini oshirishni maqsad "
+"qilgan. Shuningdek, zamonaviy ta'lim metodologiyasini takomillashtirish, "
+"tarmoqqa raqamli texnologiyalar, BIM (Building Information Modeling) "
+"tizimlari hamda sun'iy idrok algoritmlarini chuqur integratsiya qilish "
+"masalalariga bag'ishlangan yuqori salohiyatli tahliliy ma'lumotlar va "
+"innovatsion yechimlar manbaidir."
+
+#: .\templates\index.html:93
+msgid "Arxiv sonlari"
+msgstr "Arxiv sonlari"
+
+#: .\templates\index.html:106
+msgid "Maqolalarni ko'rish"
+msgstr "Maqolalarni ko'rish"
+
+#: .\templates\index.html:120
+msgid "Jonli statistika"
+msgstr "Jonli statistika"
+
+#: .\templates\index.html:127
+msgid "Jami tashriflar"
+msgstr "Jami tashriflar"
+
+#: .\templates\index.html:132
+msgid "Bugungi tashriflar"
+msgstr "Bugungi tashriflar"
+
+#: .\templates\index.html:137
+msgid "Nashr maqolalar"
+msgstr "Nashr maqolalar"
+
+#: .\templates\index.html:171
+msgid "'Arxitektura va Ta'lim' Ilmiy-Elektron Jurnali"
+msgstr "\"Arxitektura va Ta'lim\" Ilmiy-Elektron Jurnali"
+
+#: .\templates\index.html:173
+msgid "Qabul qilinadigan maqolalar yo'nalishlari"
+msgstr "Qabul qilinadigan maqolalar yo'nalishlari"
+
+#: .\templates\index.html:187
+msgid "Yo'nalishlar belgilanganicha yo'q."
+msgstr "Yo'nalishlar belgilanganicha yo'q."
+
+#: .\templates\index.html:222
+#, fuzzy
+#| msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+msgid "Maqola nomi, muallifi yoki kalit so'z bo'yicha qidiring..."
+msgstr "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
+
+#: .\templates\index.html:236
+msgid "Tozalash"
+msgstr "Tozalash"
+
+#: .\templates\index.html:244
+msgid "bo'yicha qidiruv natijalari"
+msgstr "bo'yicha qidiruv natijalari"
+
+#: .\templates\index.html:262
+msgid "Qidiruv natijalari"
+msgstr "Qidiruv natijalari"
+
+#: .\templates\index.html:264
+#, fuzzy
+#| msgid "So'nggi maqolalar"
+msgid "So'nggi nashr etilgan maqolalar"
+msgstr "So'nggi maqolalar"
+
+#: .\templates\index.html:280 .\templates\my_articles.html:83
+#: .\templates\reviewer_dashboard.html:161
+#, python-format
+msgid "%(year)s-yil %(num)s-son"
+msgstr "%(year)s-yil %(num)s-son"
+
+#: .\templates\index.html:321
+msgid "ta ko'rish"
+msgstr "ta ko'rish"
+
+#: .\templates\index.html:350
+msgid "Natijalar topilmadi"
+msgstr "Natijalar topilmadi"
+
+#: .\templates\index.html:350 .\templates\journal\issue_detail.html:150
+msgid "Maqolalar mavjud emas"
+msgstr "Maqolalar mavjud emas"
+
+#: .\templates\index.html:354
+msgid "bo'yicha hech qanday maqola topilmadi."
+msgstr "bo'yicha hech qanday maqola topilmadi."
+
+#: .\templates\index.html:357
+msgid "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
+msgstr "Hozircha chop etilgan ilmiy maqolalar mavjud emas."
+
+#: .\templates\index.html:383
+#, python-format
+msgid "%(year)s-yil nashrlari"
+msgstr "%(year)s-yil nashrlari"
+
+#: .\templates\index.html:387
+#, fuzzy, python-format
+#| msgid "%(count)s ta maqola"
+msgid "%(counter)s ta son"
+msgid_plural "%(counter)s ta son"
+msgstr[0] "%(counter)s ta maqola"
+msgstr[1] "%(counter)s ta maqola"
+msgstr[2] "%(counter)s ta maqola"
+msgstr[3] "%(counter)s ta maqola"
+
+#: .\templates\index.html:404 .\templates\index.html:550
+msgid "ta maqola"
+msgstr "ta maqola"
+
+#: .\templates\index.html:421
+msgid "Hozircha arxivlar mavjud emas."
+msgstr "Hozircha arxivlar mavjud emas."
+
+#: .\templates\index.html:447
+msgid "Taqrizlash jarayoni"
+msgstr "Taqrizlash jarayoni"
+
+#: .\templates\index.html:450
+msgid "Barcha yuborilgan maqolalar mutaxassislar tomonidan"
+msgstr "Barcha yuborilgan maqolalar mutaxassislar tomonidan"
+
+#: .\templates\index.html:450
+msgid "ikki tomonlama anonim taqrizlash"
+msgstr "ikki tomonlama anonim taqrizlash"
+
+#: .\templates\index.html:451
+msgid "talablari asosida ko'rib chiqiladi va baholanadi."
+msgstr "talablari asosida ko'rib chiqiladi va baholanadi."
+
+#: .\templates\index.html:456
+#, fuzzy
+#| msgid "Yuborildi → Taqriz → Qabul → Chop etildi"
+msgid "Yuborildi &rarr; Taqriz &rarr; Qabul &rarr; Chop etildi"
+msgstr "Yuborildi → Taqriz → Qabul → Chop etildi"
+
+#: .\templates\index.html:460
+msgid "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
+msgstr "O'rtacha ko'rib chiqish muddati: 4-6 hafta"
+
+#: .\templates\index.html:468
+msgid "Maqolangizni yuboring"
+msgstr "Maqolangizni yuboring"
+
+#: .\templates\index.html:470
+msgid ""
+"Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan "
+"o'ting."
+msgstr ""
+"Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan "
+"o'ting."
+
+#: .\templates\index.html:507
+msgid "Barcha jildlar karuseli"
+msgstr "Barcha jildlar karuseli"
+
+#: .\templates\index.html:511
+msgid "Jurnalimizning barcha oldingi nashrlari bilan tanishing"
+msgstr "Jurnalimizning barcha oldingi nashrlari bilan tanishing"
+
+#: .\templates\index.html:517
+msgid "Jildlar karuseli"
+msgstr "Jildlar karuseli"
+
+#: .\templates\index.html:526
+#, python-format
+msgid "%(num)s-son muqovasi"
+msgstr "%(num)s-son muqovasi"
+
+#: .\templates\index.html:556
+msgid "To'liq sonni PDF formatida yuklab olish"
+msgstr "To'liq sonni PDF formatida yuklab olish"
+
+#: .\templates\index.html:558
+msgid "To'liq sonni yuklab olish"
+msgstr "To'liq sonni yuklab olish"
+
+#: .\templates\index.html:566
+msgid "Karusel sahifalari"
+msgstr "Karusel sahifalari"
+
+#: .\templates\index.html:574
+msgid "Oldingi jild"
+msgstr "Oldingi jild"
+
+#: .\templates\index.html:583
+msgid "Keyingi jild"
+msgstr "Keyingi jild"
+
+#: .\templates\issue_cover_pdf.html:38
+#, python-format
+msgid "%(year)s-YIL, %(num)s-SON"
+msgstr "%(year)s-YIL, %(num)s-SON"
+
+#: .\templates\issue_editorial_pdf.html:48
+msgid "TAHRIRIYAT A'ZOLARI"
+msgstr "TAHRIRIYAT A'ZOLARI"
+
+#: .\templates\issue_toc_pdf.html:78
+msgid "MUNDARIJA / CONTENTS"
+msgstr "MUNDARIJA / CONTENTS"
+
+#: .\templates\issue_toc_pdf.html:88 .\templates\reviewer_dashboard.html:180
+#, fuzzy
+#| msgid "Muallif"
+msgid "Muallif:"
+msgstr "Muallif"
+
+#: .\templates\journal\issue_detail.html:4
+#, python-format
+msgid "%(year)s-yil, %(num)s-son | TIFT Jurnali"
+msgstr "%(year)s-yil, %(num)s-son | TIFT Jurnali"
 
 # issue_detail.html
+#: .\templates\journal\issue_detail.html:27
 msgid "Jurnal Arxivi"
 msgstr "Jurnal Arxivi"
 
-msgid "Ushbu sondagi maqolalar"
-msgstr "Ushbu sondagi maqolalar"
+#: .\templates\journal\issue_detail.html:35
+#, python-format
+msgid "%(y)s-yil"
+msgstr "%(y)s-yil"
 
-msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
-msgstr "Ushbu arxiv soniga hali maqolalar yuklanmagan."
-
+#: .\templates\journal\issue_detail.html:40
+#, python-format
 msgid "%(count)s ta maqola"
 msgstr "%(count)s ta maqola"
 
-msgid "%(y)s-yil"
-msgstr "%(y)s-yil"
+#: .\templates\journal\issue_detail.html:49
+msgid "To'liq sonni yuklab olish (PDF)"
+msgstr "To'liq sonni yuklab olish (PDF)"
+
+#: .\templates\journal\issue_detail.html:63
+msgid "Ushbu sondagi maqolalar"
+msgstr "Ushbu sondagi maqolalar"
+
+#: .\templates\journal\issue_detail.html:66
+#, fuzzy, python-format
+#| msgid "%(count)s ta maqola"
+msgid "%(count)s ta"
+msgstr "%(count)s ta maqola"
+
+#: .\templates\journal\issue_detail.html:151
+msgid "Ushbu arxiv soniga hali maqolalar yuklanmagan."
+msgstr "Ushbu arxiv soniga hali maqolalar yuklanmagan."
+
+#: .\templates\my_articles.html:4
+msgid "Mening maqolalarim | TIFT Jurnali"
+msgstr "Mening maqolalarim | TIFT Jurnali"
+
+# my_articles.html
+#: .\templates\my_articles.html:12
+msgid "Jami"
+msgstr "Jami"
+
+#: .\templates\my_articles.html:16 .\templates\my_articles.html:73
+#: .\templates\profile.html:58
+msgid "Yuborildi"
+msgstr "Yuborildi"
+
+#: .\templates\my_articles.html:20 .\templates\profile.html:54
+msgid "Taqrizda"
+msgstr "Taqrizda"
+
+#: .\templates\my_articles.html:24 .\templates\my_articles.html:72
+msgid "Chop etildi"
+msgstr "Chop etildi"
+
+#: .\templates\my_articles.html:28 .\templates\my_articles.html:77
+msgid "Rad etildi"
+msgstr "Rad etildi"
+
+#: .\templates\my_articles.html:37
+#, fuzzy
+#| msgid "Maqolalarni ko'rish"
+msgid "Maqolalar analitikasi"
+msgstr "Maqolalarni ko'rish"
+
+#: .\templates\my_articles.html:75
+msgid "Qabul qilindi"
+msgstr "Qabul qilindi"
+
+#: .\templates\my_articles.html:76
+msgid "Tuzatishga qaytarildi"
+msgstr "Tuzatishga qaytarildi"
+
+#: .\templates\my_articles.html:107
+msgid "Taqrizchi / Muharrir izohi:"
+msgstr "Taqrizchi / Muharrir izohi:"
+
+#: .\templates\my_articles.html:123
+msgid "ko'rish"
+msgstr "ko'rish"
+
+#: .\templates\my_articles.html:139
+msgid "Jarayonda..."
+msgstr "Jarayonda..."
+
+#: .\templates\my_articles.html:152
+msgid "Hali maqola yubormagansiz"
+msgstr "Hali maqola yubormagansiz"
+
+#: .\templates\my_articles.html:153
+msgid "Tadqiqotingizni tahririyatga yuboring"
+msgstr "Tadqiqotingizni tahririyatga yuboring"
+
+#: .\templates\my_articles.html:157
+msgid "Birinchi maqolangizni yuboring"
+msgstr "Birinchi maqolangizni yuboring"
+
+#: .\templates\my_articles.html:172
+#, fuzzy
+#| msgid "Yuklab olish"
+msgid "Yuklab olishlar"
+msgstr "Yuklab olish"
+
+#: .\templates\news.html:3 .\templates\news_detail.html:3
+msgid "Yangiliklar | TIFT Jurnali"
+msgstr "Yangiliklar | TIFT Jurnali"
+
+#: .\templates\news.html:15
+msgid "Jurnal va universitetdagi so'nggi yangiliklar"
+msgstr "Jurnal va universitetdagi so'nggi yangiliklar"
+
+#: .\templates\news.html:39 .\templates\news.html:50 .\templates\news.html:57
+#, fuzzy, python-format
+#| msgid "%(count)s ta maqola"
+msgid "%(counter)s media"
+msgid_plural "%(counter)s media"
+msgstr[0] "%(counter)s ta maqola"
+msgstr[1] "%(counter)s ta maqola"
+msgstr[2] "%(counter)s ta maqola"
+msgstr[3] "%(counter)s ta maqola"
+
+#: .\templates\news.html:82
+#, fuzzy
+#| msgid "Batafsil"
+msgid "Batafsil o'qish"
+msgstr "Batafsil"
+
+#: .\templates\news.html:92
+#, fuzzy
+#| msgid "Hozircha arxivlar mavjud emas."
+msgid "Hozircha yangiliklar mavjud emas."
+msgstr "Hozircha arxivlar mavjud emas."
+
+#: .\templates\news_detail.html:35
+#, fuzzy, python-format
+#| msgid "%(count)s ta maqola"
+msgid "%(counter)s ta media fayl"
+msgid_plural "%(counter)s ta media fayl"
+msgstr[0] "%(counter)s ta maqola"
+msgstr[1] "%(counter)s ta maqola"
+msgstr[2] "%(counter)s ta maqola"
+msgstr[3] "%(counter)s ta maqola"
+
+#: .\templates\news_detail.html:57 .\templates\news_detail.html:69
+msgid "Katta ko'rinishda ochish"
+msgstr "Katta ko'rinishda ochish"
+
+#: .\templates\news_detail.html:87
+msgid "Foto va Video Galereya"
+msgstr "Foto va Video Galereya"
+
+#: .\templates\news_detail.html:90
+#, fuzzy, python-format
+#| msgid "%(count)s ta maqola"
+msgid "%(counter)s ta fayl"
+msgid_plural "%(counter)s ta fayl"
+msgstr[0] "%(counter)s ta maqola"
+msgstr[1] "%(counter)s ta maqola"
+msgstr[2] "%(counter)s ta maqola"
+msgstr[3] "%(counter)s ta maqola"
+
+#: .\templates\news_detail.html:124
+msgid "Brauzeringiz video ijrosini qo'llab-quvvatlamaydi."
+msgstr "Brauzeringiz video ijrosini qo'llab-quvvatlamaydi."
+
+#: .\templates\news_detail.html:127 .\templates\news_detail.html:147
+msgid "Video"
+msgstr "Video"
+
+#: .\templates\news_detail.html:161
+#, fuzzy
+#| msgid "Bosh sahifaga qaytish"
+msgid "Barcha yangiliklarga qaytish"
+msgstr "Bosh sahifaga qaytish"
+
+#: .\templates\news_detail.html:170
+#, fuzzy
+#| msgid "Yangiliklar"
+msgid "Boshqa yangiliklar"
+msgstr "Yangiliklar"
+
+#: .\templates\profile.html:3
+#, fuzzy
+#| msgid "Profilni tahrirlash"
+msgid "Profilni tahrirlash | TIFT Jurnali"
+msgstr "Profilni tahrirlash"
+
+#: .\templates\profile.html:26
+msgid "Avatar"
+msgstr "Avatar"
+
+# profile.html
+#: .\templates\profile.html:50
+msgid "Nashr"
+msgstr "Nashr"
+
+#: .\templates\profile.html:82
+msgid "Profil ma'lumotlarini tahrirlash"
+msgstr "Profil ma'lumotlarini tahrirlash"
+
+#: .\templates\profile.html:103
+msgid "Telefon"
+msgstr "Telefon"
+
+#: .\templates\profile.html:107
+msgid "Ish / O'qish joyi"
+msgstr "Ish / O'qish joyi"
+
+#: .\templates\profile.html:127 .\templates\reviewer_dashboard.html:369
+msgid "Saqlash"
+msgstr "Saqlash"
+
+#: .\templates\registration\login.html:4
+msgid "Kirish | TIFT Jurnali"
+msgstr "Kirish | TIFT Jurnali"
+
+# index.html
+#: .\templates\registration\login.html:19
+#: .\templates\registration\signup.html:19
+#, fuzzy
+#| msgid "Ilmiy Jurnali"
+msgid "Ilmiy-elektron jurnal"
+msgstr "Ilmiy Jurnali"
+
+#: .\templates\registration\login.html:28
+msgid "Hisobingizga kiring."
+msgstr "Hisobingizga kiring."
+
+#: .\templates\registration\login.html:34
+msgid "Email yoki parol noto'g'ri."
+msgstr "Email yoki parol noto'g'ri."
+
+#: .\templates\registration\login.html:48
+#: .\templates\registration\signup.html:83
+msgid "Elektron pochta (Email)"
+msgstr "Elektron pochta (Email)"
+
+#: .\templates\registration\login.html:76
+#, fuzzy
+#| msgid "Parol o'zgartirish"
+msgid "Parolni ko'rsat/yashir"
+msgstr "Parol o'zgartirish"
+
+#: .\templates\registration\login.html:87
+msgid "Meni eslab qol"
+msgstr "Meni eslab qol"
+
+#: .\templates\registration\login.html:100
+msgid "Hisobingiz yo'qmi?"
+msgstr "Hisobingiz yo'qmi?"
+
+#: .\templates\registration\signup.html:4
+#, fuzzy
+#| msgid "Ro'yxatdan o'tish"
+msgid "Ro'yxatdan o'tish | TIFT Jurnali"
+msgstr "Ro'yxatdan o'tish"
+
+#: .\templates\registration\signup.html:28
+msgid "Ilmiy jurnal tizimida yangi hisob yarating."
+msgstr "Ilmiy jurnal tizimida yangi hisob yarating."
+
+#: .\templates\registration\signup.html:35
+#, fuzzy
+#| msgid "Maqolalar mavjud emas"
+msgid "Xatoliklar mavjud:"
+msgstr "Maqolalar mavjud emas"
+
+#: .\templates\registration\signup.html:111
+#: .\templates\registration\signup.html:133
+#, fuzzy
+#| msgid "Maqolalarni ko'rish"
+msgid "Parolni ko'rsat"
+msgstr "Maqolalarni ko'rish"
+
+#: .\templates\registration\signup.html:123
+#, fuzzy
+#| msgid "Profilni tahrirlash"
+msgid "Parolni tasdiqlash"
+msgstr "Profilni tahrirlash"
+
+#: .\templates\registration\signup.html:147
+msgid "Foydalanish shartlari va Maxfiylik siyosatiga roziman."
+msgstr "Foydalanish shartlari va Maxfiylik siyosatiga roziman."
+
+#: .\templates\registration\signup.html:160
+msgid "Hisobingiz bormi?"
+msgstr "Hisobingiz bormi?"
+
+#: .\templates\reviewer_dashboard.html:4
+msgid "Taqrizchi va Muharrirlar paneli"
+msgstr "Taqrizchi va Muharrirlar paneli"
+
+#: .\templates\reviewer_dashboard.html:6
+msgid "Taqrizchi va Muharrirlar Ishchi Paneli"
+msgstr "Taqrizchi va Muharrirlar Ishchi Paneli"
+
+#: .\templates\reviewer_dashboard.html:16
+#: .\templates\reviewer_dashboard.html:74
+#, fuzzy
+#| msgid "Taqriz jarayonida"
+msgid "Taqriz kutayotganlar"
+msgstr "Taqriz jarayonida"
+
+#: .\templates\reviewer_dashboard.html:28
+#: .\templates\reviewer_dashboard.html:80
+#, fuzzy
+#| msgid "Chop etildi"
+msgid "Chop etilganlar"
+msgstr "Chop etildi"
+
+#: .\templates\reviewer_dashboard.html:40
+#: .\templates\reviewer_dashboard.html:86
+msgid "Rad etilgan / Qaytarilgan"
+msgstr "Rad etilgan / Qaytarilgan"
+
+#: .\templates\reviewer_dashboard.html:68
+msgid "Menga biriktirilganlar"
+msgstr "Menga biriktirilganlar"
+
+#: .\templates\reviewer_dashboard.html:92
+#, fuzzy
+#| msgid "Barchasini ko'rish"
+msgid "Barchasi"
+msgstr "Barchasini ko'rish"
+
+#: .\templates\reviewer_dashboard.html:101
+#, fuzzy
+#| msgid "Maqola matni"
+msgid "Maqola, muallif bo\\"
+msgstr "Maqola matni"
+
+#: .\templates\reviewer_dashboard.html:111
+#, fuzzy
+#| msgid "Tozalash"
+msgid "Izlash"
+msgstr "Tozalash"
+
+#: .\templates\reviewer_dashboard.html:135
+msgid "Yangi kelib tushgan"
+msgstr "Yangi kelib tushgan"
+
+#: .\templates\reviewer_dashboard.html:138
+msgid "Tuzatishga qaytarilgan"
+msgstr "Tuzatishga qaytarilgan"
+
+#: .\templates\reviewer_dashboard.html:145
+#, fuzzy
+#| msgid "Taqrizda"
+msgid "Taqrizchi:"
+msgstr "Taqrizda"
+
+#: .\templates\reviewer_dashboard.html:149
+msgid "Biriktirilmagan"
+msgstr "Biriktirilmagan"
+
+#: .\templates\reviewer_dashboard.html:187
+msgid "Sahifalar:"
+msgstr "Sahifalar:"
+
+#: .\templates\reviewer_dashboard.html:205
+msgid "Taqrizchi izohi"
+msgstr "Taqrizchi izohi"
+
+#: .\templates\reviewer_dashboard.html:221
+msgid "Original Fayl"
+msgstr "Original Fayl"
+
+#: .\templates\reviewer_dashboard.html:226
+msgid "PDF Jurnal Ko'rinishi"
+msgstr "PDF Jurnal Ko'rinishi"
+
+#: .\templates\reviewer_dashboard.html:239
+msgid "-- Taqrizchi biriktirish --"
+msgstr "-- Taqrizchi biriktirish --"
+
+#: .\templates\reviewer_dashboard.html:247
+#, fuzzy
+#| msgid "Bekor qilish"
+msgid "Biriktiruvni bekor qilish"
+msgstr "Bekor qilish"
+
+#: .\templates\reviewer_dashboard.html:260
+msgid "Taqrizga o'tkazish"
+msgstr "Taqrizga o'tkazish"
+
+#: .\templates\reviewer_dashboard.html:268
+#, fuzzy
+#| msgid "Tozalash"
+msgid "Tahrirlash"
+msgstr "Tozalash"
+
+#: .\templates\reviewer_dashboard.html:274
+#, fuzzy
+#| msgid "Chop etildi"
+msgid "Chop etish (Publish)"
+msgstr "Chop etildi"
+
+#: .\templates\reviewer_dashboard.html:280
+msgid "Rad etish / Izoh berish"
+msgstr "Rad etish / Izoh berish"
+
+#: .\templates\reviewer_dashboard.html:291
+#, fuzzy
+#| msgid "Profil ma'lumotlarini tahrirlash"
+msgid "Maqola ma'lumotlarini tahrirlash"
+msgstr "Profil ma'lumotlarini tahrirlash"
+
+#: .\templates\reviewer_dashboard.html:309
+msgid "Mualliflar va ish joylari"
+msgstr "Mualliflar va ish joylari"
+
+#: .\templates\reviewer_dashboard.html:316
+#, fuzzy
+#| msgid "Yo'nalishlar"
+msgid "Bo'lim / Yo'nalish"
+msgstr "Yo'nalishlar"
+
+#: .\templates\reviewer_dashboard.html:318
+msgid "-- Yo'nalishni tanlang --"
+msgstr "-- Yo'nalishni tanlang --"
+
+#: .\templates\reviewer_dashboard.html:328
+#, fuzzy
+#| msgid "Bosh sahifa"
+msgid "Boshlanish sahifasi"
+msgstr "Bosh sahifa"
+
+#: .\templates\reviewer_dashboard.html:329
+msgid "masalan: 12"
+msgstr "masalan: 12"
+
+#: .\templates\reviewer_dashboard.html:333
+#, fuzzy
+#| msgid "Bosh sahifa"
+msgid "Tugash sahifasi"
+msgstr "Bosh sahifa"
+
+#: .\templates\reviewer_dashboard.html:334
+msgid "masalan: 18"
+msgstr "masalan: 18"
+
+#: .\templates\reviewer_dashboard.html:341
+#, fuzzy
+#| msgid "Annotatsiya"
+msgid "Annotatsiya (Abstract)"
+msgstr "Annotatsiya"
+
+#: .\templates\reviewer_dashboard.html:353
+msgid "Yangi PDF/Docx fayli yuklash (ixtiyoriy)"
+msgstr "Yangi PDF/Docx fayli yuklash (ixtiyoriy)"
+
+#: .\templates\reviewer_dashboard.html:358
+msgid "Taqrizchi izohi (ixtiyoriy saqlash)"
+msgstr "Taqrizchi izohi (ixtiyoriy saqlash)"
+
+#: .\templates\reviewer_dashboard.html:359
+msgid "O\\"
+msgstr "O\\"
+
+#: .\templates\reviewer_dashboard.html:381
+msgid "Maqolani Chop Etish (Nashr Qilish)"
+msgstr "Maqolani Chop Etish (Nashr Qilish)"
+
+#: .\templates\reviewer_dashboard.html:393
+msgid "Jurnal sonini tanlang"
+msgstr "Jurnal sonini tanlang"
+
+#: .\templates\reviewer_dashboard.html:395
+msgid "-- Jurnal sonini tanlang --"
+msgstr "-- Jurnal sonini tanlang --"
+
+#: .\templates\reviewer_dashboard.html:398
+#, python-format
+msgid "%(y)s-yil, %(n)s-son (Volume %(v)s)"
+msgstr "%(y)s-yil, %(n)s-son (Volume %(v)s)"
+
+#: .\templates\reviewer_dashboard.html:408
+msgid "Tanlanmasa, bugungi sana avtomatik qo'yiladi."
+msgstr "Tanlanmasa, bugungi sana avtomatik qo'yiladi."
+
+#: .\templates\reviewer_dashboard.html:412
+msgid "Muallif uchun tabrik / izoh (ixtiyoriy)"
+msgstr "Muallif uchun tabrik / izoh (ixtiyoriy)"
+
+#: .\templates\reviewer_dashboard.html:413
+msgid "Masalan: Maqolangiz muvaffaqiyatli nashr etildi!"
+msgstr "Masalan: Maqolangiz muvaffaqiyatli nashr etildi!"
+
+#: .\templates\reviewer_dashboard.html:423
+msgid "Rasman Nashr Etish"
+msgstr "Rasman Nashr Etish"
+
+#: .\templates\reviewer_dashboard.html:435
+msgid "Maqolani Rad etish yoki Tuzatishga Qaytarish"
+msgstr "Maqolani Rad etish yoki Tuzatishga Qaytarish"
+
+#: .\templates\reviewer_dashboard.html:447
+#, fuzzy
+#| msgid "Qabul qilindi"
+msgid "Qabul qilingan qaror:"
+msgstr "Qabul qilindi"
+
+#: .\templates\reviewer_dashboard.html:453
+#, fuzzy
+#| msgid "Rad etildi"
+msgid "Butunlay rad etiladi"
+msgstr "Rad etildi"
+
+#: .\templates\reviewer_dashboard.html:460
+msgid "Tuzatishga qaytarish"
+msgstr "Tuzatishga qaytarish"
+
+#: .\templates\reviewer_dashboard.html:461
+msgid "Qayta ishlash uchun"
+msgstr "Qayta ishlash uchun"
+
+#: .\templates\reviewer_dashboard.html:470
+msgid "Rad etish / Tuzatish sababi (Muallifga ko'rinadi)"
+msgstr "Rad etish / Tuzatish sababi (Muallifga ko'rinadi)"
+
+#: .\templates\reviewer_dashboard.html:473
+msgid ""
+"Nima uchun maqola rad etildi yoki qaysi joylarini tuzatish kerakligi haqida "
+"batafsil izoh yozing..."
+msgstr ""
+"Nima uchun maqola rad etildi yoki qaysi joylarini tuzatish kerakligi haqida "
+"batafsil izoh yozing..."
+
+#: .\templates\reviewer_dashboard.html:483
+msgid "Qarorni Saqlash va Muallifga Yuborish"
+msgstr "Qarorni Saqlash va Muallifga Yuborish"
+
+#: .\templates\reviewer_dashboard.html:495
+#, fuzzy
+#| msgid "Natijalar topilmadi"
+msgid "Maqolalar topilmadi"
+msgstr "Natijalar topilmadi"
+
+#: .\templates\reviewer_dashboard.html:496
+msgid "Ushbu bo'limda ko'rib chiqish uchun maqolalar mavjud emas."
+msgstr "Ushbu bo'limda ko'rib chiqish uchun maqolalar mavjud emas."
+
+#: .\templates\submit_article.html:4
+#, fuzzy
+#| msgid "Maqola yuborish"
+msgid "Maqola yuborish | TIFT Jurnali"
+msgstr "Maqola yuborish"
+
+#: .\templates\submit_article.html:26
+msgid "Mualliflar va ish joyi"
+msgstr "Mualliflar va ish joyi"
+
+#: .\templates\submit_article.html:30
+msgid "Yana muallif qo'shish"
+msgstr "Yana muallif qo'shish"
+
+#: .\templates\submit_article.html:49
+#, fuzzy
+#| msgid "Ish / O'qish joyi"
+msgid "Ish yoki o'qish joyi"
+msgstr "Ish / O'qish joyi"
+
+#: .\templates\submit_article.html:92
+msgid "Word faylni bu yerga tashlang yoki bosing"
+msgstr "Word faylni bu yerga tashlang yoki bosing"
+
+#: .\templates\submit_article.html:94
+#, fuzzy
+#| msgid "Faqat .docx format, maksimal hajm: 20MB"
+msgid "Faqat <strong>.docx</strong> format, maksimal hajm: 20MB"
+msgstr "Faqat .docx format, maksimal hajm: 20MB"
+
+#: .\templates\submit_article.html:155
+msgid "Maqolani tahririyatga yuborish"
+msgstr "Maqolani tahririyatga yuborish"
+
+#: .\templates\submit_article.html:175
+msgid "Yuborish talablari"
+msgstr "Yuborish talablari"
+
+#: .\templates\submit_article.html:183
+#, fuzzy
+#| msgid "Maqola faqat Word (.docx) formatida yuboriladi"
+msgid "Maqola faqat <strong>Word (.docx)</strong> formatida yuboriladi"
+msgstr "Maqola faqat Word (.docx) formatida yuboriladi"
+
+#: .\templates\submit_article.html:189
+msgid "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
+msgstr "Annotatsiya kamida 150 so'zdan iborat bo'lsin"
+
+#: .\templates\submit_article.html:195
+msgid "Kalit so'zlar vergul bilan ajratilsin"
+msgstr "Kalit so'zlar vergul bilan ajratilsin"
+
+#: .\templates\submit_article.html:201
+msgid "Fayl hajmi 20 MB dan oshmasin"
+msgstr "Fayl hajmi 20 MB dan oshmasin"
+
+#: .\templates\submit_article.html:207
+msgid "Plagiatdan xoli originallik shart"
+msgstr "Plagiatdan xoli originallik shart"
+
+#: .\templates\submit_article.html:216
+msgid "Ko'rib chiqish jarayoni"
+msgstr "Ko'rib chiqish jarayoni"
+
+#: .\templates\submit_article.html:225
+msgid "Maqola yuborildi va ro'yxatga olindi"
+msgstr "Maqola yuborildi va ro'yxatga olindi"
+
+#: .\templates\submit_article.html:226
+msgid "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
+msgstr "Muharrir dastlabki ko'rib chiqadi (1-3 kun)"
+
+#: .\templates\submit_article.html:227
+#, fuzzy
+#| msgid "Peer-review jarayoni (4-6 hafta)"
+msgid "Anonim taqrizlash jarayoni (4-6 hafta)"
+msgstr "Anonim taqrizlash jarayoni (4-6 hafta)"
+
+#: .\templates\submit_article.html:228
+msgid "Qabul yoki rad qaroriga xabar beriladi"
+msgstr "Qabul yoki rad qaroriga xabar beriladi"
+
+#: .\templates\submit_article.html:254
+#, fuzzy
+#| msgid "Maqola faqat Word (.docx) formatida yuboriladi"
+msgid "Faqat Word (.docx, .doc) format qabul qilamiz!"
+msgstr "Maqola faqat Word (.docx) formatida yuboriladi"
+
+#~ msgid "A'zo bo'lish"
+#~ msgstr "A'zo bo'lish"
+
+#~ msgid "Chastotasi"
+#~ msgstr "Chastotasi"
+
+#~ msgid "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
+#~ msgstr "\"Arxitektura va Ta'lim\" yo'nalishida zamonaviy tadqiqotlar."
+
+#~ msgid ""
+#~ "Barcha yuborilgan maqolalar mutaxassislar tomonidan Double-blind peer review"
+#~ " talablari asosida ko'rib chiqiladi va baholanadi."
+#~ msgstr ""
+#~ "Barcha yuborilgan maqolalar mutaxassislar tomonidan ikki tomonlama anonim "
+#~ "taqrizlash talablari asosida ko'rib chiqiladi va baholanadi."
+
+#~ msgid "Open Access — bepul kirish"
+#~ msgstr "Open Access — bepul kirish"
+
+#~ msgid "Bepul kirish"
+#~ msgstr "Bepul kirish"
+
+#~ msgid ""
+#~ "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy "
+#~ "Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. "
+#~ "Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim "
+#~ "sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
+#~ msgstr ""
+#~ "\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy "
+#~ "Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. "
+#~ "Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim "
+#~ "sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan."
+
+#~ msgid "Hali ro'yxatdan o'tmaganmisiz?"
+#~ msgstr "Hali ro'yxatdan o'tmaganmisiz?"
+
+# signup.html
+#~ msgid "Muallif sifatida platformaga qo'shiling"
+#~ msgstr "Muallif sifatida platformaga qo'shiling"
+
+#~ msgid "Xatoliklar mavjud, iltimos tekshiring:"
+#~ msgstr "Xatoliklar mavjud, iltimos tekshiring:"
+
+#~ msgid "Allaqachon akkauntingiz bormi?"
+#~ msgstr "Allaqachon akkauntingiz bormi?"
