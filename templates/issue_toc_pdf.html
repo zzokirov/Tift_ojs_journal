@@ -75,7 +75,7 @@ body {
 </head>
 <body>
 
-<div class="toc-heading">MUNDARIJA / CONTENTS</div>
+<div class="toc-heading">{% trans "MUNDARIJA / CONTENTS" %}</div>
 
 <div class="toc-container">
     {% for item in article_items %}
@@ -85,7 +85,7 @@ body {
                 <td style="vertical-align: top;">
                     <div class="art-title">{{ forloop.counter }}. {{ item.article.title }}</div>
                     <div class="art-authors">
-                        <i>Muallif:</i> {{ item.article.authors|default:item.article.author.get_full_name }}
+                        <i>{% trans "Muallif:" %}</i> {{ item.article.authors|default:item.article.author.get_full_name }}
                     </div>
                 </td>
                 <td class="toc-page-cell">

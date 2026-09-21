@@ -191,8 +191,8 @@
 
 <div class="container-fluid">
     <div class="dashboard-header">
-        <h1>TIFT Ilmiy Jurnali Boshqaruvi</h1>
-        <p class="text-muted">Tizim holati va maqolalar monitoringi</p>
+        <h1>{% trans "TIFT Ilmiy Jurnali Boshqaruvi" %}</h1>
+        <p class="text-muted">{% trans "Tizim holati va maqolalar monitoringi" %}</p>
     </div>
 
     <!-- Top Cards -->
@@ -202,7 +202,7 @@
                 <div class="stat-icon blue"><i class="fas fa-file-alt"></i></div>
                 <div class="stat-info">
                     <h3>{{ stats.total_articles }}</h3>
-                    <p>Jami maqolalar</p>
+                    <p>{% trans "Jami maqolalar" %}</p>
                 </div>
             </div>
         </div>
@@ -211,7 +211,7 @@
                 <div class="stat-icon orange"><i class="fas fa-inbox"></i></div>
                 <div class="stat-info">
                     <h3>{{ stats.new_articles }}</h3>
-                    <p>Yangi yuborilgan</p>
+                    <p>{% trans "Yangi yuborilgan" %}</p>
                 </div>
             </div>
         </div>
@@ -220,7 +220,7 @@
                 <div class="stat-icon red"><i class="fas fa-search"></i></div>
                 <div class="stat-info">
                     <h3>{{ stats.in_review }}</h3>
-                    <p>Ko'rib chiqilmoqda</p>
+                    <p>{% trans "Ko'rib chiqilmoqda" %}</p>
                 </div>
             </div>
         </div>
@@ -229,7 +229,7 @@
                 <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
                 <div class="stat-info">
                     <h3>{{ stats.accepted }}</h3>
-                    <p>Qabul qilingan</p>
+                    <p>{% trans "Qabul qilingan" %}</p>
                 </div>
             </div>
         </div>
@@ -243,7 +243,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="dashboard-panel h-100">
                         <div class="panel-header">
-                            <h2><i class="fas fa-chart-line mr-2 text-primary"></i> Oylik maqolalar tushumi</h2>
+                            <h2><i class="fas fa-chart-line mr-2 text-primary"></i> {% trans "Oylik maqolalar tushumi" %}</h2>
                         </div>
                         <div class="panel-body">
                             <canvas id="monthlyChart" height="200"></canvas>
@@ -253,7 +253,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="dashboard-panel h-100">
                         <div class="panel-header">
-                            <h2><i class="fas fa-chart-pie mr-2 text-primary"></i> Holatlar taqsimoti</h2>
+                            <h2><i class="fas fa-chart-pie mr-2 text-primary"></i> {% trans "Holatlar taqsimoti" %}</h2>
                         </div>
                         <div class="panel-body">
                             <canvas id="statusChart" height="200"></canvas>
@@ -266,7 +266,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="dashboard-panel h-100">
                         <div class="panel-header">
-                            <h2><i class="fas fa-globe mr-2 text-primary"></i> Davlatlar kesimida</h2>
+                            <h2><i class="fas fa-globe mr-2 text-primary"></i> {% trans "Davlatlar kesimida" %}</h2>
                         </div>
                         <div class="panel-body">
                             <canvas id="countryChart" height="200"></canvas>
@@ -276,7 +276,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="dashboard-panel h-100">
                         <div class="panel-header">
-                            <h2><i class="fas fa-venus-mars mr-2 text-primary"></i> Mualliflar jinsi</h2>
+                            <h2><i class="fas fa-venus-mars mr-2 text-primary"></i> {% trans "Mualliflar jinsi" %}</h2>
                         </div>
                         <div class="panel-body">
                             <canvas id="genderChart" height="200"></canvas>
@@ -289,19 +289,19 @@
             <!-- Latest Articles -->
             <div class="dashboard-panel">
                 <div class="panel-header">
-                    <h2><i class="fas fa-list mr-2 text-primary"></i> So'nggi maqolalar</h2>
-                    <a href="{% url 'admin:journal_article_changelist' %}" class="btn btn-sm btn-outline-primary">Barchasini ko'rish</a>
+                    <h2><i class="fas fa-list mr-2 text-primary"></i> {% trans "So'nggi maqolalar" %}</h2>
+                    <a href="{% url 'admin:journal_article_changelist' %}" class="btn btn-sm btn-outline-primary">{% trans "Barchasini ko'rish" %}</a>
                 </div>
                 <div class="panel-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover table-custom mb-0">
                             <thead>
                                 <tr>
-                                    <th class="pl-4">Nomi</th>
-                                    <th>Muallif</th>
-                                    <th>Sana</th>
-                                    <th>Holati</th>
-                                    <th class="pr-4 text-right">Amal</th>
+                                    <th class="pl-4">{% trans "Nomi" %}</th>
+                                    <th>{% trans "Muallif" %}</th>
+                                    <th>{% trans "Sana" %}</th>
+                                    <th>{% trans "Holati" %}</th>
+                                    <th class="pr-4 text-right">{% trans "Amal" %}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -317,7 +317,7 @@
                                     </td>
                                 </tr>
                                 {% empty %}
-                                <tr><td colspan="5" class="text-center py-4">Hozircha maqolalar yo'q.</td></tr>
+                                <tr><td colspan="5" class="text-center py-4">{% trans "Hozircha maqolalar yo'q." %}</td></tr>
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -331,38 +331,38 @@
             <!-- Quick Actions -->
             <div class="dashboard-panel quick-actions">
                 <div class="panel-header">
-                    <h2><i class="fas fa-bolt mr-2 text-warning"></i> Tezkor amallar</h2>
+                    <h2><i class="fas fa-bolt mr-2 text-warning"></i> {% trans "Tezkor amallar" %}</h2>
                 </div>
                 <div class="panel-body d-flex flex-column">
-                    <a href="{% url 'admin:journal_journalissue_add' %}" class="btn btn-outline-primary"><i class="fas fa-plus-circle mr-2"></i> Yangi jurnal soni yaratish</a>
-                    <a href="{% url 'admin:journal_article_add' %}" class="btn btn-outline-success"><i class="fas fa-file-upload mr-2"></i> Maqola qo'shish</a>
-                    <a href="{% url 'admin:journal_user_add' %}" class="btn btn-outline-info"><i class="fas fa-user-plus mr-2"></i> Foydalanuvchi qo'shish</a>
+                    <a href="{% url 'admin:journal_journalissue_add' %}" class="btn btn-outline-primary"><i class="fas fa-plus-circle mr-2"></i> {% trans "Yangi jurnal soni yaratish" %}</a>
+                    <a href="{% url 'admin:journal_article_add' %}" class="btn btn-outline-success"><i class="fas fa-file-upload mr-2"></i> {% trans "Maqola qo'shish" %}</a>
+                    <a href="{% url 'admin:journal_user_add' %}" class="btn btn-outline-info"><i class="fas fa-user-plus mr-2"></i> {% trans "Foydalanuvchi qo'shish" %}</a>
                 </div>
             </div>
 
             <!-- Upcoming Issue -->
             <div class="dashboard-panel">
                 <div class="panel-header">
-                    <h2><i class="fas fa-book-open mr-2 text-primary"></i> Kelgusi nashr</h2>
+                    <h2><i class="fas fa-book-open mr-2 text-primary"></i> {% trans "Kelgusi nashr" %}</h2>
                 </div>
                 <div class="panel-body">
                     {% get_upcoming_issue as issue %}
                     {% if issue %}
                     <h5 class="font-weight-bold mb-1">{{ issue.title }}</h5>
-                    <p class="text-muted text-sm mb-3">{{ issue.year }}-yil, {{ issue.number }}-son</p>
+                    <p class="text-muted text-sm mb-3">{% blocktrans with year=issue.year num=issue.number %}{{ year }}-yil, {{ num }}-son{% endblocktrans %}</p>
                     
                     <div class="d-flex justify-content-between text-sm mb-1">
-                        <span>Nashrga tayyorgarlik</span>
-                        <span class="font-weight-bold">{{ issue.articles.count }} ta maqola</span>
+                        <span>{% trans "Nashrga tayyorgarlik" %}</span>
+                        <span class="font-weight-bold">{% blocktrans count counter=issue.articles.count %}{{ counter }} ta maqola{% plural %}{{ counter }} ta maqola{% endblocktrans %}</span>
                     </div>
                     <div class="progress mb-3" style="height: 8px;">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: {% if issue.articles.count > 10 %}100{% else %}{{ issue.articles.count }}0{% endif %}%"></div>
                     </div>
                     
-                    <a href="{% url 'admin:journal_journalissue_change' issue.pk %}" class="btn btn-block btn-primary mt-2">Boshqarish</a>
+                    <a href="{% url 'admin:journal_journalissue_change' issue.pk %}" class="btn btn-block btn-primary mt-2">{% trans "Boshqarish" %}</a>
                     {% else %}
-                    <p class="text-center text-muted mb-0">Faol rejalashtirilgan nashr yo'q.</p>
-                    <a href="{% url 'admin:journal_journalissue_add' %}" class="btn btn-sm btn-outline-primary mt-3 d-block">Yaratish</a>
+                    <p class="text-center text-muted mb-0">{% trans "Faol rejalashtirilgan nashr yo'q." %}</p>
+                    <a href="{% url 'admin:journal_journalissue_add' %}" class="btn btn-sm btn-outline-primary mt-3 d-block">{% trans "Yaratish" %}</a>
                     {% endif %}
                 </div>
             </div>
@@ -370,7 +370,7 @@
             <!-- Recent Activity -->
             <div class="dashboard-panel">
                 <div class="panel-header">
-                    <h2><i class="fas fa-history mr-2 text-secondary"></i> So'nggi amallar</h2>
+                    <h2><i class="fas fa-history mr-2 text-secondary"></i> {% trans "So'nggi amallar" %}</h2>
                 </div>
                 <div class="panel-body">
                     <div class="activity-timeline">
@@ -379,14 +379,14 @@
                         <div class="timeline-item">
                             <div class="timeline-time">{{ log.action_time|date:"d M, H:i" }} — {{ log.user.get_username }}</div>
                             <div class="timeline-content">
-                                {% if log.is_addition %}<span class="text-success"><i class="fas fa-plus"></i> Yaratildi:</span>{% endif %}
-                                {% if log.is_change %}<span class="text-primary"><i class="fas fa-edit"></i> Tahrirlandi:</span>{% endif %}
-                                {% if log.is_deletion %}<span class="text-danger"><i class="fas fa-trash"></i> O'chirildi:</span>{% endif %}
+                                {% if log.is_addition %}<span class="text-success"><i class="fas fa-plus"></i> {% trans "Yaratildi:" %}</span>{% endif %}
+                                {% if log.is_change %}<span class="text-primary"><i class="fas fa-edit"></i> {% trans "Tahrirlandi:" %}</span>{% endif %}
+                                {% if log.is_deletion %}<span class="text-danger"><i class="fas fa-trash"></i> {% trans "O'chirildi:" %}</span>{% endif %}
                                 {{ log.object_repr }}
                             </div>
                         </div>
                         {% empty %}
-                        <p class="text-muted text-sm">Harakatlar tarixi bo'sh.</p>
+                        <p class="text-muted text-sm">{% trans "Harakatlar tarixi bo'sh." %}</p>
                         {% endfor %}
                     </div>
                 </div>
@@ -407,7 +407,7 @@ document.addEventListener("DOMContentLoaded", function() {
         data: {
             labels: chartData.monthly.labels,
             datasets: [{
-                label: 'Yuborilgan maqolalar',
+                label: '{% trans "Yuborilgan maqolalar"|escapejs %}',
                 data: chartData.monthly.data,
                 borderColor: '#2563eb',
                 backgroundColor: 'rgba(37, 99, 235, 0.1)',
@@ -454,7 +454,7 @@ document.addEventListener("DOMContentLoaded", function() {
         data: {
             labels: chartData.country.labels,
             datasets: [{
-                label: 'Maqolalar soni',
+                label: '{% trans "Maqolalar soni"|escapejs %}',
                 data: chartData.country.data,
                 backgroundColor: 'rgba(52, 211, 153, 0.7)',
                 borderColor: 'rgba(52, 211, 153, 1)',

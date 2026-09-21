@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from .models import Article, ArticleCategory
 
 User = get_user_model()
@@ -45,19 +46,19 @@ def validate_article_file(file):
 
     # Hajm tekshiruvi
     if file.size > MAX_ARTICLE_SIZE:
-        raise ValidationError(f"Fayl hajmi 20 MB dan oshmasligi kerak. Hozirgi hajm: {file.size // (1024*1024)} MB")
+        raise ValidationError(_("Fayl hajmi 20 MB dan oshmasligi kerak. Hozirgi hajm: {file.size // (1024*1024)} MB"))
 
     # Kengaytma tekshiruvi
     import os
     ext = os.path.splitext(file.name)[1].lower()
     allowed_exts = [e for exts in ALLOWED_ARTICLE_MIME.values() for e in exts]
     if ext not in allowed_exts:
-        raise ValidationError(f"Faqat Word (.docx, .doc) format qabul qilinadi. Yuborilgan: {ext}")
+        raise ValidationError(_("Faqat Word (.docx, .doc) format qabul qilinadi. Yuborilgan: {ext}"))
 
     # MIME tekshiruvi
     mime = _get_mime_type(file)
     if mime and mime not in ALLOWED_ARTICLE_MIME:
-        raise ValidationError(f"Fayl turi qabul qilinmaydi. Aniqlangan tur: {mime}")
+        raise ValidationError(_("Fayl turi qabul qilinmaydi. Aniqlangan tur: {mime}"))
 
 
 def validate_image_file(file):
@@ -67,28 +68,28 @@ def validate_image_file(file):
 
     # Hajm tekshiruvi
     if file.size > MAX_IMAGE_SIZE:
-        raise ValidationError(f"Rasm hajmi 5 MB dan oshmasligi kerak.")
+        raise ValidationError(_("Rasm hajmi 5 MB dan oshmasligi kerak."))
 
     # Kengaytma tekshiruvi
     import os
     ext = os.path.splitext(file.name)[1].lower()
     allowed_exts = [e for exts in ALLOWED_IMAGE_MIME.values() for e in exts]
     if ext not in allowed_exts:
-        raise ValidationError(f"Faqat JPG, PNG, WEBP, GIF rasmlari qabul qilinadi.")
+        raise ValidationError(_("Faqat JPG, PNG, WEBP, GIF rasmlari qabul qilinadi."))
 
     # MIME tekshiruvi
     mime = _get_mime_type(file)
     if mime and mime not in ALLOWED_IMAGE_MIME:
-        raise ValidationError(f"Rasm turi qabul qilinmaydi. Aniqlangan tur: {mime}")
+        raise ValidationError(_("Rasm turi qabul qilinmaydi. Aniqlangan tur: {mime}"))
 
 
 class ArticleSubmissionForm(forms.ModelForm):
     category = forms.ModelChoiceField(
         queryset=ArticleCategory.objects.all().order_by('order', 'code'),
         required=False,
-        empty_label="--- Maqola yo'nalishini tanlang ---",
-        label="Maqola yo'nalishi (Kategoriya)",
-        help_text="Maqolangiz tegishli bo'lgan ilmiy yo'nalishni ro'yxatdan tanlang.",
+        empty_label=_("--- Maqola yo'nalishini tanlang ---"),
+        label=_("Maqola yo'nalishi (Kategoriya)"),
+        help_text=_("Maqolangiz tegishli bo'lgan ilmiy yo'nalishni ro'yxatdan tanlang."),
         widget=forms.Select(attrs={
             'class': css_input + ' cursor-pointer'
         })
@@ -98,18 +99,18 @@ class ArticleSubmissionForm(forms.ModelForm):
         model = Article
         fields = ['title', 'category', 'authors', 'abstract', 'keywords', 'pdf_file']
         labels = {
-            'title': "Maqola sarlavhasi",
-            'category': "Yo'nalish (Kategoriya)",
-            'authors': "Mualliflar va ularning ish joyi",
-            'abstract': "Annotatsiya / Abstract",
-            'keywords': "Kalit so'zlar",
-            'pdf_file': "Maqola fayli (.docx)",
+            'title': _("Maqola sarlavhasi"),
+            'category': _("Yo'nalish (Kategoriya)"),
+            'authors': _("Mualliflar va ularning ish joyi"),
+            'abstract': _("Annotatsiya / Abstract"),
+            'keywords': _("Kalit so'zlar"),
+            'pdf_file': _("Maqola fayli (.docx)"),
         }
         widgets = {
-            'title':    forms.TextInput(attrs={'class': css_input, 'placeholder': 'Maqola sarlavhasi'}),
-            'authors':  forms.TextInput(attrs={'class': css_input, 'placeholder': 'Barcha mualliflar (Ism Familiya, ...)'}),
+            'title':    forms.TextInput(attrs={'class': css_input, 'placeholder': _('Maqola sarlavhasi')}),
+            'authors':  forms.TextInput(attrs={'class': css_input, 'placeholder': _('Barcha mualliflar (Ism Familiya, ...)')}),
             'abstract': forms.Textarea(attrs={'class': css_textarea, 'rows': 5}),
-            'keywords': forms.TextInput(attrs={'class': css_input, 'placeholder': 'Kalit so\'zlar (vergul bilan)'}),
+            'keywords': forms.TextInput(attrs={'class': css_input, 'placeholder': _("Kalit so'zlar (vergul bilan)")}),
             'pdf_file': forms.FileInput(attrs={'class': 'hidden', 'accept': '.docx,.doc'}),
         }
 
@@ -123,10 +124,10 @@ class ArticleSubmissionForm(forms.ModelForm):
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(
         required=True,
-        label='Email',
+        label=_('Email'),
         widget=forms.EmailInput(attrs={
             'class': css_input,
-            'placeholder': 'email@example.com',
+            'placeholder': _('email@example.com'),
             'autocomplete': 'email',
         })
     )
@@ -144,16 +145,16 @@ class CustomUserCreationForm(UserCreationForm):
             existing = field.widget.attrs.get('class', '')
             if css_input not in existing:
                 field.widget.attrs['class'] = css_input + ' ' + existing
-        self.fields['email'].widget.attrs['placeholder']      = 'email@example.com'
-        self.fields['first_name'].widget.attrs['placeholder'] = 'Ism'
-        self.fields['last_name'].widget.attrs['placeholder']  = 'Familiya'
-        self.fields['password1'].widget.attrs['placeholder']  = 'Parol'
-        self.fields['password2'].widget.attrs['placeholder']  = 'Parolni tasdiqlang'
+        self.fields['email'].widget.attrs['placeholder']      = _('email@example.com')
+        self.fields['first_name'].widget.attrs['placeholder'] = _('Ism')
+        self.fields['last_name'].widget.attrs['placeholder']  = _('Familiya')
+        self.fields['password1'].widget.attrs['placeholder']  = _('Parol')
+        self.fields['password2'].widget.attrs['placeholder']  = _('Parolni tasdiqlang')
 
     def clean_email(self):
         email = self.cleaned_data.get('email', '').lower().strip()
         if User.objects.filter(email__iexact=email).exists():
-            raise forms.ValidationError("Bu email allaqachon ro'yxatdan o'tgan.")
+            raise forms.ValidationError(_("Bu email allaqachon ro'yxatdan o'tgan."))
         return email
 
     def save(self, commit=True):
@@ -178,12 +179,12 @@ class ProfileUpdateForm(forms.ModelForm):
         model = User
         fields = ['avatar', 'first_name', 'last_name', 'email', 'institution', 'phone', 'bio']
         widgets = {
-            'first_name':  forms.TextInput(attrs={'class': css_input, 'placeholder': 'Ism'}),
-            'last_name':   forms.TextInput(attrs={'class': css_input, 'placeholder': 'Familiya'}),
-            'email':       forms.EmailInput(attrs={'class': css_input, 'placeholder': 'Email'}),
-            'institution': forms.TextInput(attrs={'class': css_input, 'placeholder': 'Universitet / Tashkilot'}),
-            'phone':       forms.TextInput(attrs={'class': css_input, 'placeholder': '+998 XX XXX XX XX'}),
-            'bio':         forms.Textarea(attrs={'class': css_textarea, 'rows': 4, 'placeholder': 'O\'zingiz haqingizda qisqacha...'}),
+            'first_name':  forms.TextInput(attrs={'class': css_input, 'placeholder': _('Ism')}),
+            'last_name':   forms.TextInput(attrs={'class': css_input, 'placeholder': _('Familiya')}),
+            'email':       forms.EmailInput(attrs={'class': css_input, 'placeholder': _('Email')}),
+            'institution': forms.TextInput(attrs={'class': css_input, 'placeholder': _('Universitet / Tashkilot')}),
+            'phone':       forms.TextInput(attrs={'class': css_input, 'placeholder': _('+998 XX XXX XX XX')}),
+            'bio':         forms.Textarea(attrs={'class': css_textarea, 'rows': 4, 'placeholder': _("O'zingiz haqingizda qisqacha...")}),
             'avatar':      forms.FileInput(attrs={'class': 'hidden', 'accept': 'image/*'}),
         }
 
@@ -200,6 +201,6 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({'class': css_input})
-        self.fields['old_password'].widget.attrs['placeholder']  = 'Joriy parol'
-        self.fields['new_password1'].widget.attrs['placeholder'] = 'Yangi parol'
-        self.fields['new_password2'].widget.attrs['placeholder'] = 'Yangi parolni tasdiqlang'
+        self.fields['old_password'].widget.attrs['placeholder']  = _('Joriy parol')
+        self.fields['new_password1'].widget.attrs['placeholder'] = _('Yangi parol')
+        self.fields['new_password2'].widget.attrs['placeholder'] = _('Yangi parolni tasdiqlang')

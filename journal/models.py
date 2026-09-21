@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
 
@@ -15,42 +16,42 @@ def user_avatar_path(instance, filename):
 
 class User(AbstractUser):
     ROLE_CHOICES = (
-        ('author', 'Muallif'),
-        ('reviewer', 'Taqrizchi'),
-        ('editor', 'Muharrir'),
+        ('author', _('Muallif')),
+        ('reviewer', _('Taqrizchi')),
+        ('editor', _('Muharrir')),
     )
     GENDER_CHOICES = (
-        ('male', 'Erkak'),
-        ('female', 'Ayol'),
+        ('male', _('Erkak')),
+        ('female', _('Ayol')),
     )
     role        = models.CharField(max_length=10, choices=ROLE_CHOICES, default='author')
-    institution = models.CharField(max_length=255, blank=True, verbose_name="Ish/O'qish joyi")
-    avatar      = models.ImageField(upload_to=user_avatar_path, null=True, blank=True, verbose_name="Profil rasmi")
-    bio         = models.TextField(blank=True, verbose_name="O'zim haqimda")
-    phone       = models.CharField(max_length=20, blank=True, verbose_name="Telefon raqam")
-    gender      = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True, verbose_name="Jinsi")
-    country     = models.CharField(max_length=100, null=True, blank=True, default="O'zbekiston", verbose_name="Davlat")
+    institution = models.CharField(max_length=255, blank=True, verbose_name=_("Ish/O'qish joyi"))
+    avatar      = models.ImageField(upload_to=user_avatar_path, null=True, blank=True, verbose_name=_("Profil rasmi"))
+    bio         = models.TextField(blank=True, verbose_name=_("O'zim haqimda"))
+    phone       = models.CharField(max_length=20, blank=True, verbose_name=_("Telefon raqam"))
+    gender      = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True, verbose_name=_("Jinsi"))
+    country     = models.CharField(max_length=100, null=True, blank=True, default="O'zbekiston", verbose_name=_("Davlat"))
 
     def __str__(self):
         return f"{self.get_full_name()} ({self.get_role_display()})"
 
 
 class JournalIssue(models.Model):
-    volume = models.PositiveIntegerField(verbose_name="Jurnal jildi (Volume)")
-    number = models.PositiveIntegerField(verbose_name="Jurnal soni (Issue)")
-    year = models.PositiveIntegerField(verbose_name="Chop etilgan yili")
-    period = models.CharField(max_length=100, blank=True, null=True, verbose_name="Davri (Masalan: 1-chorak, Yanvar-Mart)")
-    cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Oldi muqovasi (rasmi)")
-    back_cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name="Orqa muqovasi (rasmi)")
-    editorial_doc = models.FileField(upload_to='issues_docs/', blank=True, null=True, verbose_name="Muqova va Tahririyat Word hujjati (.docx)", help_text="Word (.docx) fayl. Nashr boshidagi muqova va tahririyat a'zolari sahifasi uchun.")
-    full_pdf = models.FileField(upload_to='issues_pdf/', blank=True, null=True, verbose_name="To'liq to'plam (PDF)")
-    is_published = models.BooleanField(default=False, verbose_name="Saytda ko'rsatish")
+    volume = models.PositiveIntegerField(verbose_name=_("Jurnal jildi (Volume)"))
+    number = models.PositiveIntegerField(verbose_name=_("Jurnal soni (Issue)"))
+    year = models.PositiveIntegerField(verbose_name=_("Chop etilgan yili"))
+    period = models.CharField(max_length=100, blank=True, null=True, verbose_name=_("Davri (Masalan: 1-chorak, Yanvar-Mart)"))
+    cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name=_("Oldi muqovasi (rasmi)"))
+    back_cover_image = models.ImageField(upload_to='issues/', blank=True, null=True, verbose_name=_("Orqa muqovasi (rasmi)"))
+    editorial_doc = models.FileField(upload_to='issues_docs/', blank=True, null=True, verbose_name=_("Muqova va Tahririyat Word hujjati (.docx)"), help_text=_("Word (.docx) fayl. Nashr boshidagi muqova va tahririyat a'zolari sahifasi uchun."))
+    full_pdf = models.FileField(upload_to='issues_pdf/', blank=True, null=True, verbose_name=_("To'liq to'plam (PDF)"))
+    is_published = models.BooleanField(default=False, verbose_name=_("Saytda ko'rsatish"))
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-year', '-volume', '-number']
-        verbose_name = "Jurnal soni"
-        verbose_name_plural = "Jurnal sonlari"
+        verbose_name = _("Jurnal soni")
+        verbose_name_plural = _("Jurnal sonlari")
 
     def __str__(self):
         return f"{self.year}-yil, {self.number}-son"
@@ -78,15 +79,15 @@ def article_template_pdf_path(instance, filename):
 # ─── YO'NALISH / KATEGORIYA ───────────────────────────────────────────────────
 
 class ArticleCategory(models.Model):
-    code  = models.CharField(max_length=20, unique=True, verbose_name="Kod (masalan: 18.00.00)")
-    name  = models.CharField(max_length=200, verbose_name="Nomi")
-    icon  = models.CharField(max_length=50, blank=True, default='', verbose_name="Ikona klasi (masalan: fa-building)", help_text="FontAwesome ikona klasi (bo'sh bo'lsa avtomatik mos ikona tanlanadi)")
-    order = models.PositiveIntegerField(default=0, verbose_name="Tartib")
+    code  = models.CharField(max_length=20, unique=True, verbose_name=_("Kod (masalan: 18.00.00)"))
+    name  = models.CharField(max_length=200, verbose_name=_("Nomi"))
+    icon  = models.CharField(max_length=50, blank=True, default='', verbose_name=_("Ikona klasi (masalan: fa-building)"), help_text=_("FontAwesome ikona klasi (bo'sh bo'lsa avtomatik mos ikona tanlanadi)"))
+    order = models.PositiveIntegerField(default=0, verbose_name=_("Tartib"))
 
     class Meta:
         ordering = ['order', 'code']
-        verbose_name = "Yo'nalish"
-        verbose_name_plural = "Yo'nalishlar"
+        verbose_name = _("Yo'nalish")
+        verbose_name_plural = _("Yo'nalishlar")
 
     def __str__(self):
         return f"{self.code} — {self.name}"
@@ -113,55 +114,55 @@ class ArticleCategory(models.Model):
 
 class Article(models.Model):
     STATUS_CHOICES = (
-        ('submitted', 'Yangi maqola'),
-        ('initial_review', 'Dastlabki tekshiruv'),
-        ('under_review', 'Taqriz jarayonida'),
-        ('returned', 'Tuzatish uchun qaytarilgan'),
-        ('accepted', 'Qabul qilingan'),
-        ('rejected', 'Rad etilgan'),
-        ('ready_to_publish', 'Nashrga tayyor'),
-        ('published', 'Nashr etilgan'),
+        ('submitted', _('Yangi maqola')),
+        ('initial_review', _('Dastlabki tekshiruv')),
+        ('under_review', _('Taqriz jarayonida')),
+        ('returned', _('Tuzatish uchun qaytarilgan')),
+        ('accepted', _('Qabul qilingan')),
+        ('rejected', _('Rad etilgan')),
+        ('ready_to_publish', _('Nashrga tayyor')),
+        ('published', _('Nashr etilgan')),
     )
 
     # Asosiy ma'lumotlar
-    title    = models.CharField(max_length=500, verbose_name="Maqola sarlavhasi")
-    authors  = models.CharField(max_length=500, blank=True, verbose_name="Mualliflar (to'liq ro'yxat)")
-    abstract = models.TextField(verbose_name="Annotatsiya / Abstract")
-    keywords = models.CharField(max_length=255, verbose_name="Kalit so'zlar (vergul bilan ajrating)")
+    title    = models.CharField(max_length=500, verbose_name=_("Maqola sarlavhasi"))
+    authors  = models.CharField(max_length=500, blank=True, verbose_name=_("Mualliflar (to'liq ro'yxat)"))
+    abstract = models.TextField(verbose_name=_("Annotatsiya / Abstract"))
+    keywords = models.CharField(max_length=255, verbose_name=_("Kalit so'zlar (vergul bilan ajrating)"))
 
     # Muallif (tizim foydalanuvchisi) va jurnal
-    author   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name="Muallif (foydalanuvchi)")
-    issue    = models.ForeignKey(JournalIssue, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Jurnal soni")
-    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name="Yo'nalish")
+    author   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name=_("Muallif (foydalanuvchi)"))
+    issue    = models.ForeignKey(JournalIssue, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name=_("Jurnal soni"))
+    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name=_("Yo'nalish"))
 
     # Sahifalash (Paginatsiya)
-    start_page = models.PositiveIntegerField(null=True, blank=True, verbose_name="Boshlanish sahifasi (To'plamda)")
-    end_page   = models.PositiveIntegerField(null=True, blank=True, verbose_name="Tugash sahifasi (To'plamda)")
+    start_page = models.PositiveIntegerField(null=True, blank=True, verbose_name=_("Boshlanish sahifasi (To'plamda)"))
+    end_page   = models.PositiveIntegerField(null=True, blank=True, verbose_name=_("Tugash sahifasi (To'plamda)"))
 
     # Holat
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='submitted', verbose_name="Maqola holati")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='submitted', verbose_name=_("Maqola holati"))
 
     # Maqola matni (HTML)
-    content = models.TextField(blank=True, verbose_name="Maqola matni (HTML)")
+    content = models.TextField(blank=True, verbose_name=_("Maqola matni (HTML)"))
 
     # Fayllar
-    pdf_file     = models.FileField(upload_to=article_upload_path, null=True, blank=True, verbose_name="Fayl (PDF yoki Word .docx)")
-    template_pdf = models.FileField(upload_to=article_template_pdf_path, null=True, blank=True, verbose_name="Shablon PDF (tahririyat tomonidan)")
+    pdf_file     = models.FileField(upload_to=article_upload_path, null=True, blank=True, verbose_name=_("Fayl (PDF yoki Word .docx)"))
+    template_pdf = models.FileField(upload_to=article_template_pdf_path, null=True, blank=True, verbose_name=_("Shablon PDF (tahririyat tomonidan)"))
 
     # Taqriz va tahririyat xulosasi
-    assigned_reviewer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_articles', verbose_name="Biriktirilgan taqrizchi")
-    review_notes = models.TextField(blank=True, verbose_name="Taqrizchi izohi / Rad etish sababi")
-    reviewed_by  = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='reviewed_articles', verbose_name="Taqrizchi / Muharrir")
-    reviewed_at  = models.DateTimeField(null=True, blank=True, verbose_name="Taqriz qilingan sana")
+    assigned_reviewer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_articles', verbose_name=_("Biriktirilgan taqrizchi"))
+    review_notes = models.TextField(blank=True, verbose_name=_("Taqrizchi izohi / Rad etish sababi"))
+    reviewed_by  = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='reviewed_articles', verbose_name=_("Taqrizchi / Muharrir"))
+    reviewed_at  = models.DateTimeField(null=True, blank=True, verbose_name=_("Taqriz qilingan sana"))
 
     # Chop etilgan sana
-    published_at = models.DateField(null=True, blank=True, verbose_name="Chop etilgan sana")
+    published_at = models.DateField(null=True, blank=True, verbose_name=_("Chop etilgan sana"))
 
     # Statistika
-    views_count     = models.PositiveIntegerField(default=0, verbose_name="Ko'rishlar soni")
-    downloads_count = models.PositiveIntegerField(default=0, verbose_name="Yuklab olishlar soni")
+    views_count     = models.PositiveIntegerField(default=0, verbose_name=_("Ko'rishlar soni"))
+    downloads_count = models.PositiveIntegerField(default=0, verbose_name=_("Yuklab olishlar soni"))
 
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yuborilgan sana")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Yuborilgan sana"))
     updated_at = models.DateTimeField(auto_now=True)
 
     @property
@@ -178,20 +179,20 @@ class Article(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = "Maqola"
-        verbose_name_plural = "Maqolalar"
+        verbose_name = _("Maqola")
+        verbose_name_plural = _("Maqolalar")
 
     def __str__(self):
         return self.title
 
 
 class SiteVisit(models.Model):
-    date       = models.DateField(auto_now_add=True, verbose_name="Sana")
-    ip_address = models.GenericIPAddressField(verbose_name="IP manzil")
+    date       = models.DateField(auto_now_add=True, verbose_name=_("Sana"))
+    ip_address = models.GenericIPAddressField(verbose_name=_("IP manzil"))
 
     class Meta:
-        verbose_name = "Tashrif"
-        verbose_name_plural = "Tashriflar"
+        verbose_name = _("Tashrif")
+        verbose_name_plural = _("Tashriflar")
         unique_together = ('date', 'ip_address')
 
     def __str__(self):
@@ -209,27 +210,27 @@ def staff_photo_path(instance, filename):
 
 class StaffMember(models.Model):
     POSITION_CHOICES = (
-        ('editor_in_chief', 'Bosh muharrir'),
+        ('editor_in_chief', _('Bosh muharrir')),
         ('deputy_editor',   "O'rinbosar muharrir"),
-        ('editor',          'Muharrir'),
-        ('reviewer',        'Taqrizchi'),
-        ('secretary',       'Kotib'),
+        ('editor', _('Muharrir')),
+        ('reviewer', _('Taqrizchi')),
+        ('secretary', _('Kotib')),
         ('member',          'A\'zo'),
     )
 
-    full_name   = models.CharField(max_length=255, verbose_name="Ism Familiya")
-    position    = models.CharField(max_length=30, choices=POSITION_CHOICES, default='member', verbose_name="Lavozim")
-    workplace   = models.CharField(max_length=255, verbose_name="Ish joyi")
-    age         = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name="Yoshi")
-    photo       = models.ImageField(upload_to=staff_photo_path, null=True, blank=True, verbose_name="Rasmi")
-    bio         = models.TextField(blank=True, verbose_name="Qisqacha ma'lumot")
-    order       = models.PositiveIntegerField(default=0, verbose_name="Tartib raqami")
-    is_active   = models.BooleanField(default=True, verbose_name="Ko'rsatish")
+    full_name   = models.CharField(max_length=255, verbose_name=_("Ism Familiya"))
+    position    = models.CharField(max_length=30, choices=POSITION_CHOICES, default='member', verbose_name=_("Lavozim"))
+    workplace   = models.CharField(max_length=255, verbose_name=_("Ish joyi"))
+    age         = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name=_("Yoshi"))
+    photo       = models.ImageField(upload_to=staff_photo_path, null=True, blank=True, verbose_name=_("Rasmi"))
+    bio         = models.TextField(blank=True, verbose_name=_("Qisqacha ma'lumot"))
+    order       = models.PositiveIntegerField(default=0, verbose_name=_("Tartib raqami"))
+    is_active   = models.BooleanField(default=True, verbose_name=_("Ko'rsatish"))
 
     class Meta:
         ordering = ['order', 'full_name']
-        verbose_name = "Jurnal a'zosi"
-        verbose_name_plural = "Jurnal a'zolari"
+        verbose_name = _("Jurnal a'zosi")
+        verbose_name_plural = _("Jurnal a'zolari")
 
     def __str__(self):
         return f"{self.full_name} — {self.get_position_display()}"
@@ -238,19 +239,19 @@ class StaffMember(models.Model):
 # ─── KONFERENSIYALAR ─────────────────────────────────────────────────────────
 
 class Conference(models.Model):
-    title       = models.CharField(max_length=300, verbose_name="Nomi")
-    description = models.TextField(blank=True, verbose_name="Tavsif")
-    pdf_file    = models.FileField(upload_to="conferences/pdfs/", blank=True, null=True, verbose_name="Axborot xati / Fayl (PDF)")
-    date        = models.DateField(verbose_name="Sana")
-    location    = models.CharField(max_length=255, blank=True, verbose_name="Joyi")
-    url         = models.URLField(blank=True, verbose_name="Havola")
-    is_active   = models.BooleanField(default=True, verbose_name="Ko'rsatish")
+    title       = models.CharField(max_length=300, verbose_name=_("Nomi"))
+    description = models.TextField(blank=True, verbose_name=_("Tavsif"))
+    pdf_file    = models.FileField(upload_to="conferences/pdfs/", blank=True, null=True, verbose_name=_("Axborot xati / Fayl (PDF)"))
+    date        = models.DateField(verbose_name=_("Sana"))
+    location    = models.CharField(max_length=255, blank=True, verbose_name=_("Joyi"))
+    url         = models.URLField(blank=True, verbose_name=_("Havola"))
+    is_active   = models.BooleanField(default=True, verbose_name=_("Ko'rsatish"))
     created_at  = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-date']
-        verbose_name = "Konferensiya"
-        verbose_name_plural = "Konferensiyalar"
+        verbose_name = _("Konferensiya")
+        verbose_name_plural = _("Konferensiyalar")
 
     def __str__(self):
         return self.title
@@ -259,16 +260,16 @@ class Conference(models.Model):
 # ─── YANGILIKLAR ─────────────────────────────────────────────────────────────
 
 class News(models.Model):
-    title       = models.CharField(max_length=300, verbose_name="Sarlavha")
-    content     = models.TextField(verbose_name="Matn")
-    image       = models.ImageField(upload_to='news/', null=True, blank=True, verbose_name="Rasm")
-    is_active   = models.BooleanField(default=True, verbose_name="Ko'rsatish")
+    title       = models.CharField(max_length=300, verbose_name=_("Sarlavha"))
+    content     = models.TextField(verbose_name=_("Matn"))
+    image       = models.ImageField(upload_to='news/', null=True, blank=True, verbose_name=_("Rasm"))
+    is_active   = models.BooleanField(default=True, verbose_name=_("Ko'rsatish"))
     created_at  = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = "Yangilik"
-        verbose_name_plural = "Yangiliklar"
+        verbose_name = _("Yangilik")
+        verbose_name_plural = _("Yangiliklar")
 
     def __str__(self):
         return self.title
@@ -282,22 +283,22 @@ def news_media_path(instance, filename):
 
 class NewsMedia(models.Model):
     MEDIA_TYPES = (
-        ('image', 'Rasm'),
-        ('video', 'Video fayl (MP4/WebM)'),
-        ('video_url', 'Video havola (YouTube/Vimeo/Web URL)'),
+        ('image', _('Rasm')),
+        ('video', _('Video fayl (MP4/WebM)')),
+        ('video_url', _('Video havola (YouTube/Vimeo/Web URL)')),
     )
-    news        = models.ForeignKey(News, on_delete=models.CASCADE, related_name='media_files', verbose_name="Yangilik")
-    media_type  = models.CharField(max_length=20, choices=MEDIA_TYPES, default='image', verbose_name="Media turi")
-    file        = models.FileField(upload_to=news_media_path, null=True, blank=True, verbose_name="Fayl (Rasm yoki Video)")
-    video_url   = models.URLField(blank=True, verbose_name="Video URL (YouTube/Vimeo/MP4 havolasi)")
-    caption     = models.CharField(max_length=255, blank=True, verbose_name="Izoh / Sarlavha")
-    order       = models.PositiveIntegerField(default=0, verbose_name="Tartib")
+    news        = models.ForeignKey(News, on_delete=models.CASCADE, related_name='media_files', verbose_name=_("Yangilik"))
+    media_type  = models.CharField(max_length=20, choices=MEDIA_TYPES, default='image', verbose_name=_("Media turi"))
+    file        = models.FileField(upload_to=news_media_path, null=True, blank=True, verbose_name=_("Fayl (Rasm yoki Video)"))
+    video_url   = models.URLField(blank=True, verbose_name=_("Video URL (YouTube/Vimeo/MP4 havolasi)"))
+    caption     = models.CharField(max_length=255, blank=True, verbose_name=_("Izoh / Sarlavha"))
+    order       = models.PositiveIntegerField(default=0, verbose_name=_("Tartib"))
     created_at  = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['order', 'id']
-        verbose_name = "Yangilik media fayli"
-        verbose_name_plural = "Yangilik media fayllari (Rasmlar va Videolar)"
+        verbose_name = _("Yangilik media fayli")
+        verbose_name_plural = _("Yangilik media fayllari (Rasmlar va Videolar)")
 
     def __str__(self):
         return f"{self.news.title[:25]} - {self.get_media_type_display()}"
@@ -326,23 +327,23 @@ class NewsMedia(models.Model):
 class Document(models.Model):
     CATEGORY_CHOICES = (
         ('normative', "Me'yoriy hujjat"),
-        ('requirement', 'Maqola talablari'),
-        ('template', 'Shablon'),
-        ('other', 'Boshqa'),
+        ('requirement', _('Maqola talablari')),
+        ('template', _('Shablon')),
+        ('other', _('Boshqa')),
     )
-    title       = models.CharField(max_length=300, verbose_name="Nomi")
-    category    = models.CharField(max_length=15, choices=CATEGORY_CHOICES, default='normative', verbose_name="Kategoriya")
-    description = models.TextField(blank=True, verbose_name="Tavsif")
-    file        = models.FileField(upload_to='documents/', null=True, blank=True, verbose_name="Fayl")
-    url         = models.URLField(blank=True, verbose_name="Tashqi havola")
-    is_active   = models.BooleanField(default=True, verbose_name="Ko'rsatish")
-    order       = models.PositiveIntegerField(default=0, verbose_name="Tartib")
+    title       = models.CharField(max_length=300, verbose_name=_("Nomi"))
+    category    = models.CharField(max_length=15, choices=CATEGORY_CHOICES, default='normative', verbose_name=_("Kategoriya"))
+    description = models.TextField(blank=True, verbose_name=_("Tavsif"))
+    file        = models.FileField(upload_to='documents/', null=True, blank=True, verbose_name=_("Fayl"))
+    url         = models.URLField(blank=True, verbose_name=_("Tashqi havola"))
+    is_active   = models.BooleanField(default=True, verbose_name=_("Ko'rsatish"))
+    order       = models.PositiveIntegerField(default=0, verbose_name=_("Tartib"))
     created_at  = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['order', '-created_at']
-        verbose_name = "Hujjat"
-        verbose_name_plural = "Hujjatlar"
+        verbose_name = _("Hujjat")
+        verbose_name_plural = _("Hujjatlar")
 
     def __str__(self):
         return f"{self.get_category_display()} — {self.title}"

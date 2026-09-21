@@ -8,7 +8,7 @@
     </h3>
     <div style="display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px;" class="scroll-container">
         <a href="?" class="issue-tab" style="padding: 8px 16px; border-radius: 20px; font-weight: 600; white-space: nowrap; text-decoration: none; transition: all 0.2s; {% if not selected_issue %}background: #2563EB; color: white; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);{% else %}background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;{% endif %}">
-            Barcha maqolalar
+            {% trans "Barcha maqolalar" %}
         </a>
         
         {% for issue in all_issues %}

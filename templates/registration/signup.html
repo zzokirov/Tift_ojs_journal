@@ -1,7 +1,7 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static i18n %}
 
-{% block title %}Ro'yxatdan o'tish | TIFT Jurnali{% endblock %}
+{% block title %}{% trans "Ro'yxatdan o'tish | TIFT Jurnali" %}{% endblock %}
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
@@ -12,11 +12,11 @@
     <div class="text-center mb-8">
       <a href="{% url 'index' %}" class="inline-flex flex-col items-center gap-3 group">
         <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-md border border-gray-100 group-hover:shadow-lg transition-shadow">
-          <img src="{% static 'images/tift.png' %}" alt="TIFT Logo" class="w-full h-full object-contain bg-white p-1">
+          <img src="{% static 'images/tift.png' %}" alt="{% trans "TIFT Logo" %}" class="w-full h-full object-contain bg-white p-1">
         </div>
         <div>
-          <div class="text-navy-900 font-black text-lg leading-tight">Arxitektura va Ta'lim</div>
-          <div class="text-gray-500 text-xs tracking-wide">Ilmiy-elektron jurnal</div>
+          <div class="text-navy-900 font-black text-lg leading-tight">{% trans "Arxitektura va Ta'lim" %}</div>
+          <div class="text-gray-500 text-xs tracking-wide">{% trans "Ilmiy-elektron jurnal" %}</div>
         </div>
       </a>
     </div>
@@ -24,8 +24,8 @@
     <!-- Card -->
     <div class="bg-white rounded-2xl shadow-lg border border-gray-100 px-8 py-8">
 
-      <h1 class="text-2xl font-black text-gray-900 mb-1">Ro'yxatdan o'tish</h1>
-      <p class="text-sm text-gray-500 mb-6">Ilmiy jurnal tizimida yangi hisob yarating.</p>
+      <h1 class="text-2xl font-black text-gray-900 mb-1">{% trans "Ro'yxatdan o'tish" %}</h1>
+      <p class="text-sm text-gray-500 mb-6">{% trans "Ilmiy jurnal tizimida yangi hisob yarating." %}</p>
 
       <!-- Errors -->
       {% if form.errors %}
@@ -60,7 +60,7 @@
               <input type="text" name="first_name" id="id_first_name"
                      value="{{ form.first_name.value|default:'' }}"
                      class="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400 {% if form.first_name.errors %}border-red-400{% endif %}"
-                     placeholder="Ism">
+                     placeholder="{% trans 'Ism' %}">
             </div>
           </div>
           <div>
@@ -72,7 +72,7 @@
               <input type="text" name="last_name" id="id_last_name"
                      value="{{ form.last_name.value|default:'' }}"
                      class="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition-all placeholder-gray-400 {% if form.last_name.errors %}border-red-400{% endif %}"
-                     placeholder="Familiya">
+                     placeholder="{% trans 'Familiya' %}">
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
                    placeholder="••••••••">
             <button type="button" onclick="togglePwd('id_password1','eye1')"
                     class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors focus:outline-none"
-                    aria-label="Parolni ko'rsat">
+                    aria-label="{% trans "Parolni ko'rsat" %}">
               <i id="eye1" class="fas fa-eye-slash text-sm"></i>
             </button>
           </div>
@@ -130,7 +130,7 @@
                    placeholder="••••••••">
             <button type="button" onclick="togglePwd('id_password2','eye2')"
                     class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors focus:outline-none"
-                    aria-label="Parolni ko'rsat">
+                    aria-label="{% trans "Parolni ko'rsat" %}">
               <i id="eye2" class="fas fa-eye-slash text-sm"></i>
             </button>
           </div>

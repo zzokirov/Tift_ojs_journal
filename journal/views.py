@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, SiteVisit, Conference, News, Document
 from .forms import ArticleSubmissionForm, CustomUserCreationForm, ProfileUpdateForm, CustomPasswordChangeForm
+from django.utils.translation import gettext as _
 
 
 def index(request):
@@ -187,7 +188,7 @@ def article_detail(request, pk):
             article = get_object_or_404(Article, pk=pk)
             return render(request, 'article_detail.html', {
                 'article': article,
-                'author_name': getattr(article, 'authors', '') or 'Muallif',
+                'author_name': getattr(article, 'authors', '') or _('Muallif'),
                 'author_initial': 'A',
                 'author_institution': '',
                 'author_articles': [],
@@ -196,7 +197,7 @@ def article_detail(request, pk):
             })
         except Exception:
             from django.http import HttpResponse
-            return HttpResponse("Maqola topilmadi yoki xatolik yuz berdi.", status=404)
+            return HttpResponse(_("Maqola topilmadi yoki xatolik yuz berdi."), status=404)
 
 
 def _clean_text(text):
@@ -728,7 +729,7 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
         if article.issue:
             issue_full = f"{article.issue.year}-yil, {article.issue.number}-son (Jild {article.issue.volume})"
         else:
-            issue_full = "Maxsus son, 2026"
+            issue_full = _("Maxsus son, 2026")
 
         for idx, page in enumerate(doc):
             w = page.rect.width
@@ -819,7 +820,7 @@ def download_pdf(request, pk):
         article.assigned_reviewer_id == request.user.pk
     )
     if article.status != 'published' and not (is_author or is_reviewer_or_staff):
-        raise Http404("Maqola hali chop etilmagan.")
+        raise Http404(_("Maqola hali chop etilmagan."))
 
     Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
 
@@ -831,7 +832,7 @@ def download_pdf(request, pk):
     filename = f"TIFT_{safe_title}.pdf"
 
     if not article.pdf_file:
-        raise Http404("Maqola fayli topilmadi.")
+        raise Http404(_("Maqola fayli topilmadi."))
 
     file_name = getattr(article.pdf_file, 'name', '') or ''
     ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0] if article.pdf_file else ''
@@ -893,7 +894,7 @@ def generate_article_pdf(request, pk):
         article.assigned_reviewer_id == request.user.pk
     )
     if article.status != 'published' and not (is_author or is_reviewer_or_staff):
-        raise Http404("Maqola hali chop etilmagan.")
+        raise Http404(_("Maqola hali chop etilmagan."))
 
     if not request.session.get(f'pdf_viewed_{pk}'):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
@@ -1003,10 +1004,10 @@ def profile(request):
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Profil muvaffaqiyatli yangilandi!')
+            messages.success(request, _('Profil muvaffaqiyatli yangilandi!'))
             return redirect('profile')
         else:
-            messages.error(request, 'Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.')
+            messages.error(request, _("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."))
     else:
         form = ProfileUpdateForm(instance=request.user)
 
@@ -1033,10 +1034,10 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, 'Parol muvaffaqiyatli o\'zgartirildi!')
+            messages.success(request, _("Parol muvaffaqiyatli o'zgartirildi!"))
             return redirect('profile')
         else:
-            messages.error(request, 'Xatolik yuz berdi.')
+            messages.error(request, _('Xatolik yuz berdi.'))
     else:
         form = CustomPasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
@@ -1049,7 +1050,7 @@ def reviewer_dashboard(request):
     Maqolalarni ko'rib chiqish, taqrizchiga biriktirish, tahrirlash, chop etish (publish) va rad etish / izoh berish.
     """
     if not (request.user.role in ['reviewer', 'editor'] or request.user.is_staff or request.user.is_superuser):
-        messages.error(request, "Ushbu sahifa faqat taqrizchi va muharrirlar uchun mo'ljallangan.")
+        messages.error(request, _("Ushbu sahifa faqat taqrizchi va muharrirlar uchun mo'ljallangan."))
         return redirect('my_articles')
 
     tab = request.GET.get('tab', '')
@@ -1123,7 +1124,7 @@ def assign_reviewer_action(request, pk):
     Muharrir yoki admin maqolaga taqrizchini biriktiradi yoki almashtiradi.
     """
     if not (request.user.role in ['editor', 'reviewer'] or request.user.is_staff or request.user.is_superuser):
-        messages.error(request, "Ushbu harakatni bajarishga ruxsat yo'q.")
+        messages.error(request, _("Ushbu harakatni bajarishga ruxsat yo'q."))
         return redirect('reviewer_dashboard')
 
     if request.method == 'POST':
@@ -1136,11 +1137,11 @@ def assign_reviewer_action(request, pk):
                 article.status = 'under_review'
             article.save()
             rev_name = reviewer.get_full_name() or reviewer.email
-            messages.success(request, f"Maqola taqrizchi {rev_name}ga muvaffaqiyatli biriktirildi!")
+            messages.success(request, _("Maqola taqrizchi %(name)sga muvaffaqiyatli biriktirildi!") % {'name': rev_name})
         else:
             article.assigned_reviewer = None
             article.save()
-            messages.info(request, "Taqrizchi biriktiruvi bekor qilindi.")
+            messages.info(request, _("Taqrizchi biriktiruvi bekor qilindi."))
 
     return redirect(request.META.get('HTTP_REFERER', 'reviewer_dashboard'))
 
@@ -1151,7 +1152,7 @@ def review_article_action(request, pk):
     Taqrizchi/Muharrir maqolani tahrirlash, chop etish (publish) va rad etish / izoh berish (reject/return with notes) harakatlari.
     """
     if not (request.user.role in ['reviewer', 'editor'] or request.user.is_staff or request.user.is_superuser):
-        messages.error(request, "Ruxsat etilmagan harakat.")
+        messages.error(request, _("Ruxsat etilmagan harakat."))
         return redirect('my_articles')
 
     article = get_object_or_404(Article, pk=pk)
@@ -1184,7 +1185,7 @@ def review_article_action(request, pk):
             if review_notes:
                 article.review_notes = review_notes
             article.save()
-            messages.success(request, f"Maqola ('{article.title[:35]}...') muvaffaqiyatli nashr etildi!")
+            messages.success(request, _("Maqola ('%(title)s...') muvaffaqiyatli nashr etildi!") % {'title': article.title[:35]})
 
         elif action in ['reject', 'return', 'returned', 'rejected']:
             new_status = 'rejected' if action in ['reject', 'rejected'] else 'returned'
@@ -1193,15 +1194,15 @@ def review_article_action(request, pk):
             if review_notes:
                 article.review_notes = review_notes
             article.save()
-            msg_text = "rad etildi" if new_status == 'rejected' else "tuzatish uchun qaytarildi"
-            messages.warning(request, f"Maqola {msg_text} va muallif uchun izoh saqlandi!")
+            msg_text = _("rad etildi") if new_status == 'rejected' else _("tuzatish uchun qaytarildi")
+            messages.warning(request, _("Maqola %(status)s va muallif uchun izoh saqlandi!") % {'status': msg_text})
 
         elif action == 'under_review':
             article.status = 'under_review'
             if review_notes:
                 article.review_notes = review_notes
             article.save()
-            messages.info(request, "Maqola holati 'Taqriz jarayonida' ga o'tkazildi.")
+            messages.info(request, _("Maqola holati 'Taqriz jarayonida' ga o'tkazildi."))
 
         elif action == 'edit_details':
             title = request.POST.get('title', '').strip()
@@ -1235,7 +1236,7 @@ def review_article_action(request, pk):
                 article.review_notes = review_notes
 
             article.save()
-            messages.success(request, "Maqola ma'lumotlari muvaffaqiyatli tahrirlandi!")
+            messages.success(request, _("Maqola ma'lumotlari muvaffaqiyatli tahrirlandi!"))
 
         return redirect(request.META.get('HTTP_REFERER', 'reviewer_dashboard'))
 
@@ -1337,13 +1338,13 @@ def download_issue_pdf(request, issue_pk):
 
     articles = list(Article.objects.filter(issue=issue, status='published').order_by('created_at', 'id'))
     if not articles:
-        return HttpResponse("Ushbu sonda hali chop etilgan maqolalar mavjud emas.", status=404)
+        return HttpResponse(_("Ushbu sonda hali chop etilgan maqolalar mavjud emas."), status=404)
 
     try:
         import fitz
         from xhtml2pdf import pisa
     except ImportError:
-        return HttpResponse("PDF yaratish kutubxonalari topilmadi.", status=500)
+        return HttpResponse(_("PDF yaratish kutubxonalari topilmadi."), status=500)
 
     # 1. OLDI MUQOVA SAHIFASI
     doc_cover = None
@@ -1450,7 +1451,7 @@ def download_issue_pdf(request, issue_pk):
             filename = f"TIFT_Journal_{issue.year}_Son_{issue.number}.pdf"
             response['Content-Disposition'] = f'attachment; filename="{filename}"'
             return response
-        return HttpResponse("Ushbu jurnal soni va uning maqolalari hali to'liq shakllantirilmagan.", status=404)
+        return HttpResponse(_("Ushbu jurnal soni va uning maqolalari hali to'liq shakllantirilmagan."), status=404)
 
     # 3. MUNDARIJA (TABLE OF CONTENTS) YARATISH VA SAHIFALARNI HISOBLASH
     toc_doc = None
@@ -1548,7 +1549,7 @@ def download_issue_pdf(request, issue_pk):
         pdf_toc_outline = []
 
         if toc_num_pages > 0:
-            pdf_toc_outline.append([1, "Mundarija / Contents", toc_page_offset + 1])
+            pdf_toc_outline.append([1, _("Mundarija / Contents"), toc_page_offset + 1])
 
         for item_idx, item in enumerate(article_items, 1):
             art = item['article']

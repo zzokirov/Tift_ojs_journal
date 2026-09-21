@@ -1,7 +1,7 @@
 {% extends 'dashboard_base.html' %}
 {% load static i18n %}
 
-{% block title %}Maqola yuborish | TIFT Jurnali{% endblock %}
+{% block title %}{% trans "Maqola yuborish | TIFT Jurnali" %}{% endblock %}
 
 {% block dashboard_content %}
 
@@ -43,10 +43,10 @@
                                         row.className = "flex flex-col md:flex-row gap-3 p-4 bg-gray-50 border border-gray-200 rounded-xl relative";
                                         row.innerHTML = `
                                             <div class="w-full md:w-1/2">
-                                                <input type="text" class="author-name w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:border-navy-500 outline-none bg-white" placeholder="Ism Familiya" required>
+                                                <input type="text" class="author-name w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:border-navy-500 outline-none bg-white" placeholder="{% trans "Ism Familiya" %}" required>
                                             </div>
                                             <div class="w-full md:w-1/2">
-                                                <input type="text" class="author-inst w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:border-navy-500 outline-none bg-white" placeholder="Ish yoki o'qish joyi" required>
+                                                <input type="text" class="author-inst w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:border-navy-500 outline-none bg-white" placeholder="{% trans "Ish yoki o'qish joyi" %}" required>
                                             </div>
                                             <button type="button" class="remove-author absolute -top-2 -right-2 bg-red-100 text-red-500 hover:bg-red-500 hover:text-white rounded-full w-6 h-6 flex items-center justify-center transition-colors shadow-sm">
                                                 <i class="fas fa-times text-xs"></i>
@@ -251,7 +251,7 @@ document.querySelectorAll('input[type="file"]').forEach(function(input) {
             const ext = file.name.split('.').pop().toLowerCase();
             
             if (name === 'pdf_file' && ext !== 'doc' && ext !== 'docx') {
-                alert("Faqat Word (.docx, .doc) format qabul qilamiz!");
+                alert("{% trans 'Faqat Word (.docx, .doc) format qabul qilamiz!' %}");
                 this.value = ''; // clear the input
                 if (preview) {
                     preview.classList.add('hidden');

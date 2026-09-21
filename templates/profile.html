@@ -1,6 +1,6 @@
 {% extends 'dashboard_base.html' %}
 {% load static i18n %}
-{% block title %}{% trans "Profilni tahrirlash" %} | TIFT Jurnali{% endblock %}
+{% block title %}{% trans "Profilni tahrirlash | TIFT Jurnali" %}{% endblock %}
 {% block dashboard_content %}
 
 {% if messages %}
@@ -23,7 +23,7 @@
             <div class="relative inline-block mb-4">
                 <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-green-500/30 shadow-lg mx-auto">
                     {% if user.avatar %}
-                        <img src="{{ user.avatar.url }}" alt="Avatar" class="w-full h-full object-cover">
+                        <img src="{{ user.avatar.url }}" alt="{% trans "Avatar" %}" class="w-full h-full object-cover">
                     {% else %}
                         <div class="w-full h-full bg-gradient-to-br from-navy-700 to-navy-900 flex items-center justify-center">
                             <span class="text-green-400 font-black text-3xl">{{ user.username|first|upper }}</span>
@@ -96,7 +96,7 @@
                         {{ form.last_name }}
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">{% trans "Email" %}</label>
                         {{ form.email }}
                     </div>
                     <div>

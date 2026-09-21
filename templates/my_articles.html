@@ -1,7 +1,7 @@
 {% extends 'dashboard_base.html' %}
 {% load static i18n %}
 
-{% block title %}Mening maqolalarim | TIFT Jurnali{% endblock %}
+{% block title %}{% trans "Mening maqolalarim | TIFT Jurnali" %}{% endblock %}
 
 {% block dashboard_content %}
 
@@ -80,7 +80,7 @@
                             {% if article.issue %}
                                 <span class="inline-flex items-center gap-1 bg-green-50 text-green-700 border border-green-200 px-2.5 py-1 rounded-full text-xs font-semibold">
                                     <i class="fas fa-book text-[9px]"></i>
-                                    {{ article.issue.year }}-yil {{ article.issue.number }}-son
+                                    {% blocktrans with year=article.issue.year num=article.issue.number %}{{ year }}-yil {{ num }}-son{% endblocktrans %}
                                 </span>
                             {% endif %}
                         </div>
@@ -104,7 +104,7 @@
                                         {% elif article.status == 'returned' %}bg-orange-50 border-orange-200 text-orange-900
                                         {% else %}bg-blue-50 border-blue-200 text-blue-900{% endif %}">
                                 <div class="font-bold flex items-center gap-1.5 mb-1">
-                                    <i class="fas fa-comment-dots"></i> Taqrizchi / Muharrir izohi:
+                                    <i class="fas fa-comment-dots"></i> {% trans "Taqrizchi / Muharrir izohi:" %}
                                     {% if article.reviewed_by %}<span class="font-normal opacity-75">({{ article.reviewed_by.get_full_name|default:article.reviewed_by.username }})</span>{% endif %}
                                 </div>
                                 <p class="whitespace-pre-line">{{ article.review_notes }}</p>

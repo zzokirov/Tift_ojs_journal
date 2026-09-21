@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %}{% trans "Jurnal haqida" %} | TIFT Jurnali{% endblock %}
+{% block title %}{% trans "Jurnal haqida | TIFT Jurnali" %}{% endblock %}
 
 {% block extra_scripts %}
 <script>
@@ -53,13 +53,13 @@ if (wrapper && img1 && img2) {
                      style="max-width: 420px; width: 100%;">
                     <!-- muqova1 — default -->
                     <img src="{% static 'images/muqova1.png' %}"
-                         alt="TIFT Jurnali muqovasi"
+                         alt="{% trans "TIFT Jurnali muqovasi" %}"
                          class="w-full h-auto block transition-all duration-500"
                          id="coverImg1"
                          style="opacity:1;">
                     <!-- muqova2 — hover da chiqadi -->
                     <img src="{% static 'images/muqova2 (2).png' %}"
-                         alt="TIFT Jurnali muqovasi 2"
+                         alt="{% trans "TIFT Jurnali muqovasi 2" %}"
                          class="w-full h-auto block transition-all duration-500 absolute inset-0"
                          id="coverImg2"
                          style="opacity:0;">
@@ -142,7 +142,7 @@ if (wrapper && img1 && img2) {
                     </div>
                 </div>
                 {% empty %}
-                    <div class="col-span-3 text-center py-6 text-gray-400 text-sm">Hozircha yo'nalishlar mavjud emas.</div>
+                    <div class="col-span-3 text-center py-6 text-gray-400 text-sm">{% trans "Hozircha yo'nalishlar mavjud emas." %}</div>
                 {% endfor %}
             </div>
 
@@ -150,15 +150,15 @@ if (wrapper && img1 && img2) {
             <div class="mt-8 pt-6 border-t border-green-200/50 flex flex-wrap justify-center gap-8 relative z-10">
                 <div class="text-center">
                     <div class="text-green-600 font-black text-2xl">11</div>
-                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">Ilmiy yo'nalish</div>
+                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Ilmiy yo'nalish" %}</div>
                 </div>
                 <div class="text-center">
                     <div class="text-green-600 font-black text-2xl">24/7</div>
-                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">Onlayn qabul</div>
+                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Onlayn qabul" %}</div>
                 </div>
                 <div class="text-center">
                     <div class="text-green-600 font-black text-2xl">4-6</div>
-                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">Hafta taqriz muddati</div>
+                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Hafta taqriz muddati" %}</div>
                 </div>
             </div>
         </div>
@@ -188,7 +188,7 @@ if (wrapper && img1 && img2) {
                         {% else %}
                             <div class="w-full h-full flex flex-col items-center justify-center bg-navy-950/80 text-gray-400 p-2 text-center">
                                 <i class="fas {% if member.position == 'editor_in_chief' %}fa-user-tie{% elif member.position == 'deputy_editor' %}fa-user-shield{% else %}fa-pen-nib{% endif %} text-2xl text-green-400/70 mb-1"></i>
-                                <span class="text-[9px] uppercase tracking-wider text-gray-400 font-medium">3x4 Rasm</span>
+                                <span class="text-[9px] uppercase tracking-wider text-gray-400 font-medium">{% trans "3x4 Rasm" %}</span>
                             </div>
                         {% endif %}
                     </div>
@@ -199,11 +199,11 @@ if (wrapper && img1 && img2) {
                             <div class="mb-2">
                                 <span class="inline-block bg-green-600/30 text-green-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full border border-green-500/40 truncate max-w-full">
                                     {% if member.position == 'editor_in_chief' %}
-                                        Bosh muharrir
+                                        {% trans "Bosh muharrir" %}
                                     {% elif member.position == 'deputy_editor' %}
-                                        Bosh muharrir o'rinbosari
+                                        {% trans "Bosh muharrir o'rinbosari" %}
                                     {% elif member.position == 'secretary' %}
-                                        Mas'ul kotib
+                                        {% trans "Mas'ul kotib" %}
                                     {% else %}
                                         {{ member.get_position_display }}
                                     {% endif %}
@@ -248,7 +248,7 @@ if (wrapper && img1 && img2) {
                         {% else %}
                             <div class="w-full h-full flex flex-col items-center justify-center bg-gray-100 text-gray-400 p-1 text-center">
                                 <i class="fas fa-user text-xl text-gray-300 mb-0.5"></i>
-                                <span class="text-[8px] text-gray-400 uppercase font-semibold">3x4</span>
+                                <span class="text-[8px] text-gray-400 uppercase font-semibold">{% trans "3x4" %}</span>
                             </div>
                         {% endif %}
                         <div class="absolute top-1 left-1 w-5 h-5 rounded-md bg-navy-900/85 text-white font-black text-[10px] flex items-center justify-center shadow">

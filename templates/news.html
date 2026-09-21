@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %}{% trans "Yangiliklar" %} | TIFT Jurnali{% endblock %}
+{% block title %}{% trans "Yangiliklar | TIFT Jurnali" %}{% endblock %}
 {% block content %}
 
 <div class="bg-navy-900 text-white py-5 relative overflow-hidden border-b border-navy-800">
@@ -36,7 +36,7 @@
                                          class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                                     {% if item.media_files.exists %}
                                         <div class="absolute bottom-2 right-2 bg-navy-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm border border-white/10">
-                                            <i class="fas fa-photo-video text-green-400"></i> {{ item.media_files.count }} media
+                                            <i class="fas fa-photo-video text-green-400"></i> {% blocktrans count counter=item.media_files.count %}{{ counter }} media{% plural %}{{ counter }} media{% endblocktrans %}
                                         </div>
                                     {% endif %}
                                 </div>
@@ -47,14 +47,14 @@
                                             <img src="{{ first_media.file.url }}" alt="{{ item.title }}"
                                                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                                             <div class="absolute bottom-2 right-2 bg-navy-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm border border-white/10">
-                                                <i class="fas fa-photo-video text-green-400"></i> {{ item.media_files.count }} media
+                                                <i class="fas fa-photo-video text-green-400"></i> {% blocktrans count counter=item.media_files.count %}{{ counter }} media{% plural %}{{ counter }} media{% endblocktrans %}
                                             </div>
                                         </div>
                                     {% else %}
                                         <div class="h-48 flex items-center justify-center relative" style="background: linear-gradient(135deg, #0a1628, #1a3a6b);">
                                             <i class="fas fa-video text-green-400 text-3xl opacity-60"></i>
                                             <div class="absolute bottom-2 right-2 bg-navy-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm border border-white/10">
-                                                <i class="fas fa-video text-green-400"></i> {{ item.media_files.count }} media
+                                                <i class="fas fa-video text-green-400"></i> {% blocktrans count counter=item.media_files.count %}{{ counter }} media{% plural %}{{ counter }} media{% endblocktrans %}
                                             </div>
                                         </div>
                                     {% endif %}

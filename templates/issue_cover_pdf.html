@@ -35,7 +35,7 @@ html, body {
 {% else %}
     <div style="padding: 120pt 30pt; text-align: center;">
         <h1 style="font-family: 'Times New Roman', Times, serif; font-size: 28pt; color: #064e3b; margin-bottom: 20pt;">ARXITEKTURA VA TA'LIM</h1>
-        <p style="font-size: 16pt; font-weight: bold; color: #1e293b;">{{ issue.year }}-YIL, {{ issue.number }}-SON</p>
+        <p style="font-size: 16pt; font-weight: bold; color: #1e293b;">{% blocktrans with year=issue.year num=issue.number %}{{ year }}-YIL, {{ num }}-SON{% endblocktrans %}</p>
     </div>
 {% endif %}
 </body>

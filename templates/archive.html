@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %}{% trans "Arxiv" %} | TIFT Jurnali{% endblock %}
+{% block title %}{% trans "Arxiv | TIFT Jurnali" %}{% endblock %}
 
 {% block content %}
 
@@ -42,20 +42,20 @@
                     <div class="p-6">
                         <div class="flex items-start justify-between mb-4">
                             <div class="w-12 h-12 bg-navy-900 rounded-xl flex items-center justify-center shadow-lg p-2">
-                                <img src="{% static 'images/tift.png' %}" alt="TIFT Logo" class="w-7 h-7 object-contain">
+                                <img src="{% static 'images/tift.png' %}" alt="{% trans "TIFT Logo" %}" class="w-7 h-7 object-contain">
                             </div>
                             <span class="bg-green-600/10 text-green-700 border border-green-500/20 text-xs font-bold px-3 py-1 rounded-full">
                                 {{ issue.year }}
                             </span>
                         </div>
                         <h3 class="font-black text-navy-900 text-lg leading-tight group-hover:text-green-700 transition-colors">
-                            {{ issue.year }}-yil
+                            {% blocktrans with year=issue.year %}{{ year }}-yil{% endblocktrans %}
                         </h3>
-                        <p class="text-gray-500 text-sm mt-1">{{ issue.number }}-son</p>
+                        <p class="text-gray-500 text-sm mt-1">{% blocktrans with num=issue.number %}{{ num }}-son{% endblocktrans %}</p>
                         <div class="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
                             <span class="text-xs text-gray-400 flex items-center gap-1">
                                 <i class="fas fa-file-alt text-green-500/70"></i>
-                                {{ issue.articles.count }} ta maqola
+                                {% blocktrans count counter=issue.articles.count %}{{ counter }} ta maqola{% plural %}{{ counter }} ta maqola{% endblocktrans %}
                             </span>
                             <span class="text-green-600 text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
                                 {% trans "Ko'rish" %} <i class="fas fa-arrow-right text-[10px]"></i>

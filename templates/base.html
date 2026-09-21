@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Arxitektura va Ta'lim Ilmiy Jurnali{% endblock %}</title>
+    <title>{% block title %}{% trans "Arxitektura va Ta'lim Ilmiy Jurnali" %}{% endblock %}</title>
     <link rel="icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
 
@@ -206,7 +206,7 @@
                                 <a href="{% url 'reviewer_dashboard' %}"
                                    class="flex items-center gap-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap shadow-sm">
                                     <i class="fas fa-tasks text-amber-400"></i>
-                                    <span>Taqriz paneli</span>
+                                    <span>{% trans "Taqriz paneli" %}</span>
                                 </a>
                             {% endif %}
 
@@ -241,7 +241,7 @@
                                         {% if user.role == 'reviewer' or user.role == 'editor' or user.is_staff %}
                                             <a href="{% url 'reviewer_dashboard' %}"
                                                class="flex items-center gap-3 px-4 py-2.5 text-sm text-amber-700 bg-amber-50/50 hover:bg-amber-100/50 font-bold transition-colors">
-                                                <i class="fas fa-user-check text-amber-500 w-4 text-center"></i> Taqrizchi Paneli
+                                                <i class="fas fa-user-check text-amber-500 w-4 text-center"></i> {% trans "Taqrizchi Paneli" %}
                                             </a>
                                         {% endif %}
                                         <a href="{% url 'my_articles' %}"
@@ -278,7 +278,7 @@
                             <!-- Logout -->
                             <form action="{% url 'logout' %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" title="Chiqish"
+                                <button type="submit" title="{% trans "Chiqish" %}"
                                         class="w-8 h-8 flex items-center justify-center bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 rounded-xl transition-all border border-red-500/20">
                                     <i class="fas fa-sign-out-alt text-xs"></i>
                                 </button>
@@ -408,7 +408,7 @@
                             <i class="fas fa-map-marker-alt text-green-500 text-xs mt-1"></i>
                             <div>
                                 <div class="text-white text-xs font-medium">{% trans "Manzil" %}</div>
-                                <div class="text-gray-500">15 Amir Temur Shoh Street,<br>Tashkent, Uzbekistan</div>
+                                <div class="text-gray-500">{% trans "15 Amir Temur Shoh Street," %}<br>{% trans "Tashkent, Uzbekistan" %}</div>
                             </div>
                         </div>
                         <div class="flex items-start gap-3">
@@ -423,7 +423,7 @@
             </div>
 
             <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
-                <p>"Arxitektura va Ta'lim" ilmiy-elektron jurnali &copy; 2026. Barcha huquqlar himoyalangan.</p>
+                <p>{% trans '"Arxitektura va Ta\'lim" ilmiy-elektron jurnali &copy; 2026. Barcha huquqlar himoyalangan.' %}</p>
                 <p>{% trans "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti" %}</p>
             </div>
         </div>

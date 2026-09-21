@@ -2,6 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, NewsMedia, Document
 
 
@@ -22,16 +23,16 @@ class CustomUserAdmin(UserAdmin):
     filter_horizontal = ('groups', 'user_permissions')
 
     fieldsets = (
-        ("Asosiy ma'lumotlar", {
+        (_("Asosiy ma'lumotlar"), {
             'fields': ('email', 'password')
         }),
-        ("Shaxsiy ma'lumotlar", {
+        (_("Shaxsiy ma'lumotlar"), {
             'fields': ('first_name', 'last_name', 'institution', 'phone', 'gender', 'country', 'bio', 'avatar')
         }),
-        ("Rol va ruxsatlar", {
+        (_("Rol va ruxsatlar"), {
             'fields': ('role', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
         }),
-        ("Muhim sanalar", {
+        (_("Muhim sanalar"), {
             'fields': ('last_login', 'date_joined'),
             'classes': ('collapse',)
         }),
@@ -57,7 +58,7 @@ class CustomUserAdmin(UserAdmin):
 
     def article_count(self, obj):
         return obj.articles.count()
-    article_count.short_description = "Maqolalar soni"
+    article_count.short_description = _("Maqolalar soni")
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('articles')
@@ -74,7 +75,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
 
     def article_count(self, obj):
         return obj.articles.count()
-    article_count.short_description = "Maqolalar soni"
+    article_count.short_description = _("Maqolalar soni")
 
 
 
@@ -92,18 +93,18 @@ class JournalIssueAdmin(admin.ModelAdmin):
     list_per_page = 20
 
     fieldsets = (
-        ("Jurnal soni ma'lumotlari", {
+        (_("Jurnal soni ma'lumotlari"), {
             'fields': ('volume', 'number', 'year', 'period', 'cover_image', 'back_cover_image', 'full_pdf', 'is_published')
         }),
     )
 
     def issue_label(self, obj):
         return f"{obj.year}-yil, {obj.number}-son"
-    issue_label.short_description = 'Jurnal soni'
+    issue_label.short_description = _('Jurnal soni')
 
     def article_count_tag(self, obj):
         return obj.articles.filter(status='published').count()
-    article_count_tag.short_description = "Chop etilgan maqolalar soni"
+    article_count_tag.short_description = _("Chop etilgan maqolalar soni")
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('articles')
@@ -138,23 +139,23 @@ class ArticleAdmin(admin.ModelAdmin):
     readonly_fields = ('views_count', 'downloads_count', 'created_at', 'updated_at', 'pdf_link')
 
     fieldsets = (
-        ("Maqola ma'lumotlari", {
+        (_("Maqola ma'lumotlari"), {
             'fields': ('title', 'authors', 'abstract', 'keywords')
         }),
-        ("Muallif va jurnal", {
+        (_("Muallif va jurnal"), {
             'fields': ('author', 'issue', 'category')
         }),
-        ("Taqrizchi va ko'rib chiqish", {
+        (_("Taqrizchi va ko'rib chiqish"), {
             'fields': ('assigned_reviewer', 'review_notes', 'reviewed_by', 'reviewed_at')
         }),
-        ("Sahifalash (Paginatsiya)", {
+        (_("Sahifalash (Paginatsiya)"), {
             'fields': ('start_page', 'end_page'),
-            'description': "Agar maqola uchun alohida PDF yuklanmasa, To'plam PDF faylidan shu sahifalar oralig'i avtomatik qirqib olinadi."
+            'description': _("Agar maqola uchun alohida PDF yuklanmasa, To'plam PDF faylidan shu sahifalar oralig'i avtomatik qirqib olinadi.")
         }),
-        ("Holat va fayllar", {
+        (_("Holat va fayllar"), {
             'fields': ('status', 'published_at', 'pdf_file', 'pdf_link', 'template_pdf')
         }),
-        ("Statistika", {
+        (_("Statistika"), {
             'fields': ('views_count', 'downloads_count', 'created_at', 'updated_at'),
             'classes': ('collapse',)
         }),
@@ -164,32 +165,32 @@ class ArticleAdmin(admin.ModelAdmin):
 
     def title_short(self, obj):
         return obj.title[:70] + '…' if len(obj.title) > 70 else obj.title
-    title_short.short_description = 'Sarlavha'
+    title_short.short_description = _('Sarlavha')
 
     def author_name(self, obj):
         return obj.author.get_full_name() or obj.author.username
-    author_name.short_description = 'Muallif'
+    author_name.short_description = _('Muallif')
 
     def pdf_link(self, obj):
         if obj.pdf_file:
-            return format_html('<a href="{}" target="_blank">PDF ni ochish</a>', obj.pdf_file.url)
+            return format_html('<a href="{}" target="_blank">{}</a>', obj.pdf_file.url, _("PDF ni ochish"))
         return '—'
-    pdf_link.short_description = 'PDF fayl'
+    pdf_link.short_description = _('PDF fayl')
 
-    @admin.action(description='Tanlangan maqolalarni nashr etish')
+    @admin.action(description=_('Tanlangan maqolalarni nashr etish'))
     def make_published(self, request, queryset):
         updated = queryset.update(status='published')
-        self.message_user(request, f'{updated} ta maqola nashr etildi.')
+        self.message_user(request, _('{updated} ta maqola nashr etildi.').format(updated=updated))
 
-    @admin.action(description="Taqriz jarayoniga o'tkazish")
+    @admin.action(description=_("Taqriz jarayoniga o'tkazish"))
     def make_under_review(self, request, queryset):
         updated = queryset.update(status='under_review')
-        self.message_user(request, f"{updated} ta maqola taqriz jarayoniga o'tkazildi.")
+        self.message_user(request, _("{updated} ta maqola taqriz jarayoniga o'tkazildi.").format(updated=updated))
 
-    @admin.action(description='Rad etish')
+    @admin.action(description=_('Rad etish'))
     def make_rejected(self, request, queryset):
         updated = queryset.update(status='rejected', issue=None)
-        self.message_user(request, f'{updated} ta maqola rad etildi va jurnaldan chiqarildi.')
+        self.message_user(request, _('{updated} ta maqola rad etildi va jurnaldan chiqarildi.').format(updated=updated))
 
 
 # ─── STAFF MEMBER ADMIN ───────────────────────────────────────────────────────
@@ -205,13 +206,13 @@ class StaffMemberAdmin(admin.ModelAdmin):
     list_per_page = 20
 
     fieldsets = (
-        ("Shaxsiy ma'lumotlar", {
+        (_("Shaxsiy ma'lumotlar"), {
             'fields': ('full_name', 'age', 'photo')
         }),
-        ("Ish ma'lumotlari", {
+        (_("Ish ma'lumotlari"), {
             'fields': ('position', 'workplace', 'bio')
         }),
-        ("Sozlamalar", {
+        (_("Sozlamalar"), {
             'fields': ('order', 'is_active')
         }),
     )
@@ -229,7 +230,7 @@ class StaffMemberAdmin(admin.ModelAdmin):
             'color:white;font-weight:700;font-size:14px;">{}</div>',
             initials
         )
-    photo_tag.short_description = 'Rasm'
+    photo_tag.short_description = _('Rasm')
 
 
 # ─── CONFERENCE ADMIN ─────────────────────────────────────────────────────────
@@ -243,7 +244,7 @@ class ConferenceAdmin(admin.ModelAdmin):
     ordering = ('-date',)
     list_per_page = 20
     fieldsets = (
-        ("Konferensiya ma'lumotlari", {
+        (_("Konferensiya ma'lumotlari"), {
             'fields': ('title', 'description', 'pdf_file', 'date', 'location', 'url', 'is_active')
         }),
     )
@@ -270,20 +271,20 @@ class NewsAdminForm(forms.ModelForm):
     upload_images = MultipleFileField(
         widget=MultipleFileInput(attrs={'accept': 'image/*'}),
         required=False,
-        label="Ko'plab rasmlar yuklash (Bir vaqtda bir nechta rasm tanlash)",
-        help_text="Kompyuteringizdan bir nechta rasmni bir vaqtda belgilab (Ctrl/Shift) yuklashingiz mumkin."
+        label=_("Ko'plab rasmlar yuklash (Bir vaqtda bir nechta rasm tanlash)"),
+        help_text=_("Kompyuteringizdan bir nechta rasmni bir vaqtda belgilab (Ctrl/Shift) yuklashingiz mumkin.")
     )
     upload_videos = MultipleFileField(
         widget=MultipleFileInput(attrs={'accept': 'video/*'}),
         required=False,
-        label="Ko'plab video fayllar yuklash (MP4/WebM)",
-        help_text="Bir nechta video fayllarni bir vaqtning o'zida tanlab yuklashingiz mumkin."
+        label=_("Ko'plab video fayllar yuklash (MP4/WebM)"),
+        help_text=_("Bir nechta video fayllarni bir vaqtning o'zida tanlab yuklashingiz mumkin.")
     )
     video_urls_text = forms.CharField(
         widget=forms.Textarea(attrs={'rows': 3, 'placeholder': "https://www.youtube.com/watch?v=...\nhttps://youtu.be/...\nhttps://vimeo.com/..."}),
         required=False,
-        label="Video havolalar (YouTube/Vimeo)",
-        help_text="Har bir satrga bittadan video havolasini yozing."
+        label=_("Video havolalar (YouTube/Vimeo)"),
+        help_text=_("Har bir satrga bittadan video havolasini yozing.")
     )
 
     class Meta:
@@ -308,12 +309,12 @@ class NewsAdmin(admin.ModelAdmin):
     list_per_page = 20
     inlines = [NewsMediaInline]
     fieldsets = (
-        ("Yangilik ma'lumotlari", {
+        (_("Yangilik ma'lumotlari"), {
             'fields': ('title', 'content', 'image', 'is_active')
         }),
-        ("Ommaviy foto va video yuklash (Ko'plab rasmlar va videolar)", {
+        (_("Ommaviy foto va video yuklash (Ko'plab rasmlar va videolar)"), {
             'fields': ('upload_images', 'upload_videos', 'video_urls_text'),
-            'description': "Bu yerda bir vaqtning o'zida 10-20 ta rasmlarni tanlab yuklashingiz, ko'plab video fayllarni yoki YouTube/Vimeo havolalarini joylashingiz mumkin."
+            'description': _("Bu yerda bir vaqtning o'zida 10-20 ta rasmlarni tanlab yuklashingiz, ko'plab video fayllarni yoki YouTube/Vimeo havolalarini joylashingiz mumkin.")
         }),
     )
 
@@ -326,7 +327,7 @@ class NewsAdmin(admin.ModelAdmin):
         if videos_count:
             res.append(f"🎥 {videos_count} video")
         return " | ".join(res) if res else "Media yo'q"
-    media_count_display.short_description = "Media fayllar"
+    media_count_display.short_description = _("Media fayllar")
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
@@ -375,7 +376,7 @@ class DocumentAdmin(admin.ModelAdmin):
     ordering = ('order', '-created_at')
     list_per_page = 20
     fieldsets = (
-        ("Hujjat ma'lumotlari", {
+        (_("Hujjat ma'lumotlari"), {
             'fields': ('title', 'category', 'description', 'file', 'url', 'order', 'is_active')
         }),
     )
