@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
@@ -65,7 +66,7 @@ class CustomUserAdmin(UserAdmin):
 
 
 @admin.register(ArticleCategory)
-class ArticleCategoryAdmin(admin.ModelAdmin):
+class ArticleCategoryAdmin(TranslationAdmin):
     list_display = ('code', 'name', 'icon', 'order', 'article_count')
     list_display_links = ('code', 'name')
     list_editable = ('icon', 'order')
@@ -113,7 +114,7 @@ class JournalIssueAdmin(admin.ModelAdmin):
 # ─── ARTICLE ADMIN ────────────────────────────────────────────────────────────
 
 @admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(TranslationAdmin):
     change_list_template = 'admin/journal/article/change_list.html'
 
     def changelist_view(self, request, extra_context=None):
@@ -196,7 +197,7 @@ class ArticleAdmin(admin.ModelAdmin):
 # ─── STAFF MEMBER ADMIN ───────────────────────────────────────────────────────
 
 @admin.register(StaffMember)
-class StaffMemberAdmin(admin.ModelAdmin):
+class StaffMemberAdmin(TranslationAdmin):
     list_display = ('photo_tag', 'full_name', 'position', 'workplace', 'age', 'order', 'is_active')
     list_display_links = ('full_name',)
     list_filter = ('position', 'is_active')
@@ -236,7 +237,7 @@ class StaffMemberAdmin(admin.ModelAdmin):
 # ─── CONFERENCE ADMIN ─────────────────────────────────────────────────────────
 
 @admin.register(Conference)
-class ConferenceAdmin(admin.ModelAdmin):
+class ConferenceAdmin(TranslationAdmin):
     list_display = ('title', 'date', 'location', 'is_active', 'created_at')
     list_filter = ('is_active',)
     search_fields = ('title', 'description', 'location')
@@ -299,7 +300,7 @@ class NewsMediaInline(admin.TabularInline):
 
 
 @admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(TranslationAdmin):
     form = NewsAdminForm
     list_display = ('title', 'media_count_display', 'is_active', 'created_at')
     list_filter = ('is_active',)
@@ -368,7 +369,7 @@ class NewsAdmin(admin.ModelAdmin):
 # ─── DOCUMENT ADMIN ───────────────────────────────────────────────────────────
 
 @admin.register(Document)
-class DocumentAdmin(admin.ModelAdmin):
+class DocumentAdmin(TranslationAdmin):
     list_display = ('title', 'category', 'order', 'is_active', 'created_at')
     list_filter = ('category', 'is_active')
     search_fields = ('title', 'description')
