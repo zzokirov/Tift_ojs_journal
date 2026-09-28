@@ -75,7 +75,13 @@ if (wrapper && img1 && img2) {
                     {% trans "Jurnal haqida" %}
                 </h2>
                 <p class="text-gray-600 leading-relaxed text-sm">
-                    {% trans "<strong>\"Arxitektura va Ta'lim\"</strong> ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan." %}
+                    {% if LANGUAGE_CODE == 'ru' %}
+                        <strong>"Arxitektura va Ta'lim"</strong> — научно-электронный журнал, издаваемый Ташкентским международным университетом финансов и технологий (ТИФТ). Журнал специализируется на публикации научно-практических исследований в области архитектуры, строительства, геодезии, картографии, кадастра и образования.
+                    {% elif LANGUAGE_CODE == 'en' %}
+                        <strong>"Arxitektura va Ta'lim"</strong> is a scientific-electronic journal published by Tashkent International University of Finance and Technology (TIFT). The journal specializes in publishing scientific and practical research in the fields of architecture, construction, geodesy, cartography, cadastre and education.
+                    {% else %}
+                        <strong>"Arxitektura va Ta'lim"</strong> ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan.
+                    {% endif %}
                 </p>
             </div>
 
