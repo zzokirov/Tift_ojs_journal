@@ -21,7 +21,7 @@
             </div>
         </div>
         <nav class="flex items-center gap-2 text-xs text-gray-400">
-            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1.5">
+            <a href="{% url 'index' current_journal.slug %}" class="hover:text-green-400 transition-colors flex items-center gap-1.5">
                 <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
             </a>
             <i class="fas fa-chevron-right text-[8px] text-gray-600"></i>
@@ -35,7 +35,7 @@
     {% if issues %}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {% for issue in issues %}
-                <a href="{% url 'issue_detail' issue.pk %}"
+                <a href="{% url 'issue_detail' current_journal.slug issue.pk %}"
                    class="bg-white rounded-2xl border border-gray-100 shadow-sm card-hover overflow-hidden group block">
                     <!-- Top color bar -->
                     <div class="h-2 bg-gradient-to-r from-green-600 to-green-400"></div>

@@ -1,5 +1,9 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import ArticleCategory, StaffMember, Article, News, Conference, Document
+from .models import Journal, ArticleCategory, StaffMember, Article, News, Conference, Document
+
+@register(Journal)
+class JournalTranslationOptions(TranslationOptions):
+    fields = ('title', 'description')
 
 @register(ArticleCategory)
 class ArticleCategoryTranslationOptions(TranslationOptions):

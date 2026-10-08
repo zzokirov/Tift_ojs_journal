@@ -14,12 +14,12 @@
     <div class="site-container px-4 relative">
         <!-- Breadcrumb -->
         <nav class="flex flex-wrap items-center gap-2 text-xs mb-4" style="color:#6b7280;">
-            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
+            <a href="{% url 'index' current_journal.slug %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
                 <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
             </a>
             <i class="fas fa-chevron-right text-[8px]"></i>
             {% if article.issue %}
-                <a href="{% url 'issue_detail' article.issue.pk %}" class="hover:text-green-400 transition-colors">
+                <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="hover:text-green-400 transition-colors">
                     {% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
                 </a>
                 <i class="fas fa-chevron-right text-[8px]"></i>
@@ -169,12 +169,12 @@
                 <!-- Action Buttons -->
                 <div class="px-6 py-4 flex flex-wrap gap-3" style="background:#f8fafc;border-top:1px solid #f1f5f9;">
                     {% if article.pdf_file %}
-                    <a href="{% url 'article_pdf' article.pk %}" target="_blank"
+                    <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank"
                        class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-3 rounded-xl transition-all hover:scale-[1.02] hover:shadow-lg"
                        style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;min-width:200px;">
                         <i class="fas fa-eye"></i> {% trans "PDF ko'rish" %}
                     </a>
-                    <a href="{% url 'download_pdf' article.pk %}"
+                    <a href="{% url 'download_pdf' current_journal.slug article.pk %}"
                        class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-3 rounded-xl transition-all hover:scale-[1.02] hover:shadow-lg"
                        style="background:linear-gradient(135deg,#16a34a,#22c55e);color:#0a1628;min-width:200px;">
                         <i class="fas fa-download"></i> {% trans "Yuklab olish" %}
@@ -239,7 +239,7 @@
                 <ul class="divide-y divide-gray-50">
                     {% for a in author_articles %}
                     <li class="px-6 py-4 hover:bg-gray-50 transition-colors">
-                        <a href="{% url 'article_detail' a.pk %}" class="group block">
+                        <a href="{% url 'article_detail' current_journal.slug a.pk %}" class="group block">
                             <div class="flex items-start gap-3">
                                 <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mt-0.5"
                                       style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;">
@@ -313,7 +313,7 @@
                        style="background:linear-gradient(135deg,#0a1628,#1a3a6b);color:white;border:1px solid rgba(255,255,255,0.15);">
                         <i class="fas fa-book-reader text-xs"></i> {% trans "O'qish" %}
                     </a>
-                    <a href="{% url 'download_pdf' article.pk %}"
+                    <a href="{% url 'download_pdf' current_journal.slug article.pk %}"
                        class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
                        style="background:#22c55e;color:#0a1628;">
                         <i class="fas fa-download text-xs"></i> {% trans "Yuklab olish" %}
@@ -339,7 +339,7 @@
                     <div class="flex justify-between items-start px-5 py-3">
                         <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Jurnal soni" %}</dt>
                         <dd class="text-xs font-semibold" style="color:#1e293b;">
-                            <a href="{% url 'issue_detail' article.issue.pk %}" class="hover:text-green-600 transition-colors">
+                            <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="hover:text-green-600 transition-colors">
                                 {% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
                             </a>
                         </dd>
@@ -391,7 +391,7 @@
             </div>
 
             <!-- BOSH SAHIFAGA QAYTISH -->
-            <a href="{% url 'index' %}"
+            <a href="{% url 'index' current_journal.slug %}"
                class="flex items-center justify-center gap-2 font-medium text-sm py-3 rounded-xl transition-colors w-full"
                style="background:#f1f5f9;color:#475569;">
                 <i class="fas fa-arrow-left text-xs"></i> {% trans "Bosh sahifaga qaytish" %}

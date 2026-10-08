@@ -65,7 +65,7 @@
             <a href="{% url 'my_articles' %}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 transition text-sm font-medium text-gray-700 border-b border-gray-50">
                 <i class="fas fa-file-alt text-green-500 w-4"></i> {% trans "Maqolalarim" %}
             </a>
-            <a href="{% url 'submit_article' %}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 transition text-sm font-medium text-gray-700 border-b border-gray-50">
+            <a href="{% url 'submit_article' current_journal.slug %}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 transition text-sm font-medium text-gray-700 border-b border-gray-50">
                 <i class="fas fa-plus-circle text-green-500 w-4"></i> {% trans "Maqola yuborish" %}
             </a>
             <a href="{% url 'change_password' %}" class="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50 transition text-sm font-medium text-gray-700">

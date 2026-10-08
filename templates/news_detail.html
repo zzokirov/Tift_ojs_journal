@@ -8,11 +8,11 @@
     <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
     <div class="site-container px-4 relative">
         <nav class="flex items-center gap-2 text-xs text-gray-400 mb-4">
-            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
+            <a href="{% url 'index' current_journal.slug %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
                 <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
             </a>
             <i class="fas fa-chevron-right text-[8px] text-gray-600"></i>
-            <a href="{% url 'news' %}" class="hover:text-green-400 transition-colors">{% trans "Yangiliklar" %}</a>
+            <a href="{% url 'news' current_journal.slug %}" class="hover:text-green-400 transition-colors">{% trans "Yangiliklar" %}</a>
             <i class="fas fa-chevron-right text-[8px] text-gray-600"></i>
             <span class="text-gray-200 font-medium truncate max-w-xs">{{ item.title }}</span>
         </nav>
@@ -157,7 +157,7 @@
             {% endif %}
 
             <!-- BACK TO NEWS LINK -->
-            <a href="{% url 'news' %}" class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors">
+            <a href="{% url 'news' current_journal.slug %}" class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-5 py-2.5 rounded-xl text-xs transition-colors">
                 <i class="fas fa-arrow-left text-[10px]"></i> {% trans "Barcha yangiliklarga qaytish" %}
             </a>
         </div>
@@ -172,7 +172,7 @@
                 <ul class="divide-y divide-gray-50 space-y-3">
                     {% for n in recent_news %}
                     <li class="pt-3 first:pt-0">
-                        <a href="{% url 'news_detail' n.pk %}" class="group block">
+                        <a href="{% url 'news_detail' current_journal.slug n.pk %}" class="group block">
                             <div class="text-[11px] text-gray-400 mb-1 flex items-center gap-1">
                                 <i class="far fa-calendar-alt text-green-500"></i>
                                 {{ n.created_at|date:"d.m.Y" }}

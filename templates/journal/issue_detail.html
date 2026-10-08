@@ -11,11 +11,11 @@
          style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px;"></div>
     <div class="site-container px-4 relative">
         <nav class="flex items-center gap-2 text-xs text-gray-400 mb-5">
-            <a href="{% url 'index' %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
+            <a href="{% url 'index' current_journal.slug %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
                 <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
             </a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
-            <a href="{% url 'index' %}#arxiv" class="hover:text-green-400 transition-colors">{% trans "Arxiv" %}</a>
+            <a href="{% url 'index' current_journal.slug %}#arxiv" class="hover:text-green-400 transition-colors">{% trans "Arxiv" %}</a>
             <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
             <span class="text-gray-300">{% blocktrans with year=issue.year num=issue.number %}{{ year }}-yil, {{ num }}-son{% endblocktrans %}</span>
         </nav>
@@ -43,7 +43,7 @@
             </div>
             
             <div>
-                <a href="{% url 'download_issue_pdf' issue.pk %}"
+                <a href="{% url 'download_issue_pdf' current_journal.slug issue.pk %}"
                    class="inline-flex items-center gap-2.5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-green-900/30 hover:shadow-green-500/20 hover:scale-105 group/btn">
                     <i class="fas fa-download text-base group-hover/btn:translate-y-0.5 transition-transform"></i>
                     <span>{% trans "To'liq sonni yuklab olish (PDF)" %}</span>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="flex-1">
                             <h2 class="text-xl font-bold text-gray-900 hover:text-navy-700 transition-colors leading-snug mb-3">
-                                <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+                                <a href="{% url 'article_detail' current_journal.slug article.pk %}">{{ article.title }}</a>
                             </h2>
 
                             <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500 mb-3">
@@ -127,11 +127,11 @@
                                     {% endfor %}
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <a href="{% url 'article_detail' article.pk %}"
+                                    <a href="{% url 'article_detail' current_journal.slug article.pk %}"
                                        class="text-navy-700 hover:text-navy-900 text-xs font-semibold flex items-center gap-1 transition-colors">
                                         {% trans "Batafsil" %} <i class="fas fa-arrow-right text-[10px]"></i>
                                     </a>
-                                    <a href="{% url 'download_pdf' article.pk %}"
+                                    <a href="{% url 'download_pdf' current_journal.slug article.pk %}"
                                        class="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-sm" download>
                                         <i class="fas fa-download"></i>
                                         PDF
@@ -153,7 +153,7 @@
     {% endif %}
 
     <div class="mt-8">
-        <a href="{% url 'index' %}#arxiv"
+        <a href="{% url 'index' current_journal.slug %}#arxiv"
            class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-3 rounded-xl text-sm font-medium transition-colors">
             <i class="fas fa-arrow-left text-xs"></i>
             {% trans "Bosh sahifaga qaytish" %}

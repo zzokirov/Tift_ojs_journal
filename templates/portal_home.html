@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+<div class="bg-gray-50 min-h-screen py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+                {% trans "TIFT Ilmiy Jurnallari Portali" %}
+            </h1>
+            <p class="mt-4 text-xl text-gray-500">
+                {% trans "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universitetining (TIFT) ilmiy nashrlari bilan tanishing." %}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for journal in journals %}
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition duration-300 hover:shadow-xl hover:-translate-y-1">
+                <a href="{% url 'index' journal.slug %}" class="block aspect-w-16 aspect-h-9 bg-gray-200">
+                    {% if journal.cover_image %}
+                        <img src="{{ journal.cover_image.url }}" alt="{{ journal.title }}" class="object-cover w-full h-48">
+                    {% else %}
+                        <div class="flex items-center justify-center h-48 bg-blue-100 text-blue-500">
+                            <i class="fas fa-book fa-4x"></i>
+                        </div>
+                    {% endif %}
+                </a>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                        <a href="{% url 'index' journal.slug %}" class="hover:text-blue-600 transition">
+                            {{ journal.title }}
+                        </a>
+                    </h3>
+                    {% if journal.issn %}
+                    <p class="text-sm font-semibold text-gray-500 mb-4">ISSN: {{ journal.issn }}</p>
+                    {% endif %}
+                    <p class="text-gray-600 mb-6 flex-1">
+                        {{ journal.description|truncatewords:20 }}
+                    </p>
+                    <a href="{% url 'index' journal.slug %}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 w-full transition">
+                        {% trans "Jurnalga kirish" %}
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-12 text-gray-500">
+                {% trans "Hozircha jurnallar qo'shilmagan." %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

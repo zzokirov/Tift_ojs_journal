@@ -10,7 +10,7 @@
 
     <!-- Logo + Brand -->
     <div class="text-center mb-8">
-      <a href="{% url 'index' %}" class="inline-flex flex-col items-center gap-3 group">
+      <a href="{% url 'index' current_journal.slug %}" class="inline-flex flex-col items-center gap-3 group">
         <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-md border border-gray-100 group-hover:shadow-lg transition-shadow">
           <img src="{% static 'images/tift.png' %}" alt="{% trans "TIFT Logo" %}" class="w-full h-full object-contain bg-white p-1">
         </div>
@@ -105,7 +105,7 @@
     </div>
 
     <div class="mt-5 text-center">
-      <a href="{% url 'index' %}" class="text-xs text-gray-400 hover:text-gray-600 transition-colors inline-flex items-center gap-1.5">
+      <a href="{% url 'index' current_journal.slug %}" class="text-xs text-gray-400 hover:text-gray-600 transition-colors inline-flex items-center gap-1.5">
         <i class="fas fa-arrow-left text-[10px]"></i>
         {% trans "Bosh sahifaga qaytish" %}
       </a>

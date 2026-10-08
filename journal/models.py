@@ -36,7 +36,24 @@ class User(AbstractUser):
         return f"{self.get_full_name()} ({self.get_role_display()})"
 
 
+
+class Journal(models.Model):
+    title = models.CharField(max_length=200, verbose_name=_("Jurnal nomi"))
+    slug = models.SlugField(max_length=50, unique=True, verbose_name=_("URL Slug (masalan: arxitektura)"))
+    description = models.TextField(blank=True, verbose_name=_("Jurnal haqida (qisqacha)"))
+    issn = models.CharField(max_length=50, blank=True, verbose_name=_("ISSN raqami"))
+    cover_image = models.ImageField(upload_to='journals/', blank=True, null=True, verbose_name=_("Muqova rasmi"))
+    founded_year = models.PositiveIntegerField(default=2024, verbose_name=_("Tashkil etilgan yili"))
+    
+    class Meta:
+        verbose_name = _("Jurnal")
+        verbose_name_plural = _("Jurnallar")
+
+    def __str__(self):
+        return self.title
+
 class JournalIssue(models.Model):
+    journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='issues', verbose_name=_("Jurnal"), null=True, blank=True)
     volume = models.PositiveIntegerField(verbose_name=_("Jurnal jildi (Volume)"))
     number = models.PositiveIntegerField(verbose_name=_("Jurnal soni (Issue)"))
     year = models.PositiveIntegerField(verbose_name=_("Chop etilgan yili"))
@@ -79,6 +96,7 @@ def article_template_pdf_path(instance, filename):
 # ─── YO'NALISH / KATEGORIYA ───────────────────────────────────────────────────
 
 class ArticleCategory(models.Model):
+    journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='categories', verbose_name=_("Jurnal"), null=True, blank=True)
     code  = models.CharField(max_length=20, unique=True, verbose_name=_("Kod (masalan: 18.00.00)"))
     name  = models.CharField(max_length=200, verbose_name=_("Nomi"))
     icon  = models.CharField(max_length=50, blank=True, default='', verbose_name=_("Ikona klasi (masalan: fa-building)"), help_text=_("FontAwesome ikona klasi (bo'sh bo'lsa avtomatik mos ikona tanlanadi)"))
@@ -113,6 +131,7 @@ class ArticleCategory(models.Model):
 
 
 class Article(models.Model):
+    journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='articles_set', verbose_name=_("Jurnal"), null=True, blank=True)
     STATUS_CHOICES = (
         ('submitted', _('Yangi maqola')),
         ('initial_review', _('Dastlabki tekshiruv')),
@@ -209,6 +228,7 @@ def staff_photo_path(instance, filename):
 
 
 class StaffMember(models.Model):
+    journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='staff', verbose_name=_("Jurnal"), null=True, blank=True)
     POSITION_CHOICES = (
         ('editor_in_chief', _('Bosh muharrir')),
         ('deputy_editor',   "O'rinbosar muharrir"),
@@ -239,6 +259,7 @@ class StaffMember(models.Model):
 # ─── KONFERENSIYALAR ─────────────────────────────────────────────────────────
 
 class Conference(models.Model):
+    journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='conferences', verbose_name=_("Jurnal"), null=True, blank=True)
     title       = models.CharField(max_length=300, verbose_name=_("Nomi"))
     description = models.TextField(blank=True, verbose_name=_("Tavsif"))
     pdf_file    = models.FileField(upload_to="conferences/pdfs/", blank=True, null=True, verbose_name=_("Axborot xati / Fayl (PDF)"))
@@ -260,6 +281,7 @@ class Conference(models.Model):
 # ─── YANGILIKLAR ─────────────────────────────────────────────────────────────
 
 class News(models.Model):
+    journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='news', verbose_name=_("Jurnal"), null=True, blank=True)
     title       = models.CharField(max_length=300, verbose_name=_("Sarlavha"))
     content     = models.TextField(verbose_name=_("Matn"))
     image       = models.ImageField(upload_to='news/', null=True, blank=True, verbose_name=_("Rasm"))
@@ -325,6 +347,7 @@ class NewsMedia(models.Model):
 # ─── ME'YORIY HUJJATLAR ──────────────────────────────────────────────────────
 
 class Document(models.Model):
+    journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='documents', verbose_name=_("Jurnal"), null=True, blank=True)
     CATEGORY_CHOICES = (
         ('normative', "Me'yoriy hujjat"),
         ('requirement', _('Maqola talablari')),

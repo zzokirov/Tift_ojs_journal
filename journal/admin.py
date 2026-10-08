@@ -4,7 +4,7 @@ from modeltranslation.admin import TranslationAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, NewsMedia, Document
+from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, NewsMedia, Document, Journal
 
 
 # ─── USER ADMIN ───────────────────────────────────────────────────────────────
@@ -65,9 +65,16 @@ class CustomUserAdmin(UserAdmin):
         return super().get_queryset(request).prefetch_related('articles')
 
 
+
+@admin.register(Journal)
+class JournalAdmin(TranslationAdmin):
+    list_display = ('title', 'slug', 'issn', 'founded_year')
+    search_fields = ('title', 'slug', 'issn')
+    prepopulated_fields = {'slug': ('title_uz',)}
+
 @admin.register(ArticleCategory)
 class ArticleCategoryAdmin(TranslationAdmin):
-    list_display = ('code', 'name', 'icon', 'order', 'article_count')
+    list_display = ('journal', 'code', 'name', 'icon', 'order', 'article_count')
     list_display_links = ('code', 'name')
     list_editable = ('icon', 'order')
     search_fields = ('code', 'name')
@@ -83,12 +90,12 @@ class ArticleCategoryAdmin(TranslationAdmin):
 
 @admin.register(JournalIssue)
 class JournalIssueAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = ('journal', 
         'issue_label', 'year', 'period', 'article_count_tag',
         'is_published', 'created_at'
     )
     list_display_links = ('issue_label',)
-    list_filter = ('year', 'is_published')
+    list_filter = ('journal', 'journal', 'year', 'is_published')
     list_editable = ('is_published',)
     ordering = ('-year', '-volume', '-number')
     list_per_page = 20
@@ -128,7 +135,7 @@ class ArticleAdmin(TranslationAdmin):
         'status', 'views_count', 'downloads_count', 'created_at'
     )
     list_display_links = ('title_short',)
-    list_filter = ('status', 'assigned_reviewer', 'category', 'issue__year', 'issue')
+    list_filter = ('journal', 'status', 'assigned_reviewer', 'category', 'issue__year', 'issue')
     search_fields = (
         'title', 'abstract', 'keywords',
         'author__first_name', 'author__last_name', 'author__email'
@@ -198,9 +205,9 @@ class ArticleAdmin(TranslationAdmin):
 
 @admin.register(StaffMember)
 class StaffMemberAdmin(TranslationAdmin):
-    list_display = ('photo_tag', 'full_name', 'position', 'workplace', 'age', 'order', 'is_active')
+    list_display = ('journal', 'photo_tag', 'full_name', 'position', 'workplace', 'age', 'order', 'is_active')
     list_display_links = ('full_name',)
-    list_filter = ('position', 'is_active')
+    list_filter = ('journal', 'position', 'is_active')
     search_fields = ('full_name', 'workplace')
     list_editable = ('position', 'order', 'is_active')
     ordering = ('order', 'full_name')
@@ -238,8 +245,8 @@ class StaffMemberAdmin(TranslationAdmin):
 
 @admin.register(Conference)
 class ConferenceAdmin(TranslationAdmin):
-    list_display = ('title', 'date', 'location', 'is_active', 'created_at')
-    list_filter = ('is_active',)
+    list_display = ('journal', 'title', 'date', 'location', 'is_active', 'created_at')
+    list_filter = ('journal', 'is_active',)
     search_fields = ('title', 'description', 'location')
     list_editable = ('is_active',)
     ordering = ('-date',)
@@ -303,7 +310,7 @@ class NewsMediaInline(admin.TabularInline):
 class NewsAdmin(TranslationAdmin):
     form = NewsAdminForm
     list_display = ('title', 'media_count_display', 'is_active', 'created_at')
-    list_filter = ('is_active',)
+    list_filter = ('journal', 'is_active',)
     search_fields = ('title', 'content')
     list_editable = ('is_active',)
     ordering = ('-created_at',)
@@ -370,8 +377,8 @@ class NewsAdmin(TranslationAdmin):
 
 @admin.register(Document)
 class DocumentAdmin(TranslationAdmin):
-    list_display = ('title', 'category', 'order', 'is_active', 'created_at')
-    list_filter = ('category', 'is_active')
+    list_display = ('journal', 'title', 'category', 'order', 'is_active', 'created_at')
+    list_filter = ('journal', 'category', 'is_active')
     search_fields = ('title', 'description')
     list_editable = ('category', 'order', 'is_active')
     ordering = ('order', '-created_at')

@@ -105,7 +105,7 @@ if (ctx) {
                         <i class="fas fa-arrow-down"></i>
                         {% trans "Maqolalarni ko'rish" %}
                     </a>
-                    <a href="{% if user.is_authenticated %}{% url 'submit_article' %}{% else %}{% url 'login' %}{% endif %}"
+                    <a href="{% if user.is_authenticated %}{% url 'submit_article' current_journal.slug %}{% else %}{% url 'login' %}{% endif %}"
                        class="inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl transition-all border"
                        style="background:#1e3a5f; color:white; border-color:#2d5a8e;">
                         <i class="fas fa-paper-plane"></i>
@@ -189,7 +189,7 @@ if (ctx) {
                             </div>
 
                             <!-- Tugma -->
-                            <a href="{% if user.is_authenticated %}{% url 'submit_article' %}{% else %}{% url 'login' %}{% endif %}"
+                            <a href="{% if user.is_authenticated %}{% url 'submit_article' current_journal.slug %}{% else %}{% url 'login' %}{% endif %}"
                                class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105"
                                style="background:#22c55e; color:#0a1628;">
                                 <i class="fas fa-paper-plane text-xs"></i>
@@ -215,7 +215,7 @@ if (ctx) {
 <!-- SEARCH BAR -->
 <section class="site-container px-4 -mt-2 mb-10">
     <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-5">
-        <form action="{% url 'index' %}" method="GET" class="flex flex-col md:flex-row gap-3">
+        <form action="{% url 'index' current_journal.slug %}" method="GET" class="flex flex-col md:flex-row gap-3">
             <div class="relative flex-1">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
                 <input type="text" name="q" id="searchInput" value="{{ query|default:'' }}"
@@ -230,7 +230,7 @@ if (ctx) {
             </button>
             
             {% if query %}
-                <a href="{% url 'index' %}"
+                <a href="{% url 'index' current_journal.slug %}"
                    class="flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 px-5 py-3 rounded-xl text-sm font-medium transition-colors border border-red-100">
                     <i class="fas fa-times"></i>
                     {% trans "Tozalash" %}
@@ -282,7 +282,7 @@ if (ctx) {
                                     {% endif %}
                                 </div>
                                 <h3 class="text-lg font-bold text-gray-900 hover:text-navy-700 transition-colors leading-snug">
-                                    <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+                                    <a href="{% url 'article_detail' current_journal.slug article.pk %}">{{ article.title }}</a>
                                 </h3>
                             </div>
                         </div>
@@ -331,11 +331,11 @@ if (ctx) {
                         <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-gray-50">
 
                             <div class="flex items-center gap-2">
-                                <a href="{% url 'article_detail' article.pk %}"
+                                <a href="{% url 'article_detail' current_journal.slug article.pk %}"
                                    class="text-navy-700 hover:text-navy-900 text-xs font-semibold flex items-center gap-1 transition-colors">
                                     {% trans "Batafsil" %} <i class="fas fa-arrow-right text-[10px]"></i>
                                 </a>
-                                <a href="{% url 'download_pdf' article.pk %}"
+                                <a href="{% url 'download_pdf' current_journal.slug article.pk %}"
                                    class="flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-sm" download>
                                     <i class="fas fa-download"></i>
                                     PDF
@@ -352,7 +352,7 @@ if (ctx) {
                         <p class="text-gray-400 text-sm">
                             {% if query %}
                                 "<strong>{{ query }}</strong>" {% trans "bo'yicha hech qanday maqola topilmadi." %}
-                                <a href="{% url 'index' %}" class="text-navy-600 hover:underline">{% trans "Barchasini ko'rish" %}</a>
+                                <a href="{% url 'index' current_journal.slug %}" class="text-navy-600 hover:underline">{% trans "Barchasini ko'rish" %}</a>
                             {% else %}
                                 {% trans "Hozircha chop etilgan ilmiy maqolalar mavjud emas." %}
                             {% endif %}
@@ -393,7 +393,7 @@ if (ctx) {
                         <!-- Sonlar (Issues) List -->
                         <div id="yr-{{ yr.grouper }}" class="hidden divide-y divide-gray-50 bg-white">
                             {% for issue in yr.list %}
-                                <a href="{% url 'issue_detail' issue.pk %}"
+                                <a href="{% url 'issue_detail' current_journal.slug issue.pk %}"
                                    class="flex items-center justify-between px-5 py-3 pl-10 hover:bg-green-50/50 transition-colors group">
                                     <div>
                                         <div class="text-navy-800 font-semibold text-sm group-hover:text-green-700 transition-colors">
@@ -469,7 +469,7 @@ if (ctx) {
                 <p class="text-navy-800 text-xs leading-relaxed mb-4">
                     {% trans "Tadqiqotingizni dunyo bilan baham ko'ring. Maqola yuborish uchun ro'yxatdan o'ting." %}
                 </p>
-                <a href="{% if user.is_authenticated %}{% url 'submit_article' %}{% else %}{% url 'signup' %}{% endif %}"
+                <a href="{% if user.is_authenticated %}{% url 'submit_article' current_journal.slug %}{% else %}{% url 'signup' %}{% endif %}"
                    class="block text-center bg-navy-900 hover:bg-navy-800 text-white text-sm font-bold py-2.5 rounded-xl transition-all hover:scale-105">
                     {% if user.is_authenticated %}{% trans "Maqola yuborish" %}{% else %}{% trans "Ro'yxatdan o'tish" %}{% endif %}
                     <i class="fas fa-arrow-right ml-1 text-xs"></i>
@@ -519,7 +519,7 @@ if (ctx) {
                 {% for issue in issues %}
                 <div class="swiper-slide">
                     <div class="bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-2xl transition-all duration-300 ease-out overflow-hidden flex flex-col h-full group/card relative">
-                        <a href="{% url 'issue_detail' issue.pk %}" class="block">
+                        <a href="{% url 'issue_detail' current_journal.slug issue.pk %}" class="block">
                             {% if issue.cover_image %}
                             <div class="h-32 w-full overflow-hidden bg-gray-50 relative">
                                 <img src="{{ issue.cover_image.url }}"
@@ -541,7 +541,7 @@ if (ctx) {
                                     {{ issue.year }}{% if issue.period %} &bull; {{ issue.period }}{% endif %}
                                 </span>
                             </div>
-                            <a href="{% url 'issue_detail' issue.pk %}" class="block">
+                            <a href="{% url 'issue_detail' current_journal.slug issue.pk %}" class="block">
                                 <h3 class="font-black text-xl text-gray-900 mb-1 leading-tight group-hover/card:text-green-600 transition-colors">
                                     {% blocktrans with num=issue.number %}{{ num }}-son{% endblocktrans %}
                                 </h3>
@@ -551,7 +551,7 @@ if (ctx) {
                                 </p>
                             </a>
                             
-                            <a href="{% url 'download_issue_pdf' issue.pk %}"
+                            <a href="{% url 'download_issue_pdf' current_journal.slug issue.pk %}"
                                class="mt-auto w-full py-2.5 px-3 bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 hover:from-green-700 hover:to-emerald-600 text-white rounded-xl text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:shadow-green-900/20 group/btn"
                                title="{% trans "To'liq sonni PDF formatida yuklab olish" %}">
                                 <i class="fas fa-download text-xs text-green-400 group-hover/btn:text-white group-hover/btn:translate-y-0.5 transition-all"></i>
