@@ -99,7 +99,7 @@
                 <!-- LEFT SIDE: LOGO + NAV LINKS -->
                 <div class="flex items-center gap-8 lg:gap-10">
                     <!-- LOGO -->
-                    <a href="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}{% url 'portal_home' %}{% endif %}" class="flex items-center gap-3 group">
+                    <a href="{% if current_journal %}{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}{% else %}{% url 'portal_home' %}{% endif %}" class="flex items-center gap-3 group">
                         <div class="relative">
                             <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
                                 <img src="{% static 'images/tift.png' %}?v=3" alt="TIFT" class="w-10 h-10 object-contain"
@@ -124,24 +124,24 @@
 
                     <!-- NAV LINKS + SEARCH -->
                     <div class="hidden md:flex items-center gap-4 lg:gap-5 text-sm">
-                        <a href="{% url 'about' current_journal.slug %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
+                        <a href="{% if current_journal %}{% url 'about' current_journal.slug %}{% else %}#{% endif %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
                             <i class="fas fa-info-circle mr-1.5 text-xs text-green-500/70"></i>{% trans "Jurnal haqida" %}
                         </a>
-                        <a href="{% url 'conferences' current_journal.slug %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
+                        <a href="{% if current_journal %}{% url 'conferences' current_journal.slug %}{% else %}#{% endif %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
                             <i class="fas fa-calendar-check mr-1.5 text-xs text-green-500/70"></i>{% trans "Konferensiyalar" %}
                         </a>
-                        <a href="{% url 'news' current_journal.slug %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
+                        <a href="{% if current_journal %}{% url 'news' current_journal.slug %}{% else %}#{% endif %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
                             <i class="fas fa-newspaper mr-1.5 text-xs text-green-500/70"></i>{% trans "Yangiliklar" %}
                         </a>
-                        <a href="{% url 'archive' current_journal.slug %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
+                        <a href="{% if current_journal %}{% url 'archive' current_journal.slug %}{% else %}#{% endif %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
                             <i class="fas fa-book-open mr-1.5 text-xs text-green-500/70"></i>{% trans "Arxiv" %}
                         </a>
-                        <a href="{% url 'documents' current_journal.slug %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
+                        <a href="{% if current_journal %}{% url 'documents' current_journal.slug %}{% else %}#{% endif %}" class="nav-link text-gray-300 hover:text-white font-medium transition-colors whitespace-nowrap">
                             <i class="fas fa-file-alt mr-1.5 text-xs text-green-500/70"></i>{% trans "Hujjatlar" %}
                         </a>
 
                         <!-- NAVBAR SEARCH ICON & EXPANDABLE INPUT -->
-                        <form action="{% url 'index' current_journal.slug %}" method="get" class="relative flex items-center group ml-1 mr-2 flex-shrink-0">
+                        <form action="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}" method="get" class="relative flex items-center group ml-1 mr-2 flex-shrink-0">
                             <div class="relative flex items-center">
                                 <input type="text"
                                        name="q"
@@ -269,7 +269,7 @@
                             </div>
 
                             <!-- Maqola yuborish -->
-                            <a href="{% url 'submit_article' current_journal.slug %}"
+                            <a href="{% if current_journal %}{% url 'submit_article' current_journal.slug %}{% else %}#{% endif %}"
                                class="flex items-center gap-1.5 bg-green-600 hover:bg-green-500 text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shadow-lg hover:scale-105 whitespace-nowrap">
                                 <i class="fas fa-plus-circle"></i>
                                 {% trans "Maqola yuborish" %}
@@ -307,7 +307,7 @@
 
         <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-white/10 px-4 py-4 space-y-2">
             <!-- Mobile Search Bar -->
-            <form action="{% url 'index' current_journal.slug %}" method="get" class="relative my-2">
+            <form action="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}" method="get" class="relative my-2">
                 <input type="text"
                        name="q"
                        value="{{ request.GET.q|default:'' }}"
@@ -317,23 +317,23 @@
                     <i class="fas fa-search"></i>
                 </button>
             </form>
-            <a href="{% url 'about' current_journal.slug %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+            <a href="{% if current_journal %}{% url 'about' current_journal.slug %}{% else %}#{% endif %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
                 <i class="fas fa-info-circle mr-2 text-green-500/70"></i>{% trans "Jurnal haqida" %}
             </a>
-            <a href="{% url 'conferences' current_journal.slug %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+            <a href="{% if current_journal %}{% url 'conferences' current_journal.slug %}{% else %}#{% endif %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
                 <i class="fas fa-calendar-check mr-2 text-green-500/70"></i>{% trans "Konferensiyalar" %}
             </a>
-            <a href="{% url 'news' current_journal.slug %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+            <a href="{% if current_journal %}{% url 'news' current_journal.slug %}{% else %}#{% endif %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
                 <i class="fas fa-newspaper mr-2 text-green-500/70"></i>{% trans "Yangiliklar" %}
             </a>
-            <a href="{% url 'archive' current_journal.slug %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+            <a href="{% if current_journal %}{% url 'archive' current_journal.slug %}{% else %}#{% endif %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
                 <i class="fas fa-book-open mr-2 text-green-500/70"></i>{% trans "Arxiv" %}
             </a>
-            <a href="{% url 'documents' current_journal.slug %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
+            <a href="{% if current_journal %}{% url 'documents' current_journal.slug %}{% else %}#{% endif %}" class="block text-gray-300 hover:text-white py-2 px-3 rounded-lg hover:bg-white/5 transition text-sm">
                 <i class="fas fa-file-alt mr-2 text-green-500/70"></i>{% trans "Hujjatlar" %}
             </a>
             {% if user.is_authenticated %}
-                <a href="{% url 'submit_article' current_journal.slug %}" class="block bg-green-600 text-navy-900 py-2 px-3 rounded-lg text-sm font-bold text-center mt-2">
+                <a href="{% if current_journal %}{% url 'submit_article' current_journal.slug %}{% else %}#{% endif %}" class="block bg-green-600 text-navy-900 py-2 px-3 rounded-lg text-sm font-bold text-center mt-2">
                     <i class="fas fa-plus-circle mr-2"></i>{% trans "Maqola yuborish" %}
                 </a>
             {% endif %}
@@ -381,9 +381,9 @@
                 <div>
                     <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">{% trans "Tezkor havolalar" %}</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="{% url 'index' current_journal.slug %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Bosh sahifa" %}</a></li>
-                        <li><a href="{% url 'index' current_journal.slug %}#arxiv" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Jurnal arxivlari" %}</a></li>
-                        <li><a href="{% url 'submit_article' current_journal.slug %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Maqola yuborish" %}</a></li>
+                        <li><a href="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Bosh sahifa" %}</a></li>
+                        <li><a href="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}#arxiv" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Jurnal arxivlari" %}</a></li>
+                        <li><a href="{% if current_journal %}{% url 'submit_article' current_journal.slug %}{% else %}#{% endif %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Maqola yuborish" %}</a></li>
                         <li><a href="{% url 'login' %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Tizimga kirish" %}</a></li>
                     </ul>
                 </div>
