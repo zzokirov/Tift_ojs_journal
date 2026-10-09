@@ -1,54 +1,108 @@
 {% extends 'base.html' %}
 {% load i18n static %}
 
-{% block content %}
-<div class="bg-gray-50 min-h-screen py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
-                {% trans "TIFT Ilmiy Jurnallari Portali" %}
-            </h1>
-            <p class="mt-4 text-xl text-gray-500">
-                {% trans "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universitetining (TIFT) ilmiy nashrlari bilan tanishing." %}
-            </p>
-        </div>
+{% block title %}TIFT Portal{% endblock %}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for journal in journals %}
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition duration-300 hover:shadow-xl hover:-translate-y-1">
-                <a href="{% url 'index' journal.slug %}" class="block aspect-w-16 aspect-h-9 bg-gray-200">
-                    {% if journal.cover_image %}
-                        <img src="{{ journal.cover_image.url }}" alt="{{ journal.title }}" class="object-cover w-full h-48">
-                    {% else %}
-                        <div class="flex items-center justify-center h-48 bg-blue-100 text-blue-500">
-                            <i class="fas fa-book fa-4x"></i>
-                        </div>
-                    {% endif %}
+{% block header %}
+<!-- PORTAL HEADER -->
+<header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- LOGO -->
+            <div class="flex-shrink-0 flex items-center gap-2">
+                <div class="w-8 h-8 bg-[#1B5B9E] rounded-md flex items-center justify-center text-white font-bold text-xl">
+                    T
+                </div>
+                <span class="text-[#1B5B9E] font-bold text-xl tracking-tight">TIFT Portal</span>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="flex-1 max-w-2xl mx-8 hidden md:block">
+                <div class="relative">
+                    <input type="text" placeholder="{% trans 'Obshiy poisk po statyam...' %}" class="w-full bg-[#E5E9EE] text-gray-700 text-sm rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-[#1B5B9E]">
+                </div>
+            </div>
+
+            <!-- RIGHT BARS -->
+            <div class="flex items-center gap-4 text-sm font-medium text-gray-600">
+                <div class="hidden md:flex gap-1">
+                    <span class="text-gray-500">{% trans "Til:" %}</span>
+                    <a href="#" class="hover:text-[#1B5B9E] transition {% if CURRENT_LANG == 'uz' %}text-[#1B5B9E] font-bold{% endif %}">UZ</a> |
+                    <a href="#" class="hover:text-[#1B5B9E] transition {% if CURRENT_LANG == 'ru' %}text-[#1B5B9E] font-bold{% endif %}">RU</a> |
+                    <a href="#" class="hover:text-[#1B5B9E] transition {% if CURRENT_LANG == 'en' %}text-[#1B5B9E] font-bold{% endif %}">EN</a>
+                </div>
+                <a href="{% url 'login' %}" class="bg-[#1B5B9E] hover:bg-[#15467A] text-white px-4 py-1.5 rounded-md transition font-semibold">
+                    [ {% trans "KIRISH" %} ]
                 </a>
-                <div class="p-6 flex-1 flex flex-col">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">
-                        <a href="{% url 'index' journal.slug %}" class="hover:text-blue-600 transition">
-                            {{ journal.title }}
-                        </a>
-                    </h3>
-                    {% if journal.issn %}
-                    <p class="text-sm font-semibold text-gray-500 mb-4">ISSN: {{ journal.issn }}</p>
-                    {% endif %}
-                    <p class="text-gray-600 mb-6 flex-1">
-                        {{ journal.description|truncatewords:20 }}
-                    </p>
-                    <a href="{% url 'index' journal.slug %}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 w-full transition">
-                        {% trans "Jurnalga kirish" %}
-                        <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<!-- MAIN GRID -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white min-h-screen">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+        {% for journal in journals %}
+        <div class="flex flex-col">
+            <h2 class="text-lg font-bold text-black uppercase mb-4 tracking-wide border-b border-gray-200 pb-2">
+                {% trans "Yo'nalish:" %} {{ journal.title }}
+            </h2>
+            <div class="flex gap-6 items-start">
+                <!-- Image -->
+                <div class="w-1/3 flex-shrink-0">
+                    <div class="aspect-w-1 aspect-h-1 bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm p-2">
+                        {% if journal.cover_image %}
+                        <img src="{{ journal.cover_image.url }}" alt="{{ journal.title }}" class="object-contain w-full h-full">
+                        {% else %}
+                        <img src="{% static 'images/placeholder_book.png' %}" alt="Placeholder" class="object-contain w-full h-full">
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Details -->
+                <div class="w-2/3 flex flex-col justify-between">
+                    <ul class="space-y-2 mb-6">
+                        {% for cat in journal.articlecategory_set.all|slice:":4" %}
+                        <li class="flex items-start gap-2 text-gray-800 text-sm font-medium">
+                            <span class="text-black font-bold mt-1">•</span>
+                            {{ cat.name }}
+                        </li>
+                        {% empty %}
+                        <li class="text-gray-500 text-sm italic">{% trans "Yo'nalishlar kiritilmagan" %}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{% url 'index' journal.slug %}" class="inline-block self-start bg-[#1B5B9E] hover:bg-[#15467A] text-white px-5 py-2 rounded-md font-medium text-sm transition">
+                        [ {% trans "JURNALGA O'TISH" %} ]
                     </a>
                 </div>
             </div>
-            {% empty %}
-            <div class="col-span-full text-center py-12 text-gray-500">
-                {% trans "Hozircha jurnallar qo'shilmagan." %}
-            </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block footer %}
+<footer class="bg-white py-4 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="bg-[#E5E9EE] rounded-full py-2 px-6 flex items-center justify-center gap-4 text-sm font-medium text-gray-700 shadow-sm">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-chart-bar text-gray-600"></i>
+                <span>[ {% trans "Portalning jonli statistikasi" %} ]</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-file-alt text-gray-600"></i>
+                <span>{% trans "Jami maqolalar:" %} 1,450</span>
+            </div>
+            <span>|</span>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-eye text-gray-600"></i>
+                <span>{% trans "Ko'rishlar:" %} 45,200</span>
+            </div>
+            <span>|</span>
+            <span>{% trans "OAK / DOI" %}</span>
+        </div>
+    </div>
+</footer>
 {% endblock %}

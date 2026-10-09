@@ -340,11 +340,14 @@
         </div>
     </nav>
 
+    {% endblock %}
+
     <!-- PAGE CONTENT -->
     <main class="flex-1">
         {% block content %}{% endblock %}
     </main>
 
+    {% block footer %}
     <!-- FOOTER -->
     <footer class="bg-navy-900 text-gray-400 border-t-4 border-green-500 mt-auto">
         <div class="site-container px-4 pt-12 pb-6">
