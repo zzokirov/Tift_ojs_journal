@@ -97,13 +97,7 @@ if (wrapper && img1 && img2) {
                 {% if current_journal.issn %}
                 <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
                     <div class="text-green-600 font-black text-sm font-mono">{{ current_journal.issn }}</div>
-                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">ISSN (Print)</div>
-                </div>
-                {% endif %}
-                {% if current_journal.eissn %}
-                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
-                    <div class="text-green-600 font-black text-sm font-mono">{{ current_journal.eissn }}</div>
-                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">eISSN (Online)</div>
+                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">ISSN</div>
                 </div>
                 {% endif %}
             </div>

@@ -68,10 +68,10 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Journal)
 class JournalAdmin(TranslationAdmin):
-    list_display = ('title', 'slug', 'issn', 'eissn', 'publication_frequency', 'display_order', 'is_active', 'publication_status')
+    list_display = ('title', 'slug', 'issn', 'publication_frequency', 'display_order', 'is_active', 'publication_status')
     list_editable = ('display_order', 'is_active', 'publication_status')
     list_filter = ('publication_status', 'is_active', 'primary_language')
-    search_fields = ('title', 'slug', 'issn', 'eissn', 'research_areas')
+    search_fields = ('title', 'slug', 'issn', 'research_areas')
     prepopulated_fields = {'slug': ('title_uz',)}
 
     def save_model(self, request, obj, form, change):
@@ -83,7 +83,7 @@ class JournalAdmin(TranslationAdmin):
 
     fieldsets = (
         (_("Asosiy ma'lumotlar"), {
-            'fields': ('title', 'slug', 'issn', 'eissn', 'publisher_name', 'publication_frequency', 'founded_year', 'website_url')
+            'fields': ('title', 'slug', 'issn', 'publisher_name', 'publication_frequency', 'founded_year', 'website_url')
         }),
         (_("Muqovalar va logotip (3 tilda)"), {
             'fields': ('logo', 'cover_uz', 'cover_ru', 'cover_en', 'cover_image'),

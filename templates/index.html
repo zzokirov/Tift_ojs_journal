@@ -43,18 +43,13 @@
                     {{ current_journal.short_description|default:current_journal.full_description }}
                 </p>
 
-                <!-- ISSN & eISSN Badges -->
+                <!-- ISSN Badge -->
                 <div class="flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-600 mb-4 pb-4 border-b border-gray-100">
                     <span class="flex items-center gap-1.5">
                         <i class="far fa-id-card text-blue-600"></i>
                         <span>ISSN: <strong class="text-gray-900">{{ current_journal.issn|default:"—" }}</strong></span>
                     </span>
-                    {% if current_journal.eissn %}
-                    <span class="flex items-center gap-1.5">
-                        <i class="far fa-id-card text-green-600"></i>
-                        <span>eISSN: <strong class="text-gray-900">{{ current_journal.eissn }}</strong></span>
-                    </span>
-                    {% endif %}
+
                 </div>
 
                 <!-- Metadata Row (Frequency, Languages, Publisher) -->

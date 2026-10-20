@@ -49,7 +49,6 @@ def portal_home(request):
             Q(title_ru__icontains=q) |
             Q(title_en__icontains=q) |
             Q(issn__icontains=q) |
-            Q(eissn__icontains=q) |
             Q(short_description__icontains=q) |
             Q(full_description__icontains=q) |
             Q(description__icontains=q) |
