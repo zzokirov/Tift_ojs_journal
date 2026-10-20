@@ -114,16 +114,16 @@
             </div>
 
             <!-- Center: Navigation Links -->
-            <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-gray-700">
+            <nav class="hidden md:flex items-center gap-5 lg:gap-7 text-sm font-semibold text-gray-700">
                 {% if current_journal %}
-                    <a href="{% url 'index' journal_slug=current_journal.slug %}" class="hover:text-blue-700 transition">{% trans "Bosh sahifa" %}</a>
-                    <a href="{% url 'about' journal_slug=current_journal.slug %}" class="hover:text-blue-700 transition">{% trans "Jurnal haqida" %}</a>
-                    <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="hover:text-blue-700 transition">{% trans "Arxiv" %}</a>
-                    <a href="{% url 'conferences' journal_slug=current_journal.slug %}" class="hover:text-blue-700 transition">{% trans "Konferensiyalar" %}</a>
-                    <a href="{% url 'news' journal_slug=current_journal.slug %}" class="hover:text-blue-700 transition">{% trans "Yangiliklar" %}</a>
-                    <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="hover:text-blue-700 transition">{% trans "Hujjatlar" %}</a>
+                    <a href="{% url 'index' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'index' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Tavsif" %}</a>
+                    <a href="{% url 'about' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'about' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Tahririyat a'zolari" %}</a>
+                    <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name in 'archive,issue_detail' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Sonlar" %}</a>
+                    <a href="{% url 'index' journal_slug=current_journal.slug %}#articles-tab" class="hover:text-blue-700 transition">{% trans "Maqolalar" %}</a>
+                    <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'documents' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Hujjatlar" %}</a>
+                    <a href="#contact-section" class="hover:text-blue-700 transition">{% trans "Aloqa" %}</a>
                 {% else %}
-                    <a href="{% url 'portal_home' %}" class="hover:text-blue-700 transition">{% trans "Bosh sahifa" %}</a>
+                    <a href="{% url 'portal_home' %}" class="text-blue-700 font-bold border-b-2 border-blue-700 pb-1">{% trans "Bosh sahifa" %}</a>
                     <a href="{% url 'portal_home' %}#journals-section" class="hover:text-blue-700 transition">{% trans "Jurnallar" %}</a>
                     <a href="{% url 'portal_home' %}#authors-section" class="hover:text-blue-700 transition">{% trans "Mualliflar uchun" %}</a>
                     <a href="{% url 'portal_home' %}#about-section" class="hover:text-blue-700 transition">{% trans "Biz haqimizda" %}</a>
@@ -196,12 +196,12 @@
         <!-- Mobile Nav Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 bg-white px-4 pt-3 pb-5 space-y-2 text-sm font-semibold text-gray-700 shadow-lg">
             {% if current_journal %}
-                <a href="{% url 'index' journal_slug=current_journal.slug %}" class="block py-2 text-blue-700 font-bold">{% trans "Bosh sahifa" %}</a>
-                <a href="{% url 'about' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Jurnal haqida" %}</a>
-                <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Arxiv" %}</a>
-                <a href="{% url 'conferences' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Konferensiyalar" %}</a>
-                <a href="{% url 'news' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Yangiliklar" %}</a>
+                <a href="{% url 'index' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Tavsif" %}</a>
+                <a href="{% url 'about' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Tahririyat a'zolari" %}</a>
+                <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Sonlar" %}</a>
+                <a href="{% url 'index' journal_slug=current_journal.slug %}#articles-tab" class="block py-2 hover:text-blue-700">{% trans "Maqolalar" %}</a>
                 <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Hujjatlar" %}</a>
+                <a href="#contact-section" class="block py-2 hover:text-blue-700">{% trans "Aloqa" %}</a>
                 <a href="{% url 'submit_article' journal_slug=current_journal.slug %}" class="block py-2 text-blue-700 font-bold">
                     <i class="fas fa-plus-circle mr-1"></i> {% trans "Maqola yuborish" %}
                 </a>

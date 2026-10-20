@@ -108,27 +108,6 @@
             </div>
         </div>
 
-        <!-- 3. TABS NAVIGATION -->
-        <div class="border-b border-gray-200 mb-8">
-            <nav class="flex space-x-6 sm:space-x-8 text-sm font-bold text-gray-500 overflow-x-auto pb-1">
-                <a href="#about-tab" class="text-blue-700 border-b-2 border-blue-700 pb-3 whitespace-nowrap">
-                    {% trans "Tavsif" %}
-                </a>
-                <a href="{% url 'about' journal_slug=current_journal.slug %}" class="hover:text-gray-900 pb-3 whitespace-nowrap transition">
-                    {% trans "Tahririyat a'zolari" %}
-                </a>
-                <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="hover:text-gray-900 pb-3 whitespace-nowrap transition">
-                    {% trans "Sonlar" %}
-                </a>
-                <a href="#articles-tab" class="hover:text-gray-900 pb-3 whitespace-nowrap transition">
-                    {% trans "Maqolalar" %}
-                </a>
-                <a href="#contact-tab" class="hover:text-gray-900 pb-3 whitespace-nowrap transition">
-                    {% trans "Aloqa" %}
-                </a>
-            </nav>
-        </div>
-
         <!-- 4. TAB CONTENT: ABOUT + EDITORIAL BOARD SIDEBAR (SCREEN 2) -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             
