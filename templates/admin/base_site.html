@@ -5,7 +5,7 @@
 
 {% block branding %}
 <div id="site-name">
-    <a href="{% url 'admin:index' %}" style="display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none;">
+    <a href="{% url 'admin:journal_journal_changelist' %}" style="display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none;">
         <span style="color: #ffffff; font-size: 20px; font-weight: 900; letter-spacing: -0.5px;">TIFT</span>
         <span style="color: #94a3b8; font-size: 14px; font-weight: 500;">Admin</span>
     </a>
@@ -165,74 +165,184 @@
     
     <!-- Brand Logo -->
     <div class="sidebar-brand" style="border-bottom: 1px solid rgba(255,255,255,0.08); padding: 18px 22px; display: flex; align-items: center;">
-        <a href="{% url 'admin:index' %}" style="display: flex; align-items: baseline; gap: 7px; text-decoration: none;">
+        <a href="{% url 'admin:journal_journal_changelist' %}" style="display: flex; align-items: baseline; gap: 7px; text-decoration: none;">
             <span style="color: #ffffff; font-size: 23px; font-weight: 900; letter-spacing: -0.5px;">TIFT</span>
             <span style="color: #94a3b8; font-size: 15px; font-weight: 500;">Admin</span>
         </a>
     </div>
 
+    <!-- Journal Selector Dropdown -->
+    <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; background: rgba(255,255,255,0.02);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 700;">
+                <i class="fas fa-university" style="color: #60a5fa; margin-right: 4px;"></i>{% trans "Faol jurnal" %}
+            </span>
+            {% if admin_active_journal %}
+            <a href="{% url 'admin:journal_journal_changelist' %}" title="{% trans 'Barcha jurnallarga qaytish' %}" style="font-size: 11px; color: #94a3b8; text-decoration: none; padding: 1px 6px; border-radius: 4px; background: rgba(255,255,255,0.06); transition: all 0.2s;" onmouseover="this.style.color='#ffffff'; this.style.background='rgba(255,255,255,0.12)';" onmouseout="this.style.color='#94a3b8'; this.style.background='rgba(255,255,255,0.06)';">
+                ✕ {% trans "Barchasi" %}
+            </a>
+            {% endif %}
+        </div>
+        <select onchange="if(this.value){ location.href=this.value; }" style="width: 100%; background: #1e293b; color: #ffffff; border: 1px solid #334155; border-radius: 8px; padding: 7px 10px; font-size: 12px; font-weight: 600; outline: none; cursor: pointer;">
+            <option value="{% url 'admin:journal_journal_changelist' %}" {% if not admin_active_journal %}selected{% endif %}>
+                📋 {% trans "Barcha jurnallar" %}
+            </option>
+            {% for j in admin_all_journals %}
+            <option value="{% url 'admin:journal_journalissue_changelist' %}?journal__id__exact={{ j.id }}" {% if admin_active_journal.id == j.id %}selected{% endif %}>
+                🏛 {{ j.title|truncatechars:26 }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
     <!-- Sidebar Navigation -->
-    <div class="sidebar-wrapper" style="padding: 14px 10px;">
+    <div class="sidebar-wrapper" style="padding: 12px 10px;">
         <nav>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+            {% if admin_active_journal %}
+            <!-- ============================================== -->
+            <!-- CONTEXTUAL MENU: FOR THE SELECTED JOURNAL ONLY -->
+            <!-- ============================================== -->
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px;">
                 
-                <!-- 1. Bosh sahifa -->
+                <li style="padding: 4px 12px 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #38bdf8; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                    <span style="width: 6px; height: 6px; border-radius: 50%; background: #38bdf8; display: inline-block;"></span>
+                    <span class="text-truncate">{{ admin_active_journal.title|truncatechars:24 }}</span>
+                </li>
+
+                <!-- 1. Jurnal sozlamalari -->
                 <li>
-                    <a href="{% url 'admin:index' %}" class="custom-admin-nav-item {% if request.path == '/admin/' %}active{% endif %}">
-                        <i class="fas fa-home"></i>
-                        <span>{% trans "Bosh sahifa" %}</span>
+                    <a href="{% url 'admin:journal_journal_change' admin_active_journal.id %}" class="custom-admin-nav-item {% if '/journal/journal/' in request.path and admin_active_journal.id|stringformat:'s' in request.path %}active{% endif %}">
+                        <i class="fas fa-cog"></i>
+                        <span>{% trans "Jurnal sozlamalari" %}</span>
                     </a>
                 </li>
 
-                <!-- 2. Jurnallar -->
+                <!-- 2. Nashrlar (Sonlar) -->
                 <li>
-                    <a href="{% url 'admin:journal_journal_changelist' %}" class="custom-admin-nav-item {% if '/journal/journal/' in request.path %}active{% endif %}">
-                        <i class="fas fa-book"></i>
-                        <span>{% trans "Jurnallar" %}</span>
-                    </a>
-                </li>
-
-                <!-- 3. Nashrlar -->
-                <li>
-                    <a href="{% url 'admin:journal_journalissue_changelist' %}" class="custom-admin-nav-item {% if '/journal/journalissue/' in request.path %}active{% endif %}">
+                    <a href="{% url 'admin:journal_journalissue_changelist' %}?journal__id__exact={{ admin_active_journal.id }}" class="custom-admin-nav-item {% if '/journal/journalissue/' in request.path %}active{% endif %}">
                         <i class="fas fa-layer-group"></i>
-                        <span>{% trans "Nashrlar" %}</span>
+                        <span>{% trans "Nashrlar (Sonlar)" %}</span>
                     </a>
                 </li>
 
-                <!-- 4. Maqolalar -->
+                <!-- 3. Maqolalar -->
                 <li>
-                    <a href="{% url 'admin:journal_article_changelist' %}" class="custom-admin-nav-item {% if '/journal/article/' in request.path %}active{% endif %}">
+                    <a href="{% url 'admin:journal_article_changelist' %}?journal__id__exact={{ admin_active_journal.id }}" class="custom-admin-nav-item {% if '/journal/article/' in request.path %}active{% endif %}">
                         <i class="fas fa-file-alt"></i>
                         <span>{% trans "Maqolalar" %}</span>
                     </a>
                 </li>
 
-                <!-- 5. Mualliflar -->
+                <!-- 4. Tahririyat a'zolari -->
                 <li>
-                    <a href="{% url 'admin:journal_user_changelist' %}?role__exact=author" class="custom-admin-nav-item {% if '/journal/user/' in request.path and 'role__exact=author' in request.GET.urlencode %}active{% endif %}">
-                        <i class="fas fa-user-edit"></i>
-                        <span>{% trans "Mualliflar" %}</span>
+                    <a href="{% url 'admin:journal_staffmember_changelist' %}?journal__id__exact={{ admin_active_journal.id }}" class="custom-admin-nav-item {% if '/journal/staffmember/' in request.path %}active{% endif %}">
+                        <i class="fas fa-user-tie"></i>
+                        <span>{% trans "Tahririyat a'zolari" %}</span>
                     </a>
                 </li>
 
-                <!-- 6. Taqrizchilar -->
+                <!-- 5. Yo'nalishlar -->
+                <li>
+                    <a href="{% url 'admin:journal_articlecategory_changelist' %}?journal__id__exact={{ admin_active_journal.id }}" class="custom-admin-nav-item {% if '/journal/articlecategory/' in request.path %}active{% endif %}">
+                        <i class="fas fa-tags"></i>
+                        <span>{% trans "Yo'nalishlar" %}</span>
+                    </a>
+                </li>
+
+                <!-- 6. Hujjatlar -->
+                <li>
+                    <a href="{% url 'admin:journal_document_changelist' %}?journal__id__exact={{ admin_active_journal.id }}" class="custom-admin-nav-item {% if '/journal/document/' in request.path %}active{% endif %}">
+                        <i class="fas fa-file-contract"></i>
+                        <span>{% trans "Hujjatlar" %}</span>
+                    </a>
+                </li>
+
+                <!-- 7. Taqrizlar -->
                 <li>
                     <a href="{% url 'admin:journal_reviewrecord_changelist' %}" class="custom-admin-nav-item {% if '/journal/reviewrecord/' in request.path %}active{% endif %}">
                         <i class="fas fa-clipboard-check"></i>
-                        <span>{% trans "Taqrizchilar" %}</span>
+                        <span>{% trans "Taqrizlar" %}</span>
                     </a>
                 </li>
 
-                <!-- 7. Tahririyat -->
+                <!-- 8. Saytda ko'rish -->
+                <li>
+                    <a href="{% url 'index' journal_slug=admin_active_journal.slug %}" target="_blank" class="custom-admin-nav-item">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>{% trans "Saytda ko'rish" %}</span>
+                    </a>
+                </li>
+
+                <li style="margin: 8px 10px; border-top: 1px solid rgba(255,255,255,0.08);"></li>
+
+                <li style="padding: 2px 12px 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 700;">
+                    {% trans "Umumiy tizim" %}
+                </li>
+
+                <!-- Barcha jurnallar -->
+                <li>
+                    <a href="{% url 'admin:journal_journal_changelist' %}" class="custom-admin-nav-item {% if '/journal/journal/' in request.path and not admin_active_journal.id|stringformat:'s' in request.path %}active{% endif %}">
+                        <i class="fas fa-university"></i>
+                        <span>{% trans "Barcha jurnallar" %}</span>
+                    </a>
+                </li>
+
+                <!-- Foydalanuvchilar -->
+                <li>
+                    <a href="{% url 'admin:journal_user_changelist' %}" class="custom-admin-nav-item {% if '/journal/user/' in request.path %}active{% endif %}">
+                        <i class="fas fa-users"></i>
+                        <span>{% trans "Foydalanuvchilar" %}</span>
+                    </a>
+                </li>
+
+            </ul>
+            {% else %}
+            <!-- ============================================== -->
+            <!-- GLOBAL MENU: WHEN NO JOURNAL IS SELECTED      -->
+            <!-- ============================================== -->
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px;">
+                
+                <!-- Jurnallar -->
+                <li>
+                    <a href="{% url 'admin:journal_journal_changelist' %}" class="custom-admin-nav-item {% if '/journal/journal/' in request.path %}active{% endif %}">
+                        <i class="fas fa-university"></i>
+                        <span>{% trans "Jurnallar" %}</span>
+                    </a>
+                </li>
+
+                <!-- Nashrlar -->
+                <li>
+                    <a href="{% url 'admin:journal_journalissue_changelist' %}" class="custom-admin-nav-item {% if '/journal/journalissue/' in request.path %}active{% endif %}">
+                        <i class="fas fa-layer-group"></i>
+                        <span>{% trans "Barcha nashrlar" %}</span>
+                    </a>
+                </li>
+
+                <!-- Maqolalar -->
+                <li>
+                    <a href="{% url 'admin:journal_article_changelist' %}" class="custom-admin-nav-item {% if '/journal/article/' in request.path %}active{% endif %}">
+                        <i class="fas fa-file-alt"></i>
+                        <span>{% trans "Barcha maqolalar" %}</span>
+                    </a>
+                </li>
+
+                <!-- Tahririyat -->
                 <li>
                     <a href="{% url 'admin:journal_staffmember_changelist' %}" class="custom-admin-nav-item {% if '/journal/staffmember/' in request.path %}active{% endif %}">
                         <i class="fas fa-user-tie"></i>
-                        <span>{% trans "Tahririyat" %}</span>
+                        <span>{% trans "Tahririyat a'zolari" %}</span>
                     </a>
                 </li>
 
-                <!-- 8. Yo'nalishlar -->
+                <!-- Taqrizchilar / Taqrizlar -->
+                <li>
+                    <a href="{% url 'admin:journal_reviewrecord_changelist' %}" class="custom-admin-nav-item {% if '/journal/reviewrecord/' in request.path %}active{% endif %}">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>{% trans "Taqrizlar nazorati" %}</span>
+                    </a>
+                </li>
+
+                <!-- Yo'nalishlar -->
                 <li>
                     <a href="{% url 'admin:journal_articlecategory_changelist' %}" class="custom-admin-nav-item {% if '/journal/articlecategory/' in request.path %}active{% endif %}">
                         <i class="fas fa-tags"></i>
@@ -240,31 +350,46 @@
                     </a>
                 </li>
 
-                <!-- 9. Statistika -->
+                <!-- Hujjatlar -->
                 <li>
-                    <a href="{% url 'admin:index' %}" class="custom-admin-nav-item">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>{% trans "Statistika" %}</span>
+                    <a href="{% url 'admin:journal_document_changelist' %}?journal__id__exact={{ admin_active_journal.id }}" class="custom-admin-nav-item {% if '/journal/document/' in request.path %}active{% endif %}">
+                        <i class="fas fa-file-contract"></i>
+                        <span>{% trans "Hujjatlar" %}</span>
                     </a>
                 </li>
 
-                <!-- 10. Foydalanuvchilar -->
+                <li style="margin: 8px 10px; border-top: 1px solid rgba(255,255,255,0.08);"></li>
+
+                <li style="padding: 2px 12px 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 700;">
+                    {% trans "Foydalanuvchilar va Huquqlar" %}
+                </li>
+
+                <!-- Mualliflar -->
+                <li>
+                    <a href="{% url 'admin:journal_user_changelist' %}?role__exact=author" class="custom-admin-nav-item {% if '/journal/user/' in request.path and 'role__exact=author' in request.GET.urlencode %}active{% endif %}">
+                        <i class="fas fa-user-edit"></i>
+                        <span>{% trans "Mualliflar" %}</span>
+                    </a>
+                </li>
+
+                <!-- Barcha foydalanuvchilar -->
                 <li>
                     <a href="{% url 'admin:journal_user_changelist' %}" class="custom-admin-nav-item {% if '/journal/user/' in request.path and not 'role__exact=author' in request.GET.urlencode %}active{% endif %}">
-                        <i class="fas fa-users-cog"></i>
+                        <i class="fas fa-users"></i>
                         <span>{% trans "Foydalanuvchilar" %}</span>
                     </a>
                 </li>
 
-                <!-- 11. Sozlamalar -->
+                <!-- Sozlamalar / Guruhlar -->
                 <li>
                     <a href="{% url 'admin:auth_group_changelist' %}" class="custom-admin-nav-item {% if '/auth/group/' in request.path %}active{% endif %}">
-                        <i class="fas fa-cog"></i>
-                        <span>{% trans "Sozlamalar" %}</span>
+                        <i class="fas fa-shield-alt"></i>
+                        <span>{% trans "Guruhlar va huquqlar" %}</span>
                     </a>
                 </li>
 
             </ul>
+            {% endif %}
         </nav>
     </div>
 </aside>

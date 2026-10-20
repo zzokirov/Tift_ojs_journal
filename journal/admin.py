@@ -68,6 +68,15 @@ class CustomUserAdmin(UserAdmin):
 
 
 
+class JournalAdminMixin:
+    """Admin formalari ochilganda tanlangan jurnalni avtomatik to'ldirish"""
+    def get_changeform_initial_data(self, request):
+        initial = super().get_changeform_initial_data(request)
+        if 'journal' not in initial and request.session.get('admin_active_journal_id'):
+            initial['journal'] = request.session.get('admin_active_journal_id')
+        return initial
+
+
 @admin.register(Journal)
 class JournalAdmin(TranslationAdmin):
     list_display = ('counter_col', 'journal_col', 'issn_col', 'status_col', 'languages_col', 'actions_col')
@@ -90,17 +99,17 @@ class JournalAdmin(TranslationAdmin):
     def journal_col(self, obj):
         cover = obj.get_cover_for_language()
         cover_url = cover.url if cover else "/static/images/tift.png"
-        change_url = reverse('admin:journal_journal_change', args=[obj.pk])
+        select_url = f"{reverse('admin:journal_journalissue_changelist')}?journal__id__exact={obj.pk}"
         return format_html(
             '<div style="display:flex; align-items:center; gap:14px;">'
             '<div style="width:36px; height:48px; border-radius:4px; overflow:hidden; flex-shrink:0; border:1px solid #e2e8f0; background:#f1f5f9; box-shadow:0 1px 2px rgba(0,0,0,0.06);">'
             '<img src="{}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src=\'/static/images/tift.png\'">'
             '</div>'
             '<div>'
-            '<a href="{}" style="font-weight:700; color:#0f172a; font-size:13.5px; text-decoration:none; line-height:1.35; display:block;" onmouseover="this.style.color=\'#1d4ed8\'" onmouseout="this.style.color=\'#0f172a\'">{}</a>'
+            '<a href="{}" title="Jurnalni tanlash va boshqarish" style="font-weight:700; color:#0f172a; font-size:13.5px; text-decoration:none; line-height:1.35; display:block;" onmouseover="this.style.color=\'#1d4ed8\'" onmouseout="this.style.color=\'#0f172a\'">{}</a>'
             '</div>'
             '</div>',
-            cover_url, change_url, obj.title
+            cover_url, select_url, obj.title
         )
 
     @admin.display(description=_("ISSN"))
@@ -123,16 +132,18 @@ class JournalAdmin(TranslationAdmin):
     def languages_col(self, obj):
         return mark_safe('<span style="color:#475569; font-size:13px; font-weight:500;">O\'z, Rus, Eng</span>')
 
-    @admin.display(description=_("Tahrir"))
+    @admin.display(description=_("Boshqarish"))
     def actions_col(self, obj):
+        select_url = f"{reverse('admin:journal_journalissue_changelist')}?journal__id__exact={obj.pk}"
         change_url = reverse('admin:journal_journal_change', args=[obj.pk])
         view_url = reverse('index', kwargs={'journal_slug': obj.slug})
         return format_html(
             '<div style="display:flex; align-items:center; gap:8px;">'
-            '<a href="{}" title="Tahrirlash" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:6px; background:#eff6ff; color:#2563eb; text-decoration:none; border:1px solid #bfdbfe; transition:all 0.2s;" onmouseover="this.style.background=\'#dbeafe\'" onmouseout="this.style.background=\'#eff6ff\'"><i class="fas fa-pencil-alt" style="font-size:11px;"></i></a>'
-            '<a href="{}" target="_blank" title="Saytda ko\'rish" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:6px; background:#f8fafc; color:#64748b; text-decoration:none; border:1px solid #e2e8f0; transition:all 0.2s;" onmouseover="this.style.background=\'#e2e8f0\'" onmouseout="this.style.background=\'#f8fafc\'"><i class="fas fa-ellipsis-v" style="font-size:11px;"></i></a>'
+            '<a href="{}" title="Ushbu jurnalni tanlash" style="display:inline-flex; align-items:center; gap:5px; padding:6px 12px; border-radius:6px; background:#1d4ed8; color:#ffffff; font-weight:700; font-size:12px; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background=\'#1e40af\'" onmouseout="this.style.background=\'#1d4ed8\'"><i class="fas fa-folder-open" style="font-size:11px;"></i> Tanlash</a>'
+            '<a href="{}" title="Jurnal sozlamalari" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:6px; background:#eff6ff; color:#2563eb; text-decoration:none; border:1px solid #bfdbfe; transition:all 0.2s;" onmouseover="this.style.background=\'#dbeafe\'" onmouseout="this.style.background=\'#eff6ff\'"><i class="fas fa-cog" style="font-size:11px;"></i></a>'
+            '<a href="{}" target="_blank" title="Saytda ko\'rish" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:6px; background:#f8fafc; color:#64748b; text-decoration:none; border:1px solid #e2e8f0; transition:all 0.2s;" onmouseover="this.style.background=\'#e2e8f0\'" onmouseout="this.style.background=\'#f8fafc\'"><i class="fas fa-external-link-alt" style="font-size:10px;"></i></a>'
             '</div>',
-            change_url, view_url
+            select_url, change_url, view_url
         )
 
     def save_model(self, request, obj, form, change):
@@ -158,7 +169,8 @@ class JournalAdmin(TranslationAdmin):
     )
 
 @admin.register(ArticleCategory)
-class ArticleCategoryAdmin(TranslationAdmin):
+class ArticleCategoryAdmin(JournalAdminMixin, TranslationAdmin):
+    list_filter = ('journal',)
     list_display = ('journal', 'code', 'name', 'icon', 'order', 'article_count')
     list_display_links = ('code', 'name')
     list_editable = ('icon', 'order')
@@ -174,7 +186,7 @@ class ArticleCategoryAdmin(TranslationAdmin):
 
 
 @admin.register(JournalIssue)
-class JournalIssueAdmin(admin.ModelAdmin):
+class JournalIssueAdmin(JournalAdminMixin, admin.ModelAdmin):
     list_display = ('journal', 
         'issue_label', 'year', 'period', 'quarter', 'status', 'article_count_tag',
         'is_published', 'created_at'
@@ -224,7 +236,7 @@ class ReviewRecordAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 @admin.register(Article)
-class ArticleAdmin(TranslationAdmin):
+class ArticleAdmin(JournalAdminMixin, TranslationAdmin):
     change_list_template = 'admin/journal/article/change_list.html'
 
     def changelist_view(self, request, extra_context=None):
@@ -314,7 +326,7 @@ class ArticleAdmin(TranslationAdmin):
 # ─── STAFF MEMBER ADMIN ───────────────────────────────────────────────────────
 
 @admin.register(StaffMember)
-class StaffMemberAdmin(TranslationAdmin):
+class StaffMemberAdmin(JournalAdminMixin, TranslationAdmin):
     list_display = ('journal', 'photo_tag', 'full_name', 'position', 'academic_degree', 'academic_title', 'workplace', 'order', 'is_active')
     list_display_links = ('full_name',)
     list_filter = ('journal', 'position', 'academic_degree', 'academic_title', 'is_active')
@@ -354,7 +366,7 @@ class StaffMemberAdmin(TranslationAdmin):
 # ─── CONFERENCE ADMIN ─────────────────────────────────────────────────────────
 
 @admin.register(Conference)
-class ConferenceAdmin(TranslationAdmin):
+class ConferenceAdmin(JournalAdminMixin, TranslationAdmin):
     list_display = ('journal', 'title', 'date', 'location', 'is_active', 'created_at')
     list_filter = ('journal', 'is_active',)
     search_fields = ('title', 'description', 'location')
@@ -417,7 +429,7 @@ class NewsMediaInline(admin.TabularInline):
 
 
 @admin.register(News)
-class NewsAdmin(TranslationAdmin):
+class NewsAdmin(JournalAdminMixin, TranslationAdmin):
     form = NewsAdminForm
     list_display = ('title', 'media_count_display', 'is_active', 'created_at')
     list_filter = ('journal', 'is_active',)
@@ -486,7 +498,7 @@ class NewsAdmin(TranslationAdmin):
 # ─── DOCUMENT ADMIN ───────────────────────────────────────────────────────────
 
 @admin.register(Document)
-class DocumentAdmin(TranslationAdmin):
+class DocumentAdmin(JournalAdminMixin, TranslationAdmin):
     list_display = ('journal', 'title', 'category', 'order', 'is_active', 'created_at')
     list_filter = ('journal', 'category', 'is_active')
     search_fields = ('title', 'description')

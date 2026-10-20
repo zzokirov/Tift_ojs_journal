@@ -75,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'journal.context_processors.admin_journal_context',
             ],
         },
     },
@@ -165,16 +166,10 @@ JAZZMIN_SETTINGS = {
     "site_icon": "images/tift.png",
     "welcome_sign": "TIFT Admin",
     "copyright": "TIFT © 2026",
-    "search_model": ["journal.Article", "journal.User"],
+    "search_model": [],
 
     "topmenu_links": [
-        {"name": "🌐 Saytga o'tish", "url": "/", "new_window": False},
-        {"name": "🏛 Jurnallar", "model": "journal.Journal"},
-        {"name": "📚 Jurnal sonlari", "model": "journal.JournalIssue"},
-        {"name": "📄 Maqolalar", "model": "journal.Article"},
-        {"name": "📝 Taqriz nazorati", "model": "journal.ReviewRecord"},
-        {"name": "👥 Tahririyat", "model": "journal.StaffMember"},
-        {"name": "👤 Mualliflar", "model": "journal.User"},
+        {"name": "🌐 Saytga o'tish", "url": "/", "new_window": True},
     ],
 
     "usermenu_links": [
