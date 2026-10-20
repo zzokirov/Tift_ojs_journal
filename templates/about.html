@@ -74,31 +74,38 @@ if (wrapper && img1 && img2) {
                     <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
                     {% trans "Jurnal haqida" %}
                 </h2>
-                <p class="text-gray-600 leading-relaxed text-sm">
-                    {% if LANGUAGE_CODE == 'ru' %}
-                        <strong>"Arxitektura va Ta'lim"</strong> — научно-электронный журнал, издаваемый Ташкентским международным университетом финансов и технологий (ТИФТ). Журнал специализируется на публикации научно-практических исследований в области архитектуры, строительства, геодезии, картографии, кадастра и образования.
-                    {% elif LANGUAGE_CODE == 'en' %}
-                        <strong>"Arxitektura va Ta'lim"</strong> is a scientific-electronic journal published by Tashkent International University of Finance and Technology (TIFT). The journal specializes in publishing scientific and practical research in the fields of architecture, construction, geodesy, cartography, cadastre and education.
+                <div class="text-gray-600 leading-relaxed text-sm">
+                    {% if current_journal.full_description or current_journal.short_description or current_journal.description %}
+                        <p class="mb-3 font-semibold text-navy-900 text-base">"{{ current_journal.title }}"</p>
+                        <p>{{ current_journal.full_description|default:current_journal.short_description|default:current_journal.description|linebreaksbr }}</p>
                     {% else %}
-                        <strong>"Arxitektura va Ta'lim"</strong> ilmiy-elektron jurnali Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti (TIFT) tomonidan nashr etiladi. Jurnal arxitektura, qurilish, geodeziya, kartografiya, kadastr va ta'lim sohasidagi ilmiy-amaliy tadqiqotlarni chop etishga ixtisoslashgan.
+                        <p><strong>"{{ current_journal.title }}"</strong> — {% trans "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy jurnali." %}</p>
                     {% endif %}
-                </p>
+                </div>
             </div>
 
             <!-- Info cards -->
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                    <div class="text-green-600 font-black text-2xl">2026</div>
-                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">{% trans "Tashkil etilgan" %}</div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
+                    <div class="text-green-600 font-black text-xl">{{ current_journal.founded_year|default:2024 }}</div>
+                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">{% trans "Tashkil etilgan" %}</div>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                    <div class="text-green-600 font-black text-2xl">4x</div>
-                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">{% trans "Yiliga chop etiladi" %}</div>
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
+                    <div class="text-green-600 font-black text-sm">{{ current_journal.publication_frequency|default:_("Yiliga 4 marta") }}</div>
+                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">{% trans "Davriyligi" %}</div>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                    <div class="text-green-600 font-black text-sm font-mono">2181-XXXX</div>
-                    <div class="text-gray-500 text-xs mt-1 uppercase tracking-wider">ISSN (Online)</div>
+                {% if current_journal.issn %}
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
+                    <div class="text-green-600 font-black text-sm font-mono">{{ current_journal.issn }}</div>
+                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">ISSN (Print)</div>
                 </div>
+                {% endif %}
+                {% if current_journal.eissn %}
+                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
+                    <div class="text-green-600 font-black text-sm font-mono">{{ current_journal.eissn }}</div>
+                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">eISSN (Online)</div>
+                </div>
+                {% endif %}
             </div>
 
             <!-- Peer review -->
@@ -215,9 +222,14 @@ if (wrapper && img1 && img2) {
                                     {% endif %}
                                 </span>
                             </div>
-                            <h3 class="text-base font-bold text-white mb-1.5 leading-snug">
+                            <h3 class="text-base font-bold text-white mb-0.5 leading-snug">
                                 {{ member.full_name }}
                             </h3>
+                            {% if member.academic_degree or member.academic_title %}
+                            <div class="text-xs text-green-300 font-medium mb-1.5">
+                                {{ member.academic_degree }}{% if member.academic_degree and member.academic_title %}, {% endif %}{{ member.academic_title }}
+                            </div>
+                            {% endif %}
                             {% if member.bio %}
                                 <p class="text-gray-300 text-xs leading-relaxed line-clamp-3 mb-2">
                                     {{ member.bio }}

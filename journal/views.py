@@ -115,7 +115,7 @@ def index(request, journal_slug):
 
 def archive(request, journal_slug):
     current_journal = get_object_or_404(Journal, slug=journal_slug)
-    issues = JournalIssue.objects.filter(journal=current_journal).order_by('-year', '-number')
+    issues = JournalIssue.objects.filter(journal=current_journal, is_published=True).order_by('-year', '-number')
     return render(request, 'archive.html', {'current_journal': current_journal, 'issues': issues})
 
 
@@ -137,7 +137,10 @@ def about(request, journal_slug):
 def issue_detail(request, journal_slug, issue_pk):
     current_journal = get_object_or_404(Journal, slug=journal_slug)
     issue = get_object_or_404(JournalIssue, pk=issue_pk, journal=current_journal)
-    articles = Article.objects.filter(issue=issue, status='published')
+    if not issue.is_published and issue.status != 'published':
+        if not (request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser)):
+            raise Http404(_("Ushbu jurnal soni hali chop etilmagan."))
+    articles = Article.objects.filter(issue=issue, status='published').order_by('order_in_issue', 'start_page', 'id')
     return render(request, 'journal/issue_detail.html', {
         'current_journal': current_journal,
         'issue': issue,
@@ -1013,15 +1016,18 @@ def submit_article(request, journal_slug):
     current_journal = get_object_or_404(Journal, slug=journal_slug)
     if request.method == 'POST':
         form = ArticleSubmissionForm(request.POST, request.FILES)
+        form.fields['category'].queryset = ArticleCategory.objects.filter(journal=current_journal).order_by('order', 'code')
         if form.is_valid():
             article = form.save(commit=False)
             article.author = request.user
             article.journal = current_journal
             article.status = 'submitted'
             article.save()
+            messages.success(request, _("Maqolangiz tahririyatga muvaffaqiyatli topshirildi."))
             return redirect('my_articles')
     else:
         form = ArticleSubmissionForm()
+        form.fields['category'].queryset = ArticleCategory.objects.filter(journal=current_journal).order_by('order', 'code')
     return render(request, 'submit_article.html', {'current_journal': current_journal, 'form': form})
 
 

@@ -160,9 +160,12 @@ JAZZMIN_SETTINGS = {
 
     "topmenu_links": [
         {"name": "🌐 Saytga o'tish", "url": "/", "new_window": False},
-        {"name": "📄 Maqolalar", "model": "journal.Article"},
+        {"name": "🏛 Jurnallar", "model": "journal.Journal"},
         {"name": "📚 Jurnal sonlari", "model": "journal.JournalIssue"},
-        {"name": "👥 Foydalanuvchilar", "model": "journal.User"},
+        {"name": "📄 Maqolalar", "model": "journal.Article"},
+        {"name": "📝 Taqriz nazorati", "model": "journal.ReviewRecord"},
+        {"name": "👥 Tahririyat", "model": "journal.StaffMember"},
+        {"name": "👤 Mualliflar", "model": "journal.User"},
     ],
 
     "usermenu_links": [
@@ -175,18 +178,31 @@ JAZZMIN_SETTINGS = {
     "hide_models": [],
 
     "order_with_respect_to": [
-        "journal",
-        "journal.Article",
+        "journal.Journal",
         "journal.JournalIssue",
+        "journal.Article",
+        "journal.ReviewRecord",
+        "journal.StaffMember",
+        "journal.ArticleCategory",
+        "journal.Document",
+        "journal.News",
+        "journal.Conference",
         "journal.User",
     ],
 
     "icons": {
         "auth": "fas fa-shield-alt",
         "auth.Group": "fas fa-layer-group",
+        "journal.Journal": "fas fa-university",
         "journal.User": "fas fa-users",
         "journal.Article": "fas fa-file-alt",
         "journal.JournalIssue": "fas fa-book-open",
+        "journal.ReviewRecord": "fas fa-clipboard-check",
+        "journal.StaffMember": "fas fa-user-tie",
+        "journal.ArticleCategory": "fas fa-th-list",
+        "journal.Document": "fas fa-file-contract",
+        "journal.News": "fas fa-newspaper",
+        "journal.Conference": "fas fa-calendar-alt",
     },
 
     "default_icon_parents": "fas fa-folder",
@@ -253,7 +269,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_MANIFEST_STRICT = False
-CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com', 'https://architect-edu.tift.uz']
+CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com', 'https://architect-edu.tift.uz', 'https://jurnal.tift.uz']
 
 # Til cookie sozlamalari
 LANGUAGE_COOKIE_NAME = 'django_language'

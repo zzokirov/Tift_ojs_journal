@@ -89,6 +89,25 @@ class Journal(models.Model):
         verbose_name = _("Jurnal")
         verbose_name_plural = _("Jurnallar")
 
+    def clean(self):
+        super().clean()
+        from django.core.exceptions import ValidationError
+        # 1. Issue must belong to the same journal
+        if self.issue and self.journal and self.issue.journal_id != self.journal_id:
+            raise ValidationError({
+                'issue': _("Tanlangan jurnal soni maqola tegishli bo'lgan jurnalga mos kelmaydi.")
+            })
+        # 2. Only accepted or published articles can be assigned to an issue
+        if self.issue and self.status in ['submitted', 'initial_review', 'under_review', 'returned', 'rejected']:
+            raise ValidationError({
+                'issue': _("Faqat qabul qilingan yoki nashr etilgan maqolalarni jurnal soniga biriktirish mumkin.")
+            })
+        # 3. Published articles require a final PDF or template PDF or content
+        if self.status == 'published' and not self.pdf_file and not self.template_pdf and not self.content:
+            raise ValidationError({
+                'pdf_file': _("Nashr etilgan maqolalar uchun PDF fayli yoki maqola matni yuklangan bo'lishi shart.")
+            })
+
     def __str__(self):
         return self.title
 
@@ -155,6 +174,21 @@ class JournalIssue(models.Model):
         ordering = ['-year', '-volume', '-number']
         verbose_name = _("Jurnal soni")
         verbose_name_plural = _("Jurnal sonlari")
+
+    def clean(self):
+        super().clean()
+        from django.core.exceptions import ValidationError
+        if self.journal_id and self.year and self.number:
+            qs = JournalIssue.objects.filter(
+                journal_id=self.journal_id,
+                year=self.year,
+                volume=self.volume,
+                number=self.number
+            )
+            if self.pk:
+                qs = qs.exclude(pk=self.pk)
+            if qs.exists():
+                raise ValidationError(_("Ushbu jurnal, yil, jild va son raqami uchun allaqachon son mavjud."))
 
     def __str__(self):
         return f"{self.year}-yil, {self.number}-son"
@@ -301,6 +335,26 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+
+    def clean(self):
+        super().clean()
+        from django.core.exceptions import ValidationError
+        # 1. Issue must belong to the same journal
+        if self.issue and self.journal and self.issue.journal_id != self.journal_id:
+            raise ValidationError({
+                'issue': _("Tanlangan jurnal soni maqola tegishli bo'lgan jurnalga mos kelmaydi.")
+            })
+        # 2. Only accepted or published articles can be assigned to an issue
+        if self.issue and self.status in ['submitted', 'initial_review', 'under_review', 'returned', 'rejected']:
+            raise ValidationError({
+                'issue': _("Faqat qabul qilingan yoki nashr etilgan maqolalarni jurnal soniga biriktirish mumkin.")
+            })
+        # 3. Published articles require a final PDF or template PDF or content
+        if self.status == 'published' and not self.pdf_file and not self.template_pdf and not self.content:
+            raise ValidationError({
+                'pdf_file': _("Nashr etilgan maqolalar uchun PDF fayli yoki maqola matni yuklangan bo'lishi shart.")
+            })
 
 
 class SiteVisit(models.Model):
