@@ -258,8 +258,8 @@ class Article(models.Model):
     # Asosiy ma'lumotlar
     title    = models.CharField(max_length=500, verbose_name=_("Maqola sarlavhasi"))
     authors  = models.CharField(max_length=500, blank=True, verbose_name=_("Mualliflar (to'liq ro'yxat)"))
-    abstract = models.TextField(verbose_name=_("Annotatsiya / Abstract"))
-    keywords = models.CharField(max_length=255, verbose_name=_("Kalit so'zlar (vergul bilan ajrating)"))
+    abstract = models.TextField(blank=True, default='', verbose_name=_("Annotatsiya / Abstract"))
+    keywords = models.CharField(max_length=255, blank=True, default='', verbose_name=_("Kalit so'zlar (vergul bilan ajrating)"))
     ARTICLE_LANG_CHOICES = (
         ('uz', "O'zbek"),
         ('ru', "Русский"),
@@ -274,7 +274,7 @@ class Article(models.Model):
     corresponding_author_phone = models.CharField(max_length=50, blank=True, verbose_name=_("Aloqa uchun telefon"))
 
     # Muallif (tizim foydalanuvchisi) va jurnal
-    author   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name=_("Muallif (foydalanuvchi)"))
+    author   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name=_("Muallif (foydalanuvchi)"), null=True, blank=True)
     issue    = models.ForeignKey(JournalIssue, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name=_("Jurnal soni"))
     category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name=_("Yo'nalish"))
 
@@ -332,6 +332,8 @@ class Article(models.Model):
     def clean(self):
         super().clean()
         from django.core.exceptions import ValidationError
+        if self.issue and not self.journal_id:
+            self.journal = self.issue.journal
         # 1. Issue must belong to the same journal
         if self.issue and self.journal and self.issue.journal_id != self.journal_id:
             raise ValidationError({
@@ -339,9 +341,8 @@ class Article(models.Model):
             })
         # 2. Only accepted or published articles can be assigned to an issue
         if self.issue and self.status in ['submitted', 'initial_review', 'under_review', 'returned', 'rejected']:
-            raise ValidationError({
-                'issue': _("Faqat qabul qilingan yoki nashr etilgan maqolalarni jurnal soniga biriktirish mumkin.")
-            })
+            # Agar maqola songa biriktirilgan bo'lsa, holatini avtomatik nashr etilgan qilamiz
+            self.status = 'published'
         # 3. Published articles require a final PDF or template PDF or content
         if self.status == 'published' and not self.pdf_file and not self.template_pdf and not self.content:
             raise ValidationError({

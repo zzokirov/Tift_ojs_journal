@@ -905,7 +905,7 @@ def _add_header_footer_to_pdf(pdf_bytes, article):
             # CHAP TOMON MATNI (3cm uzoqlikdan)
             rect_f_left = fitz.Rect(margin_left, footer_line_y + 4, w - 100, h - 15)
             try:
-                page.insert_textbox(rect_f_left, f"\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali | {issue_full} | http://architect-edu.tift.uz", fontsize=8, color=GRAY_TEXT, align=0)
+                page.insert_textbox(rect_f_left, f"{getattr(article, 'journal', None) and article.journal.title or ''} | {issue_full}", fontsize=8, color=GRAY_TEXT, align=0)
             except Exception:
                 pass
 
@@ -958,21 +958,20 @@ def _get_pdf_bytes(article_file):
 
 def download_pdf(request, journal_slug, pk):
     """
-    Maqola PDF ini tayyorlab yuklab beradi.
-    Colontitullar, QR kod va to'plamdagi haqiqiy sahifa raqamlarini bosib beradi.
+    Maqola PDF faylini to'g'ridan-to'g'ri yuklab beradi.
+    Eski murakkab algoritmlar va cheklovlar olib tashlangan.
     """
-    from django.http import HttpResponse, Http404
+    import os
+    from django.http import FileResponse, Http404
     from django.shortcuts import redirect as _redirect
-    from django.template.loader import render_to_string
-    from django.conf import settings
 
     current_journal = _get_current_journal(journal_slug)
     article = get_object_or_404(Article, pk=pk, journal=current_journal)
 
-    # Huquq tekshiruvi: Chop etilgan bo'lsa barchaga, aks holda muallif, taqrizchi va xodimlarga
+    # Huquq tekshiruvi: Chop etilgan bo'lsa barchaga, aks holda muallif va xodimlarga
     is_author = request.user.is_authenticated and article.author_id == request.user.pk
     is_reviewer_or_staff = request.user.is_authenticated and (
-        request.user.role in ['reviewer', 'editor'] or
+        getattr(request.user, 'role', '') in ['reviewer', 'editor'] or
         request.user.is_staff or
         request.user.is_superuser or
         article.assigned_reviewer_id == request.user.pk
@@ -982,72 +981,36 @@ def download_pdf(request, journal_slug, pk):
 
     Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
 
-    if article.issue and article.start_page is None:
-        recalculate_issue_page_numbers(article.issue)
-        article.refresh_from_db()
-
-    safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
-    filename = f"TIFT_{safe_title}.pdf"
-
     if not article.pdf_file:
-        raise Http404(_("Maqola fayli topilmadi."))
+        raise Http404(_("Maqola PDF fayli yuklanmagan."))
 
-    file_name = getattr(article.pdf_file, 'name', '') or ''
-    ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0] if article.pdf_file else ''
+    safe_title = "".join(c for c in article.title if c.isalnum() or c in (' ', '_', '-')).strip()[:60]
+    filename = f"{safe_title or 'maqola'}.pdf"
 
-    # 1. Asl fayl tayyor PDF bo'lsa
-    if ext == 'pdf':
-        raw_bytes = _get_pdf_bytes(article.pdf_file)
-        if raw_bytes:
-            stamped = _add_header_footer_to_pdf(raw_bytes, article)
-            response = HttpResponse(stamped, content_type='application/pdf')
-            response['Content-Disposition'] = f'attachment; filename="{filename}"'
-            return response
-
-    # 2. Word (.docx) yoki HTML matn bo'lsa xhtml2pdf orqali
     try:
-        from xhtml2pdf import pisa
-        import io
-
-        content_html = _get_article_content_html(article.pdf_file, article=article)
-        html_string = render_to_string('article_pdf.html', {
-            'article': article,
-            'request': request,
-            'pdf_content_html': content_html,
-            'static_root': settings.STATIC_ROOT,
-            'logo_base64': _get_logo_base64(),
-            'qr_code_base64': _get_qr_code_base64(article, request),
-        })
-        buffer = io.BytesIO()
-        try:
-            base_url = request.build_absolute_uri('/') if request else 'https://architect-edu.tift.uz/'
-        except Exception:
-            base_url = 'https://architect-edu.tift.uz/'
-        res = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
-        if not res.err:
-            stamped = _add_header_footer_to_pdf(buffer.getvalue(), article)
-            response = HttpResponse(stamped, content_type='application/pdf')
-            response['Content-Disposition'] = f'attachment; filename="{filename}"'
-            return response
-    except Exception as e:
-        print("download_pdf xhtml2pdf error:", e)
-
-    return _redirect(article.pdf_file.url)
+        if hasattr(article.pdf_file, 'path') and os.path.exists(article.pdf_file.path):
+            return FileResponse(open(article.pdf_file.path, 'rb'), as_attachment=True, filename=filename, content_type='application/pdf')
+        return FileResponse(article.pdf_file.open('rb'), as_attachment=True, filename=filename, content_type='application/pdf')
+    except Exception:
+        if article.pdf_file.url:
+            return _redirect(article.pdf_file.url)
+        raise Http404(_("Faylni ochishda xatolik yuz berdi."))
 
 
 def generate_article_pdf(request, journal_slug, pk):
-    """Maqolani brauzerda inline ko'rish uchun PDF ga aylantiradi."""
-    from django.template.loader import render_to_string
-    from django.http import HttpResponse, Http404
+    """
+    Maqola PDF faylini brauzerda inline ko'rish uchun to'g'ridan-to'g'ri ochadi.
+    """
+    import os
+    from django.http import FileResponse, Http404
     from django.shortcuts import redirect as _redirect
-    import io
 
     current_journal = _get_current_journal(journal_slug)
     article = get_object_or_404(Article, pk=pk, journal=current_journal)
 
     is_author = request.user.is_authenticated and article.author_id == request.user.pk
     is_reviewer_or_staff = request.user.is_authenticated and (
-        request.user.role in ['reviewer', 'editor'] or
+        getattr(request.user, 'role', '') in ['reviewer', 'editor'] or
         request.user.is_staff or
         request.user.is_superuser or
         article.assigned_reviewer_id == request.user.pk
@@ -1059,58 +1022,20 @@ def generate_article_pdf(request, journal_slug, pk):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
         request.session[f'pdf_viewed_{pk}'] = True
 
-    if article.issue and article.start_page is None:
-        recalculate_issue_page_numbers(article.issue)
-        article.refresh_from_db()
+    if not article.pdf_file:
+        raise Http404(_("Maqola PDF fayli yuklanmagan."))
 
-    safe_title = article.title[:40].replace(' ', '_').replace('/', '_').replace('\\', '_')
-    filename = f"TIFT_{safe_title}.pdf"
-
-    if article.pdf_file:
-        file_name = getattr(article.pdf_file, 'name', '') or ''
-        ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0]
-        if ext == 'pdf':
-            raw_bytes = _get_pdf_bytes(article.pdf_file)
-            if raw_bytes:
-                stamped = _add_header_footer_to_pdf(raw_bytes, article)
-                response = HttpResponse(stamped, content_type='application/pdf')
-                response['Content-Disposition'] = f'inline; filename="{filename}"'
-                return response
+    safe_title = "".join(c for c in article.title if c.isalnum() or c in (' ', '_', '-')).strip()[:60]
+    filename = f"{safe_title or 'maqola'}.pdf"
 
     try:
-        from xhtml2pdf import pisa
-        from django.conf import settings as django_settings
-
-        content_html = ''
-        if article.pdf_file:
-            try:
-                content_html = _get_article_content_html(article.pdf_file, article=article)
-            except Exception:
-                pass
-
-        html_string = render_to_string('article_pdf.html', {
-            'article': article,
-            'pdf_content_html': content_html,
-            'static_root': django_settings.STATIC_ROOT,
-            'logo_base64': _get_logo_base64(),
-            'qr_code_base64': _get_qr_code_base64(article, request),
-        })
-        buffer = io.BytesIO()
-        try:
-            base_url = request.build_absolute_uri('/') if request else 'https://architect-edu.tift.uz/'
-        except Exception:
-            base_url = 'https://architect-edu.tift.uz/'
-        pisa_status = pisa.CreatePDF(src=html_string, dest=buffer, encoding='utf-8', base_url=base_url)
-
-        if not pisa_status.err:
-            stamped = _add_header_footer_to_pdf(buffer.getvalue(), article)
-            response = HttpResponse(stamped, content_type='application/pdf')
-            response['Content-Disposition'] = f'inline; filename="{filename}"'
-            return response
-    except Exception as e:
-        print("generate_article_pdf error:", e)
-
-    return _redirect(article.pdf_file.url if article.pdf_file else '/')
+        if hasattr(article.pdf_file, 'path') and os.path.exists(article.pdf_file.path):
+            return FileResponse(open(article.pdf_file.path, 'rb'), as_attachment=False, filename=filename, content_type='application/pdf')
+        return FileResponse(article.pdf_file.open('rb'), as_attachment=False, filename=filename, content_type='application/pdf')
+    except Exception:
+        if article.pdf_file.url:
+            return _redirect(article.pdf_file.url)
+        raise Http404(_("Faylni ochishda xatolik yuz berdi."))
 
 
 def signup(request):
@@ -1703,7 +1628,7 @@ def download_issue_pdf(request, journal_slug, issue_pk):
 
         rect_f_left = fitz.Rect(margin_left, footer_line_y + 4, w - 100, h - 15)
         try:
-            page.insert_textbox(rect_f_left, f"\"Arxitektura va Ta'lim\" ilmiy-elektron jurnali | {issue_full} | http://architect-edu.tift.uz", fontsize=8, color=GRAY_TEXT, align=0)
+                page.insert_textbox(rect_f_left, f"{getattr(article, 'journal', None) and article.journal.title or ''} | {issue_full}", fontsize=8, color=GRAY_TEXT, align=0)
         except Exception:
             pass
 

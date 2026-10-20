@@ -236,7 +236,7 @@ class ReviewRecordAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 @admin.register(Article)
-class ArticleAdmin(JournalAdminMixin, TranslationAdmin):
+class ArticleAdmin(JournalAdminMixin, admin.ModelAdmin):
     change_list_template = 'admin/journal/article/change_list.html'
 
     def changelist_view(self, request, extra_context=None):
@@ -246,48 +246,23 @@ class ArticleAdmin(JournalAdminMixin, TranslationAdmin):
         return super().changelist_view(request, extra_context=extra_context)
 
     list_display = (
-        'title_short', 'author_name', 'category', 'assigned_reviewer', 'issue',
-        'status', 'views_count', 'downloads_count', 'created_at'
+        'title_short', 'authors_display', 'journal', 'issue',
+        'status', 'pdf_link', 'downloads_count', 'created_at'
     )
     list_display_links = ('title_short',)
-    list_filter = ('journal', 'status', 'assigned_reviewer', 'category', 'issue__year', 'issue')
-    search_fields = (
-        'title', 'abstract', 'keywords',
-        'author__first_name', 'author__last_name', 'author__email'
-    )
-    list_editable = ('assigned_reviewer', 'status', 'issue')
+    list_filter = ('journal', 'status', 'issue__year', 'issue')
+    search_fields = ('title', 'authors')
+    list_editable = ('status', 'issue')
     ordering = ('-created_at',)
     list_per_page = 20
     date_hierarchy = 'created_at'
     readonly_fields = ('views_count', 'downloads_count', 'created_at', 'updated_at', 'pdf_link')
-    inlines = [ReviewRecordInline]
+    inlines = []
 
     fieldsets = (
-        (_("Maqola ma'lumotlari"), {
-            'fields': ('title', 'authors', 'abstract', 'keywords')
-        }),
-        (_("Muallif va jurnal"), {
-            'fields': ('journal', 'author', 'issue', 'category', 'article_language', 'order_in_issue')
-        }),
-        (_("Bog'lanish uchun muallif (Tahririyat uchun)"), {
-            'fields': ('corresponding_author_name', 'corresponding_author_email', 'corresponding_author_phone', 'admin_notes')
-        }),
-        (_("Fayllar (PDF va Word)"), {
-            'fields': ('pdf_file', 'pdf_link', 'word_file', 'template_pdf')
-        }),
-        (_("Taqrizchi va ko'rib chiqish"), {
-            'fields': ('assigned_reviewer', 'review_notes', 'reviewed_by', 'reviewed_at')
-        }),
-        (_("Sahifalash (Paginatsiya)"), {
-            'fields': ('start_page', 'end_page'),
-            'description': _("Agar maqola uchun alohida PDF yuklanmasa, To'plam PDF faylidan shu sahifalar oralig'i avtomatik qirqib olinadi.")
-        }),
-        (_("Holat va fayllar"), {
-            'fields': ('status', 'published_at')
-        }),
-        (_("Statistika"), {
-            'fields': ('views_count', 'downloads_count', 'created_at', 'updated_at'),
-            'classes': ('collapse',)
+        (_("Maqolani chop qilish"), {
+            'fields': ('title', 'authors', 'journal', 'issue', 'pdf_file', 'status'),
+            'description': _("Maqola ma'lumotlarini to'ldiring va PDF faylini biriktiring.")
         }),
     )
 
@@ -297,15 +272,47 @@ class ArticleAdmin(JournalAdminMixin, TranslationAdmin):
         return obj.title[:70] + '…' if len(obj.title) > 70 else obj.title
     title_short.short_description = _('Sarlavha')
 
-    def author_name(self, obj):
-        return obj.author.get_full_name() or obj.author.username
-    author_name.short_description = _('Muallif')
+    def authors_display(self, obj):
+        return obj.authors or (obj.author.get_full_name() if obj.author else '—')
+    authors_display.short_description = _("Mualliflar")
 
     def pdf_link(self, obj):
         if obj.pdf_file:
             return format_html('<a href="{}" target="_blank">{}</a>', obj.pdf_file.url, _("PDF ni ochish"))
         return '—'
     pdf_link.short_description = _('PDF fayl')
+
+    def get_changeform_initial_data(self, request):
+        initial = super().get_changeform_initial_data(request)
+        initial['status'] = 'published'
+        active_journal_id = request.session.get('admin_active_journal_id')
+        if active_journal_id:
+            initial['journal'] = active_journal_id
+        return initial
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'issue':
+            active_journal_id = request.session.get('admin_active_journal_id')
+            if active_journal_id:
+                kwargs['queryset'] = JournalIssue.objects.filter(journal_id=active_journal_id).order_by('-year', '-number')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def save_model(self, request, obj, form, change):
+        if not obj.author_id:
+            obj.author = request.user
+        if not obj.abstract:
+            obj.abstract = obj.title
+        if not obj.keywords:
+            obj.keywords = ''
+        if not obj.status:
+            obj.status = 'published'
+        if hasattr(obj, 'title_uz') and not obj.title_uz:
+            obj.title_uz = obj.title
+        if hasattr(obj, 'abstract_uz') and not obj.abstract_uz:
+            obj.abstract_uz = obj.abstract
+        if hasattr(obj, 'keywords_uz') and not obj.keywords_uz:
+            obj.keywords_uz = obj.keywords
+        super().save_model(request, obj, form, change)
 
     @admin.action(description=_('Tanlangan maqolalarni nashr etish'))
     def make_published(self, request, queryset):

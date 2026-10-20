@@ -37,13 +37,7 @@
                 </span>
             </p>
         </div>
-        <div>
-            <a href="{% url 'download_issue_pdf' current_journal.slug issue.pk %}"
-               class="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-sm">
-                <i class="fas fa-download"></i>
-                <span>{% trans "To'liq sonni yuklab olish (PDF)" %}</span>
-            </a>
-        </div>
+
     </div>
 </div>
 
@@ -146,11 +140,35 @@
         </div>
     {% endif %}
 
-    <div class="mt-8">
-        <a href="{% url 'index' current_journal.slug %}#arxiv"
+    <!-- TO'LIQ SONNI YUKLASH (ENG PASTIDA) -->
+    <div class="mt-12 pt-8 border-t border-gray-200">
+        <div class="bg-gradient-to-r from-navy-900 to-blue-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg">
+            <div>
+                <span class="inline-flex items-center gap-1.5 bg-blue-500/30 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full mb-2">
+                    <i class="fas fa-book-open"></i> {% trans "To'liq nashr" %}
+                </span>
+                <h3 class="text-xl sm:text-2xl font-black text-white">
+                    {% blocktrans with year=issue.year num=issue.number %}{{ year }}-yil, {{ num }}-son to'liq nashri{% endblocktrans %}
+                </h3>
+                <p class="text-xs sm:text-sm text-gray-300 mt-1 max-w-xl">
+                    {% trans "Ushbu sondagi barcha maqolalar va tahririyat sahifalari jamlangan to'liq sonni PDF formatida yuklab oling." %}
+                </p>
+            </div>
+            <div class="flex-shrink-0 w-full sm:w-auto">
+                <a href="{% url 'download_issue_pdf' current_journal.slug issue.pk %}"
+                   class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-xl text-sm font-bold transition shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">
+                    <i class="fas fa-file-download text-base"></i>
+                    <span>{% trans "To'liq sonni yuklab olish (PDF)" %}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 flex items-center justify-between">
+        <a href="{% url 'archive' current_journal.slug %}"
            class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-5 py-3 rounded-xl text-sm font-medium transition-colors">
             <i class="fas fa-arrow-left text-xs"></i>
-            {% trans "Bosh sahifaga qaytish" %}
+            {% trans "Arxivga qaytish" %}
         </a>
     </div>
 </div>
