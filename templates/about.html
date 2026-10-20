@@ -18,51 +18,27 @@ if (wrapper && img1 && img2) {
     });
 }
 </script>
-{% endblock %}{% block content %}
+{% endblock %}
 
-<!-- HEADER -->
-<div class="bg-navy-900 text-white py-5 relative overflow-hidden border-b border-navy-800">
-    <div class="absolute inset-0 opacity-5"
-         style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-                background-size: 30px 30px;"></div>
-    <div class="site-container px-4 relative flex flex-col md:flex-row md:items-center justify-between gap-3">
-        <div>
-            <h1 class="text-xl font-bold text-white leading-tight">{% trans "Jurnal haqida" %}</h1>
-            <p class="text-gray-400 text-xs mt-0.5">{% trans "TIFT 'Arxitektura va Ta'lim' ilmiy-elektron jurnali" %}</p>
-        </div>
-        <nav class="flex items-center gap-2 text-xs text-gray-400">
-            <a href="{% url 'index' current_journal.slug %}" class="hover:text-green-400 transition-colors flex items-center gap-1.5">
-                <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
-            </a>
-            <i class="fas fa-chevron-right text-[8px] text-gray-600"></i>
-            <span class="text-gray-200 font-medium">{% trans "Jurnal haqida" %}</span>
-        </nav>
-    </div>
-</div>
-
+{% block content %}
 <!-- ABOUT SECTION -->
-<div class="site-container px-4 py-12">
+<div class="site-container px-4 py-8 sm:py-12">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-16">
 
         <!-- LEFT: MUQOVA RASMI -->
         <div class="flex justify-center">
-            <div class="relative group">
-                <div class="absolute -inset-3 bg-green-500/15 rounded-3xl blur-2xl group-hover:bg-green-500/25 transition-all duration-500"></div>
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10 group-hover:border-green-500/40 transition-all duration-300"
-                     style="max-width: 420px; width: 100%;">
-                    <!-- muqova1 — default -->
-                    <img src="{% static 'images/muqova1.png' %}"
-                         alt="{% trans "TIFT Jurnali muqovasi" %}"
-                         class="w-full h-auto block transition-all duration-500"
-                         id="coverImg1"
-                         style="opacity:1;">
-                    <!-- muqova2 — hover da chiqadi -->
-                    <img src="{% static 'images/muqova2 (2).png' %}"
-                         alt="{% trans "TIFT Jurnali muqovasi 2" %}"
-                         class="w-full h-auto block transition-all duration-500 absolute inset-0"
-                         id="coverImg2"
-                         style="opacity:0;">
+            <div class="relative group" style="max-width: 380px; width: 100%;">
+                <div class="relative rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50 aspect-[3/4]">
+                    {% if current_journal.get_cover_for_language %}
+                        <img src="{{ current_journal.get_cover_for_language.url }}"
+                             alt="{{ current_journal.title }}"
+                             class="w-full h-full object-cover">
+                    {% else %}
+                        <div class="w-full h-full bg-navy-900 p-8 flex flex-col items-center justify-center text-white text-center">
+                            <span class="text-2xl font-black text-white mb-2">TIFT</span>
+                            <span class="text-sm font-bold text-gray-300">{{ current_journal.title }}</span>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
