@@ -3,7 +3,7 @@ from .models import Journal, ArticleCategory, StaffMember, Article, News, Confer
 
 @register(Journal)
 class JournalTranslationOptions(TranslationOptions):
-    fields = ('title', 'description')
+    fields = ('title', 'short_description', 'full_description', 'description', 'research_areas', 'publication_frequency')
 
 @register(ArticleCategory)
 class ArticleCategoryTranslationOptions(TranslationOptions):
@@ -11,7 +11,7 @@ class ArticleCategoryTranslationOptions(TranslationOptions):
 
 @register(StaffMember)
 class StaffMemberTranslationOptions(TranslationOptions):
-    fields = ('full_name', 'position', 'workplace', 'bio')
+    fields = ('full_name', 'position', 'workplace', 'bio', 'academic_degree', 'academic_title', 'institution')
 
 @register(Article)
 class ArticleTranslationOptions(TranslationOptions):

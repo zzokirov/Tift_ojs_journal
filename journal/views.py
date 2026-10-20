@@ -9,8 +9,32 @@ from django.utils.translation import gettext as _
 
 
 def portal_home(request):
-    journals = Journal.objects.all()
-    return render(request, 'portal_home.html', {'journals': journals})
+    q = request.GET.get('q', '').strip()
+    journals = Journal.objects.filter(is_active=True, publication_status='published')
+    
+    if q:
+        journals = journals.filter(
+            Q(title__icontains=q) |
+            Q(title_uz__icontains=q) |
+            Q(title_ru__icontains=q) |
+            Q(title_en__icontains=q) |
+            Q(issn__icontains=q) |
+            Q(eissn__icontains=q) |
+            Q(short_description__icontains=q) |
+            Q(full_description__icontains=q) |
+            Q(description__icontains=q) |
+            Q(research_areas__icontains=q) |
+            Q(categories__name__icontains=q)
+        ).distinct()
+    
+    journals = journals.order_by('display_order', 'id')
+    
+    context = {
+        'journals': journals,
+        'search_query': q,
+        'current_journal': None,
+    }
+    return render(request, 'portal_home.html', context)
 
 
 def index(request, journal_slug):
@@ -1421,7 +1445,7 @@ def download_issue_pdf(request, journal_slug, issue_pk):
     # 1.5. TAHRIRIYAT A'ZOLARI SAHIFASI
     doc_editorial = None
     try:
-        staff = StaffMember.objects.filter(is_active=True).order_by('order', 'full_name')
+        staff = StaffMember.objects.filter(journal=current_journal, is_active=True).order_by('order', 'full_name')
         leadership = staff.filter(position__in=['editor_in_chief', 'deputy_editor', 'secretary'])
         editorial_board = staff.filter(position='member')
         

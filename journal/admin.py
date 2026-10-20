@@ -4,7 +4,7 @@ from modeltranslation.admin import TranslationAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, NewsMedia, Document, Journal
+from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, NewsMedia, Document, Journal, ReviewRecord
 
 
 # ─── USER ADMIN ───────────────────────────────────────────────────────────────
@@ -68,9 +68,28 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Journal)
 class JournalAdmin(TranslationAdmin):
-    list_display = ('title', 'slug', 'issn', 'founded_year')
-    search_fields = ('title', 'slug', 'issn')
+    list_display = ('title', 'slug', 'issn', 'eissn', 'publication_frequency', 'display_order', 'is_active', 'publication_status')
+    list_editable = ('display_order', 'is_active', 'publication_status')
+    list_filter = ('publication_status', 'is_active', 'primary_language')
+    search_fields = ('title', 'slug', 'issn', 'eissn', 'research_areas')
     prepopulated_fields = {'slug': ('title_uz',)}
+    ordering = ('display_order', 'id')
+
+    fieldsets = (
+        (_("Asosiy ma'lumotlar"), {
+            'fields': ('title', 'slug', 'issn', 'eissn', 'publisher_name', 'publication_frequency', 'founded_year', 'website_url')
+        }),
+        (_("Muqovalar va logotip (3 tilda)"), {
+            'fields': ('logo', 'cover_uz', 'cover_ru', 'cover_en', 'cover_image'),
+            'description': _("Har bir til uchun alohida muqova yuklash mumkin. Saytda tashrif buyuruvchi tanlagan til muqovasi avtomatik ko'rsatiladi.")
+        }),
+        (_("Tavsif va ilmiy yo'nalishlar"), {
+            'fields': ('short_description', 'full_description', 'description', 'research_areas', 'submission_guidelines')
+        }),
+        (_("Sozlamalar va holat"), {
+            'fields': ('primary_language', 'supported_languages', 'editorial_email', 'theme_color', 'secondary_color', 'display_order', 'is_featured', 'is_active', 'publication_status', 'published_at')
+        }),
+    )
 
 @admin.register(ArticleCategory)
 class ArticleCategoryAdmin(TranslationAdmin):
@@ -91,18 +110,21 @@ class ArticleCategoryAdmin(TranslationAdmin):
 @admin.register(JournalIssue)
 class JournalIssueAdmin(admin.ModelAdmin):
     list_display = ('journal', 
-        'issue_label', 'year', 'period', 'article_count_tag',
+        'issue_label', 'year', 'period', 'quarter', 'status', 'article_count_tag',
         'is_published', 'created_at'
     )
     list_display_links = ('issue_label',)
-    list_filter = ('journal', 'journal', 'year', 'is_published')
-    list_editable = ('is_published',)
+    list_filter = ('journal', 'status', 'year', 'is_published')
+    list_editable = ('status', 'is_published')
     ordering = ('-year', '-volume', '-number')
     list_per_page = 20
 
     fieldsets = (
         (_("Jurnal soni ma'lumotlari"), {
-            'fields': ('volume', 'number', 'year', 'period', 'cover_image', 'back_cover_image', 'full_pdf', 'is_published')
+            'fields': ('journal', 'volume', 'number', 'year', 'quarter', 'period', 'title', 'description', 'status', 'is_published')
+        }),
+        (_("Muqovalar va fayllar"), {
+            'fields': ('cover_image', 'back_cover_image', 'toc_pdf', 'editorial_doc', 'full_pdf', 'publication_date')
         }),
     )
 
@@ -119,6 +141,21 @@ class JournalIssueAdmin(admin.ModelAdmin):
 
 
 # ─── ARTICLE ADMIN ────────────────────────────────────────────────────────────
+
+
+class ReviewRecordInline(admin.StackedInline):
+    model = ReviewRecord
+    extra = 0
+    fields = ('reviewer_name', 'reviewer_affiliation', 'date_sent', 'deadline', 'date_received', 'status', 'decision', 'confidential_comments', 'report_file')
+
+
+@admin.register(ReviewRecord)
+class ReviewRecordAdmin(admin.ModelAdmin):
+    list_display = ('article', 'reviewer_name', 'date_sent', 'deadline', 'date_received', 'status', 'decision')
+    list_filter = ('status', 'decision', 'date_sent')
+    search_fields = ('reviewer_name', 'reviewer_affiliation', 'article__title', 'confidential_comments')
+    date_hierarchy = 'date_sent'
+    list_per_page = 25
 
 @admin.register(Article)
 class ArticleAdmin(TranslationAdmin):
@@ -145,13 +182,20 @@ class ArticleAdmin(TranslationAdmin):
     list_per_page = 20
     date_hierarchy = 'created_at'
     readonly_fields = ('views_count', 'downloads_count', 'created_at', 'updated_at', 'pdf_link')
+    inlines = [ReviewRecordInline]
 
     fieldsets = (
         (_("Maqola ma'lumotlari"), {
             'fields': ('title', 'authors', 'abstract', 'keywords')
         }),
         (_("Muallif va jurnal"), {
-            'fields': ('author', 'issue', 'category')
+            'fields': ('journal', 'author', 'issue', 'category', 'article_language', 'order_in_issue')
+        }),
+        (_("Bog'lanish uchun muallif (Tahririyat uchun)"), {
+            'fields': ('corresponding_author_name', 'corresponding_author_email', 'corresponding_author_phone', 'admin_notes')
+        }),
+        (_("Fayllar (PDF va Word)"), {
+            'fields': ('pdf_file', 'pdf_link', 'word_file', 'template_pdf')
         }),
         (_("Taqrizchi va ko'rib chiqish"), {
             'fields': ('assigned_reviewer', 'review_notes', 'reviewed_by', 'reviewed_at')
@@ -161,7 +205,7 @@ class ArticleAdmin(TranslationAdmin):
             'description': _("Agar maqola uchun alohida PDF yuklanmasa, To'plam PDF faylidan shu sahifalar oralig'i avtomatik qirqib olinadi.")
         }),
         (_("Holat va fayllar"), {
-            'fields': ('status', 'published_at', 'pdf_file', 'pdf_link', 'template_pdf')
+            'fields': ('status', 'published_at')
         }),
         (_("Statistika"), {
             'fields': ('views_count', 'downloads_count', 'created_at', 'updated_at'),
@@ -205,20 +249,20 @@ class ArticleAdmin(TranslationAdmin):
 
 @admin.register(StaffMember)
 class StaffMemberAdmin(TranslationAdmin):
-    list_display = ('journal', 'photo_tag', 'full_name', 'position', 'workplace', 'age', 'order', 'is_active')
+    list_display = ('journal', 'photo_tag', 'full_name', 'position', 'academic_degree', 'academic_title', 'workplace', 'order', 'is_active')
     list_display_links = ('full_name',)
-    list_filter = ('journal', 'position', 'is_active')
-    search_fields = ('full_name', 'workplace')
+    list_filter = ('journal', 'position', 'academic_degree', 'academic_title', 'is_active')
+    search_fields = ('full_name', 'workplace', 'institution', 'bio')
     list_editable = ('position', 'order', 'is_active')
     ordering = ('order', 'full_name')
     list_per_page = 20
 
     fieldsets = (
         (_("Shaxsiy ma'lumotlar"), {
-            'fields': ('full_name', 'age', 'photo')
+            'fields': ('journal', 'full_name', 'age', 'photo', 'email', 'show_email')
         }),
-        (_("Ish ma'lumotlari"), {
-            'fields': ('position', 'workplace', 'bio')
+        (_("Ilmiy daraja va ish ma'lumotlari"), {
+            'fields': ('position', 'academic_degree', 'academic_title', 'workplace', 'institution', 'bio')
         }),
         (_("Sozlamalar"), {
             'fields': ('order', 'is_active')
