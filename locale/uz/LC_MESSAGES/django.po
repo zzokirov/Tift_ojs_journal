@@ -2890,6 +2890,58 @@ msgstr "Qidiruv bo'yicha hech qanday jurnal topilmadi"
 msgid "Mening maqolalarim"
 msgstr "Mening maqolalarim"
 
+#: templates/index.html:1
+msgid "Jurnalning yaqinda chop etilgan nashrlari"
+msgstr "Jurnalning yaqinda chop etilgan nashrlari"
+
+#: templates/index.html:1
+msgid "Barcha sonlar (Arxiv)"
+msgstr "Barcha sonlar (Arxiv)"
+
+#: templates/index.html:1
+msgid "Barcha sonlar (Arxiv) →"
+msgstr "Barcha sonlar (Arxiv) →"
+
+#: templates/index.html:1
+msgid "O'zbek, Rus, Ingliz"
+msgstr "O'zbek, Rus, Ingliz"
+
+#: templates/index.html:1
+msgid "TIFT universiteti"
+msgstr "TIFT universiteti"
+
+#: templates/index.html:1
+msgid "4 marta yiliga"
+msgstr "4 marta yiliga"
+
+#: templates/index.html:1
+msgid "Maqola talablari (PDF)"
+msgstr "Maqola talablari (PDF)"
+
+#: templates/index.html:1
+msgid "To'liq nashr"
+msgstr "To'liq nashr"
+
+#: templates/index.html:1
+msgid ""
+"Ushbu sondagi barcha maqolalar va tahririyat sahifalari jamlangan to'liq "
+"sonni PDF formatida yuklab oling."
+msgstr ""
+"Ushbu sondagi barcha maqolalar va tahririyat sahifalari jamlangan to'liq "
+"sonni PDF formatida yuklab oling."
+
+#: templates/index.html:1
+msgid "Arxivga qaytish"
+msgstr "Arxivga qaytish"
+
+#: templates/index.html:1
+msgid "nafar a'zo"
+msgstr "nafar a'zo"
+
+#: templates/index.html:1
+msgid "Tahririyat hay'ati a'zolari"
+msgstr "Tahririyat hay'ati a'zolari"
+
 #~ msgid "A'zo bo'lish"
 #~ msgstr "A'zo bo'lish"
 

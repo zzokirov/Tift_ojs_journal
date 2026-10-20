@@ -1935,7 +1935,7 @@ msgstr "%(count)s статей"
 
 #: .\templates\journal\issue_detail.html:49
 msgid "To'liq sonni yuklab olish (PDF)"
-msgstr "Скачать полный номер (PDF)"
+msgstr "Скачать полный выпуск (PDF)"
 
 #: .\templates\journal\issue_detail.html:63
 msgid "Ushbu sondagi maqolalar"
@@ -2606,11 +2606,11 @@ msgstr "Отправить статью"
 
 #: portal_home.html:1
 msgid "Submission guidelines (PDF)"
-msgstr "Требования для авторов (PDF)"
+msgstr "Требования к оформлению (PDF)"
 
 #: portal_home.html:1
 msgid "Submission guidelines (PDF) →"
-msgstr "Требования для авторов (PDF) →"
+msgstr "Требования к оформлению (PDF) →"
 
 #: portal_home.html:1
 msgid ""
@@ -2631,7 +2631,7 @@ msgstr "Вернуться к списку журналов"
 
 #: portal_home.html:1
 msgid "Tahririyat a'zolari"
-msgstr "Члены редколлегии"
+msgstr "Редакционная коллегия"
 
 #: portal_home.html:1
 msgid "Sonlar"
@@ -2741,6 +2741,58 @@ msgstr "По вашему запросу журналов не найдено"
 #: portal_home.html:1
 msgid "Mening maqolalarim"
 msgstr "Мои статьи"
+
+#: templates/index.html:1
+msgid "Jurnalning yaqinda chop etilgan nashrlari"
+msgstr "Недавно опубликованные выпуски журнала"
+
+#: templates/index.html:1
+msgid "Barcha sonlar (Arxiv)"
+msgstr "Все выпуски (Архив)"
+
+#: templates/index.html:1
+msgid "Barcha sonlar (Arxiv) →"
+msgstr "Все выпуски (Архив) →"
+
+#: templates/index.html:1
+msgid "O'zbek, Rus, Ingliz"
+msgstr "Узбекский, Русский, Английский"
+
+#: templates/index.html:1
+msgid "TIFT universiteti"
+msgstr "Университет TIFT"
+
+#: templates/index.html:1
+msgid "4 marta yiliga"
+msgstr "4 раза в год"
+
+#: templates/index.html:1
+msgid "Maqola talablari (PDF)"
+msgstr "Требования к оформлению (PDF)"
+
+#: templates/index.html:1
+msgid "To'liq nashr"
+msgstr "Полный выпуск"
+
+#: templates/index.html:1
+msgid ""
+"Ushbu sondagi barcha maqolalar va tahririyat sahifalari jamlangan to'liq "
+"sonni PDF formatida yuklab oling."
+msgstr ""
+"Скачайте полный выпуск в формате PDF, содержащий все опубликованные статьи и"
+" редакционные страницы."
+
+#: templates/index.html:1
+msgid "Arxivga qaytish"
+msgstr "Вернуться в архив"
+
+#: templates/index.html:1
+msgid "nafar a'zo"
+msgstr "членов"
+
+#: templates/index.html:1
+msgid "Tahririyat hay'ati a'zolari"
+msgstr "Члены редакционной коллегии"
 
 #~ msgid "A'zo bo'lish"
 #~ msgstr "Регистрация"

@@ -3,36 +3,12 @@
 {% block title %}{% trans "Tahririyat a'zolari | TIFT Jurnali" %}{% endblock %}
 
 {% block content %}
-<!-- HEADER -->
-<div class="site-container px-4 pt-8 pb-4">
-    <div class="border-b border-gray-200 pb-5 flex flex-wrap items-center justify-between gap-4">
-        <div>
-            <div class="flex items-center gap-2 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
-                <i class="fas fa-user-tie"></i>
-                <span>{{ current_journal.title }}</span>
-            </div>
-            <h1 class="text-2xl sm:text-3xl font-black text-navy-900">{% trans "Tahririyat a'zolari" %}</h1>
-            <p class="text-xs sm:text-sm text-gray-500 mt-1">{% trans "Jurnal tahririyat hay'ati va ilmiy maslahatchilari tarkibi" %}</p>
-        </div>
-        <div class="text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-full">
-            {% blocktrans count counter=staff.count %}{{ counter }} nafar a'zo{% plural %}{{ counter }} nafar a'zo{% endblocktrans %}
-        </div>
-    </div>
-</div>
-
 <div class="site-container px-4 py-8">
 
     <!-- STAFF SECTION -->
     {% if staff %}
         <!-- 1. JURNAL RAHBARIYATI (LEADERSHIP) -->
-        <div class="mb-12">
-            <div class="mb-6">
-                <h2 class="text-2xl font-black text-navy-900 flex items-center gap-2 mb-2">
-                    <span class="w-1 h-7 bg-blue-600 rounded-full block"></span>
-                    {% trans "Jurnal rahbariyati" %}
-                </h2>
-                <div class="section-divider ml-3 mb-4"></div>
-            </div>
+        <div class="mb-10">
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for member in leadership %}

@@ -53,26 +53,51 @@
                 </div>
 
                 <!-- Metadata Row (Frequency, Languages, Publisher) -->
+                {% get_current_language as CURRENT_LANG %}
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 text-xs text-gray-600">
                     <div class="flex items-start gap-2">
                         <i class="far fa-calendar-alt text-gray-400 mt-0.5"></i>
                         <div>
                             <span class="text-gray-400 block text-[11px]">{% trans "Nashr davriyligi" %}</span>
-                            <span class="font-bold text-gray-800">{{ current_journal.publication_frequency|default:"4 marta yiliga" }}</span>
+                            <span class="font-bold text-gray-800">
+                                {% if CURRENT_LANG == 'en' %}
+                                    {{ current_journal.publication_frequency_en|default:"4 times a year" }}
+                                {% elif CURRENT_LANG == 'ru' %}
+                                    {{ current_journal.publication_frequency_ru|default:"4 раза в год" }}
+                                {% else %}
+                                    {{ current_journal.publication_frequency_uz|default:current_journal.publication_frequency|default:"Yiliga 4 marta" }}
+                                {% endif %}
+                            </span>
                         </div>
                     </div>
                     <div class="flex items-start gap-2">
                         <i class="fas fa-globe text-gray-400 mt-0.5"></i>
                         <div>
                             <span class="text-gray-400 block text-[11px]">{% trans "Tillar" %}</span>
-                            <span class="font-bold text-gray-800">{% trans "O'zbek, Rus, Ingliz" %}</span>
+                            <span class="font-bold text-gray-800">
+                                {% if CURRENT_LANG == 'en' %}
+                                    Uzbek, Russian, English
+                                {% elif CURRENT_LANG == 'ru' %}
+                                    Узбекский, Русский, Английский
+                                {% else %}
+                                    O'zbek, Rus, Ingliz
+                                {% endif %}
+                            </span>
                         </div>
                     </div>
                     <div class="flex items-start gap-2">
                         <i class="fas fa-university text-gray-400 mt-0.5"></i>
                         <div>
                             <span class="text-gray-400 block text-[11px]">{% trans "Nashriyot" %}</span>
-                            <span class="font-bold text-gray-800">{{ current_journal.publisher_name|default:"TIFT universiteti" }}</span>
+                            <span class="font-bold text-gray-800">
+                                {% if CURRENT_LANG == 'en' %}
+                                    TIFT University
+                                {% elif CURRENT_LANG == 'ru' %}
+                                    Университет TIFT
+                                {% else %}
+                                    {{ current_journal.publisher_name|default:"TIFT universiteti" }}
+                                {% endif %}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -93,12 +118,20 @@
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap items-center gap-3 pt-2">
-                    <a href="{% url 'submit_article' journal_slug=current_journal.slug %}"
-                       class="inline-flex items-center gap-2 bg-navy-900 hover:bg-navy-800 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-sm">
-                        <i class="fas fa-paper-plane text-xs"></i>
-                        <span>{% trans "Maqolani yuborish" %}</span>
-                    </a>
-                    <a href="{% url 'documents' journal_slug=current_journal.slug %}"
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'submit_article' journal_slug=current_journal.slug %}"
+                           class="inline-flex items-center gap-2 bg-navy-900 hover:bg-navy-800 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-sm">
+                            <i class="fas fa-paper-plane text-xs"></i>
+                            <span>{% trans "Maqolani yuborish" %}</span>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'signup' %}?next={% url 'submit_article' journal_slug=current_journal.slug %}"
+                           class="inline-flex items-center gap-2 bg-navy-900 hover:bg-navy-800 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-sm">
+                            <i class="fas fa-paper-plane text-xs"></i>
+                            <span>{% trans "Maqolani yuborish" %}</span>
+                        </a>
+                    {% endif %}
+                    <a href="{% static 'docs/maqola_talablari.pdf' %}" target="_blank"
                        class="inline-flex items-center gap-1.5 border border-gray-300 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-700 text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl transition shadow-sm">
                         <span>{% trans "Submission guidelines (PDF)" %}</span>
                         <i class="fas fa-arrow-right text-xs"></i>

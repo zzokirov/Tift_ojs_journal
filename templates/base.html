@@ -103,14 +103,21 @@
                 </a>
                 <div class="h-8 w-px bg-gray-300 flex-shrink-0"></div>
                 {% if current_journal %}
+                    {% get_current_language as CURRENT_LANG %}
                     <a href="{% url 'index' journal_slug=current_journal.slug %}" class="flex flex-col justify-center leading-tight hover:text-blue-700 transition group text-left" title="{{ current_journal.title }}">
-                        {% if 'texnologiyalar' in current_journal.title|lower or current_journal.slug == 'moliya-va-intellektual-texnologiyalar' %}
-                            <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">MOLIYA VA INTELLEKTUAL</span>
-                            <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">TEXNOLOGIYALAR</span>
-                        {% elif current_journal.slug == 'arxitektura-va-talim' %}
-                            <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">ARXITEKTURA VA TA'LIM</span>
+                        {% if 'texnologiyalar' in current_journal.slug or 'moliya' in current_journal.slug %}
+                            {% if CURRENT_LANG == 'en' %}
+                                <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">FINANCE AND INTELLIGENT</span>
+                                <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">TECHNOLOGIES</span>
+                            {% elif CURRENT_LANG == 'ru' %}
+                                <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">ФИНАНСЫ И ИНТЕЛЛЕКТУАЛЬНЫЕ</span>
+                                <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">ТЕХНОЛОГИИ</span>
+                            {% else %}
+                                <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">MOLIYA VA INTELLEKTUAL</span>
+                                <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">TEXNOLOGIYALAR</span>
+                            {% endif %}
                         {% else %}
-                            <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">{{ current_journal.title }}</span>
+                            <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-gray-700 group-hover:text-blue-700 leading-tight block">{{ current_journal.title|upper }}</span>
                         {% endif %}
                     </a>
                 {% else %}
@@ -137,59 +144,55 @@
                 {% endif %}
             </nav>
 
-            <!-- Right: Language Switcher, Action Button, Auth -->
-            <div class="flex items-center gap-3 sm:gap-4">
+            <!-- Right: Language Dropdown & Authenticated User Actions -->
+            <div class="flex items-center gap-3">
                 
-                <!-- Language Switcher Pills (O'z | Рус | Eng) -->
+                <!-- Language Switcher Dropdown -->
                 {% get_current_language as CURRENT_LANG %}
-                <div class="inline-flex items-center bg-gray-100 rounded-lg p-0.5 border border-gray-200 text-xs">
-                    <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}"
-                       class="px-2.5 py-1 rounded-md font-bold transition {% if CURRENT_LANG == 'uz' %}bg-white text-navy-900 shadow-sm{% else %}text-gray-600 hover:text-navy-900{% endif %}">
-                        O'z
-                    </a>
-                    <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}"
-                       class="px-2.5 py-1 rounded-md font-bold transition {% if CURRENT_LANG == 'ru' %}bg-white text-navy-900 shadow-sm{% else %}text-gray-600 hover:text-navy-900{% endif %}">
-                        Рус
-                    </a>
-                    <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}"
-                       class="px-2.5 py-1 rounded-md font-bold transition {% if CURRENT_LANG == 'en' %}bg-white text-navy-900 shadow-sm{% else %}text-gray-600 hover:text-navy-900{% endif %}">
-                        Eng
-                    </a>
+                <div class="relative" id="lang-dropdown-wrapper">
+                    <button type="button" id="lang-dropdown-btn" class="inline-flex items-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-800 text-xs font-bold px-3 py-2 rounded-xl border border-gray-200 transition focus:outline-none shadow-sm">
+                        <i class="fas fa-globe text-gray-500 text-xs"></i>
+                        <span>{% if CURRENT_LANG == 'uz' %}O'zbek{% elif CURRENT_LANG == 'ru' %}Русский{% else %}English{% endif %}</span>
+                        <i class="fas fa-chevron-down text-[10px] text-gray-400 transition-transform duration-200" id="lang-dropdown-chevron"></i>
+                    </button>
+                    <div id="lang-dropdown-menu" class="hidden absolute right-0 mt-1.5 w-32 bg-white rounded-xl shadow-xl border border-gray-100 py-1 text-xs font-semibold z-50">
+                        <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}"
+                           class="flex items-center justify-between px-3.5 py-2 hover:bg-blue-50 transition {% if CURRENT_LANG == 'uz' %}text-blue-700 font-bold bg-blue-50/50{% else %}text-gray-700{% endif %}">
+                            <span>O'zbek</span>
+                            {% if CURRENT_LANG == 'uz' %}<i class="fas fa-check text-[10px] text-blue-700"></i>{% endif %}
+                        </a>
+                        <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}"
+                           class="flex items-center justify-between px-3.5 py-2 hover:bg-blue-50 transition {% if CURRENT_LANG == 'ru' %}text-blue-700 font-bold bg-blue-50/50{% else %}text-gray-700{% endif %}">
+                            <span>Русский</span>
+                            {% if CURRENT_LANG == 'ru' %}<i class="fas fa-check text-[10px] text-blue-700"></i>{% endif %}
+                        </a>
+                        <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}"
+                           class="flex items-center justify-between px-3.5 py-2 hover:bg-blue-50 transition {% if CURRENT_LANG == 'en' %}text-blue-700 font-bold bg-blue-50/50{% else %}text-gray-700{% endif %}">
+                            <span>English</span>
+                            {% if CURRENT_LANG == 'en' %}<i class="fas fa-check text-[10px] text-blue-700"></i>{% endif %}
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Maqola yuborish (Submit) button if journal present -->
-                {% if current_journal %}
-                <a href="{% url 'submit_article' journal_slug=current_journal.slug %}"
-                   class="hidden sm:inline-flex items-center gap-1.5 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition shadow-sm">
-                    <i class="fas fa-plus-circle text-xs"></i>
-                    <span>{% trans "Maqola yuborish" %}</span>
-                </a>
-                {% endif %}
-
-                <!-- Auth / Admin / Profile Button -->
+                <!-- Authenticated User (Admin / Profile) actions only -->
                 {% if user.is_authenticated %}
                     {% if user.is_staff or user.is_superuser %}
-                        <a href="/admin/" target="_blank" class="inline-flex items-center gap-1.5 bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition shadow-sm">
+                        <a href="/admin/" target="_blank" class="inline-flex items-center gap-1.5 bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm" title="{% trans 'Admin paneli' %}">
                             <i class="fas fa-shield-alt text-blue-400"></i>
                             <span class="hidden sm:inline">{% trans "Admin" %}</span>
                         </a>
                     {% else %}
-                        <a href="{% url 'my_articles' %}" class="inline-flex items-center gap-1.5 border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-900 text-xs font-bold px-3.5 py-2 rounded-lg transition shadow-sm">
+                        <a href="{% url 'my_articles' %}" class="inline-flex items-center gap-1.5 border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-900 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
                             <i class="far fa-user text-blue-700"></i>
                             <span>{{ user.first_name|default:user.username }}</span>
                         </a>
                     {% endif %}
                     <form action="{% url 'logout' %}" method="post" class="inline">
                         {% csrf_token %}
-                        <button type="submit" title="{% trans 'Chiqish' %}" class="p-2 text-gray-400 hover:text-red-600 transition">
+                        <button type="submit" title="{% trans 'Chiqish' %}" class="p-1.5 text-gray-400 hover:text-red-600 transition">
                             <i class="fas fa-sign-out-alt text-sm"></i>
                         </button>
                     </form>
-                {% else %}
-                    <a href="{% url 'login' %}" class="inline-flex items-center gap-2 border border-gray-300 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-800 text-xs font-bold px-4 py-2 rounded-lg transition shadow-sm">
-                        <i class="far fa-user"></i>
-                        <span>{% trans "Kirish" %}</span>
-                    </a>
                 {% endif %}
 
                 <!-- Mobile Hamburger Button -->
@@ -207,9 +210,7 @@
                 <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Arxiv" %}</a>
                 <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Hujjatlar" %}</a>
                 <a href="#contact-section" class="block py-2 hover:text-blue-700">{% trans "Aloqa" %}</a>
-                <a href="{% url 'submit_article' journal_slug=current_journal.slug %}" class="block py-2 text-blue-700 font-bold">
-                    <i class="fas fa-plus-circle mr-1"></i> {% trans "Maqola yuborish" %}
-                </a>
+
                 <a href="{% url 'portal_home' %}" class="block py-2 text-gray-500 hover:text-navy-900 border-t border-gray-100 mt-2 pt-2">
                     <i class="fas fa-th-large mr-1"></i> {% trans "Barcha jurnallar" %}
                 </a>
@@ -355,5 +356,25 @@
     }
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const langBtn = document.getElementById('lang-dropdown-btn');
+    const langMenu = document.getElementById('lang-dropdown-menu');
+    const langChevron = document.getElementById('lang-dropdown-chevron');
+    if (langBtn && langMenu) {
+        langBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            langMenu.classList.toggle('hidden');
+            if (langChevron) langChevron.classList.toggle('rotate-180');
+        });
+        document.addEventListener('click', function(e) {
+            if (!langMenu.classList.contains('hidden') && !langMenu.contains(e.target)) {
+                langMenu.classList.add('hidden');
+                if (langChevron) langChevron.classList.remove('rotate-180');
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>

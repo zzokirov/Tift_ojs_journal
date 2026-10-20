@@ -1008,7 +1008,7 @@ msgstr "Weeks Review Period"
 #: .\templates\about.html:174
 #| msgid "Jurnal haqida"
 msgid "Jurnal rahbariyati"
-msgstr "Journal Management"
+msgstr "Journal Leadership"
 
 #: .\templates\about.html:191
 msgid "3x4 Rasm"
@@ -1475,7 +1475,7 @@ msgstr "Change Password"
 #: .\templates\base.html:264 .\templates\base.html:281
 #: .\templates\dashboard_base.html:74
 msgid "Chiqish"
-msgstr "Logout"
+msgstr "Log out"
 
 #: .\templates\base.html:275 .\templates\base.html:337
 #: .\templates\base.html:385 .\templates\dashboard_base.html:67
@@ -1496,7 +1496,7 @@ msgstr "Login"
 #: .\templates\registration\signup.html:27
 #: .\templates\registration\signup.html:155
 msgid "Ro'yxatdan o'tish"
-msgstr "Register"
+msgstr "Sign Up"
 
 #: .\templates\base.html:314
 #| msgid "Maqola nomi, annotatsiya yoki kalit so'z bo'yicha qidiring..."
@@ -1930,7 +1930,7 @@ msgstr "%(count)s articles"
 
 #: .\templates\journal\issue_detail.html:49
 msgid "To'liq sonni yuklab olish (PDF)"
-msgstr "Download Full Issue (PDF)"
+msgstr "Download full issue (PDF)"
 
 #: .\templates\journal\issue_detail.html:63
 msgid "Ushbu sondagi maqolalar"
@@ -2736,6 +2736,58 @@ msgstr "No journals found matching your search"
 #: portal_home.html:1
 msgid "Mening maqolalarim"
 msgstr "My Articles"
+
+#: templates/index.html:1
+msgid "Jurnalning yaqinda chop etilgan nashrlari"
+msgstr "Recently published issues of the journal"
+
+#: templates/index.html:1
+msgid "Barcha sonlar (Arxiv)"
+msgstr "All issues (Archive)"
+
+#: templates/index.html:1
+msgid "Barcha sonlar (Arxiv) →"
+msgstr "All issues (Archive) →"
+
+#: templates/index.html:1
+msgid "O'zbek, Rus, Ingliz"
+msgstr "Uzbek, Russian, English"
+
+#: templates/index.html:1
+msgid "TIFT universiteti"
+msgstr "TIFT University"
+
+#: templates/index.html:1
+msgid "4 marta yiliga"
+msgstr "4 times a year"
+
+#: templates/index.html:1
+msgid "Maqola talablari (PDF)"
+msgstr "Submission Guidelines (PDF)"
+
+#: templates/index.html:1
+msgid "To'liq nashr"
+msgstr "Full publication"
+
+#: templates/index.html:1
+msgid ""
+"Ushbu sondagi barcha maqolalar va tahririyat sahifalari jamlangan to'liq "
+"sonni PDF formatida yuklab oling."
+msgstr ""
+"Download the complete issue in PDF format containing all published articles "
+"and editorial pages."
+
+#: templates/index.html:1
+msgid "Arxivga qaytish"
+msgstr "Back to Archive"
+
+#: templates/index.html:1
+msgid "nafar a'zo"
+msgstr "members"
+
+#: templates/index.html:1
+msgid "Tahririyat hay'ati a'zolari"
+msgstr "Editorial Board Members"
 
 #~ msgid "A'zo bo'lish"
 #~ msgstr "Register"
