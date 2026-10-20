@@ -157,14 +157,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Djangoga biz yozadigan maxsus foydalanuvchilar modelini tanitish
 AUTH_USER_MODEL = 'journal.User'
 JAZZMIN_SETTINGS = {
-    "site_title": "TIFT Journal Admin",
-    "site_header": "TIFT Jurnal Boshqaruvi",
-    "site_brand": "TIFT Journal",
+    "site_title": "TIFT Admin",
+    "site_header": "TIFT Admin",
+    "site_brand": "TIFT Admin",
     "site_logo": "images/tift.png",
     "site_logo_classes": "img-circle",
     "site_icon": "images/tift.png",
-    "welcome_sign": "TIFT Ilmiy Jurnal — Boshqaruv Paneli",
-    "copyright": "TIFT Ilmiy Jurnal © 2026",
+    "welcome_sign": "TIFT Admin",
+    "copyright": "TIFT © 2026",
     "search_model": ["journal.Article", "journal.User"],
 
     "topmenu_links": [
@@ -235,15 +235,15 @@ JAZZMIN_UI_TWEAKS = {
     "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": "navbar-success",
-    "accent": "accent-success",
+    "brand_colour": "navbar-dark",
+    "accent": "accent-primary",
     "navbar": "navbar-dark",
     "no_navbar_border": True,
     "navbar_fixed": True,
     "layout_boxed": False,
     "footer_fixed": False,
     "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-success",
+    "sidebar": "sidebar-dark-primary",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": True,
@@ -251,7 +251,6 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": False,
     "theme": "flatly",
-    "dark_mode_theme": "darkly",
     "button_classes": {
         "primary": "btn-primary",
         "secondary": "btn-secondary",

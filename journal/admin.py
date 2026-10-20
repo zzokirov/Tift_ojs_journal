@@ -3,6 +3,8 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from .models import User, JournalIssue, Article, ArticleCategory, StaffMember, Conference, News, NewsMedia, Document, Journal, ReviewRecord
 
@@ -68,18 +70,76 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Journal)
 class JournalAdmin(TranslationAdmin):
-    list_display = ('title', 'slug', 'issn', 'publication_frequency', 'display_order', 'is_active', 'publication_status')
-    list_editable = ('display_order', 'is_active', 'publication_status')
-    list_filter = ('publication_status', 'is_active', 'primary_language')
-    search_fields = ('title', 'slug', 'issn', 'research_areas')
+    list_display = ('counter_col', 'journal_col', 'issn_col', 'status_col', 'languages_col', 'actions_col')
+    list_display_links = None
+    list_filter = ('is_active', 'publication_status')
+    search_fields = ('title', 'title_uz', 'title_ru', 'title_en', 'slug', 'issn', 'research_areas')
     prepopulated_fields = {'slug': ('title_uz',)}
+    ordering = ('display_order', 'id')
+    list_per_page = 20
+
+    @admin.display(description="№")
+    def counter_col(self, obj):
+        all_ids = list(Journal.objects.order_by('display_order', 'id').values_list('id', flat=True))
+        try:
+            return all_ids.index(obj.id) + 1
+        except ValueError:
+            return obj.id
+
+    @admin.display(description=_("Jurnal nomi"))
+    def journal_col(self, obj):
+        cover = obj.get_cover_for_language()
+        cover_url = cover.url if cover else "/static/images/tift.png"
+        change_url = reverse('admin:journal_journal_change', args=[obj.pk])
+        return format_html(
+            '<div style="display:flex; align-items:center; gap:14px;">'
+            '<div style="width:36px; height:48px; border-radius:4px; overflow:hidden; flex-shrink:0; border:1px solid #e2e8f0; background:#f1f5f9; box-shadow:0 1px 2px rgba(0,0,0,0.06);">'
+            '<img src="{}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src=\'/static/images/tift.png\'">'
+            '</div>'
+            '<div>'
+            '<a href="{}" style="font-weight:700; color:#0f172a; font-size:13.5px; text-decoration:none; line-height:1.35; display:block;" onmouseover="this.style.color=\'#1d4ed8\'" onmouseout="this.style.color=\'#0f172a\'">{}</a>'
+            '</div>'
+            '</div>',
+            cover_url, change_url, obj.title
+        )
+
+    @admin.display(description=_("ISSN"))
+    def issn_col(self, obj):
+        if obj.issn:
+            return format_html('<span style="font-family:monospace; font-weight:600; color:#334155; font-size:13px;">{}</span>', obj.issn)
+        return "—"
+
+    @admin.display(description=_("Holat"))
+    def status_col(self, obj):
+        if obj.is_active:
+            return mark_safe(
+                '<span style="display:inline-block; padding:4px 14px; border-radius:9999px; font-size:11.5px; font-weight:700; background-color:#dcfce7; color:#16a34a; line-height:1.2;">Faol</span>'
+            )
+        return mark_safe(
+            '<span style="display:inline-block; padding:4px 14px; border-radius:9999px; font-size:11.5px; font-weight:700; background-color:#f1f5f9; color:#64748b; line-height:1.2;">Nofaol</span>'
+        )
+
+    @admin.display(description=_("Tillar"))
+    def languages_col(self, obj):
+        return mark_safe('<span style="color:#475569; font-size:13px; font-weight:500;">O\'z, Rus, Eng</span>')
+
+    @admin.display(description=_("Tahrir"))
+    def actions_col(self, obj):
+        change_url = reverse('admin:journal_journal_change', args=[obj.pk])
+        view_url = reverse('index', kwargs={'journal_slug': obj.slug})
+        return format_html(
+            '<div style="display:flex; align-items:center; gap:8px;">'
+            '<a href="{}" title="Tahrirlash" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:6px; background:#eff6ff; color:#2563eb; text-decoration:none; border:1px solid #bfdbfe; transition:all 0.2s;" onmouseover="this.style.background=\'#dbeafe\'" onmouseout="this.style.background=\'#eff6ff\'"><i class="fas fa-pencil-alt" style="font-size:11px;"></i></a>'
+            '<a href="{}" target="_blank" title="Saytda ko\'rish" style="display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:6px; background:#f8fafc; color:#64748b; text-decoration:none; border:1px solid #e2e8f0; transition:all 0.2s;" onmouseover="this.style.background=\'#e2e8f0\'" onmouseout="this.style.background=\'#f8fafc\'"><i class="fas fa-ellipsis-v" style="font-size:11px;"></i></a>'
+            '</div>',
+            change_url, view_url
+        )
 
     def save_model(self, request, obj, form, change):
         if not obj.slug:
             from django.utils.text import slugify
             obj.slug = slugify(obj.title_uz or obj.title or 'journal', allow_unicode=True)
         super().save_model(request, obj, form, change)
-    ordering = ('display_order', 'id')
 
     fieldsets = (
         (_("Asosiy ma'lumotlar"), {

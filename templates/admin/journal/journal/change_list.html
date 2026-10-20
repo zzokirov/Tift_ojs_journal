@@ -1,0 +1,120 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list jazzmin %}
+
+{% block object-tools %}{% endblock %}
+
+{% block content_title %}
+<div class="d-flex justify-content-between align-items-center mb-4 pt-2">
+    <h1 style="font-size: 24px; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.5px;">
+        {% trans "Jurnallar" %}
+    </h1>
+    <a href="{% url 'admin:journal_journal_add' %}" 
+       style="background: #1d4ed8; color: #ffffff; font-weight: 700; font-size: 13px; padding: 9px 18px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 2px 4px rgba(29, 78, 216, 0.25); border: none; transition: all 0.2s;"
+       onmouseover="this.style.background='#1e40af'" onmouseout="this.style.background='#1d4ed8'">
+        <i class="fas fa-plus" style="font-size: 11px;"></i>
+        <span>{% trans "Yangi jurnal qo'shish" %}</span>
+    </a>
+</div>
+{% endblock %}
+
+{% block search %}
+<div class="col-12 mb-4" id="custom-search-container">
+    <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+        <form id="changelist-search" method="GET" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 0;">
+            
+            <!-- Left: Search Box -->
+            <div style="position: relative; flex: 1; min-width: 280px; max-width: 500px;">
+                <i class="fas fa-search" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 13px;"></i>
+                <input type="text" name="q" value="{{ cl.query }}" 
+                       placeholder="{% trans "Jurnal nomi yoki ISSN bo'yicha qidirish..." %}"
+                       style="width: 100%; padding: 9px 14px 9px 38px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 13px; color: #1e293b; outline: none; background: #f8fafc;"
+                       onfocus="this.style.borderColor='#3b82f6'; this.style.background='#ffffff';"
+                       onblur="this.style.borderColor='#e2e8f0'; this.style.background='#f8fafc';">
+            </div>
+
+            <!-- Right: Status Filter Dropdown -->
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <select name="is_active__exact" onchange="this.form.submit()"
+                        style="padding: 9px 16px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 13px; font-weight: 500; color: #334155; background: #ffffff; cursor: pointer; outline: none;">
+                    <option value="">{% trans "Barchasi" %}</option>
+                    <option value="1" {% if request.GET.is_active__exact == '1' %}selected{% endif %}>{% trans "Faol" %}</option>
+                    <option value="0" {% if request.GET.is_active__exact == '0' %}selected{% endif %}>{% trans "Nofaol" %}</option>
+                </select>
+
+                {% if cl.query or request.GET.is_active__exact %}
+                <a href="?" style="font-size: 12px; color: #ef4444; text-decoration: none; font-weight: 600; padding: 6px 10px; border-radius: 6px; background: #fef2f2;">
+                    <i class="fas fa-times"></i> {% trans "Tozalash" %}
+                </a>
+                {% endif %}
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block result_list %}
+<div class="custom-admin-table-card" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+    <style>
+        #changelist-form .card {
+            border: none !important;
+            box-shadow: none !important;
+            margin-bottom: 0 !important;
+        }
+        #result_list {
+            margin-bottom: 0 !important;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+        }
+        #result_list thead th {
+            background: #f8fafc !important;
+            color: #64748b !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            padding: 14px 16px !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            border-top: none !important;
+        }
+        #result_list thead th a {
+            color: #64748b !important;
+        }
+        #result_list tbody td, #result_list tbody th {
+            padding: 14px 16px !important;
+            vertical-align: middle !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+            font-size: 13px !important;
+        }
+        #result_list tbody tr:last-child td, #result_list tbody tr:last-child th {
+            border-bottom: none !important;
+        }
+        #result_list tbody tr:hover {
+            background-color: #f8fafc !important;
+        }
+        .action-checkbox, .djn-checkbox-select-all {
+            display: none !important;
+        }
+        .change-list-actions {
+            display: none !important;
+        }
+    </style>
+    {{ block.super }}
+</div>
+{% endblock %}
+
+{% block pagination %}
+<div class="d-flex justify-content-center align-items-center pt-3 pb-2 w-100">
+    <div style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px;">
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 6px; border: 1px solid #e2e8f0; color: #94a3b8; background: #ffffff; cursor: default;">
+            <i class="fas fa-chevron-left" style="font-size: 10px;"></i>
+        </span>
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 6px; background: #1d4ed8; color: #ffffff; font-weight: 700;">
+            1
+        </span>
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 6px; border: 1px solid #e2e8f0; color: #94a3b8; background: #ffffff; cursor: default;">
+            <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
+        </span>
+    </div>
+</div>
+{% endblock %}
