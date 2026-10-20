@@ -45,7 +45,7 @@ class Journal(models.Model):
     )
 
     title = models.CharField(max_length=255, verbose_name=_("Jurnal nomi"))
-    slug = models.SlugField(max_length=100, unique=True, verbose_name=_("URL Slug (masalan: arxitektura)"))
+    slug = models.SlugField(max_length=150, unique=True, allow_unicode=True, verbose_name=_("URL Slug (masalan: arxitektura-va-talim, moliya-va-intellektual-texnologiyalar)"))
     short_description = models.TextField(blank=True, verbose_name=_("Qisqacha tavsif"))
     full_description = models.TextField(blank=True, verbose_name=_("To'liq tavsif"))
     description = models.TextField(blank=True, verbose_name=_("Jurnal haqida (eski)"))
@@ -91,22 +91,8 @@ class Journal(models.Model):
 
     def clean(self):
         super().clean()
-        from django.core.exceptions import ValidationError
-        # 1. Issue must belong to the same journal
-        if self.issue and self.journal and self.issue.journal_id != self.journal_id:
-            raise ValidationError({
-                'issue': _("Tanlangan jurnal soni maqola tegishli bo'lgan jurnalga mos kelmaydi.")
-            })
-        # 2. Only accepted or published articles can be assigned to an issue
-        if self.issue and self.status in ['submitted', 'initial_review', 'under_review', 'returned', 'rejected']:
-            raise ValidationError({
-                'issue': _("Faqat qabul qilingan yoki nashr etilgan maqolalarni jurnal soniga biriktirish mumkin.")
-            })
-        # 3. Published articles require a final PDF or template PDF or content
-        if self.status == 'published' and not self.pdf_file and not self.template_pdf and not self.content:
-            raise ValidationError({
-                'pdf_file': _("Nashr etilgan maqolalar uchun PDF fayli yoki maqola matni yuklangan bo'lishi shart.")
-            })
+        if self.slug:
+            self.slug = self.slug.strip().lower()
 
     def __str__(self):
         return self.title

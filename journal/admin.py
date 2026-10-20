@@ -73,6 +73,12 @@ class JournalAdmin(TranslationAdmin):
     list_filter = ('publication_status', 'is_active', 'primary_language')
     search_fields = ('title', 'slug', 'issn', 'eissn', 'research_areas')
     prepopulated_fields = {'slug': ('title_uz',)}
+
+    def save_model(self, request, obj, form, change):
+        if not obj.slug:
+            from django.utils.text import slugify
+            obj.slug = slugify(obj.title_uz or obj.title or 'journal', allow_unicode=True)
+        super().save_model(request, obj, form, change)
     ordering = ('display_order', 'id')
 
     fieldsets = (

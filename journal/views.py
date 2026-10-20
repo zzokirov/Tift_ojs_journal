@@ -37,8 +37,71 @@ def portal_home(request):
     return render(request, 'portal_home.html', context)
 
 
+import urllib.parse
+import re
+
+def _get_current_journal(journal_slug):
+    """
+    Resilient journal finder:
+    1. Exact slug match
+    2. URL decoded slug match
+    3. Normalized hyphenated lowercase match
+    4. Architecture journal aliases
+    5. Case-insensitive title match
+    6. Fallback 404
+    """
+    raw_slug = str(journal_slug).strip()
+    decoded_slug = urllib.parse.unquote(raw_slug).strip()
+
+    # 1. Exact match
+    j = Journal.objects.filter(slug=raw_slug).first()
+    if j:
+        return j
+    if decoded_slug != raw_slug:
+        j = Journal.objects.filter(slug=decoded_slug).first()
+        if j:
+            return j
+
+    # 2. Normalized slug (replace spaces, underscores with hyphens, lowercase)
+    norm_slug = re.sub(r'[\s_]+', '-', decoded_slug.lower()).strip('-')
+    j = Journal.objects.filter(slug__iexact=norm_slug).first()
+    if j:
+        return j
+
+    # 3. Architecture journal aliases
+    arch_aliases = [
+        'arxitektura', 'arxitektura-va-talim', 'arxitektura va talim',
+        'arxitektura-va-ta-lim', "arxitektura-va-ta'lim", "arxitektura va ta'lim",
+        'aritektura', 'aritektura-va-talim', 'aritektura va talim',
+        'architect-edu', 'architecture', 'architecture-and-education'
+    ]
+    if norm_slug in arch_aliases or decoded_slug.lower() in arch_aliases:
+        j = Journal.objects.filter(Q(slug='arxitektura-va-talim') | Q(slug='arxitektura')).first()
+        if j:
+            return j
+        j = Journal.objects.filter(is_active=True).first()
+        if j:
+            return j
+
+    # 4. Search by title
+    space_slug = decoded_slug.replace('-', ' ')
+    j = Journal.objects.filter(
+        Q(title__iexact=decoded_slug) |
+        Q(title__iexact=space_slug) |
+        Q(title_uz__iexact=decoded_slug) |
+        Q(title_uz__iexact=space_slug) |
+        Q(title_ru__iexact=decoded_slug) |
+        Q(title_en__iexact=decoded_slug)
+    ).first()
+    if j:
+        return j
+
+    # 5. Fallback
+    return get_object_or_404(Journal, slug=raw_slug)
+
+
 def index(request, journal_slug):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     try:
         # Login qilgan user bosh sahifaga kelsa — hisobiga yo'naltir (agar qidiruv so'rovi bo'lmasa)
         if request.user.is_authenticated and not request.GET.get('q'):
@@ -114,13 +177,13 @@ def index(request, journal_slug):
 
 
 def archive(request, journal_slug):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     issues = JournalIssue.objects.filter(journal=current_journal, is_published=True).order_by('-year', '-number')
     return render(request, 'archive.html', {'current_journal': current_journal, 'issues': issues})
 
 
 def about(request, journal_slug):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     staff = StaffMember.objects.filter(journal=current_journal, is_active=True).order_by('order', 'full_name')
     leadership = staff.filter(position__in=['editor_in_chief', 'deputy_editor', 'secretary'])
     editorial_board = staff.filter(position='member')
@@ -135,7 +198,7 @@ def about(request, journal_slug):
 
 
 def issue_detail(request, journal_slug, issue_pk):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     issue = get_object_or_404(JournalIssue, pk=issue_pk, journal=current_journal)
     if not issue.is_published and issue.status != 'published':
         if not (request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser)):
@@ -149,7 +212,7 @@ def issue_detail(request, journal_slug, issue_pk):
 
 
 def article_detail(request, journal_slug, pk):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     try:
         article = get_object_or_404(Article, pk=pk, journal=current_journal)
 
@@ -852,7 +915,7 @@ def download_pdf(request, journal_slug, pk):
     from django.template.loader import render_to_string
     from django.conf import settings
 
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     article = get_object_or_404(Article, pk=pk, journal=current_journal)
 
     # Huquq tekshiruvi: Chop etilgan bo'lsa barchaga, aks holda muallif, taqrizchi va xodimlarga
@@ -928,7 +991,7 @@ def generate_article_pdf(request, journal_slug, pk):
     from django.shortcuts import redirect as _redirect
     import io
 
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     article = get_object_or_404(Article, pk=pk, journal=current_journal)
 
     is_author = request.user.is_authenticated and article.author_id == request.user.pk
@@ -1013,7 +1076,7 @@ def signup(request):
 
 @login_required
 def submit_article(request, journal_slug):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     if request.method == 'POST':
         form = ArticleSubmissionForm(request.POST, request.FILES)
         form.fields['category'].queryset = ArticleCategory.objects.filter(journal=current_journal).order_by('order', 'code')
@@ -1294,25 +1357,25 @@ def review_article_action(request, pk):
 
 
 def conferences(request, journal_slug):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     items = Conference.objects.filter(journal=current_journal, is_active=True).order_by('-date')
     return render(request, 'conferences.html', {'current_journal': current_journal, 'items': items})
 
 
 def news_list(request, journal_slug):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     items = News.objects.filter(journal=current_journal, is_active=True).order_by('-created_at')
     return render(request, 'news.html', {'current_journal': current_journal, 'items': items})
 
 
 def news_detail(request, journal_slug, pk):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     item = get_object_or_404(News, pk=pk, journal=current_journal, is_active=True)
     return render(request, 'news_detail.html', {'current_journal': current_journal, 'item': item})
 
 
 def documents(request, journal_slug):
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     normative = Document.objects.filter(journal=current_journal, is_active=True, category='normative').order_by('order')
     requirements = Document.objects.filter(journal=current_journal, is_active=True, category='requirement').order_by('order')
     templates = Document.objects.filter(journal=current_journal, is_active=True, category='template').order_by('order')
@@ -1376,7 +1439,7 @@ def download_issue_pdf(request, journal_slug, issue_pk):
     from django.template.loader import render_to_string
     from django.http import HttpResponse, Http404
 
-    current_journal = get_object_or_404(Journal, slug=journal_slug)
+    current_journal = _get_current_journal(journal_slug)
     issue = get_object_or_404(JournalIssue, pk=issue_pk, journal=current_journal)
 
     # 0. Agar admin tayyor full_pdf yuklagan bo'lsa

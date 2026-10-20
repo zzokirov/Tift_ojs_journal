@@ -119,6 +119,26 @@
         </div>
 
         <!-- JOURNAL GRID (3 COLUMNS DESKTOP, 2 TABLET, 1 MOBILE) -->
+                <!-- ADMIN QUICK ACTION -->
+        {% if user.is_staff or user.is_superuser %}
+        <div class="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
+            <div class="flex items-center gap-2 text-blue-900 text-xs sm:text-sm font-semibold">
+                <i class="fas fa-shield-alt text-blue-700 text-base"></i>
+                <span>{% trans "Administrator: Yangi ilmiy jurnallar qo'shish va boshqarish" %}</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="/admin/journal/journal/add/" target="_blank" class="inline-flex items-center gap-1.5 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition shadow-sm">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>{% trans "+ Yangi jurnal qo'shish" %}</span>
+                </a>
+                <a href="/admin/journal/journal/" target="_blank" class="inline-flex items-center gap-1.5 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-xs font-bold px-3.5 py-2 rounded-lg transition shadow-sm">
+                    <i class="fas fa-list"></i>
+                    <span>{% trans "Barcha jurnallar" %}</span>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for journal in journals %}
             <div class="bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">

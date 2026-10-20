@@ -204,6 +204,24 @@ class PublicInterfaceTests(TestCase):
         response = self.client.get(reverse('index', kwargs={'journal_slug': 'arxitektura'}))
         self.assertEqual(response.status_code, 200)
 
+        # Resilient alias / slug
+        response_alias = self.client.get(reverse('index', kwargs={'journal_slug': 'arxitektura-va-talim'}))
+        self.assertEqual(response_alias.status_code, 200)
+
+        # Dynamic creation of new journal
+        j_finance = Journal.objects.create(
+            title="Moliya va intellektual texnologiyalar",
+            slug="moliya-va-intellektual-texnologiyalar",
+            publication_status="published",
+            is_active=True
+        )
+        response_finance = self.client.get(reverse('index', kwargs={'journal_slug': 'moliya-va-intellektual-texnologiyalar'}))
+        self.assertEqual(response_finance.status_code, 200)
+
+        # Space-separated query resilience
+        response_space = self.client.get('/moliya%20va%20intellektual%20texnologiyalar/')
+        self.assertEqual(response_space.status_code, 200)
+
         # Invalid slug -> 404
-        response_404 = self.client.get(reverse('index', kwargs={'journal_slug': 'nonexistent-journal-slug'}))
+        response_404 = self.client.get(reverse('index', kwargs={'journal_slug': 'nonexistent-journal-slug-999'}))
         self.assertEqual(response_404.status_code, 404)
