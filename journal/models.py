@@ -129,6 +129,12 @@ class Journal(models.Model):
     def active_cover(self):
         return self.get_cover_for_language()
 
+    @property
+    def research_areas_list(self):
+        if not self.research_areas:
+            return []
+        return [x.strip() for x in self.research_areas.split(',') if x.strip()]
+
 class JournalIssue(models.Model):
     journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='issues', verbose_name=_("Jurnal"), null=True, blank=True)
     volume = models.PositiveIntegerField(verbose_name=_("Jurnal jildi (Volume)"))

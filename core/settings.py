@@ -136,6 +136,15 @@ USE_I18N = True
 
 USE_TZ = True
 
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'uz'
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    'default': ('uz', 'ru', 'en'),
+    'uz': ('uz', 'ru', 'en'),
+    'ru': ('ru', 'uz', 'en'),
+    'en': ('en', 'uz', 'ru'),
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/

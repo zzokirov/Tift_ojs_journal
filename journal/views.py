@@ -1,3 +1,33 @@
+
+def switch_language(request, lang_code):
+    """
+    Bulletproof language switcher supporting GET and POST.
+    Sets session and cookie for the selected language.
+    """
+    next_url = request.POST.get('next') or request.GET.get('next') or request.META.get('HTTP_REFERER') or '/'
+    if not next_url or '/i18n/' in next_url or '/change-language/' in next_url:
+        next_url = '/'
+
+    from django.utils.translation import activate, check_for_language
+    from django.conf import settings
+    from django.http import HttpResponseRedirect
+
+    response = HttpResponseRedirect(next_url)
+    if check_for_language(lang_code):
+        activate(lang_code)
+        if hasattr(request, 'session'):
+            request.session['django_language'] = lang_code
+            request.session['_language'] = lang_code
+        response.set_cookie(
+            settings.LANGUAGE_COOKIE_NAME,
+            lang_code,
+            max_age=365 * 24 * 60 * 60,
+            path='/',
+            samesite='Lax'
+        )
+    return response
+
+
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, update_session_auth_hash
@@ -127,12 +157,7 @@ def _get_current_journal(journal_slug):
 
 def index(request, journal_slug):
     current_journal = _get_current_journal(journal_slug)
-    try:
-        # Login qilgan user bosh sahifaga kelsa — hisobiga yo'naltir (agar qidiruv so'rovi bo'lmasa)
-        if request.user.is_authenticated and not request.GET.get('q'):
-            return redirect('my_articles')
-    except Exception:
-        pass
+    # User can browse the journal directly without forced redirect
 
     # Tashrif buyuruvchilarni sanash
     total_visitors = 0
@@ -186,11 +211,13 @@ def index(request, journal_slug):
         total_articles = 0
 
     categories = ArticleCategory.objects.filter(journal=current_journal).order_by('order', 'code')
+    staff = StaffMember.objects.filter(journal=current_journal, is_active=True).order_by('order', 'full_name')[:6]
 
     return render(request, 'index.html', {
         'current_journal': current_journal,
         'recent_articles': recent_articles,
         'issues': issues,
+        'staff': staff,
         'query': query,
         'total_visitors': total_visitors,
         'today_visitors': today_visitors,
@@ -1129,9 +1156,11 @@ def my_articles(request):
         'published':    articles.filter(status='published').count(),
         'rejected':     articles.filter(status='rejected').count(),
     }
+    default_journal = Journal.objects.first()
     return render(request, 'my_articles.html', {
         'articles': articles,
         'status_counts': status_counts,
+        'current_journal': default_journal,
     })
 
 

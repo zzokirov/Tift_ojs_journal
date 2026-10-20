@@ -1102,7 +1102,7 @@ msgstr "Последние статьи"
 
 #: .\templates\admin\index.html:293 .\templates\index.html:355
 msgid "Barchasini ko'rish"
-msgstr "Показать все"
+msgstr "Смотреть все"
 
 #: .\templates\admin\index.html:303
 msgid "Holati"
@@ -1252,7 +1252,7 @@ msgstr "№%(num)s"
 #: .\templates\documents.html:69 .\templates\documents.html:184
 #: .\templates\documents.html:195 .\templates\my_articles.html:131
 msgid "Ko'rish"
-msgstr "Просмотр"
+msgstr "Смотреть"
 
 #: .\templates\archive.html:71
 #| msgid "Hozircha arxivlar mavjud emas."
@@ -2225,7 +2225,7 @@ msgstr "Назначенные мне"
 #: .\templates\reviewer_dashboard.html:92
 #| msgid "Barchasini ko'rish"
 msgid "Barchasi"
-msgstr "Всё"
+msgstr "Все"
 
 #: .\templates\reviewer_dashboard.html:101
 #| msgid "Maqola matni"
@@ -2511,6 +2511,236 @@ msgstr "Уведомление о решении принятия или отк�
 #| msgid "Maqola faqat Word (.docx) formatida yuboriladi"
 msgid "Faqat Word (.docx, .doc) format qabul qilamiz!"
 msgstr "Принимаем только формат Word (.docx, .doc)!"
+
+#: portal_home.html:1
+msgid "Jurnallar"
+msgstr "Журналы"
+
+#: portal_home.html:1
+msgid "Mualliflar uchun"
+msgstr "Для авторов"
+
+#: portal_home.html:1
+msgid "Biz haqimizda"
+msgstr "О нас"
+
+#: portal_home.html:1
+msgid "Aloqa"
+msgstr "Контакты"
+
+#: portal_home.html:1
+msgid "Shaxsiy kabinet"
+msgstr "Личный кабинет"
+
+#: portal_home.html:1
+msgid "Admin paneli"
+msgstr "Панель администратора"
+
+#: portal_home.html:1
+msgid "TIFT SCIENTIFIC JOURNALS"
+msgstr "TIFT НАУЧНЫЕ ЖУРНАЛЫ"
+
+#: portal_home.html:1
+msgid "TIFT ilmiy jurnallari"
+msgstr "Научные журналы TIFT"
+
+#: portal_home.html:1
+msgid ""
+"Ilmiy tadqiqotlar, innovatsion g'oyalar va zamonaviy bilimlar uchun yagona "
+"nashrlar platformasi."
+msgstr ""
+"Единая издательская платформа для научных исследований, инновационных идей и"
+" современных знаний."
+
+#: portal_home.html:1
+msgid "Jurnal nomi, ISSN yoki ilmiy yo'nalish bo'yicha qidirish"
+msgstr "Поиск по названию журнала, ISSN или научному направлению"
+
+#: portal_home.html:1
+msgid "ta jurnal mavjud"
+msgstr "журналов доступно"
+
+#: portal_home.html:1
+msgid "Barchasini ko'rish →"
+msgstr "Смотреть все →"
+
+#: portal_home.html:1
+msgid "Jurnalni ko'rish"
+msgstr "Перейти к журналу"
+
+#: portal_home.html:1
+msgid "Jurnalni ko'rish →"
+msgstr "Перейти к журналу →"
+
+#: portal_home.html:1
+msgid "Ko'rish →"
+msgstr "Смотреть →"
+
+#: portal_home.html:1
+msgid "ISSN"
+msgstr "ISSN"
+
+#: portal_home.html:1
+msgid "eISSN"
+msgstr "eISSN"
+
+#: portal_home.html:1
+msgid "Nashriyot"
+msgstr "Издатель"
+
+#: portal_home.html:1
+msgid "Nashriyotchi"
+msgstr "Издательство"
+
+#: portal_home.html:1
+msgid "Tillar"
+msgstr "Языки"
+
+#: portal_home.html:1
+msgid "Asosiy yo'nalishlar"
+msgstr "Основные направления"
+
+#: portal_home.html:1
+msgid "Maqolani yuborish"
+msgstr "Отправить статью"
+
+#: portal_home.html:1
+msgid "Submission guidelines (PDF)"
+msgstr "Требования для авторов (PDF)"
+
+#: portal_home.html:1
+msgid "Submission guidelines (PDF) →"
+msgstr "Требования для авторов (PDF) →"
+
+#: portal_home.html:1
+msgid ""
+"Maqolalar yuborish bo'yicha barcha kerakli ma'lumotlar har bir jurnal "
+"sahifasida keltirilgan. Iltimos, jurnalni tanlab, uning talablarini ko'ring."
+msgstr ""
+"Вся необходимая информация по отправке статей представлена на странице "
+"каждого журнала. Пожалуйста, выберите журнал и ознакомьтесь с его "
+"требованиями."
+
+#: portal_home.html:1
+msgid "Qo'llanma"
+msgstr "Руководство"
+
+#: portal_home.html:1
+msgid "Jurnallar ro'yxatiga qaytish"
+msgstr "Вернуться к списку журналов"
+
+#: portal_home.html:1
+msgid "Tahririyat a'zolari"
+msgstr "Члены редколлегии"
+
+#: portal_home.html:1
+msgid "Sonlar"
+msgstr "Выпуски"
+
+#: portal_home.html:1
+msgid "Bog'lanish"
+msgstr "Контакты"
+
+#: portal_home.html:1
+msgid "Veb-sayt"
+msgstr "Веб-сайт"
+
+#: portal_home.html:1
+msgid "So'nggi sonlar"
+msgstr "Последние выпуски"
+
+#: portal_home.html:1
+msgid "son"
+msgstr "выпуск"
+
+#: portal_home.html:1
+msgid "yil"
+msgstr "год"
+
+#: portal_home.html:1
+msgid "Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti"
+msgstr ""
+"Ташкентский международный университет финансового управления и технологий"
+
+#: portal_home.html:1
+msgid "Til"
+msgstr "Язык"
+
+#: portal_home.html:1
+msgid "Barcha huquqlar himoyalangan."
+msgstr "Все права защищены."
+
+#: portal_home.html:1
+msgid "Toshkent, O'zbekiston"
+msgstr "Ташкент, Узбекистан"
+
+#: portal_home.html:1
+msgid "TIFT Admin"
+msgstr "TIFT Админ"
+
+#: portal_home.html:1
+msgid "Nashrlar"
+msgstr "Выпуски"
+
+#: portal_home.html:1
+msgid "Mualliflar"
+msgstr "Авторы"
+
+#: portal_home.html:1
+msgid "Taqrizchilar"
+msgstr "Рецензенты"
+
+#: portal_home.html:1
+msgid "Tahririyat"
+msgstr "Редколлегия"
+
+#: portal_home.html:1
+msgid "Foydalanuvchilar"
+msgstr "Пользователи"
+
+#: portal_home.html:1
+msgid "Yangi jurnal qo'shish"
+msgstr "Добавить новый журнал"
+
+#: portal_home.html:1
+msgid "+ Yangi jurnal qo'shish"
+msgstr "+ Добавить новый журнал"
+
+#: portal_home.html:1
+msgid "Jurnal nomi yoki ISSN bo'yicha qidirish..."
+msgstr "Поиск по названию журнала или ISSN..."
+
+#: portal_home.html:1
+msgid "Jurnal nomi"
+msgstr "Название журнала"
+
+#: portal_home.html:1
+msgid "Holat"
+msgstr "Статус"
+
+#: portal_home.html:1
+msgid "Faol"
+msgstr "Активный"
+
+#: portal_home.html:1
+msgid "Tahrir"
+msgstr "Действия"
+
+#: portal_home.html:1
+msgid "Administrator: Yangi ilmiy jurnallar qo'shish va boshqarish"
+msgstr "Администратор: Добавление и управление научными журналами"
+
+#: portal_home.html:1
+msgid "Hozircha nashrga joylashtirilgan jurnallar mavjud emas"
+msgstr "В настоящее время опубликованных журналов нет"
+
+#: portal_home.html:1
+msgid "Qidiruv bo'yicha hech qanday jurnal topilmadi"
+msgstr "По вашему запросу журналов не найдено"
+
+#: portal_home.html:1
+msgid "Mening maqolalarim"
+msgstr "Мои статьи"
 
 #~ msgid "A'zo bo'lish"
 #~ msgstr "Регистрация"

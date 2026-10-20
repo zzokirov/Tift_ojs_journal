@@ -100,7 +100,7 @@
                 <!-- LEFT SIDE: LOGO + NAV LINKS -->
                 <div class="flex items-center gap-8 lg:gap-10">
                     <!-- LOGO -->
-                    <a href="{% if current_journal %}{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}{% else %}{% url 'portal_home' %}{% endif %}" class="flex items-center gap-3 group">
+                    <a href="{% if current_journal %}{% if current_journal %}{% url 'index' current_journal.slug|default:'arxitektura-va-talim' %}{% else %}#{% endif %}{% else %}{% url 'portal_home' %}{% endif %}" class="flex items-center gap-3 group">
                         <div class="relative">
                             <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
                                 <img src="{% static 'images/tift.png' %}?v=3" alt="TIFT" class="w-10 h-10 object-contain"
@@ -142,7 +142,7 @@
                         </a>
 
                         <!-- NAVBAR SEARCH ICON & EXPANDABLE INPUT -->
-                        <form action="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}" method="get" class="relative flex items-center group ml-1 mr-2 flex-shrink-0">
+                        <form action="{% if current_journal %}{% url 'index' current_journal.slug|default:'arxitektura-va-talim' %}{% else %}#{% endif %}" method="get" class="relative flex items-center group ml-1 mr-2 flex-shrink-0">
                             <div class="relative flex items-center">
                                 <input type="text"
                                        name="q"
@@ -282,7 +282,7 @@
 
         <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-white/10 px-4 py-4 space-y-2">
             <!-- Mobile Search Bar -->
-            <form action="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}" method="get" class="relative my-2">
+            <form action="{% if current_journal %}{% url 'index' current_journal.slug|default:'arxitektura-va-talim' %}{% else %}#{% endif %}" method="get" class="relative my-2">
                 <input type="text"
                        name="q"
                        value="{{ request.GET.q|default:'' }}"
@@ -359,8 +359,8 @@
                 <div>
                     <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">{% trans "Tezkor havolalar" %}</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Bosh sahifa" %}</a></li>
-                        <li><a href="{% if current_journal %}{% url 'index' current_journal.slug %}{% else %}#{% endif %}#arxiv" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Jurnal arxivlari" %}</a></li>
+                        <li><a href="{% if current_journal %}{% url 'index' current_journal.slug|default:'arxitektura-va-talim' %}{% else %}#{% endif %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Bosh sahifa" %}</a></li>
+                        <li><a href="{% if current_journal %}{% url 'index' current_journal.slug|default:'arxitektura-va-talim' %}{% else %}#{% endif %}#arxiv" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Jurnal arxivlari" %}</a></li>
                         <li><a href="{% if current_journal %}{% url 'submit_article' current_journal.slug %}{% else %}#{% endif %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Maqola yuborish" %}</a></li>
                         <li><a href="{% url 'login' %}" class="hover:text-green-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-green-500/50"></i>{% trans "Tizimga kirish" %}</a></li>
                     </ul>

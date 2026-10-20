@@ -494,7 +494,7 @@ msgstr "Category"
 
 #: .\journal\models.py:90
 msgid "Yo'nalishlar"
-msgstr "Directions"
+msgstr "Disciplines"
 
 #: .\journal\models.py:117
 #| msgid "ta maqola"
@@ -1099,7 +1099,7 @@ msgstr "Recent Articles"
 
 #: .\templates\admin\index.html:293 .\templates\index.html:355
 msgid "Barchasini ko'rish"
-msgstr "View all"
+msgstr "View All"
 
 #: .\templates\admin\index.html:303
 msgid "Holati"
@@ -2507,6 +2507,235 @@ msgstr "Notification of acceptance or rejection decision"
 #| msgid "Maqola faqat Word (.docx) formatida yuboriladi"
 msgid "Faqat Word (.docx, .doc) format qabul qilamiz!"
 msgstr "We only accept Word (.docx, .doc) format!"
+
+#: portal_home.html:1
+msgid "Jurnallar"
+msgstr "Journals"
+
+#: portal_home.html:1
+msgid "Mualliflar uchun"
+msgstr "For Authors"
+
+#: portal_home.html:1
+msgid "Biz haqimizda"
+msgstr "About Us"
+
+#: portal_home.html:1
+msgid "Aloqa"
+msgstr "Contact"
+
+#: portal_home.html:1
+msgid "Shaxsiy kabinet"
+msgstr "Dashboard"
+
+#: portal_home.html:1
+msgid "Admin paneli"
+msgstr "Admin Panel"
+
+#: portal_home.html:1
+msgid "TIFT SCIENTIFIC JOURNALS"
+msgstr "TIFT SCIENTIFIC JOURNALS"
+
+#: portal_home.html:1
+msgid "TIFT ilmiy jurnallari"
+msgstr "TIFT Scientific Journals"
+
+#: portal_home.html:1
+msgid ""
+"Ilmiy tadqiqotlar, innovatsion g'oyalar va zamonaviy bilimlar uchun yagona "
+"nashrlar platformasi."
+msgstr ""
+"A unified publishing platform for scientific research, innovative ideas, and"
+" modern knowledge."
+
+#: portal_home.html:1
+msgid "Jurnal nomi, ISSN yoki ilmiy yo'nalish bo'yicha qidirish"
+msgstr "Search by journal title, ISSN, or research area"
+
+#: portal_home.html:1
+msgid "ta jurnal mavjud"
+msgstr "journals available"
+
+#: portal_home.html:1
+msgid "Barchasini ko'rish →"
+msgstr "View All →"
+
+#: portal_home.html:1
+msgid "Jurnalni ko'rish"
+msgstr "View Journal"
+
+#: portal_home.html:1
+msgid "Jurnalni ko'rish →"
+msgstr "View Journal →"
+
+#: portal_home.html:1
+msgid "Ko'rish →"
+msgstr "View →"
+
+#: portal_home.html:1
+msgid "ISSN"
+msgstr "ISSN"
+
+#: portal_home.html:1
+msgid "eISSN"
+msgstr "eISSN"
+
+#: portal_home.html:1
+msgid "Nashriyot"
+msgstr "Publisher"
+
+#: portal_home.html:1
+msgid "Nashriyotchi"
+msgstr "Publisher"
+
+#: portal_home.html:1
+msgid "Tillar"
+msgstr "Languages"
+
+#: portal_home.html:1
+msgid "Asosiy yo'nalishlar"
+msgstr "Main Areas"
+
+#: portal_home.html:1
+msgid "Maqolani yuborish"
+msgstr "Submit Article"
+
+#: portal_home.html:1
+msgid "Submission guidelines (PDF)"
+msgstr "Submission Guidelines (PDF)"
+
+#: portal_home.html:1
+msgid "Submission guidelines (PDF) →"
+msgstr "Submission Guidelines (PDF) →"
+
+#: portal_home.html:1
+msgid ""
+"Maqolalar yuborish bo'yicha barcha kerakli ma'lumotlar har bir jurnal "
+"sahifasida keltirilgan. Iltimos, jurnalni tanlab, uning talablarini ko'ring."
+msgstr ""
+"All necessary information for submitting articles is provided on each "
+"journal's page. Please select a journal to view its guidelines."
+
+#: portal_home.html:1
+msgid "Qo'llanma"
+msgstr "Guidelines"
+
+#: portal_home.html:1
+msgid "Jurnallar ro'yxatiga qaytish"
+msgstr "Back to journals list"
+
+#: portal_home.html:1
+msgid "Tahririyat a'zolari"
+msgstr "Editorial Board"
+
+#: portal_home.html:1
+msgid "Sonlar"
+msgstr "Issues"
+
+#: portal_home.html:1
+msgid "Bog'lanish"
+msgstr "Contact"
+
+#: portal_home.html:1
+msgid "Veb-sayt"
+msgstr "Website"
+
+#: portal_home.html:1
+msgid "So'nggi sonlar"
+msgstr "Latest Issues"
+
+#: portal_home.html:1
+msgid "son"
+msgstr "issue"
+
+#: portal_home.html:1
+msgid "yil"
+msgstr "year"
+
+#: portal_home.html:1
+msgid "Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti"
+msgstr ""
+"Tashkent International University of Financial Management and Technologies"
+
+#: portal_home.html:1
+msgid "Til"
+msgstr "Language"
+
+#: portal_home.html:1
+msgid "Barcha huquqlar himoyalangan."
+msgstr "All rights reserved."
+
+#: portal_home.html:1
+msgid "Toshkent, O'zbekiston"
+msgstr "Tashkent, Uzbekistan"
+
+#: portal_home.html:1
+msgid "TIFT Admin"
+msgstr "TIFT Admin"
+
+#: portal_home.html:1
+msgid "Nashrlar"
+msgstr "Publications"
+
+#: portal_home.html:1
+msgid "Mualliflar"
+msgstr "Authors"
+
+#: portal_home.html:1
+msgid "Taqrizchilar"
+msgstr "Reviewers"
+
+#: portal_home.html:1
+msgid "Tahririyat"
+msgstr "Editorial"
+
+#: portal_home.html:1
+msgid "Foydalanuvchilar"
+msgstr "Users"
+
+#: portal_home.html:1
+msgid "Yangi jurnal qo'shish"
+msgstr "Add New Journal"
+
+#: portal_home.html:1
+msgid "+ Yangi jurnal qo'shish"
+msgstr "+ Add New Journal"
+
+#: portal_home.html:1
+msgid "Jurnal nomi yoki ISSN bo'yicha qidirish..."
+msgstr "Search by journal title or ISSN..."
+
+#: portal_home.html:1
+msgid "Jurnal nomi"
+msgstr "Journal Title"
+
+#: portal_home.html:1
+msgid "Holat"
+msgstr "Status"
+
+#: portal_home.html:1
+msgid "Faol"
+msgstr "Active"
+
+#: portal_home.html:1
+msgid "Tahrir"
+msgstr "Actions"
+
+#: portal_home.html:1
+msgid "Administrator: Yangi ilmiy jurnallar qo'shish va boshqarish"
+msgstr "Administrator: Add and manage scientific journals"
+
+#: portal_home.html:1
+msgid "Hozircha nashrga joylashtirilgan jurnallar mavjud emas"
+msgstr "No journals published yet"
+
+#: portal_home.html:1
+msgid "Qidiruv bo'yicha hech qanday jurnal topilmadi"
+msgstr "No journals found matching your search"
+
+#: portal_home.html:1
+msgid "Mening maqolalarim"
+msgstr "My Articles"
 
 #~ msgid "A'zo bo'lish"
 #~ msgstr "Register"

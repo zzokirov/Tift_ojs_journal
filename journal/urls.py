@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     # Portal 
     path('', views.portal_home, name='portal_home'),
+    path('change-language/<str:lang_code>/', views.switch_language, name='switch_language'),
     
     # Auth & Global User Views
     path('signup/', views.signup, name='signup'),
