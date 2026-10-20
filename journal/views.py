@@ -40,6 +40,13 @@ def portal_home(request):
 import urllib.parse
 import re
 
+def _clean_tokens(s):
+    s = urllib.parse.unquote(str(s)).lower()
+    s = s.replace("'", "").replace("’", "").replace("`", "").replace("ʻ", "")
+    s = s.replace('ll', 'l').replace('nn', 'n').replace('ss', 's').replace('mm', 'm')
+    import re
+    return set(re.findall(r'[a-z0-9]+', s))
+
 def _get_current_journal(journal_slug):
     """
     Resilient journal finder:
@@ -48,7 +55,8 @@ def _get_current_journal(journal_slug):
     3. Normalized hyphenated lowercase match
     4. Architecture journal aliases
     5. Case-insensitive title match
-    6. Fallback 404
+    6. Token / typo-tolerant match
+    7. Fallback 404
     """
     raw_slug = str(journal_slug).strip()
     decoded_slug = urllib.parse.unquote(raw_slug).strip()
@@ -96,7 +104,24 @@ def _get_current_journal(journal_slug):
     if j:
         return j
 
-    # 5. Fallback
+    # 5. Token / typo-tolerant match
+    input_tokens = _clean_tokens(decoded_slug)
+    meaningful = {t for t in input_tokens if t not in {'va', 'and', 'i', 'the', 'of'}} or input_tokens
+    if meaningful:
+        best_journal = None
+        best_score = 0.0
+        for cand in Journal.objects.all():
+            cand_tokens = _clean_tokens(cand.slug) | _clean_tokens(cand.title)
+            intersection = meaningful & cand_tokens
+            if intersection:
+                score = len(intersection) / len(meaningful)
+                if score > best_score and score >= 0.5:
+                    best_score = score
+                    best_journal = cand
+        if best_journal:
+            return best_journal
+
+    # 6. Fallback
     return get_object_or_404(Journal, slug=raw_slug)
 
 
