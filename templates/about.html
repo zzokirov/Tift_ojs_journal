@@ -1,151 +1,26 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %}{% trans "Jurnal haqida | TIFT Jurnali" %}{% endblock %}
-
-{% block extra_scripts %}
-<script>
-const wrapper = document.getElementById('coverImg1')?.closest('.relative.rounded-2xl');
-const img1 = document.getElementById('coverImg1');
-const img2 = document.getElementById('coverImg2');
-if (wrapper && img1 && img2) {
-    wrapper.addEventListener('mouseenter', () => {
-        img1.style.opacity = '0';
-        img2.style.opacity = '1';
-    });
-    wrapper.addEventListener('mouseleave', () => {
-        img1.style.opacity = '1';
-        img2.style.opacity = '0';
-    });
-}
-</script>
-{% endblock %}
+{% block title %}{% trans "Tahririyat a'zolari | TIFT Jurnali" %}{% endblock %}
 
 {% block content %}
-<!-- ABOUT SECTION -->
-<div class="site-container px-4 py-8 sm:py-12">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-16">
-
-        <!-- LEFT: MUQOVA RASMI -->
-        <div class="flex justify-center">
-            <div class="relative group" style="max-width: 380px; width: 100%;">
-                <div class="relative rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50 aspect-[3/4]">
-                    {% if current_journal.get_cover_for_language %}
-                        <img src="{{ current_journal.get_cover_for_language.url }}"
-                             alt="{{ current_journal.title }}"
-                             class="w-full h-full object-cover">
-                    {% else %}
-                        <div class="w-full h-full bg-navy-900 p-8 flex flex-col items-center justify-center text-white text-center">
-                            <span class="text-2xl font-black text-white mb-2">TIFT</span>
-                            <span class="text-sm font-bold text-gray-300">{{ current_journal.title }}</span>
-                        </div>
-                    {% endif %}
-                </div>
+<!-- HEADER -->
+<div class="site-container px-4 pt-8 pb-4">
+    <div class="border-b border-gray-200 pb-5 flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <div class="flex items-center gap-2 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+                <i class="fas fa-user-tie"></i>
+                <span>{{ current_journal.title }}</span>
             </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-navy-900">{% trans "Tahririyat a'zolari" %}</h1>
+            <p class="text-xs sm:text-sm text-gray-500 mt-1">{% trans "Jurnal tahririyat hay'ati va ilmiy maslahatchilari tarkibi" %}</p>
         </div>
-
-        <!-- RIGHT: JURNAL HAQIDA MA'LUMOT -->
-        <div class="space-y-6">
-            <div>
-                <h2 class="text-2xl font-black text-navy-900 mb-4 flex items-center gap-2">
-                    <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
-                    {% trans "Jurnal haqida" %}
-                </h2>
-                <div class="text-gray-600 leading-relaxed text-sm">
-                    {% if current_journal.full_description or current_journal.short_description or current_journal.description %}
-                        <p class="mb-3 font-semibold text-navy-900 text-base">"{{ current_journal.title }}"</p>
-                        <p>{{ current_journal.full_description|default:current_journal.short_description|default:current_journal.description|linebreaksbr }}</p>
-                    {% else %}
-                        <p><strong>"{{ current_journal.title }}"</strong> — {% trans "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy jurnali." %}</p>
-                    {% endif %}
-                </div>
-            </div>
-
-            <!-- Info cards -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
-                    <div class="text-green-600 font-black text-xl">{{ current_journal.founded_year|default:2024 }}</div>
-                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">{% trans "Tashkil etilgan" %}</div>
-                </div>
-                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
-                    <div class="text-green-600 font-black text-sm">{{ current_journal.publication_frequency|default:_("Yiliga 4 marta") }}</div>
-                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">{% trans "Davriyligi" %}</div>
-                </div>
-                {% if current_journal.issn %}
-                <div class="bg-gray-50 rounded-xl p-3.5 border border-gray-100">
-                    <div class="text-green-600 font-black text-sm font-mono">{{ current_journal.issn }}</div>
-                    <div class="text-gray-500 text-[10px] mt-1 uppercase tracking-wider">ISSN</div>
-                </div>
-                {% endif %}
-            </div>
-
-            <!-- Peer review -->
-            <div class="bg-navy-900 rounded-xl p-5 text-white">
-                <h4 class="font-bold mb-2 flex items-center gap-2">
-                    <i class="fas fa-shield-alt text-green-400 text-sm"></i>
-                    {% trans "Ikki tomonlama anonim taqrizlash" %}
-                </h4>
-                <p class="text-gray-400 text-xs leading-relaxed">
-                    {% trans "Barcha yuborilgan maqolalar ikki tomonlama anonim taqrizlash jarayonidan o'tadi. Ko'rib chiqish muddati 4-6 hafta. Muallif va taqrizchi bir-birini bilmaydi." %}
-                </p>
-            </div>
-
-
+        <div class="text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-full">
+            {% blocktrans count counter=staff.count %}{{ counter }} nafar a'zo{% plural %}{{ counter }} nafar a'zo{% endblocktrans %}
         </div>
     </div>
+</div>
 
-        <!-- CATEGORIES SECTION -->
-    <div class="mb-16 mt-8">
-        <div class="mb-6">
-            <h2 class="text-2xl font-black text-navy-900 flex items-center gap-2 mb-2">
-                <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
-                {% trans "Jurnal qabul qiladigan yo'nalishlar" %}
-            </h2>
-            <div class="section-divider ml-3 mb-4"></div>
-            <p class="text-gray-500 text-sm ml-3">{% trans "Tahririyat hay'ati quyidagi ilmiy yo'nalishlar va shifrlar bo'yicha maqolalar qabul qiladi:" %}</p>
-        </div>
-
-        <div class="bg-gradient-to-br from-white via-green-50/50 to-gray-50 rounded-3xl p-6 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <!-- Background glow -->
-            <div class="absolute top-0 right-0 w-96 h-96 bg-green-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-96 h-96 bg-green-200/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
-            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-green-100/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 relative z-10">
-                {% for cat in categories %}
-                <div class="group relative bg-white backdrop-blur-sm border border-green-200/60 rounded-2xl p-5 hover:bg-green-50/50 hover:border-green-400/50 transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md hover:shadow-green-500/10">
-                    <div class="absolute top-0 right-0 w-20 h-20 bg-green-100/30 rounded-full blur-2xl group-hover:bg-green-200/40 transition-all"></div>
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-100 to-green-50 border border-green-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                            <i class="fas {{ cat.icon_class }} text-green-600 text-lg"></i>
-                        </div>
-                        <div>
-                            <div class="font-mono text-green-600 text-xs font-bold tracking-wider mb-1">{{ cat.code }}</div>
-                            <h3 class="text-navy-900 font-bold text-sm leading-snug group-hover:text-green-700 transition-colors">{{ cat.name }}</h3>
-                        </div>
-                    </div>
-                </div>
-                {% empty %}
-                    <div class="col-span-3 text-center py-6 text-gray-400 text-sm">{% trans "Hozircha yo'nalishlar mavjud emas." %}</div>
-                {% endfor %}
-            </div>
-
-            <!-- Bottom stat bar -->
-            <div class="mt-8 pt-6 border-t border-green-200/50 flex flex-wrap justify-center gap-8 relative z-10">
-                <div class="text-center">
-                    <div class="text-green-600 font-black text-2xl">11</div>
-                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Ilmiy yo'nalish" %}</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-green-600 font-black text-2xl">24/7</div>
-                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Onlayn qabul" %}</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-green-600 font-black text-2xl">4-6</div>
-                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Hafta taqriz muddati" %}</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="site-container px-4 py-8">
 
     <!-- STAFF SECTION -->
     {% if staff %}
@@ -153,7 +28,7 @@ if (wrapper && img1 && img2) {
         <div class="mb-12">
             <div class="mb-6">
                 <h2 class="text-2xl font-black text-navy-900 flex items-center gap-2 mb-2">
-                    <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
+                    <span class="w-1 h-7 bg-blue-600 rounded-full block"></span>
                     {% trans "Jurnal rahbariyati" %}
                 </h2>
                 <div class="section-divider ml-3 mb-4"></div>
@@ -161,16 +36,16 @@ if (wrapper && img1 && img2) {
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for member in leadership %}
-                <div class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-900 text-white rounded-2xl p-5 shadow-xl relative overflow-hidden flex items-start gap-4 border border-green-500/20 group hover:border-green-500/50 transition-all duration-300">
-                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-green-500/10 rounded-full blur-2xl group-hover:bg-green-500/20 transition-all"></div>
+                <div class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-900 text-white rounded-2xl p-5 shadow-xl relative overflow-hidden flex items-start gap-4 border border-blue-500/20 group hover:border-blue-500/50 transition-all duration-300">
+                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
                     
                     <!-- 3x4 PHOTO CONTAINER -->
-                    <div class="w-24 md:w-28 flex-shrink-0 rounded-xl overflow-hidden border-2 border-green-500/40 shadow-lg relative bg-navy-950" style="aspect-ratio: 3 / 4;">
+                    <div class="w-24 md:w-28 flex-shrink-0 rounded-xl overflow-hidden border-2 border-blue-500/40 shadow-lg relative bg-navy-950" style="aspect-ratio: 3 / 4;">
                         {% if member.photo %}
                             <img src="{{ member.photo.url }}" alt="{{ member.full_name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                         {% else %}
                             <div class="w-full h-full flex flex-col items-center justify-center bg-navy-950/80 text-gray-400 p-2 text-center">
-                                <i class="fas {% if member.position == 'editor_in_chief' %}fa-user-tie{% elif member.position == 'deputy_editor' %}fa-user-shield{% else %}fa-pen-nib{% endif %} text-2xl text-green-400/70 mb-1"></i>
+                                <i class="fas {% if member.position == 'editor_in_chief' %}fa-user-tie{% elif member.position == 'deputy_editor' %}fa-user-shield{% else %}fa-pen-nib{% endif %} text-2xl text-blue-400/70 mb-1"></i>
                                 <span class="text-[9px] uppercase tracking-wider text-gray-400 font-medium">{% trans "3x4 Rasm" %}</span>
                             </div>
                         {% endif %}
@@ -180,7 +55,7 @@ if (wrapper && img1 && img2) {
                     <div class="flex-1 min-w-0 flex flex-col justify-between self-stretch">
                         <div>
                             <div class="mb-2">
-                                <span class="inline-block bg-green-600/30 text-green-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full border border-green-500/40 truncate max-w-full">
+                                <span class="inline-block bg-blue-600/30 text-blue-300 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full border border-blue-500/40 truncate max-w-full">
                                     {% if member.position == 'editor_in_chief' %}
                                         {% trans "Bosh muharrir" %}
                                     {% elif member.position == 'deputy_editor' %}
@@ -196,7 +71,7 @@ if (wrapper && img1 && img2) {
                                 {{ member.full_name }}
                             </h3>
                             {% if member.academic_degree or member.academic_title %}
-                            <div class="text-xs text-green-300 font-medium mb-1.5">
+                            <div class="text-xs text-blue-200 font-medium mb-1.5">
                                 {{ member.academic_degree }}{% if member.academic_degree and member.academic_title %}, {% endif %}{{ member.academic_title }}
                             </div>
                             {% endif %}
@@ -206,9 +81,9 @@ if (wrapper && img1 && img2) {
                                 </p>
                             {% endif %}
                         </div>
-                        <div class="pt-2 border-t border-white/10 flex items-center gap-1.5 text-xs text-green-400 font-medium">
+                        <div class="pt-2 border-t border-white/10 flex items-center gap-1.5 text-xs text-blue-300 font-medium">
                             <i class="fas fa-university text-[11px] flex-shrink-0"></i>
-                            <span class="truncate">{{ member.workplace }}</span>
+                            <span class="truncate">{{ member.workplace|default:"TIFT universiteti" }}</span>
                         </div>
                     </div>
                 </div>
@@ -217,18 +92,18 @@ if (wrapper && img1 && img2) {
         </div>
 
         <!-- 2. TAHRIRIYAT HAY'ATI (EDITORIAL BOARD) -->
-        <div class="mb-12">
+        <div class="mb-14">
             <div class="mb-6">
                 <h2 class="text-2xl font-black text-navy-900 flex items-center gap-2 mb-2">
-                    <span class="w-1 h-7 bg-green-600 rounded-full block"></span>
-                    {% trans "Tahririyat hay'ati" %}
+                    <span class="w-1 h-7 bg-blue-600 rounded-full block"></span>
+                    {% trans "Tahririyat hay'ati a'zolari" %}
                 </h2>
                 <div class="section-divider ml-3 mb-4"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {% for member in editorial_board %}
-                <div class="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm hover:shadow-md hover:border-green-500/30 transition-all duration-200 flex items-start gap-4">
+                <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm hover:shadow-md hover:border-blue-400 transition-all duration-200 flex items-start gap-4">
                     <!-- 3x4 PHOTO CONTAINER WITH COUNTER BADGE -->
                     <div class="w-20 md:w-24 flex-shrink-0 rounded-xl overflow-hidden border border-gray-200 shadow-sm relative bg-gray-50" style="aspect-ratio: 3 / 4;">
                         {% if member.photo %}
@@ -250,27 +125,85 @@ if (wrapper && img1 && img2) {
                             <h4 class="font-bold text-navy-900 text-sm leading-snug mb-1">
                                 {{ member.full_name }}
                             </h4>
+                            {% if member.academic_degree or member.academic_title %}
+                            <div class="text-xs text-blue-700 font-semibold mb-1">
+                                {{ member.academic_degree }}{% if member.academic_degree and member.academic_title %}, {% endif %}{{ member.academic_title }}
+                            </div>
+                            {% endif %}
                             {% if member.bio %}
                                 <p class="text-gray-600 text-xs leading-relaxed mb-2 line-clamp-3">
                                     {{ member.bio }}
                                 </p>
                             {% endif %}
                         </div>
-                        <div class="flex items-center gap-1.5 text-[11px] text-gray-400 font-medium pt-1">
-                            <i class="fas fa-building text-green-600 text-[10px] flex-shrink-0"></i>
-                            <span class="truncate">{{ member.workplace }}</span>
+                        <div class="flex items-center gap-1.5 text-[11px] text-gray-500 font-medium pt-1 border-t border-gray-100">
+                            <i class="fas fa-building text-blue-600 text-[10px] flex-shrink-0"></i>
+                            <span class="truncate">{{ member.workplace|default:"TIFT universiteti" }}</span>
                         </div>
                     </div>
+                </div>
+                {% empty %}
+                <div class="col-span-3 text-center py-8 text-gray-400 text-sm bg-white rounded-2xl border border-dashed border-gray-200">
+                    {% trans "Tahririyat hay'ati a'zolari shakllantirilmoqda." %}
                 </div>
                 {% endfor %}
             </div>
         </div>
     {% else %}
-        <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center">
+        <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center mb-12">
             <i class="fas fa-users text-4xl text-gray-300 mb-3 block"></i>
             <p class="text-gray-400 text-sm">{% trans "Tahririyat a'zolari hali qo'shilmagan." %}</p>
         </div>
     {% endif %}
+
+    <!-- CATEGORIES SECTION -->
+    <div class="mb-16">
+        <div class="mb-6">
+            <h2 class="text-2xl font-black text-navy-900 flex items-center gap-2 mb-2">
+                <span class="w-1 h-7 bg-blue-600 rounded-full block"></span>
+                {% trans "Jurnal qabul qiladigan yo'nalishlar" %}
+            </h2>
+            <div class="section-divider ml-3 mb-4"></div>
+            <p class="text-gray-500 text-sm ml-3">{% trans "Tahririyat hay'ati quyidagi ilmiy yo'nalishlar va shifrlar bo'yicha maqolalar qabul qiladi:" %}</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-gray-200 relative overflow-hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 relative z-10">
+                {% for cat in categories %}
+                <div class="group relative bg-gray-50/70 border border-gray-200 rounded-2xl p-5 hover:bg-blue-50/50 hover:border-blue-300 transition-all duration-300 hover:-translate-y-0.5 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 border border-blue-200 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+                            <i class="fas {{ cat.icon_class }} text-blue-700 text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="font-mono text-blue-700 text-xs font-bold tracking-wider mb-1">{{ cat.code }}</div>
+                            <h3 class="text-navy-900 font-bold text-sm leading-snug group-hover:text-blue-700 transition-colors">{{ cat.name }}</h3>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <div class="col-span-3 text-center py-6 text-gray-400 text-sm">{% trans "Hozircha yo'nalishlar mavjud emas." %}</div>
+                {% endfor %}
+            </div>
+
+            <!-- Bottom stat bar -->
+            <div class="mt-8 pt-6 border-t border-gray-200 flex flex-wrap justify-center gap-8 relative z-10">
+                <div class="text-center">
+                    <div class="text-blue-700 font-black text-2xl">{{ categories|length|default:11 }}</div>
+                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Ilmiy yo'nalish" %}</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-blue-700 font-black text-2xl">24/7</div>
+                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Onlayn qabul" %}</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-blue-700 font-black text-2xl">4-6</div>
+                    <div class="text-gray-500 text-[10px] uppercase tracking-wider mt-1">{% trans "Hafta taqriz muddati" %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

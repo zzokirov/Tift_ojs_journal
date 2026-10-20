@@ -3,9 +3,21 @@
 {% block title %}{% trans "Hujjatlar" %} | {% trans "TIFT Jurnali" %}{% endblock %}
 {% block content %}
 
+<!-- HEADER -->
+<div class="site-container px-4 pt-8 pb-4">
+    <div class="border-b border-gray-200 pb-5 flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <div class="flex items-center gap-2 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+                <i class="fas fa-file-contract"></i>
+                <span>{{ current_journal.title }}</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-navy-900">{% trans "Hujjatlar va talablar" %}</h1>
+            <p class="text-xs sm:text-sm text-gray-500 mt-1">{% trans "Mualliflar uchun talablar, namunaviy andozalar va me'yoriy hujjatlar" %}</p>
+        </div>
+    </div>
+</div>
 
-
-<div class="site-container px-4 py-12 space-y-10">
+<div class="site-container px-4 py-8 space-y-10">
 
     <!-- MAQOLA TALABLARI -->
     {% if requirements %}
