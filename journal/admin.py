@@ -202,7 +202,7 @@ class JournalIssueAdmin(JournalAdminMixin, admin.ModelAdmin):
             'fields': ('journal', 'volume', 'number', 'year', 'quarter', 'period', 'title', 'description', 'status', 'is_published')
         }),
         (_("Muqovalar va fayllar"), {
-            'fields': ('cover_image', 'back_cover_image', 'toc_pdf', 'editorial_doc', 'full_pdf', 'publication_date')
+            'fields': ('cover_image', 'full_pdf', 'publication_date')
         }),
     )
 

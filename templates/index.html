@@ -141,61 +141,7 @@
             </div>
         </div>
 
-        <!-- 4. SO'NGGI SONLAR SECTION -->
-        <section class="mb-12">
-            <div class="flex items-center justify-between mb-6 pb-2 border-b border-gray-200">
-                <div>
-                    <h2 class="text-lg sm:text-xl font-black text-gray-900 flex items-center gap-2">
-                        <i class="fas fa-layer-group text-blue-600 text-base"></i>
-                        <span>{% trans "So'nggi sonlar" %}</span>
-                    </h2>
-                    <p class="text-xs text-gray-500 mt-0.5">{% trans "Jurnalning yaqinda chop etilgan nashrlari" %}</p>
-                </div>
-                <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="text-xs sm:text-sm font-bold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1 transition">
-                    <span>{% trans "Barcha sonlar (Arxiv)" %}</span>
-                    <i class="fas fa-arrow-right text-[11px]"></i>
-                </a>
-            </div>
-
-            {% if issues %}
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {% for issue in issues|slice:":3" %}
-                    <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition flex gap-4 items-center">
-                        <div class="w-20 flex-shrink-0">
-                            <div class="aspect-[3/4] w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
-                                {% if issue.cover_image %}
-                                    <img src="{{ issue.cover_image.url }}" alt="{{ issue }}" class="w-full h-full object-cover">
-                                {% elif current_journal.get_cover_for_language %}
-                                    <img src="{{ current_journal.get_cover_for_language.url }}" alt="{{ issue }}" class="w-full h-full object-cover">
-                                {% else %}
-                                    <div class="w-full h-full bg-navy-900 p-2 text-white flex flex-col justify-between">
-                                        <span class="text-[8px] font-bold">TIFT</span>
-                                        <span class="text-[9px] font-bold leading-tight">{{ issue.number }}-son</span>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h4 class="text-sm font-bold text-gray-900 truncate mb-1">
-                                {{ issue.number }}-son, {{ issue.year }} {% trans "yil" %}
-                            </h4>
-                            <p class="text-xs text-gray-400 mb-3">{{ issue.publication_date|default:issue.created_at|date:"Y-m-d" }}</p>
-                            <a href="{% url 'issue_detail' journal_slug=current_journal.slug issue_pk=issue.pk %}"
-                               class="inline-flex items-center gap-1 text-xs font-bold text-blue-700 hover:text-blue-900 border border-blue-200 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition">
-                                <span>{% trans "Ko'rish →" %}</span>
-                            </a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class="bg-white rounded-2xl border border-dashed border-gray-300 p-8 text-center text-xs text-gray-400">
-                    {% trans "Hozircha nashr etilgan sonlar mavjud emas" %}
-                </div>
-            {% endif %}
-        </section>
-
-        <!-- 5. ARTICLES & EDITORIAL BOARD GRID -->
+        <!-- 4. ARTICLES & EDITORIAL BOARD GRID -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             
             <!-- Left 2 Cols: So'nggi maqolalar -->
@@ -300,6 +246,60 @@
             </div>
 
         </div>
+
+        <!-- 5. SO'NGGI SONLAR SECTION -->
+        <section class="mb-12">
+            <div class="flex items-center justify-between mb-6 pb-2 border-b border-gray-200">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-black text-gray-900 flex items-center gap-2">
+                        <i class="fas fa-layer-group text-blue-600 text-base"></i>
+                        <span>{% trans "So'nggi sonlar" %}</span>
+                    </h2>
+                    <p class="text-xs text-gray-500 mt-0.5">{% trans "Jurnalning yaqinda chop etilgan nashrlari" %}</p>
+                </div>
+                <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="text-xs sm:text-sm font-bold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1 transition">
+                    <span>{% trans "Barcha sonlar (Arxiv)" %}</span>
+                    <i class="fas fa-arrow-right text-[11px]"></i>
+                </a>
+            </div>
+
+            {% if issues %}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for issue in issues|slice:":3" %}
+                    <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition flex gap-4 items-center">
+                        <div class="w-20 flex-shrink-0">
+                            <div class="aspect-[3/4] w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+                                {% if issue.cover_image %}
+                                    <img src="{{ issue.cover_image.url }}" alt="{{ issue }}" class="w-full h-full object-cover">
+                                {% elif current_journal.get_cover_for_language %}
+                                    <img src="{{ current_journal.get_cover_for_language.url }}" alt="{{ issue }}" class="w-full h-full object-cover">
+                                {% else %}
+                                    <div class="w-full h-full bg-navy-900 p-2 text-white flex flex-col justify-between">
+                                        <span class="text-[8px] font-bold">TIFT</span>
+                                        <span class="text-[9px] font-bold leading-tight">{{ issue.number }}-son</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-sm font-bold text-gray-900 truncate mb-1">
+                                {{ issue.number }}-son, {{ issue.year }} {% trans "yil" %}
+                            </h4>
+                            <p class="text-xs text-gray-400 mb-3">{{ issue.publication_date|default:issue.created_at|date:"Y-m-d" }}</p>
+                            <a href="{% url 'issue_detail' journal_slug=current_journal.slug issue_pk=issue.pk %}"
+                               class="inline-flex items-center gap-1 text-xs font-bold text-blue-700 hover:text-blue-900 border border-blue-200 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition">
+                                <span>{% trans "Ko'rish →" %}</span>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white rounded-2xl border border-dashed border-gray-300 p-8 text-center text-xs text-gray-400">
+                    {% trans "Hozircha nashr etilgan sonlar mavjud emas" %}
+                </div>
+            {% endif %}
+        </section>
 
     </div>
 </div>
