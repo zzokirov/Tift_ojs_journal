@@ -48,7 +48,7 @@
 
       <form method="post" class="space-y-4">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.GET.next|default:next|default:'' }}">
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
 
         <!-- First + Last name (2 column) -->
         <div class="grid grid-cols-2 gap-3">
@@ -159,7 +159,7 @@
 
       <div class="mt-6 pt-6 border-t border-gray-100 text-center text-sm text-gray-500">
         {% trans "Hisobingiz bormi?" %}
-        <a href="{% url 'login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="text-green-600 font-bold hover:text-green-700 transition-colors ml-1">
+        <a href="{% url 'login' %}{% if next %}?next={{ next }}{% endif %}" class="text-green-600 font-bold hover:text-green-700 transition-colors ml-1">
           {% trans "Kirish" %}
         </a>
       </div>

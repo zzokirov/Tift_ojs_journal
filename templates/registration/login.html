@@ -41,7 +41,7 @@
 
       <form method="post" class="space-y-5">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next|default:request.GET.next|default:'' }}">
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
 
         <!-- Email -->
         <div>
@@ -99,7 +99,7 @@
 
       <div class="mt-6 pt-6 border-t border-gray-100 text-center text-sm text-gray-500">
         {% trans "Hisobingiz yo'qmi?" %}
-        <a href="{% url 'signup' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="text-green-600 font-bold hover:text-green-700 transition-colors ml-1">
+        <a href="{% url 'signup' %}{% if next %}?next={{ next }}{% endif %}" class="text-green-600 font-bold hover:text-green-700 transition-colors ml-1">
           {% trans "Ro'yxatdan o'tish" %}
         </a>
       </div>
