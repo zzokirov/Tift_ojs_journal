@@ -1039,15 +1039,32 @@ def generate_article_pdf(request, journal_slug, pk):
 
 
 def signup(request):
+    next_url = request.POST.get('next') or request.GET.get('next', '')
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            from django.contrib.auth import login as auth_login
+            auth_login(request, user)
+            if next_url and next_url.startswith('/'):
+                return redirect(next_url)
             return redirect('my_articles')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
+
+    current_journal = None
+    if next_url:
+        parts = [p for p in next_url.strip('/').split('/') if p]
+        if parts:
+            current_journal = Journal.objects.filter(slug=parts[0]).first()
+    if not current_journal:
+        current_journal = Journal.objects.first()
+
+    return render(request, 'registration/signup.html', {
+        'form': form,
+        'current_journal': current_journal,
+        'next': next_url,
+    })
 
 
 @login_required
