@@ -168,7 +168,7 @@
                             </a>
                             <p class="text-xs text-gray-500 line-clamp-2 mb-2">{{ art.abstract }}</p>
                             <div class="flex items-center gap-3 text-[11px] text-gray-400">
-                                <span class="font-semibold text-gray-600">{{ art.author.get_full_name|default:art.author.username }}</span>
+                                <span class="font-semibold text-gray-600">{{ art.authors|default:art.author.get_full_name|default:art.author.username }}</span>
                                 <span>•</span>
                                 <span>{{ art.created_at|date:"d.m.Y" }}</span>
                             </div>

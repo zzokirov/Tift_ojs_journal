@@ -1,0 +1,2840 @@
+[
+  {
+    "id": 8,
+    "categories": [
+      {
+        "id": 76,
+        "name_uz": "Молия, солиқ, бюджет, суғурта",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 142,
+            "name_uz": "RESPUBLIKAMIZDA ISLOM MOLIYASINI RIVOJLANTIRISHNING  USTUVOR YO‘NALISHLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Ibaragimov_A_fNquRmI.N._Bositova_S.%D0%92.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/142/view_or_download/",
+            "author": {
+              "id": 116,
+              "name": "Ibragimov Abdunazar Narzullayevich, Bositova Samiya Bahodir qizi"
+            }
+          },
+          {
+            "id": 143,
+            "name_uz": "ПУТИ ПОВЫШЕНИЯ ЭФФЕКТИВНОСТИ БЮДЖЕТНЫХ СРЕДСТВ  В СФЕРЕ ГОСУДАРСТВЕННЫХ ЗАКУПОК",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%91%D0%B0%D0%B7%D0%B0%D1%80%D0%BE%D0%B2_%D0%9D.%D0%A1._%D0%91%D0%B0%D1%85%D1%82%D0%B8%D1%8F%D1%80%D0%BE%D0%B2_%D0%A3.%D0%9A..pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/%D0%91%D0%B0%D0%B7%D0%B0%D1%80%D0%BE%D0%B2_%D0%9D.%D0%A1._%D0%91%D0%B0%D1%85%D1%82%D0%B8%D1%8F%D1%80%D0%BE%D0%B2_%D0%A3.%D0%9A..pdf",
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/143/view_or_download/",
+            "author": {
+              "id": 117,
+              "name": "Базаров Назиржон Сабирович ,Бахтияров Умид Кахраманович"
+            }
+          },
+          {
+            "id": 144,
+            "name_uz": "НАЛОГОВЫЕ ОТНОШЕНИЯ В ЭПОХУ ТИМУРИДОВ",
+            "name_ru": "НАЛОГОВЫЕ ОТНОШЕНИЯ В ЭПОХУ ТИМУРИДОВ",
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9D%D0%B0%D0%BB%D0%BE%D0%B3%D0%BE%D0%B2%D1%8B%D0%B5_%D0%BE%D1%82%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D1%8F_%D0%B2_%D1%8D%D0%BF%D0%BE%D1%85%D1%83_%D0%A2%D0%B8%D0%BC%D1%83%D1%80%D0%B8%D0%B4%D0%BE%D0%B2_.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/%D0%9D%D0%B0%D0%BB%D0%BE%D0%B3%D0%BE%D0%B2%D1%8B%D0%B5_%D0%BE%D1%82%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D1%8F_%D0%B2_%D1%8D%D0%BF%D0%BE%D1%85%D1%83_%D0%A2%D0%B8%D0%BC%D1%83%D1%80%D0%B8%D0%B4%D0%BE%D0%B2_.pdf",
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/144/view_or_download/",
+            "author": {
+              "id": 118,
+              "name": "Тошматов Шухрат Амонович,  Гиясов Сарвар Аъзамович"
+            }
+          }
+        ]
+      },
+      {
+        "id": 77,
+        "name_uz": "Банк, кредит, давлат қарзи",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 145,
+            "name_uz": "MONETAR SIYOSAT TRANSMISSIYA MEXANIZMI VA KAPITAL  HARAKATI SAMARADORLIGI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Abduraximova_S.A._Mamadjanov_F.G._-_Monei.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/145/view_or_download/",
+            "author": {
+              "id": 119,
+              "name": "Abduraximova Saida Axmadjanovna,Mamadjanov Farrux Gayratovich"
+            }
+          },
+          {
+            "id": 158,
+            "name_uz": "KRIPTO AKTIVLARNI GLOBAL MOLIYAVIY BOSHQARUVDA  FUNKSIONAL TARTIBGA SOLISH VA SOLIQ SHAFFOFLIGI:  XALQARO MODELLAR VA O‘ZBEKISTON UCHUN  INTEGRATSIYALASHGAN MEXANIZM",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Zafar_Berdinazarov_Biznes_va_tadbirkorlik_%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%B2%D0%B0%D0%BB%D1%8E%D1%82%D0%B0%D0%BB%D0%B0%D1%80.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/158/view_or_download/",
+            "author": {
+              "id": 132,
+              "name": "Zafar Berdinazarov,Baxodir Davlatov"
+            }
+          }
+        ]
+      },
+      {
+        "id": 78,
+        "name_uz": "Бухгалтерия ҳисоби ва иқтисодий таҳлил",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 156,
+            "name_uz": "KORPORATIV BOSHQARUV TIZIMIDA ICHKI AUDIT  XIZMATINI TASHKIL ETISHNING O‘ZIGA XOS JIHATLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Torayev_A_N__Torayeva_G_Korpoi.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/156/view_or_download/",
+            "author": {
+              "id": 130,
+              "name": "To‘rayev Abdurahim Nortojiyevich,To‘rayeva Mohira Gulmirzayevna"
+            }
+          },
+          {
+            "id": 146,
+            "name_uz": "MOLIYAVIY HISOBOT ISHONCHLILIGINI BAHOALSH  KO’RSATKICHLARINI TAKOMILLASHTIRISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Suvonov_B.B._-_Moliyaviy_hisobashtirish.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/146/view_or_download/",
+            "author": {
+              "id": 120,
+              "name": "Suvonov Bekniyoz Baxtiyor o‘g‘li"
+            }
+          },
+          {
+            "id": 147,
+            "name_uz": "RAQAMLI IQTISODIYOT SHAROITIDA BUXGALTERIYA HISOBINI  TRANSFORMATSIYA QILISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Sidiqov_R.R._Mirahmedov_A.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/147/view_or_download/",
+            "author": {
+              "id": 121,
+              "name": "Sidiqov Rauf Rustamovich,Mirahmedov Abdulhafiz Alisher o‘g‘li"
+            }
+          },
+          {
+            "id": 148,
+            "name_uz": "ISLOM MOLIYA TASHKILOTLARIDA BUXGALTERIYA  HISOBIDA TASHKIL QILISH TARTIBI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Ibragimov_A.Ni.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/148/view_or_download/",
+            "author": {
+              "id": 122,
+              "name": "Ibragimov Abdunazar Narzullayevich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 79,
+        "name_uz": "Хорижий мамлакатлар иқтисодиёти",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 149,
+            "name_uz": "ГЛОБАЛЬНЫЕ РЫНКИ ПОД ДАВЛЕНИЕМ: РОЛЬ ЯПОНИИ КАК  ВОЗМОЖНОГО ОЧАГА ФИНАНСОВОЙ НЕСТАБИЛЬНОСТИ",
+            "name_ru": "ГЛОБАЛЬНЫЕ РЫНКИ ПОД ДАВЛЕНИЕМ: РОЛЬ ЯПОНИИ КАК  ВОЗМОЖНОГО ОЧАГА ФИНАНСОВОЙ НЕСТАБИЛЬНОСТИ",
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A1%D0%B0%D0%BB%D0%B0%D0%B5%D0%B2_%D0%A8.%D0%A0._-_%D0%93%D0%BB%D0%BE%D0%B1%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5_%D1%80%D1%8B%D0%BD%D0%BA%D0%B8_%D0%BF%D0%BE%D0%B4_%D0%B4%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC_%D1%80%D0%BE%D0%BB%D1%8C_%D0%AF%D0%BF%D0%BE%D0%BD.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/149/view_or_download/",
+            "author": {
+              "id": 123,
+              "name": "Расул Шавкатович Салаев"
+            }
+          },
+          {
+            "id": 150,
+            "name_uz": "THE EXPERIENCE OF DEVELOPED COUNTRIES IN DIGITAL  TRANSFORMATION OF UZBEKISTAN’S ECONOMY AND  OPPORTUNITIES FOR ITS APPLICATION",
+            "name_ru": null,
+            "name_en": "THE EXPERIENCE OF DEVELOPED COUNTRIES IN DIGITAL  TRANSFORMATION OF UZBEKISTAN’S ECONOMY AND  OPPORTUNITIES FOR ITS APPLICATION",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Tursinbayev_A.N._-_The_experience_of_dn.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/150/view_or_download/",
+            "author": {
+              "id": 124,
+              "name": "Tursinbayev Azizbek Nabijon o‘g‘li"
+            }
+          }
+        ]
+      },
+      {
+        "id": 80,
+        "name_uz": "Тармоқлар иқтисодиёти",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 151,
+            "name_uz": "KIMYO SANOATI KORXONALARINING IQTISODIY SALOHIYATINI  BAHOLASHDA AHP USULI VA INTEGRAL INDEKSLARDAN  FOYDALANISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Adilova_G.A._Odilova_M.A._-_Kimyo_sanoati_korxonalarili.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/151/view_or_download/",
+            "author": {
+              "id": 125,
+              "name": "Adilova Guzal Abdazovna,Odilova Malika Abdushukur qizi"
+            }
+          },
+          {
+            "id": 152,
+            "name_uz": "O‘ZBEKISTON RESPUBLIKASIDA KICHIK BIZNES VA XUSUSIY  TADBIRKORLIKNI RIVOJLANTIRISH ISTIQBOLLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Nurullayeva_S.%D0%A2._Saydullayeva_S.%D0%90._-_Ozbekish_istiqbollari.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/152/view_or_download/",
+            "author": {
+              "id": 126,
+              "name": "Nurullayeva Shaxnoza Toxtasinovna,Saydullayeva Saodat Abdumajitovna"
+            }
+          },
+          {
+            "id": 153,
+            "name_uz": "MEHNAT MIGRATSIYASINING DINAMIKASI VA TARKIBIY  TUZILMASI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Rahimboyev_M.I._-_Mehnat_migratsiyasiningibiy_tuzilmasi.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/153/view_or_download/",
+            "author": {
+              "id": 127,
+              "name": "Rahimboyev Muxtorbek Ikrom o‘g‘li"
+            }
+          },
+          {
+            "id": 154,
+            "name_uz": "СТРУКТУРНАЯ ТРАНСФОРМАЦИЯ ПРОМЫШЛЕННОСТИ  УЗБЕКИСТАНА: СОВРЕМЕННЫЕ ТЕНДЕНЦИИ И  РЕГИОНАЛЬНЫЕ ДИСПРОПОРЦИИ",
+            "name_ru": "СТРУКТУРНАЯ ТРАНСФОРМАЦИЯ ПРОМЫШЛЕННОСТИ  УЗБЕКИСТАНА: СОВРЕМЕННЫЕ ТЕНДЕНЦИИ И  РЕГИОНАЛЬНЫЕ ДИСПРОПОРЦИИ",
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A5%D0%BE%D0%BB%D0%B8%D0%BA%D0%BE%D0%B2%D0%B0_%D0%A0.%D0%A1._-_%D0%A1%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%BD%D0%B0%D1%8F_%D1%82%D1%88%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D0%A3%D0%B7%D0%B1%D0%B5%D0%BA%D0%B8%D1%81%D1%82%D0%B0%D0%BD%D0%B0.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/154/view_or_download/",
+            "author": {
+              "id": 128,
+              "name": "Холикова Рухсора Санджаровна"
+            }
+          }
+        ]
+      },
+      {
+        "id": 81,
+        "name_uz": "Сунъий интеллект ва ахборот технологиялари",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 155,
+            "name_uz": "OʻZBEK TILIDAGI YOZMA NUTQNI TABIIY TILNI QAYTA ISHLASH  ASOSIDA AVTOMATIK TAHLIL QILISH USULLARINING QIYOSIY  TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Ozbek_NLP_qiyosiy_tahlil_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/155/view_or_download/",
+            "author": {
+              "id": 129,
+              "name": "Zokirov Sanjar Zohidjon o‘g‘li,Xolmuminov Yusufjon Xolbuta o‘g‘li"
+            }
+          },
+          {
+            "id": 157,
+            "name_uz": "РАЗВИТИЕ ИСКУССТВЕННОГО ИНТЕЛЛЕКТА В ЭКОНОМИКЕ:  ТЕНДЕНЦИИ, ЭФФЕКТЫ И ОГРАНИЧЕНИЯ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Nabieva_v_ekonomike_1.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/Nabieva_v_ekonomike_1.pdf",
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/157/view_or_download/",
+            "author": {
+              "id": 131,
+              "name": "Набиева Севара Султановна, Нормурадов Нурбек Сунатиллоевич,Зокиров Санжар Зохиджон угли"
+            }
+          }
+        ]
+      }
+    ],
+    "name_uz": "Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal",
+    "name_ru": null,
+    "name_en": null,
+    "cover_image": "https://back.tift-fintech.uz/media/Jurnal/jurnal/2026/10/12/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8_%D0%B8_%D0%B0%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D1%83%D1%80%D0%B0__%D0%B6%D1%83%D1%80%D0%BD%D0%B0%D0%BB_TIFT_2026.png",
+    "cover_image_ru": null,
+    "cover_image_en": null,
+    "back_image": "https://back.tift-fintech.uz/media/jurnal/jurnal/2026/10/12/dddddd.jpg",
+    "back_image_ru": null,
+    "back_image_en": null,
+    "which_number": "3-son | 2026 yil",
+    "created_at": "2026-10-12T06:47:05.835997Z",
+    "updated_at": "2026-10-12T12:49:43.786496Z",
+    "upload_file_uz": null,
+    "upload_file_ru": null,
+    "upload_file_en": null
+  },
+  {
+    "id": 7,
+    "categories": [
+      {
+        "id": 59,
+        "name_uz": "BOSH MUHARRIRDAN - MUSHTARIYLARGA",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 115,
+            "name_uz": "BOSH MUHARRIRDAN - MUSHTARIYLARGA",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A2%D0%90%D0%91%D0%A0%D0%98%D0%9A.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/115/view_or_download/",
+            "author": {
+              "id": 24,
+              "name": "Бош муҳаррир, TIFT университети Ректори А. Нодиров"
+            }
+          }
+        ]
+      },
+      {
+        "id": 60,
+        "name_uz": "Moliya, soliq, byudjet, sugʼurta.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 116,
+            "name_uz": "ISLOM MOLIYASI SOHASIDA MALAYZIYA TAJRIBASI VA UNING O‘ZBEKISTON UCHUN IJOBIY JIHATLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/15._Azizov_O.M._-_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/116/view_or_download/",
+            "author": {
+              "id": 69,
+              "name": "Azizov Olim Maxmudovich"
+            }
+          },
+          {
+            "id": 117,
+            "name_uz": "НАУЧНО-ТЕОРЕТИЧЕСКИЕ ОСНОВЫ И МЕЖДУНАРОДНАЯ ПРАКТИКА ОЦЕНКИ НАЛОГОВЫХ РАСХОДОВ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/S.Giyasov_maqola_ann_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/117/view_or_download/",
+            "author": {
+              "id": 34,
+              "name": "Giyasov Sarvar A’zamovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 61,
+        "name_uz": "BANK, KREDIT, DAVLAT QARZI.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 120,
+            "name_uz": "TIJORAT BANKLARI CHAKANA XIZMATLAR BOZORINI KENGAYTIRISHNING USTUVOR YOʻNALISHLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9D%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2_%D0%90-TIJORAT_BANKLARI_CHAKANA_XIZMATLAR.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/120/view_or_download/",
+            "author": {
+              "id": 96,
+              "name": "Nodirov Azizxon Asrorovich"
+            }
+          },
+          {
+            "id": 121,
+            "name_uz": "INFLYATSION BOSIMLARNI KAMAYTIRISHDA MARKAZIY BANK KOMMUNIKATSIYA SIYOSATINING AHAMIYATI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/5_17SH0oL._Abduraximova_S.A._Saidov_S.I._-_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/121/view_or_download/",
+            "author": {
+              "id": 97,
+              "name": "Abduraximova Saida Axmadjanovna,Saidov Sardorbek Iskandarbekovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 62,
+        "name_uz": "Investitsiya va innovatsiya.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 122,
+            "name_uz": "NAMANGAN VILOYATI QURILISH MATERIALLARI SANOATIDA MODERNIZATSIYA JARAYONLARIGA TA’SIR ETUVCHI OMILLAR VA ULARNING IQTISODIY AHAMIYATI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/1._Adilova_G.A._Odilova_M.A._-.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/122/view_or_download/",
+            "author": {
+              "id": 98,
+              "name": "Adilova Guzal Abdazovna,Odilova Malika Abdushukur qizi"
+            }
+          },
+          {
+            "id": 123,
+            "name_uz": "KAPITAL TARKIBI VA KOMPANIYA QIYMATI: MODIGLIANI-MILLER NAZARIYASI RIVOJLANAYOTGAN BOZORLARDA",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/6._Umarova_G._G._Rustamova_S.R._-_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/123/view_or_download/",
+            "author": {
+              "id": 99,
+              "name": "Umarova Go‘zal G‘ayratovna,Rustamova Sevinch Ravshan qizi"
+            }
+          },
+          {
+            "id": 124,
+            "name_uz": "INNOVATSION IQTISODIYOT SHAROITIDA KORXONALARDA INNOVATSION MARKETING KONSEPSIYASINI SHAKLLANTIRISHNING NAZARIY-USLUBIY ASOSLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/8._Mirzajonova_M.J._-_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/124/view_or_download/",
+            "author": {
+              "id": 100,
+              "name": "Mirzajonova Maftunaxon Jaxongir qizi"
+            }
+          },
+          {
+            "id": 125,
+            "name_uz": "O'ZBEKISTON MILLIY INVESTITSIYA JAMG'ARMASI (UzNIF) LOYIHASI: TASHKIL ETILISHIDAN BIRINCHI XALQARO IPO GACHA BO'LGAN TRANSFORMATSIYA JARAYONI VA UNING MARKAZIY OSIYO KAPITAL BOZORIGA TA'SIRI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/14._Azizov_O.O._-_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/125/view_or_download/",
+            "author": {
+              "id": 101,
+              "name": "Azizov Odiljon Olimovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 63,
+        "name_uz": "Buxgalteriya hisobi va iqtisodiyot tahlil",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 126,
+            "name_uz": "HISOB SIYOSATLARI, HISOBLAB CHIQILGAN BAHOLARDAGI OʼZGARISHLAR VA XATOLAR (BHXS 8)",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/18._Joraev_D.X._Bositova_S.%D0%92._-_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/126/view_or_download/",
+            "author": {
+              "id": 102,
+              "name": "Jo‘raev Dilmurod Xolmo‘minovich, Bositova Samiya Bahodir qizi"
+            }
+          },
+          {
+            "id": 127,
+            "name_uz": "FOYDALANISH HUQUQI KO‘RINISHIDAGI AKTIVLAR VA IJARA MAJBURIYATLARINI QAYTA BAHOLASHNING NAZARIY MASALALARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/21._Djumayeva_G.A._-_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/127/view_or_download/",
+            "author": {
+              "id": 103,
+              "name": "Djumayeva Guzal Axtamovna"
+            }
+          }
+        ]
+      },
+      {
+        "id": 64,
+        "name_uz": "Xorijiy mamlakatlar iqtisodiyoti",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 128,
+            "name_uz": "NEFT NARXI, VALYUTA KURSI VA MOLIYAVIY BARQARORLIK: NEFT EKSPORT QILUVCHI MAMLAKATLAR MISOLIDA VAR VA GREYNJER TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/9._Narziyev_A.B._-_Neft_narxi_valyuta_kursi_va_moliyaviy_barqarorlik.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/128/view_or_download/",
+            "author": {
+              "id": 104,
+              "name": "Narziyev Abror Baxtiyorovich"
+            }
+          },
+          {
+            "id": 129,
+            "name_uz": "O‘ZBEKISTON–TOJIKISTON IQTISODIY HAMKORLIGINING ZAMONAVIY HOLATI VA RIVOJLANISH ISTIQBOLLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/19._Sheraliyev_N.S._-.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/129/view_or_download/",
+            "author": {
+              "id": 105,
+              "name": "Sheraliyev Nurali Sherali oʻgʻli"
+            }
+          }
+        ]
+      },
+      {
+        "id": 65,
+        "name_uz": "TARMOQLAR IQTISODIYOTI",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 130,
+            "name_uz": "CHANGING TRENDS IN POPULATION EMPLOYMENT AND INCOME IN THE REPUBLIC OF KARAKALPAKSTAN",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/2._Rahimboyev_M.M._Normurodov_A.A_-_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/130/view_or_download/",
+            "author": {
+              "id": 106,
+              "name": "Mukhtorbek Rahimboyev, Alibek Normurodov"
+            }
+          },
+          {
+            "id": 131,
+            "name_uz": "OʻZBEKISTON KIMYO SANOATINING TRANSFORMATSION RIVOJLANISH TENDENSIYALARI VA SANOAT SIYOSATI SAMARADORLIGINI BAHOLASH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/11._Odilova_M.%D0%90._-.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/131/view_or_download/",
+            "author": {
+              "id": 107,
+              "name": "Odilova Malika Abdushukur qizi"
+            }
+          },
+          {
+            "id": 132,
+            "name_uz": "ЭКОНОМИЧЕСКАЯ ЭФФЕКТИВНОСТЬ СОЛНЕЧНОЙ И ВЕТРОВОЙ ЭНЕРГЕТИИКИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9C%D0%B0%D1%85%D0%BA%D0%B0%D0%BC%D0%BE%D0%B2%D0%B0_%D0%9D.%D0%A1._%D0%AD%D0%BA%D0%BE%D0%BD%D0%BE%D0%BC.%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82._%D1%81%D0%BE%D0%BB%D0%BD._%D0%B8_%D0%B2%D0%B5%D1%82%D1%80.%D1%81%D1%82..pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/132/view_or_download/",
+            "author": {
+              "id": 108,
+              "name": "Махкамова Надира Саидмуратовна"
+            }
+          }
+        ]
+      },
+      {
+        "id": 66,
+        "name_uz": "Nobel mukofoti",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 133,
+            "name_uz": "Gunnar Myrdal, Fridrix fon Hayek",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Nobel_mukofoti_1974_Gunnar_Myrda_Fridrix_fon_Hayek_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/133/view_or_download/",
+            "author": {
+              "id": 52,
+              "name": "Хайдаров Низамиддин.  Нормуродов Алибек"
+            }
+          }
+        ]
+      },
+      {
+        "id": 72,
+        "name_uz": "2-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_ru": "2-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_en": "2-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "articles": [
+          {
+            "id": 140,
+            "name_uz": "2-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_ru": "2-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_en": "2-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/FULLLL.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/140/view_or_download/",
+            "author": {
+              "id": 114,
+              "name": "2-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli"
+            }
+          }
+        ]
+      }
+    ],
+    "name_uz": "Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal",
+    "name_ru": null,
+    "name_en": null,
+    "cover_image": "https://back.tift-fintech.uz/media/Jurnal/jurnal/2026/09/21/dddddd.jpg",
+    "cover_image_ru": "https://back.tift-fintech.uz/media/Jurnal/jurnal/ru/2026/09/21/rus.png",
+    "cover_image_en": "https://back.tift-fintech.uz/media/Jurnal/jurnal/en/2026/09/21/eng.png",
+    "back_image": "https://back.tift-fintech.uz/media/jurnal/jurnal/2026/09/21/oldi_muqova.jpg",
+    "back_image_ru": null,
+    "back_image_en": null,
+    "which_number": "2-son | 2026",
+    "created_at": "2026-07-07T08:21:29.542814Z",
+    "updated_at": "2026-09-21T05:19:57.449562Z",
+    "upload_file_uz": null,
+    "upload_file_ru": null,
+    "upload_file_en": null
+  },
+  {
+    "id": 6,
+    "categories": [
+      {
+        "id": 50,
+        "name_uz": "BOSH MUHARRIRDAN - MUSHTARIYLARGA",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 95,
+            "name_uz": "BOSH MUHARRIRDAN - MUSHTARIYLARGA",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/4f844bd3-c052-4b74-9e8e-c76428003fa2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/95/view_or_download/",
+            "author": {
+              "id": 24,
+              "name": "Бош муҳаррир, TIFT университети Ректори А. Нодиров"
+            }
+          }
+        ]
+      },
+      {
+        "id": 51,
+        "name_uz": "Moliya, soliq, byudjet, sugʼurta.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 96,
+            "name_uz": "DAROMAD SOLIG‘I STAVKALARINI QO‘LLASHNING O‘ZIGA XOS XUSUSIYATLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/DAROMAD_SOLIGI_STAVKALARINI_QOLLASHNING.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/96/view_or_download/",
+            "author": {
+              "id": 34,
+              "name": "Giyasov Sarvar A’zamovich"
+            }
+          },
+          {
+            "id": 97,
+            "name_uz": "JISMONIY SHAXSLAR DAROMADLARINI SOLIQQA TORTISH TIZIMINI YANADA TAKOMILLASHTIRISHGA OID",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/JISMONIY_SHAXSLAR_DAROMADLARINI_SOLIQQA_TORTISH.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/97/view_or_download/",
+            "author": {
+              "id": 80,
+              "name": "Boltayev Jo‘rabek Yusufovich ,   Sidiqov Rauf Rustamovich."
+            }
+          },
+          {
+            "id": 98,
+            "name_uz": "XO‘JALIK YURITUVCHI SUBYEKTLARDA PUL MABLAGʻLARI HISOBINI EKONOMETRIK MODELLASHTIRISH VA PROGNOZLASHNI TAKOMILLASHTIRISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/XOJALIK_YURITUVCHI_SUBYEKTLARDA_PUL_MABLAG%CA%BBLARI.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/98/view_or_download/",
+            "author": {
+              "id": 81,
+              "name": "Raxmonov Sherzod Sherkulovich"
+            }
+          },
+          {
+            "id": 114,
+            "name_uz": "SUG‘URTA KOMPANIYALARNI MOLIYAVIY XAVFSIZLIGINI TA`MINLASHNING TASHKILIY-IQTISODIY MEXANIZMLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/SUGURTA_KOMPANIYALARNI_MOLIYAVIY_XAVFSIZLIGINI_TAMINLASHNING_TASHKILIY.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/114/view_or_download/",
+            "author": {
+              "id": 94,
+              "name": "Nosirov Jasur Tursunpulotovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 52,
+        "name_uz": "BANK, KREDIT, DAVLAT QARZI.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 99,
+            "name_uz": "CHET EL VALYUTASIDAGI OPERATSIYALAR VA VALYUTA KURSLARINING O'ZGARISHI HISOBI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/CHET_EL_VALYUTASIDAGI_OPERATSIYALAR_VA_VALYUTA.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/99/view_or_download/",
+            "author": {
+              "id": 25,
+              "name": "To‘rayev Abdurahim Nortojiyevich , Abdusalomova Xurshidabonu Abrorbek qizi"
+            }
+          },
+          {
+            "id": 100,
+            "name_uz": "O‘ZBEKISTONDA ISLOM BANK TIZIMINI JORIY ETISHNING INSTITUTSIONAL MODELI VA UNING IQTISODIY RIVOJLANISHGA TA’SIRI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Islom_banklari_maqola_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/100/view_or_download/",
+            "author": {
+              "id": 82,
+              "name": "Voitov Aziz Botirovich"
+            }
+          },
+          {
+            "id": 101,
+            "name_uz": "O'ZBEKISTON BANK TIZIMIDA “OPEN BANKING” TEXNOLOGIYASINI JORIY ETISH ISTIQBOLLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Ozbekiston_bank_tizimi.__Maqola..pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/101/view_or_download/",
+            "author": {
+              "id": 83,
+              "name": "Sidiqov Rauf Rustamovich , Allamurotov Azimbek Jahongir o‘g‘li."
+            }
+          }
+        ]
+      },
+      {
+        "id": 53,
+        "name_uz": "Investitsiya va innovatsiya.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 102,
+            "name_uz": "QO‘SHMA KORXONALARDA JORIY AKTIVLAR HISOBINI XALQARO STANDARTLAR ASOSIDA YURITISH TARTIBI",
+            "name_ru": null,
+            "name_en": "Yusupov Asror Maxmanazar o‘g‘li.",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/QOSHMA_KORXONALARDA_JORIY_AKTIVLAR_HISOBINI_XALQARO.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/102/view_or_download/",
+            "author": {
+              "id": 84,
+              "name": "Yusupov Asror Maxmanazar o‘g‘li."
+            }
+          },
+          {
+            "id": 103,
+            "name_uz": "SANOATDA INNOVATSIYALARNI RIVOJLANTIRISHNI MOLIYAVIY RAG‘BATLANTIRISH: STRATEGIK YONDASHUVLAR VA AMALIY VOSITALAR",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/SANOATDA_INNOVATSIYALARNI_RIVOJLANTIRISHNI_MOLIYAVIY.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/103/view_or_download/",
+            "author": {
+              "id": 85,
+              "name": "Olimjonov Odil Olimovich , Baxriddinov Nodirbek Zamirdinovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 54,
+        "name_uz": "Moliyaviy menejment va marketing.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 104,
+            "name_uz": "КОРПОРАТИВ БОШҚАРУВ ТИЗИМИНИ ЖОРИЙ ЭТИШНИНГ ХОРИЖ ТАЖРИБАСИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9A%D0%9E%D0%A0%D0%9F%D0%9E%D0%A0%D0%90%D0%A2%D0%98%D0%92_%D0%91%D0%9E%D0%A8%D2%9A%D0%90%D0%A0%D0%A3%D0%92_%D0%A2%D0%98%D0%97%D0%98%D0%9C%D0%98%D0%9D%D0%98_%D0%96%D0%9E%D0%A0%D0%98%D0%99_%D0%AD%D0%A2%D0%98%D0%A8%D0%9D%D0%98%D0%9D%D0%93.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/104/view_or_download/",
+            "author": {
+              "id": 86,
+              "name": "Тўраев Абдураҳим Нортожиевич , Тўраева Моҳира Гулмирзаевна"
+            }
+          },
+          {
+            "id": 105,
+            "name_uz": "O‘ZBEKISTON IQTISODIYOTINING 2025 YILDA MAKROMOLIYAVIY HOLATI TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A3%D0%B7%D0%B1%D0%B5%D0%BA%D0%B8%D1%81%D1%82%D0%BE%D0%BD_%D0%B8%D2%9B%D1%82%D0%B8%D1%81%D0%BE%D0%B4%D0%B8%D1%91%D1%82%D0%B8%D0%BD%D0%B8%D0%BD%D0%B3_2025_%D0%B9%D0%B8%D0%BB%D0%B4%D0%B0_%D0%BC%D0%B0%D0%BA%D1%80%D0%BE%D0%BC%D0%BE%D0%BB%D0%B8%D1%8F%D0%B2%D0%B8%D0%B9_%D2%B3%D0%BE%D0%BB%D0%B0%D1%82%D0%B8_%D1%82%D0%B0%D1%85%D0%BB%D0%B8%D0%BB%D0%B8_3.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/105/view_or_download/",
+            "author": {
+              "id": 87,
+              "name": "Azizov Olim Maxmudovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 55,
+        "name_uz": "IQTISODIYOTNI RAQAMLASHTIRISH, AGRO VA NANO TEXNOLOGIYALAR",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 107,
+            "name_uz": "MATRITSALARNING INFORMATSION TEXNOLOGIYALARNING BA’ZI MASALALARIDA QO‘LLANILISHI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/MATRITSALARNING_INFORMATSION_TEXNOLOGIYALARNING.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/107/view_or_download/",
+            "author": {
+              "id": 89,
+              "name": "Eshimbetov Muzaffar Reyimbayevich, Farhodillayev Dostonbek Toxirjon o’g’li"
+            }
+          },
+          {
+            "id": 160,
+            "name_uz": "TURIZM INFRATUZILMASIDA MA’LUMOTLARNI QAYTA ISHLASH JARAYONLARINI RAQAMLASHTIRISH VA OPTIMALLASHTIRISH",
+            "name_ru": "TURIZM INFRATUZILMASIDA MA’LUMOTLARNI QAYTA ISHLASH JARAYONLARINI RAQAMLASHTIRISH VA OPTIMALLASHTIRISH",
+            "name_en": "TURIZM INFRATUZILMASIDA MA’LUMOTLARNI QAYTA ISHLASH JARAYONLARINI RAQAMLASHTIRISH VA OPTIMALLASHTIRISH",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/TURIZM_INFRATUZILMASIDA_MALUMOTLARNI.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/160/view_or_download/",
+            "author": {
+              "id": 88,
+              "name": "Toshtemirov Xojiakbar Qahramon o'g'li, Ma'rufov Sardorbek Bahromjon o'g'li"
+            }
+          }
+        ]
+      },
+      {
+        "id": 56,
+        "name_uz": "BUXGALTERIYA HISOBINING MILLIY STANDARTLARI ASOSIDA HISOB YURITISH: NAZARIY VA AMALIY YONDASHUVLAR",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 109,
+            "name_uz": "KONSOLIDATSIYALASHGAN MOLIYAVIY HISOBOTDA ICHKI GURUH OPERATSIYALARINI ELIMINATSIYA QILISHNING NAZARIY VA AMALIY MUAMMOLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/KONSOLIDATSIYALASHGAN_MOLIYAVIY_HISOBOTDA_ICHKI.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/109/view_or_download/",
+            "author": {
+              "id": 91,
+              "name": "Eshonqulov Azamat Abdiraximovich"
+            }
+          },
+          {
+            "id": 108,
+            "name_uz": "HISOB SIYOSATINI TUZISHNING TASHKILIY JIHATLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/HISOB_SIYOSATINI_TUZISHNING_TASHKILIY_JIHATLARI.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/108/view_or_download/",
+            "author": {
+              "id": 90,
+              "name": "To‘rayev Abdurahim Nortojiyevich, Masudova Nozimaxon Ma’rufjon qizi"
+            }
+          }
+        ]
+      },
+      {
+        "id": 58,
+        "name_uz": "TARMOQLAR IQTISODIYOTI",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 112,
+            "name_uz": "O‘ZBEKISTON AKSIYADORLIK JAMIYATLARI QIMMATLI QOG‘OZLARNING IKKILAMCHI BOZORIDAGI AMALDAGI HOLATINI TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/OZBEKISTON_AKSIYADORLIK_JAMIYATLARI_QIMMATLI_QOGOZLARNING_IKKIL_Vp7XRsf.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/112/view_or_download/",
+            "author": {
+              "id": 53,
+              "name": "Berdiqulova Manzura Raxmonqulovna"
+            }
+          },
+          {
+            "id": 113,
+            "name_uz": "Sug‘urta kompaniyalarining moliyaviy barqarorligini oshirishda noproporsional qayta sug‘urtani amaliyotga joriy etish",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Sugurta_kompaniyalarining_moliyaviy_barqarorligini_oshirishda.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/113/view_or_download/",
+            "author": {
+              "id": 93,
+              "name": "Moyliyev Murod Baxtiyorovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 57,
+        "name_uz": "Nobel mukofoti",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 110,
+            "name_uz": "Vasiliy Vasilyevich Leontev",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Nobel_mukofoti_1973_Vasiliy_Leontef.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/110/view_or_download/",
+            "author": {
+              "id": 92,
+              "name": "Хайдаров Низамиддин. Нормуродов Алибек"
+            }
+          }
+        ]
+      },
+      {
+        "id": 71,
+        "name_uz": "1-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_ru": "1-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_en": "1-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "articles": [
+          {
+            "id": 139,
+            "name_uz": "1-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_ru": "1-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_en": "1-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/FULLL_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/139/view_or_download/",
+            "author": {
+              "id": 113,
+              "name": "1-son | 2026 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli"
+            }
+          }
+        ]
+      }
+    ],
+    "name_uz": "Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal",
+    "name_ru": null,
+    "name_en": null,
+    "cover_image": "https://back.tift-fintech.uz/media/Jurnal/jurnal/2026/04/09/2026_1-son_4.jpg",
+    "cover_image_ru": null,
+    "cover_image_en": null,
+    "back_image": "https://back.tift-fintech.uz/media/jurnal/jurnal/2026/07/09/1-son__2026_._doc__%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F_page-0001.jpg",
+    "back_image_ru": null,
+    "back_image_en": null,
+    "which_number": "1-son | 2026",
+    "created_at": "2026-04-09T16:42:46.213732Z",
+    "updated_at": "2026-07-09T12:36:15.789036Z",
+    "upload_file_uz": null,
+    "upload_file_ru": null,
+    "upload_file_en": null
+  },
+  {
+    "id": 4,
+    "categories": [
+      {
+        "id": 49,
+        "name_uz": "BOSH MUHARRIRDAN - MUSHTARIYLARGA",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 82,
+            "name_uz": "Татқиқотчи ва муштарийлар илмий фаолиятга ривож!",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/1f48ffe8-7734-47ad-ba30-5331cb466624.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/82/view_or_download/",
+            "author": {
+              "id": 24,
+              "name": "Бош муҳаррир, TIFT университети Ректори А. Нодиров"
+            }
+          }
+        ]
+      },
+      {
+        "id": 38,
+        "name_uz": "MOLIYA, SOLIQ, BYUDJET, SUGʼURTA",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 83,
+            "name_uz": "SOLIQ YUKINI HISOBLASH USLUBLARI",
+            "name_ru": "SOLIQ YUKINI HISOBLASH USLUBLARI",
+            "name_en": "SOLIQ YUKINI HISOBLASH USLUBLARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/SOLIQ_YUKINI_HISOBLASH_USLUBLARI22%D0%B7.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/SOLIQ_YUKINI_HISOBLASH_USLUBLARI22%D0%B7.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/SOLIQ_YUKINI_HISOBLASH_USLUBLARI22%D0%B7.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/83/view_or_download/",
+            "author": {
+              "id": 69,
+              "name": "Azizov Olim Maxmudovich"
+            }
+          },
+          {
+            "id": 63,
+            "name_uz": "AKSIYADORLIK JAMIYATLARI TOMONIDAN CHIQARILGAN AKSIYALARNING IKKILAMCHI BOZORDA SAVDOSI SAMARADORLIGINI OSHIRISH.",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/AKSIYADORLIK_JAMIYATLARI_TOMONIDAN_CHIQARILGAN.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/63/view_or_download/",
+            "author": {
+              "id": 53,
+              "name": "Berdiqulova Manzura Raxmonqulovna"
+            }
+          },
+          {
+            "id": 64,
+            "name_uz": "O’ZBEKISTONDA IQTISODIY O’SISHNING ATROF MUHIT ZARARLANISHIGA TA’SIRINI EKONOMETRIK PROGNOZLASH: KUZNETS EGRI CHIZIG’INI YONDASHUVI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/OZBEKISTONDA_IQTISODIY_OSISHNING_ATROF_MUHIT.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/64/view_or_download/",
+            "author": {
+              "id": 54,
+              "name": "Sarvar Mamasoliyev"
+            }
+          },
+          {
+            "id": 65,
+            "name_uz": "ВАЖНОСТЬ ФИНАНСОВОЙ ПОДДЕРЖКИ ВНЕШНЕЭКОНОМИЧЕСКОЙ ДЕЯТЕЛЬНОСТИ ПРЕДПРИЯТИЙ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A4%D0%98%D0%9D%D0%90%D0%9D%D0%A1%D0%9E%D0%92%D0%9E%D0%99_%D0%9F%D0%9E%D0%94%D0%94%D0%95%D0%A0%D0%96%D0%9A%D0%98.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/65/view_or_download/",
+            "author": {
+              "id": 55,
+              "name": "Пулатова Мохира Бахтиёровна"
+            }
+          }
+        ]
+      },
+      {
+        "id": 39,
+        "name_uz": "BANK, KREDIT, DAVLAT QARZI.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 90,
+            "name_uz": "TIJORAT BANKLARIDA KREDIT RISKLARINI BOSHQARISHNING XORIJIY TAJRIBALARNI O‘ZBEKISTON BANK AMALIYOTIGA TATBIQ ETISH IMKONIYATLARI.",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/TIJORAT_BANKLARIDA_KREDIT_RISKLARINI_Bs855R8.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/90/view_or_download/",
+            "author": {
+              "id": 57,
+              "name": "Norova Nozima Nabiyevna"
+            }
+          },
+          {
+            "id": 93,
+            "name_uz": "ДИНАМИКА И СТРУКТУРА ВНЕШНЕГО ДОЛГА УЗБЕКИСТАН.",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%94%D0%98%D0%9D%D0%90%D0%9C%D0%98%D0%9A%D0%90_%D0%98_%D0%A1%D0%A2%D0%A0%D0%A3%D0%9A%D0%A2%D0%A3%D0%A0%D0%90_%D0%92%D0%9D%D0%95%D0%A8%D0%9D%D0%95%D0%93%D0%9E_%D0%94%D0%9E%D0%9B%D0%93%D0%90_%D0%A3%D0%97%D0%91%D0%95%D0%9A%D0%98%D0%A1%D0%A2%D0%90%D0%9D.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/93/view_or_download/",
+            "author": {
+              "id": 77,
+              "name": "Одинаев Фаёзхон Зиядуллаевич"
+            }
+          },
+          {
+            "id": 88,
+            "name_uz": "BANKLARNING CHAKANA XIZMATLARI TIZIMIDA CHAKANA KREDITLARNING OʻRNI VA RIVOJLANISH OMILLARI TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9D%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2_%D0%90_BANKLARNING_CHAKANA_XIZMATLARI_TIZIMIDA_CHAKANA.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/88/view_or_download/",
+            "author": {
+              "id": 37,
+              "name": "Nodirov Azizxon Asrorovich"
+            }
+          },
+          {
+            "id": 94,
+            "name_uz": "OʻZBEKISTON BANK TIZIMI MOLIYAVIY BARQARORLIGINI TAʼMINLASHDA KAPITAL VA LIKVIDLILIK KOʻRSATKICHLARI TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/BANK_TIZIMI_MOLIYAVIY_BARQARORLIGINI_TA%CA%BCMINLASHDA_KAPITAL_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/94/view_or_download/",
+            "author": {
+              "id": 78,
+              "name": "Xolmamatov Farhodjon Kubayevich"
+            }
+          },
+          {
+            "id": 91,
+            "name_uz": "TIJORAT BANKLARIDA YASHIL DEPOZITLAR TIZIMINI RIVOJLANTIRISH ISTIQBOLLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/TIJORAT_BANKLARIDA_YASHIL_DEPOZITLAR_TIZIMINI_2R06dF1.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/91/view_or_download/",
+            "author": {
+              "id": 57,
+              "name": "Norova Nozima Nabiyevna"
+            }
+          },
+          {
+            "id": 89,
+            "name_uz": "BLOKCHEYN TEXNOLOGIYASIDAN FOYDALANGAN HOLDA ENERGIYA SAVDOSI VA MOLIYALASHTIRISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/BLOKCHEYN_TEXNOLOGIYASIDAN_FOYDALANGAN_JupAzAN.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/89/view_or_download/",
+            "author": {
+              "id": 56,
+              "name": "Otaxonov Alisherbek Abdumutal o‘g‘li"
+            }
+          }
+        ]
+      },
+      {
+        "id": 40,
+        "name_uz": "Investitsiya va innovatsiya.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 69,
+            "name_uz": "МАXСУС ИҚТИСОДИЙ ЗОНАЛАР ИНВЕСТИЦИЯ МУҲИТИ ЖОЗИБАДОРЛИГИНИ ОШИРИШ МУАММОЛАРИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9C%D0%90X%D0%A1%D0%A3%D0%A1_%D0%98%D2%9A%D0%A2%D0%98%D0%A1%D0%9E%D0%94%D0%98%D0%99_%D0%97%D0%9E%D0%9D%D0%90%D0%9B%D0%90%D0%A0_%D0%98%D0%9D%D0%92%D0%95%D0%A1%D0%A2%D0%98%D0%A6%D0%98%D0%AF.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/69/view_or_download/",
+            "author": {
+              "id": 58,
+              "name": "Умирзоқов Жасъур Артиқбой ўғли"
+            }
+          },
+          {
+            "id": 84,
+            "name_uz": "КОРХОНАНИ САМАРАЛИ БОШКАРИШДА ХОДИМЛАР ФАОЛЛИГИНИ ОШИРИШ",
+            "name_ru": "КОРХОНАНИ САМАРАЛИ БОШКАРИШДА ХОДИМЛАР ФАОЛЛИГИНИ ОШИРИШ",
+            "name_en": "КОРХОНАНИ САМАРАЛИ БОШКАРИШДА ХОДИМЛАР ФАОЛЛИГИНИ ОШИРИШ",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9A%D0%9E%D0%A0%D0%A5%D0%9E%D0%9D%D0%90%D0%9D%D0%98_%D0%A1%D0%90%D0%9C%D0%90%D0%A0%D0%90%D0%9B%D0%98_%D0%91%D0%9E%D0%A8%D0%9A%D0%90%D0%A0%D0%98%D0%A8%D0%94%D0%90_%D0%A5%D0%9E%D0%94%D0%98%D0%9C%D0%9B%D0%90%D0%A0_%D0%A4%D0%90%D0%9E%D0%9B%D0%9B%D0%98%D0%93%D0%98%D0%9D%D0%98_%D0%9E%D0%A8%D0%98%D0%A0%D0%98%D0%A8.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/%D0%9A%D0%9E%D0%A0%D0%A5%D0%9E%D0%9D%D0%90%D0%9D%D0%98_%D0%A1%D0%90%D0%9C%D0%90%D0%A0%D0%90%D0%9B%D0%98_%D0%91%D0%9E%D0%A8%D0%9A%D0%90%D0%A0%D0%98%D0%A8%D0%94%D0%90_%D0%A5%D0%9E%D0%94%D0%98%D0%9C%D0%9B%D0%90%D0%A0_%D0%A4%D0%90%D0%9E%D0%9B%D0%9B%D0%98%D0%93%D0%98%D0%9D%D0%98_%D0%9E%D0%A8%D0%98%D0%A0%D0%98%D0%A8.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/%D0%9A%D0%9E%D0%A0%D0%A5%D0%9E%D0%9D%D0%90%D0%9D%D0%98_%D0%A1%D0%90%D0%9C%D0%90%D0%A0%D0%90%D0%9B%D0%98_%D0%91%D0%9E%D0%A8%D0%9A%D0%90%D0%A0%D0%98%D0%A8%D0%94%D0%90_%D0%A5%D0%9E%D0%94%D0%98%D0%9C%D0%9B%D0%90%D0%A0_%D0%A4%D0%90%D0%9E%D0%9B%D0%9B%D0%98%D0%93%D0%98%D0%9D%D0%98_%D0%9E%D0%A8%D0%98%D0%A0%D0%98%D0%A8.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/84/view_or_download/",
+            "author": {
+              "id": 70,
+              "name": "Садриддинова Севинчхон Садриддин қизи"
+            }
+          },
+          {
+            "id": 92,
+            "name_uz": "INVESTITSION JOZIBADORLIKNI OSHIRISH –KORXONALARNING RAQOBATBARDOSHLIGINI OSHIRISHNING MUHIM SHARTIDIR",
+            "name_ru": "INVESTITSION JOZIBADORLIKNI OSHIRISH –KORXONALARNING RAQOBATBARDOSHLIGINI OSHIRISHNING MUHIM SHARTIDIR",
+            "name_en": "INVESTITSION JOZIBADORLIKNI OSHIRISH –KORXONALARNING RAQOBATBARDOSHLIGINI OSHIRISHNING MUHIM SHARTIDIR",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/2._INVESTITSION_JOZIBADORLIKNI_OSHIRISH_15.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/2._INVESTITSION_JOZIBADORLIKNI_OSHIRISH_15.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/2._INVESTITSION_JOZIBADORLIKNI_OSHIRISH_15.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/92/view_or_download/",
+            "author": {
+              "id": 75,
+              "name": "Karimova Dilafruz Sadriddin qizi"
+            }
+          }
+        ]
+      },
+      {
+        "id": 41,
+        "name_uz": "Ta'lim tizimi",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 71,
+            "name_uz": "O‘YINLI TA’LIM ORQALI TA‘LIM SAMARADORLIGINI OSHIRISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/OYINLI_TALIM_ORQALI_TALIM_SAMARADORLIGINI_OSHIRISH.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/71/view_or_download/",
+            "author": {
+              "id": 60,
+              "name": "Tahirov Behzod Nasriddinovich"
+            }
+          },
+          {
+            "id": 70,
+            "name_uz": "OLIY TA’LIM TIZIMIDA TA’LIM SIFATINI BOSHQARISH VA RIVOJLANTIRISHDA IJTIMOIY HAMDA TASHKILIY OMILLARNING RO’LI.",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/OLIY_TALIM_TIZIMIDA_TALIM_SIFATINI_BOSHQARISH.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/70/view_or_download/",
+            "author": {
+              "id": 59,
+              "name": "Yokubova Dilafruz Mirjabborovna"
+            }
+          },
+          {
+            "id": 85,
+            "name_uz": "ANALYSIS OF SPEECH-LIKE SIGNALS FOR THE UZBEK LANGUAGE",
+            "name_ru": "ANALYSIS OF SPEECH-LIKE SIGNALS FOR THE UZBEK LANGUAGE",
+            "name_en": "ANALYSIS OF SPEECH-LIKE SIGNALS FOR THE UZBEK LANGUAGE",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/ANALYSIS_OF_SPEECH-LIKE_SIGNALS_FOR_THE_UZBEK_LANGUAGE.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/ANALYSIS_OF_SPEECH-LIKE_SIGNALS_FOR_THE_UZBEK_LANGUAGE.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/ANALYSIS_OF_SPEECH-LIKE_SIGNALS_FOR_THE_UZBEK_LANGUAGE.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/85/view_or_download/",
+            "author": {
+              "id": 71,
+              "name": "Musadjanova Dilobar Abduvakhidovna"
+            }
+          }
+        ]
+      },
+      {
+        "id": 42,
+        "name_uz": "Moliyaviy menejment va marketing.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 72,
+            "name_uz": "O‘ZBEKISTONDA SMART SUV MENEJMENTIDAN FOYDALANISH ISTIQBOLLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/OZBEKISTONDA_SMART_SUV_MENEJMENTIDAN_FOYDALANISH.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/72/view_or_download/",
+            "author": {
+              "id": 61,
+              "name": "Sarvar Mamasoliyev"
+            }
+          },
+          {
+            "id": 73,
+            "name_uz": "СИСТЕМНЫЙ ПОДХОД В ПОДДЕРЖКИ УПРАВЛЕНИЯ И КОНТРОЛЬ ЭФФЕКТИВНОСТИ ПРЕДПРИЯТИЙ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A1%D0%98%D0%A1%D0%A2%D0%95%D0%9C%D0%9D%D0%AB%D0%99_%D0%9F%D0%9E%D0%94%D0%A5%D0%9E%D0%94_%D0%92_%D0%9F%D0%9E%D0%94%D0%94%D0%95%D0%A0%D0%96%D0%9A%D0%98_%D0%A3%D0%9F%D0%A0%D0%90%D0%92%D0%9B%D0%95%D0%9D%D0%98%D0%AF.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/73/view_or_download/",
+            "author": {
+              "id": 62,
+              "name": "Умурзоков Элёр Ўктамович"
+            }
+          }
+        ]
+      },
+      {
+        "id": 43,
+        "name_uz": "IQTISODIYOTNI RAQAMLASHTIRISH, AGRO VA NANO TEXNOLOGIYALAR",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 74,
+            "name_uz": "RAQAMLASHTIRISHNING AYLANMA IQTISODIYOTDAGI O‘RNI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/RAQAMLASHTIRISHNING_AYLANMA_IQTISODIYOTDAGI_ORNI.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/74/view_or_download/",
+            "author": {
+              "id": 63,
+              "name": "Nasriddinov Burxoniddin Zuxriddin o’g’li"
+            }
+          },
+          {
+            "id": 75,
+            "name_uz": "РАҚАМЛИ ИҚТИСОДИЁТНИНГ ШАКЛЛАНИБ БОРИШ ЖАРАЁНЛАРИНИ СТАТИСТИК ҲИСОБГА ОЛИШНИНГ УСЛУБИЙ ЁНДАШУВЛАРИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A0%D0%90%D2%9A%D0%90%D0%9C%D0%9B%D0%98_%D0%98%D2%9A%D0%A2%D0%98%D0%A1%D0%9E%D0%94%D0%98%D0%81%D0%A2%D0%9D%D0%98%D0%9D%D0%93_%D0%A8%D0%90%D0%9A%D0%9B%D0%9B%D0%90%D0%9D%D0%98%D0%91_%D0%91%D0%9E%D0%A0%D0%98%D0%A8.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/75/view_or_download/",
+            "author": {
+              "id": 64,
+              "name": "Баходир Абдусаломович Бегалов \n Шахбоз Уктамович Жонодилов \n Абдусамад Баходирович Абдусаломов"
+            }
+          }
+        ]
+      },
+      {
+        "id": 44,
+        "name_uz": "BUXGALTERIYA HISOBINING MILLIY STANDARTLARI ASOSIDA HISOB YURITISH: NAZARIY VA AMALIY YONDASHUVLAR",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 76,
+            "name_uz": "KONSOLIDATSIYALASHGAN PUL OQIMLARI HISOBOTINING TUZILISHI VA TAHLILINI TAKOMILLASHTIRISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/PUL_OQIMLARI_HISOBOTINING.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/76/view_or_download/",
+            "author": {
+              "id": 65,
+              "name": "Eshonqulov Azamat Abdiraximovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 45,
+        "name_uz": "XORIJIY MAMLAKATLAR IQTISODIYOTI",
+        "name_ru": null,
+        "name_en": null,
+        "articles": []
+      },
+      {
+        "id": 46,
+        "name_uz": "TARMOQLAR IQTISODIYOTI",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 77,
+            "name_uz": "ADDRESSING THE TRAINING NEEDS OF TOURISM STAFF FOR SUSTAINABLE PRACTICES IN THE GREEN ECONOMY ERA",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/ADDRESSING_THE_TRAINING_NEEDS_OF_TOURISM_STAFF.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/77/view_or_download/",
+            "author": {
+              "id": 66,
+              "name": "Dadamuxamedova Mushtariy Maxmudjon qizi"
+            }
+          },
+          {
+            "id": 78,
+            "name_uz": "TURIZM INFRATUZILMASINI RAQAMLASHTIRISH VA OBYEKTLARNI RIVOJLANTIRISHNING TASHKILIY-IQTISODIY ASOSLARI.",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/TURIZM_INFRATUZILMASINI_RAQAMLASHTIRISH_VA.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/78/view_or_download/",
+            "author": {
+              "id": 5,
+              "name": "Toshtemirov Xojiakbar Qahramon o‘g‘li"
+            }
+          },
+          {
+            "id": 86,
+            "name_uz": "OʻZBEKISTONDA YENGIL SANOATNING RAQAMLI TRANSFORMATSIYASI",
+            "name_ru": "OʻZBEKISTONDA YENGIL SANOATNING RAQAMLI TRANSFORMATSIYASI",
+            "name_en": "OʻZBEKISTONDA YENGIL SANOATNING RAQAMLI TRANSFORMATSIYASI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/YENGIL_SANOATNING_RAQAMLI_TRANSFORMATSIYASI_%D0%8E%D0%B7%D0%B1..pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/YENGIL_SANOATNING_RAQAMLI_TRANSFORMATSIYASI_%D0%8E%D0%B7%D0%B1..pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/YENGIL_SANOATNING_RAQAMLI_TRANSFORMATSIYASI_%D0%8E%D0%B7%D0%B1..pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/86/view_or_download/",
+            "author": {
+              "id": 72,
+              "name": "Quldasheva Nargiza Komoliddin qizi"
+            }
+          },
+          {
+            "id": 111,
+            "name_uz": "O‘ZBEKISTON AKSIYADORLIK JAMIYATLARI QIMMATLI QOG‘OZLARNING IKKILAMCHI BOZORIDAGI AMALDAGI HOLATINI TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/OZBEKISTON_AKSIYADORLIK_JAMIYATLARI_QIMMATLI_QOGOZLARNING_IKKILAMCHI.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/111/view_or_download/",
+            "author": {
+              "id": 26,
+              "name": "Berdiqulova Manzura Rahmonqulovna"
+            }
+          }
+        ]
+      },
+      {
+        "id": 47,
+        "name_uz": "O‘ZBEKISTON - 2030 STRATEGIYASI",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 79,
+            "name_uz": "ЗНАЧЕНИЕ ЭТИКИ В ИНЖЕНЕРНОЙ ДЕЯТЕЛЬНОСТИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%97%D0%9D%D0%90%D0%A7%D0%95%D0%9D%D0%98%D0%95_%D0%AD%D0%A2%D0%98%D0%9A%D0%98_%D0%92_%D0%98%D0%9D%D0%96%D0%95%D0%9D%D0%95%D0%A0%D0%9D%D0%9E%D0%99_%D0%94%D0%95%D0%AF%D0%A2%D0%95%D0%9B%D0%AC%D0%9D%D0%9E%D0%A1%D0%A2%D0%98.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/79/view_or_download/",
+            "author": {
+              "id": 67,
+              "name": "Сайфуллаев Самарбек Дилшод o'g'li"
+            }
+          },
+          {
+            "id": 80,
+            "name_uz": "МИГРАЦИОННЫЕ ПРОЦЕССЫ В ЦЕНТРАЛЬНОЙ АЗИИ: АНАЛИЗ И НАПРАВЛЕНИЯ РЕГУЛИРОВАНИЯ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9C%D0%98%D0%93%D0%A0%D0%90%D0%A6%D0%98%D0%9E%D0%9D%D0%9D%D0%AB%D0%95_%D0%9F%D0%A0%D0%9E%D0%A6%D0%95%D0%A1%D0%A1%D0%AB_%D0%92_%D0%A6%D0%95%D0%9D%D0%A2%D0%A0%D0%90%D0%9B%D0%AC%D0%9D%D0%9E%D0%99_%D0%90%D0%97%D0%98%D0%98.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/80/view_or_download/",
+            "author": {
+              "id": 68,
+              "name": "Salimov Sherzod Yunusovich"
+            }
+          },
+          {
+            "id": 87,
+            "name_uz": "BILINGUAL ONGNING LINGVOKOGNITIV KONSEPTUAL SINTEZ MEXANIZMLARI",
+            "name_ru": "BILINGUAL ONGNING LINGVOKOGNITIV KONSEPTUAL SINTEZ MEXANIZMLARI",
+            "name_en": "BILINGUAL ONGNING LINGVOKOGNITIV KONSEPTUAL SINTEZ MEXANIZMLARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/BILINGUAL_ONGNING_LINGVOKOGNITIV_KONSEPTUAL_SINTEZ.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/BILINGUAL_ONGNING_LINGVOKOGNITIV_KONSEPTUAL_SINTEZ.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/BILINGUAL_ONGNING_LINGVOKOGNITIV_KONSEPTUAL_SINTEZ.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/87/view_or_download/",
+            "author": {
+              "id": 73,
+              "name": "Komilova Gulmira Olimovna"
+            }
+          }
+        ]
+      },
+      {
+        "id": 48,
+        "name_uz": "Nobel mukofoti",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 81,
+            "name_uz": "Jon R. Hiks ilmiy-ijodiy faoliyati",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Nobel_mukofoti_1972_John_R_wyIMkbh._Hicks_Kenneth_J._Arrow.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/Nobel_mukofoti_1972_John_R._Hicks_Kenneth_J._Arrow.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/Nobel_mukofoti_1972_John_R._Hicks_Kenneth_J._Arrow.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/81/view_or_download/",
+            "author": {
+              "id": 52,
+              "name": "Хайдаров Низамиддин.  Нормуродов Алибек"
+            }
+          }
+        ]
+      },
+      {
+        "id": 70,
+        "name_uz": "4-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_ru": "4-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_en": "4-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "articles": [
+          {
+            "id": 138,
+            "name_uz": "4-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_ru": "4-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_en": "4-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/FULL_PDF__merged.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/138/view_or_download/",
+            "author": {
+              "id": 112,
+              "name": "4-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli"
+            }
+          }
+        ]
+      }
+    ],
+    "name_uz": "Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal",
+    "name_ru": null,
+    "name_en": null,
+    "cover_image": "https://back.tift-fintech.uz/media/Jurnal/jurnal/2026/01/20/4-son_yangi_4.jpg",
+    "cover_image_ru": null,
+    "cover_image_en": null,
+    "back_image": "https://back.tift-fintech.uz/media/jurnal/jurnal/2026/07/09/2025_4-son__page-0001.jpg",
+    "back_image_ru": null,
+    "back_image_en": null,
+    "which_number": "4-son | 2025",
+    "created_at": "2026-01-12T18:07:39.845133Z",
+    "updated_at": "2026-07-09T08:01:07.324449Z",
+    "upload_file_uz": null,
+    "upload_file_ru": null,
+    "upload_file_en": null
+  },
+  {
+    "id": 3,
+    "categories": [
+      {
+        "id": 36,
+        "name_uz": "BOSH MUHARRIRDAN - MUSHTARIYLARGA",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 59,
+            "name_uz": "Татқиқотчи ва муштарийлар илмий фаолиятга ривож!",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/af556b7d-7c40-470b-a9ef-dc9d4ec71461.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/59/view_or_download/",
+            "author": {
+              "id": 24,
+              "name": "Бош муҳаррир, TIFT университети Ректори А. Нодиров"
+            }
+          }
+        ]
+      },
+      {
+        "id": 27,
+        "name_uz": "Moliya, soliq, byudjet, sug'urta.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 44,
+            "name_uz": "РОЛЬ НАЛОГОВОГО ПОТЕНЦИАЛА В РАЗВИТИИ ЭКОНОМИКИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%91%D0%B0%D1%85%D1%82%D0%B8%D1%91%D1%80%D0%BE%D0%B2_%D0%A3%D0%BC%D0%B8%D0%B4_%D0%A0%D0%BE%D0%BB%D1%8C_%D0%BD%D0%B0%D0%BB%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D0%B3%D0%BE_%D0%BF%D0%BE%D1%82%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D0%B0_%D0%B2_%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B8_%D1%8D%D0%BA%D0%BE%D0%BD%D0%BE%D0%BC%D0%B8%D0%BA%D0%B8.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/44/view_or_download/",
+            "author": {
+              "id": 4,
+              "name": "Baxtiyorov Umid Qaxramon o’g’li."
+            }
+          },
+          {
+            "id": 45,
+            "name_uz": "МОЛИЯВИЙ ФАНЛАР ТАРАҚҚИЁТИНИ ҲАМ, АВВАЛО, ҲАР БИР ТУШУНЧА (АТАМА, СЎЗ)НИНГ АНИҚ ВА ЎЗ ЎРНИДА ИШЛАТИЛИШИ БЕЛГИЛАБ БЕРАДИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A2.%D0%9C%D0%90%D0%9B%D0%98%D0%9A%D0%9E%D0%92_%D0%9C%D0%BE%D0%BB.%D1%82%D0%B5%D1%85._%D0%9D.%D2%B2._-_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/45/view_or_download/",
+            "author": {
+              "id": 6,
+              "name": "Тоҳир Сатторович Маликов"
+            }
+          },
+          {
+            "id": 46,
+            "name_uz": "Умумий овқатланиш соҳасини ривожлантиришда солиқ сиёсати ва маъмурчилигини такомиллаштириш",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A5.%D0%91.%D0%98%D1%81%D0%BC%D0%B0%D1%82%D0%BE%D0%B2_-08042025.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/46/view_or_download/",
+            "author": {
+              "id": 39,
+              "name": "Xolbo'ta Ismatov"
+            }
+          }
+        ]
+      },
+      {
+        "id": 28,
+        "name_uz": "Bank, kredit, davlat qarzi.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 47,
+            "name_uz": "ТИЖОРАТ БAНКЛАРНИНГ РЕCУРС БАЗАСИНИ МУСТAҲКАМЛАШНИНГ ХОРИЖ ТАЖРИБАСИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A1%D1%83%D0%BB%D1%82%D0%B0%D0%BD%D0%BC%D1%83%D1%80%D0%BE%D0%B4%D0%BE%D0%B2%D0%B0_%D0%94%D0%B8%D0%BB%D1%80%D0%B0%D0%B1%D0%BE_%D0%A2%D0%B8%D0%B6%D0%BE%D1%80%D0%B0%D1%82_%D0%B1a%D0%BD%D0%BA%D0%BB%D0%B0%D1%80%D0%BD%D0%B8%D0%BD%D0%B3_%D1%80%D0%B5c%D1%83%D1%80%D1%81_%D0%B1%D0%B0%D0%B7%D0%B0%D1%81%D0%B8%D0%BD%D0%B8_%D0%BC%D1%83%D1%81%D1%82_9LRasky.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/47/view_or_download/",
+            "author": {
+              "id": 28,
+              "name": "Султанмуратова Дилрабо Шайлавбековна"
+            }
+          },
+          {
+            "id": 48,
+            "name_uz": "TIJORAT BANKLARIDA KREDIT RISKLARINI SUG‘URTALASH VA DIVERSIFIKATSIYA QILISH MEXANIZMLARINI TAKOMILLASHTIRISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%AD%D1%88%D0%B1%D0%BE%D0%B5%D0%B2_%D0%A8%D0%B0%D2%B3%D0%BE%D0%B1%D0%B8%D0%B4%D0%B4%D0%B8%D0%BD_Tijorat_banklarida_kredit_risklarini_sugurtalash.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/48/view_or_download/",
+            "author": {
+              "id": 40,
+              "name": "Eshboyev Shahobiddin Anorqul o‘g‘li"
+            }
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "name_uz": "Investitsiya va innovatsiya.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 49,
+            "name_uz": "PORTFEL SHAKLLANTIRISHDA KAPITAL BOZORIDAGI MAVJUD MUAMMOLAR TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A1%D0%B8%D0%BD%D0%B4%D0%B0%D1%80%D0%BE%D0%B2_%D0%A4%D0%B0%D0%B7%D0%BB%D0%B8%D0%B4%D0%B4%D0%B8%D0%BD_O%CA%BBzbekiston_respublikasida_meva_sabzavot_mah_OWNwCCA.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/49/view_or_download/",
+            "author": {
+              "id": 41,
+              "name": "Sindarov Fazliddin Qaxramonivich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 30,
+        "name_uz": "Moliyaviy menejment va marketing.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 50,
+            "name_uz": "O`ZBEKISTON IQTISODIY SIYOSATINI SHAKLLANTIRISHDA OUKEN QONUNING AMALIY AHAMIYATI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A1%D0%B0%D0%B4%D1%80%D0%B8%D0%B4%D0%B4%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0_%D0%A1%D0%B5%D0%B2%D0%B8%D0%BD%D1%87%D1%85%D0%BE%D0%BD_Ozbekiston_iqtisodiy_siyosatini_shakllantirishda.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/50/view_or_download/",
+            "author": {
+              "id": 42,
+              "name": "Sadriddinova Sevinchxon Sadriddin qiz"
+            }
+          }
+        ]
+      },
+      {
+        "id": 31,
+        "name_uz": "Iqtisodiyotni Raqamlashtirish, agro va nano texnologiyalar.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 51,
+            "name_uz": "QORAQALPOG‘ISTON RESPUBLIKASIDA RAQAMLI TEXNOLOGIYALARNI JORIY ETISH ORQALI AHOLI BANDLIGINI OSHIRISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A0%D0%B0%D1%85%D0%B8%D0%BC%D0%B1%D0%BE%D0%B5%D0%B2_%D0%9C%D1%83%D1%85%D1%82%D0%BE%D1%80%D0%B1%D0%B5%D0%BA_Qoraqalpogiston_respublikasida_raqamli_texn_4GycPwx.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/51/view_or_download/",
+            "author": {
+              "id": 13,
+              "name": "Rahimboyev Muxtorbek Ikrom o’g’li."
+            }
+          },
+          {
+            "id": 60,
+            "name_uz": "КОРХОНАЛАР ФАОЛИЯТИНИ РАҚАМЛАШТИРИШ ЖАРАЁНЛАРИ ВА УЛАРДА БИЗНЕС-МОДЕЛЛАРНИНГ ТУТГАН ЎРНИ",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%91%D0%B5%D0%B3%D0%B0%D0%BB%D0%BE%D0%B2_%D0%91.%D0%90._%D0%94%D0%B0%D0%B4%D0%B0%D0%B1%D0%BE%D0%B5%D0%B2%D0%B0_%D0%A0..pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/60/view_or_download/",
+            "author": {
+              "id": 49,
+              "name": "Бегалов Баҳодир Абдусаломович, Дадабаева Раъно Акрамовна"
+            }
+          }
+        ]
+      },
+      {
+        "id": 32,
+        "name_uz": "Buxgalteriya hisobi va iqtisodiy tahlil.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 52,
+            "name_uz": "BUXGALTERIYA HISOBINING MILLIY STANDARTLARI ASOSIDA HISOB YURITISH: NAZARIY VA AMALIY YONDASHUVLAR",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%90%D1%8A%D0%B7%D0%B0%D0%BC%D0%BE%D0%B2_%D0%A8%D0%BE%D1%85%D0%B6%D0%B0%D1%85%D0%BE%D0%BD_Buxgalteriya_hisobining_milliy_standartlari_asosida.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/52/view_or_download/",
+            "author": {
+              "id": 43,
+              "name": "A’zamov Shohjahon Muhammadrasulxon Baxtiyor o‘g‘li"
+            }
+          },
+          {
+            "id": 53,
+            "name_uz": "FARMATSEVTIKA KORXONALARIDA BUXGALTERIYA HISOBI TIZIMINI XALQARO STANDARTLAR ASOSIDA TAKOMILLASHTIRISH YO‘LLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A2%D1%83%D1%80%D0%B4%D0%B8%D0%BA%D1%83%D0%BB%D0%BE%D0%B2%D0%B0_%D0%93%D1%83%D0%BB%D1%88%D0%B0%D0%B4_Tijorat_banklarida_kredit_risklarini_sugurtalash.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/53/view_or_download/",
+            "author": {
+              "id": 31,
+              "name": "Turdikulova Gulshad Nurmamatovna"
+            }
+          }
+        ]
+      },
+      {
+        "id": 33,
+        "name_uz": "Xorijiy mamlakatlar iqtisodiyoti.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 54,
+            "name_uz": "TURKIYA IQTISODIYOTI: MUAMMO VA YECHIMLAR",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Ergashev_O.B._8-rukn.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/54/view_or_download/",
+            "author": {
+              "id": 44,
+              "name": "Ergashev Urolbek Berkinovich"
+            }
+          },
+          {
+            "id": 55,
+            "name_uz": "BUSINESS ETHICS AND CULTURE",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A3%D1%80%D0%B0%D0%B7%D0%BE%D0%B2_%D0%9C%D0%B0%D0%BD%D1%81%D1%83%D1%80._-_Business_ethics_and_culture.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/55/view_or_download/",
+            "author": {
+              "id": 45,
+              "name": "Urazov Mansur Musurmanovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 34,
+        "name_uz": "Ta‘lim tizimi",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 56,
+            "name_uz": "OLIY TA’LIM TIZIMIDA TA’LIM SIFATNI RIVOJLANTIRISHNING IJTIMOIY OMILLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Hakimova_Gulmira_Toxtatoshevna_vC0xX9X.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/56/view_or_download/",
+            "author": {
+              "id": 46,
+              "name": "Hakimova Gulmira To‘xtatoshevna"
+            }
+          }
+        ]
+      },
+      {
+        "id": 35,
+        "name_uz": "Tarmoqlar iqtisidoyoti",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 57,
+            "name_uz": "OʻZBEKISTON RESPUBLIKASIDA MEVA-SABZAVOT MAHSULOTLARI ISHLAB CHIQARISH JARAYONLARINI IQTISODIY TAHLILI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%90%D0%BD%D0%B0%D1%80%D0%B1%D0%B0%D0%B5%D0%B2%D0%B0_%D0%91%D0%B0%D1%85%D1%82%D0%B8%D0%B6%D0%B0%D0%BC%D0%BE%D0%BB_O%CA%BBzbekiston_respublikasida_meva_sabzavot_m_7gKpafo.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/57/view_or_download/",
+            "author": {
+              "id": 47,
+              "name": "Anorboyeva Baxtijamol Daniyar qizi"
+            }
+          },
+          {
+            "id": 58,
+            "name_uz": "SPORT VA YOSHLAR SALOMATLIGI MILLIY XAVFSIZLIK GAROVI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%9A%D0%B0%D0%B3%D0%B0%D1%80%D0%BC%D0%BE%D0%BD%D0%BE%D0%B2%D0%B0_%D0%90%D0%BD%D0%B8%D1%81%D0%B0_Sport_va_yoshlar_salomatligi_milliy_xavfsizli_4kBFl3B.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/58/view_or_download/",
+            "author": {
+              "id": 48,
+              "name": "KAGARMANOVA ANISA AXMETOVNA"
+            }
+          }
+        ]
+      },
+      {
+        "id": 37,
+        "name_uz": "Nobel mukofoti",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 62,
+            "name_uz": "Simon Kuznets ilmiy-ijodiy faoliyati",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Nobel_mukofoti_1971_Simon_Kuznets.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/Nobel_mukofoti_1971_Simon_Kuznets.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/Nobel_mukofoti_1971_Simon_Kuznets.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/62/view_or_download/",
+            "author": {
+              "id": 52,
+              "name": "Хайдаров Низамиддин.  Нормуродов Алибек"
+            }
+          }
+        ]
+      },
+      {
+        "id": 69,
+        "name_uz": "3-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_ru": "3-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_en": "3-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "articles": [
+          {
+            "id": 137,
+            "name_uz": "3-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_ru": "3-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_en": "3-son | 2025 - Moliya va intellektual texno",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/FULL_12.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/FULL_12.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/FULL_12.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/137/view_or_download/",
+            "author": {
+              "id": 111,
+              "name": "3-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli"
+            }
+          }
+        ]
+      }
+    ],
+    "name_uz": "Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal",
+    "name_ru": null,
+    "name_en": null,
+    "cover_image": "https://back.tift-fintech.uz/media/Jurnal/jurnal/2026/01/20/01_3.jpg",
+    "cover_image_ru": null,
+    "cover_image_en": null,
+    "back_image": "https://back.tift-fintech.uz/media/jurnal/jurnal/2026/07/09/2025_3-son__page-0001.jpg",
+    "back_image_ru": null,
+    "back_image_en": null,
+    "which_number": "3-son | 2025",
+    "created_at": "2025-10-22T10:20:12.531086Z",
+    "updated_at": "2026-07-09T08:40:11.957576Z",
+    "upload_file_uz": null,
+    "upload_file_ru": null,
+    "upload_file_en": null
+  },
+  {
+    "id": 2,
+    "categories": [
+      {
+        "id": 13,
+        "name_uz": "BOSH MUHARRIRDAN - MUSHTARIYLARGA",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 24,
+            "name_uz": "Татқиқотчи ва муштарийлар илмий фаолиятга ривож!",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/BOSH_MUHARRIRDAN_-_MUSHTARIYLARGA.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/24/view_or_download/",
+            "author": {
+              "id": 24,
+              "name": "Бош муҳаррир, TIFT университети Ректори А. Нодиров"
+            }
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "name_uz": "MOLIYA, SOLIQ, BYUDJET, SUGʻURTA",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 36,
+            "name_uz": "O‘ZBEKISTON RESPUBLIKASI BYUDJET TASHKILOTLARIDA BYUDJET MABLAG‘LARIDAN FOYDALANISHNING NATIJADORLIGI BO‘YICHA HISOB TIZIMINI SHAKLLANTIRISH",
+            "name_ru": "O‘ZBEKISTON RESPUBLIKASI BYUDJET TASHKILOTLARIDA BYUDJET MABLAG‘LARIDAN FOYDALANISHNING NATIJADORLIGI BO‘YICHA HISOB TIZIMINI SHAKLLANTIRISH",
+            "name_en": "O‘ZBEKISTON RESPUBLIKASI BYUDJET TASHKILOTLARIDA BYUDJET MABLAG‘LARIDAN FOYDALANISHNING NATIJADORLIGI BO‘YICHA HISOB TIZIMINI SHAKLLANTIRISH",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Jorayev_Qobiljon_Olimjonovich__.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/36/view_or_download/",
+            "author": {
+              "id": 35,
+              "name": "Jo’rayev Qobiljon Olimjonovich"
+            }
+          },
+          {
+            "id": 34,
+            "name_uz": "O‘ZBEKISTONDA ISLOM MOLIYASI INSTRUMENTLARINI TADBIQ QILISH IMKONIYATLARI",
+            "name_ru": "O‘ZBEKISTONDA ISLOM MOLIYASI INSTRUMENTLARINI TADBIQ QILISH IMKONIYATLARI",
+            "name_en": "O‘ZBEKISTONDA ISLOM MOLIYASI INSTRUMENTLARINI TADBIQ QILISH IMKONIYATLARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/6._Abdullayev__Suxrobiddin._Ismoilovich_4.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/34/view_or_download/",
+            "author": {
+              "id": 33,
+              "name": "Abdullayev Suxrobiddin Ismoilovich"
+            }
+          },
+          {
+            "id": 37,
+            "name_uz": "DAVLAT XARIDLARI TIZIMIDA MOLIYAVIY NAZORATNI AMALGA OSHIRISHNING DOLZARB MASALALARI",
+            "name_ru": "DAVLAT XARIDLARI TIZIMIDA MOLIYAVIY NAZORATNI AMALGA OSHIRISHNING DOLZARB MASALALARI",
+            "name_en": "DAVLAT XARIDLARI TIZIMIDA MOLIYAVIY NAZORATNI AMALGA OSHIRISHNING DOLZARB MASALALARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%A3.%D0%8E%D1%80%D0%BE%D2%9B%D0%BE%D0%B2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/37/view_or_download/",
+            "author": {
+              "id": 36,
+              "name": "O‘roqov Uchqun Yunusovich"
+            }
+          },
+          {
+            "id": 35,
+            "name_uz": "MAMLAKATLARARO BOJLAR URUSHINING SOLIQ SIYOSATIGA TA’SIRI",
+            "name_ru": "MAMLAKATLARARO BOJLAR URUSHINING SOLIQ SIYOSATIGA TA’SIRI",
+            "name_en": "MAMLAKATLARARO BOJLAR URUSHINING SOLIQ SIYOSATIGA TA’SIRI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/11._%D0%A1.%D0%93%D0%B8%D1%8F%D1%81%D0%BE%D0%B2_%D0%BC%D0%B0%D0%BA%D0%BE%D0%BB%D0%B0.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/35/view_or_download/",
+            "author": {
+              "id": 34,
+              "name": "Giyasov Sarvar A’zamovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "name_uz": "BANK, TURIZM, DAVLAT QARZI",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 25,
+            "name_uz": "AKSIYADORLIK TIJORAT BANKLARIDA LIKVIDLIKNI TA'MINLASH UCHUN QO'LLANILADIGAN USULLARNI TAKOMILLASHTIRISH",
+            "name_ru": "AKSIYADORLIK TIJORAT BANKLARIDA LIKVIDLIKNI TA'MINLASH UCHUN QO'LLANILADIGAN USULLARNI TAKOMILLASHTIRISH",
+            "name_en": "AKSIYADORLIK TIJORAT BANKLARIDA LIKVIDLIKNI TA'MINLASH UCHUN QO'LLANILADIGAN USULLARNI TAKOMILLASHTIRISH",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/2._Torayev_A.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/25/view_or_download/",
+            "author": {
+              "id": 25,
+              "name": "To‘rayev Abdurahim Nortojiyevich , Abdusalomova Xurshidabonu Abrorbek qizi"
+            }
+          },
+          {
+            "id": 26,
+            "name_uz": "TIJORAT BANKLARI FAOLIYATINI TRANSFORMATLASHDA BANK XIZMATLARINI TAKOMILLASHTIRISH YO‘LLARI",
+            "name_ru": "TIJORAT BANKLARI FAOLIYATINI TRANSFORMATLASHDA BANK XIZMATLARINI TAKOMILLASHTIRISH YO‘LLARI",
+            "name_en": "TIJORAT BANKLARI FAOLIYATINI TRANSFORMATLASHDA BANK XIZMATLARINI TAKOMILLASHTIRISH YO‘LLARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/5._Berdiqulova_Manzura.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/26/view_or_download/",
+            "author": {
+              "id": 26,
+              "name": "Berdiqulova Manzura Rahmonqulovna"
+            }
+          },
+          {
+            "id": 27,
+            "name_uz": "AKSIYADORLIK TIJORAT BANKLARINING KREDIT SIYOSATINI AMALGA OSHIRISH BILAN BOG‘LIQ MUAMMO VA ISTIQBOLLAR",
+            "name_ru": "AKSIYADORLIK TIJORAT BANKLARINING KREDIT SIYOSATINI AMALGA OSHIRISH BILAN BOG‘LIQ MUAMMO VA ISTIQBOLLAR",
+            "name_en": "AKSIYADORLIK TIJORAT BANKLARINING KREDIT SIYOSATINI AMALGA OSHIRISH BILAN BOG‘LIQ MUAMMO VA ISTIQBOLLAR",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/10.__Eshonqulov_Azamat_Abdiraximovich.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/27/view_or_download/",
+            "author": {
+              "id": 27,
+              "name": "Eshonqulov Azamat Abdiraximovich"
+            }
+          },
+          {
+            "id": 28,
+            "name_uz": "ТИЖОРАТ БAНКЛАРНИНГ РЕCУРС БАЗАСИНИ МУСТAҲКАМ- ЛАШНИНГ ХОРИЖ ТАЖРИБАСИ",
+            "name_ru": "ТИЖОРАТ БAНКЛАРНИНГ РЕCУРС БАЗАСИНИ МУСТAҲКАМ- ЛАШНИНГ ХОРИЖ ТАЖРИБАСИ",
+            "name_en": "ТИЖОРАТ БAНКЛАРНИНГ РЕCУРС БАЗАСИНИ МУСТAҲКАМ- ЛАШНИНГ ХОРИЖ ТАЖРИБАСИ",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/15._Sultonmurodova_D._maqola__TIFT_jurnal_1-son_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/28/view_or_download/",
+            "author": {
+              "id": 28,
+              "name": "Султанмуратова Дилрабо Шайлавбековна"
+            }
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "name_uz": "Investitsiya va innovatsiya.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": []
+      },
+      {
+        "id": 17,
+        "name_uz": "MAKRO VA MIKROIQTISODIYOT",
+        "name_ru": null,
+        "name_en": null,
+        "articles": []
+      },
+      {
+        "id": 18,
+        "name_uz": "Moliyaviy menejment va marketing.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": []
+      },
+      {
+        "id": 19,
+        "name_uz": "IQTISODIYOTNI RAQAMLASHTIRISH, AGRO VA NANO TEXNOLOGIYALAR",
+        "name_ru": null,
+        "name_en": null,
+        "articles": []
+      },
+      {
+        "id": 20,
+        "name_uz": "BUXGALTERIYA HISOBI VA IQTISODIY TAHLIL",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 30,
+            "name_uz": "АKSIYADORLIK JAMIYATLARIDA AUDITORLIK TEKSHIRUVI JARAYONIDA YUZAGA KELADIGAN MUOMMOLAR",
+            "name_ru": "АKSIYADORLIK JAMIYATLARIDA AUDITORLIK TEKSHIRUVI JARAYONIDA YUZAGA KELADIGAN MUOMMOLAR",
+            "name_en": "АKSIYADORLIK JAMIYATLARIDA AUDITORLIK TEKSHIRUVI JARAYONIDA YUZAGA KELADIGAN MUOMMOLAR",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/3._Xalimova_Mayram_Maqola.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/30/view_or_download/",
+            "author": {
+              "id": 30,
+              "name": "Xalimova Mayram Xamidovna"
+            }
+          },
+          {
+            "id": 29,
+            "name_uz": "АКЦИЯДОРЛИК ЖАМИЯТЛАРИДА ҲИСОБ СИЁСАТИНИ ХАЛҚАРО СТАНДАРТЛАР АСОСИДА ТУЗИШ",
+            "name_ru": "АКЦИЯДОРЛИК ЖАМИЯТЛАРИДА ҲИСОБ СИЁСАТИНИ ХАЛҚАРО СТАНДАРТЛАР АСОСИДА ТУЗИШ",
+            "name_en": "АКЦИЯДОРЛИК ЖАМИЯТЛАРИДА ҲИСОБ СИЁСАТИНИ ХАЛҚАРО СТАНДАРТЛАР АСОСИДА ТУЗИШ",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/1._Jorayev_Dilmurod_Xolmominovich_07_07_2025.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/29/view_or_download/",
+            "author": {
+              "id": 29,
+              "name": "Жўраев Дилмурод Холмўминович"
+            }
+          },
+          {
+            "id": 31,
+            "name_uz": "FARMATSEVTIKA KORXONALARIDA DORI VOSITALARINI ISHLAB CHIQARISHDAGI CHIQINDILAR VA YO‘QOTISHLARNI BUXGALTERIYA HISOBIDA AKS ETTIRISH MASALALARI",
+            "name_ru": "FARMATSEVTIKA KORXONALARIDA DORI VOSITALARINI ISHLAB CHIQARISHDAGI CHIQINDILAR VA YO‘QOTISHLARNI BUXGALTERIYA HISOBIDA AKS ETTIRISH MASALALARI",
+            "name_en": "FARMATSEVTIKA KORXONALARIDA DORI VOSITALARINI ISHLAB CHIQARISHDAGI CHIQINDILAR VA YO‘QOTISHLARNI BUXGALTERIYA HISOBIDA AKS ETTIRISH MASALALARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/8._Turdikulova_Gulshad.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/31/view_or_download/",
+            "author": {
+              "id": 31,
+              "name": "Turdikulova Gulshad Nurmamatovna"
+            }
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "name_uz": "XORIJIY MAMLAKATLAR IQTISODIYOTI",
+        "name_ru": null,
+        "name_en": null,
+        "articles": []
+      },
+      {
+        "id": 22,
+        "name_uz": "KICHIK, BIZNES VA XUSUSIY TADBIRKORLIK",
+        "name_ru": null,
+        "name_en": null,
+        "articles": []
+      },
+      {
+        "id": 23,
+        "name_uz": "QIMMATLI QOGʻOZLAR BOZORI",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 33,
+            "name_uz": "AKSIYADORLIK TIJORAT BANKLARINING MOLIYAVIY HISOBOTLARINI XALQARO STANDARTLAR ASOSIDA TUZISHNI TAKOMILLASHTIRISH YO’LLARI",
+            "name_ru": "AKSIYADORLIK TIJORAT BANKLARINING MOLIYAVIY HISOBOTLARINI XALQARO STANDARTLAR ASOSIDA TUZISHNI TAKOMILLASHTIRISH YO’LLARI",
+            "name_en": "AKSIYADORLIK TIJORAT BANKLARINING MOLIYAVIY HISOBOTLARINI XALQARO STANDARTLAR ASOSIDA TUZISHNI TAKOMILLASHTIRISH YO’LLARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/7.__Eshonqulov_Azamat_Abdiraximovich.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/33/view_or_download/",
+            "author": {
+              "id": 27,
+              "name": "Eshonqulov Azamat Abdiraximovich"
+            }
+          },
+          {
+            "id": 32,
+            "name_uz": "AKSIYADORLIK JAMIYATLARIDA XODIMLARNING SAMARADORLIGINI BELGILOVCHI KO’RSATKICHLAR TAHLILI",
+            "name_ru": "AKSIYADORLIK JAMIYATLARIDA XODIMLARNING SAMARADORLIGINI BELGILOVCHI KO’RSATKICHLAR TAHLILI",
+            "name_en": "AKSIYADORLIK JAMIYATLARIDA XODIMLARNING SAMARADORLIGINI BELGILOVCHI KO’RSATKICHLAR TAHLILI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/4._Suvonov_Bekniyoz.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/32/view_or_download/",
+            "author": {
+              "id": 32,
+              "name": "Suvonov Bekniyoz Baxtiyor o’g’li"
+            }
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "name_uz": "«Oʼzbekiston – 2030» strategiyasidagi 5 ta yoʼnalish va 100 ta maqsaddan birini gavdalantirigan maqolalar.",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 43,
+            "name_uz": "СИФАТЛИ ТАЪЛИМ – ИЖТИМОИЙ, ИҚТИСОДИЙ ВА СИЁСИЙ БАРҚАРОРЛИК ТАЯНЧИ",
+            "name_ru": "СИФАТЛИ ТАЪЛИМ – ИЖТИМОИЙ, ИҚТИСОДИЙ ВА СИЁСИЙ БАРҚАРОРЛИК ТАЯНЧИ",
+            "name_en": "СИФАТЛИ ТАЪЛИМ – ИЖТИМОИЙ, ИҚТИСОДИЙ ВА СИЁСИЙ БАРҚАРОРЛИК ТАЯНЧИ",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/12_%D0%A1%D0%B8%D1%84%D0%B0%D1%82%D0%BB%D0%B8_%D1%82%D0%B0%D1%8A%D0%BB%D0%B8%D0%BC__%D0%B8%D0%B6%D1%82%D0%B8%D0%BC%D0%BE%D0%B8%D0%B9_%D0%B8%D2%9B%D1%82%D0%B8%D1%81%D0%BE%D0%B4%D0%B8%D0%B9_%D0%B2%D0%B0_%D1%81%D0%B8%D1%91%D1%81%D0%B8%D0%B9_%D0%B1%D0%B0%D1%80%D2%9B%D0%B0%D1%80%D0%BE%D1%80%D0%BB%D0%B8%D0%BA_%D1%82%D0%B0%D1%8F%D0%BD%D1%87%D0%B8.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/43/view_or_download/",
+            "author": {
+              "id": 37,
+              "name": "Nodirov Azizxon Asrorovich"
+            }
+          },
+          {
+            "id": 39,
+            "name_uz": "TA‘LIMDA RAQAMLI TRANSFORMATSIYANI JORIY ETISHNING ASOSIY BOSQICHLARI VA ISTIQBOLI",
+            "name_ru": "TA‘LIMDA RAQAMLI TRANSFORMATSIYANI JORIY ETISHNING ASOSIY BOSQICHLARI VA ISTIQBOLI",
+            "name_en": "TA‘LIMDA RAQAMLI TRANSFORMATSIYANI JORIY ETISHNING ASOSIY BOSQICHLARI VA ISTIQBOLI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/14._Professor_Normatov_Ibroximali_Xolmamatovich.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/39/view_or_download/",
+            "author": {
+              "id": 38,
+              "name": "Normatov Ibroximali Xolmamatovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "name_uz": "Nobel mukofoti",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 61,
+            "name_uz": "Paul A. Samuelson илмий-ижодий фаолияти.",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Paul_A._Samuelson_%D0%B8%D0%BB%D0%BC%D0%B8%D0%B8-%D0%B8%D0%B6%D0%BE%D0%B4%D0%B8%D0%B8_%D1%84%D0%B0%D0%BE%D0%BB%D0%B8%D1%8F%D1%82%D0%B8..pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/Paul_A._Samuelson_%D0%B8%D0%BB%D0%BC%D0%B8%D0%B8-%D0%B8%D0%B6%D0%BE%D0%B4%D0%B8%D0%B8_%D1%84%D0%B0%D0%BE%D0%BB%D0%B8%D1%8F%D1%82%D0%B8..pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/Paul_A._Samuelson_%D0%B8%D0%BB%D0%BC%D0%B8%D0%B8-%D0%B8%D0%B6%D0%BE%D0%B4%D0%B8%D0%B8_%D1%84%D0%B0%D0%BE%D0%BB%D0%B8%D1%8F%D1%82%D0%B8..pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/61/view_or_download/",
+            "author": {
+              "id": 52,
+              "name": "Хайдаров Низамиддин.  Нормуродов Алибек"
+            }
+          }
+        ]
+      },
+      {
+        "id": 68,
+        "name_uz": "2-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_ru": "2-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_en": "2-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "articles": [
+          {
+            "id": 136,
+            "name_uz": "2-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_ru": "2-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "name_en": "2-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/ilovepdf_merged.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/ilovepdf_merged.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/ilovepdf_merged.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/136/view_or_download/",
+            "author": {
+              "id": 115,
+              "name": "2-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli"
+            }
+          }
+        ]
+      }
+    ],
+    "name_uz": "Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal",
+    "name_ru": null,
+    "name_en": null,
+    "cover_image": "https://back.tift-fintech.uz/media/Jurnal/jurnal/2026/07/09/95b168ea-180e-4d85-a6a7-b5aa81f4d6ae.png",
+    "cover_image_ru": null,
+    "cover_image_en": null,
+    "back_image": "https://back.tift-fintech.uz/media/jurnal/jurnal/2026/07/09/2-son__2025_._doc_page-0001.jpg",
+    "back_image_ru": null,
+    "back_image_en": null,
+    "which_number": "2-son | 2025",
+    "created_at": "2025-10-09T17:42:40.787521Z",
+    "updated_at": "2026-07-09T08:46:49.722824Z",
+    "upload_file_uz": null,
+    "upload_file_ru": null,
+    "upload_file_en": null
+  },
+  {
+    "id": 1,
+    "categories": [
+      {
+        "id": 26,
+        "name_uz": "BOSH MUHARRIRDAN - MUSHTARIYLARGA",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 42,
+            "name_uz": "Татқиқотчи ва муштарийлар илмий фаолиятга ривож!",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/%D0%98%D0%B7%D0%BB%D0%B0%D0%BD%D1%83%D0%B2%D1%87%D0%B8_%D0%B2%D0%B0_%D0%BC%D1%83%D1%88%D1%82%D0%B0%D1%80%D0%B8%D0%B8%D0%BB%D0%B0%D1%80_%D0%B8%D0%BB%D0%BC%D0%B8%D0%B8_%D1%84%D0%B0%D0%BE%D0%BB%D0%B8%D1%8F%D1%82%D0%B3%D0%B0_%D1%80%D0%B8%D0%B2%D0%BE%D0%B6.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/42/view_or_download/",
+            "author": {
+              "id": 24,
+              "name": "Бош муҳаррир, TIFT университети Ректори А. Нодиров"
+            }
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name_uz": "Moliya, soliq, byudjet, sugʼurta.",
+        "name_ru": "Финансы, налоги, бюджет, страхование.",
+        "name_en": "Finance, taxes, budget, insurance.",
+        "articles": [
+          {
+            "id": 2,
+            "name_uz": "MAHALLIY BYUDJET DAROMADLARINI SHAKLLANTIRISHNING AMALDAGI HOLATI TAHLILI",
+            "name_ru": "MAHALLIY BYUDJET DAROMADLARINI SHAKLLANTIRISHNING AMALDAGI HOLATI TAHLILI",
+            "name_en": "MAHALLIY BYUDJET DAROMADLARINI SHAKLLANTIRISHNING AMALDAGI HOLATI TAHLILI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/3._Tursunova_Z._maqola__TIFT_jurnal_1-son_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/2/view_or_download/",
+            "author": {
+              "id": 3,
+              "name": "Tursunova Zulayxo Abdujobir qizi"
+            }
+          },
+          {
+            "id": 3,
+            "name_uz": "“YASHIL” IQTISODIYOTGA O‘TISH DAVRIDA HUDUDLAR SOLIQ SALOHIYATINI OSHIRISHNING ASOSIY YO‘NALISHLARI.",
+            "name_ru": "“YASHIL” IQTISODIYOTGA O‘TISH DAVRIDA HUDUDLAR SOLIQ SALOHIYATINI OSHIRISHNING ASOSIY YO‘NALISHLARI.",
+            "name_en": "“YASHIL” IQTISODIYOTGA O‘TISH DAVRIDA HUDUDLAR SOLIQ SALOHIYATINI OSHIRISHNING ASOSIY YO‘NALISHLARI.",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/4._Baxtiyorov_U._maqola__TIFT_jurnal_1-son_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/3/view_or_download/",
+            "author": {
+              "id": 4,
+              "name": "Baxtiyorov Umid Qaxramon o’g’li."
+            }
+          },
+          {
+            "id": 1,
+            "name_uz": "O‘ZBEKISTONDA DAVLAT BYUDJETI DAROMAD VA XARAJATLARINING TARKIBI VA DINAMIKASI TAHLILI",
+            "name_ru": "O‘ZBEKISTONDA DAVLAT BYUDJETI DAROMAD VA XARAJATLARINING TARKIBI VA DINAMIKASI TAHLILI",
+            "name_en": "O‘ZBEKISTONDA DAVLAT BYUDJETI DAROMAD VA XARAJATLARINING TARKIBI VA DINAMIKASI TAHLILI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/2_%D0%90%D0%B1%D0%B4%D1%83%D1%80%D0%B0%D1%85%D0%B8%D0%BC%D0%BE%D0%B2%D0%B0_%D0%A1_maqola_TIFT_jurnal_1_son_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/1/view_or_download/",
+            "author": {
+              "id": 2,
+              "name": "Abduraximova Saida Axmadjanovna \n G‘ulomjonov Farruxbek Doniyorjon o‘g‘li"
+            }
+          },
+          {
+            "id": 5,
+            "name_uz": "МОЛИЯВИЙ ФАНЛАР ТАРАҚҚИЁТИНИ ҲАМ, АВВАЛО, ҲАР БИР ТУШУНЧА (АТАМА, СЎЗ)НИНГ АНИҚ ВА ЎЗ ЎРНИДА ИШЛАТИЛИШИ БЕЛГИЛАБ БЕРАДИ",
+            "name_ru": "МОЛИЯВИЙ ФАНЛАР ТАРАҚҚИЁТИНИ ҲАМ, АВВАЛО, ҲАР БИР ТУШУНЧА (АТАМА, СЎЗ)НИНГ АНИҚ ВА ЎЗ ЎРНИДА ИШЛАТИЛИШИ БЕЛГИЛАБ БЕРАДИ",
+            "name_en": "МОЛИЯВИЙ ФАНЛАР ТАРАҚҚИЁТИНИ ҲАМ, АВВАЛО, ҲАР БИР ТУШУНЧА (АТАМА, СЎЗ)НИНГ АНИҚ ВА ЎЗ ЎРНИДА ИШЛАТИЛИШИ БЕЛГИЛАБ БЕРАДИ",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/17._%D0%9C%D0%BE%D0%BB.%D1%82%D0%B5%D1%85.%D0%A2.%D0%A1._%D0%9C%D0%90%D0%BB%D0%B8%D0%BA%D0%BE%D0%B2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/5/view_or_download/",
+            "author": {
+              "id": 6,
+              "name": "Тоҳир Сатторович Маликов"
+            }
+          },
+          {
+            "id": 141,
+            "name_uz": "RESPUBLIKAMIZDA ISLOM MOLIYASINI RIVOJLANTIRISHNING  USTUVOR YO‘NALISHLARI",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/Ibaragimov_A.N._Bositova_S.%D0%92.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/141/view_or_download/",
+            "author": {
+              "id": 116,
+              "name": "Ibragimov Abdunazar Narzullayevich, Bositova Samiya Bahodir qizi"
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name_uz": "Bank, kredit, davlat qarzi.",
+        "name_ru": "Банк, кредит, государственный долг.",
+        "name_en": "Bank, credit, government debt.",
+        "articles": [
+          {
+            "id": 6,
+            "name_uz": "O’ZBEKISTON RESPUBLIKASIDA XALQARO YOZGI MAKTAB VA TA’LIM TURIZMINI RIVOJLANTIRISHNINING ISTIQBOLLI YO’NALISHLARI",
+            "name_ru": "O’ZBEKISTON RESPUBLIKASIDA XALQARO YOZGI MAKTAB VA TA’LIM TURIZMINI RIVOJLANTIRISHNINING ISTIQBOLLI YO’NALISHLARI",
+            "name_en": "O’ZBEKISTON RESPUBLIKASIDA XALQARO YOZGI MAKTAB VA TA’LIM TURIZMINI RIVOJLANTIRISHNINING ISTIQBOLLI YO’NALISHLARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/7_Adilova_G__Qoraboyev_N_Ozbekistonda_Talim_turizmni_rivojlantirish.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/6/view_or_download/",
+            "author": {
+              "id": 7,
+              "name": "Adilova Go’zal Abdazovna \n Qoraboyev Nuriddin Pardaboy o’g’li \n  Odilova Malika Abdushukur qizi"
+            }
+          },
+          {
+            "id": 134,
+            "name_uz": "O‘ZBEKISTON BANK TIZIMIDA RAQAMLI VALYUTALAR VA YASHIL INVESTITSIYALAR INTEGRATSIYASINI TAKOMILLASHTIRISH",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/24._%D0%9D%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2_%D0%9C%D0%B0%D2%9B%D0%BE%D0%BB%D0%B0_1-son_PDF.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/134/view_or_download/",
+            "author": {
+              "id": 37,
+              "name": "Nodirov Azizxon Asrorovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name_uz": "Investitsiya va innovatsiya.",
+        "name_ru": "Инвестиции и инновации.",
+        "name_en": "Investment and innovation.",
+        "articles": []
+      },
+      {
+        "id": 4,
+        "name_uz": "Makro va mikroiqtisodiyot.",
+        "name_ru": "Макро и микроэкономика.",
+        "name_en": "Macro and microeconomics.",
+        "articles": []
+      },
+      {
+        "id": 5,
+        "name_uz": "Moliyaviy menejment va marketing.",
+        "name_ru": "Финансовый менеджмент и маркетинг.",
+        "name_en": "Financial management and marketing.",
+        "articles": []
+      },
+      {
+        "id": 6,
+        "name_uz": "Iqtisodiyotni Raqamlashtirish, agro va nano texnololgiyalar.",
+        "name_ru": "Цифровизация экономики, агро и нанотехнологии.",
+        "name_en": "Digitalization of the Economy, agro and nano technologies.",
+        "articles": [
+          {
+            "id": 7,
+            "name_uz": "ДАВЛАТ-ХУСУСИЙ ШЕРИКЛИК ЛОЙИҲАЛАРИ ИНВЕСТИЦИОН ФАОЛИЯТИНИ ТАКОМИЛЛАШТИРИШ",
+            "name_ru": "ДАВЛАТ-ХУСУСИЙ ШЕРИКЛИК ЛОЙИҲАЛАРИ ИНВЕСТИЦИОН ФАОЛИЯТИНИ ТАКОМИЛЛАШТИРИШ",
+            "name_en": "ДАВЛАТ-ХУСУСИЙ ШЕРИКЛИК ЛОЙИҲАЛАРИ ИНВЕСТИЦИОН ФАОЛИЯТИНИ ТАКОМИЛЛАШТИРИШ",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/19_%D0%9D_%D0%A5%D0%B0%D0%B8%D0%B4%D0%B0%D1%80%D0%BE%D0%B2_%D0%94%D0%A5%D0%A8_%D0%BC%D0%B0%D2%9B%D0%BE%D0%BB%D0%B0_%D0%96%D1%83%D1%80%D0%BD%D0%B0%D0%BB_1_%D1%81%D0%BE%D0%BD%D0%B8%D0%B3%D0%B0_2025_%D0%B8%D0%B8%D0%BB.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/7/view_or_download/",
+            "author": {
+              "id": 8,
+              "name": "Хайдаров Низамиддин Хамраевич"
+            }
+          },
+          {
+            "id": 8,
+            "name_uz": "КУЗАТИЛМАЙДИГАН ИҚТИСОДИЁТДА ХУФИЁНА ДАРОМАДЛАРНИ КАМАЙТИРИШ: ЎЗБЕКИСТОНДАГИ ИСЛОҲОТЛАР ВА САМАРАЛИ ЧОРАЛАР",
+            "name_ru": "КУЗАТИЛМАЙДИГАН ИҚТИСОДИЁТДА ХУФИЁНА ДАРОМАДЛАРНИ КАМАЙТИРИШ: ЎЗБЕКИСТОНДАГИ ИСЛОҲОТЛАР ВА САМАРАЛИ ЧОРАЛАР",
+            "name_en": "КУЗАТИЛМАЙДИГАН ИҚТИСОДИЁТДА ХУФИЁНА ДАРОМАДЛАРНИ КАМАЙТИРИШ: ЎЗБЕКИСТОНДАГИ ИСЛОҲОТЛАР ВА САМАРАЛИ ЧОРАЛАР",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/23._%D0%90.%D0%90.%D2%92%D0%B8%D0%B5%D1%81%D0%BE%D0%B2_%D0%BC%D0%B0%D0%BA%D0%BE%D0%BB%D0%B0_%D1%82%D0%B0%D0%B8%D0%B5%D1%80%D0%B8.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/8/view_or_download/",
+            "author": {
+              "id": 9,
+              "name": "Ғиёсов Азизбек Аъзамович"
+            }
+          },
+          {
+            "id": 159,
+            "name_uz": "TURIZM OBYEKTLARIDAGI MA’LUMOTLARNI QAYTA ISHLASHNI OPTIMALLASHTIRISHDA TEXNOLOGIK YONDASHUVLAR.",
+            "name_ru": "TURIZM OBYEKTLARIDAGI MA’LUMOTLARNI QAYTA ISHLASHNI OPTIMALLASHTIRISHDA TEXNOLOGIK YONDASHUVLAR.",
+            "name_en": "TURIZM OBYEKTLARIDAGI MA’LUMOTLARNI QAYTA ISHLASHNI OPTIMALLASHTIRISHDA TEXNOLOGIK YONDASHUVLAR.",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/TURIZM_OBYEKTLARIDAGI_MALUMOTLARNI_QAYTA_ISHLASHNI_OPTIMALLASHT_p69EJvI.pdf",
+            "file_ru": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/ru/TURIZM_OBYEKTLARIDAGI_MALUMOTLARNI_QAYTA_ISHLASHNI_OPTIMALLASHT_RL8QgVA.pdf",
+            "file_en": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/en/TURIZM_OBYEKTLARIDAGI_MALUMOTLARNI_QAYTA_ISHLASHNI_OPTIMALLASHT_PhpgvXP.pdf",
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/159/view_or_download/",
+            "author": {
+              "id": 5,
+              "name": "Toshtemirov Xojiakbar Qahramon o‘g‘li"
+            }
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name_uz": "Buxgalteriya hisobi va iqtisodiy tahlil.",
+        "name_ru": "Бухгалтерский учет и экономический анализ.",
+        "name_en": "Accounting and economic analysis.",
+        "articles": []
+      },
+      {
+        "id": 8,
+        "name_uz": "Xorijiy mamlakatlar iqtisodiyoti.",
+        "name_ru": "Экономика зарубежных стран.",
+        "name_en": "The economy of foreign countries.",
+        "articles": [
+          {
+            "id": 9,
+            "name_uz": "AFG‘ONISTONDA GIYOHVAND MODDALARI SAVDOSINING RIVOJLANISH DINAMIKASI",
+            "name_ru": "AFG‘ONISTONDA GIYOHVAND MODDALARI SAVDOSINING RIVOJLANISH DINAMIKASI",
+            "name_en": "AFG‘ONISTONDA GIYOHVAND MODDALARI SAVDOSINING RIVOJLANISH DINAMIKASI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/14_Xudayberdiyev_I_maqola_Rukn_11_Ozbekiston_2030.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/9/view_or_download/",
+            "author": {
+              "id": 10,
+              "name": "Xudayberdiyev Ikrom Ilxomjon o‘g‘li"
+            }
+          },
+          {
+            "id": 10,
+            "name_uz": "О‘ZBЕKIЅTОN VA HINDIЅTОN O‘RTASIDA TURIZM YO‘LIDA HAMKORLIK ALOQALARI VA ISTIQBOLLARI",
+            "name_ru": "О‘ZBЕKIЅTОN VA HINDIЅTОN O‘RTASIDA TURIZM YO‘LIDA HAMKORLIK ALOQALARI VA ISTIQBOLLARI",
+            "name_en": "О‘ZBЕKIЅTОN VA HINDIЅTОN O‘RTASIDA TURIZM YO‘LIDA HAMKORLIK ALOQALARI VA ISTIQBOLLARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/21._Sayfullayev_B.D._Rukn_11._Ozbekiston_-_2030_3.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/10/view_or_download/",
+            "author": {
+              "id": 11,
+              "name": "Sayfullayev Behruz Dilshod o‘g‘li,"
+            }
+          },
+          {
+            "id": 11,
+            "name_uz": "MUQADDAS JOYLARNING ARXITEKTURA YODGORLIKLARI VA UNING IJTIMOIY MADANIYATGA KO‘RSATGAN TAʼSIRI",
+            "name_ru": "MUQADDAS JOYLARNING ARXITEKTURA YODGORLIKLARI VA UNING IJTIMOIY MADANIYATGA KO‘RSATGAN TAʼSIRI",
+            "name_en": "MUQADDAS JOYLARNING ARXITEKTURA YODGORLIKLARI VA UNING IJTIMOIY MADANIYATGA KO‘RSATGAN TAʼSIRI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/22_Kalonov_K_maqola_09_04_Rukn_11_Ozbekiston_2030.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/11/view_or_download/",
+            "author": {
+              "id": 12,
+              "name": "Kalanov Komil Kulaxmatovich"
+            }
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name_uz": "Kichik, biznes va xususiy tadbirkorlik.",
+        "name_ru": "Малый бизнес и частное предпринимательство.",
+        "name_en": "Small, business and private entrepreneurship.",
+        "articles": [
+          {
+            "id": 15,
+            "name_uz": "IQTISODIY MODELLARDA MATRITSALAR VA CHIZIQLI TENGLAMALAR SISTEMASINING QOʻLLANILISHI",
+            "name_ru": "IQTISODIY MODELLARDA MATRITSALAR VA CHIZIQLI TENGLAMALAR SISTEMASINING QOʻLLANILISHI",
+            "name_en": "IQTISODIY MODELLARDA MATRITSALAR VA CHIZIQLI TENGLAMALAR SISTEMASINING QOʻLLANILISHI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/16._Eshimbetov_Muzaffar_Matematika_kafedrasi.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/15/view_or_download/",
+            "author": {
+              "id": 16,
+              "name": "Eshimbetov Muzaffar Reyimbayevich \n Eshimbetov Joʻrabek Reyimbayevich"
+            }
+          },
+          {
+            "id": 14,
+            "name_uz": "O‘ZBEKISTON RESPUBLIKASIDA IQTISODIY FAOL AHOLINI SAMARALI ISH BILAN BANDLIGINI TA’MINLASH ISTIQBOLLARI",
+            "name_ru": "O‘ZBEKISTON RESPUBLIKASIDA IQTISODIY FAOL AHOLINI SAMARALI ISH BILAN BANDLIGINI TA’MINLASH ISTIQBOLLARI",
+            "name_en": "O‘ZBEKISTON RESPUBLIKASIDA IQTISODIY FAOL AHOLINI SAMARALI ISH BILAN BANDLIGINI TA’MINLASH ISTIQBOLLARI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/12._Adilova_G_maqola_TIFT_jurnal_1_son_3._09.04.25.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/14/view_or_download/",
+            "author": {
+              "id": 15,
+              "name": "Adilova Guzal Abdazovna \n Madaminjanov Bekzodbek Ayubxan o’g’li"
+            }
+          },
+          {
+            "id": 13,
+            "name_uz": "YANGI O‘ZBEKISTONNING MINTAQAVIY TASHQI VA IQTISODIY SIYOSATI MARKAZIY OSIYODA BARQAROR RIVOJLANISHNING MUHIM GAROVI",
+            "name_ru": "YANGI O‘ZBEKISTONNING MINTAQAVIY TASHQI VA IQTISODIY SIYOSATI MARKAZIY OSIYODA BARQAROR RIVOJLANISHNING MUHIM GAROVI",
+            "name_en": "YANGI O‘ZBEKISTONNING MINTAQAVIY TASHQI VA IQTISODIY SIYOSATI MARKAZIY OSIYODA BARQAROR RIVOJLANISHNING MUHIM GAROVI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/9._Ergasheva_X.Q._maqola_-_Rukn_11._Ozbekiston_-_2030.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/13/view_or_download/",
+            "author": {
+              "id": 14,
+              "name": "Ergasheva Xulkar Quldoshevna"
+            }
+          },
+          {
+            "id": 12,
+            "name_uz": "QORAQALPOG‘ISTON RESPUBLIKASIDA AHOLI DAROMADLARI DINAMIKASI",
+            "name_ru": "QORAQALPOG‘ISTON RESPUBLIKASIDA AHOLI DAROMADLARI DINAMIKASI",
+            "name_en": "QORAQALPOG‘ISTON RESPUBLIKASIDA AHOLI DAROMADLARI DINAMIKASI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/5._Rahimboyev_M._maqola__TIFT_jurnal_1-son_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/12/view_or_download/",
+            "author": {
+              "id": 13,
+              "name": "Rahimboyev Muxtorbek Ikrom o’g’li."
+            }
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name_uz": "Qimmatli qogʼozlar bozori.",
+        "name_ru": "Фондовый рынок.",
+        "name_en": "Stock market.",
+        "articles": []
+      },
+      {
+        "id": 11,
+        "name_uz": "«Oʼzbekiston – 2030» strategiyasidagi 5 ta yoʼnalish va 100 ta maqsaddan birini gavdalantirigan maqolalar.",
+        "name_ru": "Статьи, воплощающие одно из 5 направлений и 100 целей стратегии «Узбекистан – 2030».",
+        "name_en": "Articles embodying one of the 5 areas and 100 goals of the \"Uzbekistan - 2030\" strategy.",
+        "articles": [
+          {
+            "id": 20,
+            "name_uz": "ISLOMIY ILMLAR SHAKLLANISHIDA MUSULMON SHARQIDAGI QADIMGI MADANIY AN’ANALARNING O‘RNI",
+            "name_ru": "ISLOMIY ILMLAR SHAKLLANISHIDA MUSULMON SHARQIDAGI QADIMGI MADANIY AN’ANALARNING O‘RNI",
+            "name_en": "ISLOMIY ILMLAR SHAKLLANISHIDA MUSULMON SHARQIDAGI QADIMGI MADANIY AN’ANALARNING O‘RNI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/11._Jurayev_Sh.__maqola_-_Rukn_11._Ozbekiston_-_2030.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/20/view_or_download/",
+            "author": {
+              "id": 21,
+              "name": "Jurayev Sherali Soibnazar o‘g‘li"
+            }
+          },
+          {
+            "id": 19,
+            "name_uz": "ABU RAYHON BERUNIYNING “HINDISTON” ASARI VA UNING TARIXSHUNOSLIGI",
+            "name_ru": "ABU RAYHON BERUNIYNING “HINDISTON” ASARI VA UNING TARIXSHUNOSLIGI",
+            "name_en": "ABU RAYHON BERUNIYNING “HINDISTON” ASARI VA UNING TARIXSHUNOSLIGI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/10._Jumayev_B._maqola_-_Rukn_11._Ozbekiston_-_2030.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/19/view_or_download/",
+            "author": {
+              "id": 20,
+              "name": "Jumayev Buron Ulug‘murotovich"
+            }
+          },
+          {
+            "id": 18,
+            "name_uz": "O’ZBEKISTON RESPUBLIKASINING FRANKOFON DAVLATLAR BILAN ALOQALARI TARIXI VA DAVLAT SIYOSATI",
+            "name_ru": "O’ZBEKISTON RESPUBLIKASINING FRANKOFON DAVLATLAR BILAN ALOQALARI TARIXI VA DAVLAT SIYOSATI",
+            "name_en": "O’ZBEKISTON RESPUBLIKASINING FRANKOFON DAVLATLAR BILAN ALOQALARI TARIXI VA DAVLAT SIYOSATI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/8._Boboyev_D._maqola_-_Rukn_11._Ozbekiston_2030.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/18/view_or_download/",
+            "author": {
+              "id": 19,
+              "name": "Boboyev Doniyor Xaydaraliyevich"
+            }
+          },
+          {
+            "id": 17,
+            "name_uz": "О‘ZBEK XALQI ANTROPOLOGIK TIPI DASTLAB TARKIB TOPGAN MAKON VA ZAMON",
+            "name_ru": "О‘ZBEK XALQI ANTROPOLOGIK TIPI DASTLAB TARKIB TOPGAN MAKON VA ZAMON",
+            "name_en": "О‘ZBEK XALQI ANTROPOLOGIK TIPI DASTLAB TARKIB TOPGAN MAKON VA ZAMON",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/6._Sayfullayev_S_D_maqola_Rukn_11_Ozbekiston_2030_copy.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/17/view_or_download/",
+            "author": {
+              "id": 18,
+              "name": "Sayfullayev Samarbek Dilshod o’g’li"
+            }
+          },
+          {
+            "id": 16,
+            "name_uz": "YOSH VA GENDER XUSUSIYATLARI KONTEKSTIDA IJTIMOIY TARMOQLARGA QARAMLIK MUAMMOSIGA DOIR TADQIQOTLAR TAVSIFI",
+            "name_ru": "YOSH VA GENDER XUSUSIYATLARI KONTEKSTIDA IJTIMOIY TARMOQLARGA QARAMLIK MUAMMOSIGA DOIR TADQIQOTLAR TAVSIFI",
+            "name_en": "YOSH VA GENDER XUSUSIYATLARI KONTEKSTIDA IJTIMOIY TARMOQLARGA QARAMLIK MUAMMOSIGA DOIR TADQIQOTLAR TAVSIFI",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/1._Maqola_Ahrorov_S._TIFT_jurnal.Asosiy.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/16/view_or_download/",
+            "author": {
+              "id": 17,
+              "name": "Ahrorov Suhrobxon Yunusovich"
+            }
+          },
+          {
+            "id": 21,
+            "name_uz": "ХУЛҚ-АТВОР АРХИТЕКТОНИКАСИ ВА МОДЕЛЛАРИНИНГ ПСИХОЛОГИК ХАРАКТЕРИСТИКАСИ",
+            "name_ru": "ХУЛҚ-АТВОР АРХИТЕКТОНИКАСИ ВА МОДЕЛЛАРИНИНГ ПСИХОЛОГИК ХАРАКТЕРИСТИКАСИ",
+            "name_en": "ХУЛҚ-АТВОР АРХИТЕКТОНИКАСИ ВА МОДЕЛЛАРИНИНГ ПСИХОЛОГИК ХАРАКТЕРИСТИКАСИ",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/15._S.R.Sadriddinov_1_%D0%A5%D1%83%D0%BB%D0%BA_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%BB%D0%B0%D1%80%D0%B8_2.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/21/view_or_download/",
+            "author": {
+              "id": 22,
+              "name": "Садриддинов Сухроб Рустамжонович \n Садриддинов Сайроб Рустамжонович \nСадриддинова Дилнура Рустамжонз"
+            }
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "name_uz": "Nobel mukofoti",
+        "name_ru": null,
+        "name_en": null,
+        "articles": [
+          {
+            "id": 22,
+            "name_uz": "Ragnar Frisch ,Yan Tinbergen ilmiy ijodiy faoliyati",
+            "name_ru": "Ragnar Frisch ,Yan Tinbergen ilmiy ijodiy faoliyati",
+            "name_en": "Ragnar Frisch ,Yan Tinbergen ilmiy ijodiy faoliyati",
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/20._Nobel_mukofoti_1969_Jurnal_uchun_tayyor.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/22/view_or_download/",
+            "author": {
+              "id": 23,
+              "name": "Nizamiddin Xaydarov \n Abdullayev Axrorjon"
+            }
+          }
+        ]
+      },
+      {
+        "id": 67,
+        "name_uz": "1-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_ru": "1-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "name_en": "1-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli",
+        "articles": [
+          {
+            "id": 135,
+            "name_uz": "1-son | 2025 - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal",
+            "name_ru": null,
+            "name_en": null,
+            "file_uz": "https://back.tift-fintech.uz/media/bosh_sahifa/maqolalar/uz/full_1-son_.pdf",
+            "file_ru": null,
+            "file_en": null,
+            "view_article_or_download": "https://back.tift-fintech.uz/ru/articles/135/view_or_download/",
+            "author": {
+              "id": 109,
+              "name": "1-son | 2025  - Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal to'liq shakli"
+            }
+          }
+        ]
+      }
+    ],
+    "name_uz": "Moliya va intellektual texnologiyalar ilmiy tahliliy jurnal",
+    "name_ru": "Научно-аналитический журнал финансов и интеллектуальных технологий",
+    "name_en": "Scientific and analytical journal of finance and intellectual technologies",
+    "cover_image": "https://back.tift-fintech.uz/media/Jurnal/jurnal/2026/09/16/1_son_muqova.png",
+    "cover_image_ru": null,
+    "cover_image_en": null,
+    "back_image": "https://back.tift-fintech.uz/media/jurnal/jurnal/2026/07/09/1-son__2025__page-0001.jpg",
+    "back_image_ru": null,
+    "back_image_en": null,
+    "which_number": "1-son | 2025",
+    "created_at": "2025-10-07T16:52:49.065814Z",
+    "updated_at": "2026-09-16T12:28:17.162530Z",
+    "upload_file_uz": null,
+    "upload_file_ru": null,
+    "upload_file_en": null
+  }
+]
