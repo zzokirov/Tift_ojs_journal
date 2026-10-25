@@ -61,12 +61,16 @@
                         <i class="fas {{ group.category.icon }} text-blue-300 text-sm"></i>
                     {% endif %}
                     <span class="font-extrabold uppercase sm:normal-case">
-                        {% if CURRENT_LANG == 'ru' and group.category.name_ru %}
-                            {{ group.category.name_ru }}
-                        {% elif CURRENT_LANG == 'en' and group.category.name_en %}
-                            {{ group.category.name_en }}
+                        {% if group.category %}
+                            {% if CURRENT_LANG == 'ru' and group.category.name_ru %}
+                                {{ group.category.name_ru }}
+                            {% elif CURRENT_LANG == 'en' and group.category.name_en %}
+                                {{ group.category.name_en }}
+                            {% else %}
+                                {{ group.category.name_uz|default:group.category.name }}
+                            {% endif %}
                         {% else %}
-                            {{ group.category.name_uz|default:group.category.name|default:_("Ilmiy maqolalar") }}
+                            {% trans "Ilmiy maqolalar" %}
                         {% endif %}
                     </span>
                     <span class="text-xs bg-navy-800 text-blue-200 px-2 py-0.5 rounded-full ml-1 font-semibold">
