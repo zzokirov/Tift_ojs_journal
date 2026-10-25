@@ -254,11 +254,36 @@ def issue_detail(request, journal_slug, issue_pk):
     if not issue.is_published and issue.status != 'published':
         if not (request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser)):
             raise Http404(_("Ushbu jurnal soni hali chop etilmagan."))
-    articles = Article.objects.filter(issue=issue, status='published').order_by('order_in_issue', 'start_page', 'id')
+    articles = Article.objects.filter(issue=issue, status='published').select_related('category', 'author').order_by('category__order', 'category__id', 'order_in_issue', 'start_page', 'id')
+
+    from collections import OrderedDict
+    categories_dict = OrderedDict()
+    uncategorized = []
+    for art in articles:
+        if art.category:
+            if art.category not in categories_dict:
+                categories_dict[art.category] = []
+            categories_dict[art.category].append(art)
+        else:
+            uncategorized.append(art)
+
+    grouped_categories = []
+    for cat, arts in categories_dict.items():
+        grouped_categories.append({
+            'category': cat,
+            'articles': arts
+        })
+    if uncategorized:
+        grouped_categories.append({
+            'category': None,
+            'articles': uncategorized
+        })
+
     return render(request, 'journal/issue_detail.html', {
         'current_journal': current_journal,
         'issue': issue,
         'articles': articles,
+        'grouped_categories': grouped_categories,
     })
 
 
