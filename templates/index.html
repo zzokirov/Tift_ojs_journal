@@ -4,30 +4,34 @@
 {% block title %}{{ current_journal.title }} — TIFT{% endblock %}
 
 {% block content %}
+{% get_current_language as CURRENT_LANG %}
+
 <div class="bg-[#F8FAFC] py-6 sm:py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- 1. BACK TO JOURNALS LIST LINK -->
         <div class="mb-5">
-            <a href="{% url 'portal_home' %}" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-gray-600 hover:text-blue-700 transition">
+            <a href="{% url 'portal_home' %}" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-gray-600 hover:{% if 'moliya' in current_journal.slug %}text-emerald-700{% else %}text-blue-700{% endif %} transition">
                 <i class="fas fa-arrow-left text-xs"></i>
                 <span>{% trans "Jurnallar ro'yxatiga qaytish" %}</span>
             </a>
         </div>
 
-        <!-- 2. JOURNAL HERO CARD (SCREEN 2) -->
-        <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm mb-8 flex flex-col md:flex-row gap-8 items-start">
-            
-            <!-- Journal Cover -->
-            <div class="w-40 sm:w-52 flex-shrink-0 self-center md:self-start">
-                <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden shadow-lg border border-gray-200 bg-gray-100">
+        <!-- 2. JOURNAL HERO CARD (DYNAMIC PER JOURNAL DESIGN) -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm mb-10 flex flex-col md:flex-row gap-8 items-start relative overflow-hidden">
+            <!-- Subtle accent top strip -->
+            <div class="absolute top-0 left-0 right-0 h-1.5 {% if 'moliya' in current_journal.slug %}bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-400{% else %}bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-500{% endif %}"></div>
+
+            <!-- Journal Cover (3:4 ratio) -->
+            <div class="w-44 sm:w-56 flex-shrink-0 self-center md:self-start">
+                <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden shadow-lg border border-gray-200 bg-gray-100 relative group">
                     {% if current_journal.get_cover_for_language %}
-                        <img src="{{ current_journal.get_cover_for_language.url }}" alt="{{ current_journal.title }}" class="w-full h-full object-cover">
+                        <img src="{{ current_journal.get_cover_for_language.url }}" alt="{{ current_journal.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     {% else %}
-                        <div class="w-full h-full bg-gradient-to-br from-navy-900 to-blue-800 p-5 text-white flex flex-col justify-between">
-                            <span class="text-xs font-black uppercase tracking-wider text-blue-300">TIFT</span>
-                            <p class="text-sm font-bold leading-tight">{{ current_journal.title }}</p>
-                            <span class="text-[11px] text-blue-200">{{ current_journal.issn }}</span>
+                        <div class="w-full h-full p-6 text-white flex flex-col justify-between {% if 'moliya' in current_journal.slug %}bg-gradient-to-br from-[#122336] via-[#0b2420] to-[#044e3d]{% else %}bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#1e3a8a]{% endif %}">
+                            <span class="text-xs font-black uppercase tracking-wider {% if 'moliya' in current_journal.slug %}text-emerald-300{% else %}text-blue-300{% endif %}">TIFT</span>
+                            <p class="text-base font-bold leading-tight">{{ current_journal.title }}</p>
+                            <span class="text-xs text-gray-300 font-mono">ISSN {{ current_journal.issn|default:"—" }}</span>
                         </div>
                     {% endif %}
                 </div>
@@ -35,7 +39,22 @@
 
             <!-- Journal Info & Details -->
             <div class="flex-1 w-full">
-                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-3 leading-tight">
+                <div class="flex flex-wrap items-center gap-2 mb-2">
+                    <span class="text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border {% if 'moliya' in current_journal.slug %}bg-emerald-50 text-emerald-800 border-emerald-200{% else %}bg-blue-50 text-blue-800 border-blue-200{% endif %}">
+                        <i class="fas {% if 'moliya' in current_journal.slug %}fa-chart-line{% else %}fa-building{% endif %} mr-1"></i>
+                        {% if 'moliya' in current_journal.slug %}{% trans "Moliya va Raqamli Iqtisodiyot" %}{% else %}{% trans "Arxitektura va Qurilish" %}{% endif %}
+                    </span>
+                    <span class="text-[11px] font-semibold text-gray-500">
+                        ISSN: <strong class="text-gray-900 font-mono">{{ current_journal.issn|default:"—" }}</strong>
+                    </span>
+                    {% if current_journal.eissn %}
+                    <span class="text-[11px] font-semibold text-gray-500">
+                        • eISSN: <strong class="text-gray-900 font-mono">{{ current_journal.eissn }}</strong>
+                    </span>
+                    {% endif %}
+                </div>
+
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-navy-900 mb-3 leading-tight">
                     {{ current_journal.title }}
                 </h1>
                 
@@ -43,22 +62,12 @@
                     {{ current_journal.short_description|default:current_journal.full_description }}
                 </p>
 
-                <!-- ISSN Badge -->
-                <div class="flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-600 mb-4 pb-4 border-b border-gray-100">
-                    <span class="flex items-center gap-1.5">
-                        <i class="far fa-id-card text-blue-600"></i>
-                        <span>ISSN: <strong class="text-gray-900">{{ current_journal.issn|default:"—" }}</strong></span>
-                    </span>
-
-                </div>
-
                 <!-- Metadata Row (Frequency, Languages, Publisher) -->
-                {% get_current_language as CURRENT_LANG %}
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 text-xs text-gray-600">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 text-xs text-gray-600 bg-gray-50/70 p-3.5 rounded-xl border border-gray-100">
                     <div class="flex items-start gap-2">
                         <i class="far fa-calendar-alt text-gray-400 mt-0.5"></i>
                         <div>
-                            <span class="text-gray-400 block text-[11px]">{% trans "Nashr davriyligi" %}</span>
+                            <span class="text-gray-400 block text-[10px] uppercase font-bold">{% trans "Nashr davriyligi" %}</span>
                             <span class="font-bold text-gray-800">
                                 {% if CURRENT_LANG == 'en' %}
                                     {{ current_journal.publication_frequency_en|default:"4 times a year" }}
@@ -73,7 +82,7 @@
                     <div class="flex items-start gap-2">
                         <i class="fas fa-globe text-gray-400 mt-0.5"></i>
                         <div>
-                            <span class="text-gray-400 block text-[11px]">{% trans "Tillar" %}</span>
+                            <span class="text-gray-400 block text-[10px] uppercase font-bold">{% trans "Tillar" %}</span>
                             <span class="font-bold text-gray-800">
                                 {% if CURRENT_LANG == 'en' %}
                                     Uzbek, Russian, English
@@ -88,7 +97,7 @@
                     <div class="flex items-start gap-2">
                         <i class="fas fa-university text-gray-400 mt-0.5"></i>
                         <div>
-                            <span class="text-gray-400 block text-[11px]">{% trans "Nashriyot" %}</span>
+                            <span class="text-gray-400 block text-[10px] uppercase font-bold">{% trans "Nashriyot" %}</span>
                             <span class="font-bold text-gray-800">
                                 {% if CURRENT_LANG == 'en' %}
                                     TIFT University
@@ -105,10 +114,10 @@
                 <!-- Research Area Badges -->
                 {% if current_journal.research_areas_list %}
                 <div class="mb-6">
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400 block mb-2">{% trans "Asosiy yo'nalishlar" %}</span>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-2">{% trans "Asosiy yo'nalishlar" %}</span>
                     <div class="flex flex-wrap gap-1.5">
                         {% for tag in current_journal.research_areas_list %}
-                            <span class="text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-md">
+                            <span class="text-[11px] font-semibold px-2.5 py-1 rounded-lg border {% if 'moliya' in current_journal.slug %}bg-emerald-50 text-emerald-800 border-emerald-200{% else %}bg-blue-50 text-blue-800 border-blue-200{% endif %}">
                                 {{ tag }}
                             </span>
                         {% endfor %}
@@ -120,13 +129,13 @@
                 <div class="flex flex-wrap items-center gap-3 pt-2">
                     {% if user.is_authenticated %}
                         <a href="{% url 'submit_article' journal_slug=current_journal.slug %}"
-                           class="inline-flex items-center gap-2 bg-navy-900 hover:bg-navy-800 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-sm">
+                           class="inline-flex items-center gap-2 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-md hover:shadow-lg {% if 'moliya' in current_journal.slug %}bg-[#00b074] hover:bg-[#009663]{% else %}bg-blue-700 hover:bg-blue-800{% endif %}">
                             <i class="fas fa-paper-plane text-xs"></i>
                             <span>{% trans "Maqolani yuborish" %}</span>
                         </a>
                     {% else %}
                         <a href="{% url 'signup' %}?next={% url 'submit_article' journal_slug=current_journal.slug %}"
-                           class="inline-flex items-center gap-2 bg-navy-900 hover:bg-navy-800 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-sm">
+                           class="inline-flex items-center gap-2 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-md hover:shadow-lg {% if 'moliya' in current_journal.slug %}bg-[#00b074] hover:bg-[#009663]{% else %}bg-blue-700 hover:bg-blue-800{% endif %}">
                             <i class="fas fa-paper-plane text-xs"></i>
                             <span>{% trans "Maqolani yuborish" %}</span>
                         </a>
@@ -137,80 +146,162 @@
                         <i class="fas fa-arrow-right text-xs"></i>
                     </a>
                 </div>
-
             </div>
         </div>
 
-        <!-- 4. ARTICLES & EDITORIAL BOARD GRID -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <!-- 3. SO'NGGI MAQOLALAR: GROUPED BY CATEGORY (HUDDI ARXIV KABI JADVALDA) -->
+        <section class="mb-14">
             
-            <!-- Left 2 Cols: So'nggi maqolalar -->
-            <div class="lg:col-span-2 space-y-6">
-                <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm">
-                    <div class="flex items-center justify-between mb-5 pb-3 border-b border-gray-100">
-                        <div>
-                            <h3 class="text-lg font-black text-gray-900 flex items-center gap-2">
-                                <i class="fas fa-file-alt text-blue-600 text-base"></i>
-                                <span>{% trans "So'nggi maqolalar" %}</span>
-                            </h3>
-                            <p class="text-xs text-gray-500 mt-0.5">{% trans "Ushbu jurnalda e'lon qilingan ilmiy maqolalar" %}</p>
-                        </div>
-                    </div>
-
-                    {% if recent_articles %}
-                    <div class="divide-y divide-gray-100">
-                        {% for art in recent_articles %}
-                        <div class="py-4 first:pt-0 last:pb-0">
-                            <a href="{% url 'article_detail' journal_slug=current_journal.slug pk=art.pk %}" class="block group">
-                                <h4 class="text-sm font-bold text-gray-900 group-hover:text-blue-700 transition leading-snug mb-1">
-                                    {{ art.title }}
-                                </h4>
-                            </a>
-                            <p class="text-xs text-gray-500 line-clamp-2 mb-2">{{ art.abstract }}</p>
-                            <div class="flex items-center gap-3 text-[11px] text-gray-400">
-                                <span class="font-semibold text-gray-600">{{ art.authors|default:art.author.get_full_name|default:art.author.username }}</span>
-                                <span>•</span>
-                                <span>{{ art.created_at|date:"d.m.Y" }}</span>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                        <div class="py-8 text-center text-xs text-gray-400">
-                            <i class="fas fa-file-alt text-gray-300 text-2xl mb-2 block"></i>
-                            {% trans "Hozircha maqolalar mavjud emas." %}
-                        </div>
-                    {% endif %}
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-3 border-b border-gray-200">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-black text-navy-900 flex items-center gap-2">
+                        <i class="fas fa-file-alt {% if 'moliya' in current_journal.slug %}text-emerald-600{% else %}text-blue-600{% endif %} text-lg"></i>
+                        <span>{% trans "So'nggi maqolalar" %}</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-0.5">
+                        {% if latest_issue %}
+                            {% blocktrans with year=latest_issue.year num=latest_issue.number %}{{ year }}-yil, {{ num }}-son bo‘yicha yo‘nalishlarga ajratilgan maqolalar{% endblocktrans %}
+                        {% else %}
+                            {% trans "Ushbu jurnalda e'lon qilingan ilmiy maqolalar yo‘nalishlar bo‘yicha" %}
+                        {% endif %}
+                    </p>
                 </div>
+                {% if latest_issue %}
+                    <div class="text-xs font-black px-3.5 py-1.5 rounded-full border shadow-sm {% if 'moliya' in current_journal.slug %}bg-emerald-50 text-emerald-800 border-emerald-200{% else %}bg-blue-50 text-blue-800 border-blue-200{% endif %}">
+                        {{ latest_issue.number }}-son | {{ latest_issue.year }} yil
+                    </div>
+                {% endif %}
             </div>
 
-            <!-- Right 1 Col: Editorial Board Preview & Guidelines -->
-            <div class="space-y-6">
-                
-                <!-- Editorial Board Preview Card -->
-                <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+            {% if grouped_categories %}
+                {% for group in grouped_categories %}
+                    <div class="mb-8 last:mb-0">
+                        <!-- Category Banner (Dark bar matching reference design) -->
+                        <div class="bg-[#122336] text-white font-bold py-3 px-6 rounded-t-xl text-center text-sm sm:text-base tracking-wide flex items-center justify-center gap-2.5 shadow-sm">
+                            {% if group.category and group.category.icon %}
+                                <i class="fas {{ group.category.icon }} text-blue-300 text-sm"></i>
+                            {% endif %}
+                            <span class="font-extrabold uppercase sm:normal-case">
+                                {% if CURRENT_LANG == 'ru' and group.category.name_ru %}
+                                    {{ group.category.name_ru }}
+                                {% elif CURRENT_LANG == 'en' and group.category.name_en %}
+                                    {{ group.category.name_en }}
+                                {% else %}
+                                    {{ group.category.name_uz|default:group.category.name|default:_("Ilmiy maqolalar") }}
+                                {% endif %}
+                            </span>
+                            <span class="text-xs bg-navy-800 text-blue-200 px-2 py-0.5 rounded-full ml-1 font-semibold">
+                                {{ group.articles|length }}
+                            </span>
+                        </div>
+
+                        <!-- Table of Articles (matching issue_detail) -->
+                        <div class="bg-white rounded-b-xl border border-gray-200 shadow-sm overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse min-w-[700px]">
+                                    <thead>
+                                        <tr class="border-b border-gray-200 bg-white text-[11px] font-black text-gray-500 uppercase tracking-wider">
+                                            <th scope="col" class="py-4 px-6 w-1/2">{% trans "MAQOLA NOMI" %}</th>
+                                            <th scope="col" class="py-4 px-6 w-1/3">{% trans "MUALLIFLAR" %}</th>
+                                            <th scope="col" class="py-4 px-6 text-center whitespace-nowrap">{% trans "YUKLAB OLISH" %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100">
+                                        {% for article in group.articles %}
+                                            <tr class="hover:bg-blue-50/40 transition-colors duration-150">
+                                                <!-- MAQOLA NOMI -->
+                                                <td class="py-4 px-6 align-middle">
+                                                    <a href="{% url 'article_detail' current_journal.slug article.pk %}"
+                                                       class="font-bold text-gray-900 hover:text-blue-700 transition leading-snug block text-xs sm:text-sm uppercase tracking-tight">
+                                                        {% if CURRENT_LANG == 'ru' and article.title_ru %}
+                                                            {{ article.title_ru }}
+                                                        {% elif CURRENT_LANG == 'en' and article.title_en %}
+                                                            {{ article.title_en }}
+                                                        {% else %}
+                                                            {{ article.title_uz|default:article.title }}
+                                                        {% endif %}
+                                                    </a>
+                                                    {% if article.start_page and article.end_page %}
+                                                        <span class="inline-flex items-center gap-1 text-[11px] text-gray-500 mt-1 font-semibold">
+                                                            <i class="fas fa-file-alt text-gray-400 text-[10px]"></i>
+                                                            {{ article.start_page }}-{{ article.end_page }}-betlar
+                                                        </span>
+                                                    {% endif %}
+                                                </td>
+
+                                                <!-- MUALLIFLAR -->
+                                                <td class="py-4 px-6 align-middle text-xs text-gray-700 font-medium leading-relaxed">
+                                                    {% if article.authors %}
+                                                        {{ article.authors }}
+                                                    {% else %}
+                                                        {{ article.author.get_full_name|default:article.author.username }}
+                                                    {% endif %}
+                                                    {% if article.author.institution %}
+                                                        <div class="text-[11px] text-gray-400 mt-0.5">{{ article.author.institution }}</div>
+                                                    {% endif %}
+                                                </td>
+
+                                                <!-- AMALLAR (Yuklab olish & Ochib ko'rish) -->
+                                                <td class="py-4 px-6 align-middle text-center whitespace-nowrap">
+                                                    <div class="inline-flex items-center gap-2 justify-center">
+                                                        {% if article.pdf_file %}
+                                                            <a href="{% url 'download_pdf' current_journal.slug article.pk %}"
+                                                               class="inline-flex items-center justify-center gap-1.5 bg-[#00b074] hover:bg-[#009663] text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow-sm hover:shadow"
+                                                               title="{% trans 'PDF yuklab olish' %}" download>
+                                                                <span>{% trans "Yuklab olish" %}</span>
+                                                            </a>
+                                                        {% endif %}
+                                                        <a href="{% url 'article_detail' current_journal.slug article.pk %}"
+                                                           class="inline-flex items-center justify-center gap-1.5 bg-[#132337] hover:bg-[#1e3450] text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow-sm hover:shadow"
+                                                           title="{% trans 'Batafsil' %}">
+                                                            <span>{% trans "Ochib ko'rish" %}</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center text-xs text-gray-400">
+                    <i class="fas fa-file-alt text-gray-300 text-3xl mb-2 block"></i>
+                    {% trans "Hozircha maqolalar mavjud emas." %}
+                </div>
+            {% endif %}
+        </section>
+
+        <!-- 4. TAHRIRIYAT VA HUJJATLAR QUICK SECTION -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
+            
+            <!-- Editorial Board Preview -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm flex flex-col justify-between">
+                <div>
                     <div class="flex items-center justify-between mb-4 pb-2 border-b border-gray-100">
                         <h3 class="text-base font-black text-gray-900 flex items-center gap-2">
-                            <i class="fas fa-user-tie text-blue-600 text-sm"></i>
+                            <i class="fas fa-user-tie {% if 'moliya' in current_journal.slug %}text-emerald-600{% else %}text-blue-600{% endif %} text-sm"></i>
                             <span>{% trans "Tahririyat a'zolari" %}</span>
                         </h3>
+                        <span class="text-xs text-gray-400 font-semibold">{{ staff|length }} nafar</span>
                     </div>
 
                     {% if staff %}
-                        <div class="space-y-3.5">
-                            {% for member in staff|slice:":5" %}
+                        <div class="space-y-3">
+                            {% for member in staff|slice:":4" %}
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0 flex items-center justify-center text-gray-400">
+                                <div class="w-9 h-9 rounded-full overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0 flex items-center justify-center text-gray-400">
                                     {% if member.photo %}
                                         <img src="{{ member.photo.url }}" alt="{{ member.full_name }}" class="w-full h-full object-cover">
                                     {% else %}
-                                        <i class="far fa-user text-sm"></i>
+                                        <i class="far fa-user text-xs"></i>
                                     {% endif %}
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="text-xs font-bold text-gray-900 truncate">{{ member.full_name }}</h4>
                                     <p class="text-[11px] text-gray-500 truncate">{{ member.get_position_display }}</p>
-                                    <p class="text-[10px] text-gray-400 truncate">{{ member.institution|default:"TIFT universiteti" }}</p>
                                 </div>
                             </div>
                             {% endfor %}
@@ -218,31 +309,34 @@
                     {% else %}
                         <p class="text-xs text-gray-400 italic">{% trans "Tahririyat a'zolari shakllantirilmoqda" %}</p>
                     {% endif %}
-
-                    <div class="mt-5 pt-4 border-t border-gray-100">
-                        <a href="{% url 'about' journal_slug=current_journal.slug %}" class="w-full inline-flex items-center justify-center gap-1.5 text-xs font-bold bg-blue-50 hover:bg-blue-100 text-blue-800 py-2.5 rounded-xl transition">
-                            <span>{% trans "Barcha a'zolarni ko'rish" %}</span>
-                            <i class="fas fa-arrow-right text-[10px]"></i>
-                        </a>
-                    </div>
                 </div>
 
-                <!-- Guidelines Quick Card -->
-                <div class="bg-gradient-to-br from-navy-900 to-blue-900 text-white rounded-2xl p-6 shadow-sm">
-                    <div class="flex items-center gap-2 mb-2 text-blue-300 text-xs font-bold uppercase tracking-wider">
+                <div class="mt-5 pt-4 border-t border-gray-100">
+                    <a href="{% url 'about' journal_slug=current_journal.slug %}" class="w-full inline-flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 rounded-xl transition {% if 'moliya' in current_journal.slug %}bg-emerald-50 hover:bg-emerald-100 text-emerald-800{% else %}bg-blue-50 hover:bg-blue-100 text-blue-800{% endif %}">
+                        <span>{% trans "Barcha tahririyat a'zolari" %}</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Guidelines Quick Card -->
+            <div class="text-white rounded-2xl p-6 shadow-sm flex flex-col justify-between {% if 'moliya' in current_journal.slug %}bg-gradient-to-br from-[#122336] to-[#064e3b]{% else %}bg-gradient-to-br from-[#0f172a] to-[#1e3a8a]{% endif %}">
+                <div>
+                    <div class="flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-wider {% if 'moliya' in current_journal.slug %}text-emerald-300{% else %}text-blue-300{% endif %}">
                         <i class="fas fa-file-contract"></i>
                         <span>{% trans "Mualliflarga" %}</span>
                     </div>
-                    <h4 class="font-bold text-sm text-white mb-2">{% trans "Maqola talablari va nizomlar" %}</h4>
+                    <h4 class="font-bold text-base text-white mb-2">{% trans "Maqola talablari va nizomlar" %}</h4>
                     <p class="text-xs text-gray-300 leading-relaxed mb-4">
-                        {% trans "Jurnalga maqola yuborishdan oldin talablar va namunaviy andoza bilan tanishib chiqing." %}
+                        {% trans "Jurnalga maqola yuborishdan oldin talablar, IMRAD qoidalari va namunaviy andoza bilan tanishib chiqing." %}
                     </p>
-                    <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="inline-flex items-center gap-2 bg-white text-navy-900 hover:bg-gray-100 text-xs font-bold px-4 py-2 rounded-lg transition">
+                </div>
+                <div>
+                    <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="inline-flex items-center gap-2 bg-white text-navy-900 hover:bg-gray-100 text-xs font-bold px-4 py-2.5 rounded-xl transition shadow">
                         <span>{% trans "Hujjatlarni ko'rish" %}</span>
                         <i class="fas fa-arrow-right text-[10px]"></i>
                     </a>
                 </div>
-
             </div>
 
         </div>
@@ -252,46 +346,51 @@
             <div class="flex items-center justify-between mb-6 pb-2 border-b border-gray-200">
                 <div>
                     <h2 class="text-lg sm:text-xl font-black text-gray-900 flex items-center gap-2">
-                        <i class="fas fa-layer-group text-blue-600 text-base"></i>
+                        <i class="fas fa-layer-group {% if 'moliya' in current_journal.slug %}text-emerald-600{% else %}text-blue-600{% endif %} text-base"></i>
                         <span>{% trans "So'nggi sonlar" %}</span>
                     </h2>
-                    <p class="text-xs text-gray-500 mt-0.5">{% trans "Jurnalning yaqinda chop etilgan nashrlari" %}</p>
+                    <p class="text-xs text-gray-500 mt-0.5">{% trans "Jurnalning yaqinda chop etilgan rasmiy sonlari" %}</p>
                 </div>
-                <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="text-xs sm:text-sm font-bold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1 transition">
+                <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="text-xs sm:text-sm font-bold {% if 'moliya' in current_journal.slug %}text-emerald-700 hover:text-emerald-900{% else %}text-blue-700 hover:text-blue-900{% endif %} inline-flex items-center gap-1 transition">
                     <span>{% trans "Barcha sonlar (Arxiv)" %}</span>
                     <i class="fas fa-arrow-right text-[11px]"></i>
                 </a>
             </div>
 
             {% if issues %}
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {% for issue in issues|slice:":3" %}
-                    <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition flex gap-4 items-center">
-                        <div class="w-20 flex-shrink-0">
-                            <div class="aspect-[3/4] w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for issue in issues|slice:":4" %}
+                    <a href="{% url 'issue_detail' journal_slug=current_journal.slug issue_pk=issue.pk %}"
+                       class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm hover:shadow-lg transition flex flex-col group hover:-translate-y-1">
+                        <div class="w-full mb-3">
+                            <div class="aspect-[3/4] w-full rounded-xl overflow-hidden bg-gray-100 border border-gray-100 shadow-sm">
                                 {% if issue.cover_image %}
-                                    <img src="{{ issue.cover_image.url }}" alt="{{ issue }}" class="w-full h-full object-cover">
+                                    <img src="{{ issue.cover_image.url }}" alt="{{ issue.number }}-son" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 {% elif current_journal.get_cover_for_language %}
-                                    <img src="{{ current_journal.get_cover_for_language.url }}" alt="{{ issue }}" class="w-full h-full object-cover">
+                                    <img src="{{ current_journal.get_cover_for_language.url }}" alt="{{ issue.number }}-son" class="w-full h-full object-cover">
                                 {% else %}
-                                    <div class="w-full h-full bg-navy-900 p-2 text-white flex flex-col justify-between">
-                                        <span class="text-[8px] font-bold">TIFT</span>
-                                        <span class="text-[9px] font-bold leading-tight">{{ issue.number }}-son</span>
+                                    <div class="w-full h-full bg-navy-900 p-3 text-white flex flex-col justify-between">
+                                        <span class="text-[9px] font-bold">TIFT</span>
+                                        <span class="text-xs font-bold leading-tight">{{ issue.number }}-son</span>
                                     </div>
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="flex-1 min-w-0">
-                            <h4 class="text-sm font-bold text-gray-900 truncate mb-1">
-                                {{ issue.number }}-son, {{ issue.year }} {% trans "yil" %}
-                            </h4>
-                            <p class="text-xs text-gray-400 mb-3">{{ issue.publication_date|default:issue.created_at|date:"Y-m-d" }}</p>
-                            <a href="{% url 'issue_detail' journal_slug=current_journal.slug issue_pk=issue.pk %}"
-                               class="inline-flex items-center gap-1 text-xs font-bold text-blue-700 hover:text-blue-900 border border-blue-200 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition">
-                                <span>{% trans "Ko'rish →" %}</span>
-                            </a>
+                        <div class="flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900 group-hover:text-blue-700 transition leading-snug">
+                                    {{ issue.number }}-son | {{ issue.year }} yil
+                                </h4>
+                                <p class="text-[11px] text-gray-400 mt-0.5">
+                                    {% blocktrans count counter=issue.articles.count %}{{ counter }} ta maqola{% plural %}{{ counter }} ta maqola{% endblocktrans %}
+                                </p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-gray-100 text-xs font-bold {% if 'moliya' in current_journal.slug %}text-emerald-600{% else %}text-blue-600{% endif %} flex items-center justify-between">
+                                <span>{% trans "Ko'rish" %}</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                     {% endfor %}
                 </div>
             {% else %}

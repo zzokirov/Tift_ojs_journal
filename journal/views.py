@@ -181,8 +181,15 @@ def index(request, journal_slug):
 
     query = request.GET.get('q')
     recent_articles = []
+    grouped_categories = []
+    latest_issue = None
     try:
-        recent_qs = Article.objects.filter(journal=current_journal, status='published').order_by('-created_at')
+        latest_issue = JournalIssue.objects.filter(journal=current_journal).order_by('-year', '-number').first()
+        if latest_issue and not query:
+            recent_qs = Article.objects.filter(journal=current_journal, issue=latest_issue, status='published').select_related('category', 'author').order_by('category__order', 'category__id', 'order_in_issue', 'start_page', 'id')
+        else:
+            recent_qs = Article.objects.filter(journal=current_journal, status='published').select_related('category', 'author').order_by('category__order', 'category__id', 'order_in_issue', 'start_page', 'id')
+
         if query:
             recent_qs = recent_qs.filter(
                 Q(title__icontains=query) |
@@ -193,9 +200,32 @@ def index(request, journal_slug):
                 Q(author__last_name__icontains=query) |
                 Q(author__username__icontains=query)
             )
-        recent_articles = list(recent_qs[:10])
+
+        from collections import OrderedDict
+        categories_dict = OrderedDict()
+        uncategorized = []
+        for art in recent_qs:
+            if art.category:
+                if art.category not in categories_dict:
+                    categories_dict[art.category] = []
+                categories_dict[art.category].append(art)
+            else:
+                uncategorized.append(art)
+
+        for cat, arts in categories_dict.items():
+            grouped_categories.append({
+                'category': cat,
+                'articles': arts
+            })
+        if uncategorized:
+            grouped_categories.append({
+                'category': None,
+                'articles': uncategorized
+            })
+        recent_articles = list(recent_qs)
     except Exception:
         recent_articles = []
+        grouped_categories = []
 
     issues = []
     try:
@@ -215,6 +245,8 @@ def index(request, journal_slug):
     return render(request, 'index.html', {
         'current_journal': current_journal,
         'recent_articles': recent_articles,
+        'grouped_categories': grouped_categories,
+        'latest_issue': latest_issue,
         'issues': issues,
         'staff': staff,
         'query': query,
@@ -323,13 +355,26 @@ def article_detail(request, journal_slug, pk):
         except Exception:
             pass
 
-        # 3. Shu muallifning boshqa nashr etilgan maqolalari
+        # 3. Shu muallifning boshqa nashr etilgan maqolalari (faqat shu muallifga tegishli maqolalar)
         author_articles = []
         try:
-            author_obj = getattr(article, 'author', None)
-            if author_obj:
+            if article.authors:
+                author_names = [n.strip() for n in article.authors.replace(';', ',').split(',') if len(n.strip()) > 3]
+                if author_names:
+                    q_author = Q()
+                    for aname in author_names:
+                        parts = aname.split()
+                        if len(parts) >= 2:
+                            q_author |= Q(authors__icontains=f"{parts[0]} {parts[1]}")
+                        elif len(parts) == 1:
+                            q_author |= Q(authors__icontains=parts[0])
+                    author_articles = Article.objects.filter(
+                        journal=current_journal,
+                        status='published'
+                    ).filter(q_author).exclude(pk=pk).order_by('-published_at', '-created_at')[:8]
+            elif article.author and article.author.username not in ('tift', 'admin'):
                 author_articles = Article.objects.filter(
-                    author=author_obj,
+                    author=article.author,
                     status='published',
                     journal=current_journal
                 ).exclude(pk=pk).order_by('-created_at')[:8]

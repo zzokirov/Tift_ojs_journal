@@ -1,22 +1,30 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %}{% trans "Arxiv | TIFT Jurnali" %}{% endblock %}
+{% block title %}{% trans "Arxiv" %} | {{ current_journal.title }}{% endblock %}
 
 {% block content %}
 
-<!-- HEADER -->
+<!-- BREADCRUMBS & TOP NAV -->
 <div class="site-container px-4 pt-8 pb-4">
+    <nav class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+        <a href="{% url 'index' current_journal.slug %}" class="hover:text-blue-700 transition flex items-center gap-1">
+            <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
+        </a>
+        <i class="fas fa-chevron-right text-[9px] text-gray-400"></i>
+        <span class="text-gray-900 font-bold">{% trans "Arxiv" %}</span>
+    </nav>
     <div class="border-b border-gray-200 pb-5 flex flex-wrap items-center justify-between gap-4">
         <div>
-            <div class="flex items-center gap-2 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-1 {% if 'moliya' in current_journal.slug %}text-emerald-700{% else %}text-blue-700{% endif %}">
                 <i class="fas fa-archive"></i>
                 <span>{{ current_journal.title }}</span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-black text-navy-900">{% trans "Jurnal sonlari (Arxiv)" %}</h1>
-            <p class="text-xs sm:text-sm text-gray-500 mt-1">{% trans "Barcha chop etilgan nashrlar to'plami" %}</p>
+            <p class="text-xs sm:text-sm text-gray-500 mt-1">{% trans "Barcha chop etilgan rasmiy nashrlar to'plami" %}</p>
         </div>
-        <div class="text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200 px-3.5 py-1.5 rounded-full">
-            {% blocktrans count counter=issues.count %}{{ counter }} ta son mavjud{% plural %}{{ counter }} ta son mavjud{% endblocktrans %}
+        <div class="text-xs font-bold px-4 py-2 rounded-full border shadow-sm {% if 'moliya' in current_journal.slug %}bg-emerald-50 text-emerald-800 border-emerald-200{% else %}bg-blue-50 text-blue-800 border-blue-200{% endif %}">
+            <i class="fas fa-layer-group mr-1.5"></i>
+            {% blocktrans count counter=issues|length %}{{ counter }} ta son mavjud{% plural %}{{ counter }} ta son mavjud{% endblocktrans %}
         </div>
     </div>
 </div>
@@ -24,32 +32,78 @@
 <!-- ARCHIVE GRID -->
 <div class="site-container px-4 py-8">
     {% if issues %}
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
             {% for issue in issues %}
                 <a href="{% url 'issue_detail' current_journal.slug issue.pk %}"
-                   class="bg-white rounded-2xl border border-gray-100 shadow-sm card-hover overflow-hidden group block">
-                    <!-- Top color bar -->
-                    <div class="h-2 bg-gradient-to-r from-green-600 to-green-400"></div>
-                    <div class="p-6">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-12 h-12 bg-navy-900 rounded-xl flex items-center justify-center shadow-lg p-2">
-                                <img src="{% static 'images/tift.png' %}" alt="{% trans "TIFT Logo" %}" class="w-7 h-7 object-contain">
+                   class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group block hover:-translate-y-1.5">
+                    
+                    <!-- Top accent bar -->
+                    <div class="h-1.5 {% if 'moliya' in current_journal.slug %}bg-gradient-to-r from-emerald-600 to-teal-400{% else %}bg-gradient-to-r from-blue-700 to-indigo-500{% endif %}"></div>
+
+                    <div class="p-4 sm:p-5">
+                        <!-- REAL ISSUE COVER IMAGE (3:4 aspect ratio) -->
+                        <div class="relative w-full rounded-xl overflow-hidden bg-gray-100 shadow-md mb-4 border border-gray-100" style="aspect-ratio: 3 / 4;">
+                            {% if issue.cover_image %}
+                                <img src="{{ issue.cover_image.url }}"
+                                     alt="{% blocktrans with year=issue.year num=issue.number %}{{ year }}-yil, {{ num }}-son{% endblocktrans %}"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            {% else %}
+                                <!-- Elegant fallback magazine cover -->
+                                <div class="w-full h-full p-5 text-white flex flex-col justify-between relative overflow-hidden {% if 'moliya' in current_journal.slug %}bg-gradient-to-br from-[#122336] via-[#0d2a24] to-[#044e3d]{% else %}bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#1e3a8a]{% endif %}">
+                                    <div class="relative z-10">
+                                        <div class="flex items-center gap-2 mb-3">
+                                            <span class="text-xs font-black tracking-widest uppercase bg-white/15 px-2 py-0.5 rounded">TIFT</span>
+                                        </div>
+                                        <h4 class="text-sm font-black leading-snug tracking-tight text-white/95">
+                                            {{ current_journal.title }}
+                                        </h4>
+                                    </div>
+                                    <div class="relative z-10 border-t border-white/20 pt-3">
+                                        <div class="text-xl font-black text-white">
+                                            {{ issue.number }}-son
+                                        </div>
+                                        <div class="text-xs text-white/80 font-semibold">
+                                            {{ issue.year }} yil
+                                        </div>
+                                    </div>
+                                    <!-- Decorative background icon -->
+                                    <i class="fas fa-book-open absolute -bottom-4 -right-4 text-7xl text-white/5 pointer-events-none"></i>
+                                </div>
+                            {% endif %}
+
+                            <!-- Hover Overlay with CTA -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <span class="text-white text-xs font-bold flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/30">
+                                    <i class="fas fa-book-open text-emerald-300 text-xs"></i>
+                                    <span>{% trans "Sonni ko'rish" %}</span>
+                                </span>
                             </div>
-                            <span class="bg-green-600/10 text-green-700 border border-green-500/20 text-xs font-bold px-3 py-1 rounded-full">
+
+                            <!-- Year Badge on Top Right -->
+                            <span class="absolute top-2.5 right-2.5 bg-navy-950/85 backdrop-blur-md text-white text-[11px] font-black px-2.5 py-1 rounded-lg shadow-md border border-white/10">
                                 {{ issue.year }}
                             </span>
                         </div>
-                        <h3 class="font-black text-navy-900 text-lg leading-tight group-hover:text-green-700 transition-colors">
-                            {% blocktrans with year=issue.year %}{{ year }}-yil{% endblocktrans %}
-                        </h3>
-                        <p class="text-gray-500 text-sm mt-1">{% blocktrans with num=issue.number %}{{ num }}-son{% endblocktrans %}</p>
-                        <div class="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
-                            <span class="text-xs text-gray-400 flex items-center gap-1">
-                                <i class="fas fa-file-alt text-green-500/70"></i>
-                                {% blocktrans count counter=issue.articles.count %}{{ counter }} ta maqola{% plural %}{{ counter }} ta maqola{% endblocktrans %}
+
+                        <!-- Card Details -->
+                        <div class="space-y-1">
+                            <h3 class="font-black text-navy-900 text-base sm:text-lg leading-snug group-hover:text-blue-700 transition-colors flex items-center justify-between">
+                                <span>{{ issue.number }}-son | {{ issue.year }} yil</span>
+                            </h3>
+                            <p class="text-xs text-gray-500 flex items-center gap-1.5 pt-0.5">
+                                <i class="fas fa-file-alt text-gray-400 text-[11px]"></i>
+                                <span>{% blocktrans count counter=issue.articles.count %}{{ counter }} ta maqola{% plural %}{{ counter }} ta maqola{% endblocktrans %}</span>
+                            </p>
+                        </div>
+
+                        <!-- Card Footer Action -->
+                        <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
+                            <span class="font-bold {% if 'moliya' in current_journal.slug %}text-emerald-600 group-hover:text-emerald-700{% else %}text-blue-600 group-hover:text-blue-700{% endif %} flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                                <span>{% trans "Maqolalar ro'yxati" %}</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
                             </span>
-                            <span class="text-green-600 text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                {% trans "Ko'rish" %} <i class="fas fa-arrow-right text-[10px]"></i>
+                            <span class="text-gray-400 text-[11px]">
+                                <i class="fas fa-calendar-alt text-[10px] mr-1"></i>{{ issue.year }}
                             </span>
                         </div>
                     </div>
