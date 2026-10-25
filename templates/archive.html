@@ -32,7 +32,7 @@
 <!-- ARCHIVE GRID -->
 <div class="site-container px-4 py-8">
     {% if issues %}
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4">
             {% for issue in issues %}
                 <a href="{% url 'issue_detail' current_journal.slug issue.pk %}"
                    class="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group block hover:-translate-y-1.5">
@@ -40,9 +40,9 @@
                     <!-- Top accent bar -->
                     <div class="h-1.5 {% if 'moliya' in current_journal.slug %}bg-gradient-to-r from-emerald-600 to-teal-400{% else %}bg-gradient-to-r from-blue-700 to-indigo-500{% endif %}"></div>
 
-                    <div class="p-4 sm:p-5">
+                    <div class="p-2.5 sm:p-3">
                         <!-- REAL ISSUE COVER IMAGE (3:4 aspect ratio) -->
-                        <div class="relative w-full rounded-xl overflow-hidden bg-gray-100 shadow-md mb-4 border border-gray-100" style="aspect-ratio: 3 / 4;">
+                        <div class="relative w-full rounded-lg overflow-hidden bg-gray-100 shadow-xs mb-2.5 border border-gray-100" style="aspect-ratio: 3 / 4;">
                             {% if issue.cover_image %}
                                 <img src="{{ issue.cover_image.url }}"
                                      alt="{% blocktrans with year=issue.year num=issue.number %}{{ year }}-yil, {{ num }}-son{% endblocktrans %}"
@@ -86,24 +86,24 @@
                         </div>
 
                         <!-- Card Details -->
-                        <div class="space-y-1">
-                            <h3 class="font-black text-navy-900 text-base sm:text-lg leading-snug group-hover:text-blue-700 transition-colors flex items-center justify-between">
-                                <span>{{ issue.number }}-son | {{ issue.year }} yil</span>
+                        <div class="space-y-0.5">
+                            <h3 class="font-bold text-navy-900 text-xs sm:text-sm leading-snug group-hover:text-blue-700 transition-colors">
+                                {{ issue.number }}-son | {{ issue.year }} yil
                             </h3>
-                            <p class="text-xs text-gray-500 flex items-center gap-1.5 pt-0.5">
-                                <i class="fas fa-file-alt text-gray-400 text-[11px]"></i>
+                            <p class="text-[11px] text-gray-500 flex items-center gap-1">
+                                <i class="fas fa-file-alt text-gray-400 text-[10px]"></i>
                                 <span>{% blocktrans count counter=issue.articles.count %}{{ counter }} ta maqola{% plural %}{{ counter }} ta maqola{% endblocktrans %}</span>
                             </p>
                         </div>
 
                         <!-- Card Footer Action -->
-                        <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
-                            <span class="font-bold {% if 'moliya' in current_journal.slug %}text-emerald-600 group-hover:text-emerald-700{% else %}text-blue-600 group-hover:text-blue-700{% endif %} flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
-                                <span>{% trans "Maqolalar ro'yxati" %}</span>
-                                <i class="fas fa-arrow-right text-[10px]"></i>
+                        <div class="mt-2.5 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                            <span class="font-bold {% if 'moliya' in current_journal.slug %}text-emerald-600 group-hover:text-emerald-700{% else %}text-blue-600 group-hover:text-blue-700{% endif %} flex items-center gap-1 group-hover:gap-1.5 transition-all">
+                                <span>{% trans "Ochish" %}</span>
+                                <i class="fas fa-arrow-right text-[9px]"></i>
                             </span>
-                            <span class="text-gray-400 text-[11px]">
-                                <i class="fas fa-calendar-alt text-[10px] mr-1"></i>{{ issue.year }}
+                            <span class="text-gray-400 text-[10px]">
+                                <i class="fas fa-calendar-alt text-[9px] mr-0.5"></i>{{ issue.year }}
                             </span>
                         </div>
                     </div>

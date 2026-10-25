@@ -55,11 +55,8 @@
         {% for group in grouped_categories %}
             <div class="mb-10 last:mb-0">
                 
-                <!-- Category Banner (Dark Navy bar with white text matching screenshot) -->
-                <div class="bg-[#122336] text-white font-bold py-3 px-6 rounded-t-xl text-center text-sm sm:text-base tracking-wide flex items-center justify-center gap-2.5 shadow-sm">
-                    {% if group.category and group.category.icon %}
-                        <i class="fas {{ group.category.icon }} text-blue-300 text-sm"></i>
-                    {% endif %}
+                <!-- Category Banner (Without icon and without count badge) -->
+                <div class="bg-[#122336] text-white font-bold py-3 px-6 rounded-t-xl text-center text-sm sm:text-base tracking-wide flex items-center justify-center shadow-sm">
                     <span class="font-extrabold uppercase sm:normal-case">
                         {% if group.category %}
                             {% if CURRENT_LANG == 'ru' and group.category.name_ru %}
@@ -72,9 +69,6 @@
                         {% else %}
                             {% trans "Ilmiy maqolalar" %}
                         {% endif %}
-                    </span>
-                    <span class="text-xs bg-navy-800 text-blue-200 px-2 py-0.5 rounded-full ml-1 font-semibold">
-                        {{ group.articles|length }}
                     </span>
                 </div>
 

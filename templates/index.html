@@ -168,11 +168,8 @@
             {% if grouped_categories %}
                 {% for group in grouped_categories %}
                     <div class="mb-8 last:mb-0">
-                        <!-- Category Banner (Dark bar matching reference design) -->
-                        <div class="bg-[#122336] text-white font-bold py-3 px-6 rounded-t-xl text-center text-sm sm:text-base tracking-wide flex items-center justify-center gap-2.5 shadow-sm">
-                            {% if group.category and group.category.icon %}
-                                <i class="fas {{ group.category.icon }} text-blue-300 text-sm"></i>
-                            {% endif %}
+                        <!-- Category Banner (Without icon and without count badge) -->
+                        <div class="bg-[#122336] text-white font-bold py-3 px-6 rounded-t-xl text-center text-sm sm:text-base tracking-wide flex items-center justify-center shadow-sm">
                             <span class="font-extrabold uppercase sm:normal-case">
                                 {% if group.category %}
                                     {% if CURRENT_LANG == 'ru' and group.category.name_ru %}
@@ -185,9 +182,6 @@
                                 {% else %}
                                     {% trans "Ilmiy maqolalar" %}
                                 {% endif %}
-                            </span>
-                            <span class="text-xs bg-navy-800 text-blue-200 px-2 py-0.5 rounded-full ml-1 font-semibold">
-                                {{ group.articles|length }}
                             </span>
                         </div>
 
@@ -354,36 +348,39 @@
             </div>
 
             {% if issues %}
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {% for issue in issues|slice:":4" %}
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4">
+                    {% for issue in issues|slice:":6" %}
                     <a href="{% url 'issue_detail' journal_slug=current_journal.slug issue_pk=issue.pk %}"
-                       class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm hover:shadow-lg transition flex flex-col group hover:-translate-y-1">
-                        <div class="w-full mb-3">
-                            <div class="aspect-[3/4] w-full rounded-xl overflow-hidden bg-gray-100 border border-gray-100 shadow-sm">
+                       class="bg-white rounded-xl border border-gray-200 p-2.5 sm:p-3 shadow-xs hover:shadow-md transition flex flex-col group hover:-translate-y-1">
+                        <div class="w-full mb-2">
+                            <div class="aspect-[3/4] w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-100 shadow-xs relative">
                                 {% if issue.cover_image %}
                                     <img src="{{ issue.cover_image.url }}" alt="{{ issue.number }}-son" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 {% elif current_journal.get_cover_for_language %}
                                     <img src="{{ current_journal.get_cover_for_language.url }}" alt="{{ issue.number }}-son" class="w-full h-full object-cover">
                                 {% else %}
-                                    <div class="w-full h-full bg-navy-900 p-3 text-white flex flex-col justify-between">
-                                        <span class="text-[9px] font-bold">TIFT</span>
-                                        <span class="text-xs font-bold leading-tight">{{ issue.number }}-son</span>
+                                    <div class="w-full h-full bg-navy-900 p-2 text-white flex flex-col justify-between">
+                                        <span class="text-[8px] font-bold">TIFT</span>
+                                        <span class="text-[10px] font-bold leading-tight">{{ issue.number }}-son</span>
                                     </div>
                                 {% endif %}
+                                <span class="absolute top-1.5 right-1.5 bg-navy-950/85 backdrop-blur-xs text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow">
+                                    {{ issue.year }}
+                                </span>
                             </div>
                         </div>
                         <div class="flex-1 flex flex-col justify-between">
                             <div>
-                                <h4 class="text-sm font-bold text-gray-900 group-hover:text-blue-700 transition leading-snug">
-                                    {{ issue.number }}-son | {{ issue.year }} yil
+                                <h4 class="text-xs font-bold text-gray-900 group-hover:text-blue-700 transition leading-snug">
+                                    {{ issue.number }}-son | {{ issue.year }}
                                 </h4>
-                                <p class="text-[11px] text-gray-400 mt-0.5">
+                                <p class="text-[10px] text-gray-400 mt-0.5">
                                     {% blocktrans count counter=issue.articles.count %}{{ counter }} ta maqola{% plural %}{{ counter }} ta maqola{% endblocktrans %}
                                 </p>
                             </div>
-                            <div class="mt-3 pt-2 border-t border-gray-100 text-xs font-bold {% if 'moliya' in current_journal.slug %}text-emerald-600{% else %}text-blue-600{% endif %} flex items-center justify-between">
+                            <div class="mt-2 pt-1.5 border-t border-gray-100 text-[11px] font-bold {% if 'moliya' in current_journal.slug %}text-emerald-600{% else %}text-blue-600{% endif %} flex items-center justify-between">
                                 <span>{% trans "Ko'rish" %}</span>
-                                <i class="fas fa-arrow-right text-[10px]"></i>
+                                <i class="fas fa-arrow-right text-[9px]"></i>
                             </div>
                         </div>
                     </a>
