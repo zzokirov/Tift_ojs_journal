@@ -89,27 +89,6 @@
                     </div>
                 </div>
 
-                <!-- Authenticated User (Admin / Profile) actions only -->
-                {% if user.is_authenticated %}
-                    {% if user.is_staff or user.is_superuser %}
-                        <a href="/admin/" target="_blank" class="inline-flex items-center gap-1.5 bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm" title="{% trans 'Admin paneli' %}">
-                            <i class="fas fa-shield-alt text-blue-400"></i>
-                            <span class="hidden sm:inline">{% trans "Admin" %}</span>
-                        </a>
-                    {% else %}
-                        <a href="{% url 'my_articles' %}" class="inline-flex items-center gap-1.5 border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-900 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
-                            <i class="far fa-user text-blue-700"></i>
-                            <span>{{ user.first_name|default:user.username }}</span>
-                        </a>
-                    {% endif %}
-                    <form action="{% url 'logout' %}" method="post" class="inline">
-                        {% csrf_token %}
-                        <button type="submit" title="{% trans 'Chiqish' %}" class="p-1.5 text-gray-400 hover:text-red-600 transition">
-                            <i class="fas fa-sign-out-alt text-sm"></i>
-                        </button>
-                    </form>
-                {% endif %}
-
                 <!-- Mobile Hamburger Button -->
                 <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-700 hover:text-navy-900 focus:outline-none">
                     <i class="fas fa-bars text-lg"></i>

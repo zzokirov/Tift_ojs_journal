@@ -1070,7 +1070,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             from django.contrib.auth import login as auth_login
-            auth_login(request, user)
+            auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             if next_url and next_url.startswith('/'):
                 return redirect(next_url)
             return redirect('my_articles')
