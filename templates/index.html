@@ -127,19 +127,11 @@
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap items-center gap-3 pt-2">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'submit_article' journal_slug=current_journal.slug %}"
-                           class="inline-flex items-center gap-2 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-md hover:shadow-lg {% if 'moliya' in current_journal.slug %}bg-[#00b074] hover:bg-[#009663]{% else %}bg-blue-700 hover:bg-blue-800{% endif %}">
-                            <i class="fas fa-paper-plane text-xs"></i>
-                            <span>{% trans "Maqolani yuborish" %}</span>
-                        </a>
-                    {% else %}
-                        <a href="{% url 'signup' %}?next={% url 'submit_article' journal_slug=current_journal.slug %}"
-                           class="inline-flex items-center gap-2 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-md hover:shadow-lg {% if 'moliya' in current_journal.slug %}bg-[#00b074] hover:bg-[#009663]{% else %}bg-blue-700 hover:bg-blue-800{% endif %}">
-                            <i class="fas fa-paper-plane text-xs"></i>
-                            <span>{% trans "Maqolani yuborish" %}</span>
-                        </a>
-                    {% endif %}
+                    <button type="button" onclick="openSubmitModal()"
+                            class="inline-flex items-center gap-2 text-white text-xs sm:text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-md hover:shadow-lg {% if 'moliya' in current_journal.slug %}bg-[#00b074] hover:bg-[#009663]{% else %}bg-blue-700 hover:bg-blue-800{% endif %} cursor-pointer">
+                        <i class="fas fa-paper-plane text-xs"></i>
+                        <span>{% trans "Maqolani yuborish" %}</span>
+                    </button>
                     <a href="{% static 'docs/maqola_talablari.pdf' %}" target="_blank"
                        class="inline-flex items-center gap-1.5 border border-gray-300 hover:border-gray-400 bg-white hover:bg-gray-50 text-gray-700 text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl transition shadow-sm">
                         <span>{% trans "Submission guidelines (PDF)" %}</span>

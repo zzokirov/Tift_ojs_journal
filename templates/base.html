@@ -363,5 +363,157 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+    <!-- MAQOLA YUBORISH MODAL (Vaqtinchalik Telegram / Email orqali) -->
+    <div id="submitArticleModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-200">
+        <div class="relative bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-gray-100 transform transition-all my-8">
+            <!-- Modal Header -->
+            <div class="relative p-6 pb-5 {% if current_journal and 'moliya' in current_journal.slug %}bg-gradient-to-r from-[#122336] to-[#044e3d]{% else %}bg-gradient-to-r from-[#0f172a] to-[#1e3a8a]{% endif %} text-white">
+                <button type="button" onclick="closeSubmitModal()" class="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full w-8 h-8 flex items-center justify-center transition">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center text-xl text-emerald-300">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-black text-white">
+                            {% if CURRENT_LANG == 'ru' %}Порядок подачи статей
+                            {% elif CURRENT_LANG == 'en' %}Manuscript Submission
+                            {% else %}Maqola yuborish tartibi{% endif %}
+                        </h3>
+                        <p class="text-xs text-blue-200/90 font-medium">
+                            {% if CURRENT_LANG == 'ru' %}Подача статьи в редакцию журнала
+                            {% elif CURRENT_LANG == 'en' %}Submitting to the editorial board
+                            {% else %}Tahririyatga maqola topshirish{% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 space-y-4">
+                <!-- Info notice banner -->
+                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-amber-900 text-xs sm:text-sm leading-relaxed flex items-start gap-3">
+                    <i class="fas fa-info-circle text-amber-600 text-base mt-0.5 flex-shrink-0"></i>
+                    <div>
+                        <strong class="font-bold block mb-1">
+                            {% if CURRENT_LANG == 'ru' %}Уважаемый автор!
+                            {% elif CURRENT_LANG == 'en' %}Dear Author!
+                            {% else %}Hurmatli muallif!{% endif %}
+                        </strong>
+                        <span>
+                            {% if CURRENT_LANG == 'ru' %}
+                                Система онлайн-подачи статей через сайт находится на стадии внедрения и будет запущена в ближайшее время. В настоящее время просим отправлять Ваши статьи для рассмотрения в редакцию через официальный Telegram или по электронной почте (Email).
+                            {% elif CURRENT_LANG == 'en' %}
+                                The online submission system via the website is currently being updated and will be launched shortly. In the meantime, please submit your manuscripts directly via our official Telegram or Email.
+                            {% else %}
+                                Sayt orqali onlayn maqola qabul qilish tizimi tez kunda to‘liq yo‘lga qo‘yiladi. Hozirda maqolangizni ko‘rib chiqish uchun tahririyatimizning rasmiy Telegram manzili yoki elektron pochtasi (Email) orqali yuborishingizni so‘raymiz.
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Channels / Actions -->
+                <div class="space-y-2.5">
+                    <!-- Telegram -->
+                    <a href="https://t.me/tift_uz" target="_blank" class="flex items-center justify-between p-3.5 bg-blue-50/60 hover:bg-blue-50 border border-blue-200 rounded-2xl transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-[#229ED9] text-white flex items-center justify-center text-lg shadow-sm">
+                                <i class="fab fa-telegram-plane"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] text-gray-500 font-semibold block uppercase tracking-wider">Telegram</span>
+                                <span class="text-sm font-black text-gray-900 group-hover:text-blue-700 transition">@tift_uz</span>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 bg-white px-3.5 py-1.5 rounded-xl border border-blue-200 group-hover:bg-blue-700 group-hover:text-white transition shadow-xs">
+                            <span>{% if CURRENT_LANG == 'ru' %}Отправить{% elif CURRENT_LANG == 'en' %}Send{% else %}Yuborish{% endif %}</span>
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </span>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:{{ current_journal.editorial_email|default:'journal@tift.uz' }}" class="flex items-center justify-between p-3.5 bg-emerald-50/60 hover:bg-emerald-50 border border-emerald-200 rounded-2xl transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg shadow-sm">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] text-gray-500 font-semibold block uppercase tracking-wider">Email</span>
+                                <span class="text-sm font-black text-gray-900 group-hover:text-emerald-700 transition">
+                                    {{ current_journal.editorial_email|default:"journal@tift.uz" }}
+                                </span>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-white px-3.5 py-1.5 rounded-xl border border-emerald-200 group-hover:bg-emerald-700 group-hover:text-white transition shadow-xs">
+                            <span>{% if CURRENT_LANG == 'ru' %}Написать{% elif CURRENT_LANG == 'en' %}Compose{% else %}Yozish{% endif %}</span>
+                            <i class="fas fa-arrow-right text-[10px]"></i>
+                        </span>
+                    </a>
+
+                    <!-- Guidelines PDF -->
+                    <a href="{% static 'docs/maqola_talablari.pdf' %}" target="_blank" class="flex items-center justify-between p-3.5 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-2xl transition group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-gray-800 text-white flex items-center justify-center text-lg shadow-sm">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] text-gray-500 font-semibold block uppercase tracking-wider">{% if CURRENT_LANG == 'ru' %}Требования{% elif CURRENT_LANG == 'en' %}Guidelines{% else %}Talablar{% endif %}</span>
+                                <span class="text-xs sm:text-sm font-black text-gray-900 group-hover:text-navy-900 transition">{% if CURRENT_LANG == 'ru' %}Требования к оформлению (PDF){% elif CURRENT_LANG == 'en' %}Submission Guidelines (PDF){% else %}Maqola rasmiylashtirish talablari (PDF){% endif %}</span>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-gray-700 bg-white px-3 py-1.5 rounded-xl border border-gray-300 group-hover:bg-gray-900 group-hover:text-white transition shadow-xs">
+                            <i class="fas fa-download text-xs"></i>
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Editorial Secretary info -->
+                <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+                    <span class="font-medium">{% trans "Mas'ul kotib" %}: <strong class="text-gray-800">Zokirov Sanjar Zohidjon o'g'li</strong></span>
+                    <span class="text-emerald-600 font-bold flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Qabul ochiq
+                    </span>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-gray-50 border-t border-gray-100 flex justify-end">
+                <button type="button" onclick="closeSubmitModal()" class="w-full sm:w-auto px-6 py-2.5 bg-gray-900 hover:bg-black text-white text-xs font-bold rounded-xl transition shadow-sm">
+                    {% if CURRENT_LANG == 'ru' %}Закрыть / Понятно{% elif CURRENT_LANG == 'en' %}Close / Got it{% else %}Tushunarli / Yopish{% endif %}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function openSubmitModal() {
+        const modal = document.getElementById('submitArticleModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    function closeSubmitModal() {
+        const modal = document.getElementById('submitArticleModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('submitArticleModal');
+        if (modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeSubmitModal();
+                }
+            });
+        }
+    });
+    </script>
+
 </body>
 </html>

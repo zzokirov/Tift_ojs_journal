@@ -5,6 +5,52 @@
 
 {% block dashboard_content %}
 
+<!-- NOTICE BANNER: VAQTINCHALIK TELEGRAM / EMAIL ORQALI YUBORISH -->
+<div class="mb-8 p-6 bg-amber-50/90 border-2 border-amber-300 rounded-3xl shadow-sm">
+    <div class="flex flex-col sm:flex-row items-start gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-2xl flex-shrink-0 shadow-md">
+            <i class="fas fa-paper-plane"></i>
+        </div>
+        <div class="flex-1">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                <h3 class="text-base sm:text-lg font-black text-amber-950">
+                    {% if CURRENT_LANG == 'ru' %}Временный порядок подачи статей
+                    {% elif CURRENT_LANG == 'en' %}Temporary Article Submission Notice
+                    {% else %}Vaqtinchalik maqola qabul qilish tartibi{% endif %}
+                </h3>
+                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-900">
+                    {% if CURRENT_LANG == 'ru' %}Через Telegram / Email
+                    {% elif CURRENT_LANG == 'en' %}Via Telegram / Email
+                    {% else %}Telegram / Email orqali{% endif %}
+                </span>
+            </div>
+            <p class="text-xs sm:text-sm text-amber-900 leading-relaxed mb-4">
+                {% if CURRENT_LANG == 'ru' %}
+                    Система онлайн-подачи статей через сайт находится на стадии внедрения и будет запущена в ближайшее время. В настоящее время просим отправлять Ваши статьи для рассмотрения в редакцию через официальный Telegram или по электронной почте (Email).
+                {% elif CURRENT_LANG == 'en' %}
+                    The online submission system via the website is currently being updated and will be launched shortly. In the meantime, please submit your manuscripts directly via our official Telegram or Email.
+                {% else %}
+                    Sayt orqali to‘g‘ridan-to‘g‘ri maqola qabul qilish tizimi texnik sozlanmoqda va yaqin kunlarda to‘liq ishga tushiriladi. Hozirda maqolalaringizni rasmiylashtirish talablari asosida tayyorlab, tahririyatimizning rasmiy Telegram manzili yoki elektron pochtasiga yuborishingizni so‘raymiz.
+                {% endif %}
+            </p>
+            <div class="flex flex-wrap items-center gap-3">
+                <a href="https://t.me/tift_uz" target="_blank" class="inline-flex items-center gap-2 bg-[#229ED9] hover:bg-[#1e8bc0] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>Telegram: @tift_uz</span>
+                </a>
+                <a href="mailto:{{ current_journal.editorial_email|default:'journal@tift.uz' }}" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email: {{ current_journal.editorial_email|default:'journal@tift.uz' }}</span>
+                </a>
+                <a href="{% static 'docs/maqola_talablari.pdf' %}" target="_blank" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-300 text-gray-800 text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm">
+                    <i class="fas fa-file-pdf text-red-500"></i>
+                    <span>{% trans "Maqola talablari (PDF)" %}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- FORM SECTION -->
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
