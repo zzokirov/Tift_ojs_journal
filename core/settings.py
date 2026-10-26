@@ -28,11 +28,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-vwd#x=#-5888l=x2kq8^szx4i7(e^z%)7rrr#tgi_@h2tk)av@')
+# Standart holat — production (DEBUG o'chiq). Lokal ishlash uchun .env ga DEBUG=True yozing.
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    if not DEBUG:
+        from django.core.exceptions import ImproperlyConfigured
+        raise ImproperlyConfigured("SECRET_KEY muhit o'zgaruvchisi (.env) o'rnatilmagan")
+    SECRET_KEY = 'django-insecure-local-dev-only'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get(
+    'ALLOWED_HOSTS', 'architect-edu.tift.uz,jurnal.tift.uz,localhost,127.0.0.1'
+).split(',') if h.strip()]
 
 
 # Application definition

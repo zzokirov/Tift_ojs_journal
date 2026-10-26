@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{% if current_journal %}{{ current_journal.title }}{% else %}{% trans "TIFT Ilmiy Jurnallari" %}{% endif %}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% if current_journal %}{{ current_journal.short_description|striptags|truncatechars:160 }}{% else %}{% trans "TIFT ilmiy jurnallari" %}{% endif %}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{% if current_journal %}{{ current_journal.title }}{% else %}{% trans "TIFT Ilmiy Jurnallari" %}{% endif %}{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <link rel="icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
 

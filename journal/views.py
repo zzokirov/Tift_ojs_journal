@@ -1301,7 +1301,8 @@ def assign_reviewer_action(request, pk):
     """
     Muharrir yoki admin maqolaga taqrizchini biriktiradi yoki almashtiradi.
     """
-    if not (request.user.role in ['editor', 'reviewer'] or request.user.is_staff or request.user.is_superuser):
+    # Taqrizchi biriktirish faqat muharrir/admin huquqi
+    if not (request.user.role == 'editor' or request.user.is_staff or request.user.is_superuser):
         messages.error(request, _("Ushbu harakatni bajarishga ruxsat yo'q."))
         return redirect('reviewer_dashboard')
 
@@ -1334,6 +1335,12 @@ def review_article_action(request, pk):
         return redirect('my_articles')
 
     article = get_object_or_404(Article, pk=pk)
+
+    # Oddiy taqrizchi faqat o'ziga biriktirilgan maqola ustida ishlay oladi
+    is_editor = (request.user.role == 'editor' or request.user.is_staff or request.user.is_superuser)
+    if not is_editor and article.assigned_reviewer_id != request.user.pk:
+        messages.error(request, _("Ruxsat etilmagan harakat."))
+        return redirect('reviewer_dashboard')
 
     if request.method == 'POST':
         action = request.POST.get('action')  # 'publish', 'reject', 'return', 'under_review', 'edit_details'

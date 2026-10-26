@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import redirect
+from journal import seo
 
 # Admin bosh sahifasi o'rniga to'g'ridan-to'g'ri Jurnallar ro'yxatiga yo'naltirish
 def admin_redirect_to_journals(request, extra_context=None):
@@ -12,6 +13,9 @@ admin.site.index = admin_redirect_to_journals
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
+    path('robots.txt', seo.robots_txt),
+    path('sitemap.xml', seo.sitemap_xml),
+    path('favicon.ico', seo.favicon_ico),
     path('admin/', admin_redirect_to_journals),
     path('admin/', admin.site.urls),
     path('', include('journal.urls')),

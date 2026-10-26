@@ -225,3 +225,96 @@ class PublicInterfaceTests(TestCase):
         # Invalid slug -> 404
         response_404 = self.client.get(reverse('index', kwargs={'journal_slug': 'nonexistent-journal-slug-999'}))
         self.assertEqual(response_404.status_code, 404)
+
+
+class ReviewPermissionTests(TestCase):
+    def setUp(self):
+        self.journal = Journal.objects.create(
+            title="Arxitektura", slug="arxitektura", publication_status="published", is_active=True
+        )
+        self.author = User.objects.create_user(
+            username="author1", email="author1@example.com", password="password123", role="author"
+        )
+        self.reviewer = User.objects.create_user(
+            username="rev1", email="rev1@example.com", password="password123", role="reviewer"
+        )
+        self.other_reviewer = User.objects.create_user(
+            username="rev2", email="rev2@example.com", password="password123", role="reviewer"
+        )
+        self.editor = User.objects.create_user(
+            username="ed1", email="ed1@example.com", password="password123", role="editor"
+        )
+        self.article = Article.objects.create(
+            journal=self.journal, title="Test maqola", author=self.author,
+            status="under_review", assigned_reviewer=self.reviewer
+        )
+
+    def _publish(self, user):
+        self.client.force_login(user)
+        self.client.post(reverse('review_article_action', args=[self.article.pk]), {'action': 'reject'})
+        self.article.refresh_from_db()
+        return self.article.status
+
+    def test_unassigned_reviewer_cannot_change_article(self):
+        self.assertEqual(self._publish(self.other_reviewer), 'under_review')
+
+    def test_assigned_reviewer_can_change_article(self):
+        self.assertEqual(self._publish(self.reviewer), 'rejected')
+
+    def test_editor_can_change_any_article(self):
+        self.assertEqual(self._publish(self.editor), 'rejected')
+
+    def test_reviewer_cannot_assign_reviewers(self):
+        self.client.force_login(self.other_reviewer)
+        self.client.post(reverse('assign_reviewer_action', args=[self.article.pk]), {'reviewer_id': self.other_reviewer.pk})
+        self.article.refresh_from_db()
+        self.assertEqual(self.article.assigned_reviewer, self.reviewer)
+
+    def test_editor_can_assign_reviewers(self):
+        self.client.force_login(self.editor)
+        self.client.post(reverse('assign_reviewer_action', args=[self.article.pk]), {'reviewer_id': self.other_reviewer.pk})
+        self.article.refresh_from_db()
+        self.assertEqual(self.article.assigned_reviewer, self.other_reviewer)
+
+
+class SeoTests(TestCase):
+    def setUp(self):
+        self.journal = Journal.objects.create(
+            title="Arxitektura", slug="arxitektura", issn="2181-1230",
+            publication_status="published", is_active=True
+        )
+        author = User.objects.create_user(
+            username="author1", email="author1@example.com", password="password123", role="author"
+        )
+        self.published = Article.objects.create(
+            journal=self.journal, title="Chop etilgan maqola", author=author,
+            authors="Ali Valiyev | TIFT", abstract="Annotatsiya matni", status="published",
+            content="<p>Matn</p>"
+        )
+        self.draft = Article.objects.create(
+            journal=self.journal, title="Qoralama maqola", author=author, status="submitted"
+        )
+
+    def test_robots_txt(self):
+        r = self.client.get('/robots.txt')
+        self.assertEqual(r.status_code, 200)
+        self.assertIn('Disallow: /admin/', r.content.decode())
+        self.assertIn('Sitemap:', r.content.decode())
+
+    def test_sitemap_lists_only_published(self):
+        r = self.client.get('/sitemap.xml')
+        self.assertEqual(r.status_code, 200)
+        body = r.content.decode()
+        self.assertIn(f'/arxitektura/article/{self.published.pk}/', body)
+        self.assertNotIn(f'/arxitektura/article/{self.draft.pk}/', body)
+
+    def test_favicon_redirects(self):
+        self.assertEqual(self.client.get('/favicon.ico').status_code, 301)
+
+    def test_article_has_scholar_meta(self):
+        r = self.client.get(reverse('article_detail', args=['arxitektura', self.published.pk]))
+        self.assertEqual(r.status_code, 200)
+        body = r.content.decode()
+        self.assertIn('name="citation_title" content="Chop etilgan maqola"', body)
+        self.assertIn('name="citation_author" content="Ali Valiyev"', body)
+        self.assertIn('name="citation_issn" content="2181-1230"', body)
