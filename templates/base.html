@@ -31,6 +31,13 @@
                         '4xl': '2560px',
                     },
                     colors: {
+                        {% if journal_theme == 'arch' %}
+                        navy: { 50: '#f6f3ee', 100: '#ece6dc', 200: '#d9d0c1', 600: '#4a443c', 700: '#35302a', 800: '#26231f', 900: '#1c1b19' },
+                        gold: { 400: '#d0764f', 500: '#b5532f', 600: '#9a4425' },
+                        {% elif journal_theme == 'finance' %}
+                        navy: { 50: '#eef6f4', 100: '#d7ebe6', 200: '#b3d9cf', 600: '#14304a', 700: '#10263b', 800: '#0d1b2c', 900: '#0b1220' },
+                        gold: { 400: '#34d399', 500: '#10b981', 600: '#059669' },
+                        {% else %}
                         navy: {
                             50:  '#f0f4ff',
                             100: '#e0e9ff',
@@ -44,7 +51,12 @@
                             400: '#22c55e',
                             500: '#16a34a',
                             600: '#15803d',
-                        }
+                        },
+                        {% endif %}
+                        // Arxitektura mavzusi
+                        paper: '#f5f1ea', ink: '#1c1b19', terra: { DEFAULT: '#b5532f', dark: '#9a4425', light: '#f3e3d9' }, stone: '#8a8174', rule: '#d9d2c5',
+                        // Moliya mavzusi
+                        fin: { bg: '#0b1220', panel: '#111a2e', line: '#1f2b45', em: '#10b981', cy: '#22d3ee', mute: '#94a3b8' },
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -89,13 +101,43 @@
         .section-divider { width: 60px; height: 4px; background: linear-gradient(90deg, #16a34a, #22c55e); border-radius: 2px; }
         input:focus, textarea:focus, select:focus { outline: none; border-color: #1a3a6b; box-shadow: 0 0 0 3px rgba(26,58,107,0.15); }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+        /* Arxitektura: chizma to'ri va serif sarlavhalar */
+        .theme-arch .blueprint { background-image: linear-gradient(rgba(28,27,25,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(28,27,25,.06) 1px, transparent 1px); background-size: 28px 28px; }
+        .theme-arch main h1, .theme-arch main h2 { font-family: 'Playfair Display', Georgia, serif; }
+        .theme-arch .nav-link::after, .theme-arch .section-divider { background: #b5532f; }
+        .theme-arch main .rounded-2xl, .theme-arch main .rounded-xl { border-radius: 2px; }
+        /* Moliya: raqamlar monoshirifda */
+        .theme-finance .num { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+        .theme-finance .grid-glow { background-image: radial-gradient(circle at 20% 0%, rgba(16,185,129,.18), transparent 45%), radial-gradient(circle at 90% 30%, rgba(34,211,238,.12), transparent 40%), linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px); background-size: auto, auto, 40px 40px, 40px 40px; }
+        @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .theme-finance .ticker { animation: ticker 40s linear infinite; }
+        @media (prefers-reduced-motion: reduce) { .theme-finance .ticker { animation: none; } }
+        /* Ichki sahifalardagi urg'u ranglarini jurnal mavzusiga moslash */
+        .theme-arch main [class~="text-green-300"], .theme-arch main [class~="text-green-400"], .theme-arch main [class~="text-green-500"], .theme-arch main [class~="text-green-600"], .theme-arch main [class~="text-green-700"], .theme-arch main [class~="text-green-800"], .theme-arch main [class~="text-blue-300"], .theme-arch main [class~="text-blue-400"], .theme-arch main [class~="text-blue-500"], .theme-arch main [class~="text-blue-600"], .theme-arch main [class~="text-blue-700"], .theme-arch main [class~="text-blue-800"], .theme-arch main [class~="text-emerald-300"], .theme-arch main [class~="text-emerald-400"], .theme-arch main [class~="text-emerald-500"], .theme-arch main [class~="text-emerald-600"], .theme-arch main [class~="text-emerald-700"], .theme-arch main [class~="text-emerald-800"], .theme-arch main [class~="text-indigo-300"], .theme-arch main [class~="text-indigo-400"], .theme-arch main [class~="text-indigo-500"], .theme-arch main [class~="text-indigo-600"], .theme-arch main [class~="text-indigo-700"], .theme-arch main [class~="text-indigo-800"] { color: #b5532f !important; }
+        .theme-arch main [class~="bg-green-50"], .theme-arch main [class~="bg-green-100"], .theme-arch main [class~="bg-blue-50"], .theme-arch main [class~="bg-blue-100"], .theme-arch main [class~="bg-emerald-50"], .theme-arch main [class~="bg-emerald-100"], .theme-arch main [class~="bg-indigo-50"], .theme-arch main [class~="bg-indigo-100"] { background-color: #f3e3d9 !important; }
+        .theme-arch main [class~="bg-green-500"], .theme-arch main [class~="bg-green-600"], .theme-arch main [class~="bg-green-700"], .theme-arch main [class~="bg-blue-500"], .theme-arch main [class~="bg-blue-600"], .theme-arch main [class~="bg-blue-700"], .theme-arch main [class~="bg-emerald-500"], .theme-arch main [class~="bg-emerald-600"], .theme-arch main [class~="bg-emerald-700"], .theme-arch main [class~="bg-indigo-500"], .theme-arch main [class~="bg-indigo-600"], .theme-arch main [class~="bg-indigo-700"] { background-color: #b5532f !important; }
+        .theme-arch main [class~="border-green-200"], .theme-arch main [class~="border-green-300"], .theme-arch main [class~="border-green-500"], .theme-arch main [class~="border-green-600"], .theme-arch main [class~="border-blue-200"], .theme-arch main [class~="border-blue-300"], .theme-arch main [class~="border-blue-500"], .theme-arch main [class~="border-blue-600"], .theme-arch main [class~="border-emerald-200"], .theme-arch main [class~="border-emerald-300"], .theme-arch main [class~="border-emerald-500"], .theme-arch main [class~="border-emerald-600"], .theme-arch main [class~="border-indigo-200"], .theme-arch main [class~="border-indigo-300"], .theme-arch main [class~="border-indigo-500"], .theme-arch main [class~="border-indigo-600"] { border-color: #d0764f !important; }
+        .theme-arch main [style*="22c55e"], .theme-arch main [style*="16a34a"] { background-image: linear-gradient(#b5532f, #b5532f) !important; }
+        .theme-arch main [style*="color:#22c55e"] { color: #b5532f !important; background-image: none !important; }
+        .theme-arch main [class*="from-[#0f172a]"], .theme-arch main [class*="to-[#1e3a8a]"] { background: #1c1b19 !important; }
+        .theme-finance main [class~="text-blue-300"], .theme-finance main [class~="text-blue-400"], .theme-finance main [class~="text-blue-500"], .theme-finance main [class~="text-blue-600"], .theme-finance main [class~="text-blue-700"], .theme-finance main [class~="text-blue-800"], .theme-finance main [class~="text-indigo-300"], .theme-finance main [class~="text-indigo-400"], .theme-finance main [class~="text-indigo-500"], .theme-finance main [class~="text-indigo-600"], .theme-finance main [class~="text-indigo-700"], .theme-finance main [class~="text-indigo-800"] { color: #059669 !important; }
+        .theme-finance main [class~="bg-blue-50"], .theme-finance main [class~="bg-blue-100"], .theme-finance main [class~="bg-indigo-50"], .theme-finance main [class~="bg-indigo-100"] { background-color: #ecfdf5 !important; }
+        .theme-finance main [class~="bg-blue-500"], .theme-finance main [class~="bg-blue-600"], .theme-finance main [class~="bg-blue-700"], .theme-finance main [class~="bg-indigo-500"], .theme-finance main [class~="bg-indigo-600"], .theme-finance main [class~="bg-indigo-700"] { background-color: #059669 !important; }
+        .theme-finance main [class~="border-blue-200"], .theme-finance main [class~="border-blue-300"], .theme-finance main [class~="border-blue-500"], .theme-finance main [class~="border-blue-600"], .theme-finance main [class~="border-indigo-200"], .theme-finance main [class~="border-indigo-300"], .theme-finance main [class~="border-indigo-500"], .theme-finance main [class~="border-indigo-600"] { border-color: #6ee7b7 !important; }
+        .theme-finance main [class*="from-[#0f172a]"], .theme-finance main [class*="to-[#1e3a8a]"] { background: #0b1220 !important; }
     </style>
 
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+<body class="{% if journal_theme == 'arch' %}bg-paper text-ink{% elif journal_theme == 'finance' %}bg-slate-50 text-gray-900{% else %}bg-gray-50 text-gray-900{% endif %} min-h-screen flex flex-col theme-{{ journal_theme|default:'default' }}">
 
         {% block header %}
+    {% if journal_theme == 'arch' and current_journal %}
+        {% include 'themes/arch/header.html' %}
+    {% elif journal_theme == 'finance' and current_journal %}
+        {% include 'themes/finance/header.html' %}
+    {% else %}
     <!-- MAIN NAVBAR (MATCHING HOMEPAGE CLEAN WHITE DESIGN) -->
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -214,6 +256,7 @@
             {% endif %}
         </div>
     </header>
+    {% endif %}
     {% endblock %}
 
     <!-- PAGE CONTENT -->
@@ -222,6 +265,11 @@
     </main>
 
         {% block footer %}
+    {% if journal_theme == 'arch' and current_journal %}
+        {% include 'themes/arch/footer.html' %}
+    {% elif journal_theme == 'finance' and current_journal %}
+        {% include 'themes/finance/footer.html' %}
+    {% else %}
     <!-- FOOTER (CLEAN DARK NAVY - MATCHING HOMEPAGE) -->
     <footer id="contact-section" class="bg-navy-900 text-white mt-auto pt-12 pb-8 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -310,6 +358,7 @@
             </div>
         </div>
     </footer>
+    {% endif %}
 
     <script>
         const navBtn = document.getElementById('mobile-menu-btn');

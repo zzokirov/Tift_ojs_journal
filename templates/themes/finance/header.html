@@ -1,0 +1,54 @@
+{% load i18n %}
+{% get_current_language as CURRENT_LANG %}
+{% with url_name=request.resolver_match.url_name %}
+<!-- MOLIYA: to'q rangli "terminal" uslubidagi header -->
+<header class="sticky top-0 z-50 bg-fin-bg/95 backdrop-blur-md text-white border-b border-fin-line">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+
+        <a href="{% url 'index' journal_slug=current_journal.slug %}" class="flex items-center gap-3 min-w-0 group">
+            <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-fin-em to-fin-cy flex items-center justify-center text-fin-bg font-black text-sm flex-shrink-0">T</span>
+            <span class="min-w-0 leading-tight">
+                <span class="block text-[10px] font-bold uppercase tracking-[0.2em] text-fin-em">TIFT · Journal</span>
+                <span class="block text-xs sm:text-sm font-bold text-white truncate max-w-[180px] sm:max-w-[260px] group-hover:text-fin-em transition">{{ current_journal.title }}</span>
+            </span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-1 text-[13px] font-semibold bg-white/[0.04] border border-fin-line rounded-xl p-1">
+            <a href="{% url 'index' journal_slug=current_journal.slug %}" class="px-3.5 py-1.5 rounded-lg transition {% if url_name == 'index' %}bg-fin-em text-fin-bg{% else %}text-fin-mute hover:text-white hover:bg-white/5{% endif %}">{% trans "Bosh sahifa" %}</a>
+            <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="px-3.5 py-1.5 rounded-lg transition {% if url_name == 'archive' or url_name == 'issue_detail' %}bg-fin-em text-fin-bg{% else %}text-fin-mute hover:text-white hover:bg-white/5{% endif %}">{% trans "Arxiv" %}</a>
+            <a href="{% url 'about' journal_slug=current_journal.slug %}" class="px-3.5 py-1.5 rounded-lg transition {% if url_name == 'about' %}bg-fin-em text-fin-bg{% else %}text-fin-mute hover:text-white hover:bg-white/5{% endif %}">{% trans "Tahririyat a'zolari" %}</a>
+            <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="px-3.5 py-1.5 rounded-lg transition {% if url_name == 'documents' %}bg-fin-em text-fin-bg{% else %}text-fin-mute hover:text-white hover:bg-white/5{% endif %}">{% trans "Hujjatlar" %}</a>
+            <a href="#contact-section" class="px-3.5 py-1.5 rounded-lg text-fin-mute hover:text-white hover:bg-white/5 transition">{% trans "Aloqa" %}</a>
+        </nav>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+            <div class="hidden sm:flex items-center text-[11px] font-bold border border-fin-line rounded-lg overflow-hidden num">
+                <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 {% if CURRENT_LANG == 'uz' %}bg-white/10 text-white{% else %}text-fin-mute hover:text-white{% endif %}">UZ</a>
+                <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 border-l border-fin-line {% if CURRENT_LANG == 'ru' %}bg-white/10 text-white{% else %}text-fin-mute hover:text-white{% endif %}">RU</a>
+                <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 border-l border-fin-line {% if CURRENT_LANG == 'en' %}bg-white/10 text-white{% else %}text-fin-mute hover:text-white{% endif %}">EN</a>
+            </div>
+            <button type="button" onclick="openSubmitModal()" class="hidden md:inline-flex items-center gap-2 bg-fin-em hover:bg-emerald-400 text-fin-bg text-xs font-bold px-4 py-2 rounded-lg transition">
+                <i class="fas fa-paper-plane text-[11px]"></i><span>{% trans "Maqolani yuborish" %}</span>
+            </button>
+            <button id="mobile-menu-btn" class="lg:hidden p-2 text-fin-mute hover:text-white" aria-label="Menu">
+                <i class="fas fa-bars text-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-fin-line bg-fin-bg px-4 py-3 space-y-1 text-sm font-semibold">
+        <a href="{% url 'index' journal_slug=current_journal.slug %}" class="block px-3 py-2 rounded-lg {% if url_name == 'index' %}bg-fin-em text-fin-bg{% else %}text-fin-mute{% endif %}">{% trans "Bosh sahifa" %}</a>
+        <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="block px-3 py-2 rounded-lg text-fin-mute">{% trans "Arxiv" %}</a>
+        <a href="{% url 'about' journal_slug=current_journal.slug %}" class="block px-3 py-2 rounded-lg text-fin-mute">{% trans "Tahririyat a'zolari" %}</a>
+        <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="block px-3 py-2 rounded-lg text-fin-mute">{% trans "Hujjatlar" %}</a>
+        <a href="#contact-section" class="block px-3 py-2 rounded-lg text-fin-mute">{% trans "Aloqa" %}</a>
+        <div class="flex gap-2 px-3 pt-2 text-xs num">
+            <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}" class="{% if CURRENT_LANG == 'uz' %}text-fin-em{% else %}text-fin-mute{% endif %}">UZ</a>
+            <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="{% if CURRENT_LANG == 'ru' %}text-fin-em{% else %}text-fin-mute{% endif %}">RU</a>
+            <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="{% if CURRENT_LANG == 'en' %}text-fin-em{% else %}text-fin-mute{% endif %}">EN</a>
+        </div>
+        <button type="button" onclick="openSubmitModal()" class="w-full mt-2 bg-fin-em text-fin-bg text-sm font-bold px-4 py-2.5 rounded-lg">{% trans "Maqolani yuborish" %}</button>
+        <a href="{% url 'portal_home' %}" class="block px-3 py-2 text-fin-mute text-xs">← {% trans "Barcha jurnallar" %}</a>
+    </div>
+</header>
+{% endwith %}

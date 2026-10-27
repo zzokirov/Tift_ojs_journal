@@ -1,0 +1,65 @@
+{% load i18n %}
+{% get_current_language as CURRENT_LANG %}
+{% with url_name=request.resolver_match.url_name %}
+<!-- ARXITEKTURA: jurnal muqovasi uslubidagi masthead -->
+<header class="bg-paper text-ink border-b border-ink">
+    <!-- Yuqori ingichka qator -->
+    <div class="border-b border-rule">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 flex items-center justify-between text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-stone">
+            <div class="flex items-center gap-3 min-w-0">
+                <a href="{% url 'portal_home' %}" class="font-black text-ink hover:text-terra transition" title="{% trans 'Barcha jurnallar portali' %}">TIFT</a>
+                <span class="hidden sm:inline text-rule">/</span>
+                <span class="hidden sm:inline truncate">{% if CURRENT_LANG == 'ru' %}Научный журнал{% elif CURRENT_LANG == 'en' %}Scientific journal{% else %}Ilmiy jurnal{% endif %}</span>
+                {% if current_journal.issn %}<span class="hidden md:inline text-rule">/</span><span class="hidden md:inline">ISSN {{ current_journal.issn }}</span>{% endif %}
+            </div>
+            <div class="flex items-center gap-4">
+                <nav class="flex items-center gap-2 font-bold" aria-label="{% trans 'Til' %}">
+                    <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}" class="{% if CURRENT_LANG == 'uz' %}text-terra{% else %}hover:text-ink{% endif %}">UZ</a>
+                    <span class="text-rule">·</span>
+                    <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="{% if CURRENT_LANG == 'ru' %}text-terra{% else %}hover:text-ink{% endif %}">RU</a>
+                    <span class="text-rule">·</span>
+                    <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="{% if CURRENT_LANG == 'en' %}text-terra{% else %}hover:text-ink{% endif %}">EN</a>
+                </nav>
+                <button id="mobile-menu-btn" class="md:hidden text-ink" aria-label="Menu">
+                    <i class="fas fa-bars text-base"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Masthead -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 text-center">
+        <a href="{% url 'index' journal_slug=current_journal.slug %}" class="inline-block group">
+            <span class="block font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-none group-hover:text-terra transition">{{ current_journal.title }}</span>
+        </a>
+        <div class="mt-3 flex items-center justify-center gap-3 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-stone">
+            <span class="h-px w-8 sm:w-16 bg-ink"></span>
+            <span>{% if CURRENT_LANG == 'ru' %}Архитектура · Градостроительство · Образование{% elif CURRENT_LANG == 'en' %}Architecture · Urban planning · Education{% else %}Arxitektura · Shaharsozlik · Ta'lim{% endif %}</span>
+            <span class="h-px w-8 sm:w-16 bg-ink"></span>
+        </div>
+    </div>
+
+    <!-- Navigatsiya -->
+    <nav class="hidden md:block border-t border-rule">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-center gap-8 lg:gap-12 h-12 text-[11px] font-bold uppercase tracking-[0.2em]">
+            <a href="{% url 'index' journal_slug=current_journal.slug %}" class="{% if url_name == 'index' %}text-terra border-b-2 border-terra{% else %}hover:text-terra{% endif %} py-3 transition">{% trans "Bosh sahifa" %}</a>
+            <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="{% if url_name == 'archive' or url_name == 'issue_detail' %}text-terra border-b-2 border-terra{% else %}hover:text-terra{% endif %} py-3 transition">{% trans "Arxiv" %}</a>
+            <a href="{% url 'about' journal_slug=current_journal.slug %}" class="{% if url_name == 'about' %}text-terra border-b-2 border-terra{% else %}hover:text-terra{% endif %} py-3 transition">{% trans "Tahririyat a'zolari" %}</a>
+            <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="{% if url_name == 'documents' %}text-terra border-b-2 border-terra{% else %}hover:text-terra{% endif %} py-3 transition">{% trans "Hujjatlar" %}</a>
+            <a href="#contact-section" class="hover:text-terra py-3 transition">{% trans "Aloqa" %}</a>
+            <button type="button" onclick="openSubmitModal()" class="ml-2 border border-ink px-4 py-1.5 hover:bg-ink hover:text-paper transition uppercase tracking-[0.2em]">{% trans "Maqolani yuborish" %}</button>
+        </div>
+    </nav>
+
+    <!-- Mobil menyu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-rule px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] divide-y divide-rule">
+        <a href="{% url 'index' journal_slug=current_journal.slug %}" class="block py-3">{% trans "Bosh sahifa" %}</a>
+        <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="block py-3">{% trans "Arxiv" %}</a>
+        <a href="{% url 'about' journal_slug=current_journal.slug %}" class="block py-3">{% trans "Tahririyat a'zolari" %}</a>
+        <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="block py-3">{% trans "Hujjatlar" %}</a>
+        <a href="#contact-section" class="block py-3">{% trans "Aloqa" %}</a>
+        <button type="button" onclick="openSubmitModal()" class="block w-full text-left py-3 text-terra uppercase tracking-[0.18em]">{% trans "Maqolani yuborish" %}</button>
+        <a href="{% url 'portal_home' %}" class="block py-3 text-stone">← {% trans "Barcha jurnallar" %}</a>
+    </div>
+</header>
+{% endwith %}

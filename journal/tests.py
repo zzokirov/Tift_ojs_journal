@@ -329,3 +329,22 @@ class SeoTests(TestCase):
     def test_https_links_behind_proxy(self):
         body = self.client.get('/robots.txt', HTTP_X_FORWARDED_PROTO='https').content.decode()
         self.assertIn('Sitemap: https://', body)
+
+
+class JournalThemeTests(TestCase):
+    def _journal(self, slug):
+        return Journal.objects.create(title=slug, slug=slug, publication_status="published", is_active=True)
+
+    def test_each_journal_gets_own_theme(self):
+        for slug, template in [('arxitektura-va-talim', 'themes/arch/index.html'),
+                               ('moliya-va-intellektual-texnologiyalar', 'themes/finance/index.html'),
+                               ('bugalteriya-hisobi', 'index.html')]:
+            self._journal(slug)
+            r = self.client.get(reverse('index', args=[slug]))
+            self.assertEqual(r.status_code, 200)
+            self.assertTemplateUsed(r, template)
+
+    def test_inner_pages_use_theme_header(self):
+        self._journal('moliya-va-intellektual-texnologiyalar')
+        r = self.client.get(reverse('archive', args=['moliya-va-intellektual-texnologiyalar']))
+        self.assertTemplateUsed(r, 'themes/finance/header.html')

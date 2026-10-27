@@ -44,3 +44,19 @@ def admin_journal_context(request):
         'admin_active_journal': active_journal,
         'admin_all_journals': all_admin_journals,
     }
+
+
+def journal_theme_for_slug(slug):
+    """Jurnal slug'iga qarab dizayn mavzusini tanlaydi: 'arch', 'finance' yoki 'default'"""
+    slug = (slug or '').lower()
+    if 'arxitektura' in slug:
+        return 'arch'
+    if 'moliya' in slug:
+        return 'finance'
+    return 'default'
+
+
+def journal_theme(request):
+    match = getattr(request, 'resolver_match', None)
+    slug = match.kwargs.get('journal_slug') if match else None
+    return {'journal_theme': journal_theme_for_slug(slug)}

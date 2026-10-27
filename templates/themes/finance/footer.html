@@ -1,0 +1,46 @@
+{% load i18n %}
+<!-- MOLIYA: to'q rangli footer -->
+<footer id="contact-section" class="bg-fin-bg text-white mt-auto border-t border-fin-line grid-glow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-lg bg-gradient-to-br from-fin-em to-fin-cy flex items-center justify-center text-fin-bg font-black">T</span>
+                    <div>
+                        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-fin-em">TIFT · Journal</p>
+                        <p class="font-bold">{{ current_journal.title }}</p>
+                    </div>
+                </div>
+                <p class="mt-4 text-sm text-fin-mute max-w-md leading-relaxed">{{ current_journal.publisher_name|default:_("Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti") }}</p>
+                <div class="mt-5 flex flex-wrap gap-2 text-[11px] num">
+                    {% if current_journal.issn %}<span class="px-2.5 py-1 rounded-md bg-white/5 border border-fin-line text-fin-mute">ISSN <span class="text-white">{{ current_journal.issn }}</span></span>{% endif %}
+                    {% if current_journal.eissn %}<span class="px-2.5 py-1 rounded-md bg-white/5 border border-fin-line text-fin-mute">eISSN <span class="text-white">{{ current_journal.eissn }}</span></span>{% endif %}
+                </div>
+            </div>
+
+            <div>
+                <p class="text-xs font-bold uppercase tracking-wider text-fin-mute mb-4">{% trans "Tezkor havolalar" %}</p>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="{% url 'archive' journal_slug=current_journal.slug %}" class="text-white/80 hover:text-fin-em transition">{% trans "Arxiv" %}</a></li>
+                    <li><a href="{% url 'about' journal_slug=current_journal.slug %}" class="text-white/80 hover:text-fin-em transition">{% trans "Tahririyat a'zolari" %}</a></li>
+                    <li><a href="{% url 'documents' journal_slug=current_journal.slug %}" class="text-white/80 hover:text-fin-em transition">{% trans "Hujjatlar" %}</a></li>
+                    <li><a href="{% url 'portal_home' %}" class="text-white/80 hover:text-fin-em transition">← {% trans "Barcha jurnallar" %}</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <p class="text-xs font-bold uppercase tracking-wider text-fin-mute mb-4">{% trans "Aloqa" %}</p>
+                <ul class="space-y-2.5 text-sm">
+                    <li class="flex items-center gap-2 text-white/80"><i class="fas fa-map-marker-alt text-fin-em w-4"></i>{% trans "Toshkent, O'zbekiston" %}</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-envelope text-fin-em w-4"></i><a href="mailto:{{ current_journal.editorial_email|default:'journal@tift.uz' }}" class="text-white/80 hover:text-fin-em transition break-all">{{ current_journal.editorial_email|default:"journal@tift.uz" }}</a></li>
+                    <li class="flex items-center gap-2"><i class="fab fa-telegram-plane text-fin-cy w-4"></i><a href="https://t.me/tift_uz" target="_blank" rel="noopener" class="text-white/80 hover:text-fin-em transition">@tift_uz</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-fin-line flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-fin-mute">
+            <p>© 2026 TIFT. {% trans "Barcha huquqlar himoyalangan." %}</p>
+            <p class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-fin-em animate-pulse"></span><span>Open Access</span></p>
+        </div>
+    </div>
+</footer>

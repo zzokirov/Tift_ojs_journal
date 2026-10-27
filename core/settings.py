@@ -84,6 +84,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'journal.context_processors.admin_journal_context',
+                'journal.context_processors.journal_theme',
             ],
         },
     },

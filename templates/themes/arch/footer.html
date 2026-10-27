@@ -1,0 +1,46 @@
+{% load i18n %}
+{% get_current_language as CURRENT_LANG %}
+<!-- ARXITEKTURA: qog'oz uslubidagi footer -->
+<footer id="contact-section" class="bg-paper text-ink mt-auto border-t-2 border-ink">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div class="lg:col-span-5">
+                <p class="font-serif text-3xl sm:text-4xl font-bold leading-tight">{{ current_journal.title }}</p>
+                <p class="mt-4 text-sm text-stone leading-relaxed max-w-md">{{ current_journal.publisher_name|default:_("Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti") }}</p>
+            </div>
+
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terra mb-4">01 — {% if CURRENT_LANG == 'ru' %}Журнал{% elif CURRENT_LANG == 'en' %}Journal{% else %}Jurnal{% endif %}</p>
+                    <ul class="space-y-2">
+                        <li><a href="{% url 'index' journal_slug=current_journal.slug %}" class="hover:text-terra transition">{% trans "Bosh sahifa" %}</a></li>
+                        <li><a href="{% url 'archive' journal_slug=current_journal.slug %}" class="hover:text-terra transition">{% trans "Arxiv" %}</a></li>
+                        <li><a href="{% url 'about' journal_slug=current_journal.slug %}" class="hover:text-terra transition">{% trans "Tahririyat a'zolari" %}</a></li>
+                        <li><a href="{% url 'documents' journal_slug=current_journal.slug %}" class="hover:text-terra transition">{% trans "Hujjatlar" %}</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terra mb-4">02 — {% trans "Aloqa" %}</p>
+                    <ul class="space-y-2 text-stone">
+                        <li>{% trans "Toshkent, O'zbekiston" %}</li>
+                        <li><a href="mailto:{{ current_journal.editorial_email|default:'journal@tift.uz' }}" class="text-ink hover:text-terra transition break-all">{{ current_journal.editorial_email|default:"journal@tift.uz" }}</a></li>
+                        <li><a href="https://t.me/tift_uz" target="_blank" rel="noopener" class="text-ink hover:text-terra transition">Telegram @tift_uz</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terra mb-4">03 — {% if CURRENT_LANG == 'ru' %}Сведения{% elif CURRENT_LANG == 'en' %}Details{% else %}Ma'lumot{% endif %}</p>
+                    <ul class="space-y-2 text-stone">
+                        {% if current_journal.issn %}<li>ISSN {{ current_journal.issn }}</li>{% endif %}
+                        {% if current_journal.eissn %}<li>eISSN {{ current_journal.eissn }}</li>{% endif %}
+                        <li><a href="{% url 'portal_home' %}" class="text-ink hover:text-terra transition">← {% trans "Barcha jurnallar" %}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 pt-6 border-t border-rule flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] uppercase tracking-[0.2em] text-stone">
+            <p>© 2026 TIFT. {% trans "Barcha huquqlar himoyalangan." %}</p>
+            <p class="font-black text-ink tracking-[0.4em]">TIFT</p>
+        </div>
+    </div>
+</footer>

@@ -242,7 +242,9 @@ def index(request, journal_slug):
     categories = ArticleCategory.objects.filter(journal=current_journal).order_by('order', 'code')
     staff = StaffMember.objects.filter(journal=current_journal, is_active=True).order_by('order', 'full_name')[:6]
 
-    return render(request, 'index.html', {
+    from .context_processors import journal_theme_for_slug
+    theme = journal_theme_for_slug(current_journal.slug)
+    return render(request, [f'themes/{theme}/index.html', 'index.html'], {
         'current_journal': current_journal,
         'recent_articles': recent_articles,
         'grouped_categories': grouped_categories,
