@@ -3,7 +3,8 @@
 
 {% block title %}{{ article.title }} | {% trans "TIFT Jurnali" %}{% endblock %}
 
-{% block meta_description %}{{ article.abstract|striptags|truncatechars:160 }}{% endblock %}
+{% block meta_description %}{{ article.abstract|default:article.title|striptags|truncatechars:160 }}{% endblock %}
+{% block og_type %}article{% endblock %}
 {% block og_title %}{{ article.title }}{% endblock %}
 
 {% block extra_head %}
@@ -13,7 +14,8 @@
     {% if article.parsed_authors %}{% for a in article.parsed_authors %}
     <meta name="citation_author" content="{{ a.name }}">{% if a.inst %}
     <meta name="citation_author_institution" content="{{ a.inst }}">{% endif %}{% endfor %}
-    {% elif article.authors %}<meta name="citation_author" content="{{ article.authors }}">{% endif %}
+    {% else %}{% for name in article.author_names %}<meta name="citation_author" content="{{ name }}">
+    {% endfor %}{% endif %}
     {% if article.published_at %}<meta name="citation_publication_date" content="{{ article.published_at|date:'Y/m/d' }}">{% endif %}
     {% if article.journal %}<meta name="citation_journal_title" content="{{ article.journal.title }}">
     {% if article.journal.issn %}<meta name="citation_issn" content="{{ article.journal.issn }}">{% endif %}
@@ -24,7 +26,6 @@
     {% if article.end_page %}<meta name="citation_lastpage" content="{{ article.end_page }}">{% endif %}
     {% if article.keywords %}<meta name="citation_keywords" content="{{ article.keywords }}">{% endif %}
     {% if article.pdf_file and article.journal %}<meta name="citation_pdf_url" content="{{ request.scheme }}://{{ request.get_host }}{% url 'download_pdf' article.journal.slug article.pk %}">{% endif %}
-    <meta property="og:type" content="article">
 {% endif %}
 {% endblock %}
 

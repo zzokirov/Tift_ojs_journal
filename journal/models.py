@@ -320,6 +320,12 @@ class Article(models.Model):
                     authors_list.append({"name": parts[0], "inst": ""})
         return authors_list
 
+    @property
+    def author_names(self):
+        """Mualliflar ro'yxati (vergul yoki nuqtali vergul bilan ajratilgan) — Google Scholar uchun"""
+        import re
+        return [n.strip() for n in re.split(r'[;,]', self.authors or '') if n.strip()]
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = _("Maqola")

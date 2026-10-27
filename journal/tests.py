@@ -318,3 +318,14 @@ class SeoTests(TestCase):
         self.assertIn('name="citation_title" content="Chop etilgan maqola"', body)
         self.assertIn('name="citation_author" content="Ali Valiyev"', body)
         self.assertIn('name="citation_issn" content="2181-1230"', body)
+
+    def test_plain_authors_split_into_separate_tags(self):
+        self.published.authors = "Ali Valiyev, Vali Aliyev"
+        self.published.save()
+        body = self.client.get(reverse('article_detail', args=['arxitektura', self.published.pk])).content.decode()
+        self.assertIn('name="citation_author" content="Ali Valiyev"', body)
+        self.assertIn('name="citation_author" content="Vali Aliyev"', body)
+
+    def test_https_links_behind_proxy(self):
+        body = self.client.get('/robots.txt', HTTP_X_FORWARDED_PROTO='https').content.decode()
+        self.assertIn('Sitemap: https://', body)
