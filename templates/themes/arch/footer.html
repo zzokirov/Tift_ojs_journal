@@ -1,46 +1,56 @@
-{% load i18n %}
+{% load static i18n %}
 {% get_current_language as CURRENT_LANG %}
-<!-- ARXITEKTURA: qog'oz uslubidagi footer -->
-<footer id="contact-section" class="bg-paper text-ink mt-auto border-t-2 border-ink">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- ARXITEKTURA: sodda, zamonaviy footer -->
+<footer id="contact-section" class="bg-ink text-paper mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div class="lg:col-span-5">
-                <p class="font-serif text-3xl sm:text-4xl font-bold leading-tight">{{ current_journal.title }}</p>
-                <p class="mt-4 text-sm text-stone leading-relaxed max-w-md">{{ current_journal.publisher_name|default:_("Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti") }}</p>
+                <div class="flex items-center gap-3">
+                    <img src="{% static 'images/tift.png' %}" alt="TIFT" class="h-10 w-10 rounded-xl bg-white p-1">
+                    <p class="font-serif text-2xl font-bold leading-tight">{{ current_journal.title }}</p>
+                </div>
+                <p class="mt-4 text-sm text-paper/60 leading-relaxed max-w-md">{{ current_journal.publisher_name|default:_("Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti") }}</p>
+                <button type="button" onclick="openSubmitModal()" class="mt-6 inline-flex items-center gap-2 rounded-full bg-terra hover:bg-terra-dark text-white px-5 py-2.5 text-sm font-semibold transition">
+                    <i class="fas fa-paper-plane text-xs"></i>{% trans "Maqolani yuborish" %}
+                </button>
             </div>
 
             <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
                 <div>
-                    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terra mb-4">01 — {% if CURRENT_LANG == 'ru' %}Журнал{% elif CURRENT_LANG == 'en' %}Journal{% else %}Jurnal{% endif %}</p>
-                    <ul class="space-y-2">
-                        <li><a href="{% url 'index' journal_slug=current_journal.slug %}" class="hover:text-terra transition">{% trans "Bosh sahifa" %}</a></li>
-                        <li><a href="{% url 'archive' journal_slug=current_journal.slug %}" class="hover:text-terra transition">{% trans "Arxiv" %}</a></li>
-                        <li><a href="{% url 'about' journal_slug=current_journal.slug %}" class="hover:text-terra transition">{% trans "Tahririyat a'zolari" %}</a></li>
-                        <li><a href="{% url 'documents' journal_slug=current_journal.slug %}" class="hover:text-terra transition">{% trans "Hujjatlar" %}</a></li>
+                    <p class="font-semibold text-paper mb-4">{% if CURRENT_LANG == 'ru' %}Журнал{% elif CURRENT_LANG == 'en' %}Journal{% else %}Jurnal{% endif %}</p>
+                    <ul class="space-y-2.5 text-paper/60">
+                        <li><a href="{% url 'index' journal_slug=current_journal.slug %}" class="hover:text-paper transition">{% trans "Bosh sahifa" %}</a></li>
+                        <li><a href="{% url 'archive' journal_slug=current_journal.slug %}" class="hover:text-paper transition">{% trans "Arxiv" %}</a></li>
+                        <li><a href="{% url 'about' journal_slug=current_journal.slug %}" class="hover:text-paper transition">{% trans "Tahririyat a'zolari" %}</a></li>
+                        <li><a href="{% url 'documents' journal_slug=current_journal.slug %}" class="hover:text-paper transition">{% trans "Hujjatlar" %}</a></li>
                     </ul>
                 </div>
                 <div>
-                    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terra mb-4">02 — {% trans "Aloqa" %}</p>
-                    <ul class="space-y-2 text-stone">
-                        <li>{% trans "Toshkent, O'zbekiston" %}</li>
-                        <li><a href="mailto:{{ current_journal.editorial_email|default:'journal@tift.uz' }}" class="text-ink hover:text-terra transition break-all">{{ current_journal.editorial_email|default:"journal@tift.uz" }}</a></li>
-                        <li><a href="https://t.me/tift_uz" target="_blank" rel="noopener" class="text-ink hover:text-terra transition">Telegram @tift_uz</a></li>
+                    <p class="font-semibold text-paper mb-4">{% trans "Aloqa" %}</p>
+                    <ul class="space-y-2.5 text-paper/60">
+                        <li class="flex items-start gap-2"><i class="fas fa-location-dot mt-0.5 text-terra-light/70"></i>{% trans "Toshkent, O'zbekiston" %}</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-envelope mt-0.5 text-terra-light/70"></i><a href="mailto:{{ current_journal.editorial_email|default:'journal@tift.uz' }}" class="hover:text-paper transition break-all">{{ current_journal.editorial_email|default:"journal@tift.uz" }}</a></li>
+                        <li class="flex items-start gap-2"><i class="fab fa-telegram mt-0.5 text-terra-light/70"></i><a href="https://t.me/tift_uz" target="_blank" rel="noopener" class="hover:text-paper transition">@tift_uz</a></li>
                     </ul>
                 </div>
                 <div>
-                    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terra mb-4">03 — {% if CURRENT_LANG == 'ru' %}Сведения{% elif CURRENT_LANG == 'en' %}Details{% else %}Ma'lumot{% endif %}</p>
-                    <ul class="space-y-2 text-stone">
+                    <p class="font-semibold text-paper mb-4">{% if CURRENT_LANG == 'ru' %}Сведения{% elif CURRENT_LANG == 'en' %}Details{% else %}Ma'lumot{% endif %}</p>
+                    <ul class="space-y-2.5 text-paper/60">
                         {% if current_journal.issn %}<li>ISSN {{ current_journal.issn }}</li>{% endif %}
                         {% if current_journal.eissn %}<li>eISSN {{ current_journal.eissn }}</li>{% endif %}
-                        <li><a href="{% url 'portal_home' %}" class="text-ink hover:text-terra transition">← {% trans "Barcha jurnallar" %}</a></li>
+                        <li><a href="{% url 'portal_home' %}" class="hover:text-paper transition">← {% trans "Barcha jurnallar" %}</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="mt-12 pt-6 border-t border-rule flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] uppercase tracking-[0.2em] text-stone">
-            <p>© 2026 TIFT. {% trans "Barcha huquqlar himoyalangan." %}</p>
-            <p class="font-black text-ink tracking-[0.4em]">TIFT</p>
+        <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-paper/50">
+            <p>© {% now "Y" %} TIFT. {% trans "Barcha huquqlar himoyalangan." %}</p>
+            <div class="flex items-center gap-2 text-xs">
+                <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}" class="px-2 py-1 rounded {% if CURRENT_LANG == 'uz' %}bg-white/10 text-paper{% else %}hover:text-paper{% endif %}">O'zbekcha</a>
+                <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="px-2 py-1 rounded {% if CURRENT_LANG == 'ru' %}bg-white/10 text-paper{% else %}hover:text-paper{% endif %}">Русский</a>
+                <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="px-2 py-1 rounded {% if CURRENT_LANG == 'en' %}bg-white/10 text-paper{% else %}hover:text-paper{% endif %}">English</a>
+            </div>
         </div>
     </div>
 </footer>
