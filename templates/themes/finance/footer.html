@@ -31,9 +31,10 @@
             <div>
                 <p class="text-xs font-bold uppercase tracking-wider text-fin-mute mb-4">{% trans "Aloqa" %}</p>
                 <ul class="space-y-2.5 text-sm">
-                    <li class="flex items-center gap-2 text-white/80"><i class="fas fa-map-marker-alt text-fin-em w-4"></i>{% trans "Toshkent, O'zbekiston" %}</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-envelope text-fin-em w-4"></i><a href="mailto:{{ current_journal.editorial_email|default:'journal@tift.uz' }}" class="text-white/80 hover:text-fin-em transition break-all">{{ current_journal.editorial_email|default:"journal@tift.uz" }}</a></li>
-                    <li class="flex items-center gap-2"><i class="fab fa-telegram-plane text-fin-cy w-4"></i><a href="https://t.me/tift_uz" target="_blank" rel="noopener" class="text-white/80 hover:text-fin-em transition">@tift_uz</a></li>
+                    <li class="flex items-center gap-2 text-white/80"><i class="fas fa-map-marker-alt text-fin-em w-4"></i>{% include 'partials/address.html' %}</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-envelope text-fin-em w-4"></i><a href="mailto:s.zokirov@tift.uz" class="text-white/80 hover:text-fin-em transition break-all">s.zokirov@tift.uz</a></li>
+                    <li class="flex items-center gap-2"><i class="fab fa-telegram-plane text-fin-cy w-4"></i><a href="https://t.me/zokirovsanjar" target="_blank" rel="noopener" class="text-white/80 hover:text-fin-em transition">@zokirovsanjar</a></li>
+                    <li class="flex items-center gap-2"><i class="fas fa-phone text-fin-em w-4"></i><a href="tel:+998934029927" class="text-white/80 hover:text-white transition">+998 93 402 99 27</a></li>
                 </ul>
             </div>
         </div>

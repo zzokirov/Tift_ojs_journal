@@ -312,15 +312,15 @@
                     <ul class="space-y-2.5 text-xs text-gray-400">
                         <li class="flex items-start gap-2">
                             <i class="fas fa-map-marker-alt text-blue-400 mt-0.5"></i>
-                            <span>{% trans "Toshkent, O'zbekiston" %}</span>
+                            <span>{% include 'partials/address.html' %}</span>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fas fa-envelope text-blue-400"></i>
-                            <span>{{ current_journal.editorial_email|default:"info@tift.uz" }}</span>
+                            <span>s.zokirov@tift.uz</span>
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fas fa-phone-alt text-blue-400"></i>
-                            <span>+998 71 123 45 67</span>
+                            <span>+998 93 402 99 27</span>
                         </li>
                     </ul>
                 </div>
@@ -351,7 +351,7 @@
             <div class="pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
                 <p>© 2026 TIFT. {% trans "Barcha huquqlar himoyalangan." %}</p>
                 <div class="flex items-center gap-4 text-gray-400 text-base">
-                    <a href="https://t.me/tift_uz" target="_blank" class="hover:text-blue-400 transition"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="https://t.me/zokirovsanjar" target="_blank" class="hover:text-blue-400 transition"><i class="fab fa-telegram-plane"></i></a>
                     <a href="https://linkedin.com" target="_blank" class="hover:text-blue-400 transition"><i class="fab fa-linkedin-in"></i></a>
                     <a href="https://youtube.com" target="_blank" class="hover:text-red-500 transition"><i class="fab fa-youtube"></i></a>
                 </div>
@@ -470,14 +470,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 <!-- Channels / Actions -->
                 <div class="space-y-2.5">
                     <!-- Telegram -->
-                    <a href="https://t.me/tift_uz" target="_blank" class="flex items-center justify-between p-3.5 bg-blue-50/60 hover:bg-blue-50 border border-blue-200 rounded-2xl transition group">
+                    <a href="https://t.me/zokirovsanjar" target="_blank" class="flex items-center justify-between p-3.5 bg-blue-50/60 hover:bg-blue-50 border border-blue-200 rounded-2xl transition group">
                         <div class="flex items-center gap-3.5">
                             <div class="w-10 h-10 rounded-xl bg-[#229ED9] text-white flex items-center justify-center text-lg shadow-sm">
                                 <i class="fab fa-telegram-plane"></i>
                             </div>
                             <div>
                                 <span class="text-[11px] text-gray-500 font-semibold block uppercase tracking-wider">Telegram</span>
-                                <span class="text-sm font-black text-gray-900 group-hover:text-blue-700 transition">@tift_uz</span>
+                                <span class="text-sm font-black text-gray-900 group-hover:text-blue-700 transition">@zokirovsanjar</span>
                             </div>
                         </div>
                         <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 bg-white px-3.5 py-1.5 rounded-xl border border-blue-200 group-hover:bg-blue-700 group-hover:text-white transition shadow-xs">
@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </a>
 
                     <!-- Email -->
-                    <a href="mailto:{{ current_journal.editorial_email|default:'journal@tift.uz' }}" class="flex items-center justify-between p-3.5 bg-emerald-50/60 hover:bg-emerald-50 border border-emerald-200 rounded-2xl transition group">
+                    <a href="mailto:s.zokirov@tift.uz" class="flex items-center justify-between p-3.5 bg-emerald-50/60 hover:bg-emerald-50 border border-emerald-200 rounded-2xl transition group">
                         <div class="flex items-center gap-3.5">
                             <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg shadow-sm">
                                 <i class="fas fa-envelope"></i>
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div>
                                 <span class="text-[11px] text-gray-500 font-semibold block uppercase tracking-wider">Email</span>
                                 <span class="text-sm font-black text-gray-900 group-hover:text-emerald-700 transition">
-                                    {{ current_journal.editorial_email|default:"journal@tift.uz" }}
+                                    s.zokirov@tift.uz
                                 </span>
                             </div>
                         </div>
