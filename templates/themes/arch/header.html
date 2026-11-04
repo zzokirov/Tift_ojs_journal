@@ -5,6 +5,10 @@
 <header class="sticky top-0 z-40 bg-paper/85 backdrop-blur-md border-b border-rule/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 lg:h-[4.5rem] flex items-center justify-between gap-4">
 
+        <div class="flex items-center gap-3 min-w-0">
+        <a href="{% url 'portal_home' %}#journals-section" class="inline-flex items-center gap-1.5 shrink-0 rounded-full bg-white ring-1 ring-rule hover:ring-ink px-3 py-1.5 text-sm font-medium text-ink/80 hover:text-ink transition" title="{% trans 'Barcha jurnallar' %}">
+            <i class="fas fa-arrow-left text-xs"></i><span class="hidden sm:inline">{% trans "Jurnallar" %}</span>
+        </a>
         <!-- Logo + jurnal nomi -->
         <a href="{% url 'index' journal_slug=current_journal.slug %}" class="flex items-center gap-3 min-w-0 group">
             <img src="{% static 'images/tift.png' %}" alt="TIFT" class="h-9 w-9 rounded-xl bg-white p-1 ring-1 ring-rule shrink-0">
@@ -13,6 +17,7 @@
                 <span class="hidden sm:block text-xs text-stone truncate">{% if CURRENT_LANG == 'ru' %}Научный журнал TIFT{% elif CURRENT_LANG == 'en' %}TIFT scientific journal{% else %}TIFT ilmiy jurnali{% endif %}{% if current_journal.issn %} · ISSN {{ current_journal.issn }}{% endif %}</span>
             </span>
         </a>
+        </div>
 
         <!-- Asosiy navigatsiya -->
         <nav class="hidden lg:flex items-center gap-1 text-[0.92rem] font-medium" aria-label="{% trans 'Bosh sahifa' %}">

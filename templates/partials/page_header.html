@@ -1,0 +1,14 @@
+{% comment %}
+Ixcham sahifa sarlavhasi. Parametrlar: title, meta (ixtiyoriy), back_url, back_label
+{% endcomment %}
+<div class="site-container pt-6 sm:pt-8">
+    {% if back_url %}
+    <a href="{{ back_url }}" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition">
+        <i class="fas fa-arrow-left text-xs"></i>{{ back_label }}
+    </a>
+    {% endif %}
+    <div class="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">{{ title }}</h1>
+        {% if meta %}<span class="text-sm text-gray-500">{{ meta }}</span>{% endif %}
+    </div>
+</div>

@@ -6,50 +6,14 @@
 {% block content %}
 {% get_current_language as CURRENT_LANG %}
 
-<!-- BREADCRUMBS & TOP NAV -->
-<div class="site-container px-4 pt-8 pb-4">
-    <nav class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-        <a href="{% url 'index' current_journal.slug %}" class="hover:text-blue-700 transition flex items-center gap-1">
-            <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
-        </a>
-        <i class="fas fa-chevron-right text-[9px] text-gray-400"></i>
-        <a href="{% url 'archive' current_journal.slug %}" class="hover:text-blue-700 transition">{% trans "Arxiv" %}</a>
-        <i class="fas fa-chevron-right text-[9px] text-gray-400"></i>
-        <span class="text-gray-900 font-bold">{% blocktrans with year=issue.year num=issue.number %}{{ year }}-yil, {{ num }}-son{% endblocktrans %}</span>
-    </nav>
-    <div class="border-b border-gray-200 pb-5 flex flex-wrap items-center justify-between gap-4">
-        <div>
-            <div class="flex items-center gap-2 text-xs font-bold text-blue-700 uppercase tracking-wider mb-1">
-                <i class="fas fa-book-open"></i>
-                <span>{{ current_journal.title }}</span>
-            </div>
-            <h1 class="text-2xl sm:text-3xl font-black text-navy-900">
-                {% blocktrans with year=issue.year num=issue.number %}{{ year }}-yil, {{ num }}-son{% endblocktrans %}
-            </h1>
-            <p class="text-xs sm:text-sm text-gray-500 mt-1 flex items-center gap-3">
-                <span class="flex items-center gap-1">
-                    <i class="fas fa-calendar-alt text-gray-400"></i>
-                    {% blocktrans with y=issue.year %}{{ y }}-yil{% endblocktrans %}
-                </span>
-                <span>•</span>
-                <span class="flex items-center gap-1">
-                    <i class="fas fa-file-alt text-gray-400"></i>
-                    {% blocktrans with count=articles.count %}{{ count }} ta maqola{% endblocktrans %}
-                </span>
-            </p>
-        </div>
-    </div>
-</div>
+{% blocktrans with year=issue.year num=issue.number asvar issue_title %}{{ year }}-yil, {{ num }}-son{% endblocktrans %}
+{% blocktrans with count=articles.count asvar issue_meta %}{{ count }} ta maqola{% endblocktrans %}
+{% url 'archive' current_journal.slug as archive_url %}
+{% trans "Arxiv" as archive_label %}
+{% include 'partials/page_header.html' with title=issue_title meta=issue_meta back_url=archive_url back_label=archive_label %}
 
 <!-- ARTICLES GROUPED BY CATEGORY -->
-<div class="site-container px-4 py-8">
-
-    <!-- Issue Title Heading (as in screenshot) -->
-    <div class="text-center my-6 pb-2">
-        <h2 class="text-2xl sm:text-3xl font-black text-navy-900 italic tracking-tight">
-            {{ issue.number }}-son | {{ issue.year }} yil
-        </h2>
-    </div>
+<div class="site-container py-6">
 
     {% if grouped_categories %}
         {% for group in grouped_categories %}

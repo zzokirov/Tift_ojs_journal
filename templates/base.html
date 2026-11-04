@@ -81,11 +81,14 @@
         /* Responsive container — to'liq full-width, faqat padding */
         .site-container {
             width: 100%;
-            padding-left: clamp(1rem, 2vw, 3rem);
-            padding-right: clamp(1rem, 2vw, 3rem);
+            max-width: 80rem; /* header bilan bir xil kenglik (max-w-7xl) */
+            padding-left: 1rem;
+            padding-right: 1rem;
             margin-left: auto;
             margin-right: auto;
         }
+        @media (min-width: 640px) { .site-container { padding-left: 1.5rem; padding-right: 1.5rem; } }
+        @media (min-width: 1024px) { .site-container { padding-left: 2rem; padding-right: 2rem; } }
 
         /* Katta ekran uchun clamp-based shrift o'lchamlari - kattalashtirildi */
         html { font-size: clamp(14px, 1.25vw, 24px); }
@@ -144,6 +147,11 @@
             
             <!-- Left: Logo & Subtitle -->
             <div class="flex items-center gap-3 flex-shrink-0 mr-4">
+                {% if current_journal %}
+                <a href="{% url 'portal_home' %}#journals-section" class="inline-flex items-center gap-1.5 shrink-0 rounded-full border border-gray-200 hover:border-gray-400 px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition" title="{% trans 'Barcha jurnallar' %}">
+                    <i class="fas fa-arrow-left text-xs"></i><span class="hidden sm:inline">{% trans "Jurnallar" %}</span>
+                </a>
+                {% endif %}
                 <a href="{% url 'portal_home' %}" title="{% trans 'Barcha jurnallar portali' %}" class="flex items-center gap-2 group flex-shrink-0">
                     <span class="text-2xl sm:text-3xl font-black tracking-tight text-navy-900 group-hover:text-blue-700 transition">TIFT</span>
                 </a>
@@ -167,8 +175,9 @@
                         {% endif %}
                     </a>
                 {% else %}
+                    {% get_current_language as CURRENT_LANG %}
                     <a href="{% url 'portal_home' %}" class="text-xs uppercase tracking-wider font-bold text-gray-500 hover:text-blue-700 transition">
-                        Scientific Journals
+                        {% if CURRENT_LANG == 'ru' %}Научные журналы{% elif CURRENT_LANG == 'en' %}Scientific journals{% else %}Ilmiy jurnallar{% endif %}
                     </a>
                 {% endif %}
             </div>
