@@ -1,391 +1,274 @@
 {% load static i18n %}
+{% get_current_language as L %}
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:'uz' }}" class="scroll-smooth">
+<html lang="{{ L|default:'uz' }}" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% trans "TIFT ilmiy jurnallari" %} — {% trans "Nashrlar portali" %}</title>
-    <meta name="description" content="{% trans "Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti ilmiy jurnallari: maqolalar, sonlar arxivi va maqola yuborish." %}">
-    <meta property="og:title" content="{% trans "TIFT ilmiy jurnallari" %}">
+    <title>{% if L == 'ru' %}Научные журналы TIFT — портал изданий{% elif L == 'en' %}TIFT Scientific Journals — publishing portal{% else %}TIFT ilmiy jurnallari — nashrlar portali{% endif %}</title>
+    <meta name="description" content="{% if L == 'ru' %}Научные журналы Ташкентского международного университета финансового управления и технологий: статьи, архив выпусков и подача рукописей.{% elif L == 'en' %}Scientific journals of Tashkent International University of Financial Management and Technologies: articles, issue archive and online submission.{% else %}Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti ilmiy jurnallari: maqolalar, sonlar arxivi va maqola yuborish.{% endif %}">
+    <meta property="og:title" content="{% if L == 'ru' %}Научные журналы TIFT{% elif L == 'en' %}TIFT Scientific Journals{% else %}TIFT ilmiy jurnallari{% endif %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <link rel="icon" type="image/png" href="{% static 'images/tift.png' %}?v=3">
 
-    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
-
-    <!-- Tailwind CSS -->
     <script src="{% static 'js/tailwind.min.js' %}"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        navy: {
-                            800: '#14253d',
-                            900: '#0B1727',
-                            950: '#060d17',
-                        },
-                        brand: {
-                            blue: '#1B5B9E',
-                            dark: '#0e2a47',
-                        }
-                    }
+                        navy: { 800: '#14253d', 900: '#0B1727', 950: '#060d17' },
+                        brand: { DEFAULT: '#1B5B9E', dark: '#0e2a47', light: '#e8f0fa' },
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
                 }
             }
         }
     </script>
+    <style>
+        .grid-bg { background-image: linear-gradient(rgba(27,91,158,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(27,91,158,.07) 1px, transparent 1px); background-size: 32px 32px; }
+    </style>
 </head>
-<body class="bg-[#F8FAFC] text-gray-800 antialiased font-sans flex flex-col min-h-screen">
+<body class="bg-slate-50 text-slate-800 antialiased font-sans flex flex-col min-h-screen">
 
-    <!-- ================================================================= -->
-    <!-- 1. TOP NAVBAR (HEADER)                                            -->
-    <!-- ================================================================= -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            
-            <!-- Left: Logo & Subtitle -->
-            <a href="{% url 'portal_home' %}" class="flex items-center gap-3 group">
-                <div class="flex items-baseline gap-2">
-                    <span class="text-2xl sm:text-3xl font-black tracking-tight text-navy-900 group-hover:text-blue-700 transition">TIFT</span>
-                    <div class="h-4 w-px bg-gray-300"></div>
-                    <span class="text-xs uppercase tracking-wider font-bold text-gray-500">Scientific Journals</span>
-                </div>
+    <!-- ═══ HEADER ═══ -->
+    <header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            <a href="{% url 'portal_home' %}" class="flex items-center gap-3 min-w-0">
+                <img src="{% static 'images/tift.png' %}" alt="TIFT" class="h-9 w-9 rounded-xl bg-white p-1 ring-1 ring-slate-200 shrink-0">
+                <span class="leading-tight min-w-0">
+                    <span class="block font-extrabold text-navy-900 tracking-tight">TIFT</span>
+                    <span class="block text-xs text-slate-500 truncate">{% if L == 'ru' %}Научные журналы{% elif L == 'en' %}Scientific journals{% else %}Ilmiy jurnallar{% endif %}</span>
+                </span>
             </a>
 
-            <!-- Center: Navigation Links (Desktop) -->
-            <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-gray-700">
-                <a href="{% url 'portal_home' %}" class="text-blue-700 font-bold border-b-2 border-blue-700 pb-1">{% trans "Bosh sahifa" %}</a>
-                <a href="#journals-section" class="hover:text-blue-700 transition">{% trans "Jurnallar" %}</a>
-                <a href="#authors-section" class="hover:text-blue-700 transition">{% trans "Mualliflar uchun" %}</a>
-                <a href="#about-section" class="hover:text-blue-700 transition">{% trans "Biz haqimizda" %}</a>
-                <a href="#contact-section" class="hover:text-blue-700 transition">{% trans "Aloqa" %}</a>
+            <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+                <a href="{% url 'portal_home' %}" class="px-3.5 py-2 rounded-full bg-navy-900 text-white">{% trans "Bosh sahifa" %}</a>
+                <a href="#journals-section" class="px-3.5 py-2 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Jurnallar" %}</a>
+                <a href="#authors-section" class="px-3.5 py-2 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Mualliflar uchun" %}</a>
+                <a href="#about-section" class="px-3.5 py-2 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Biz haqimizda" %}</a>
+                <a href="#contact-section" class="px-3.5 py-2 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Aloqa" %}</a>
             </nav>
 
-            <!-- Right: Language Dropdown & Authenticated User Actions -->
-            <div class="flex items-center gap-3">
-                
-                <!-- Language Switcher Dropdown -->
-                {% get_current_language as CURRENT_LANG %}
-                <div class="relative" id="lang-dropdown-wrapper">
-                    <button type="button" id="lang-dropdown-btn" class="inline-flex items-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-800 text-xs font-bold px-3 py-2 rounded-xl border border-gray-200 transition focus:outline-none shadow-sm">
-                        <i class="fas fa-globe text-gray-500 text-xs"></i>
-                        <span>{% if CURRENT_LANG == 'uz' %}O'zbek{% elif CURRENT_LANG == 'ru' %}Русский{% else %}English{% endif %}</span>
-                        <i class="fas fa-chevron-down text-[10px] text-gray-400 transition-transform duration-200" id="lang-dropdown-chevron"></i>
-                    </button>
-                    <div id="lang-dropdown-menu" class="hidden absolute right-0 mt-1.5 w-32 bg-white rounded-xl shadow-xl border border-gray-100 py-1 text-xs font-semibold z-50">
-                        <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}"
-                           class="flex items-center justify-between px-3.5 py-2 hover:bg-blue-50 transition {% if CURRENT_LANG == 'uz' %}text-blue-700 font-bold bg-blue-50/50{% else %}text-gray-700{% endif %}">
-                            <span>O'zbek</span>
-                            {% if CURRENT_LANG == 'uz' %}<i class="fas fa-check text-[10px] text-blue-700"></i>{% endif %}
-                        </a>
-                        <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}"
-                           class="flex items-center justify-between px-3.5 py-2 hover:bg-blue-50 transition {% if CURRENT_LANG == 'ru' %}text-blue-700 font-bold bg-blue-50/50{% else %}text-gray-700{% endif %}">
-                            <span>Русский</span>
-                            {% if CURRENT_LANG == 'ru' %}<i class="fas fa-check text-[10px] text-blue-700"></i>{% endif %}
-                        </a>
-                        <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}"
-                           class="flex items-center justify-between px-3.5 py-2 hover:bg-blue-50 transition {% if CURRENT_LANG == 'en' %}text-blue-700 font-bold bg-blue-50/50{% else %}text-gray-700{% endif %}">
-                            <span>English</span>
-                            {% if CURRENT_LANG == 'en' %}<i class="fas fa-check text-[10px] text-blue-700"></i>{% endif %}
-                        </a>
-                    </div>
+            <div class="flex items-center gap-2">
+                <div class="flex items-center rounded-full bg-slate-100 p-0.5 text-xs font-semibold" role="group" aria-label="Language">
+                    <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full transition {% if L == 'uz' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">UZ</a>
+                    <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full transition {% if L == 'ru' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">RU</a>
+                    <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full transition {% if L == 'en' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">EN</a>
                 </div>
-
-                <!-- Mobile Hamburger Button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-700 hover:text-navy-900 focus:outline-none">
-                    <i class="fas fa-bars text-lg"></i>
+                <button id="mobile-menu-btn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-slate-200 text-slate-700" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Nav Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 bg-white px-4 pt-3 pb-5 space-y-2 text-sm font-semibold text-gray-700">
-            <a href="{% url 'portal_home' %}" class="block py-2 text-blue-700 font-bold">{% trans "Bosh sahifa" %}</a>
-            <a href="#journals-section" class="block py-2 hover:text-blue-700">{% trans "Jurnallar" %}</a>
-            <a href="#authors-section" class="block py-2 hover:text-blue-700">{% trans "Mualliflar uchun" %}</a>
-            <a href="#about-section" class="block py-2 hover:text-blue-700">{% trans "Biz haqimizda" %}</a>
-            <a href="#contact-section" class="block py-2 hover:text-blue-700">{% trans "Aloqa" %}</a>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-1 text-[0.95rem] font-medium text-slate-700">
+            <a href="{% url 'portal_home' %}" class="block px-3 py-2.5 rounded-xl bg-navy-900 text-white">{% trans "Bosh sahifa" %}</a>
+            <a href="#journals-section" class="block px-3 py-2.5 rounded-xl hover:bg-slate-100">{% trans "Jurnallar" %}</a>
+            <a href="#authors-section" class="block px-3 py-2.5 rounded-xl hover:bg-slate-100">{% trans "Mualliflar uchun" %}</a>
+            <a href="#about-section" class="block px-3 py-2.5 rounded-xl hover:bg-slate-100">{% trans "Biz haqimizda" %}</a>
+            <a href="#contact-section" class="block px-3 py-2.5 rounded-xl hover:bg-slate-100">{% trans "Aloqa" %}</a>
         </div>
     </header>
 
-    <!-- ================================================================= -->
-    <!-- 2. MAIN CONTENT                                                   -->
-    <!-- ================================================================= -->
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+    <main class="flex-grow w-full">
 
-        <!-- HERO SECTION (WITH TIFT BUILDING TEXTURE & DARK BLUE OVERLAY) -->
-        <section class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg bg-[#0e2a47] text-white">
-            <!-- Background Image & Gradient Overlay -->
-            <div class="absolute inset-0 z-0">
-                <img src="{% static 'images/hero_banner.jpg' %}" alt="TIFT Campus" class="w-full h-full object-cover object-right opacity-40 mix-blend-luminosity">
-                <div class="absolute inset-0 bg-gradient-to-r from-[#0e2a47] via-[#0e2a47]/90 to-transparent"></div>
-            </div>
+        <!-- ═══ HERO: ixcham, rasmsiz, toza ═══ -->
+        <section class="relative overflow-hidden border-b border-slate-200/80 bg-white">
+            <div class="absolute inset-0 grid-bg [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" aria-hidden="true"></div>
+            <div class="absolute -top-32 left-1/2 -translate-x-1/2 h-72 w-[42rem] rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>
 
-            <div class="relative z-10 px-6 sm:px-10 py-10 sm:py-14 max-w-2xl">
-                <!-- Subtitle Badge -->
-                <p class="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
-                    {% trans "TIFT SCIENTIFIC JOURNALS" %}
-                </p>
+            <div class="relative max-w-3xl mx-auto px-4 sm:px-6 py-14 sm:py-20 text-center">
+                <span class="inline-flex items-center gap-2 rounded-full bg-brand-light text-brand text-xs font-semibold px-3 py-1.5">
+                    <i class="fas fa-book-open text-[0.7rem]"></i>
+                    {% if L == 'ru' %}Журналов: {{ journals.count }} · открытый доступ{% elif L == 'en' %}Journals: {{ journals.count }} · open access{% else %}{{ journals.count }} ta jurnal · ochiq kirish{% endif %}
+                </span>
 
-                <!-- Hero Title -->
-                <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-3 sm:mb-4 leading-tight">
-                    {% trans "TIFT ilmiy jurnallari" %}
+                <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-900 leading-[1.1]">
+                    {% if L == 'ru' %}Научные журналы <span class="text-brand">TIFT</span>{% elif L == 'en' %}<span class="text-brand">TIFT</span> Scientific Journals{% else %}<span class="text-brand">TIFT</span> ilmiy jurnallari{% endif %}
                 </h1>
-
-                <!-- Subtitle Description -->
-                <p class="text-xs sm:text-sm lg:text-base text-blue-100 mb-6 leading-relaxed">
-                    {% trans "Ilmiy tadqiqotlar, innovatsion g'oyalar va zamonaviy bilimlar uchun yagona nashrlar platformasi." %}
+                <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+                    {% if L == 'ru' %}Читайте статьи, просматривайте архив выпусков и отправляйте свои исследования онлайн.{% elif L == 'en' %}Read articles, browse issue archives and submit your research online.{% else %}Maqolalarni o'qing, sonlar arxivini ko'ring va tadqiqotingizni onlayn yuboring.{% endif %}
                 </p>
 
-                <!-- Search Box -->
-                <form method="get" action="" class="w-full">
-                    <div class="bg-white rounded-xl sm:rounded-2xl p-1.5 shadow-2xl flex items-center gap-2 border border-white/20">
-                        <i class="fas fa-search text-gray-400 ml-3 text-sm"></i>
+                <form method="get" action="" class="mt-8">
+                    <div class="flex items-center gap-2 rounded-2xl bg-white p-1.5 shadow-lg shadow-slate-200/70 ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-brand transition">
+                        <i class="fas fa-search text-slate-400 ml-3"></i>
                         <input type="text" name="q" value="{{ search_query }}"
-                               placeholder="{% trans 'Jurnal nomi, ISSN yoki ilmiy yo\'nalish bo\'yicha qidirish' %}"
-                               class="w-full text-xs sm:text-sm text-gray-800 placeholder-gray-400 bg-transparent focus:outline-none px-2 py-1">
-                        <button type="submit"
-                                class="bg-navy-900 hover:bg-navy-800 text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-lg sm:rounded-xl transition flex-shrink-0 shadow-sm">
-                            {% trans "Qidirish" %}
+                               placeholder="{% if L == 'ru' %}Название журнала, ISSN или направление{% elif L == 'en' %}Journal title, ISSN or research area{% else %}Jurnal nomi, ISSN yoki yo'nalish{% endif %}"
+                               class="w-full min-w-0 bg-transparent px-2 py-2 text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none">
+                        <button type="submit" class="shrink-0 rounded-xl bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-5 py-2.5 transition">
+                            {% if L == 'ru' %}Найти{% elif L == 'en' %}Search{% else %}Qidirish{% endif %}
                         </button>
                     </div>
                 </form>
-
-                <!-- Journal Count Badge -->
-                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs px-3.5 py-1.5 rounded-lg mt-5 font-semibold">
-                    <i class="far fa-newspaper text-blue-300"></i>
-                    <span>{{ journals.count }} {% trans "ta jurnal mavjud" %}</span>
-                </div>
+                {% if search_query %}
+                <p class="mt-3 text-sm text-slate-500">
+                    {% if L == 'ru' %}Результаты по запросу{% elif L == 'en' %}Results for{% else %}Qidiruv natijasi:{% endif %} «{{ search_query }}» ·
+                    <a href="{% url 'portal_home' %}" class="text-brand font-medium hover:underline">{% if L == 'ru' %}сбросить{% elif L == 'en' %}clear{% else %}tozalash{% endif %}</a>
+                </p>
+                {% endif %}
             </div>
         </section>
 
-        <!-- ============================================================= -->
-        <!-- 3. JURNALLAR CATALOG (HORIZONTAL CARDS 2 COLUMNS)             -->
-        <!-- ============================================================= -->
-        <section id="journals-section" class="mt-10 sm:mt-12">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
-                    {% trans "Jurnallar" %}
-                </h2>
-                <a href="#journals-section" class="text-xs sm:text-sm font-bold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1 transition">
-                    {% trans "Barchasini ko'rish →" %}
-                </a>
+        <!-- ═══ JURNALLAR ═══ -->
+        <section id="journals-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 scroll-mt-20">
+            <div class="flex items-end justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy-900">{% trans "Jurnallar" %}</h2>
+                    <p class="mt-1 text-slate-500">{% if L == 'ru' %}Выберите журнал, чтобы увидеть выпуски и требования.{% elif L == 'en' %}Choose a journal to see its issues and guidelines.{% else %}Sonlar va talablarni ko'rish uchun jurnalni tanlang.{% endif %}</p>
+                </div>
             </div>
 
             {% if journals %}
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {% for journal in journals %}
-                    <div class="bg-white rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 p-5 sm:p-6 flex flex-col sm:flex-row gap-5 items-start group">
-                        
-                        <!-- Left: Vertical Journal Cover Image -->
-                        <div class="w-28 sm:w-36 flex-shrink-0 self-center sm:self-start">
-                            <a href="{% url 'index' journal_slug=journal.slug %}">
-                                <div class="aspect-[3/4] w-full rounded-xl overflow-hidden shadow-md bg-gray-100 border border-gray-200 group-hover:scale-105 transition-transform duration-300">
-                                    {% if journal.get_cover_for_language %}
-                                        <img src="{{ journal.get_cover_for_language.url }}" alt="{{ journal.title }}" class="w-full h-full object-cover">
-                                    {% else %}
-                                        <div class="w-full h-full bg-gradient-to-br from-navy-900 to-blue-800 p-3 text-white flex flex-col justify-between">
-                                            <span class="text-[10px] font-black uppercase tracking-wider text-blue-300">TIFT</span>
-                                            <p class="text-xs font-bold leading-tight line-clamp-3">{{ journal.title }}</p>
-                                            <span class="text-[9px] text-blue-200">{{ journal.issn }}</span>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {% for journal in journals %}
+                <a href="{% url 'index' journal_slug=journal.slug %}" class="group flex flex-col rounded-3xl bg-white ring-1 ring-slate-200 hover:ring-brand/40 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-0.5 transition duration-300 overflow-hidden">
+                    <div class="flex gap-5 p-5 sm:p-6">
+                        <div class="w-24 sm:w-28 shrink-0">
+                            <div class="aspect-[3/4] rounded-xl overflow-hidden bg-slate-100 ring-1 ring-slate-200 shadow-sm">
+                                {% if journal.get_cover_for_language %}
+                                    <img src="{{ journal.get_cover_for_language.url }}" alt="{{ journal.title }}" class="w-full h-full object-cover" loading="lazy">
+                                {% else %}
+                                    <div class="w-full h-full bg-gradient-to-br from-brand-dark to-brand p-3 text-white flex flex-col justify-between">
+                                        <span class="text-[10px] font-black tracking-wider text-blue-200">TIFT</span>
+                                        <p class="text-xs font-bold leading-tight line-clamp-4">{{ journal.title }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
-
-                        <!-- Right: Info, ISSN, Research Areas, Link -->
-                        <div class="flex-1 flex flex-col justify-between h-full w-full">
-                            <div>
-                                <a href="{% url 'index' journal_slug=journal.slug %}">
-                                    <h3 class="text-base sm:text-lg font-black text-gray-900 mb-2 leading-snug group-hover:text-blue-700 transition">
-                                        {{ journal.title }}
-                                    </h3>
-                                </a>
-                                <p class="text-xs sm:text-sm text-gray-600 mb-3 line-clamp-3 leading-relaxed">
-                                    {{ journal.short_description|default:journal.full_description }}
-                                </p>
-                                <div class="text-xs text-gray-500 font-semibold mb-3">
-                                    <span>ISSN: <strong class="text-gray-800">{{ journal.issn|default:"—" }}</strong></span>
-
-                                </div>
-
-                                <!-- Research areas pills -->
-                                <div class="flex flex-wrap gap-1.5 mb-4">
-                                    {% for tag in journal.research_areas_list %}
-                                        <span class="text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 rounded-md">
-                                            {{ tag }}
-                                        </span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-
-                            <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
-                                <a href="{% url 'index' journal_slug=journal.slug %}"
-                                   class="text-xs sm:text-sm font-bold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1.5 group/btn transition">
-                                    <span>{% trans "Jurnalni ko'rish" %}</span>
-                                    <i class="fas fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
-                                </a>
-                            </div>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-lg font-bold leading-snug text-navy-900 group-hover:text-brand transition">{{ journal.title }}</h3>
+                            {% if journal.issn %}<p class="mt-1 text-xs text-slate-500">ISSN {{ journal.issn }}{% if journal.eissn %} · eISSN {{ journal.eissn }}{% endif %}</p>{% endif %}
+                            {% with desc=journal.short_description|default:journal.full_description %}
+                            {% if desc %}<p class="mt-3 text-sm text-slate-600 leading-relaxed line-clamp-3">{{ desc|striptags }}</p>{% endif %}
+                            {% endwith %}
                         </div>
                     </div>
-                    {% endfor %}
-                </div>
+                    {% if journal.research_areas_list %}
+                    <div class="px-5 sm:px-6 flex flex-wrap gap-1.5">
+                        {% for tag in journal.research_areas_list|slice:":5" %}
+                            <span class="rounded-full bg-slate-100 text-slate-600 text-xs font-medium px-2.5 py-1">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="mt-auto px-5 sm:px-6 py-4 mt-5 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-brand">
+                        <span>{% if L == 'ru' %}Открыть журнал{% elif L == 'en' %}Open journal{% else %}Jurnalga o'tish{% endif %}</span>
+                        <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-light group-hover:bg-brand group-hover:text-white transition"><i class="fas fa-arrow-right text-xs"></i></span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
             {% else %}
-                <div class="bg-white rounded-2xl border border-dashed border-gray-300 p-12 text-center">
-                    <i class="far fa-folder-open text-4xl text-gray-300 mb-3 block"></i>
-                    <h3 class="text-base font-bold text-gray-700 mb-1">{% trans "Hozircha nashrga joylashtirilgan jurnallar mavjud emas" %}</h3>
-                    <p class="text-xs text-gray-500">{% trans "Qidiruv bo'yicha hech qanday jurnal topilmadi" %}</p>
-                </div>
+            <div class="rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center">
+                <i class="far fa-folder-open text-4xl text-slate-300"></i>
+                <h3 class="mt-3 font-semibold text-slate-700">{% if L == 'ru' %}Журналы не найдены{% elif L == 'en' %}No journals found{% else %}{% trans "Hozircha nashrga joylashtirilgan jurnallar mavjud emas" %}{% endif %}</h3>
+                <p class="mt-1 text-sm text-slate-500">{% if L == 'ru' %}Попробуйте изменить запрос.{% elif L == 'en' %}Try a different search.{% else %}Boshqa so'z bilan qidirib ko'ring.{% endif %}</p>
+            </div>
             {% endif %}
         </section>
 
-        <!-- ============================================================= -->
-        <!-- 4. MUALLIFLAR UCHUN BANNER                                    -->
-        <!-- ============================================================= -->
-        <section id="authors-section" class="mt-12 bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-5">
-                <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">
-                    <i class="fas fa-file-signature"></i>
+        <!-- ═══ MUALLIFLAR UCHUN: 3 qadam ═══ -->
+        <section id="authors-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 scroll-mt-20">
+            <div class="rounded-3xl bg-navy-900 text-white p-8 sm:p-10 relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/40 blur-3xl" aria-hidden="true"></div>
+                <div class="relative">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">{% trans "Mualliflar uchun" %}</h2>
+                    <p class="mt-2 text-slate-300">{% if L == 'ru' %}Публикация статьи — в три простых шага.{% elif L == 'en' %}Publishing your paper takes three simple steps.{% else %}Maqolani chop etish — uchta oddiy qadam.{% endif %}</p>
+                    <ol class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5">
+                            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand font-bold">1</span>
+                            <p class="mt-4 font-semibold">{% if L == 'ru' %}Выберите журнал{% elif L == 'en' %}Choose a journal{% else %}Jurnalni tanlang{% endif %}</p>
+                            <p class="mt-1 text-sm text-slate-400">{% if L == 'ru' %}Найдите журнал по своему научному направлению.{% elif L == 'en' %}Find the journal that matches your field.{% else %}Ilmiy yo'nalishingizga mos jurnalni toping.{% endif %}</p>
+                        </li>
+                        <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5">
+                            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand font-bold">2</span>
+                            <p class="mt-4 font-semibold">{% if L == 'ru' %}Изучите требования{% elif L == 'en' %}Read the guidelines{% else %}Talablar bilan tanishing{% endif %}</p>
+                            <p class="mt-1 text-sm text-slate-400">{% if L == 'ru' %}Требования и шаблон есть на странице журнала.{% elif L == 'en' %}Guidelines and template are on the journal page.{% else %}Talablar va andoza jurnal sahifasida.{% endif %}</p>
+                        </li>
+                        <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5">
+                            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand font-bold">3</span>
+                            <p class="mt-4 font-semibold">{% if L == 'ru' %}Отправьте статью{% elif L == 'en' %}Submit your paper{% else %}Maqolani yuboring{% endif %}</p>
+                            <p class="mt-1 text-sm text-slate-400">{% if L == 'ru' %}После рецензирования статья выходит в ближайшем выпуске.{% elif L == 'en' %}After peer review it appears in the next issue.{% else %}Taqrizdan so'ng maqola navbatdagi sonda chiqadi.{% endif %}</p>
+                        </li>
+                    </ol>
+                    <a href="#journals-section" class="mt-8 inline-flex items-center gap-2 rounded-full bg-white text-navy-900 hover:bg-brand-light px-5 py-2.5 text-sm font-semibold transition">
+                        {% if L == 'ru' %}Выбрать журнал{% elif L == 'en' %}Choose a journal{% else %}Jurnal tanlash{% endif %} <i class="fas fa-arrow-up text-xs"></i>
+                    </a>
                 </div>
-                <div>
-                    <h3 class="text-base sm:text-lg font-black text-gray-900 mb-1">
-                        {% trans "Mualliflar uchun" %}
-                    </h3>
-                    <p class="text-xs sm:text-sm text-gray-600 max-w-2xl leading-relaxed">
-                        {% trans "Maqolalar yuborish bo'yicha barcha kerakli ma'lumotlar har bir jurnal sahifasida keltirilgan. Iltimos, jurnalni tanlab, uning talablarini ko'ring." %}
+            </div>
+        </section>
+
+        <!-- ═══ BIZ HAQIMIZDA ═══ -->
+        <section id="about-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 scroll-mt-20">
+            <div class="rounded-3xl bg-white ring-1 ring-slate-200 p-8 sm:p-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <div class="lg:col-span-2">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy-900">{% trans "Biz haqimizda" %}</h2>
+                    <p class="mt-3 text-slate-600 leading-relaxed">
+                        {% if L == 'ru' %}Портал научных изданий Ташкентского международного университета финансового управления и технологий (TIFT) помогает преподавателям, докторантам, исследователям и одарённым студентам публиковать результаты исследований по международным стандартам.
+                        {% elif L == 'en' %}The publishing portal of Tashkent International University of Financial Management and Technologies (TIFT) helps faculty, doctoral students, researchers and talented students publish their research to international standards.
+                        {% else %}Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti (TIFT) ilmiy nashrlar portali professor-o'qituvchilar, doktorantlar, izlanuvchilar va iqtidorli talabalarga tadqiqot natijalarini xalqaro standartlar asosida chop etishda yordam beradi.{% endif %}
                     </p>
                 </div>
-            </div>
-            <div class="flex-shrink-0 w-full sm:w-auto">
-                <a href="#journals-section" class="w-full sm:w-auto inline-flex items-center justify-center border-2 border-blue-700 hover:bg-blue-700 text-blue-700 hover:text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl transition shadow-sm">
-                    {% trans "Qo'llanma" %}
-                </a>
+                <ul class="grid grid-cols-1 gap-3 text-sm">
+                    <li class="flex items-center gap-3 rounded-2xl bg-slate-50 p-4"><i class="fas fa-user-shield text-brand"></i>{% if L == 'ru' %}Двойное слепое рецензирование{% elif L == 'en' %}Double-blind peer review{% else %}Ikki tomonlama yashirin taqriz{% endif %}</li>
+                    <li class="flex items-center gap-3 rounded-2xl bg-slate-50 p-4"><i class="fas fa-language text-brand"></i>{% if L == 'ru' %}Узбекский, русский, английский{% elif L == 'en' %}Uzbek, Russian, English{% else %}O'zbek, rus, ingliz tillarida{% endif %}</li>
+                    <li class="flex items-center gap-3 rounded-2xl bg-slate-50 p-4"><i class="fas fa-unlock text-brand"></i>{% if L == 'ru' %}Открытый доступ к статьям{% elif L == 'en' %}Open access to articles{% else %}Maqolalarga ochiq kirish{% endif %}</li>
+                </ul>
             </div>
         </section>
-
-        <!-- ============================================================= -->
-        <!-- 5. BIZ HAQIMIZDA (ABOUT US) & ALOQA                           -->
-        <!-- ============================================================= -->
-        <section id="about-section" class="mt-12 bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm">
-            <h3 class="text-lg sm:text-xl font-black text-gray-900 mb-3">{% trans "Biz haqimizda" %}</h3>
-            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-4xl">
-                {% trans "Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti (TIFT) ilmiy nashrlar portali professor-o'qituvchilar, doktorantlar, mustaqil izlanuvchilar va iqtidorli talabalar uchun ilmiy tadqiqot natijalarini xalqaro standartlar asosida chop etish va ommalashtirishga xizmat qiladi." %}
-            </p>
-        </section>
-
     </main>
 
-    <!-- ================================================================= -->
-    <!-- 6. FOOTER (DARK NAVY - MATCHING SCREEN 1)                         -->
-    <!-- ================================================================= -->
-    <footer id="contact-section" class="bg-navy-900 text-white mt-16 pt-12 pb-8 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                
-                <!-- Col 1: Brand & University Name -->
+    <!-- ═══ FOOTER ═══ -->
+    <footer id="contact-section" class="bg-navy-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div>
-                    <div class="flex items-baseline gap-2 mb-3">
-                        <span class="text-2xl font-black tracking-tight text-white">TIFT</span>
-                        <div class="h-4 w-px bg-gray-600"></div>
-                        <span class="text-xs uppercase tracking-wider font-bold text-blue-300">Scientific Journals</span>
+                    <div class="flex items-center gap-3">
+                        <img src="{% static 'images/tift.png' %}" alt="TIFT" class="h-10 w-10 rounded-xl bg-white p-1">
+                        <span class="leading-tight">
+                            <span class="block font-extrabold">TIFT</span>
+                            <span class="block text-xs text-slate-400">{% if L == 'ru' %}Научные журналы{% elif L == 'en' %}Scientific journals{% else %}Ilmiy jurnallar{% endif %}</span>
+                        </span>
                     </div>
-                    <p class="text-xs text-gray-400 leading-relaxed">
-                        {% trans "Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti" %}
-                    </p>
+                    <p class="mt-4 text-sm text-slate-400 leading-relaxed max-w-xs">{% if L == 'ru' %}Ташкентский международный университет финансового управления и технологий{% elif L == 'en' %}Tashkent International University of Financial Management and Technologies{% else %}Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti{% endif %}</p>
                 </div>
-
-                <!-- Col 2: Tezkor havolalar -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-300 mb-4">{% trans "Tezkor havolalar" %}</h4>
-                    <ul class="space-y-2 text-xs text-gray-400 font-medium">
-                        <li><a href="{% url 'portal_home' %}" class="hover:text-white transition">{% trans "Bosh sahifa" %}</a></li>
-                        <li><a href="#journals-section" class="hover:text-white transition">{% trans "Jurnallar" %}</a></li>
-                        <li><a href="#authors-section" class="hover:text-white transition">{% trans "Mualliflar uchun" %}</a></li>
-                        <li><a href="#about-section" class="hover:text-white transition">{% trans "Biz haqimizda" %}</a></li>
-                        <li><a href="#contact-section" class="hover:text-white transition">{% trans "Aloqa" %}</a></li>
+                    <p class="font-semibold mb-4">{% trans "Jurnallar" %}</p>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        {% for journal in journals|slice:":5" %}
+                        <li><a href="{% url 'index' journal_slug=journal.slug %}" class="hover:text-white transition">{{ journal.title }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
-
-                <!-- Col 3: Aloqa -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-300 mb-4">{% trans "Aloqa" %}</h4>
-                    <ul class="space-y-2.5 text-xs text-gray-400">
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-map-marker-alt text-blue-400 mt-0.5"></i>
-                            <span>{% trans "Toshkent, O'zbekiston" %}</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i class="fas fa-envelope text-blue-400"></i>
-                            <span>info@tift.uz</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <i class="fas fa-phone-alt text-blue-400"></i>
-                            <span>+998 71 123 45 67</span>
-                        </li>
+                    <p class="font-semibold mb-4">{% trans "Aloqa" %}</p>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li class="flex items-start gap-2"><i class="fas fa-location-dot mt-0.5 text-blue-400"></i>{% if L == 'ru' %}Ташкент, Узбекистан{% elif L == 'en' %}Tashkent, Uzbekistan{% else %}Toshkent, O'zbekiston{% endif %}</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-envelope mt-0.5 text-blue-400"></i><a href="mailto:info@tift.uz" class="hover:text-white transition">info@tift.uz</a></li>
+                        <li class="flex items-start gap-2"><i class="fab fa-telegram mt-0.5 text-blue-400"></i><a href="https://t.me/tift_uz" target="_blank" rel="noopener" class="hover:text-white transition">@tift_uz</a></li>
                     </ul>
                 </div>
-
-                <!-- Col 4: Til (Language selector) -->
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-300 mb-4">{% trans "Til" %}</h4>
-                    <div class="inline-flex items-center bg-gray-800 rounded-lg p-1 border border-gray-700 text-xs">
-                        <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}"
-                           class="px-3 py-1 rounded font-bold transition {% if CURRENT_LANG == 'uz' %}bg-white text-navy-900 shadow-sm{% else %}text-gray-400 hover:text-white{% endif %}">
-                            O'z
-                        </a>
-                        <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}"
-                           class="px-3 py-1 rounded font-bold transition {% if CURRENT_LANG == 'ru' %}bg-white text-navy-900 shadow-sm{% else %}text-gray-400 hover:text-white{% endif %}">
-                            Рус
-                        </a>
-                        <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}"
-                           class="px-3 py-1 rounded font-bold transition {% if CURRENT_LANG == 'en' %}bg-white text-navy-900 shadow-sm{% else %}text-gray-400 hover:text-white{% endif %}">
-                            Eng
-                        </a>
-                    </div>
-                </div>
-
             </div>
-
-            <!-- Bottom Copyright & Social Links -->
-            <div class="pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-                <p>© 2026 TIFT. {% trans "Barcha huquqlar himoyalangan." %}</p>
-                <div class="flex items-center gap-4 text-gray-400 text-base">
-                    <a href="https://t.me/tift_uz" target="_blank" class="hover:text-blue-400 transition"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="https://linkedin.com" target="_blank" class="hover:text-blue-400 transition"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://youtube.com" target="_blank" class="hover:text-red-500 transition"><i class="fab fa-youtube"></i></a>
+            <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+                <p>© {% now "Y" %} TIFT. {% if L == 'ru' %}Все права защищены.{% elif L == 'en' %}All rights reserved.{% else %}Barcha huquqlar himoyalangan.{% endif %}</p>
+                <div class="flex items-center gap-2 text-xs">
+                    <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}" class="px-2 py-1 rounded {% if L == 'uz' %}bg-white/10 text-white{% else %}hover:text-white{% endif %}">O'zbekcha</a>
+                    <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="px-2 py-1 rounded {% if L == 'ru' %}bg-white/10 text-white{% else %}hover:text-white{% endif %}">Русский</a>
+                    <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="px-2 py-1 rounded {% if L == 'en' %}bg-white/10 text-white{% else %}hover:text-white{% endif %}">English</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Mobile Menu Script -->
     <script>
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
-                // Language Dropdown Script
-        const langBtn = document.getElementById('lang-dropdown-btn');
-        const langMenu = document.getElementById('lang-dropdown-menu');
-        const langChevron = document.getElementById('lang-dropdown-chevron');
-        if (langBtn && langMenu) {
-            langBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                langMenu.classList.toggle('hidden');
-                if (langChevron) langChevron.classList.toggle('rotate-180');
-            });
-            document.addEventListener('click', (e) => {
-                if (!langMenu.classList.contains('hidden') && !langMenu.contains(e.target)) {
-                    langMenu.classList.add('hidden');
-                    if (langChevron) langChevron.classList.remove('rotate-180');
-                }
-            });
-        }
         if (btn && menu) {
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
+            btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+            menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
         }
     </script>
 </body>
