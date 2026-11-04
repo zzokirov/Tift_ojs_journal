@@ -75,41 +75,49 @@
 
     <main class="flex-grow w-full">
 
-        <!-- ═══ HERO: ixcham, rasmsiz, toza ═══ -->
-        <section class="relative overflow-hidden border-b border-slate-200/80 bg-white">
-            <div class="absolute inset-0 grid-bg [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" aria-hidden="true"></div>
-            <div class="absolute -top-32 left-1/2 -translate-x-1/2 h-72 w-[42rem] rounded-full bg-brand/10 blur-3xl" aria-hidden="true"></div>
+        <!-- ═══ HERO: fonda TIFT binosi ═══ -->
+        <section class="relative overflow-hidden border-b border-slate-200/80 bg-[#f5f1f0]">
+            <!-- Bino rasmi: o'ng tomonda, chap tomoni fonga silliq singib ketadi -->
+            <div class="absolute inset-y-0 right-0 w-full md:w-[68%] lg:w-[62%]" aria-hidden="true">
+                <img src="{% static 'images/hero_tift_building.jpg' %}" alt="" class="h-full w-full object-cover object-[70%_center] md:object-contain md:object-right-bottom">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#f5f1f0] via-[#f5f1f0]/70 to-transparent md:via-[#f5f1f0]/10"></div>
+                <div class="absolute inset-0 bg-[#f5f1f0]/80 md:hidden"></div>
+                <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#f5f1f0]/80 to-transparent"></div>
+            </div>
 
-            <div class="relative max-w-3xl mx-auto px-4 sm:px-6 py-14 sm:py-20 text-center">
-                <span class="inline-flex items-center gap-2 rounded-full bg-brand-light text-brand text-xs font-semibold px-3 py-1.5">
-                    <i class="fas fa-book-open text-[0.7rem]"></i>
-                    {% if L == 'ru' %}Журналов: {{ journals.count }} · открытый доступ{% elif L == 'en' %}Journals: {{ journals.count }} · open access{% else %}{{ journals.count }} ta jurnal · ochiq kirish{% endif %}
-                </span>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
+                <div class="max-w-xl">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur ring-1 ring-black/5 text-emerald-700 text-xs font-semibold px-3 py-1.5 shadow-sm">
+                        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                        {% if L == 'ru' %}Журналов: {{ journals.count }} · открытый доступ{% elif L == 'en' %}Journals: {{ journals.count }} · open access{% else %}{{ journals.count }} ta jurnal · ochiq kirish{% endif %}
+                    </span>
 
-                <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-900 leading-[1.1]">
-                    {% if L == 'ru' %}Научные журналы <span class="text-brand">TIFT</span>{% elif L == 'en' %}<span class="text-brand">TIFT</span> Scientific Journals{% else %}<span class="text-brand">TIFT</span> ilmiy jurnallari{% endif %}
-                </h1>
-                <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-                    {% if L == 'ru' %}Читайте статьи, просматривайте архив выпусков и отправляйте свои исследования онлайн.{% elif L == 'en' %}Read articles, browse issue archives and submit your research online.{% else %}Maqolalarni o'qing, sonlar arxivini ko'ring va tadqiqotingizni onlayn yuboring.{% endif %}
-                </p>
+                    <h1 class="mt-5 text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight text-navy-900 leading-[1.08]">
+                        {% if L == 'ru' %}Научные журналы <span class="text-emerald-600">TIFT</span>{% elif L == 'en' %}<span class="text-emerald-600">TIFT</span> Scientific Journals{% else %}<span class="text-emerald-600">TIFT</span> ilmiy jurnallari{% endif %}
+                    </h1>
+                    <div class="mt-4 h-1 w-16 rounded-full bg-emerald-500"></div>
+                    <p class="mt-4 text-base sm:text-lg text-slate-700 leading-relaxed">
+                        {% if L == 'ru' %}Читайте статьи, просматривайте архив выпусков и отправляйте свои исследования онлайн.{% elif L == 'en' %}Read articles, browse issue archives and submit your research online.{% else %}Maqolalarni o'qing, sonlar arxivini ko'ring va tadqiqotingizni onlayn yuboring.{% endif %}
+                    </p>
 
-                <form method="get" action="" class="mt-8">
-                    <div class="flex items-center gap-2 rounded-2xl bg-white p-1.5 shadow-lg shadow-slate-200/70 ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-brand transition">
-                        <i class="fas fa-search text-slate-400 ml-3"></i>
-                        <input type="text" name="q" value="{{ search_query }}"
-                               placeholder="{% if L == 'ru' %}Название журнала, ISSN или направление{% elif L == 'en' %}Journal title, ISSN or research area{% else %}Jurnal nomi, ISSN yoki yo'nalish{% endif %}"
-                               class="w-full min-w-0 bg-transparent px-2 py-2 text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none">
-                        <button type="submit" class="shrink-0 rounded-xl bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-5 py-2.5 transition">
-                            {% if L == 'ru' %}Найти{% elif L == 'en' %}Search{% else %}Qidirish{% endif %}
-                        </button>
-                    </div>
-                </form>
-                {% if search_query %}
-                <p class="mt-3 text-sm text-slate-500">
-                    {% if L == 'ru' %}Результаты по запросу{% elif L == 'en' %}Results for{% else %}Qidiruv natijasi:{% endif %} «{{ search_query }}» ·
-                    <a href="{% url 'portal_home' %}" class="text-brand font-medium hover:underline">{% if L == 'ru' %}сбросить{% elif L == 'en' %}clear{% else %}tozalash{% endif %}</a>
-                </p>
-                {% endif %}
+                    <form method="get" action="" class="mt-8">
+                        <div class="flex items-center gap-2 rounded-2xl bg-white p-1.5 shadow-xl shadow-slate-900/10 ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-emerald-500 transition">
+                            <i class="fas fa-search text-slate-400 ml-3"></i>
+                            <input type="text" name="q" value="{{ search_query }}"
+                                   placeholder="{% if L == 'ru' %}Название журнала, ISSN или направление{% elif L == 'en' %}Journal title, ISSN or research area{% else %}Jurnal nomi, ISSN yoki yo'nalish{% endif %}"
+                                   class="w-full min-w-0 bg-transparent px-2 py-2 text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none">
+                            <button type="submit" class="shrink-0 rounded-xl bg-navy-900 hover:bg-emerald-600 text-white text-sm font-semibold px-5 py-2.5 transition">
+                                {% if L == 'ru' %}Найти{% elif L == 'en' %}Search{% else %}Qidirish{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                    {% if search_query %}
+                    <p class="mt-3 text-sm text-slate-600">
+                        {% if L == 'ru' %}Результаты по запросу{% elif L == 'en' %}Results for{% else %}Qidiruv natijasi:{% endif %} «{{ search_query }}» ·
+                        <a href="{% url 'portal_home' %}" class="text-emerald-700 font-medium hover:underline">{% if L == 'ru' %}сбросить{% elif L == 'en' %}clear{% else %}tozalash{% endif %}</a>
+                    </p>
+                    {% endif %}
+                </div>
             </div>
         </section>
 
