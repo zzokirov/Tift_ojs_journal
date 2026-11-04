@@ -9,63 +9,21 @@
 <!-- ═══ 1. HERO ═══ -->
 <section class="relative overflow-hidden">
     <div class="absolute inset-0 blueprint opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 lg:pt-16 lg:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-10 lg:pt-12 lg:pb-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
         <div class="lg:col-span-7">
-            {% if latest_issue %}
-            <a href="{% url 'issue_detail' journal_slug=current_journal.slug issue_pk=latest_issue.pk %}" class="inline-flex items-center gap-2 rounded-full bg-white ring-1 ring-rule pl-1.5 pr-3.5 py-1.5 text-sm text-ink hover:ring-terra transition">
-                <span class="rounded-full bg-terra text-white text-xs font-semibold px-2.5 py-0.5">{% if CURRENT_LANG == 'ru' %}Новый выпуск{% elif CURRENT_LANG == 'en' %}New issue{% else %}Yangi son{% endif %}</span>
-                {% if CURRENT_LANG == 'ru' %}Том {{ latest_issue.volume }}, № {{ latest_issue.number }} · {{ latest_issue.year }}
-                {% elif CURRENT_LANG == 'en' %}Vol. {{ latest_issue.volume }}, No. {{ latest_issue.number }} · {{ latest_issue.year }}
-                {% else %}{{ latest_issue.volume }}-jild, {{ latest_issue.number }}-son · {{ latest_issue.year }}{% endif %}
-                <i class="fas fa-arrow-right text-xs text-stone"></i>
-            </a>
-            {% endif %}
-
-            <h1 class="mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight text-ink">{{ current_journal.title }}</h1>
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight text-ink">{{ current_journal.title }}</h1>
 
             <p class="mt-5 text-lg sm:text-xl leading-relaxed text-ink/70 max-w-2xl">
                 {{ current_journal.short_description|default:current_journal.full_description|striptags|truncatewords:40 }}
             </p>
 
-            <div class="mt-8 flex flex-wrap items-center gap-3">
-                <button type="button" onclick="openSubmitModal()" class="inline-flex items-center gap-2 rounded-full bg-terra hover:bg-terra-dark text-white px-6 py-3.5 text-[0.95rem] font-semibold shadow-lg shadow-terra/25 transition">
-                    <i class="fas fa-paper-plane text-sm"></i>{% trans "Maqolani yuborish" %}
-                </button>
-                <a href="{% static 'docs/maqola_talablari.pdf' %}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-white ring-1 ring-rule hover:ring-ink px-6 py-3.5 text-[0.95rem] font-semibold text-ink transition">
-                    <i class="far fa-file-pdf text-terra"></i>{% if CURRENT_LANG == 'ru' %}Требования к статьям{% elif CURRENT_LANG == 'en' %}Author guidelines{% else %}Maqola talablari{% endif %}
-                </a>
-            </div>
-
-            <!-- Qisqa ma'lumotlar -->
-            <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div class="rounded-2xl bg-white ring-1 ring-rule/80 p-4">
-                    <dt class="flex items-center gap-2 text-xs text-stone"><i class="far fa-calendar text-terra"></i>{% trans "Nashr davriyligi" %}</dt>
-                    <dd class="mt-1.5 font-semibold text-ink leading-snug">
-                        {% if CURRENT_LANG == 'en' %}{{ current_journal.publication_frequency_en|default:"4 times a year" }}
-                        {% elif CURRENT_LANG == 'ru' %}{{ current_journal.publication_frequency_ru|default:"4 раза в год" }}
-                        {% else %}{{ current_journal.publication_frequency_uz|default:current_journal.publication_frequency|default:"Yiliga 4 marta" }}{% endif %}
-                    </dd>
-                </div>
-                <div class="rounded-2xl bg-white ring-1 ring-rule/80 p-4">
-                    <dt class="flex items-center gap-2 text-xs text-stone"><i class="fas fa-language text-terra"></i>{% trans "Tillar" %}</dt>
-                    <dd class="mt-1.5 font-semibold text-ink leading-snug">UZ · RU · EN</dd>
-                </div>
-                <div class="rounded-2xl bg-white ring-1 ring-rule/80 p-4">
-                    <dt class="flex items-center gap-2 text-xs text-stone"><i class="fas fa-barcode text-terra"></i>ISSN</dt>
-                    <dd class="mt-1.5 font-semibold text-ink leading-snug">{{ current_journal.issn|default:"—" }}{% if current_journal.eissn %}<span class="block text-xs font-normal text-stone">eISSN {{ current_journal.eissn }}</span>{% endif %}</dd>
-                </div>
-                <div class="rounded-2xl bg-white ring-1 ring-rule/80 p-4">
-                    <dt class="flex items-center gap-2 text-xs text-stone"><i class="fas fa-file-lines text-terra"></i>{% if CURRENT_LANG == 'ru' %}Статьи{% elif CURRENT_LANG == 'en' %}Articles{% else %}Maqolalar{% endif %}</dt>
-                    <dd class="mt-1.5 font-semibold text-ink leading-snug">{{ total_articles }}</dd>
-                </div>
-            </dl>
         </div>
 
         <!-- Muqova -->
         <div class="lg:col-span-5 flex justify-center lg:justify-end">
-            <div class="relative w-60 sm:w-72 lg:w-80">
-                <div class="absolute -inset-6 rounded-[2rem] bg-terra/10 rotate-3" aria-hidden="true"></div>
+            <div class="relative w-40 sm:w-48 lg:w-52">
+                <div class="absolute -inset-4 rounded-[1.5rem] bg-terra/10 rotate-3" aria-hidden="true"></div>
                 <div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white shadow-2xl shadow-ink/25 ring-1 ring-ink/10">
                     {% if current_journal.get_cover_for_language %}
                         <img src="{{ current_journal.get_cover_for_language.url }}" alt="{{ current_journal.title }}" class="w-full h-full object-cover">
@@ -122,23 +80,23 @@
                             {% else %}{% trans "Ilmiy maqolalar" %}{% endif %}
                         </span>
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {% for article in group.articles %}
-                        <article class="group flex flex-col rounded-2xl bg-paper/60 ring-1 ring-rule/70 p-5 sm:p-6 hover:bg-white hover:ring-terra/40 hover:shadow-xl hover:shadow-ink/5 transition">
-                            <a href="{% url 'article_detail' current_journal.slug article.pk %}" class="font-serif text-lg sm:text-xl font-semibold leading-snug text-ink group-hover:text-terra transition line-clamp-3">
+                        <article class="group flex flex-col rounded-2xl bg-paper/60 ring-1 ring-rule/70 p-4 sm:p-5 hover:bg-white hover:ring-terra/40 hover:shadow-xl hover:shadow-ink/5 transition">
+                            <a href="{% url 'article_detail' current_journal.slug article.pk %}" class="text-[0.95rem] font-semibold leading-snug text-ink group-hover:text-terra transition line-clamp-3">
                                 {% if CURRENT_LANG == 'ru' and article.title_ru %}{{ article.title_ru }}{% elif CURRENT_LANG == 'en' and article.title_en %}{{ article.title_en }}{% else %}{{ article.title_uz|default:article.title }}{% endif %}
                             </a>
-                            <p class="mt-3 flex items-start gap-2 text-sm text-stone">
+                            <p class="mt-2 flex items-start gap-2 text-xs text-stone">
                                 <i class="far fa-user mt-0.5"></i>
                                 <span class="line-clamp-2">{% if article.authors %}{{ article.authors }}{% else %}{{ article.author.get_full_name|default:article.author.username }}{% endif %}</span>
                             </p>
-                            <div class="mt-auto pt-5 flex items-center justify-between gap-3">
+                            <div class="mt-auto pt-4 flex items-center justify-between gap-3">
                                 {% if article.start_page and article.end_page %}
                                 <span class="text-xs text-stone">{% if CURRENT_LANG == 'en' %}Pages{% elif CURRENT_LANG == 'ru' %}Страницы{% else %}Sahifalar{% endif %} {{ article.start_page }}–{{ article.end_page }}</span>
                                 {% else %}<span></span>{% endif %}
                                 <span class="flex items-center gap-2">
-                                    <a href="{% url 'article_detail' current_journal.slug article.pk %}" class="rounded-full bg-ink text-paper hover:bg-terra px-4 py-1.5 text-sm font-medium transition">{% if CURRENT_LANG == 'ru' %}Читать{% elif CURRENT_LANG == 'en' %}Read{% else %}O'qish{% endif %}</a>
-                                    {% if article.pdf_file %}<a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="inline-flex items-center gap-1.5 rounded-full ring-1 ring-rule hover:ring-terra hover:text-terra px-3.5 py-1.5 text-sm font-medium text-ink transition" download><i class="fas fa-download text-xs"></i>PDF</a>{% endif %}
+                                    <a href="{% url 'article_detail' current_journal.slug article.pk %}" class="rounded-full bg-ink text-paper hover:bg-terra px-3.5 py-1 text-xs font-medium transition">{% if CURRENT_LANG == 'ru' %}Читать{% elif CURRENT_LANG == 'en' %}Read{% else %}O'qish{% endif %}</a>
+                                    {% if article.pdf_file %}<a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="inline-flex items-center gap-1.5 rounded-full ring-1 ring-rule hover:ring-terra hover:text-terra px-3 py-1 text-xs font-medium text-ink transition" download><i class="fas fa-download text-[0.65rem]"></i>PDF</a>{% endif %}
                                 </span>
                             </div>
                         </article>
