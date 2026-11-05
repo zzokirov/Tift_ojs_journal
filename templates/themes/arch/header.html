@@ -20,12 +20,12 @@
         </div>
 
         <!-- Asosiy navigatsiya -->
-        <nav class="hidden lg:flex items-center gap-1 text-[0.92rem] font-medium" aria-label="{% trans 'Bosh sahifa' %}">
-            <a href="{% url 'index' journal_slug=current_journal.slug %}" class="px-3.5 py-2 rounded-full transition {% if url_name == 'index' %}bg-ink text-paper{% else %}text-ink/75 hover:text-ink hover:bg-ink/5{% endif %}">{% trans "Bosh sahifa" %}</a>
-            <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="px-3.5 py-2 rounded-full transition {% if url_name == 'archive' or url_name == 'issue_detail' %}bg-ink text-paper{% else %}text-ink/75 hover:text-ink hover:bg-ink/5{% endif %}">{% trans "Arxiv" %}</a>
-            <a href="{% url 'about' journal_slug=current_journal.slug %}" class="px-3.5 py-2 rounded-full transition {% if url_name == 'about' %}bg-ink text-paper{% else %}text-ink/75 hover:text-ink hover:bg-ink/5{% endif %}">{% trans "Tahririyat a'zolari" %}</a>
-            <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="px-3.5 py-2 rounded-full transition {% if url_name == 'documents' %}bg-ink text-paper{% else %}text-ink/75 hover:text-ink hover:bg-ink/5{% endif %}">{% trans "Hujjatlar" %}</a>
-            <a href="#contact-section" class="px-3.5 py-2 rounded-full text-ink/75 hover:text-ink hover:bg-ink/5 transition">{% trans "Aloqa" %}</a>
+        <nav class="hidden lg:flex items-center gap-0.5 text-[0.9rem] font-medium shrink-0" aria-label="{% trans 'Bosh sahifa' %}">
+            <a href="{% url 'index' journal_slug=current_journal.slug %}" class="px-3.5 py-2 rounded-full whitespace-nowrap transition {% if url_name == 'index' %}bg-ink text-paper{% else %}text-ink/75 hover:text-ink hover:bg-ink/5{% endif %}">{% trans "Bosh sahifa" %}</a>
+            <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="px-3.5 py-2 rounded-full whitespace-nowrap transition {% if url_name == 'archive' or url_name == 'issue_detail' %}bg-ink text-paper{% else %}text-ink/75 hover:text-ink hover:bg-ink/5{% endif %}">{% trans "Arxiv" %}</a>
+            <a href="{% url 'about' journal_slug=current_journal.slug %}" class="px-3.5 py-2 rounded-full whitespace-nowrap transition {% if url_name == 'about' %}bg-ink text-paper{% else %}text-ink/75 hover:text-ink hover:bg-ink/5{% endif %}">{% trans "Tahririyat a'zolari" %}</a>
+            <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="px-3.5 py-2 rounded-full whitespace-nowrap transition {% if url_name == 'documents' %}bg-ink text-paper{% else %}text-ink/75 hover:text-ink hover:bg-ink/5{% endif %}">{% trans "Hujjatlar" %}</a>
+            <a href="#contact-section" class="px-3.5 py-2 rounded-full whitespace-nowrap text-ink/75 hover:text-ink hover:bg-ink/5 transition">{% trans "Aloqa" %}</a>
         </nav>
 
         <div class="flex items-center gap-2 sm:gap-3 shrink-0">

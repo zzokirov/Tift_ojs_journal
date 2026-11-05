@@ -53,8 +53,13 @@
                             600: '#15803d',
                         },
                         {% endif %}
+                        {% if journal_theme == 'finance' %}
+                        // Moliya mavzusi: yorug' fon, zumrad (emerald) urg'u
+                        paper: '#f8fafc', ink: '#0f172a', terra: { DEFAULT: '#059669', dark: '#047857', light: '#d1fae5' }, stone: '#64748b', rule: '#e2e8f0',
+                        {% else %}
                         // Arxitektura mavzusi
                         paper: '#f5f1ea', ink: '#1c1b19', terra: { DEFAULT: '#b5532f', dark: '#9a4425', light: '#f3e3d9' }, stone: '#8a8174', rule: '#d9d2c5',
+                        {% endif %}
                         // Moliya mavzusi
                         fin: { bg: '#0b1220', panel: '#111a2e', line: '#1f2b45', em: '#10b981', cy: '#22d3ee', mute: '#94a3b8' },
                     },
@@ -111,6 +116,7 @@
         .theme-arch .nav-link::after, .theme-arch .section-divider { background: #b5532f; }
         /* Arxitektura: ichki sahifalarda ham yumaloq burchaklar saqlanadi (zamonaviy ko'rinish) */
         /* Moliya: raqamlar monoshirifda */
+        .theme-finance .blueprint { background-image: linear-gradient(rgba(5,150,105,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(5,150,105,.07) 1px, transparent 1px); background-size: 32px 32px; }
         .theme-finance .num { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
         .theme-finance .grid-glow { background-image: radial-gradient(circle at 20% 0%, rgba(16,185,129,.18), transparent 45%), radial-gradient(circle at 90% 30%, rgba(34,211,238,.12), transparent 40%), linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px); background-size: auto, auto, 40px 40px, 40px 40px; }
         @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -133,7 +139,7 @@
 
     {% block extra_head %}{% endblock %}
 </head>
-<body class="{% if journal_theme == 'arch' %}bg-paper text-ink{% elif journal_theme == 'finance' %}bg-slate-50 text-gray-900{% else %}bg-gray-50 text-gray-900{% endif %} min-h-screen flex flex-col theme-{{ journal_theme|default:'default' }}">
+<body class="{% if journal_theme == 'arch' %}bg-paper text-ink{% elif journal_theme == 'finance' %}bg-paper text-ink{% else %}bg-gray-50 text-gray-900{% endif %} min-h-screen flex flex-col theme-{{ journal_theme|default:'default' }}">
 
         {% block header %}
     {% if journal_theme == 'arch' and current_journal %}
