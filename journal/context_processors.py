@@ -59,4 +59,10 @@ def journal_theme_for_slug(slug):
 def journal_theme(request):
     match = getattr(request, 'resolver_match', None)
     slug = match.kwargs.get('journal_slug') if match else None
-    return {'journal_theme': journal_theme_for_slug(slug)}
+    ctx = {'journal_theme': journal_theme_for_slug(slug)}
+    if slug:
+        # Header'dagi "jurnal almashtirish" menyusi uchun (faqat jurnal sahifalarida, dangasa so'rov)
+        ctx['nav_journals'] = Journal.objects.filter(
+            is_active=True, publication_status='published'
+        ).order_by('display_order', 'id')
+    return ctx

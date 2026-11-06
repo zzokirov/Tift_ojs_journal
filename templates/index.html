@@ -44,14 +44,9 @@
                         <i class="fas {% if 'moliya' in current_journal.slug %}fa-chart-line{% else %}fa-building{% endif %} mr-1"></i>
                         {% if 'moliya' in current_journal.slug %}{% trans "Moliya va Raqamli Iqtisodiyot" %}{% else %}{% trans "Arxitektura va Qurilish" %}{% endif %}
                     </span>
-                    <span class="text-[11px] font-semibold text-gray-500">
-                        ISSN: <strong class="text-gray-900 font-mono">{{ current_journal.issn|default:"—" }}</strong>
-                    </span>
-                    {% if current_journal.eissn %}
-                    <span class="text-[11px] font-semibold text-gray-500">
-                        • eISSN: <strong class="text-gray-900 font-mono">{{ current_journal.eissn }}</strong>
-                    </span>
-                    {% endif %}
+                    {% if current_journal.issn %}<span class="text-[11px] font-semibold text-gray-500">
+                        ISSN: <strong class="text-gray-900 font-mono">{{ current_journal.issn }}</strong>
+                    </span>{% endif %}
                 </div>
 
                 <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-navy-900 mb-3 leading-tight">

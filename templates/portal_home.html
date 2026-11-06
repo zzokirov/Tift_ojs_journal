@@ -149,7 +149,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <h3 class="text-lg font-bold leading-snug text-navy-900 group-hover:text-brand transition">{{ journal.title }}</h3>
-                            {% if journal.issn %}<p class="mt-1 text-xs text-slate-500">ISSN {{ journal.issn }}{% if journal.eissn %} · eISSN {{ journal.eissn }}{% endif %}</p>{% endif %}
+                            {% if journal.issn %}<p class="mt-1 text-xs text-slate-500">ISSN {{ journal.issn }}</p>{% endif %}
                             {% with desc=journal.short_description|default:journal.full_description %}
                             {% if desc %}<p class="mt-3 text-sm text-slate-600 leading-relaxed line-clamp-3">{{ desc|striptags }}</p>{% endif %}
                             {% endwith %}

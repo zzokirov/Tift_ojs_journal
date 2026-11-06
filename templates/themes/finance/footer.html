@@ -38,7 +38,6 @@
                     <p class="font-semibold text-ink mb-4">{% if CURRENT_LANG == 'ru' %}Сведения{% elif CURRENT_LANG == 'en' %}Details{% else %}Ma'lumot{% endif %}</p>
                     <ul class="space-y-2.5 text-stone">
                         {% if current_journal.issn %}<li>ISSN {{ current_journal.issn }}</li>{% endif %}
-                        {% if current_journal.eissn %}<li>eISSN {{ current_journal.eissn }}</li>{% endif %}
                         <li><a href="{% url 'portal_home' %}" class="hover:text-terra transition">← {% trans "Barcha jurnallar" %}</a></li>
                     </ul>
                 </div>

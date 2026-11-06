@@ -116,6 +116,7 @@
         .theme-arch .nav-link::after, .theme-arch .section-divider { background: #b5532f; }
         /* Arxitektura: ichki sahifalarda ham yumaloq burchaklar saqlanadi (zamonaviy ko'rinish) */
         /* Moliya: raqamlar monoshirifda */
+        details.journal-switcher[open] .switcher-chevron { transform: rotate(180deg); }
         .theme-finance .blueprint { background-image: linear-gradient(rgba(5,150,105,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(5,150,105,.07) 1px, transparent 1px); background-size: 32px 32px; }
         .theme-finance .num { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
         .theme-finance .grid-glow { background-image: radial-gradient(circle at 20% 0%, rgba(16,185,129,.18), transparent 45%), radial-gradient(circle at 90% 30%, rgba(34,211,238,.12), transparent 40%), linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px); background-size: auto, auto, 40px 40px, 40px 40px; }
@@ -583,5 +584,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     </script>
 
+<script>
+    // Jurnal almashtirish menyusi: tashqariga bosilganda yopiladi
+    document.addEventListener('click', function (e) {
+        document.querySelectorAll('details.journal-switcher[open]').forEach(function (d) {
+            if (!d.contains(e.target)) d.removeAttribute('open');
+        });
+    });
+</script>
 </body>
 </html>
