@@ -514,3 +514,22 @@ class PdfServingTests(TestCase):
         tr.assert_not_called()
         self.art.refresh_from_db()
         self.assertEqual(self.art.views_count, 1)
+
+
+class WordArticleTests(TestCase):
+    def test_word_file_is_served_as_real_pdf(self):
+        import io, tempfile, shutil, docx
+        from django.core.files.base import ContentFile
+        from django.test import override_settings
+        tmp = tempfile.mkdtemp(); self.addCleanup(shutil.rmtree, tmp)
+        with override_settings(MEDIA_ROOT=tmp):
+            j = Journal.objects.create(title='Arxitektura', slug='arxitektura-va-talim', publication_status='published', is_active=True)
+            d = docx.Document(); d.add_heading('Sinov maqolasi', 1); d.add_paragraph('Annotatsiya: oʻzbekcha va русский матн.')
+            buf = io.BytesIO(); d.save(buf)
+            a = Article.objects.create(journal=j, title='Sinov', authors='Ali Valiyev', status='published', start_page=1, end_page=1)
+            a.pdf_file.save('sinov.docx', ContentFile(buf.getvalue()))
+            for name in ('article_pdf', 'download_pdf'):
+                r = self.client.get(reverse(name, args=[j.slug, a.pk]))
+                self.assertEqual(r.status_code, 200)
+                self.assertEqual(r['Content-Type'], 'application/pdf')
+                self.assertTrue(b''.join(r.streaming_content).startswith(b'%PDF'), name)

@@ -30,6 +30,8 @@ git reset --hard origin/main
 ./venv/bin/python manage.py collectstatic --noinput
 # Annotatsiyasi bo'sh maqolalarni PDF fayldan to'ldirish (faqat bo'sh maydonlar, qayta ishga tushirish xavfsiz)
 ./venv/bin/python manage.py fill_abstracts || true
+# PDF o'rniga Word yuklangan maqolalar uchun PDF nusxa (brauzerda ochilishi uchun)
+./venv/bin/python manage.py convert_word_articles || true
 # Til almashtirilganda jurnal nomlari va yo'nalishlar ham o'zgarishi uchun bo'sh RU/EN tarjimalarni to'ldirish
 ./venv/bin/python manage.py compilemessages -i venv >/dev/null 2>&1 || true
 ./venv/bin/python manage.py translate_content || true

@@ -1185,15 +1185,32 @@ def _article_file(article):
 
 
 def _serve_pdf(fieldfile, filename, as_attachment):
-    """PDF'ni beradi. X_ACCEL_MEDIA=True bo'lsa faylni nginx o'zi uzatadi (tez, gunicorn
-    vaqt limitiga tushmaydi); aks holda Django FileResponse."""
+    """PDF'ni beradi. Word fayl yuklangan bo'lsa avval PDF'ga aylantiriladi (keshlanadi).
+    X_ACCEL_MEDIA=True bo'lsa faylni nginx o'zi uzatadi (tez, gunicorn vaqt limitiga
+    tushmaydi); aks holda Django FileResponse."""
     import os
     from urllib.parse import quote
     from django.conf import settings as _s
     from django.http import FileResponse, HttpResponse
     from django.utils.http import content_disposition_header
+    from .docconvert import pdf_path_for, sniff
 
-    path = getattr(fieldfile, 'path', None)
+    try:
+        path = fieldfile.path
+    except Exception:
+        path = None
+    if path and os.path.exists(path) and sniff(path) != 'pdf':
+        converted = pdf_path_for(path)
+        if converted:
+            path = converted
+        else:
+            # Aylantirib bo'lmadi — asl Word faylni to'g'ri turi bilan beramiz
+            kind = sniff(path)
+            ext = 'docx' if kind == 'docx' else 'doc'
+            ctype = ('application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                     if kind == 'docx' else 'application/msword')
+            name = filename.rsplit('.', 1)[0] + '.' + ext
+            return FileResponse(open(path, 'rb'), as_attachment=True, filename=name, content_type=ctype)
     if getattr(_s, 'X_ACCEL_MEDIA', False) and path and os.path.exists(path):
         media_root = os.path.realpath(_s.MEDIA_ROOT)
         real = os.path.realpath(path)

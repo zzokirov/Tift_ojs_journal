@@ -71,11 +71,12 @@ def extract_from_text(text):
 
 
 def extract_from_file(path):
-    low = (path or "").lower()
+    from .docconvert import sniff
+    kind = sniff(path)  # kengaytmaga emas, fayl ichidagi baytlarga qaraymiz
     try:
-        if low.endswith(".pdf"):
+        if kind == "pdf":
             text = _pdf_text(path)
-        elif low.endswith(".docx"):
+        elif kind == "docx":
             text = _docx_text(path)
         else:
             return "", ""
