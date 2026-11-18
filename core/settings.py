@@ -166,6 +166,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Djangoga biz yozadigan maxsus foydalanuvchilar modelini tanitish
 AUTH_USER_MODEL = 'journal.User'
+
+# Mavjud migratsiyalar BigAutoField bilan yaratilgan
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 JAZZMIN_SETTINGS = {
     "site_title": "TIFT Admin",
     "site_header": "TIFT Admin",
@@ -280,7 +283,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_MANIFEST_STRICT = False
 CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com', 'https://architect-edu.tift.uz', 'https://jurnal.tift.uz']
 

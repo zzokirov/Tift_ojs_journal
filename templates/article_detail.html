@@ -30,210 +30,165 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    .ad-card { background: var(--surface); border: 1px solid var(--line); border-radius: 1.25rem; }
+    .ad-label { font-family: Inter, sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .ad-accent { color: var(--accent); }
+    .ad-btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-weight: 600; font-size: .875rem; padding: .7rem 1.25rem; border-radius: .875rem; transition: background-color .2s, color .2s, border-color .2s, box-shadow .2s; }
+    .ad-btn-primary { background: var(--accent); color: #fff; }
+    .ad-btn-primary:hover { background: var(--accent-dark); box-shadow: 0 8px 24px -8px var(--accent); }
+    .ad-btn-ghost { background: var(--surface); color: var(--hero-ink); border: 1px solid var(--line); }
+    .ad-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .ad-chip { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .75rem; border-radius: 999px; font-size: .75rem; font-weight: 600; background: var(--accent-soft); color: var(--accent-dark); border: 1px solid var(--accent-line); }
+    .ad-chip-plain { background: var(--surface); color: var(--muted); border-color: var(--line); }
+    .ad-abstract { font-size: 1.02rem; line-height: 1.85; color: #334155; max-width: 72ch; }
+    .ad-icon-btn { width: 2rem; height: 2rem; border-radius: .6rem; display: inline-flex; align-items: center; justify-content: center; font-size: .75rem; color: var(--muted); border: 1px solid var(--line); background: var(--surface); transition: color .2s, border-color .2s; }
+    .ad-icon-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .ad-link:hover { color: var(--accent); }
+    .ad-meta dt { font-size: .75rem; color: var(--muted); }
+    .ad-meta dd { font-size: .8rem; font-weight: 600; color: var(--hero-ink); text-align: right; }
+</style>
 
-<!-- ═══ HEADER ═══ -->
-<div class="bg-navy-900 text-white relative overflow-hidden" style="padding:2.5rem 0;">
-    <div class="absolute inset-0 opacity-5"
-         style="background-image:linear-gradient(rgba(255,255,255,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:32px 32px;"></div>
-    <div class="absolute left-0 top-0 bottom-0 w-1" style="background:linear-gradient(180deg,#22c55e,#16a34a);"></div>
-
-    <div class="site-container px-4 relative">
-        <!-- Breadcrumb -->
-        <nav class="flex flex-wrap items-center gap-2 text-xs mb-4" style="color:#6b7280;">
-            <a href="{% url 'index' current_journal.slug %}" class="hover:text-green-400 transition-colors flex items-center gap-1">
-                <i class="fas fa-home text-[10px]"></i> {% trans "Bosh sahifa" %}
-            </a>
-            <i class="fas fa-chevron-right text-[8px]"></i>
+<!-- ═══ SARLAVHA ═══ -->
+<section class="blueprint border-b" style="border-color:var(--line);">
+    <div class="site-container py-10 lg:py-14">
+        <nav aria-label="breadcrumb" class="flex flex-wrap items-center gap-2 text-xs mb-6" style="color:var(--muted);">
+            <a href="{% url 'index' current_journal.slug %}" class="ad-link transition-colors">{{ current_journal.title }}</a>
             {% if article.issue %}
-                <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="hover:text-green-400 transition-colors">
+                <i class="fas fa-chevron-right text-[8px] opacity-60"></i>
+                <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="ad-link transition-colors">
                     {% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
                 </a>
-                <i class="fas fa-chevron-right text-[8px]"></i>
             {% endif %}
-            <span style="color:#9ca3af;" class="truncate max-w-xs">{{ article.title|truncatewords:8 }}</span>
         </nav>
 
-        <!-- Badges -->
-        <div class="flex flex-wrap gap-2 mb-4">
-
+        <div class="flex flex-wrap gap-2 mb-5">
             {% if article.category %}
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
-                      style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);color:#a5b4fc;">
-                    <i class="fas fa-tag text-[9px]"></i>
-                    {{ article.category.code }} — {{ article.category.name }}
-                </span>
+                <span class="ad-chip">{{ article.category.code }} · {{ article.category.name }}</span>
             {% endif %}
             {% if article.issue %}
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
-                      style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#cbd5e1;">
-                    <i class="fas fa-book text-[9px]"></i>
-                    {% blocktrans with vol=article.issue.volume num=article.issue.number year=article.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}{% if article.start_page %} {% blocktrans with start=article.start_page end=article.end_page %}(S. {{ start }}-{{ end }}){% endblocktrans %}{% endif %}
+                <span class="ad-chip ad-chip-plain">
+                    {% blocktrans with vol=article.issue.volume num=article.issue.number year=article.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}{% if article.start_page %} · {% blocktrans with start=article.start_page end=article.end_page %}(S. {{ start }}-{{ end }}){% endblocktrans %}{% endif %}
                 </span>
             {% endif %}
         </div>
 
-        <!-- Title -->
-        <h1 class="font-serif font-bold leading-snug text-white mb-4"
-            style="font-size:clamp(1.3rem,2.5vw,2.2rem); max-width:900px;">
+        <h1 class="font-serif font-bold leading-tight mb-5" style="color:var(--hero-ink);font-size:clamp(1.6rem,3.2vw,2.6rem);max-width:900px;">
             {{ article.title }}
         </h1>
 
-        <!-- Authors row -->
-        <div class="flex flex-wrap items-center gap-4 text-sm" style="color:#94a3b8;">
-            <span class="flex items-center gap-2">
-                <i class="fas fa-users text-green-500 text-xs"></i>
-                {{ author_name|default:_("Muallif ko'rsatilmagan") }}
-            </span>
+        <p class="text-base font-medium mb-4" style="color:var(--hero-ink);">
+            {{ author_name|default:_("Muallif ko'rsatilmagan") }}
+        </p>
+        {% if author_institution %}
+            <p class="text-sm -mt-2 mb-4" style="color:var(--muted);">{{ author_institution }}</p>
+        {% endif %}
+
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm mb-8" style="color:var(--muted);">
             {% if article.published_at %}
-                <span class="flex items-center gap-1.5">
-                    <i class="far fa-calendar-check text-green-500 text-xs"></i>
-                    {{ article.published_at|date:"d.m.Y" }}
-                </span>
+                <span class="inline-flex items-center gap-1.5"><i class="far fa-calendar text-xs ad-accent"></i>{{ article.published_at|date:"d.m.Y" }}</span>
             {% endif %}
-            <span class="flex items-center gap-1.5">
-                <i class="far fa-eye text-blue-400 text-xs"></i>
-                {% blocktrans with count=article.views_count %}{{ count }} ko'rish{% endblocktrans %}
-            </span>
-            <span class="flex items-center gap-1.5">
-                <i class="fas fa-download text-green-400 text-xs"></i>
-                {% blocktrans with count=article.downloads_count %}{{ count }} yuklab olish{% endblocktrans %}
-            </span>
+            <span class="inline-flex items-center gap-1.5"><i class="far fa-eye text-xs ad-accent"></i>{% blocktrans with count=article.views_count %}{{ count }} ko'rish{% endblocktrans %}</span>
+            <span class="inline-flex items-center gap-1.5"><i class="fas fa-arrow-down text-xs ad-accent"></i>{% blocktrans with count=article.downloads_count %}{{ count }} yuklab olish{% endblocktrans %}</span>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+            {% if article.pdf_file %}
+                <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-primary">
+                    <i class="far fa-file-pdf"></i> {% trans "PDF ko'rish" %}
+                </a>
+                <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost">
+                    <i class="fas fa-download"></i> {% trans "Yuklab olish" %}
+                </a>
+            {% endif %}
+            <a href="#citation" class="ad-btn ad-btn-ghost">
+                <i class="fas fa-quote-right"></i> {% trans "Iqtibos keltirish" %}
+            </a>
         </div>
     </div>
-</div>
+</section>
 
-<!-- ═══ MAIN CONTENT ═══ -->
-<div class="site-container px-4 py-10">
-    <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
+<!-- ═══ ASOSIY QISM ═══ -->
+<div class="site-container py-10 lg:py-14">
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-8 lg:gap-12">
 
-        <!-- LEFT: ARTICLE BODY -->
-        <div class="xl:col-span-3 space-y-6">
+        <div class="space-y-8 min-w-0">
 
             <!-- ANNOTATSIYA -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
-                    <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
-                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">{% trans "Annotatsiya" %}</h2>
-                </div>
-                <div class="px-6 py-5">
-                    <p class="leading-relaxed text-justify italic"
-                       style="color:#374151;font-size:clamp(0.875rem,1.05vw,1rem);word-break:break-word;border-left:3px solid #22c55e;padding-left:1rem;">
-                        {{ article.abstract }}
-                    </p>
-                </div>
-            </div>
+            <section>
+                <h2 class="ad-label mb-3">{% trans "Annotatsiya" %}</h2>
+                <p class="ad-abstract" style="word-break:break-word;">{{ article.abstract|default:"—" }}</p>
+            </section>
 
             <!-- KALIT SO'ZLAR -->
             {% if keywords_list %}
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
-                <h3 class="font-bold text-navy-900 text-sm mb-3 flex items-center gap-2 uppercase tracking-wider">
-                    <i class="fas fa-tags text-green-500 text-xs"></i> {% trans "Kalit so'zlar" %}
-                </h3>
+            <section>
+                <h2 class="ad-label mb-3">{% trans "Kalit so'zlar" %}</h2>
                 <div class="flex flex-wrap gap-2">
-                    {% for tag in keywords_list %}
-                        <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium"
-                              style="background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;">
-                            <i class="fas fa-tag text-[9px]" style="color:#22c55e;"></i>
-                            {{ tag }}
-                        </span>
-                    {% endfor %}
+                    {% for tag in keywords_list %}<span class="ad-chip">{{ tag }}</span>{% endfor %}
                 </div>
-            </div>
+            </section>
             {% endif %}
 
-            <!-- ═══ MAQOLANI O'QISH (INTERACTIVE READER) ═══ -->
+            <!-- MAQOLANI O'QISH -->
             {% if article_content_html or article.pdf_file %}
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden" id="readerSection">
-                <!-- Reader Header -->
-                <div class="flex items-center justify-between px-6 py-4 border-b border-gray-50">
-                    <div class="flex items-center gap-3">
-                        <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
-                        <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">{% trans "Maqolani o'qish" %}</h2>
+            <section class="ad-card overflow-hidden" id="readerSection">
+                <div class="flex items-center justify-between gap-3 px-5 sm:px-6 py-4 border-b" style="border-color:var(--line);">
+                    <h2 class="font-bold" style="color:var(--hero-ink);font-size:1.05rem;">{% trans "Maqolani o'qish" %}</h2>
+                    {% if article_content_html %}
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" onclick="adjustFontSize(-1)" class="ad-icon-btn" title="{% trans 'Kichiklashtirish' %}" aria-label="{% trans 'Kichiklashtirish' %}"><i class="fas fa-minus"></i></button>
+                        <span id="fontSizeLabel" class="text-xs font-medium w-10 text-center" style="color:var(--muted);">16px</span>
+                        <button type="button" onclick="adjustFontSize(1)" class="ad-icon-btn" title="{% trans 'Kattalashtirish' %}" aria-label="{% trans 'Kattalashtirish' %}"><i class="fas fa-plus"></i></button>
+                        <button type="button" onclick="toggleFullscreen()" class="ad-icon-btn ml-1" title="{% trans 'To\'liq ekran' %}" aria-label="{% trans 'To\'liq ekran' %}"><i class="fas fa-expand" id="fullscreenIcon"></i></button>
                     </div>
-                    <!-- Reader Controls -->
-                    <div class="flex items-center gap-2">
-                        <button onclick="adjustFontSize(-1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-all hover:scale-110"
-                                style="background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;" title="{% trans 'Kichiklashtirish' %}">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <span id="fontSizeLabel" class="text-xs font-medium px-2" style="color:#64748b;">16px</span>
-                        <button onclick="adjustFontSize(1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-all hover:scale-110"
-                                style="background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;" title="{% trans 'Kattalashtirish' %}">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div class="w-px h-6 mx-1" style="background:#e2e8f0;"></div>
-                        <button onclick="toggleFullscreen()" class="w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-all hover:scale-110"
-                                style="background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;" title="{% trans 'To\'liq ekran' %}">
-                            <i class="fas fa-expand" id="fullscreenIcon"></i>
-                        </button>
-                    </div>
+                    {% endif %}
                 </div>
 
-                <!-- Reader Content -->
                 {% if article_content_html %}
-                <div id="readerContent" class="px-8 py-8 overflow-y-auto"
+                <div id="readerContent" class="px-5 sm:px-10 py-8 overflow-y-auto bg-white"
                      style="max-height:650px;line-height:1.9;color:#1e293b;font-size:16px;scroll-behavior:smooth;">
-                    <div class="max-w-none prose prose-lg" style="font-family:'Georgia','Playfair Display',serif;">
+                    <div class="max-w-none prose prose-lg" style="font-family:Georgia,'Playfair Display',serif;">
                         {{ article_content_html|safe }}
                     </div>
                 </div>
-                <!-- Scroll Progress -->
-                <div class="h-1 w-full" style="background:#f1f5f9;">
-                    <div id="readProgress" class="h-full transition-all duration-300" style="width:0%;background:linear-gradient(90deg,#22c55e,#4ade80);border-radius:0 4px 4px 0;"></div>
+                <div class="h-1 w-full" style="background:var(--line);">
+                    <div id="readProgress" class="h-full transition-all duration-300" style="width:0%;background:var(--accent);"></div>
                 </div>
                 {% else %}
-                <div class="px-8 py-16 text-center">
-                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                         style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);">
-                        <i class="fas fa-file-pdf text-2xl" style="color:#ef4444;"></i>
+                <div class="px-6 py-14 text-center">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:var(--accent-soft);">
+                        <i class="far fa-file-pdf text-xl ad-accent"></i>
                     </div>
-                    <p class="font-semibold text-navy-900 mb-1">{% trans "PDF formatdagi maqola" %}</p>
-                    <p class="text-sm" style="color:#64748b;">{% trans "Maqolani quyidagi tugmalar orqali ko'rishingiz yoki yuklab olishingiz mumkin" %}</p>
+                    <p class="font-semibold mb-1" style="color:var(--hero-ink);">{% trans "PDF formatdagi maqola" %}</p>
+                    <p class="text-sm mb-6" style="color:var(--muted);">{% trans "Maqolani quyidagi tugmalar orqali ko'rishingiz yoki yuklab olishingiz mumkin" %}</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-primary"><i class="far fa-file-pdf"></i> {% trans "PDF ko'rish" %}</a>
+                        <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost"><i class="fas fa-download"></i> {% trans "Yuklab olish" %}</a>
+                    </div>
                 </div>
                 {% endif %}
-
-                <!-- Action Buttons -->
-                <div class="px-6 py-4 flex flex-wrap gap-3" style="background:#f8fafc;border-top:1px solid #f1f5f9;">
-                    {% if article.pdf_file %}
-                    <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank"
-                       class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-3 rounded-xl transition-all hover:scale-[1.02] hover:shadow-lg"
-                       style="background:linear-gradient(135deg,#0a1628,#142d54);color:white;min-width:200px;">
-                        <i class="fas fa-eye"></i> {% trans "PDF ko'rish" %}
-                    </a>
-                    <a href="{% url 'download_pdf' current_journal.slug article.pk %}"
-                       class="flex-1 flex items-center justify-center gap-2 font-bold text-sm py-3 rounded-xl transition-all hover:scale-[1.02] hover:shadow-lg"
-                       style="background:linear-gradient(135deg,#16a34a,#22c55e);color:#0a1628;min-width:200px;">
-                        <i class="fas fa-download"></i> {% trans "Yuklab olish" %}
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
+            </section>
             {% endif %}
 
-            <!-- MAQOLA MATNI (agar content bor bo'lsa) -->
+            <!-- MAQOLA MATNI -->
             {% if article.content %}
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
-                    <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
-                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">{% trans "Maqola matni" %}</h2>
-                </div>
-                <div class="px-6 py-6 prose prose-lg max-w-none"
-                     style="color:#1e293b;line-height:1.8;font-size:clamp(0.9rem,1.05vw,1rem);">
+            <section class="ad-card overflow-hidden">
+                <h2 class="font-bold px-5 sm:px-6 py-4 border-b" style="color:var(--hero-ink);border-color:var(--line);font-size:1.05rem;">{% trans "Maqola matni" %}</h2>
+                <div class="px-5 sm:px-6 py-6 prose prose-lg max-w-none" style="color:#1e293b;line-height:1.8;">
                     {{ article.content|safe }}
                 </div>
-            </div>
+            </section>
             {% endif %}
 
-            <!-- IQTIBOS KELTIRISH (CITATIONS DROPDOWN) -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-4 border-b border-gray-100 pb-3">
-                    <h3 class="font-bold text-navy-900 text-sm flex items-center gap-2 uppercase tracking-wider">
-                        <i class="fas fa-quote-left text-green-500 text-base"></i> {% trans "Iqtibos keltirish" %}
-                    </h3>
+            <!-- IQTIBOS KELTIRISH -->
+            <section id="citation" class="ad-card p-5 sm:p-6 scroll-mt-24">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <h2 class="font-bold" style="color:var(--hero-ink);font-size:1.05rem;">{% trans "Iqtibos keltirish" %}</h2>
                     <div class="flex items-center gap-2">
-                        <label for="citationFormatSelect" class="text-xs font-medium text-gray-500">{% trans "Format:" %}</label>
+                        <label for="citationFormatSelect" class="text-xs" style="color:var(--muted);">{% trans "Format:" %}</label>
                         <select id="citationFormatSelect" onchange="updateCitationDisplay()"
-                                class="bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl px-3 py-1.5 text-xs font-bold text-navy-900 focus:ring-2 focus:ring-green-500/20 focus:border-green-500 focus:outline-none transition-all cursor-pointer shadow-sm">
+                                class="rounded-lg px-3 py-1.5 text-xs font-semibold cursor-pointer bg-white" style="border:1px solid var(--line);color:var(--hero-ink);">
                             <option value="apa" selected>APA</option>
                             <option value="mla">MLA</option>
                             <option value="chicago">Chicago</option>
@@ -243,186 +198,90 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="relative bg-gray-50 rounded-xl p-4 border border-gray-200/80 group">
-                    <pre id="citationTextDisplay" class="font-mono text-xs text-gray-700 leading-relaxed whitespace-pre-wrap break-words pr-24 font-normal" style="font-family:'Courier New',Courier,monospace;"></pre>
-                    <button id="copyCitationBtn" onclick="copyCitation()"
-                            class="absolute top-3 right-3 bg-green-600 hover:bg-green-500 text-navy-900 font-bold px-3.5 py-1.5 rounded-lg text-xs flex items-center gap-1.5 shadow transition-all hover:scale-105 active:scale-95">
+                <div class="rounded-xl p-4" style="background:var(--accent-soft);border:1px solid var(--accent-line);">
+                    <pre id="citationTextDisplay" class="text-sm leading-relaxed whitespace-pre-wrap break-words" style="color:#334155;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;"></pre>
+                </div>
+                <div class="mt-3 flex justify-end">
+                    <button type="button" id="copyCitationBtn" onclick="copyCitation()" class="ad-btn ad-btn-primary" style="padding:.5rem 1rem;font-size:.8rem;">
                         <i class="fas fa-copy text-xs"></i> {% trans "Nusxalash" %}
                     </button>
                 </div>
-            </div>
+            </section>
 
-            <!-- MUALLIF MAQOLALARI -->
+            <!-- MUALLIFNING BOSHQA MAQOLALARI -->
             {% if author_articles %}
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-50">
-                    <div class="w-1 h-6 rounded-full" style="background:#22c55e;"></div>
-                    <h2 class="font-bold text-navy-900" style="font-size:1.05rem;">
-                        {% trans "Muallif boshqa maqolalari" %}
-                    </h2>
-                </div>
-                <ul class="divide-y divide-gray-50">
+            <section>
+                <h2 class="ad-label mb-3">{% trans "Muallif boshqa maqolalari" %}</h2>
+                <ul class="ad-card divide-y overflow-hidden" style="--tw-divide-opacity:1;">
                     {% for a in author_articles %}
-                    <li class="px-6 py-4 hover:bg-gray-50 transition-colors">
-                        <a href="{% url 'article_detail' current_journal.slug a.pk %}" class="group block">
-                            <div class="flex items-start gap-3">
-                                <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mt-0.5"
-                                      style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;">
-                                    {{ forloop.counter }}
-                                </span>
-                                <div class="flex-1 min-w-0">
-                                    <p class="font-semibold text-sm leading-snug group-hover:text-green-700 transition-colors line-clamp-2"
-                                       style="color:#1e293b;">
-                                        {{ a.title }}
-                                    </p>
-                                    <div class="flex flex-wrap items-center gap-3 mt-1.5">
-                                        {% if a.issue %}
-                                        <span class="text-xs flex items-center gap-1" style="color:#94a3b8;">
-                                            <i class="fas fa-book text-[9px] text-green-400"></i>
-                                            {% blocktrans with vol=a.issue.volume num=a.issue.number year=a.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}
-                                        </span>
-                                        {% endif %}
-                                        <span class="text-xs flex items-center gap-1" style="color:#94a3b8;">
-                                            <i class="far fa-eye text-[9px] text-blue-400"></i>
-                                            {{ a.views_count }}
-                                        </span>
-                                        <span class="text-xs flex items-center gap-1" style="color:#94a3b8;">
-                                            <i class="fas fa-download text-[9px] text-green-400"></i>
-                                            {{ a.downloads_count }}
-                                        </span>
-                                    </div>
+                    <li style="border-color:var(--line);">
+                        <a href="{% url 'article_detail' current_journal.slug a.pk %}" class="group flex items-start gap-4 px-5 sm:px-6 py-4 transition-colors hover:bg-black/[0.02]">
+                            <div class="flex-1 min-w-0">
+                                <p class="font-semibold text-sm leading-snug line-clamp-2 ad-link transition-colors" style="color:var(--hero-ink);">{{ a.title }}</p>
+                                <div class="flex flex-wrap items-center gap-3 mt-1.5 text-xs" style="color:var(--muted);">
+                                    {% if a.issue %}<span>{% blocktrans with vol=a.issue.volume num=a.issue.number year=a.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}</span>{% endif %}
+                                    <span class="inline-flex items-center gap-1"><i class="far fa-eye text-[10px]"></i>{{ a.views_count }}</span>
+                                    <span class="inline-flex items-center gap-1"><i class="fas fa-arrow-down text-[10px]"></i>{{ a.downloads_count }}</span>
                                 </div>
-                                <i class="fas fa-chevron-right text-xs flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity" style="color:#22c55e;"></i>
                             </div>
+                            <i class="fas fa-arrow-right text-xs mt-1 ad-accent opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"></i>
                         </a>
                     </li>
                     {% endfor %}
                 </ul>
-            </div>
+            </section>
             {% endif %}
-
         </div>
 
-        <!-- RIGHT: SIDEBAR -->
-        <aside class="xl:col-span-1 space-y-5">
-
-            <!-- TIFT BREND KARTASI -->
-            <div class="rounded-2xl overflow-hidden shadow-xl text-white"
-                 style="background:linear-gradient(160deg,#0a1628 0%,#142d54 60%,#1a3a6b 100%);">
-                <div class="px-5 py-4 flex items-center gap-3" style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                    <div class="w-9 h-9 bg-white rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
-                        <img src="{% static 'images/tift.png' %}" alt="TIFT" class="w-7 h-7 object-contain"
-                             onerror="this.style.display='none'">
-                    </div>
-                    <div>
-                        <div class="font-black text-sm leading-none">TIFT <span style="color:#22c55e;">JOURNAL</span></div>
-                        <div class="text-[9px] uppercase tracking-widest mt-0.5" style="color:#6b7280;">{{ article.journal.title|default:current_journal.title }}</div>
-                    </div>
-                </div>
-
-                <!-- PDF Actions -->
-                <div class="px-5 py-5 space-y-3">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                             style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);">
-                            <i class="fas fa-file-pdf text-red-400"></i>
-                        </div>
-                        <div>
-                            <div class="text-white text-sm font-bold leading-none">{% trans "To'liq matn" %}</div>
-                            <div class="text-xs mt-0.5" style="color:#6b7280;">{% trans "PDF formatda" %}</div>
-                        </div>
-                    </div>
-                    {% if article.pdf_file %}
-                    <a href="#readerSection" onclick="document.getElementById('readerSection').scrollIntoView({behavior:'smooth'})"
-                       class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
-                       style="background:linear-gradient(135deg,#0a1628,#1a3a6b);color:white;border:1px solid rgba(255,255,255,0.15);">
-                        <i class="fas fa-book-reader text-xs"></i> {% trans "O'qish" %}
-                    </a>
-                    <a href="{% url 'download_pdf' current_journal.slug article.pk %}"
-                       class="flex items-center justify-center gap-2 font-bold text-sm py-2.5 rounded-xl transition-all hover:scale-105 w-full"
-                       style="background:#22c55e;color:#0a1628;">
-                        <i class="fas fa-download text-xs"></i> {% trans "Yuklab olish" %}
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-
-            <!-- MAQOLA MA'LUMOTLARI -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="px-5 py-3.5 border-b border-gray-50 flex items-center gap-2">
-                    <i class="fas fa-info-circle text-green-500 text-sm"></i>
-                    <h3 class="font-bold text-navy-900 text-sm">{% trans "Maqola ma'lumotlari" %}</h3>
-                </div>
-                <dl class="divide-y divide-gray-50">
+        <!-- ═══ YON PANEL ═══ -->
+        <aside class="space-y-5 lg:sticky lg:top-24 self-start">
+            <div class="ad-card p-5">
+                <h3 class="ad-label mb-3">{% trans "Maqola ma'lumotlari" %}</h3>
+                <dl class="ad-meta divide-y" style="border-color:var(--line);">
                     {% if article.category %}
-                    <div class="flex justify-between items-start px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Yo'nalish" %}</dt>
-                        <dd class="text-xs font-semibold text-right ml-2" style="color:#1e293b;max-width:60%;">{{ article.category.code }}</dd>
-                    </div>
+                    <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>{% trans "Yo'nalish" %}</dt><dd>{{ article.category.code }}</dd></div>
                     {% endif %}
                     {% if article.issue %}
-                    <div class="flex justify-between items-start px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Jurnal soni" %}</dt>
-                        <dd class="text-xs font-semibold" style="color:#1e293b;">
-                            <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="hover:text-green-600 transition-colors">
-                                {% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
-                            </a>
-                        </dd>
-                    </div>
-                    <div class="flex justify-between px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Yil" %}</dt>
-                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.issue.year }}</dd>
-                    </div>
+                    <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>{% trans "Jurnal soni" %}</dt>
+                        <dd><a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="ad-link transition-colors">{% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}</a></dd></div>
+                    <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>{% trans "Yil" %}</dt><dd>{{ article.issue.year }}</dd></div>
+                    {% endif %}
+                    {% if article.start_page %}
+                    <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>{% trans "Sahifalar" %}</dt><dd>{{ article.start_page }}–{{ article.end_page }}</dd></div>
                     {% endif %}
                     {% if article.published_at %}
-                    <div class="flex justify-between px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Chop etilgan" %}</dt>
-                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.published_at|date:"d.m.Y" }}</dd>
-                    </div>
+                    <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>{% trans "Chop etilgan" %}</dt><dd>{{ article.published_at|date:"d.m.Y" }}</dd></div>
                     {% endif %}
-                    <div class="flex justify-between px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Ko'rishlar" %}</dt>
-                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.views_count }}</dd>
-                    </div>
-                    <div class="flex justify-between px-5 py-3">
-                        <dt class="text-xs uppercase tracking-wider" style="color:#9ca3af;">{% trans "Yuklamalar" %}</dt>
-                        <dd class="text-xs font-semibold" style="color:#1e293b;">{{ article.downloads_count }}</dd>
-                    </div>
+                    {% if current_journal.issn %}
+                    <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>ISSN</dt><dd>{{ current_journal.issn }}</dd></div>
+                    {% endif %}
                 </dl>
-            </div>
-
-            <!-- MUALLIF -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-                <h3 class="font-bold text-navy-900 text-sm mb-4 flex items-center gap-2">
-                    <i class="fas fa-user-circle text-green-500 text-sm"></i> {% trans "Muallif" %}
-                </h3>
-                <div class="flex items-start gap-3">
-                    <div class="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg flex-shrink-0"
-                         style="background:linear-gradient(135deg,#142d54,#0a1628);color:#22c55e;">
-                        {{ author_initial }}
+                <div class="grid grid-cols-2 gap-3 mt-4">
+                    <div class="rounded-xl p-3 text-center" style="background:var(--accent-soft);">
+                        <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.views_count }}</div>
+                        <div class="text-[11px]" style="color:var(--muted);">{% trans "Ko'rishlar" %}</div>
                     </div>
-                    <div>
-                        <div class="font-bold text-navy-900 text-sm">
-                            {{ author_name|default:_("Muallif")|truncatewords:4 }}
-                        </div>
-                        {% if author_institution %}
-                            <div class="text-xs mt-1 flex items-center gap-1.5" style="color:#64748b;">
-                                <i class="fas fa-university text-green-500 text-[9px]"></i>
-                                {{ author_institution }}
-                            </div>
-                        {% endif %}
+                    <div class="rounded-xl p-3 text-center" style="background:var(--accent-soft);">
+                        <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.downloads_count }}</div>
+                        <div class="text-[11px]" style="color:var(--muted);">{% trans "Yuklamalar" %}</div>
                     </div>
                 </div>
             </div>
 
-            <!-- BOSH SAHIFAGA QAYTISH -->
-            <a href="{% url 'index' current_journal.slug %}"
-               class="flex items-center justify-center gap-2 font-medium text-sm py-3 rounded-xl transition-colors w-full"
-               style="background:#f1f5f9;color:#475569;">
+            <div class="ad-card p-5">
+                <h3 class="ad-label mb-3">{% trans "Muallif" %}</h3>
+                <div class="flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-white" style="background:var(--accent);">{{ author_initial }}</div>
+                    <div class="min-w-0">
+                        <div class="font-semibold text-sm" style="color:var(--hero-ink);">{{ author_name|default:_("Muallif") }}</div>
+                        {% if author_institution %}<div class="text-xs mt-1" style="color:var(--muted);">{{ author_institution }}</div>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <a href="{% url 'index' current_journal.slug %}" class="ad-btn ad-btn-ghost w-full">
                 <i class="fas fa-arrow-left text-xs"></i> {% trans "Bosh sahifaga qaytish" %}
             </a>
-
         </aside>
     </div>
 </div>
@@ -478,12 +337,8 @@ function copyCitation() {
         const btn = document.getElementById('copyCitationBtn');
         if (btn) {
             btn.innerHTML = '<i class="fas fa-check text-xs"></i> {% trans 'Nusxalandi!' %}';
-            btn.classList.remove('bg-green-600', 'hover:bg-green-500');
-            btn.classList.add('bg-emerald-700', 'text-white');
             setTimeout(() => {
                 btn.innerHTML = '<i class="fas fa-copy text-xs"></i> {% trans 'Nusxalash' %}';
-                btn.classList.remove('bg-emerald-700', 'text-white');
-                btn.classList.add('bg-green-600', 'hover:bg-green-500');
             }, 2000);
         }
     });
@@ -533,7 +388,7 @@ function toggleFullscreen() {
         section.style.zIndex = '9999';
         section.style.borderRadius = '0';
         const reader = document.getElementById('readerContent');
-        if (reader) reader.style.maxHeight = 'calc(100vh - 130px)';
+        if (reader) reader.style.maxHeight = 'calc(100vh - 70px)';
         icon.className = 'fas fa-compress';
         document.body.style.overflow = 'hidden';
     }

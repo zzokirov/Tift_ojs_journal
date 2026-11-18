@@ -4,8 +4,13 @@ def switch_language(request, lang_code):
     Bulletproof language switcher supporting GET and POST.
     Sets session and cookie for the selected language.
     """
+    from django.utils.http import url_has_allowed_host_and_scheme
+
     next_url = request.POST.get('next') or request.GET.get('next') or request.META.get('HTTP_REFERER') or '/'
     if not next_url or '/i18n/' in next_url or '/change-language/' in next_url:
+        next_url = '/'
+    # Faqat o'z saytimizga qaytaramiz (open redirect himoyasi)
+    if not url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
         next_url = '/'
 
     from django.utils.translation import activate, check_for_language

@@ -28,9 +28,9 @@ git reset --hard origin/main
 ./venv/bin/pip install -q -r requirements.txt
 ./venv/bin/python manage.py migrate --noinput
 ./venv/bin/python manage.py collectstatic --noinput
-./venv/bin/python populate_editorial_board.py
-./venv/bin/python insert_categories.py
-./venv/bin/python update_pages.py
+# Eslatma: populate_editorial_board.py / insert_categories.py endi har deployda ishga tushirilmaydi —
+# ular admin panelda kiritilgan tahririyat va yo'nalish ma'lumotlarini qayta yozib yuborardi.
+# Kerak bo'lsa qo'lda ishga tushiring: ./venv/bin/python insert_categories.py
 
 # 5. Servisni qayta ishga tushirish (sudoers da parolsiz ruxsat bo'lishi kerak)
 if sudo -n systemctl restart tift-journal.service 2>/dev/null; then
