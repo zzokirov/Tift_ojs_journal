@@ -414,8 +414,9 @@ def run_migration():
                         'article_language': lang,
                         'status': 'published',
                         'order_in_issue': order_index,
-                        'views_count': 15 + (aid * 7) % 65,
-                        'downloads_count': 5 + (aid * 3) % 25,
+                        # Yangi maqolalar statistikasi noldan boshlanadi (soxta raqamlar qo'yilmaydi)
+                        'views_count': 0,
+                        'downloads_count': 0,
                     }
                 )
                 art_obj.authors = authors_str
