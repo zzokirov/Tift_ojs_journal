@@ -172,10 +172,11 @@
 {% trans "Yuklab olishlar" as downloads_label %}
 (function() {
     const ctx = document.getElementById('authorChart');
-    if (ctx) {
-        const labels = {{ chart_labels|safe }};
-        const views = {{ chart_views|safe }};
-        const downloads = {{ chart_downloads|safe }};
+    if (ctx && typeof Chart !== 'undefined') {
+        // Built from `articles` in the template: the view does not supply chart_* context vars.
+        const labels = [{% for article in articles %}"{{ article.title|truncatechars:30|escapejs }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
+        const views = [{% for article in articles %}{{ article.views_count|default:0 }}{% if not forloop.last %}, {% endif %}{% endfor %}];
+        const downloads = [{% for article in articles %}{{ article.downloads_count|default:0 }}{% if not forloop.last %}, {% endif %}{% endfor %}];
 
         new Chart(ctx, {
             type: 'bar',
