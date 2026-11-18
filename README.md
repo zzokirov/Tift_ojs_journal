@@ -3,7 +3,7 @@
 **Toshkent Xalqaro Moliyaviy Boshqaruv va Texnologiyalar Universiteti**  
 Ilmiy-elektron jurnallar portali (Multi-Journal Publishing Platform)
 
-🌐 **Rasmiy portal:** https://jurnal.tift.uz / https://architect-edu.tift.uz  
+🌐 **Rasmiy portal:** https://journal.tift.uz (eski manzil: https://architect-edu.tift.uz)  
 ⚙️ **Backend:** Python 3.10+ / Django 5.2 / 6.0  
 🗄 **Ma'lumotlar bazasi:** PostgreSQL 16  
 🎨 **Frontend:** HTML5, Tailwind CSS, JavaScript  

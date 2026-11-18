@@ -38,9 +38,19 @@ if not SECRET_KEY:
         raise ImproperlyConfigured("SECRET_KEY muhit o'zgaruvchisi (.env) o'rnatilmagan")
     SECRET_KEY = 'django-insecure-local-dev-only'
 
+# Asosiy domen: journal.tift.uz. Eski architect-edu.tift.uz o'tish davrida ham ishlaydi.
+SITE_DOMAIN = os.environ.get('SITE_DOMAIN', 'journal.tift.uz').strip()
+SITE_URL = f"https://{SITE_DOMAIN}"
+
 ALLOWED_HOSTS = [h.strip() for h in os.environ.get(
-    'ALLOWED_HOSTS', 'architect-edu.tift.uz,jurnal.tift.uz,localhost,127.0.0.1'
+    'ALLOWED_HOSTS', f'{SITE_DOMAIN},architect-edu.tift.uz,jurnal.tift.uz,localhost,127.0.0.1'
 ).split(',') if h.strip()]
+if SITE_DOMAIN not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(SITE_DOMAIN)
+
+# Eski domendan yangisiga 301 yo'naltirish (DNS va SSL tayyor bo'lgach .env da REDIRECT_OLD_DOMAINS=True qiling)
+REDIRECT_OLD_DOMAINS = os.environ.get('REDIRECT_OLD_DOMAINS', 'False') == 'True'
+OLD_DOMAINS = [h.strip() for h in os.environ.get('OLD_DOMAINS', 'architect-edu.tift.uz').split(',') if h.strip()]
 
 
 # Application definition
@@ -59,6 +69,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'journal.middleware.CanonicalDomainMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -284,7 +295,10 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 WHITENOISE_MANIFEST_STRICT = False
-CSRF_TRUSTED_ORIGINS = ['https://tift-ojs-journal.onrender.com', 'https://architect-edu.tift.uz', 'https://jurnal.tift.uz']
+# Formalar (login, admin) ishlashi uchun: ALLOWED_HOSTS dagi har bir domen https orqali ishonchli
+CSRF_TRUSTED_ORIGINS = [f"https://{h}" for h in ALLOWED_HOSTS
+                        if h not in ('localhost', '127.0.0.1') and not h.replace('.', '').isdigit() and not h.startswith('.')]
+CSRF_TRUSTED_ORIGINS += [o.strip() for o in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if o.strip()]
 
 # Cloudflare/Nginx orqali kelgan HTTPS so'rovlarni to'g'ri aniqlash (https:// havolalar uchun)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

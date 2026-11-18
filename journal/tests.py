@@ -453,3 +453,24 @@ class LanguageSwitchTests(TestCase):
             self.assertIn(expected, body)
             self.assertNotIn(absent, body)
             self.assertNotIn('ta jurnal · ochiq kirish', body)
+
+
+class DomainTests(TestCase):
+    def test_new_and_old_domains_are_served(self):
+        from django.conf import settings
+        self.assertEqual(settings.SITE_DOMAIN, 'journal.tift.uz')
+        self.assertIn('https://journal.tift.uz', settings.CSRF_TRUSTED_ORIGINS)
+        for host in ('journal.tift.uz', 'architect-edu.tift.uz'):
+            r = self.client.get('/robots.txt', HTTP_HOST=host)
+            self.assertEqual(r.status_code, 200, host)
+
+    def test_old_domain_redirect_is_opt_in(self):
+        from django.test import override_settings
+        r = self.client.get('/robots.txt', HTTP_HOST='architect-edu.tift.uz')
+        self.assertEqual(r.status_code, 200)
+        with override_settings(REDIRECT_OLD_DOMAINS=True):
+            r = self.client.get('/moliya/?a=1', HTTP_HOST='architect-edu.tift.uz')
+            self.assertEqual(r.status_code, 301)
+            self.assertEqual(r['Location'], 'https://journal.tift.uz/moliya/?a=1')
+            r = self.client.get('/robots.txt', HTTP_HOST='journal.tift.uz')
+            self.assertEqual(r.status_code, 200)

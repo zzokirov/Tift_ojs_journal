@@ -5,9 +5,9 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 urls = [
-    'https://architect-edu.tift.uz/moliya-va-intellektual-texnologiyalar/',
-    'https://architect-edu.tift.uz/moliya%20va%20intelektual%20texnologiyalar/',
-    'https://architect-edu.tift.uz/moliya%20va%20intellektual%20texnologiyalar/',
+    'https://journal.tift.uz/moliya-va-intellektual-texnologiyalar/',
+    'https://journal.tift.uz/moliya%20va%20intelektual%20texnologiyalar/',
+    'https://journal.tift.uz/moliya%20va%20intellektual%20texnologiyalar/',
 ]
 
 for url in urls:

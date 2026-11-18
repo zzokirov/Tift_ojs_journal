@@ -792,14 +792,22 @@ def _get_qr_code_base64(article, request=None):
         import io
         import base64
         qr = qrcode.QRCode(version=1, box_size=5, border=0)
+        from django.conf import settings as _s
+        from django.urls import reverse as _reverse
+        path = f"/article/{article.pk}/"
+        try:
+            if article.journal:
+                path = _reverse('article_detail', args=[article.journal.slug, article.pk])
+        except BaseException:
+            pass
         qr_url = None
         if request:
             try:
-                qr_url = request.build_absolute_uri(f"/article/{article.pk}/")
+                qr_url = request.build_absolute_uri(path)
             except BaseException:
                 pass
         if not qr_url:
-            qr_url = f"https://architect-edu.tift.uz/article/{article.pk}/"
+            qr_url = _s.SITE_URL + path
 
         qr.add_data(qr_url)
         qr.make(fit=True)
@@ -1618,10 +1626,11 @@ def _build_pdf_from_html_xhtml2pdf(article, request=None):
             'static_root': django_settings.STATIC_ROOT,
             'logo_base64': safe_logo,
             'qr_code_base64': safe_qr,
+            'site_domain': django_settings.SITE_DOMAIN,
         })
 
         buffer = io.BytesIO()
-        base_url = 'https://architect-edu.tift.uz/'
+        base_url = django_settings.SITE_URL + '/'
         if request:
             try:
                 base_url = request.build_absolute_uri('/')
