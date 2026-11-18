@@ -41,7 +41,7 @@
     .ad-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
     .ad-chip { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .75rem; border-radius: 999px; font-size: .75rem; font-weight: 600; background: var(--accent-soft); color: var(--accent-dark); border: 1px solid var(--accent-line); }
     .ad-chip-plain { background: var(--surface); color: var(--muted); border-color: var(--line); }
-    .ad-abstract { font-size: 1.02rem; line-height: 1.85; color: #334155; max-width: 72ch; }
+    .ad-abstract { font-size: 1.02rem; line-height: 1.8; color: #334155; text-align: justify; text-justify: inter-word; hyphens: auto; }
     .ad-icon-btn { width: 2rem; height: 2rem; border-radius: .6rem; display: inline-flex; align-items: center; justify-content: center; font-size: .75rem; color: var(--muted); border: 1px solid var(--line); background: var(--surface); transition: color .2s, border-color .2s; }
     .ad-icon-btn:hover { color: var(--accent); border-color: var(--accent); }
     .ad-link:hover { color: var(--accent); }
@@ -88,8 +88,8 @@
         </div>
 
         <!-- Tezkor harakatlar kartasi -->
-        <div class="ad-card p-5 shadow-sm">
-            <div class="grid grid-cols-3 gap-2 text-center mb-4">
+        <div class="ad-card p-4 shadow-sm">
+            <div class="grid grid-cols-3 gap-2 text-center mb-3">
                 <div>
                     <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.views_count }}</div>
                     <div class="text-[11px]" style="color:var(--muted);">{% trans "Ko'rishlar" %}</div>
@@ -103,19 +103,16 @@
                     <div class="text-[11px]" style="color:var(--muted);">{% trans "Sahifalar" %}</div>
                 </div>
             </div>
-            {% if article.published_at %}
-            <p class="text-xs text-center mb-4" style="color:var(--muted);"><i class="far fa-calendar mr-1 ad-accent"></i>{% trans "Chop etilgan" %}: {{ article.published_at|date:"d.m.Y" }}</p>
-            {% endif %}
-            <div class="space-y-2">
+            <div class="grid grid-cols-2 gap-2">
                 {% if article.pdf_file %}
-                <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-primary w-full">
-                    <i class="far fa-file-pdf"></i> {% trans "PDF ko'rish" %}
+                <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-primary w-full" style="padding:.6rem .5rem;">
+                    <i class="far fa-file-pdf"></i> PDF
                 </a>
-                <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost w-full">
+                <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost w-full whitespace-nowrap" style="padding:.6rem .4rem;font-size:.8rem;">
                     <i class="fas fa-download"></i> {% trans "Yuklab olish" %}
                 </a>
                 {% endif %}
-                <a href="#citation" class="ad-btn ad-btn-ghost w-full">
+                <a href="#citation" class="ad-btn ad-btn-ghost w-full col-span-2" style="padding:.6rem .5rem;">
                     <i class="fas fa-quote-right"></i> {% trans "Iqtibos keltirish" %}
                 </a>
             </div>
