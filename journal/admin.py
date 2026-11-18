@@ -171,9 +171,11 @@ class JournalAdmin(TranslationAdmin):
 @admin.register(ArticleCategory)
 class ArticleCategoryAdmin(JournalAdminMixin, TranslationAdmin):
     list_filter = ('journal',)
-    list_display = ('journal', 'code', 'name', 'icon', 'order', 'article_count')
+    list_display = ('journal', 'code', 'name', 'order', 'article_count')
     list_display_links = ('code', 'name')
-    list_editable = ('icon', 'order')
+    list_editable = ('order',)
+    # Ikona maydoni ishlatilmaydi (saytda avtomatik ikona tanlanadi) — admin'da ko'rsatilmaydi
+    exclude = ('icon',)
     search_fields = ('code', 'name')
     ordering = ('order', 'code')
     list_per_page = 30
@@ -188,7 +190,7 @@ class ArticleCategoryAdmin(JournalAdminMixin, TranslationAdmin):
 @admin.register(JournalIssue)
 class JournalIssueAdmin(JournalAdminMixin, admin.ModelAdmin):
     list_display = ('journal', 
-        'issue_label', 'year', 'period', 'quarter', 'status', 'article_count_tag',
+        'issue_label', 'year', 'period_col', 'quarter_col', 'status', 'article_count_tag',
         'is_published', 'created_at'
     )
     list_display_links = ('issue_label',)
@@ -213,6 +215,15 @@ class JournalIssueAdmin(JournalAdminMixin, admin.ModelAdmin):
     def article_count_tag(self, obj):
         return obj.articles.filter(status='published').count()
     article_count_tag.short_description = _("Chop etilgan maqolalar soni")
+
+    # Ro'yxatda qisqa ustun sarlavhalari (formadagi to'liq yorliqlar o'zgarmaydi)
+    @admin.display(description=_("Davri"), ordering='period')
+    def period_col(self, obj):
+        return obj.period or '—'
+
+    @admin.display(description=_("Chorak"), ordering='quarter')
+    def quarter_col(self, obj):
+        return obj.quarter or '—'
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('articles')

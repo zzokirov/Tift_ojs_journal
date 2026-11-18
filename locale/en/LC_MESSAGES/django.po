@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 16:57+0000\n"
+"POT-Creation-Date: 2026-11-18 17:06+0000\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr "English"
 msgid "Asosiy ma'lumotlar"
 msgstr "Basic Information"
 
-#: journal/admin.py:32 journal/admin.py:346
+#: journal/admin.py:32 journal/admin.py:357
 msgid "Shaxsiy ma'lumotlar"
 msgstr "Personal Information"
 
@@ -38,7 +38,7 @@ msgstr "Roles and Permissions"
 msgid "Muhim sanalar"
 msgstr "Important Dates"
 
-#: journal/admin.py:64 journal/admin.py:183 templates/admin/index.html:457
+#: journal/admin.py:64 journal/admin.py:185 templates/admin/index.html:457
 msgid "Maqolalar soni"
 msgstr "Number of Articles"
 
@@ -82,96 +82,105 @@ msgstr "Description and research areas"
 msgid "Sozlamalar va holat"
 msgstr "Settings and status"
 
-#: journal/admin.py:201
+#: journal/admin.py:203
 msgid "Jurnal soni ma'lumotlari"
 msgstr "Journal Issue Information"
 
-#: journal/admin.py:204
+#: journal/admin.py:206
 msgid "Muqovalar va fayllar"
 msgstr "Covers and files"
 
-#: journal/admin.py:211 journal/models.py:167 journal/models.py:278
+#: journal/admin.py:213 journal/models.py:167 journal/models.py:278
 #: templates/article_detail.html:253
 msgid "Jurnal soni"
 msgstr "Journal Issue"
 
-#: journal/admin.py:215
+#: journal/admin.py:217
 msgid "Chop etilgan maqolalar soni"
 msgstr "Number of Published Articles"
 
-#: journal/admin.py:263
+#: journal/admin.py:220
+msgid "Davri"
+msgstr "Period"
+
+#: journal/admin.py:224
+#| msgid "Chorak (1-4)"
+msgid "Chorak"
+msgstr "Quarter"
+
+#: journal/admin.py:274
 msgid "Maqolani chop qilish"
 msgstr "Publish article"
 
-#: journal/admin.py:265
+#: journal/admin.py:276
 msgid "Maqola ma'lumotlarini to'ldiring va PDF faylini biriktiring."
 msgstr "Fill in the article details and attach the PDF file."
 
-#: journal/admin.py:273 journal/models.py:441
+#: journal/admin.py:284 journal/models.py:441
 msgid "Sarlavha"
 msgstr "Title"
 
-#: journal/admin.py:277 templates/admin/base_site.html:381
+#: journal/admin.py:288 templates/admin/base_site.html:381
 msgid "Mualliflar"
 msgstr "Authors"
 
-#: journal/admin.py:281
+#: journal/admin.py:292
 msgid "PDF ni ochish"
 msgstr "Open PDF"
 
-#: journal/admin.py:283
+#: journal/admin.py:294
 msgid "PDF fayl"
 msgstr "PDF File"
 
-#: journal/admin.py:317
+#: journal/admin.py:328
 msgid "Tanlangan maqolalarni nashr etish"
 msgstr "Publish Selected Articles"
 
-#: journal/admin.py:320
+#: journal/admin.py:331
 #, python-brace-format
 msgid "{updated} ta maqola nashr etildi."
 msgstr "{updated} articles have been published."
 
-#: journal/admin.py:322
+#: journal/admin.py:333
 msgid "Taqriz jarayoniga o'tkazish"
 msgstr "Transfer to Review Process"
 
-#: journal/admin.py:325
+#: journal/admin.py:336
 #, python-brace-format
 msgid "{updated} ta maqola taqriz jarayoniga o'tkazildi."
 msgstr "{updated} articles have been transferred to the review process."
 
-#: journal/admin.py:327 templates/reviewer_dashboard.html:452
+#: journal/admin.py:338 templates/reviewer_dashboard.html:452
 msgid "Rad etish"
 msgstr "Reject"
 
-#: journal/admin.py:330
+#: journal/admin.py:341
 #, python-brace-format
 msgid "{updated} ta maqola rad etildi va jurnaldan chiqarildi."
 msgstr "{updated} articles have been rejected and removed from the journal."
 
-#: journal/admin.py:349
+#: journal/admin.py:360
 msgid "Ilmiy daraja va ish ma'lumotlari"
 msgstr "Academic degree and employment"
 
-#: journal/admin.py:352
+#: journal/admin.py:363
 msgid "Sozlamalar"
 msgstr "Settings"
 
-#: journal/admin.py:370 journal/models.py:443 journal/models.py:464
+#: journal/admin.py:381 journal/models.py:443 journal/models.py:464
 #: templates/news_detail.html:77
 msgid "Rasm"
 msgstr "Image"
 
-#: journal/admin.py:384
+#: journal/admin.py:395
 msgid "Konferensiya ma'lumotlari"
 msgstr "Conference Information"
 
-#: journal/admin.py:411
+#: journal/admin.py:422
 msgid "Ko'plab rasmlar yuklash (Bir vaqtda bir nechta rasm tanlash)"
 msgstr "Bulk Image Upload (Select multiple images at once)"
 
-#: journal/admin.py:412
+#: journal/admin.py:423
 msgid ""
 "Kompyuteringizdan bir nechta rasmni bir vaqtda belgilab (Ctrl/Shift) "
 "yuklashingiz mumkin."
@@ -179,32 +188,32 @@ msgstr ""
 "You can select and upload multiple images from your computer simultaneously "
 "(using Ctrl/Shift)."
 
-#: journal/admin.py:417
+#: journal/admin.py:428
 msgid "Ko'plab video fayllar yuklash (MP4/WebM)"
 msgstr "Bulk Video File Upload (MP4/WebM)"
 
-#: journal/admin.py:418
+#: journal/admin.py:429
 msgid ""
 "Bir nechta video fayllarni bir vaqtning o'zida tanlab yuklashingiz mumkin."
 msgstr "You can select and upload multiple video files simultaneously."
 
-#: journal/admin.py:423
+#: journal/admin.py:434
 msgid "Video havolalar (YouTube/Vimeo)"
 msgstr "Video Links (YouTube/Vimeo)"
 
-#: journal/admin.py:424
+#: journal/admin.py:435
 msgid "Har bir satrga bittadan video havolasini yozing."
 msgstr "Write one video link per line."
 
-#: journal/admin.py:449
+#: journal/admin.py:460
 msgid "Yangilik ma'lumotlari"
 msgstr "News Information"
 
-#: journal/admin.py:452
+#: journal/admin.py:463
 msgid "Ommaviy foto va video yuklash (Ko'plab rasmlar va videolar)"
 msgstr "Bulk Photo and Video Upload (Multiple images and videos)"
 
-#: journal/admin.py:454
+#: journal/admin.py:465
 msgid ""
 "Bu yerda bir vaqtning o'zida 10-20 ta rasmlarni tanlab yuklashingiz, ko'plab"
 " video fayllarni yoki YouTube/Vimeo havolalarini joylashingiz mumkin."
@@ -212,11 +221,11 @@ msgstr ""
 "Here you can simultaneously select and upload 10-20 images, upload multiple "
 "video files, or place YouTube/Vimeo links."
 
-#: journal/admin.py:467
+#: journal/admin.py:478
 msgid "Media fayllar"
 msgstr "Media Files"
 
-#: journal/admin.py:516
+#: journal/admin.py:527
 msgid "Hujjat ma'lumotlari"
 msgstr "Document Information"
 
@@ -537,8 +546,8 @@ msgstr "Publication date"
 #: journal/models.py:90 templates/admin/base_site.html:319
 #: templates/admin/journal/journal/change_list.html:9 templates/base.html:170
 #: templates/base.html:221 templates/base.html:279 templates/base.html:330
-#: templates/portal_home.html:80 templates/portal_home.html:104
-#: templates/portal_home.html:332
+#: templates/portal_home.html:80 templates/portal_home.html:102
+#: templates/portal_home.html:331
 msgid "Jurnallar"
 msgstr "Journals"
 
@@ -1185,7 +1194,7 @@ msgstr "3x4 Photo"
 msgid "Bosh muharrir o'rinbosari"
 msgstr "Deputy Editor-in-Chief"
 
-#: templates/about.html:40 templates/base.html:555
+#: templates/about.html:40 templates/partials/submit_modal.html:111
 msgid "Mas'ul kotib"
 msgstr "Executive Secretary"
 
@@ -1261,7 +1270,6 @@ msgid "Barcha jurnallar"
 msgstr "All journals"
 
 #: templates/admin/base_site.html:210
-#| msgid "Admin paneli"
 msgid "Admin menyusi"
 msgstr "Admin menu"
 
@@ -1638,7 +1646,7 @@ msgstr "Category:"
 msgid "Maqola matni o'qib bo'lmadi."
 msgstr "Article text could not be read."
 
-#: templates/base.html:7 templates/base.html:9 templates/portal_home.html:121
+#: templates/base.html:7 templates/base.html:9 templates/portal_home.html:118
 #: templates/registration/login.html:18 templates/registration/signup.html:18
 msgid "TIFT Ilmiy Jurnallari"
 msgstr "TIFT Scientific Journals"
@@ -1654,7 +1662,7 @@ msgstr "All journals portal"
 #: templates/base.html:207 templates/base.html:213 templates/base.html:220
 #: templates/base.html:268 templates/base.html:278 templates/base.html:323
 #: templates/base.html:325 templates/portal_home.html:79
-#: templates/portal_home.html:103 templates/themes/arch/footer.html:22
+#: templates/portal_home.html:101 templates/themes/arch/footer.html:22
 #: templates/themes/arch/header.html:12 templates/themes/arch/header.html:13
 #: templates/themes/arch/header.html:41
 #: templates/themes/finance/footer.html:22
@@ -1666,8 +1674,8 @@ msgstr "Home"
 
 #: templates/base.html:211 templates/base.html:217 templates/base.html:224
 #: templates/base.html:272 templates/base.html:282 templates/base.html:338
-#: templates/portal_home.html:83 templates/portal_home.html:107
-#: templates/portal_home.html:340 templates/themes/arch/footer.html:29
+#: templates/portal_home.html:83 templates/portal_home.html:105
+#: templates/portal_home.html:339 templates/themes/arch/footer.html:29
 #: templates/themes/arch/header.html:17 templates/themes/arch/header.html:45
 #: templates/themes/finance/footer.html:29
 #: templates/themes/finance/header.html:17
@@ -1676,14 +1684,14 @@ msgid "Aloqa"
 msgstr "Contact"
 
 #: templates/base.html:222 templates/base.html:280 templates/base.html:331
-#: templates/portal_home.html:81 templates/portal_home.html:105
-#: templates/portal_home.html:271
+#: templates/portal_home.html:81 templates/portal_home.html:103
+#: templates/portal_home.html:270
 msgid "Mualliflar uchun"
 msgstr "For Authors"
 
 #: templates/base.html:223 templates/base.html:281
-#: templates/portal_home.html:82 templates/portal_home.html:106
-#: templates/portal_home.html:301
+#: templates/portal_home.html:82 templates/portal_home.html:104
+#: templates/portal_home.html:300
 msgid "Biz haqimizda"
 msgstr "About Us"
 
@@ -1864,7 +1872,8 @@ msgstr "Architecture and Construction"
 msgid "Asosiy yo'nalishlar"
 msgstr "Main Areas"
 
-#: templates/index.html:128 templates/themes/arch/footer.html:14
+#: templates/index.html:128 templates/portal_home.html:93
+#: templates/portal_home.html:112 templates/themes/arch/footer.html:14
 #: templates/themes/arch/header.html:29 templates/themes/arch/header.html:46
 #: templates/themes/arch/index.html:51 templates/themes/arch/index.html:188
 #: templates/themes/finance/footer.html:14
@@ -2166,11 +2175,11 @@ msgstr "Back to All News"
 msgid "Boshqa yangiliklar"
 msgstr "Other News"
 
-#: templates/portal_home.html:142
+#: templates/portal_home.html:139
 msgid "Qidirish"
 msgstr "Search"
 
-#: templates/portal_home.html:236
+#: templates/portal_home.html:235
 msgid "Hozircha nashrga joylashtirilgan jurnallar mavjud emas"
 msgstr "No journals published yet"
 

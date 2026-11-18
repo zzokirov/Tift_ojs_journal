@@ -20,8 +20,8 @@
 {{ block.super }}
 {# Zamonaviy ko'rinish qatlami: faqat CSS/JS, admin funksiyalariga tegmaydi #}
 <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-<link rel="stylesheet" href="{% static 'admin_ui/tift-admin.css' %}?v=1">
-<script defer src="{% static 'admin_ui/tift-admin.js' %}?v=1"></script>
+<link rel="stylesheet" href="{% static 'admin_ui/tift-admin.css' %}?v=2">
+<script defer src="{% static 'admin_ui/tift-admin.js' %}?v=2"></script>
 {# Menyu havolalari ustiga kursor kelganda keyingi sahifa oldindan yuklanadi (tez ochilishi uchun) #}
 <script type="speculationrules">
 {"prefetch": [{"where": {"and": [{"href_matches": "/admin/*"}, {"not": {"href_matches": "/admin/logout*"}}, {"not": {"href_matches": "*/delete/*"}}, {"not": {"selector_matches": "[target=_blank]"}}]}, "eagerness": "moderate"}]}
