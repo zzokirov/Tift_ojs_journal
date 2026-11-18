@@ -65,7 +65,7 @@
 
             <div class="flex flex-wrap gap-2 mb-4">
                 {% if article.category %}
-                    <span class="ad-chip">{{ article.category.code }} · {{ article.category.name }}</span>
+                    <span class="ad-chip">{{ article.category.name }}</span>
                 {% endif %}
                 {% if article.issue %}
                     <span class="ad-chip ad-chip-plain">
@@ -254,7 +254,7 @@
                 <h3 class="ad-label mb-3">{% trans "Maqola ma'lumotlari" %}</h3>
                 <dl class="ad-meta divide-y" style="border-color:var(--line);">
                     {% if article.category %}
-                    <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>{% trans "Yo'nalish" %}</dt><dd>{{ article.category.code }}</dd></div>
+                    <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>{% trans "Yo'nalish" %}</dt><dd>{{ article.category.name }}</dd></div>
                     {% endif %}
                     {% if article.issue %}
                     <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>{% trans "Jurnal soni" %}</dt>
