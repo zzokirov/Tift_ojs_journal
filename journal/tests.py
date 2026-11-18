@@ -348,3 +348,25 @@ class JournalThemeTests(TestCase):
         self._journal('moliya-va-intellektual-texnologiyalar')
         r = self.client.get(reverse('archive', args=['moliya-va-intellektual-texnologiyalar']))
         self.assertTemplateUsed(r, 'themes/finance/header.html')
+
+
+class AuthorMatchingTests(TestCase):
+    """"Muallif boshqa maqolalari" faqat shu muallifning maqolalarini ko'rsatishi kerak"""
+    def _match(self, a, b):
+        from journal.views import _author_people, _same_person
+        return any(_same_person(x, y) for x in _author_people(a) for y in _author_people(b))
+
+    def test_same_author_different_institution(self):
+        self.assertTrue(self._match("Abbos Maxmudov | TIFT", "Abbos Maxmudov | Toshkent davlat universiteti"))
+
+    def test_shared_institution_is_not_a_match(self):
+        self.assertFalse(self._match("Abbos Maxmudov | TIFT", "Dilshod Karimov | TIFT"))
+        self.assertFalse(self._match("Abbos Maxmudov, TIFT, Toshkent shahri", "Sardor Aliyev, TIFT, Toshkent shahri"))
+
+    def test_initials(self):
+        self.assertTrue(self._match("A. Karimov, D. Yusupova", "Akmal Karimov"))
+        self.assertTrue(self._match("Karimov A.", "A. Karimov"))
+        self.assertFalse(self._match("A. Karimov", "D. Karimov"))
+
+    def test_same_first_name_only_is_not_a_match(self):
+        self.assertFalse(self._match("Abbos Maxmudov", "Abbos Rahimov"))

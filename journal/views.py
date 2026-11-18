@@ -352,6 +352,57 @@ def issue_detail(request, journal_slug, issue_pk):
     })
 
 
+# ── Mualliflarni solishtirish ────────────────────────────────────────────────
+_INSTITUTION_WORDS = (
+    'universitet', 'university', 'университет', 'institut', 'институт', 'tift', 'akademiya',
+    'academy', 'академия', 'kafedra', 'кафедра', 'fakultet', 'факультет', 'toshkent', 'tashkent',
+    'ташкент', 'o\'zbekiston', 'uzbekistan', 'узбекистан', 'markaz', 'center', 'centre', 'центр',
+    'maktab', 'school', 'kollej', 'college', 'litsey', 'vazirlik', 'ministry', 'phd', 'dsc',
+    'dotsent', 'professor', 'prof', 'katta', "o'qituvchi", 'teacher', 'student', 'talaba',
+    'magistr', 'doktorant', 'ilmiy', 'rahbar', 'tadqiqotchi', 'researcher', 'mudir',
+)
+
+
+def _author_people(authors_text):
+    """Mualliflar matnidan faqat odam ismlarini ajratib oladi (tashkilot va lavozimlarsiz).
+    Har bir odam: (to'liq so'zlar to'plami, bosh harflar to'plami)."""
+    import re
+    if not authors_text:
+        return []
+    people = []
+    for block in re.split(r'[;\n]', authors_text):
+        name_part = block.split('|')[0]
+        for chunk in re.split(r',| va | and | и ', name_part):
+            chunk = chunk.strip()
+            low = chunk.lower()
+            if not chunk or re.search(r'\d', chunk) or any(w in low for w in _INSTITUTION_WORDS):
+                continue
+            words = [w for w in re.split(r'[\s.]+', chunk) if w]
+            words = [re.sub(r"[^\w'ʻʼ‘’`-]", '', w).lower() for w in words]
+            words = [w for w in words if w]
+            if len(words) < 2 or len(words) > 4:
+                continue
+            full = {w for w in words if len(w) > 2}
+            if not full:
+                continue
+            people.append((full, {w[0] for w in words}))
+    return people
+
+
+def _same_person(a, b):
+    """Ikki muallif bir odammi: kamida 2 ta to'liq so'z mos kelsa yoki
+    familiya + ismning bosh harfi mos kelsa."""
+    full_a, init_a = a
+    full_b, init_b = b
+    common = full_a & full_b
+    if len(common) >= 2:
+        return True
+    if len(common) == 1:
+        surname = next(iter(common))
+        return bool((init_a & init_b) - {surname[0]})
+    return False
+
+
 def article_detail(request, journal_slug, pk):
     current_journal = _get_current_journal(journal_slug)
     try:
@@ -388,23 +439,24 @@ def article_detail(request, journal_slug, pk):
         except Exception:
             pass
 
-        # 3. Shu muallifning boshqa nashr etilgan maqolalari (faqat shu muallifga tegishli maqolalar)
+        # 3. Shu muallifning boshqa nashr etilgan maqolalari (faqat ism-familiyasi mos kelganlar)
         author_articles = []
         try:
             if article.authors:
-                author_names = [n.strip() for n in article.authors.replace(';', ',').split(',') if len(n.strip()) > 3]
-                if author_names:
-                    q_author = Q()
-                    for aname in author_names:
-                        parts = aname.split()
-                        if len(parts) >= 2:
-                            q_author |= Q(authors__icontains=f"{parts[0]} {parts[1]}")
-                        elif len(parts) == 1:
-                            q_author |= Q(authors__icontains=parts[0])
-                    author_articles = Article.objects.filter(
-                        journal=current_journal,
-                        status='published'
-                    ).filter(q_author).exclude(pk=pk).order_by('-published_at', '-created_at')[:8]
+                my_people = _author_people(article.authors)
+                if my_people:
+                    candidates = (Article.objects
+                                  .filter(journal=current_journal, status='published')
+                                  .exclude(pk=pk)
+                                  .exclude(authors='')
+                                  .select_related('issue')
+                                  .order_by('-published_at', '-created_at')[:500])
+                    for cand in candidates:
+                        their = _author_people(cand.authors)
+                        if any(_same_person(m, t) for m in my_people for t in their):
+                            author_articles.append(cand)
+                            if len(author_articles) >= 8:
+                                break
             elif article.author and article.author.username not in ('tift', 'admin'):
                 author_articles = Article.objects.filter(
                     author=article.author,
