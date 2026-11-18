@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TIFT Journal 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 16:47+0000\n"
+"POT-Creation-Date: 2026-11-18 16:57+0000\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,7 +111,7 @@ msgstr "Заполните данные статьи и прикрепите PDF
 msgid "Sarlavha"
 msgstr "Заголовок"
 
-#: journal/admin.py:277 templates/admin/base_site.html:371
+#: journal/admin.py:277 templates/admin/base_site.html:381
 msgid "Mualliflar"
 msgstr "Авторы"
 
@@ -537,7 +537,7 @@ msgstr "Год основания"
 msgid "Nashr etilgan sana"
 msgstr "Дата публикации"
 
-#: journal/models.py:90 templates/admin/base_site.html:309
+#: journal/models.py:90 templates/admin/base_site.html:319
 #: templates/admin/journal/journal/change_list.html:9 templates/base.html:170
 #: templates/base.html:221 templates/base.html:279 templates/base.html:330
 #: templates/portal_home.html:80 templates/portal_home.html:104
@@ -657,8 +657,8 @@ msgstr "Порядок"
 msgid "Yo'nalish"
 msgstr "Направление"
 
-#: journal/models.py:220 templates/admin/base_site.html:248
-#: templates/admin/base_site.html:349
+#: journal/models.py:220 templates/admin/base_site.html:258
+#: templates/admin/base_site.html:359
 msgid "Yo'nalishlar"
 msgstr "Направления"
 
@@ -788,7 +788,7 @@ msgstr "Дата отправки"
 msgid "Maqola"
 msgstr "Статья"
 
-#: journal/models.py:332 templates/admin/base_site.html:232
+#: journal/models.py:332 templates/admin/base_site.html:242
 msgid "Maqolalar"
 msgstr "Статьи"
 
@@ -983,8 +983,8 @@ msgstr "Внешняя ссылка"
 msgid "Hujjat"
 msgstr "Документ"
 
-#: journal/models.py:525 templates/admin/base_site.html:256
-#: templates/admin/base_site.html:357 templates/base.html:210
+#: journal/models.py:525 templates/admin/base_site.html:266
+#: templates/admin/base_site.html:367 templates/base.html:210
 #: templates/base.html:216 templates/base.html:271 templates/base.html:328
 #: templates/documents.html:3 templates/themes/arch/footer.html:25
 #: templates/themes/arch/header.html:16 templates/themes/arch/header.html:44
@@ -1242,21 +1242,21 @@ msgstr "Срок еженедельного обзора"
 msgid "Django site admin"
 msgstr "Админ-панель сайта Django"
 
-#: templates/admin/base_site.html:178
+#: templates/admin/base_site.html:188 templates/admin/base_site.html:196
 msgid "Faol jurnal"
 msgstr "Активный журнал"
 
-#: templates/admin/base_site.html:181
+#: templates/admin/base_site.html:191
 msgid "Barcha jurnallarga qaytish"
 msgstr "Вернуться ко всем журналам"
 
-#: templates/admin/base_site.html:182
+#: templates/admin/base_site.html:192
 #: templates/admin/journal/journal/change_list.html:39
 #: templates/reviewer_dashboard.html:92
 msgid "Barchasi"
 msgstr "Все"
 
-#: templates/admin/base_site.html:188 templates/admin/base_site.html:286
+#: templates/admin/base_site.html:198 templates/admin/base_site.html:296
 #: templates/base.html:169 templates/base.html:275
 #: templates/themes/arch/footer.html:41 templates/themes/arch/header.html:48
 #: templates/themes/finance/footer.html:41
@@ -1264,15 +1264,20 @@ msgstr "Все"
 msgid "Barcha jurnallar"
 msgstr "Все журналы"
 
-#: templates/admin/base_site.html:216
+#: templates/admin/base_site.html:210
+#| msgid "Admin paneli"
+msgid "Admin menyusi"
+msgstr "Меню администратора"
+
+#: templates/admin/base_site.html:226
 msgid "Jurnal sozlamalari"
 msgstr "Настройки журнала"
 
-#: templates/admin/base_site.html:224
+#: templates/admin/base_site.html:234
 msgid "Nashrlar (Sonlar)"
 msgstr "Выпуски"
 
-#: templates/admin/base_site.html:240 templates/admin/base_site.html:333
+#: templates/admin/base_site.html:250 templates/admin/base_site.html:343
 #: templates/base.html:208 templates/base.html:214 templates/base.html:269
 #: templates/base.html:326 templates/index.html:271
 #: templates/themes/arch/footer.html:24 templates/themes/arch/header.html:15
@@ -1284,41 +1289,41 @@ msgstr "Выпуски"
 msgid "Tahririyat a'zolari"
 msgstr "Редакционная коллегия"
 
-#: templates/admin/base_site.html:264
+#: templates/admin/base_site.html:274
 msgid "Taqrizlar"
 msgstr "Рецензии"
 
-#: templates/admin/base_site.html:272
+#: templates/admin/base_site.html:282
 msgid "Saytda ko'rish"
 msgstr "Открыть на сайте"
 
-#: templates/admin/base_site.html:279
+#: templates/admin/base_site.html:289
 msgid "Umumiy tizim"
 msgstr "Общая система"
 
-#: templates/admin/base_site.html:294 templates/admin/base_site.html:379
+#: templates/admin/base_site.html:304 templates/admin/base_site.html:389
 msgid "Foydalanuvchilar"
 msgstr "Пользователи"
 
-#: templates/admin/base_site.html:317
+#: templates/admin/base_site.html:327
 msgid "Barcha nashrlar"
 msgstr "Все выпуски"
 
-#: templates/admin/base_site.html:325
+#: templates/admin/base_site.html:335
 #: templates/admin/journal/article/change_list.html:11
 #: templates/reviewer_dashboard.html:52
 msgid "Barcha maqolalar"
 msgstr "Все статьи"
 
-#: templates/admin/base_site.html:341
+#: templates/admin/base_site.html:351
 msgid "Taqrizlar nazorati"
 msgstr "Контроль рецензий"
 
-#: templates/admin/base_site.html:364
+#: templates/admin/base_site.html:374
 msgid "Foydalanuvchilar va Huquqlar"
 msgstr "Пользователи и права"
 
-#: templates/admin/base_site.html:387
+#: templates/admin/base_site.html:397
 msgid "Guruhlar va huquqlar"
 msgstr "Группы и права"
 
@@ -1637,7 +1642,7 @@ msgstr "Направление:"
 msgid "Maqola matni o'qib bo'lmadi."
 msgstr "Текст статьи не удалось прочитать."
 
-#: templates/base.html:7 templates/base.html:9
+#: templates/base.html:7 templates/base.html:9 templates/portal_home.html:121
 #: templates/registration/login.html:18 templates/registration/signup.html:18
 msgid "TIFT Ilmiy Jurnallari"
 msgstr "Научные журналы TIFT"
@@ -2004,7 +2009,6 @@ msgstr "%(count)s статей"
 
 #: templates/journal/issue_detail.html:68
 #, python-format
-#| msgid "(S. %(start)s-%(end)s)"
 msgid "%(start)s-%(end)s-betlar"
 msgstr "с. %(start)s–%(end)s"
 
@@ -2917,9 +2921,6 @@ msgstr[3] "%(counter)s статей"
 
 #~ msgid "Shaxsiy kabinet"
 #~ msgstr "Личный кабинет"
-
-#~ msgid "Admin paneli"
-#~ msgstr "Панель администратора"
 
 #~ msgid "TIFT SCIENTIFIC JOURNALS"
 #~ msgstr "TIFT НАУЧНЫЕ ЖУРНАЛЫ"
