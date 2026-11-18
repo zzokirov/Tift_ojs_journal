@@ -121,7 +121,7 @@
             {% for group in grouped_categories %}
             <div>
                 <!-- Yo'nalish nomi (raqamsiz) -->
-                <div class="flex items-center gap-3 pb-3 border-b-2 border-emerald-500">
+                <div class="flex items-center gap-3 rounded-xl bg-emerald-50 ring-1 ring-emerald-100 border-l-4 border-emerald-500 px-4 py-3">
                     <span class="h-2.5 w-2.5 rounded-full bg-emerald-500 shrink-0"></span>
                     <h3 class="flex-1 text-lg font-bold text-ink leading-snug">
                         {% if group.category %}{% if CURRENT_LANG == 'ru' and group.category.name_ru %}{{ group.category.name_ru }}{% elif CURRENT_LANG == 'en' and group.category.name_en %}{{ group.category.name_en }}{% else %}{{ group.category.name_uz|default:group.category.name }}{% endif %}{% else %}{% trans "Ilmiy maqolalar" %}{% endif %}

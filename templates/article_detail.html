@@ -49,9 +49,9 @@
     .ad-meta dd { font-size: .8rem; font-weight: 600; color: var(--hero-ink); text-align: right; }
 </style>
 
-<!-- ═══ SARLAVHA ═══ -->
-<section class="blueprint border-b" style="border-color:var(--line);">
-    <div class="site-container pt-6 pb-6 lg:pt-8 lg:pb-7 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-8 lg:gap-12 items-start">
+<!-- ═══ SARLAVHA + ASOSIY QISM: bitta tor, bo'shliqsiz oqim ═══ -->
+<div class="site-container pt-6 pb-10 lg:pt-8 lg:pb-14">
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-8 lg:gap-12">
         <div class="min-w-0">
             <nav aria-label="breadcrumb" class="flex flex-wrap items-center gap-2 text-xs mb-4" style="color:var(--muted);">
                 <a href="{% url 'index' current_journal.slug %}" class="ad-link transition-colors">{{ current_journal.title }}</a>
@@ -85,64 +85,8 @@
             {% if author_institution %}
                 <p class="text-sm mt-1" style="color:var(--muted);">{{ author_institution }}</p>
             {% endif %}
-        </div>
 
-        <!-- Tezkor harakatlar kartasi -->
-        <div class="ad-card p-4 shadow-sm">
-            <div class="grid grid-cols-3 gap-2 text-center mb-2">
-                <div>
-                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.views_count }}</div>
-                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Ko'rishlar" %}</div>
-                </div>
-                <div style="border-left:1px solid var(--line);border-right:1px solid var(--line);">
-                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.downloads_count }}</div>
-                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Yuklamalar" %}</div>
-                </div>
-                <div>
-                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{% if article.start_page %}{{ article.start_page }}–{{ article.end_page }}{% else %}—{% endif %}</div>
-                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Sahifalar" %}</div>
-                </div>
-            </div>
-            {% if article.issue %}
-            <!-- Son muqovasi -->
-            <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="group mt-4 flex items-center gap-3 pt-4" style="border-top:1px solid var(--line);">
-                <span class="w-11 shrink-0 aspect-[3/4] overflow-hidden" style="border:1px solid var(--line);background:var(--accent-soft);">
-                    {% if article.issue.cover_image %}<img src="{{ article.issue.cover_image.url }}" alt="" class="w-full h-full object-cover" loading="lazy">
-                    {% elif current_journal.get_cover_for_language %}<img src="{{ current_journal.get_cover_for_language.url }}" alt="" class="w-full h-full object-cover" loading="lazy">
-                    {% else %}<span class="w-full h-full flex items-center justify-center font-serif font-bold ad-accent">{{ article.issue.number }}</span>{% endif %}
-                </span>
-                <span class="min-w-0">
-                    <span class="block text-sm font-semibold ad-link transition-colors" style="color:var(--hero-ink);">{% blocktrans with vol=article.issue.volume num=article.issue.number year=article.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}</span>
-                    <span class="block text-xs" style="color:var(--muted);">{% if article.published_at %}{% trans "Chop etilgan" %}: {{ article.published_at|date:"d.m.Y" }}{% else %}{% trans "Sonni ko'rish" %}{% endif %} <i class="fas fa-arrow-right text-[9px] ml-0.5 group-hover:translate-x-0.5 transition-transform"></i></span>
-                </span>
-            </a>
-            {% elif article.published_at %}
-            <p class="text-xs text-center" style="color:var(--muted);"><i class="far fa-calendar mr-1 ad-accent"></i>{% trans "Chop etilgan" %}: {{ article.published_at|date:"d.m.Y" }}</p>
-            {% endif %}
-
-            <!-- Ulashish -->
-            <div class="mt-4 pt-4 flex items-center justify-between gap-2" style="border-top:1px solid var(--line);">
-                <span class="ad-label">{% trans "Ulashish" %}</span>
-                <div class="flex items-center gap-1.5">
-                    <a class="ad-icon-btn" target="_blank" rel="noopener" title="Telegram" aria-label="Telegram"
-                       href="https://t.me/share/url?url={{ request.build_absolute_uri|urlencode }}&text={{ article.title|truncatechars:120|urlencode }}"><i class="fab fa-telegram-plane"></i></a>
-                    <a class="ad-icon-btn" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook"
-                       href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"><i class="fab fa-facebook-f"></i></a>
-                    <a class="ad-icon-btn" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"
-                       href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}"><i class="fab fa-linkedin-in"></i></a>
-                    <button type="button" class="ad-icon-btn" id="copyLinkBtn" title="{% trans 'Havolani nusxalash' %}" aria-label="{% trans 'Havolani nusxalash' %}"
-                            onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const i=this.querySelector('i');i.className='fas fa-check';setTimeout(()=>{i.className='fas fa-link'},1600)})"><i class="fas fa-link"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ ASOSIY QISM ═══ -->
-<div class="site-container pt-6 pb-10 lg:pt-7 lg:pb-14">
-    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-8 lg:gap-12">
-
-        <div class="space-y-8 min-w-0">
+            <div class="mt-6 pt-6 space-y-8" style="border-top:1px solid var(--line);">
 
             <!-- ANNOTATSIYA -->
             <section>
@@ -246,10 +190,59 @@
                 </ul>
             </section>
             {% endif %}
+            </div>
         </div>
 
         <!-- ═══ YON PANEL ═══ -->
-        <aside class="space-y-5 lg:sticky lg:top-24 self-start">
+        <aside class="space-y-5 self-start">
+        <!-- Tezkor harakatlar kartasi -->
+        <div class="ad-card p-4 shadow-sm">
+            <div class="grid grid-cols-3 gap-2 text-center mb-2">
+                <div>
+                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.views_count }}</div>
+                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Ko'rishlar" %}</div>
+                </div>
+                <div style="border-left:1px solid var(--line);border-right:1px solid var(--line);">
+                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.downloads_count }}</div>
+                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Yuklamalar" %}</div>
+                </div>
+                <div>
+                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{% if article.start_page %}{{ article.start_page }}–{{ article.end_page }}{% else %}—{% endif %}</div>
+                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Sahifalar" %}</div>
+                </div>
+            </div>
+            {% if article.issue %}
+            <!-- Son muqovasi -->
+            <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="group mt-4 flex items-center gap-3 pt-4" style="border-top:1px solid var(--line);">
+                <span class="w-11 shrink-0 aspect-[3/4] overflow-hidden" style="border:1px solid var(--line);background:var(--accent-soft);">
+                    {% if article.issue.cover_image %}<img src="{{ article.issue.cover_image.url }}" alt="" class="w-full h-full object-cover" loading="lazy">
+                    {% elif current_journal.get_cover_for_language %}<img src="{{ current_journal.get_cover_for_language.url }}" alt="" class="w-full h-full object-cover" loading="lazy">
+                    {% else %}<span class="w-full h-full flex items-center justify-center font-serif font-bold ad-accent">{{ article.issue.number }}</span>{% endif %}
+                </span>
+                <span class="min-w-0">
+                    <span class="block text-sm font-semibold ad-link transition-colors" style="color:var(--hero-ink);">{% blocktrans with vol=article.issue.volume num=article.issue.number year=article.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}</span>
+                    <span class="block text-xs" style="color:var(--muted);">{% if article.published_at %}{% trans "Chop etilgan" %}: {{ article.published_at|date:"d.m.Y" }}{% else %}{% trans "Sonni ko'rish" %}{% endif %} <i class="fas fa-arrow-right text-[9px] ml-0.5 group-hover:translate-x-0.5 transition-transform"></i></span>
+                </span>
+            </a>
+            {% elif article.published_at %}
+            <p class="text-xs text-center" style="color:var(--muted);"><i class="far fa-calendar mr-1 ad-accent"></i>{% trans "Chop etilgan" %}: {{ article.published_at|date:"d.m.Y" }}</p>
+            {% endif %}
+
+            <!-- Ulashish -->
+            <div class="mt-4 pt-4 flex items-center justify-between gap-2" style="border-top:1px solid var(--line);">
+                <span class="ad-label">{% trans "Ulashish" %}</span>
+                <div class="flex items-center gap-1.5">
+                    <a class="ad-icon-btn" target="_blank" rel="noopener" title="Telegram" aria-label="Telegram"
+                       href="https://t.me/share/url?url={{ request.build_absolute_uri|urlencode }}&text={{ article.title|truncatechars:120|urlencode }}"><i class="fab fa-telegram-plane"></i></a>
+                    <a class="ad-icon-btn" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook"
+                       href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"><i class="fab fa-facebook-f"></i></a>
+                    <a class="ad-icon-btn" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"
+                       href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}"><i class="fab fa-linkedin-in"></i></a>
+                    <button type="button" class="ad-icon-btn" id="copyLinkBtn" title="{% trans 'Havolani nusxalash' %}" aria-label="{% trans 'Havolani nusxalash' %}"
+                            onclick="navigator.clipboard.writeText(window.location.href).then(()=>{const i=this.querySelector('i');i.className='fas fa-check';setTimeout(()=>{i.className='fas fa-link'},1600)})"><i class="fas fa-link"></i></button>
+                </div>
+            </div>
+        </div>
             <div class="ad-card p-5">
                 <h3 class="ad-label mb-3">{% trans "Maqola ma'lumotlari" %}</h3>
                 <dl class="ad-meta divide-y" style="border-color:var(--line);">
