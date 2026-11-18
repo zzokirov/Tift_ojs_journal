@@ -28,6 +28,8 @@ git reset --hard origin/main
 ./venv/bin/pip install -q -r requirements.txt
 ./venv/bin/python manage.py migrate --noinput
 ./venv/bin/python manage.py collectstatic --noinput
+# Annotatsiyasi bo'sh maqolalarni PDF fayldan to'ldirish (faqat bo'sh maydonlar, qayta ishga tushirish xavfsiz)
+./venv/bin/python manage.py fill_abstracts || true
 # Eslatma: populate_editorial_board.py / insert_categories.py endi har deployda ishga tushirilmaydi —
 # ular admin panelda kiritilgan tahririyat va yo'nalish ma'lumotlarini qayta yozib yuborardi.
 # Kerak bo'lsa qo'lda ishga tushiring: ./venv/bin/python insert_categories.py

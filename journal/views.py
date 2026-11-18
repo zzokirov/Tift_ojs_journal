@@ -470,6 +470,13 @@ def article_detail(request, journal_slug, pk):
         # Maqola matni sahifada ko'rsatilmaydi (faqat annotatsiya + PDF yuklab olish)
         article_content_html = ''
 
+        # 4b. Annotatsiya/kalit so'zlar admin panelda bo'sh bo'lsa — fayldan olinadi (bir marta, bazaga yoziladi)
+        try:
+            from .pdf_meta import fill_article_meta
+            fill_article_meta(article)
+        except Exception:
+            pass
+
         # 5. Kalit so'zlar ro'yxati
         keywords_list = []
         if article.keywords:

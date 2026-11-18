@@ -400,3 +400,27 @@ class CertificateTests(TestCase):
         body = self.client.get(reverse('article_detail', args=[self.journal.slug, self.article.pk])).content.decode()
         self.assertNotIn('readerSection', body)
         self.assertIn(reverse('article_certificate', args=[self.journal.slug, self.article.pk]), body)
+
+
+class PdfMetaExtractionTests(TestCase):
+    def test_russian_with_second_language_block(self):
+        from journal.pdf_meta import extract_from_text
+        text = ("ЗАГОЛОВОК\nАннотация: В статье рассматриваются пути повышения эффективности использования бюджетных сред-\n"
+                "ств в сфере государственных закупок и предлагаются меры по их совершенствованию.\n"
+                "Ключевые слова: бюджет, государственные закупки, тендер.\n\nAnnotatsiya: Maqolada ...\nВведение\n")
+        a, k = extract_from_text(text)
+        self.assertTrue(a.startswith("В статье рассматриваются"))
+        self.assertIn("бюджетных средств", a)
+        self.assertEqual(k, "бюджет, государственные закупки, тендер")
+
+    def test_uzbek_heading_on_own_line(self):
+        from journal.pdf_meta import extract_from_text
+        text = ("ANNOTATSIYA\nMaqolada yangiliklarni avtomatik yig‘ish, filtrlash, klasterlash va Telegram kanalida nashr etish modeli taklif etiladi.\n"
+                "Kalit so‘zlar: sun’iy intellekt, yangiliklar\nKIRISH\nMatn")
+        a, k = extract_from_text(text)
+        self.assertTrue(a.startswith("Maqolada yangiliklarni"))
+        self.assertEqual(k, "sun’iy intellekt, yangiliklar")
+
+    def test_nothing_found(self):
+        from journal.pdf_meta import extract_from_text
+        self.assertEqual(extract_from_text("Oddiy matn, sarlavhalarsiz."), ("", ""))
