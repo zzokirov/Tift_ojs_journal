@@ -147,33 +147,7 @@ def build_certificate_pdf(article, author_name, author_index, article_url, theme
     page.insert_textbox(fitz.Rect(40, 270, W - 40, 288), "quyidagi ilmiy maqolaning muallifi ekanligini tasdiqlaydi:", fontname="serif", fontsize=12, color=ink, align=1)
 
     # Maqola nomi
-    _fit_text(page, fitz.Rect(90, 294, W - 90, 352), f"«{article.title}»", "serifb", 15, 9, accent, lineheight=1.25)
-
-    # Nashr ma'lumotlari
-    parts = []
-    if journal:
-        parts.append(f"Jurnal: {journal.title}")
-        if journal.issn:
-            parts.append(f"ISSN {journal.issn}")
-        if journal.eissn:
-            parts.append(f"eISSN {journal.eissn}")
-    if article.issue:
-        parts.append(f"{article.issue.year}-yil, {article.issue.volume}-jild, {article.issue.number}-son")
-    if article.start_page and article.end_page:
-        parts.append(f"{article.start_page}–{article.end_page}-betlar")
-    line1 = "  ·  ".join(parts)
-    parts2 = []
-    if article.category:
-        parts2.append(f"Yo‘nalish: {article.category.code} — {article.category.name}")
-    if article.published_at:
-        pub = article.published_at
-        if hasattr(pub, 'tzinfo') and getattr(pub, 'hour', None) is not None and timezone.is_aware(pub):
-            pub = timezone.localtime(pub)
-        parts2.append(f"Nashr sanasi: {pub.strftime('%d.%m.%Y')}")
-    line2 = "  ·  ".join(parts2)
-    _fit_text(page, fitz.Rect(70, 360, W - 70, 376), line1, "sans", 10, 7, ink)
-    if line2:
-        _fit_text(page, fitz.Rect(70, 377, W - 70, 393), line2, "sans", 10, 7, muted)
+    _fit_text(page, fitz.Rect(80, 296, W - 80, 392), f"«{article.title}»", "serifb", 17, 9, accent, lineheight=1.3)
 
     # Pastki qism: imzo, raqam, QR
     y = H - 140
