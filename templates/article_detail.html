@@ -89,7 +89,7 @@
 
         <!-- Tezkor harakatlar kartasi -->
         <div class="ad-card p-4 shadow-sm">
-            <div class="grid grid-cols-3 gap-2 text-center mb-3">
+            <div class="grid grid-cols-3 gap-2 text-center mb-2">
                 <div>
                     <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.views_count }}</div>
                     <div class="text-[11px]" style="color:var(--muted);">{% trans "Ko'rishlar" %}</div>
@@ -103,19 +103,9 @@
                     <div class="text-[11px]" style="color:var(--muted);">{% trans "Sahifalar" %}</div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-2">
-                {% if article.pdf_file %}
-                <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-primary w-full" style="padding:.6rem .5rem;">
-                    <i class="far fa-file-pdf"></i> PDF
-                </a>
-                <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost w-full whitespace-nowrap" style="padding:.6rem .4rem;font-size:.8rem;">
-                    <i class="fas fa-download"></i> {% trans "Yuklab olish" %}
-                </a>
-                {% endif %}
-                <a href="#citation" class="ad-btn ad-btn-ghost w-full col-span-2" style="padding:.6rem .5rem;">
-                    <i class="fas fa-quote-right"></i> {% trans "Iqtibos keltirish" %}
-                </a>
-            </div>
+            {% if article.published_at %}
+            <p class="text-xs text-center" style="color:var(--muted);"><i class="far fa-calendar mr-1 ad-accent"></i>{% trans "Chop etilgan" %}: {{ article.published_at|date:"d.m.Y" }}</p>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -142,54 +132,39 @@
             </section>
             {% endif %}
 
-            <!-- MAQOLANI O'QISH -->
-            {% if article_content_html or article.pdf_file %}
-            <section class="ad-card overflow-hidden" id="readerSection">
-                <div class="flex items-center justify-between gap-3 px-5 sm:px-6 py-4 border-b" style="border-color:var(--line);">
-                    <h2 class="font-bold" style="color:var(--hero-ink);font-size:1.05rem;">{% trans "Maqolani o'qish" %}</h2>
-                    {% if article_content_html %}
-                    <div class="flex items-center gap-1.5">
-                        <button type="button" onclick="adjustFontSize(-1)" class="ad-icon-btn" title="{% trans 'Kichiklashtirish' %}" aria-label="{% trans 'Kichiklashtirish' %}"><i class="fas fa-minus"></i></button>
-                        <span id="fontSizeLabel" class="text-xs font-medium w-10 text-center" style="color:var(--muted);">16px</span>
-                        <button type="button" onclick="adjustFontSize(1)" class="ad-icon-btn" title="{% trans 'Kattalashtirish' %}" aria-label="{% trans 'Kattalashtirish' %}"><i class="fas fa-plus"></i></button>
-                        <button type="button" onclick="toggleFullscreen()" class="ad-icon-btn ml-1" title="{% trans 'To\'liq ekran' %}" aria-label="{% trans 'To\'liq ekran' %}"><i class="fas fa-expand" id="fullscreenIcon"></i></button>
-                    </div>
+            <!-- YUKLAB OLISH VA SERTIFIKAT -->
+            {% if article.pdf_file or certificate_authors %}
+            <section class="ad-card p-5 sm:p-6">
+                <div class="flex flex-wrap items-center gap-3">
+                    {% if article.pdf_file %}
+                    <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-primary">
+                        <i class="fas fa-download"></i> {% trans "Maqolani yuklab olish" %} (PDF)
+                    </a>
+                    <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-ghost">
+                        <i class="far fa-eye"></i> {% trans "Brauzerda ochish" %}
+                    </a>
+                    {% endif %}
+                    {% if article.status == 'published' and certificate_authors %}
+                        {% if certificate_authors|length == 1 %}
+                        <a href="{% url 'article_certificate' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost">
+                            <i class="fas fa-award"></i> {% trans "Sertifikat olish" %}
+                        </a>
+                        {% else %}
+                        <details class="relative">
+                            <summary class="ad-btn ad-btn-ghost cursor-pointer list-none"><i class="fas fa-award"></i> {% trans "Sertifikat olish" %} <i class="fas fa-chevron-down text-[10px]"></i></summary>
+                            <div class="absolute z-20 mt-2 min-w-[16rem] bg-white shadow-xl" style="border:1px solid var(--line);">
+                                <p class="px-4 pt-3 pb-1 text-xs" style="color:var(--muted);">{% trans "Muallifni tanlang" %}</p>
+                                {% for name in certificate_authors %}
+                                <a href="{% url 'article_certificate' current_journal.slug article.pk %}?author={{ forloop.counter0 }}" class="block px-4 py-2.5 text-sm font-medium ad-link" style="color:var(--hero-ink);">{{ name }}</a>
+                                {% endfor %}
+                            </div>
+                        </details>
+                        {% endif %}
                     {% endif %}
                 </div>
-
-                {% if article_content_html %}
-                <div id="readerContent" class="px-5 sm:px-10 py-8 overflow-y-auto bg-white"
-                     style="max-height:650px;line-height:1.9;color:#1e293b;font-size:16px;scroll-behavior:smooth;">
-                    <div class="max-w-none prose prose-lg" style="font-family:Georgia,'Playfair Display',serif;">
-                        {{ article_content_html|safe }}
-                    </div>
-                </div>
-                <div class="h-1 w-full" style="background:var(--line);">
-                    <div id="readProgress" class="h-full transition-all duration-300" style="width:0%;background:var(--accent);"></div>
-                </div>
-                {% else %}
-                <div class="px-6 py-14 text-center">
-                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:var(--accent-soft);">
-                        <i class="far fa-file-pdf text-xl ad-accent"></i>
-                    </div>
-                    <p class="font-semibold mb-1" style="color:var(--hero-ink);">{% trans "PDF formatdagi maqola" %}</p>
-                    <p class="text-sm mb-6" style="color:var(--muted);">{% trans "Maqolani quyidagi tugmalar orqali ko'rishingiz yoki yuklab olishingiz mumkin" %}</p>
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-primary"><i class="far fa-file-pdf"></i> {% trans "PDF ko'rish" %}</a>
-                        <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost"><i class="fas fa-download"></i> {% trans "Yuklab olish" %}</a>
-                    </div>
-                </div>
+                {% if article.status == 'published' and certificate_authors %}
+                <p class="mt-3 text-xs" style="color:var(--muted);">{% trans "Sertifikat universitet nomidan, maqola va muallif ma'lumotlari hamda tekshirish uchun QR kod bilan PDF shaklida beriladi." %}</p>
                 {% endif %}
-            </section>
-            {% endif %}
-
-            <!-- MAQOLA MATNI -->
-            {% if article.content %}
-            <section class="ad-card overflow-hidden">
-                <h2 class="font-bold px-5 sm:px-6 py-4 border-b" style="color:var(--hero-ink);border-color:var(--line);font-size:1.05rem;">{% trans "Maqola matni" %}</h2>
-                <div class="px-5 sm:px-6 py-6 prose prose-lg max-w-none" style="color:#1e293b;line-height:1.8;">
-                    {{ article.content|safe }}
-                </div>
             </section>
             {% endif %}
 
@@ -294,7 +269,7 @@
 <script>
 // Citation manager
 const articleData = {
-    authors: "{% if article.authors %}{{ article.authors|escapejs }}{% elif author_name %}{{ author_name|escapejs }}{% else %}{{ article.author.last_name|escapejs }}, {{ article.author.first_name|slice:':1'|escapejs }}.{% endif %}",
+    authors: "{% if certificate_authors %}{{ certificate_authors|join:', '|escapejs }}{% elif article.authors %}{{ article.authors|escapejs }}{% elif author_name %}{{ author_name|escapejs }}{% else %}{{ article.author.last_name|escapejs }}, {{ article.author.first_name|slice:':1'|escapejs }}.{% endif %}",
     title: "{{ article.title|escapejs }}",
     journal: "{{ article.journal.title|default:current_journal.title|escapejs }}",
     year: "{% if article.published_at %}{{ article.published_at.year }}{% elif article.issue %}{{ article.issue.year }}{% else %}2026{% endif %}",
@@ -351,60 +326,5 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCitationDisplay();
 });
 
-// Font size adjustment for reader
-let currentFontSize = 16;
-function adjustFontSize(delta) {
-    const reader = document.getElementById('readerContent');
-    if (!reader) return;
-    currentFontSize = Math.max(12, Math.min(24, currentFontSize + delta));
-    reader.style.fontSize = currentFontSize + 'px';
-    document.getElementById('fontSizeLabel').textContent = currentFontSize + 'px';
-}
-
-// Fullscreen toggle
-function toggleFullscreen() {
-    const section = document.getElementById('readerSection');
-    const icon = document.getElementById('fullscreenIcon');
-    if (!section) return;
-
-    if (section.style.position === 'fixed') {
-        // Exit fullscreen
-        section.style.position = '';
-        section.style.top = '';
-        section.style.left = '';
-        section.style.right = '';
-        section.style.bottom = '';
-        section.style.zIndex = '';
-        section.style.borderRadius = '';
-        const reader = document.getElementById('readerContent');
-        if (reader) reader.style.maxHeight = '650px';
-        icon.className = 'fas fa-expand';
-        document.body.style.overflow = '';
-    } else {
-        // Enter fullscreen
-        section.style.position = 'fixed';
-        section.style.top = '0';
-        section.style.left = '0';
-        section.style.right = '0';
-        section.style.bottom = '0';
-        section.style.zIndex = '9999';
-        section.style.borderRadius = '0';
-        const reader = document.getElementById('readerContent');
-        if (reader) reader.style.maxHeight = 'calc(100vh - 70px)';
-        icon.className = 'fas fa-compress';
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-// Scroll progress indicator
-const readerEl = document.getElementById('readerContent');
-if (readerEl) {
-    readerEl.addEventListener('scroll', function() {
-        const scrollTop = this.scrollTop;
-        const scrollHeight = this.scrollHeight - this.clientHeight;
-        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        document.getElementById('readProgress').style.width = progress + '%';
-    });
-}
 </script>
 {% endblock %}

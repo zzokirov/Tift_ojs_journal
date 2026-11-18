@@ -31,6 +31,7 @@ urlpatterns = [
     path('<str:journal_slug>/article/<int:pk>/', views.article_detail, name='article_detail'),
     path('<str:journal_slug>/article/<int:pk>/download/', views.download_pdf, name='download_pdf'),
     path('<str:journal_slug>/article/<int:pk>/pdf/', views.generate_article_pdf, name='article_pdf'),
+    path('<str:journal_slug>/article/<int:pk>/certificate/', views.article_certificate, name='article_certificate'),
     path('<str:journal_slug>/submit/', views.submit_article, name='submit_article'),
     path('<str:journal_slug>/issue/<int:issue_pk>/', views.issue_detail, name='issue_detail'),
     path('<str:journal_slug>/issue/<int:issue_pk>/download/', views.download_issue_pdf, name='download_issue_pdf'),

@@ -370,3 +370,33 @@ class AuthorMatchingTests(TestCase):
 
     def test_same_first_name_only_is_not_a_match(self):
         self.assertFalse(self._match("Abbos Maxmudov", "Abbos Rahimov"))
+
+
+class CertificateTests(TestCase):
+    def setUp(self):
+        from django.utils import timezone
+        self.journal = Journal.objects.create(title="Arxitektura va ta'lim", slug='arxitektura-va-talim', publication_status='published', is_active=True, issn='3162-1554')
+        self.article = Article.objects.create(journal=self.journal, title="SUN’IY INTELLEKT ASOSIDA YANGILIKLARNI SARALASH", authors='Abbos Maxmudov | TIFT; Dilnoza Karimova | TIFT', status='published', published_at=timezone.now())
+
+    def test_author_names_exclude_institutions(self):
+        from journal.certificate import author_display_names
+        self.assertEqual(author_display_names('Abbos Maxmudov | TIFT; Dilnoza Karimova | TIFT'), ['Abbos Maxmudov', 'Dilnoza Karimova'])
+        self.assertEqual(author_display_names('A. Karimov, TIFT, Toshkent shahri'), ['A. Karimov'])
+
+    def test_certificate_pdf_for_each_author(self):
+        for idx in (0, 1):
+            r = self.client.get(reverse('article_certificate', args=[self.journal.slug, self.article.pk]) + f'?author={idx}')
+            self.assertEqual(r.status_code, 200)
+            self.assertEqual(r['Content-Type'], 'application/pdf')
+            self.assertTrue(r.content.startswith(b'%PDF'))
+
+    def test_no_certificate_for_unpublished(self):
+        self.article.status = 'submitted'
+        self.article.save()
+        r = self.client.get(reverse('article_certificate', args=[self.journal.slug, self.article.pk]))
+        self.assertEqual(r.status_code, 404)
+
+    def test_article_page_has_no_reader_and_offers_certificate(self):
+        body = self.client.get(reverse('article_detail', args=[self.journal.slug, self.article.pk])).content.decode()
+        self.assertNotIn('readerSection', body)
+        self.assertIn(reverse('article_certificate', args=[self.journal.slug, self.article.pk]), body)

@@ -467,12 +467,8 @@ def article_detail(request, journal_slug, pk):
             author_articles = []
 
         # 4. Maqola matnini HTML formatda olish (reader uchun)
+        # Maqola matni sahifada ko'rsatilmaydi (faqat annotatsiya + PDF yuklab olish)
         article_content_html = ''
-        if article.pdf_file:
-            try:
-                article_content_html = _get_article_content_html(article.pdf_file) or ''
-            except Exception:
-                article_content_html = ''
 
         # 5. Kalit so'zlar ro'yxati
         keywords_list = []
@@ -491,6 +487,7 @@ def article_detail(request, journal_slug, pk):
             'author_articles': author_articles,
             'article_content_html': article_content_html,
             'keywords_list': keywords_list,
+            'certificate_authors': _certificate_authors(article),
         })
     except Exception as e:
         import traceback
@@ -1109,6 +1106,52 @@ def _get_pdf_bytes(article_file):
     except Exception:
         pass
     return None
+
+
+def _certificate_authors(article):
+    """Sertifikat beriladigan mualliflar ro'yxati."""
+    from .certificate import author_display_names
+    names = author_display_names(article.authors)
+    if not names and article.author:
+        full = article.author.get_full_name()
+        if full:
+            names = [full]
+    return names
+
+
+def article_certificate(request, journal_slug, pk):
+    """Chop etilgan maqola uchun nashr sertifikati (PDF). ?author=N — mualliflar ro'yxatidagi tartib raqami."""
+    from django.http import HttpResponse, Http404
+    from django.urls import reverse
+    from .certificate import build_certificate_pdf, certificate_number
+    from .context_processors import journal_theme_for_slug
+
+    current_journal = _get_current_journal(journal_slug)
+    article = get_object_or_404(Article.objects.select_related('journal', 'issue', 'category'), pk=pk, journal=current_journal)
+    if article.status != 'published':
+        raise Http404(_("Maqola hali chop etilmagan."))
+
+    names = _certificate_authors(article)
+    if not names:
+        raise Http404(_("Muallif ma'lumotlari topilmadi."))
+    try:
+        idx = int(request.GET.get('author', 0))
+    except (TypeError, ValueError):
+        idx = 0
+    if not 0 <= idx < len(names):
+        idx = 0
+
+    chief = StaffMember.objects.filter(journal=current_journal, position='editor_in_chief', is_active=True).order_by('order').first()
+    article_url = request.build_absolute_uri(reverse('article_detail', args=[current_journal.slug, article.pk]))
+    pdf = build_certificate_pdf(
+        article, names[idx], idx, article_url,
+        theme=journal_theme_for_slug(current_journal.slug),
+        chief_editor=chief.full_name if chief else None,
+    )
+    safe = re.sub(r'[^\w\-]+', '_', names[idx]).strip('_')[:40] or 'muallif'
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="Sertifikat_{safe}_{certificate_number(article, idx)}.pdf"'
+    return response
 
 
 def download_pdf(request, journal_slug, pk):
