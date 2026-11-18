@@ -424,3 +424,32 @@ class PdfMetaExtractionTests(TestCase):
     def test_nothing_found(self):
         from journal.pdf_meta import extract_from_text
         self.assertEqual(extract_from_text("Oddiy matn, sarlavhalarsiz."), ("", ""))
+
+
+class TranslateContentCommandTests(TestCase):
+    def test_fills_only_missing_or_untranslated_fields(self):
+        from unittest import mock
+        from django.core.management import call_command
+        j = Journal.objects.create(title="Moliya", slug='moliya-x', publication_status='published', is_active=True)
+        Journal.objects.filter(pk=j.pk).update(title_uz="Moliya", title_ru="Финансы (ручной)", title_en="",
+                                               publication_frequency_uz="Yiliga 4 marta",
+                                               publication_frequency_ru="Yiliga 4 marta", publication_frequency_en="Yiliga 4 marta")
+        fake = lambda text, lang: f"[{lang}] {text}"
+        with mock.patch('journal.management.commands.translate_content.translate_text', side_effect=fake):
+            call_command('translate_content', stdout=open('/dev/null', 'w'))
+        j.refresh_from_db()
+        self.assertEqual(j.title_ru, "Финансы (ручной)")          # qo'lda kiritilgani saqlanadi
+        self.assertEqual(j.title_en, "[en] Moliya")
+        self.assertEqual(j.publication_frequency_ru, "[ru] Yiliga 4 marta")
+        self.assertEqual(j.publication_frequency_en, "[en] Yiliga 4 marta")
+
+
+class LanguageSwitchTests(TestCase):
+    def test_portal_home_fully_switches_language(self):
+        Journal.objects.create(title="Arxitektura", slug='arxitektura-va-talim', publication_status='published', is_active=True)
+        for lang, expected, absent in (('ru', 'Научные журналы', 'ilmiy jurnallari'), ('en', 'Scientific Journals', 'ilmiy jurnallari')):
+            self.client.cookies['django_language'] = lang
+            body = self.client.get('/').content.decode()
+            self.assertIn(expected, body)
+            self.assertNotIn(absent, body)
+            self.assertNotIn('ta jurnal · ochiq kirish', body)

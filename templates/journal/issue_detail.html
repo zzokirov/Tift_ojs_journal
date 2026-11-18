@@ -65,7 +65,7 @@
                                             {% if article.start_page and article.end_page %}
                                                 <span class="inline-flex items-center gap-1 text-[11px] text-gray-500 mt-1 font-semibold">
                                                     <i class="fas fa-file-alt text-gray-400 text-[10px]"></i>
-                                                    {{ article.start_page }}-{{ article.end_page }}-betlar
+                                                    {% blocktrans with start=article.start_page end=article.end_page %}{{ start }}-{{ end }}-betlar{% endblocktrans %}
                                                 </span>
                                             {% endif %}
                                         </td>

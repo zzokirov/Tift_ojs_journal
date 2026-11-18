@@ -75,7 +75,7 @@
                 </span>
             </a>
 
-            <nav class="hidden lg:flex items-center gap-1 text-[0.95rem] font-medium" aria-label="Asosiy menyu">
+            <nav class="hidden lg:flex items-center gap-1 text-[0.95rem] font-medium" aria-label="Menu">
                 <a href="{% url 'portal_home' %}" class="hdr-active px-4 py-2 rounded-full transition">{% trans "Bosh sahifa" %}</a>
                 <a href="#journals-section" class="hdr-link px-4 py-2 rounded-full transition">{% trans "Jurnallar" %}</a>
                 <a href="#authors-section" class="hdr-link px-4 py-2 rounded-full transition">{% trans "Mualliflar uchun" %}</a>
@@ -118,7 +118,7 @@
     </header>
 
     <!-- ═══ HERO COVER (100vh, sticky: katalog uning ustiga chiqadi) ═══ -->
-    <section id="hero" class="sticky top-0 z-0 h-[100svh] min-h-[600px] overflow-hidden bg-[#071426] text-white" aria-label="TIFT ilmiy jurnallari">
+    <section id="hero" class="sticky top-0 z-0 h-[100svh] min-h-[600px] overflow-hidden bg-[#071426] text-white" aria-label="{% trans "TIFT Ilmiy Jurnallari" %}">
         <div id="hero-bg" class="absolute inset-0 will-change-transform" aria-hidden="true">
             <div class="absolute inset-0 bg-gradient-to-b from-[#071426] via-[#0d2547] to-[#14366a]"></div>
             <div class="absolute -top-40 right-[-10%] h-[38rem] w-[38rem] rounded-full bg-sky-400/20 blur-3xl"></div>
@@ -129,11 +129,7 @@
         </div>
 
         <div id="hero-content" class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center pt-20 pb-24 will-change-transform">
-            <span class="inline-flex w-fit items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/20 backdrop-blur px-3 py-1.5 text-xs font-semibold text-sky-100">
-                <span class="h-1.5 w-1.5 rounded-full bg-sky-300"></span>
-                {% if L == 'ru' %}Журналов: {{ stats.journals }} · открытый доступ{% elif L == 'en' %}Journals: {{ stats.journals }} · open access{% else %}{{ stats.journals }} ta jurnal · ochiq kirish{% endif %}
-            </span>
-            <h1 class="mt-6 max-w-3xl font-extrabold tracking-tight leading-[1.02]" style="font-size:clamp(2.6rem,7vw,5.25rem);">
+            <h1 class="max-w-3xl font-extrabold tracking-tight leading-[1.02]" style="font-size:clamp(2.6rem,7vw,5.25rem);">
                 {% if L == 'ru' %}Научные журналы <span class="text-sky-300">TIFT</span>{% elif L == 'en' %}<span class="text-sky-300">TIFT</span> Scientific Journals{% else %}<span class="text-sky-300">TIFT</span> ilmiy jurnallari{% endif %}
             </h1>
             <p class="mt-5 max-w-xl text-base sm:text-lg text-slate-200/90 leading-relaxed">

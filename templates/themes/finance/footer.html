@@ -9,7 +9,7 @@
                     <img src="{% static 'images/tift.png' %}" alt="TIFT" class="h-10 w-10 rounded-xl bg-white p-1 ring-1 ring-rule">
                     <p class="text-2xl font-bold tracking-tight leading-tight">{{ current_journal.title }}</p>
                 </div>
-                <p class="mt-4 text-sm text-stone leading-relaxed max-w-md">{{ current_journal.publisher_name|default:_("Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti") }}</p>
+                <p class="mt-4 text-sm text-stone leading-relaxed max-w-md">{% if LANGUAGE_CODE == 'ru' %}Ташкентский международный университет финансового управления и технологий{% elif LANGUAGE_CODE == 'en' %}Tashkent International University of Financial Management and Technologies{% else %}{{ current_journal.publisher_name|default:"Toshkent xalqaro moliyaviy boshqaruv va texnologiyalar universiteti" }}{% endif %}</p>
                 <button type="button" onclick="openSubmitModal()" class="mt-6 inline-flex items-center gap-2 rounded-full bg-terra hover:bg-terra-dark text-white px-5 py-2.5 text-sm font-semibold transition">
                     <i class="fas fa-paper-plane text-xs"></i>{% trans "Maqolani yuborish" %}
                 </button>

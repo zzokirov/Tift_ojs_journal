@@ -15,7 +15,7 @@
           <img src="{% static 'images/tift.png' %}" alt="{% trans "TIFT Logo" %}" class="w-full h-full object-contain bg-white p-1">
         </div>
         <div>
-          <div class="text-navy-900 font-black text-lg leading-tight">{{ current_journal.title|default:"TIFT Ilmiy Jurnallari" }}</div>
+          <div class="text-navy-900 font-black text-lg leading-tight">{% trans "TIFT Ilmiy Jurnallari" as portal_title %}{{ current_journal.title|default:portal_title }}</div>
           <div class="text-gray-500 text-xs tracking-wide">{% trans "Ilmiy-elektron jurnal" %}</div>
         </div>
       </a>

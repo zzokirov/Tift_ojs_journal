@@ -30,6 +30,9 @@ git reset --hard origin/main
 ./venv/bin/python manage.py collectstatic --noinput
 # Annotatsiyasi bo'sh maqolalarni PDF fayldan to'ldirish (faqat bo'sh maydonlar, qayta ishga tushirish xavfsiz)
 ./venv/bin/python manage.py fill_abstracts || true
+# Til almashtirilganda jurnal nomlari va yo'nalishlar ham o'zgarishi uchun bo'sh RU/EN tarjimalarni to'ldirish
+./venv/bin/python manage.py compilemessages -i venv >/dev/null 2>&1 || true
+./venv/bin/python manage.py translate_content || true
 # Eslatma: populate_editorial_board.py / insert_categories.py endi har deployda ishga tushirilmaydi —
 # ular admin panelda kiritilgan tahririyat va yo'nalish ma'lumotlarini qayta yozib yuborardi.
 # Kerak bo'lsa qo'lda ishga tushiring: ./venv/bin/python insert_categories.py
