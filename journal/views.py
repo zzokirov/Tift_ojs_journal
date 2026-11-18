@@ -61,12 +61,34 @@ def portal_home(request):
             Q(categories__name__icontains=q)
         ).distinct()
     
-    journals = journals.order_by('display_order', 'id')
-    
+    from django.db.models import Count
+    from .context_processors import journal_theme_for_slug
+
+    journals = list(journals.order_by('display_order', 'id').annotate(
+        published_count=Count('articles_set', filter=Q(articles_set__status='published'), distinct=True),
+        issue_count=Count('issues', distinct=True),
+    ))
+    for j in journals:
+        # Har bir jurnal kartasi o'z dizayn mavzusida ko'rsatiladi
+        j.theme = journal_theme_for_slug(j.slug)
+
+    latest_articles = (Article.objects
+                       .filter(status='published', journal__is_active=True, journal__publication_status='published')
+                       .select_related('journal', 'category')
+                       .order_by('-published_at', '-id')[:6])
+    for a in latest_articles:
+        a.theme = journal_theme_for_slug(a.journal.slug if a.journal else '')
+
     context = {
         'journals': journals,
         'search_query': q,
         'current_journal': None,
+        'latest_articles': latest_articles,
+        'stats': {
+            'journals': len(journals),
+            'articles': Article.objects.filter(status='published').count(),
+            'issues': JournalIssue.objects.filter(journal__is_active=True).count(),
+        },
     }
     return render(request, 'portal_home.html', context)
 
