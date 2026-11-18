@@ -411,8 +411,10 @@ def article_detail(request, journal_slug, pk):
         # 1. Views count update
         try:
             if not request.session.get(f'viewed_article_{pk}'):
+                # update(): pre_save tarjima signali ishga tushmaydi (sahifa sekinlashmaydi)
+                from django.db.models import F
+                Article.objects.filter(pk=pk).update(views_count=F('views_count') + 1)
                 article.views_count = (article.views_count or 0) + 1
-                article.save(update_fields=['views_count'])
                 request.session[f'viewed_article_{pk}'] = True
         except Exception:
             pass
@@ -472,8 +474,12 @@ def article_detail(request, journal_slug, pk):
 
         # 4b. Annotatsiya/kalit so'zlar admin panelda bo'sh bo'lsa — fayldan olinadi (bir marta, bazaga yoziladi)
         try:
-            from .pdf_meta import fill_article_meta
-            fill_article_meta(article)
+            from django.core.cache import cache
+            key = f'pdfmeta_tried_{article.pk}'
+            if not cache.get(key):
+                from .pdf_meta import fill_article_meta
+                fill_article_meta(article)
+                cache.set(key, 1, 60 * 60 * 24)
         except Exception:
             pass
 
@@ -1169,6 +1175,39 @@ def article_certificate(request, journal_slug, pk):
     return response
 
 
+def _article_file(article):
+    """Maqola fayli; "to'liq son" yozuvlarida PDF songa biriktirilgan bo'ladi."""
+    if article.pdf_file:
+        return article.pdf_file
+    if article.issue_id and article.issue and article.issue.full_pdf:
+        return article.issue.full_pdf
+    return None
+
+
+def _serve_pdf(fieldfile, filename, as_attachment):
+    """PDF'ni beradi. X_ACCEL_MEDIA=True bo'lsa faylni nginx o'zi uzatadi (tez, gunicorn
+    vaqt limitiga tushmaydi); aks holda Django FileResponse."""
+    import os
+    from urllib.parse import quote
+    from django.conf import settings as _s
+    from django.http import FileResponse, HttpResponse
+    from django.utils.http import content_disposition_header
+
+    path = getattr(fieldfile, 'path', None)
+    if getattr(_s, 'X_ACCEL_MEDIA', False) and path and os.path.exists(path):
+        media_root = os.path.realpath(_s.MEDIA_ROOT)
+        real = os.path.realpath(path)
+        if real.startswith(media_root + os.sep):
+            rel = os.path.relpath(real, media_root).replace(os.sep, '/')
+            resp = HttpResponse(content_type='application/pdf')
+            resp['X-Accel-Redirect'] = _s.MEDIA_URL.rstrip('/') + '/' + quote(rel)
+            resp['Content-Disposition'] = content_disposition_header(as_attachment, filename)
+            return resp
+    if path and os.path.exists(path):
+        return FileResponse(open(path, 'rb'), as_attachment=as_attachment, filename=filename, content_type='application/pdf')
+    return FileResponse(fieldfile.open('rb'), as_attachment=as_attachment, filename=filename, content_type='application/pdf')
+
+
 def download_pdf(request, journal_slug, pk):
     """
     Maqola PDF faylini to'g'ridan-to'g'ri yuklab beradi.
@@ -1194,19 +1233,21 @@ def download_pdf(request, journal_slug, pk):
 
     Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
 
-    if not article.pdf_file:
+    pdf = _article_file(article)
+    if not pdf:
         raise Http404(_("Maqola PDF fayli yuklanmagan."))
 
-    safe_title = "".join(c for c in article.title if c.isalnum() or c in (' ', '_', '-')).strip()[:60]
+    safe_title = " ".join("".join(c for c in article.title if c.isalnum() or c in (' ', '_', '-')).split())[:80]
     filename = f"{safe_title or 'maqola'}.pdf"
 
     try:
-        if hasattr(article.pdf_file, 'path') and os.path.exists(article.pdf_file.path):
-            return FileResponse(open(article.pdf_file.path, 'rb'), as_attachment=True, filename=filename, content_type='application/pdf')
-        return FileResponse(article.pdf_file.open('rb'), as_attachment=True, filename=filename, content_type='application/pdf')
+        return _serve_pdf(pdf, filename, as_attachment=True)
     except Exception:
-        if article.pdf_file.url:
-            return _redirect(article.pdf_file.url)
+        try:
+            if pdf.url:
+                return _redirect(pdf.url)
+        except Exception:
+            pass
         raise Http404(_("Faylni ochishda xatolik yuz berdi."))
 
 
@@ -1235,19 +1276,21 @@ def generate_article_pdf(request, journal_slug, pk):
         Article.objects.filter(pk=pk).update(downloads_count=article.downloads_count + 1)
         request.session[f'pdf_viewed_{pk}'] = True
 
-    if not article.pdf_file:
+    pdf = _article_file(article)
+    if not pdf:
         raise Http404(_("Maqola PDF fayli yuklanmagan."))
 
-    safe_title = "".join(c for c in article.title if c.isalnum() or c in (' ', '_', '-')).strip()[:60]
+    safe_title = " ".join("".join(c for c in article.title if c.isalnum() or c in (' ', '_', '-')).split())[:80]
     filename = f"{safe_title or 'maqola'}.pdf"
 
     try:
-        if hasattr(article.pdf_file, 'path') and os.path.exists(article.pdf_file.path):
-            return FileResponse(open(article.pdf_file.path, 'rb'), as_attachment=False, filename=filename, content_type='application/pdf')
-        return FileResponse(article.pdf_file.open('rb'), as_attachment=False, filename=filename, content_type='application/pdf')
+        return _serve_pdf(pdf, filename, as_attachment=False)
     except Exception:
-        if article.pdf_file.url:
-            return _redirect(article.pdf_file.url)
+        try:
+            if pdf.url:
+                return _redirect(pdf.url)
+        except Exception:
+            pass
         raise Http404(_("Faylni ochishda xatolik yuz berdi."))
 
 
@@ -1665,7 +1708,7 @@ def download_issue_pdf(request, journal_slug, issue_pk):
             from django.http import FileResponse
             if hasattr(issue.full_pdf, 'path') and os.path.exists(issue.full_pdf.path):
                 filename = f"TIFT_Journal_{issue.year}_Son_{issue.number}.pdf"
-                return FileResponse(open(issue.full_pdf.path, 'rb'), content_type='application/pdf', as_attachment=True, filename=filename)
+                return _serve_pdf(issue.full_pdf, filename, as_attachment=True)
             elif issue.full_pdf.url:
                 return redirect(issue.full_pdf.url)
         except Exception as e:

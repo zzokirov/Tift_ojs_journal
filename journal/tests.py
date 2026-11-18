@@ -474,3 +474,43 @@ class DomainTests(TestCase):
             self.assertEqual(r['Location'], 'https://journal.tift.uz/moliya/?a=1')
             r = self.client.get('/robots.txt', HTTP_HOST='journal.tift.uz')
             self.assertEqual(r.status_code, 200)
+
+
+class PdfServingTests(TestCase):
+    def setUp(self):
+        import tempfile, shutil
+        from django.core.files.base import ContentFile
+        from django.test import override_settings
+        self.tmp = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, self.tmp)
+        self.ov = override_settings(MEDIA_ROOT=self.tmp)
+        self.ov.enable(); self.addCleanup(self.ov.disable)
+        self.j = Journal.objects.create(title='Moliya', slug='moliya-va-intellektual-texnologiyalar', publication_status='published', is_active=True)
+        self.issue = JournalIssue.objects.create(journal=self.j, volume=1, number=1, year=2025, is_published=True, status='published')
+        self.issue.full_pdf.save('full.pdf', ContentFile(b'%PDF-1.4 full issue ' + b'x' * 2000))
+        Article.objects.filter(pk=0).delete()
+        self.full = Article.objects.create(journal=self.j, issue=self.issue, title="1-son | 2025 - to'liq shakli", status='published', start_page=1, end_page=1)
+        self.art = Article.objects.create(journal=self.j, issue=self.issue, title='Maqola', authors='Ali Valiyev', status='published', start_page=2, end_page=3)
+        self.art.pdf_file.save('a.pdf', ContentFile(b'%PDF-1.4 article ' + b'y' * 2000))
+
+    def test_full_issue_entry_serves_issue_pdf(self):
+        r = self.client.get(reverse('article_pdf', args=[self.j.slug, self.full.pk]))
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue(b''.join(r.streaming_content).startswith(b'%PDF-1.4 full issue'))
+
+    def test_x_accel_redirect_when_enabled(self):
+        from django.test import override_settings
+        with override_settings(X_ACCEL_MEDIA=True):
+            r = self.client.get(reverse('download_pdf', args=[self.j.slug, self.art.pk]))
+        self.assertEqual(r.status_code, 200)
+        self.assertTrue(r['X-Accel-Redirect'].startswith('/media/'))
+        self.assertIn('attachment', r['Content-Disposition'])
+
+    def test_page_view_does_not_call_translator(self):
+        from unittest import mock
+        with mock.patch('journal.signals.translate_text') as tr:
+            r = self.client.get(reverse('article_detail', args=[self.j.slug, self.art.pk]))
+        self.assertEqual(r.status_code, 200)
+        tr.assert_not_called()
+        self.art.refresh_from_db()
+        self.assertEqual(self.art.views_count, 1)

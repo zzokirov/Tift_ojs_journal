@@ -15,7 +15,11 @@ def translate_text(text, target_lang):
         print(f"Translation error: {e}")
         return text
 
-def auto_translate_fields(instance, fields):
+def auto_translate_fields(instance, fields, update_fields=None):
+    # save(update_fields=[...]) tarjima maydonlariga tegmasa — tarmoqqa so'rov yubormaymiz
+    if update_fields is not None and not any(
+            f == fld or f.startswith(fld + '_') for f in update_fields for fld in fields):
+        return
     for field in fields:
         uz_val = getattr(instance, f"{field}_uz", None)
         ru_val = getattr(instance, f"{field}_ru", None)
@@ -30,24 +34,24 @@ def auto_translate_fields(instance, fields):
 
 @receiver(pre_save, sender=ArticleCategory)
 def translate_category(sender, instance, **kwargs):
-    auto_translate_fields(instance, ['name'])
+    auto_translate_fields(instance, ['name'], kwargs.get('update_fields'))
 
 @receiver(pre_save, sender=StaffMember)
 def translate_staff(sender, instance, **kwargs):
-    auto_translate_fields(instance, ['full_name', 'position', 'workplace', 'bio'])
+    auto_translate_fields(instance, ['full_name', 'position', 'workplace', 'bio'], kwargs.get('update_fields'))
 
 @receiver(pre_save, sender=Article)
 def translate_article(sender, instance, **kwargs):
-    auto_translate_fields(instance, ['title', 'abstract', 'keywords'])
+    auto_translate_fields(instance, ['title', 'abstract', 'keywords'], kwargs.get('update_fields'))
 
 @receiver(pre_save, sender=News)
 def translate_news(sender, instance, **kwargs):
-    auto_translate_fields(instance, ['title', 'content'])
+    auto_translate_fields(instance, ['title', 'content'], kwargs.get('update_fields'))
 
 @receiver(pre_save, sender=Conference)
 def translate_conference(sender, instance, **kwargs):
-    auto_translate_fields(instance, ['title', 'description'])
+    auto_translate_fields(instance, ['title', 'description'], kwargs.get('update_fields'))
 
 @receiver(pre_save, sender=Document)
 def translate_document(sender, instance, **kwargs):
-    auto_translate_fields(instance, ['title', 'description'])
+    auto_translate_fields(instance, ['title', 'description'], kwargs.get('update_fields'))

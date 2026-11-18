@@ -48,6 +48,9 @@ ALLOWED_HOSTS = [h.strip() for h in os.environ.get(
 if SITE_DOMAIN not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(SITE_DOMAIN)
 
+# PDF'larni nginx orqali uzatish (X-Accel-Redirect /media/ ga). Nginx /media/ ni xizmat qilsa True qiling.
+X_ACCEL_MEDIA = os.environ.get('X_ACCEL_MEDIA', 'False') == 'True'
+
 # Eski domendan yangisiga 301 yo'naltirish (DNS va SSL tayyor bo'lgach .env da REDIRECT_OLD_DOMAINS=True qiling)
 REDIRECT_OLD_DOMAINS = os.environ.get('REDIRECT_OLD_DOMAINS', 'False') == 'True'
 OLD_DOMAINS = [h.strip() for h in os.environ.get('OLD_DOMAINS', 'architect-edu.tift.uz').split(',') if h.strip()]
