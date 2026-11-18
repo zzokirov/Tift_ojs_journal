@@ -51,59 +51,74 @@
 
 <!-- ═══ SARLAVHA ═══ -->
 <section class="blueprint border-b" style="border-color:var(--line);">
-    <div class="site-container py-10 lg:py-14">
-        <nav aria-label="breadcrumb" class="flex flex-wrap items-center gap-2 text-xs mb-6" style="color:var(--muted);">
-            <a href="{% url 'index' current_journal.slug %}" class="ad-link transition-colors">{{ current_journal.title }}</a>
-            {% if article.issue %}
-                <i class="fas fa-chevron-right text-[8px] opacity-60"></i>
-                <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="ad-link transition-colors">
-                    {% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
-                </a>
-            {% endif %}
-        </nav>
+    <div class="site-container py-8 lg:py-10 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-8 lg:gap-12 items-start">
+        <div class="min-w-0">
+            <nav aria-label="breadcrumb" class="flex flex-wrap items-center gap-2 text-xs mb-4" style="color:var(--muted);">
+                <a href="{% url 'index' current_journal.slug %}" class="ad-link transition-colors">{{ current_journal.title }}</a>
+                {% if article.issue %}
+                    <i class="fas fa-chevron-right text-[8px] opacity-60"></i>
+                    <a href="{% url 'issue_detail' current_journal.slug article.issue.pk %}" class="ad-link transition-colors">
+                        {% blocktrans with vol=article.issue.volume num=article.issue.number %}Jild {{ vol }}, Son {{ num }}{% endblocktrans %}
+                    </a>
+                {% endif %}
+            </nav>
 
-        <div class="flex flex-wrap gap-2 mb-5">
-            {% if article.category %}
-                <span class="ad-chip">{{ article.category.code }} · {{ article.category.name }}</span>
-            {% endif %}
-            {% if article.issue %}
-                <span class="ad-chip ad-chip-plain">
-                    {% blocktrans with vol=article.issue.volume num=article.issue.number year=article.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}{% if article.start_page %} · {% blocktrans with start=article.start_page end=article.end_page %}(S. {{ start }}-{{ end }}){% endblocktrans %}{% endif %}
-                </span>
+            <div class="flex flex-wrap gap-2 mb-4">
+                {% if article.category %}
+                    <span class="ad-chip">{{ article.category.code }} · {{ article.category.name }}</span>
+                {% endif %}
+                {% if article.issue %}
+                    <span class="ad-chip ad-chip-plain">
+                        {% blocktrans with vol=article.issue.volume num=article.issue.number year=article.issue.year %}Jild {{ vol }}, Son {{ num }}, {{ year }}{% endblocktrans %}{% if article.start_page %} · {% blocktrans with start=article.start_page end=article.end_page %}(S. {{ start }}-{{ end }}){% endblocktrans %}{% endif %}
+                    </span>
+                {% endif %}
+            </div>
+
+            {# Katta harflar bilan yozilgan sarlavhalar kichikroq shriftda ko'rsatiladi #}
+            <h1 class="font-serif font-bold mb-4" style="color:var(--hero-ink);{% if article.title == article.title|upper %}font-size:clamp(1.2rem,1.9vw,1.65rem);line-height:1.3;letter-spacing:.01em;{% else %}font-size:clamp(1.4rem,2.3vw,2.05rem);line-height:1.25;{% endif %}">
+                {{ article.title }}
+            </h1>
+
+            <p class="text-base font-medium" style="color:var(--hero-ink);">
+                {{ author_name|default:_("Muallif ko'rsatilmagan") }}
+            </p>
+            {% if author_institution %}
+                <p class="text-sm mt-1" style="color:var(--muted);">{{ author_institution }}</p>
             {% endif %}
         </div>
 
-        <h1 class="font-serif font-bold leading-tight mb-5" style="color:var(--hero-ink);font-size:clamp(1.6rem,3.2vw,2.6rem);max-width:900px;">
-            {{ article.title }}
-        </h1>
-
-        <p class="text-base font-medium mb-4" style="color:var(--hero-ink);">
-            {{ author_name|default:_("Muallif ko'rsatilmagan") }}
-        </p>
-        {% if author_institution %}
-            <p class="text-sm -mt-2 mb-4" style="color:var(--muted);">{{ author_institution }}</p>
-        {% endif %}
-
-        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm mb-8" style="color:var(--muted);">
+        <!-- Tezkor harakatlar kartasi -->
+        <div class="ad-card p-5 shadow-sm">
+            <div class="grid grid-cols-3 gap-2 text-center mb-4">
+                <div>
+                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.views_count }}</div>
+                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Ko'rishlar" %}</div>
+                </div>
+                <div style="border-left:1px solid var(--line);border-right:1px solid var(--line);">
+                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.downloads_count }}</div>
+                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Yuklamalar" %}</div>
+                </div>
+                <div>
+                    <div class="text-lg font-bold" style="color:var(--hero-ink);">{% if article.start_page %}{{ article.start_page }}–{{ article.end_page }}{% else %}—{% endif %}</div>
+                    <div class="text-[11px]" style="color:var(--muted);">{% trans "Sahifalar" %}</div>
+                </div>
+            </div>
             {% if article.published_at %}
-                <span class="inline-flex items-center gap-1.5"><i class="far fa-calendar text-xs ad-accent"></i>{{ article.published_at|date:"d.m.Y" }}</span>
+            <p class="text-xs text-center mb-4" style="color:var(--muted);"><i class="far fa-calendar mr-1 ad-accent"></i>{% trans "Chop etilgan" %}: {{ article.published_at|date:"d.m.Y" }}</p>
             {% endif %}
-            <span class="inline-flex items-center gap-1.5"><i class="far fa-eye text-xs ad-accent"></i>{% blocktrans with count=article.views_count %}{{ count }} ko'rish{% endblocktrans %}</span>
-            <span class="inline-flex items-center gap-1.5"><i class="fas fa-arrow-down text-xs ad-accent"></i>{% blocktrans with count=article.downloads_count %}{{ count }} yuklab olish{% endblocktrans %}</span>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-            {% if article.pdf_file %}
-                <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-primary">
+            <div class="space-y-2">
+                {% if article.pdf_file %}
+                <a href="{% url 'article_pdf' current_journal.slug article.pk %}" target="_blank" rel="noopener" class="ad-btn ad-btn-primary w-full">
                     <i class="far fa-file-pdf"></i> {% trans "PDF ko'rish" %}
                 </a>
-                <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost">
+                <a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="ad-btn ad-btn-ghost w-full">
                     <i class="fas fa-download"></i> {% trans "Yuklab olish" %}
                 </a>
-            {% endif %}
-            <a href="#citation" class="ad-btn ad-btn-ghost">
-                <i class="fas fa-quote-right"></i> {% trans "Iqtibos keltirish" %}
-            </a>
+                {% endif %}
+                <a href="#citation" class="ad-btn ad-btn-ghost w-full">
+                    <i class="fas fa-quote-right"></i> {% trans "Iqtibos keltirish" %}
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -256,16 +271,6 @@
                     <div class="flex justify-between gap-3 py-2.5" style="border-color:var(--line);"><dt>ISSN</dt><dd>{{ current_journal.issn }}</dd></div>
                     {% endif %}
                 </dl>
-                <div class="grid grid-cols-2 gap-3 mt-4">
-                    <div class="rounded-xl p-3 text-center" style="background:var(--accent-soft);">
-                        <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.views_count }}</div>
-                        <div class="text-[11px]" style="color:var(--muted);">{% trans "Ko'rishlar" %}</div>
-                    </div>
-                    <div class="rounded-xl p-3 text-center" style="background:var(--accent-soft);">
-                        <div class="text-lg font-bold" style="color:var(--hero-ink);">{{ article.downloads_count }}</div>
-                        <div class="text-[11px]" style="color:var(--muted);">{% trans "Yuklamalar" %}</div>
-                    </div>
-                </div>
             </div>
 
             <div class="ad-card p-5">
