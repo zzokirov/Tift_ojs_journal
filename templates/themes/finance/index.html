@@ -17,7 +17,7 @@
 <!-- ═══ 1. HERO: qorong'i panel ═══ -->
 <section class="relative bg-fin-bg text-white overflow-hidden">
     <div class="absolute inset-0 grid-glow" aria-hidden="true"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-10 grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-10 lg:gap-14 items-center">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 lg:pt-14 pb-8 grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-10 lg:gap-14 items-center">
         <div class="min-w-0">
             <p class="fin-kicker text-fin-em inline-flex items-center gap-2">
                 <span class="h-1.5 w-1.5 rounded-full bg-fin-em animate-pulse"></span>
@@ -86,7 +86,7 @@
 
 <!-- ═══ 2. SO'NGGI SON MAQOLALARI ═══ -->
 <section class="bg-white border-b border-rule">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
         <div class="flex flex-wrap items-end justify-between gap-3 mb-8">
             <div>
                 <p class="fin-kicker text-terra">{% if latest_issue %}VOL {{ latest_issue.volume }} · NO {{ latest_issue.number }} · {{ latest_issue.year }}{% else %}{% if CURRENT_LANG == 'en' %}Articles{% else %}Maqolalar{% endif %}{% endif %}</p>
@@ -133,7 +133,7 @@
 </section>
 
 <!-- ═══ 3. SONLAR: panel kartalari ═══ -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 w-full">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 w-full">
     <div class="flex items-end justify-between gap-4 mb-8">
         <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{% trans "So'nggi sonlar" %}</h2>
         <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="inline-flex items-center gap-2 text-sm font-semibold text-terra hover:text-terra-dark whitespace-nowrap">{% trans "Barcha sonlar (Arxiv)" %} <i class="fas fa-arrow-right text-xs"></i></a>
@@ -167,7 +167,7 @@
 </section>
 
 <!-- ═══ 4. MUALLIFLARGA ═══ -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 lg:pb-20 w-full">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 lg:pb-14 w-full">
     <div class="rounded-3xl bg-fin-bg text-white p-8 sm:p-12 relative overflow-hidden">
         <div class="absolute inset-0 grid-glow opacity-80" aria-hidden="true"></div>
         <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -202,7 +202,7 @@
 
 <!-- ═══ 5. TAHRIRIYAT ═══ -->
 <section class="bg-white border-t border-rule">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
         <div class="flex items-end justify-between gap-4 mb-8">
             <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">{% trans "Tahririyat a'zolari" %}</h2>
             {% if staff %}<a href="{% url 'about' journal_slug=current_journal.slug %}" class="inline-flex items-center gap-2 text-sm font-semibold text-terra hover:text-terra-dark whitespace-nowrap">{% trans "Barcha tahririyat a'zolari" %} <i class="fas fa-arrow-right text-xs"></i></a>{% endif %}

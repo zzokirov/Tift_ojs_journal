@@ -37,7 +37,7 @@
         <path d="M20 400 V60 M14 60 H26 M14 400 H26" stroke="#b5532f"/>
     </svg>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center">
         <div class="min-w-0">
             <p class="arch-smallcaps text-terra">{% if CURRENT_LANG == 'ru' %}Научный журнал · Открытый доступ{% elif CURRENT_LANG == 'en' %}Scientific journal · Open access{% else %}Ilmiy jurnal · Ochiq kirish{% endif %}</p>
             <h1 class="mt-5 font-serif font-bold text-ink leading-[1.02] tracking-tight" style="font-size:clamp(2.4rem,5.5vw,4.6rem);">{{ current_journal.title }}</h1>
@@ -58,7 +58,7 @@
             </div>
 
             <!-- Chizma "shtampi": jurnal rekvizitlari -->
-            <dl class="arch-titleblock mt-10 grid grid-cols-2 sm:grid-cols-4 max-w-3xl border border-rule bg-white/70 backdrop-blur-sm text-left">
+            <dl class="arch-titleblock mt-8 grid grid-cols-2 sm:grid-cols-4 max-w-3xl border border-rule bg-white/70 backdrop-blur-sm text-left">
                 <div class="px-4 py-3"><dt class="arch-smallcaps text-stone">ISSN</dt><dd class="mt-1 font-semibold text-ink text-sm">{{ current_journal.issn|default:"—" }}</dd></div>
                 <div class="px-4 py-3"><dt class="arch-smallcaps text-stone">eISSN</dt><dd class="mt-1 font-semibold text-ink text-sm">{{ current_journal.eissn|default:"—" }}</dd></div>
                 <div class="px-4 py-3"><dt class="arch-smallcaps text-stone">{% if CURRENT_LANG == 'ru' %}Периодичность{% elif CURRENT_LANG == 'en' %}Frequency{% else %}Davriylik{% endif %}</dt><dd class="mt-1 font-semibold text-ink text-sm">{{ current_journal.publication_frequency }}</dd></div>
@@ -91,7 +91,7 @@
 
 <!-- ═══ 2. JORIY SON MUNDARIJASI ═══ -->
 <section class="bg-white border-b border-rule">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10 lg:gap-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10 lg:gap-16">
         <div class="lg:sticky lg:top-24 self-start">
             <p class="arch-smallcaps text-terra">{% if CURRENT_LANG == 'ru' %}Содержание{% elif CURRENT_LANG == 'en' %}Contents{% else %}Mundarija{% endif %}</p>
             {% if latest_issue %}
@@ -141,8 +141,8 @@
 </section>
 
 <!-- ═══ 3. SONLAR: chizma varaqlari ═══ -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 w-full">
-    <div class="flex items-end justify-between gap-4 mb-10">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 w-full">
+    <div class="flex items-end justify-between gap-4 mb-6">
         <div>
             <p class="arch-smallcaps text-terra">{% if CURRENT_LANG == 'ru' %}Архив{% elif CURRENT_LANG == 'en' %}Archive{% else %}Arxiv{% endif %}</p>
             <h2 class="mt-2 font-serif text-3xl sm:text-4xl font-bold text-ink">{% trans "So'nggi sonlar" %}</h2>
@@ -180,7 +180,7 @@
 
 <!-- ═══ 4. MUALLIFLARGA ═══ -->
 <section class="bg-ink text-paper">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
         <div class="lg:col-span-4">
             <p class="arch-smallcaps text-terra-light/80">{% trans "Mualliflarga" %}</p>
             <h2 class="mt-3 font-serif text-3xl sm:text-4xl font-bold leading-tight">{% if CURRENT_LANG == 'ru' %}Как опубликовать статью?{% elif CURRENT_LANG == 'en' %}How to publish?{% else %}Maqolani qanday chop etish mumkin?{% endif %}</h2>
@@ -211,7 +211,7 @@
 
 <!-- ═══ 5. TAHRIRIYAT ═══ -->
 <section class="bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
         <div class="flex items-end justify-between gap-4 mb-8">
             <h2 class="font-serif text-3xl sm:text-4xl font-bold text-ink">{% trans "Tahririyat a'zolari" %}</h2>
             {% if staff %}<a href="{% url 'about' journal_slug=current_journal.slug %}" class="inline-flex items-center gap-2 text-sm font-semibold text-terra hover:text-terra-dark whitespace-nowrap">{% trans "Barcha tahririyat a'zolari" %} <i class="fas fa-arrow-right text-xs"></i></a>{% endif %}

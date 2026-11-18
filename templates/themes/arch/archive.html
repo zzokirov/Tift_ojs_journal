@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Arxiv" %} — {{ current_journal.title }}{% endblock %}
+
+{% block content %}
+{% get_current_language as CURRENT_LANG %}
+{% include 'themes/arch/_styles.html' %}
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 w-full">
+    <div class="flex flex-wrap items-end justify-between gap-3 border-b-2 border-ink pb-4">
+        <div>
+            <p class="arch-smallcaps text-terra">{{ current_journal.title }}</p>
+            <h1 class="mt-1 font-serif text-3xl sm:text-4xl font-bold text-ink">{% trans "Arxiv" %}</h1>
+        </div>
+        <p class="text-sm text-stone">{% blocktrans count counter=issues|length %}{{ counter }} ta son{% plural %}{{ counter }} ta son{% endblocktrans %}</p>
+    </div>
+
+    {% if issues %}
+    <ol>
+        {% for issue in issues %}
+        {% ifchanged issue.year %}
+        <li class="pt-6 pb-2"><span class="arch-smallcaps text-stone">{{ issue.year }}</span></li>
+        {% endifchanged %}
+        <li class="border-b border-rule">
+            <a href="{% url 'issue_detail' current_journal.slug issue.pk %}" class="group grid grid-cols-[3.25rem_1fr_auto] sm:grid-cols-[3.25rem_4.5rem_1fr_auto] items-center gap-4 sm:gap-6 py-4">
+                <span class="font-serif text-4xl font-bold leading-none text-rule group-hover:text-terra transition">{{ issue.number }}</span>
+                <span class="hidden sm:block w-[4.5rem] aspect-[210/297] ring-1 ring-rule overflow-hidden bg-white">
+                    {% if issue.cover_image %}<img src="{{ issue.cover_image.url }}" alt="" class="w-full h-full object-cover" loading="lazy">
+                    {% else %}<span class="block w-full h-full arch-sheet"></span>{% endif %}
+                </span>
+                <span class="min-w-0">
+                    <span class="block font-serif text-lg sm:text-xl font-semibold text-ink group-hover:text-terra transition">
+                        {% if CURRENT_LANG == 'ru' %}Том {{ issue.volume }}, выпуск {{ issue.number }}{% elif CURRENT_LANG == 'en' %}Volume {{ issue.volume }}, issue {{ issue.number }}{% else %}{{ issue.volume }}-jild, {{ issue.number }}-son{% endif %}{% if issue.title %} — {{ issue.title }}{% endif %}
+                    </span>
+                    <span class="mt-1 block text-sm text-stone">
+                        {% if issue.period %}{{ issue.period }} · {% endif %}{% if issue.publication_date %}{{ issue.publication_date|date:"d.m.Y" }} · {% endif %}{% blocktrans count counter=issue.articles.count %}{{ counter }} ta maqola{% plural %}{{ counter }} ta maqola{% endblocktrans %}
+                    </span>
+                </span>
+                <i class="fas fa-arrow-right text-sm text-stone group-hover:text-terra group-hover:translate-x-1 transition"></i>
+            </a>
+        </li>
+        {% endfor %}
+    </ol>
+    {% else %}
+        <p class="py-12 text-stone">{% trans "Hozircha nashr etilgan sonlar mavjud emas" %}</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{% blocktrans with year=issue.year num=issue.number %}{{ year }}-yil, {{ num }}-son | TIFT Jurnali{% endblocktrans %}{% endblock %}
+
+{% block content %}
+{% get_current_language as CURRENT_LANG %}
+{% include 'themes/arch/_styles.html' %}
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 w-full grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 lg:gap-14">
+    <!-- Chap ustun: son haqida -->
+    <aside class="lg:sticky lg:top-24 self-start">
+        <a href="{% url 'archive' current_journal.slug %}" class="inline-flex items-center gap-1.5 text-sm text-stone hover:text-terra transition"><i class="fas fa-arrow-left text-xs"></i>{% trans "Arxiv" %}</a>
+        <div class="mt-4 flex lg:block gap-5 items-start">
+            <div class="w-24 lg:w-full shrink-0 aspect-[210/297] ring-1 ring-rule overflow-hidden bg-white">
+                {% if issue.cover_image %}<img src="{{ issue.cover_image.url }}" alt="№ {{ issue.number }} — {{ issue.year }}" class="w-full h-full object-cover">
+                {% else %}<div class="w-full h-full arch-sheet flex items-center justify-center font-serif font-bold text-ink" style="font-size:3.5rem;">{{ issue.number }}</div>{% endif %}
+            </div>
+            <div class="lg:mt-5 min-w-0">
+                <p class="arch-smallcaps text-terra">{{ current_journal.title }}</p>
+                <h1 class="mt-1 font-serif text-3xl font-bold text-ink leading-tight">№{{ issue.number }} · {{ issue.year }}</h1>
+                <p class="mt-1 text-sm text-stone">{% if CURRENT_LANG == 'ru' %}Том {{ issue.volume }}{% elif CURRENT_LANG == 'en' %}Volume {{ issue.volume }}{% else %}{{ issue.volume }}-jild{% endif %} · {% blocktrans with count=articles.count %}{{ count }} ta maqola{% endblocktrans %}</p>
+                {% if issue.title %}<p class="mt-2 text-sm text-ink">{{ issue.title }}</p>{% endif %}
+                <a href="{% url 'download_issue_pdf' current_journal.slug issue.pk %}" class="mt-4 inline-flex items-center gap-2 bg-ink hover:bg-terra text-paper px-4 py-2.5 text-sm font-semibold transition">
+                    <i class="fas fa-download text-xs"></i>{% if CURRENT_LANG == 'ru' %}Скачать выпуск{% elif CURRENT_LANG == 'en' %}Download issue{% else %}To'liq sonni yuklab olish{% endif %}
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- O'ng ustun: mundarija -->
+    <div class="min-w-0 arch-toc">
+        {% if grouped_categories %}
+            {% for group in grouped_categories %}
+            <div class="{% if not forloop.first %}mt-10{% endif %}">
+                <h2 class="arch-smallcaps text-stone pb-3 border-b-2 border-ink">
+                    {% if group.category %}{% if CURRENT_LANG == 'ru' and group.category.name_ru %}{{ group.category.name_ru }}{% elif CURRENT_LANG == 'en' and group.category.name_en %}{{ group.category.name_en }}{% else %}{{ group.category.name_uz|default:group.category.name }}{% endif %}{% else %}{% trans "Ilmiy maqolalar" %}{% endif %}
+                </h2>
+                <ol>
+                    {% for article in group.articles %}
+                    <li class="border-b border-rule arch-toc-item grid grid-cols-[2.5rem_1fr] sm:grid-cols-[3.25rem_1fr_auto] gap-x-4 py-5">
+                        <span class="font-serif text-2xl sm:text-3xl font-bold text-rule leading-none pt-1 arch-toc-num" aria-hidden="true"></span>
+                        <div class="min-w-0">
+                            <a href="{% url 'article_detail' current_journal.slug article.pk %}" class="block font-serif text-lg font-semibold leading-snug text-ink hover:text-terra transition">{% if CURRENT_LANG == 'ru' and article.title_ru %}{{ article.title_ru }}{% elif CURRENT_LANG == 'en' and article.title_en %}{{ article.title_en }}{% else %}{{ article.title_uz|default:article.title }}{% endif %}</a>
+                            <p class="mt-1.5 text-sm text-stone">{% if article.authors %}{{ article.authors }}{% else %}{{ article.author.get_full_name|default:article.author.username }}{% endif %}</p>
+                            <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                                <a href="{% url 'article_detail' current_journal.slug article.pk %}" class="font-semibold text-terra hover:underline underline-offset-4">{% if CURRENT_LANG == 'ru' %}Читать{% elif CURRENT_LANG == 'en' %}Read{% else %}O'qish{% endif %}</a>
+                                {% if article.pdf_file %}<a href="{% url 'download_pdf' current_journal.slug article.pk %}" class="text-stone hover:text-terra">PDF <i class="fas fa-arrow-down text-[10px]"></i></a>{% endif %}
+                            </p>
+                        </div>
+                        {% if article.start_page and article.end_page %}
+                        <span class="col-start-2 sm:col-start-3 mt-1 text-sm text-stone whitespace-nowrap font-mono">{{ article.start_page }}–{{ article.end_page }}</span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ol>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="py-12 text-stone">{% trans "Hozircha maqolalar mavjud emas." %}</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

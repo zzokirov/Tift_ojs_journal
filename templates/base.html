@@ -85,6 +85,13 @@
         :root { --accent:#16a34a; --accent-dark:#15803d; --accent-soft:#f0fdf4; --accent-line:#bbf7d0; --hero-ink:#0a1628; --surface:#ffffff; --line:#e5e7eb; --muted:#64748b; }
         .theme-arch { --accent:#b5532f; --accent-dark:#9a4425; --accent-soft:#f6ebe3; --accent-line:#e6cbb9; --hero-ink:#1c1b19; --line:#e4dccf; --muted:#7a7166; }
         .theme-finance { --accent:#059669; --accent-dark:#047857; --accent-soft:#ecfdf5; --accent-line:#a7f3d0; --hero-ink:#0b1220; --line:#e2e8f0; }
+        /* Arxitektura jurnali: kartasiz, chiziqli (o'tkir burchakli) uslub */
+        .theme-arch main [class*="rounded"] { border-radius: 0 !important; }
+        .theme-arch main [class*="shadow"] { box-shadow: none !important; }
+        .theme-arch .ad-card { background: transparent; border: 0; border-top: 2px solid var(--hero-ink); border-radius: 0; }
+        .theme-arch .ad-btn, .theme-arch .ad-chip, .theme-arch .ad-icon-btn { border-radius: 0; }
+        .theme-arch main .bg-white:not(img) { background-color: transparent !important; }
+        .theme-arch main [class*="border-dashed"] { border-style: solid !important; border-width: 0 !important; border-top: 1px solid #d9d2c5 !important; }
         body { font-family: 'Inter', sans-serif; }
 
         /* Responsive container — to'liq full-width, faqat padding */

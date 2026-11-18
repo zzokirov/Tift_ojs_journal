@@ -291,7 +291,9 @@ def index(request, journal_slug):
 def archive(request, journal_slug):
     current_journal = _get_current_journal(journal_slug)
     issues = JournalIssue.objects.filter(journal=current_journal, is_published=True).order_by('-year', '-number')
-    return render(request, 'archive.html', {'current_journal': current_journal, 'issues': issues})
+    from .context_processors import journal_theme_for_slug
+    theme = journal_theme_for_slug(current_journal.slug)
+    return render(request, [f'themes/{theme}/archive.html', 'archive.html'], {'current_journal': current_journal, 'issues': issues})
 
 
 def about(request, journal_slug):
@@ -340,7 +342,9 @@ def issue_detail(request, journal_slug, issue_pk):
             'articles': uncategorized
         })
 
-    return render(request, 'journal/issue_detail.html', {
+    from .context_processors import journal_theme_for_slug
+    theme = journal_theme_for_slug(current_journal.slug)
+    return render(request, [f'themes/{theme}/issue_detail.html', 'journal/issue_detail.html'], {
         'current_journal': current_journal,
         'issue': issue,
         'articles': articles,
