@@ -40,28 +40,28 @@
 
     <!-- ═══ HEADER ═══ -->
     <header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
             <a href="{% url 'portal_home' %}" class="flex items-center gap-3 min-w-0">
-                <img src="{% static 'images/tift.png' %}" alt="TIFT" class="h-9 w-9 rounded-xl bg-white p-1 ring-1 ring-slate-200 shrink-0">
+                <img src="{% static 'images/tift.png' %}" alt="TIFT" class="h-12 w-12 rounded-xl bg-white p-1.5 ring-1 ring-slate-200 shrink-0">
                 <span class="leading-tight min-w-0">
-                    <span class="block font-extrabold text-navy-900 tracking-tight">TIFT</span>
-                    <span class="block text-xs text-slate-500 truncate">{% if L == 'ru' %}Научные журналы{% elif L == 'en' %}Scientific journals{% else %}Ilmiy jurnallar{% endif %}</span>
+                    <span class="block text-lg font-extrabold text-navy-900 tracking-tight">TIFT</span>
+                    <span class="block text-sm text-slate-500 truncate">{% if L == 'ru' %}Научные журналы{% elif L == 'en' %}Scientific journals{% else %}Ilmiy jurnallar{% endif %}</span>
                 </span>
             </a>
 
-            <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
-                <a href="{% url 'portal_home' %}" class="px-3.5 py-2 rounded-full bg-navy-900 text-white">{% trans "Bosh sahifa" %}</a>
-                <a href="#journals-section" class="px-3.5 py-2 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Jurnallar" %}</a>
-                <a href="#authors-section" class="px-3.5 py-2 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Mualliflar uchun" %}</a>
-                <a href="#about-section" class="px-3.5 py-2 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Biz haqimizda" %}</a>
-                <a href="#contact-section" class="px-3.5 py-2 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Aloqa" %}</a>
+            <nav class="hidden md:flex items-center gap-1.5 text-[0.95rem] font-medium">
+                <a href="{% url 'portal_home' %}" class="px-4 py-2.5 rounded-full bg-navy-900 text-white">{% trans "Bosh sahifa" %}</a>
+                <a href="#journals-section" class="px-4 py-2.5 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Jurnallar" %}</a>
+                <a href="#authors-section" class="px-4 py-2.5 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Mualliflar uchun" %}</a>
+                <a href="#about-section" class="px-4 py-2.5 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Biz haqimizda" %}</a>
+                <a href="#contact-section" class="px-4 py-2.5 rounded-full text-slate-600 hover:text-navy-900 hover:bg-slate-100 transition">{% trans "Aloqa" %}</a>
             </nav>
 
             <div class="flex items-center gap-2">
-                <div class="flex items-center rounded-full bg-slate-100 p-0.5 text-xs font-semibold" role="group" aria-label="Language">
-                    <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full transition {% if L == 'uz' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">UZ</a>
-                    <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full transition {% if L == 'ru' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">RU</a>
-                    <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full transition {% if L == 'en' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">EN</a>
+                <div class="flex items-center rounded-full bg-slate-100 p-1 text-sm font-semibold" role="group" aria-label="Language">
+                    <a href="{% url 'switch_language' lang_code='uz' %}?next={{ request.get_full_path|urlencode }}" class="px-3 py-1.5 rounded-full transition {% if L == 'uz' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">UZ</a>
+                    <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="px-3 py-1.5 rounded-full transition {% if L == 'ru' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">RU</a>
+                    <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="px-3 py-1.5 rounded-full transition {% if L == 'en' %}bg-white text-brand shadow-sm{% else %}text-slate-500 hover:text-navy-900{% endif %}">EN</a>
                 </div>
                 <button id="mobile-menu-btn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-slate-200 text-slate-700" aria-label="Menu">
                     <i class="fas fa-bars"></i>
@@ -132,7 +132,7 @@
         </section>
 
         <!-- ═══ JURNALLAR ═══ -->
-        <section id="journals-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-20">
+        <section id="journals-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-24">
             <div class="flex items-end justify-between gap-4 mb-8">
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy-900">{% trans "Jurnallar" %}</h2>
@@ -141,33 +141,33 @@
             </div>
 
             {% if journals %}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                 {% for journal in journals %}
                 {% if journal.theme == 'arch' %}
                 <!-- Arxitektura: chizma varag'i -->
                 <a href="{% url 'index' journal_slug=journal.slug %}" class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#f5f1ea] ring-1 ring-[#d9d2c5] hover:shadow-2xl hover:shadow-[#b5532f]/10 hover:-translate-y-1 transition duration-300">
                     <div class="absolute inset-0 jc-blueprint" aria-hidden="true"></div>
-                    <div class="relative flex gap-6 p-6 sm:p-8">
+                    <div class="relative flex gap-4 p-5 sm:p-6">
                         <div class="min-w-0 flex-1">
                             <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-[#b5532f]">{% if journal.issn %}ISSN {{ journal.issn }}{% else %}TIFT{% endif %}</p>
-                            <h3 class="mt-3 serif text-2xl sm:text-3xl font-bold leading-tight text-[#1c1b19]">{{ journal.title }}</h3>
+                            <h3 class="mt-3 serif text-xl sm:text-2xl font-bold leading-tight text-[#1c1b19]">{{ journal.title }}</h3>
                             <div class="mt-4 h-px w-16 bg-[#b5532f]"></div>
                             {% with desc=journal.short_description|default:journal.full_description %}
                             {% if desc %}<p class="mt-4 text-sm text-[#1c1b19]/70 leading-relaxed line-clamp-3">{{ desc|striptags }}</p>{% endif %}
                             {% endwith %}
                         </div>
-                        <div class="hidden sm:block w-28 shrink-0 rotate-2 group-hover:rotate-0 transition duration-500">
+                        <div class="hidden sm:block w-20 shrink-0 rotate-2 group-hover:rotate-0 transition duration-500">
                             <div class="aspect-[210/297] overflow-hidden bg-white shadow-xl ring-1 ring-[#d9d2c5]">
                                 {% if journal.get_cover_for_language %}<img src="{{ journal.get_cover_for_language.url }}" alt="{{ journal.title }}" class="w-full h-full object-cover" loading="lazy">
-                                {% else %}<div class="w-full h-full jc-blueprint bg-[#fbf9f5] p-3 flex flex-col justify-between"><span class="text-[9px] font-bold tracking-[0.2em]">TIFT</span><p class="serif text-sm font-bold leading-tight">{{ journal.title }}</p></div>{% endif %}
+                                {% else %}<div class="w-full h-full jc-blueprint bg-[#fbf9f5] p-3 flex flex-col justify-between"><span class="text-[9px] font-bold tracking-[0.2em]">TIFT</span><p class="serif text-[11px] font-bold leading-tight break-words line-clamp-4">{{ journal.title }}</p></div>{% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="relative mt-auto grid grid-cols-3 border-t border-[#d9d2c5] text-[#1c1b19]">
-                        <div class="px-6 sm:px-8 py-4"><p class="serif text-2xl font-bold">{{ journal.published_count }}</p><p class="text-xs text-[#8a8174]">{% if L == 'ru' %}статей{% elif L == 'en' %}articles{% else %}maqola{% endif %}</p></div>
+                        <div class="px-5 sm:px-6 py-3.5"><p class="serif text-2xl font-bold">{{ journal.published_count }}</p><p class="text-xs text-[#8a8174]">{% if L == 'ru' %}статей{% elif L == 'en' %}articles{% else %}maqola{% endif %}</p></div>
                         <div class="px-4 py-4 border-l border-[#d9d2c5]"><p class="serif text-2xl font-bold">{{ journal.issue_count }}</p><p class="text-xs text-[#8a8174]">{% if L == 'ru' %}выпусков{% elif L == 'en' %}issues{% else %}son{% endif %}</p></div>
-                        <div class="px-4 py-4 border-l border-[#d9d2c5] flex items-center justify-end gap-2 text-sm font-semibold text-[#b5532f] pr-6 sm:pr-8">
-                            <span class="hidden sm:inline">{% if L == 'ru' %}Открыть{% elif L == 'en' %}Open{% else %}Ochish{% endif %}</span>
+                        <div class="px-4 py-4 border-l border-[#d9d2c5] flex items-center justify-end gap-2 text-sm font-semibold text-[#b5532f] pr-5 sm:pr-6">
+                            <span class="hidden 2xl:inline">{% if L == 'ru' %}Открыть{% elif L == 'en' %}Open{% else %}Ochish{% endif %}</span>
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-[#b5532f]/40 group-hover:bg-[#b5532f] group-hover:text-white transition"><i class="fas fa-arrow-right text-xs"></i></span>
                         </div>
                     </div>
@@ -176,26 +176,26 @@
                 <!-- Moliya: ma'lumotlar paneli -->
                 <a href="{% url 'index' journal_slug=journal.slug %}" class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#0b1220] text-white ring-1 ring-[#1f2b45] hover:ring-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1 transition duration-300">
                     <div class="absolute inset-0 jc-glow" aria-hidden="true"></div>
-                    <div class="relative flex gap-6 p-6 sm:p-8">
+                    <div class="relative flex gap-4 p-5 sm:p-6">
                         <div class="min-w-0 flex-1">
                             <p class="mono text-[11px] tracking-[0.14em] uppercase text-emerald-400 inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>{% if journal.issn %}ISSN {{ journal.issn }}{% else %}TIFT{% endif %}</p>
-                            <h3 class="mt-3 text-2xl sm:text-3xl font-extrabold leading-tight bg-gradient-to-r from-emerald-300 to-cyan-300 bg-clip-text text-transparent">{{ journal.title }}</h3>
+                            <h3 class="mt-3 text-xl sm:text-2xl font-extrabold leading-tight bg-gradient-to-r from-emerald-300 to-cyan-300 bg-clip-text text-transparent">{{ journal.title }}</h3>
                             {% with desc=journal.short_description|default:journal.full_description %}
                             {% if desc %}<p class="mt-4 text-sm text-slate-400 leading-relaxed line-clamp-3">{{ desc|striptags }}</p>{% endif %}
                             {% endwith %}
                         </div>
-                        <div class="hidden sm:block w-28 shrink-0">
+                        <div class="hidden sm:block w-20 shrink-0">
                             <div class="aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-[#1f2b45] shadow-xl shadow-black/40">
                                 {% if journal.get_cover_for_language %}<img src="{{ journal.get_cover_for_language.url }}" alt="{{ journal.title }}" class="w-full h-full object-cover" loading="lazy">
-                                {% else %}<div class="w-full h-full bg-[#111a2e] p-3 flex flex-col justify-between"><span class="mono text-[9px] text-emerald-400">TIFT</span><p class="text-xs font-bold leading-tight">{{ journal.title }}</p></div>{% endif %}
+                                {% else %}<div class="w-full h-full bg-[#111a2e] p-3 flex flex-col justify-between"><span class="mono text-[9px] text-emerald-400">TIFT</span><p class="text-[11px] font-bold leading-tight break-words line-clamp-4">{{ journal.title }}</p></div>{% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="relative mt-auto grid grid-cols-3 border-t border-[#1f2b45]">
-                        <div class="px-6 sm:px-8 py-4"><p class="mono text-2xl font-bold">{{ journal.published_count }}</p><p class="text-xs text-slate-500">{% if L == 'ru' %}статей{% elif L == 'en' %}articles{% else %}maqola{% endif %}</p></div>
+                        <div class="px-5 sm:px-6 py-3.5"><p class="mono text-2xl font-bold">{{ journal.published_count }}</p><p class="text-xs text-slate-500">{% if L == 'ru' %}статей{% elif L == 'en' %}articles{% else %}maqola{% endif %}</p></div>
                         <div class="px-4 py-4 border-l border-[#1f2b45]"><p class="mono text-2xl font-bold">{{ journal.issue_count }}</p><p class="text-xs text-slate-500">{% if L == 'ru' %}выпусков{% elif L == 'en' %}issues{% else %}son{% endif %}</p></div>
-                        <div class="px-4 py-4 border-l border-[#1f2b45] flex items-center justify-end gap-2 text-sm font-semibold text-emerald-400 pr-6 sm:pr-8">
-                            <span class="hidden sm:inline">{% if L == 'ru' %}Открыть{% elif L == 'en' %}Open{% else %}Ochish{% endif %}</span>
+                        <div class="px-4 py-4 border-l border-[#1f2b45] flex items-center justify-end gap-2 text-sm font-semibold text-emerald-400 pr-5 sm:pr-6">
+                            <span class="hidden 2xl:inline">{% if L == 'ru' %}Открыть{% elif L == 'en' %}Open{% else %}Ochish{% endif %}</span>
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg ring-1 ring-emerald-500/40 group-hover:bg-emerald-500 group-hover:text-[#0b1220] transition"><i class="fas fa-arrow-right text-xs"></i></span>
                         </div>
                     </div>
@@ -203,25 +203,25 @@
                 {% else %}
                 <!-- Standart jurnal -->
                 <a href="{% url 'index' journal_slug=journal.slug %}" class="group relative flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200 hover:ring-brand/40 hover:shadow-2xl hover:shadow-slate-200 hover:-translate-y-1 transition duration-300">
-                    <div class="flex gap-6 p-6 sm:p-8">
+                    <div class="flex gap-4 p-5 sm:p-6">
                         <div class="min-w-0 flex-1">
                             <p class="text-[11px] font-bold tracking-[0.14em] uppercase text-brand">{% if journal.issn %}ISSN {{ journal.issn }}{% else %}TIFT{% endif %}</p>
-                            <h3 class="mt-3 text-2xl sm:text-3xl font-extrabold leading-tight text-navy-900">{{ journal.title }}</h3>
+                            <h3 class="mt-3 text-xl sm:text-2xl font-extrabold leading-tight text-navy-900">{{ journal.title }}</h3>
                             {% with desc=journal.short_description|default:journal.full_description %}
                             {% if desc %}<p class="mt-4 text-sm text-slate-600 leading-relaxed line-clamp-3">{{ desc|striptags }}</p>{% endif %}
                             {% endwith %}
                         </div>
-                        <div class="hidden sm:block w-28 shrink-0">
+                        <div class="hidden sm:block w-20 shrink-0">
                             <div class="aspect-[3/4] overflow-hidden rounded-xl ring-1 ring-slate-200 shadow-lg">
                                 {% if journal.get_cover_for_language %}<img src="{{ journal.get_cover_for_language.url }}" alt="{{ journal.title }}" class="w-full h-full object-cover" loading="lazy">
-                                {% else %}<div class="w-full h-full bg-gradient-to-br from-brand-dark to-brand p-3 text-white flex flex-col justify-between"><span class="text-[9px] font-black text-blue-200">TIFT</span><p class="text-xs font-bold leading-tight">{{ journal.title }}</p></div>{% endif %}
+                                {% else %}<div class="w-full h-full bg-gradient-to-br from-brand-dark to-brand p-3 text-white flex flex-col justify-between"><span class="text-[9px] font-black text-blue-200">TIFT</span><p class="text-[11px] font-bold leading-tight break-words line-clamp-4">{{ journal.title }}</p></div>{% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="mt-auto grid grid-cols-3 border-t border-slate-100">
-                        <div class="px-6 sm:px-8 py-4"><p class="text-2xl font-extrabold text-navy-900">{{ journal.published_count }}</p><p class="text-xs text-slate-500">{% if L == 'ru' %}статей{% elif L == 'en' %}articles{% else %}maqola{% endif %}</p></div>
+                        <div class="px-5 sm:px-6 py-3.5"><p class="text-2xl font-extrabold text-navy-900">{{ journal.published_count }}</p><p class="text-xs text-slate-500">{% if L == 'ru' %}статей{% elif L == 'en' %}articles{% else %}maqola{% endif %}</p></div>
                         <div class="px-4 py-4 border-l border-slate-100"><p class="text-2xl font-extrabold text-navy-900">{{ journal.issue_count }}</p><p class="text-xs text-slate-500">{% if L == 'ru' %}выпусков{% elif L == 'en' %}issues{% else %}son{% endif %}</p></div>
-                        <div class="px-4 py-4 border-l border-slate-100 flex items-center justify-end gap-2 text-sm font-semibold text-brand pr-6 sm:pr-8">
+                        <div class="px-4 py-4 border-l border-slate-100 flex items-center justify-end gap-2 text-sm font-semibold text-brand pr-5 sm:pr-6">
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand-light group-hover:bg-brand group-hover:text-white transition"><i class="fas fa-arrow-right text-xs"></i></span>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
         {% endif %}
 
         <!-- ═══ MUALLIFLAR UCHUN: 3 qadam ═══ -->
-        <section id="authors-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 scroll-mt-20">
+        <section id="authors-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 scroll-mt-24">
             <div class="rounded-3xl bg-navy-900 text-white p-8 sm:p-10 relative overflow-hidden">
                 <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand/40 blur-3xl" aria-hidden="true"></div>
                 <div class="relative">
@@ -294,7 +294,7 @@
         </section>
 
         <!-- ═══ BIZ HAQIMIZDA ═══ -->
-        <section id="about-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 scroll-mt-20">
+        <section id="about-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 scroll-mt-24">
             <div class="rounded-3xl bg-white ring-1 ring-slate-200 p-8 sm:p-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
                 <div class="lg:col-span-2">
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy-900">{% trans "Biz haqimizda" %}</h2>
