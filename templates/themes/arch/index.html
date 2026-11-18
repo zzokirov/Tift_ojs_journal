@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n journal_i18n %}
 
 {% block title %}{{ current_journal.title }} — TIFT{% endblock %}
 
@@ -61,7 +61,7 @@
             <dl class="arch-titleblock mt-8 grid grid-cols-2 sm:grid-cols-4 max-w-3xl border border-rule bg-white/70 backdrop-blur-sm text-left">
                 <div class="px-4 py-3"><dt class="arch-smallcaps text-stone">ISSN</dt><dd class="mt-1 font-semibold text-ink text-sm">{{ current_journal.issn|default:"—" }}</dd></div>
                 <div class="px-4 py-3"><dt class="arch-smallcaps text-stone">eISSN</dt><dd class="mt-1 font-semibold text-ink text-sm">{{ current_journal.eissn|default:"—" }}</dd></div>
-                <div class="px-4 py-3"><dt class="arch-smallcaps text-stone">{% if CURRENT_LANG == 'ru' %}Периодичность{% elif CURRENT_LANG == 'en' %}Frequency{% else %}Davriylik{% endif %}</dt><dd class="mt-1 font-semibold text-ink text-sm">{{ current_journal.publication_frequency }}</dd></div>
+                <div class="px-4 py-3"><dt class="arch-smallcaps text-stone">{% if CURRENT_LANG == 'ru' %}Периодичность{% elif CURRENT_LANG == 'en' %}Frequency{% else %}Davriylik{% endif %}</dt><dd class="mt-1 font-semibold text-ink text-sm">{{ current_journal.publication_frequency|frequency }}</dd></div>
                 <div class="px-4 py-3"><dt class="arch-smallcaps text-stone">{% if CURRENT_LANG == 'ru' %}Статей{% elif CURRENT_LANG == 'en' %}Articles{% else %}Maqolalar{% endif %}</dt><dd class="mt-1 font-semibold text-ink text-sm">{{ total_articles }}</dd></div>
             </dl>
         </div>

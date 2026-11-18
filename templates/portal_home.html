@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n journal_i18n %}
 {% get_current_language as L %}
 <!DOCTYPE html>
 <html lang="{{ L|default:'uz' }}" class="scroll-smooth">
@@ -89,11 +89,9 @@
                     <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full transition {% if L == 'ru' %}is-on{% endif %}">RU</a>
                     <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full transition {% if L == 'en' %}is-on{% endif %}">EN</a>
                 </div>
-                {% if user.is_authenticated %}
-                <a href="{% url 'my_articles' %}" class="hdr-btn hidden sm:inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition hover:bg-white/10"><i class="far fa-user"></i>{% if L == 'ru' %}Кабинет{% elif L == 'en' %}My account{% else %}Kabinet{% endif %}</a>
-                {% else %}
-                <a href="{% url 'login' %}" class="hdr-btn hidden sm:inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition hover:bg-white/10"><i class="far fa-user"></i>{% if L == 'ru' %}Войти{% elif L == 'en' %}Sign in{% else %}Kirish{% endif %}</a>
-                {% endif %}
+                <button type="button" onclick="openSubmitModal()" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-brand hover:bg-brand-dark text-white px-4 py-2.5 text-sm font-semibold shadow-lg shadow-blue-900/30 transition whitespace-nowrap">
+                    <i class="fas fa-paper-plane text-xs" aria-hidden="true"></i>{% trans "Maqolani yuborish" %}
+                </button>
                 <button id="mobile-menu-btn" class="hdr-btn lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border transition" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -111,14 +109,13 @@
                     <a href="{% url 'switch_language' lang_code='ru' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full {% if L == 'ru' %}bg-navy-900 text-white{% else %}bg-slate-100{% endif %}">RU</a>
                     <a href="{% url 'switch_language' lang_code='en' %}?next={{ request.get_full_path|urlencode }}" class="px-2.5 py-1.5 rounded-full {% if L == 'en' %}bg-navy-900 text-white{% else %}bg-slate-100{% endif %}">EN</a>
                 </div>
-                {% if user.is_authenticated %}<a href="{% url 'my_articles' %}" class="px-3 py-2 rounded-xl text-brand font-semibold">{% if L == 'ru' %}Кабинет{% elif L == 'en' %}My account{% else %}Kabinet{% endif %}</a>
-                {% else %}<a href="{% url 'login' %}" class="px-3 py-2 rounded-xl text-brand font-semibold">{% if L == 'ru' %}Войти{% elif L == 'en' %}Sign in{% else %}Kirish{% endif %}</a>{% endif %}
+                <button type="button" onclick="document.getElementById('mobile-menu').classList.add('hidden');openSubmitModal()" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-brand text-white text-sm font-semibold"><i class="fas fa-paper-plane text-xs"></i>{% trans "Maqolani yuborish" %}</button>
             </div>
         </div>
     </header>
 
     <!-- ═══ HERO COVER (100vh, sticky: katalog uning ustiga chiqadi) ═══ -->
-    <section id="hero" class="sticky top-0 z-0 h-[100svh] min-h-[600px] overflow-hidden bg-[#071426] text-white" aria-label="{% trans "TIFT Ilmiy Jurnallari" %}">
+    <section id="hero" class="sticky top-0 z-0 min-h-[100svh] overflow-hidden bg-[#071426] text-white" aria-label="{% trans "TIFT Ilmiy Jurnallari" %}">
         <div id="hero-bg" class="absolute inset-0 will-change-transform" aria-hidden="true">
             <div class="absolute inset-0 bg-gradient-to-b from-[#071426] via-[#0d2547] to-[#14366a]"></div>
             <div class="absolute -top-40 right-[-10%] h-[38rem] w-[38rem] rounded-full bg-sky-400/20 blur-3xl"></div>
@@ -128,11 +125,11 @@
             <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#071426]/80 to-transparent"></div>
         </div>
 
-        <div id="hero-content" class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center pt-20 pb-24 will-change-transform">
-            <h1 class="max-w-3xl font-extrabold tracking-tight leading-[1.02]" style="font-size:clamp(2.6rem,7vw,5.25rem);">
+        <div id="hero-content" class="relative min-h-[100svh] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center pt-28 pb-28 will-change-transform">
+            <h1 class="font-extrabold tracking-tight leading-[1.05] lg:whitespace-nowrap" style="font-size:clamp(2.3rem,4.6vw,4.1rem);">
                 {% if L == 'ru' %}Научные журналы <span class="text-sky-300">TIFT</span>{% elif L == 'en' %}<span class="text-sky-300">TIFT</span> Scientific Journals{% else %}<span class="text-sky-300">TIFT</span> ilmiy jurnallari{% endif %}
             </h1>
-            <p class="mt-5 max-w-xl text-base sm:text-lg text-slate-200/90 leading-relaxed">
+            <p class="mt-5 max-w-xl min-h-[3.25em] text-base sm:text-lg text-slate-200/90 leading-relaxed">
                 {% if L == 'ru' %}Платформа для науки, инноваций и международного научного сотрудничества.{% elif L == 'en' %}A platform for science, innovation and international academic collaboration.{% else %}Ilm-fan, innovatsiya va xalqaro ilmiy hamkorlik platformasi.{% endif %}
             </p>
 
@@ -152,8 +149,8 @@
             {% if journals %}
             <div class="mt-5 flex flex-wrap gap-2">
                 {% for journal in journals|slice:":4" %}
-                <a href="{% url 'index' journal_slug=journal.slug %}" class="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 ring-1 ring-white/15 px-3.5 py-1.5 text-xs sm:text-sm text-white/90 transition">
-                    <i class="far fa-bookmark text-[0.7rem] text-sky-300" aria-hidden="true"></i>{{ journal.title|truncatechars:34 }}
+                <a href="{% url 'index' journal_slug=journal.slug %}" class="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-white/10 hover:bg-white/20 ring-1 ring-white/15 px-3.5 py-1.5 text-xs sm:text-sm text-white/90 transition">
+                    <i class="far fa-bookmark text-[0.7rem] text-sky-300" aria-hidden="true"></i>{{ journal.title }}
                 </a>
                 {% endfor %}
             </div>
@@ -191,7 +188,8 @@
             </div>
 
             {% if journals %}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% with n=journals|length %}
+            <div class="grid grid-cols-1 gap-6 {% if n == 1 %}max-w-3xl{% elif n == 2 %}md:grid-cols-2{% elif n == 4 %}md:grid-cols-2 xl:grid-cols-4{% else %}md:grid-cols-2 lg:grid-cols-3{% endif %}">
                 {% for journal in journals %}
                 <div class="reveal" style="transition-delay:{% widthratio forloop.counter0 1 80 %}ms">
                 <article class="group h-full flex gap-5 rounded-2xl bg-white ring-1 ring-slate-200 p-5 shadow-sm hover:shadow-xl hover:shadow-slate-300/50 hover:-translate-y-1 hover:ring-brand/30 transition duration-300">
@@ -208,7 +206,7 @@
                         </div>
                     </a>
                     <div class="min-w-0 flex-1 flex flex-col">
-                        <h3 class="text-lg font-bold leading-snug text-navy-900">
+                        <h3 class="text-lg font-bold leading-snug text-navy-900" style="text-wrap:balance;">
                             <a href="{% url 'index' journal_slug=journal.slug %}" class="hover:text-brand transition">{{ journal.title }}</a>
                         </h3>
                         {% with desc=journal.short_description|default:journal.full_description %}
@@ -216,7 +214,7 @@
                         {% endwith %}
                         <ul class="mt-3 space-y-1 text-xs text-slate-500">
                             {% if journal.issn %}<li class="flex items-center gap-2"><i class="far fa-file-alt w-3 text-brand" aria-hidden="true"></i>ISSN {{ journal.issn }}{% if journal.eissn %} · eISSN {{ journal.eissn }}{% endif %}</li>{% endif %}
-                            {% if journal.publication_frequency %}<li class="flex items-center gap-2"><i class="far fa-calendar w-3 text-brand" aria-hidden="true"></i>{{ journal.publication_frequency }}</li>{% endif %}
+                            {% if journal.publication_frequency %}<li class="flex items-center gap-2"><i class="far fa-calendar w-3 text-brand" aria-hidden="true"></i>{{ journal.publication_frequency|frequency }}</li>{% endif %}
                             <li class="flex items-center gap-2"><i class="far fa-newspaper w-3 text-brand" aria-hidden="true"></i>{{ journal.published_count }} {% if L == 'ru' %}статей{% elif L == 'en' %}articles{% else %}maqola{% endif %} · {{ journal.issue_count }} {% if L == 'ru' %}выпусков{% elif L == 'en' %}issues{% else %}son{% endif %}</li>
                         </ul>
                         <a href="{% url 'index' journal_slug=journal.slug %}" class="mt-auto pt-4 inline-flex">
@@ -230,6 +228,7 @@
                 </div>
                 {% endfor %}
             </div>
+            {% endwith %}
             {% else %}
             <div class="rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center">
                 <i class="far fa-folder-open text-4xl text-slate-300"></i>
@@ -356,6 +355,8 @@
             </div>
         </div>
     </footer>
+
+    {% include 'partials/submit_modal.html' %}
 
     <script>
     (function () {
