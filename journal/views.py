@@ -1919,18 +1919,6 @@ def download_issue_pdf(request, journal_slug, issue_pk):
             issue_pdf.remove_original_page_numbers(master_doc[idx])
         except Exception as e:
             print("Page number cleanup error:", e)
-    # Har bir yo'nalish boshlanishida bir marta yo'nalish nomi
-    if any(i['article'].category_id for i in article_items):
-        prev = object()
-        for item in article_items:
-            cat = item['article'].category
-            if cat != prev:
-                prev = cat
-                if cat:
-                    try:
-                        issue_pdf.add_category_heading(master_doc, item['start_page'] - 1, cat.name)
-                    except Exception as e:
-                        print("Category heading error:", e)
     for idx in range(unbound_count, articles_end):
         page = master_doc[idx]
         try:
