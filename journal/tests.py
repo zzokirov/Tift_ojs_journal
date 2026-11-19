@@ -556,6 +556,8 @@ class IssuePdfTests(TestCase):
                                        academic_title='prof.', workplace='Samarqand iqtisodiyot va servis instituti rektori', order=i)
         titles = ['МОНЕТАРНАЯ ПОЛИТИКА И ТРАНСМИССИОННЫЙ МЕХАНИЗМ', 'O‘ZBEK TILIDAGI YOZMA NUTQNI TABIIY TILNI QAYTA ISHLASH ASOSIDA TAHLIL',
                   'Kripto aktivlarni global moliyaviy boshqaruvda funksional tartibga solish va soliq shaffofligi: xalqaro modellar']
+        cats = [ArticleCategory.objects.create(journal=j, code='MF.02.00', name='Bank, kredit', order=2),
+                ArticleCategory.objects.create(journal=j, code='MF.01.00', name='Moliya, soliq, byudjet', order=1)]
         for n in range(15):
             doc = fitz.open()
             for k in range(3):
@@ -563,7 +565,7 @@ class IssuePdfTests(TestCase):
                 pg.insert_text((72, 100), f'Article {n} body', fontsize=12)
                 pg.insert_text((pg.rect.width / 2, pg.rect.height - 30), str(k + 1), fontsize=10)
             a = Article.objects.create(journal=j, issue=issue, title=titles[n % 3], authors='Абдурахимова Саида, Mamadjanov Farrux G‘ayratovich',
-                                       status='published', order_in_issue=n)
+                                       status='published', order_in_issue=n, category=cats[n % 2])
             a.pdf_file.save(f'a{n}.pdf', ContentFile(doc.tobytes()))
         r = self.client.get(reverse('download_issue_pdf', args=[j.slug, issue.pk]))
         self.assertEqual(r.status_code, 200)
@@ -587,4 +589,17 @@ class IssuePdfTests(TestCase):
         old = [w for w in page.get_text('words') if w[4] == '1' and abs(w[0] - mid) < 5]
         self.assertEqual(old, [])  # maqola faylidagi eski raqam olib tashlangan
         self.assertEqual(arts[-1].end_page, arts[-1].start_page + 2)
-        self.assertEqual(len(doc.get_toc()), len(arts) + 1)
+        self.assertEqual(len(doc.get_toc()), len(arts) + 3)  # mundarija + 2 yo'nalish
+
+    def test_articles_grouped_by_category_with_sequential_pages(self):
+        doc, issue = self.make_issue()
+        from journal.views import ordered_issue_articles
+        arts = ordered_issue_articles(issue)
+        codes = [a.category.code for a in arts]
+        self.assertEqual(codes, sorted(codes))  # MF.01 (order=1) avval, keyin MF.02
+        for prev, cur in zip(arts, arts[1:]):
+            self.assertEqual(cur.start_page, prev.end_page + 1)
+        toc = doc.get_toc()
+        self.assertEqual([t[1] for t in toc if t[0] == 1][1:], ['Moliya, soliq, byudjet', 'Bank, kredit'])
+        r = self.client.get(reverse('issue_detail', args=[issue.journal.slug, issue.pk]))
+        self.assertEqual(r.status_code, 200)

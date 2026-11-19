@@ -317,7 +317,7 @@ def issue_detail(request, journal_slug, issue_pk):
     if not issue.is_published and issue.status != 'published':
         if not (request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser)):
             raise Http404(_("Ushbu jurnal soni hali chop etilmagan."))
-    articles = Article.objects.filter(issue=issue, status='published').select_related('category', 'author').order_by('category__order', 'category__id', 'order_in_issue', 'start_page', 'id')
+    articles = ordered_issue_articles(issue)
 
     from collections import OrderedDict
     categories_dict = OrderedDict()
@@ -1000,6 +1000,21 @@ def _get_article_content_html(article_file, article=None):
                 pass
 
 
+def ordered_issue_articles(issue):
+    """Sondagi chop etilgan maqolalar saytdagi tartibda: yo'nalishlar ketma-ket
+    (yo'nalish tartibi bo'yicha), yo'nalishsizlari oxirida."""
+    arts = Article.objects.filter(issue=issue, status='published').select_related('category', 'author')
+    return sorted(arts, key=lambda a: (
+        a.category is None,
+        a.category.order if a.category else 0,
+        a.category.code if a.category else '',
+        a.category_id or 0,
+        a.order_in_issue,
+        a.start_page or 0,
+        a.id,
+    ))
+
+
 def recalculate_issue_page_numbers(issue):
     """
     Jurnal sonidagi barcha chop etilgan maqolalarning to'plamdagi
@@ -1007,7 +1022,7 @@ def recalculate_issue_page_numbers(issue):
     """
     if not issue:
         return
-    articles = list(Article.objects.filter(issue=issue, status='published').order_by('order_in_issue', 'created_at', 'id'))
+    articles = ordered_issue_articles(issue)
     if not articles:
         return
 
@@ -1731,7 +1746,7 @@ def download_issue_pdf(request, journal_slug, issue_pk):
         except Exception as e:
             print("full_pdf redirect error:", e)
 
-    articles = list(Article.objects.filter(issue=issue, status='published').order_by('order_in_issue', 'created_at', 'id'))
+    articles = ordered_issue_articles(issue)
     if not articles:
         return HttpResponse(_("Ushbu sonda hali chop etilgan maqolalar mavjud emas."), status=404)
 
@@ -1914,10 +1929,16 @@ def download_issue_pdf(request, journal_slug, issue_pk):
     try:
         toc_page_offset = cover_page_count
         outline = []
+        has_cats = any(i['article'].category_id for i in article_items)
+        last_cat = object()
         if toc_doc and len(toc_doc):
             outline.append([1, _("Mundarija"), toc_page_offset + 1])
         for n, (item, (toc_idx, rect)) in enumerate(zip(article_items, toc_links), 1):
-            outline.append([1, f"{n}. {_clean_text(item['article'].title)[:75]}", item['start_page']])
+            cat = item['article'].category if has_cats else None
+            if has_cats and cat != last_cat:
+                last_cat = cat
+                outline.append([1, (cat.name if cat else _("Boshqa maqolalar")), item['start_page']])
+            outline.append([2 if has_cats else 1, f"{n}. {_clean_text(item['article'].title)[:75]}", item['start_page']])
             master_doc[toc_page_offset + toc_idx].insert_link({
                 'kind': fitz.LINK_GOTO, 'from': rect,
                 'page': item['start_page'] - 1, 'to': fitz.Point(0, 0),

@@ -83,8 +83,25 @@ def build_toc(issue, journal, items):
     y += 16
 
     links = []
+    has_cats = any(getattr(i['article'], 'category', None) for i in items)
+    last_cat = object()
     for n, item in enumerate(items, 1):
         art = item['article']
+        cat = getattr(art, 'category', None) if has_cats else None
+        if has_cats and cat != last_cat:
+            last_cat = cat
+            name = f"{cat.code} · {cat.name}" if cat and cat.code else (cat.name if cat else _("Boshqa maqolalar"))
+            head = (f'<p class="sans" style="font-size:9.5pt;font-weight:bold;letter-spacing:0.6pt;color:{NAVY};">'
+                    f'{_e(name).upper()}</p>')
+            hh = _measure(head, right - MARGIN_L - 16, arc) + 10
+            if y + hh + 50 > bottom:
+                page = doc.new_page(width=A4.width, height=A4.height)
+                y = MARGIN_T
+            y += 4
+            page.draw_rect(fitz.Rect(MARGIN_L, y, right, y + hh), color=None, fill=(0.93, 0.95, 0.97))
+            page.draw_rect(fitz.Rect(MARGIN_L, y, MARGIN_L + 3, y + hh), color=None, fill=(0.04, 0.145, 0.251))
+            page.insert_htmlbox(fitz.Rect(MARGIN_L + 12, y + 5, right - 4, y + hh), head, css=CSS, archive=arc)
+            y += hh + 12
         authors = art.authors or (art.author.get_full_name() if getattr(art, 'author', None) else '')
         html = (
             f'<p style="font-size:11pt;font-weight:bold;line-height:1.3;color:#111;">'
