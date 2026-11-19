@@ -562,7 +562,7 @@ class IssuePdfTests(TestCase):
             doc = fitz.open()
             for k in range(3):
                 pg = doc.new_page()
-                pg.insert_text((72, 100), f'Article {n} body', fontsize=12)
+                pg.insert_text((72, 100 if n % 2 else 45), f'Article {n} body', fontsize=12)
                 pg.insert_text((pg.rect.width / 2, pg.rect.height - 30), str(k + 1), fontsize=10)
             a = Article.objects.create(journal=j, issue=issue, title=titles[n % 3], authors='Абдурахимова Саида, Mamadjanov Farrux G‘ayratovich',
                                        status='published', order_in_issue=n, category=cats[n % 2])
@@ -601,5 +601,12 @@ class IssuePdfTests(TestCase):
             self.assertEqual(cur.start_page, prev.end_page + 1)
         toc = doc.get_toc()
         self.assertEqual([t[1] for t in toc if t[0] == 1][1:], ['Moliya, soliq, byudjet', 'Bank, kredit'])
+        for a in arts:
+            first = doc[a.start_page - 1].get_text()
+            is_first = a is next(x for x in arts if x.category_id == a.category_id)
+            self.assertEqual(a.category.name in first, is_first, a.pk)
+            self.assertIn(f'Article {a.order_in_issue} body', first)
+        toc_text = doc[1].get_text()
+        self.assertNotIn('Bank, kredit', toc_text)
         r = self.client.get(reverse('issue_detail', args=[issue.journal.slug, issue.pk]))
         self.assertEqual(r.status_code, 200)

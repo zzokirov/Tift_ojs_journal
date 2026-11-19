@@ -47,13 +47,9 @@ def _issue_label(issue):
     return label
 
 
-def _header_html(kicker, title, sub):
-    return f"""
-    <div style="text-align:center">
-      <p class="sans" style="font-size:8.5pt;letter-spacing:2pt;color:#6b7c93;">{_e(kicker).upper()}</p>
-      <p style="font-size:20pt;font-weight:bold;color:{NAVY};margin-top:5pt;letter-spacing:1pt;">{_e(title)}</p>
-      <p class="sans" style="font-size:9pt;color:#6b7c93;margin-top:5pt;">{_e(sub)}</p>
-    </div>"""
+def _title_html(title):
+    return (f'<p style="text-align:center;font-size:20pt;font-weight:bold;color:{NAVY};letter-spacing:1pt;">'
+            f'{_e(title)}</p>')
 
 
 # ---------------------------------------------------------------- mundarija
@@ -74,34 +70,13 @@ def build_toc(issue, journal, items):
     bottom = A4.height - MARGIN_B
 
     page = doc.new_page(width=A4.width, height=A4.height)
-    spare, _s = page.insert_htmlbox(
-        fitz.Rect(MARGIN_L, MARGIN_T, right, MARGIN_T + 110),
-        _header_html(journal.title if journal else '', _("Mundarija"), _issue_label(issue)),
-        css=CSS, archive=arc, scale_low=1)
-    y = MARGIN_T + (110 - max(spare, 0)) + 14
-    page.draw_line((MARGIN_L, y), (right, y), color=(0.04, 0.145, 0.251), width=1.2)
-    y += 16
+    page.insert_htmlbox(fitz.Rect(MARGIN_L, MARGIN_T, right, MARGIN_T + 40), _title_html(_("Mundarija")),
+                        css=CSS, archive=arc)
+    y = MARGIN_T + 52
 
     links = []
-    has_cats = any(getattr(i['article'], 'category', None) for i in items)
-    last_cat = object()
     for n, item in enumerate(items, 1):
         art = item['article']
-        cat = getattr(art, 'category', None) if has_cats else None
-        if has_cats and cat != last_cat:
-            last_cat = cat
-            name = f"{cat.code} · {cat.name}" if cat and cat.code else (cat.name if cat else _("Boshqa maqolalar"))
-            head = (f'<p class="sans" style="font-size:9.5pt;font-weight:bold;letter-spacing:0.6pt;color:{NAVY};">'
-                    f'{_e(name).upper()}</p>')
-            hh = _measure(head, right - MARGIN_L - 16, arc) + 10
-            if y + hh + 50 > bottom:
-                page = doc.new_page(width=A4.width, height=A4.height)
-                y = MARGIN_T
-            y += 4
-            page.draw_rect(fitz.Rect(MARGIN_L, y, right, y + hh), color=None, fill=(0.93, 0.95, 0.97))
-            page.draw_rect(fitz.Rect(MARGIN_L, y, MARGIN_L + 3, y + hh), color=None, fill=(0.04, 0.145, 0.251))
-            page.insert_htmlbox(fitz.Rect(MARGIN_L + 12, y + 5, right - 4, y + hh), head, css=CSS, archive=arc)
-            y += hh + 12
         authors = art.authors or (art.author.get_full_name() if getattr(art, 'author', None) else '')
         html = (
             f'<p style="font-size:11pt;font-weight:bold;line-height:1.3;color:#111;">'
@@ -150,19 +125,14 @@ def _person_html(p, show_role):
 
 
 def build_editorial(journal, leadership, board):
-    html = _header_html(
-        journal.title if journal else '',
-        _("Tahririyat"),
-        f"ISSN {journal.issn}" if journal and getattr(journal, 'issn', '') else '')
+    html = _title_html(_("Tahririyat"))
     html += '<div style="margin-top:22pt;"></div>'
     for p in leadership:
         html += _person_html(p, show_role=True)
-    if board:
-        html += (f'<p class="sans" style="font-size:9pt;font-weight:bold;letter-spacing:1.5pt;color:{NAVY};'
-                 f'margin-top:10pt;margin-bottom:9pt;border-bottom:0.8pt solid #c9d2dc;padding-bottom:4pt;">'
-                 f'{_e(_("Tahririyat hayʼati aʼzolari")).upper()}</p>')
-        for p in board:
-            html += _person_html(p, show_role=False)
+    if leadership and board:
+        html += '<div style="margin-top:8pt;"></div>'
+    for p in board:
+        html += _person_html(p, show_role=False)
 
     story = fitz.Story(html=html, user_css=CSS, archive=_archive())
     buf = io.BytesIO()
@@ -215,3 +185,43 @@ def draw_footer(page, left_text, page_num):
                         fontsize=7.5, fontname='dejavu', fontfile=SANS, color=FOOTER_GRAY, align=0)
     page.insert_textbox(fitz.Rect(w - 110, y + 4, w - MARGIN_R, h - 12), str(page_num),
                         fontsize=9, fontname='dejavu', fontfile=SANS, color=FOOTER_NAVY, align=2)
+
+
+# ---------------------------------------------------------------- yo'nalish nomi
+TIMES_BOLD = os.path.join(FONT_DIR, 'LiberationSerif-Bold.ttf')  # Times New Roman bilan bir xil o'lcham
+
+
+def _content_top(page):
+    tops = [b[1] for b in page.get_text('blocks') if b[4].strip()]
+    tops += [r.y0 for img in page.get_images(full=True) for r in page.get_image_rects(img[0])]
+    tops += [d['rect'].y0 for d in page.get_drawings() if d['rect'].height < page.rect.height * 0.9]
+    return min(tops) if tops else page.rect.height
+
+
+def add_category_heading(doc, index, name, size=16):
+    """Yo'nalishning birinchi maqolasi boshiga yo'nalish nomini (Times New Roman, 16, qalin)
+    bir marta yozadi. Tepada joy yetmasa sahifa mazmuni biroz kichraytirib pastga suriladi."""
+    page = doc[index]
+    w, h = page.rect.width, page.rect.height
+    font = fitz.Font(fontfile=TIMES_BOLD)
+    lines, line = [], ''
+    for word in name.split():
+        trial = f"{line} {word}".strip()
+        if line and font.text_length(trial, size) > w - MARGIN_L - MARGIN_R:
+            lines.append(line); line = word
+        else:
+            line = trial
+    lines.append(line)
+    need = len(lines) * size * 1.25 + 14
+    top = 28.0
+    if _content_top(page) < top + need:
+        src = fitz.open()
+        src.insert_pdf(doc, from_page=index, to_page=index)
+        doc.delete_page(index)
+        page = doc.new_page(pno=index, width=w, height=h)
+        page.show_pdf_page(fitz.Rect(0, top + need - 20, w, h), src, 0, keep_proportion=True)
+    y = top + size
+    for ln in lines:
+        x = (w - font.text_length(ln, size)) / 2
+        page.insert_text((x, y), ln, fontsize=size, fontname='timesbd', fontfile=TIMES_BOLD, color=(0, 0, 0))
+        y += size * 1.25
