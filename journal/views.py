@@ -1007,7 +1007,7 @@ def recalculate_issue_page_numbers(issue):
     """
     if not issue:
         return
-    articles = list(Article.objects.filter(issue=issue, status='published').order_by('created_at', 'id'))
+    articles = list(Article.objects.filter(issue=issue, status='published').order_by('order_in_issue', 'created_at', 'id'))
     if not articles:
         return
 
@@ -1731,7 +1731,7 @@ def download_issue_pdf(request, journal_slug, issue_pk):
         except Exception as e:
             print("full_pdf redirect error:", e)
 
-    articles = list(Article.objects.filter(issue=issue, status='published').order_by('created_at', 'id'))
+    articles = list(Article.objects.filter(issue=issue, status='published').order_by('order_in_issue', 'created_at', 'id'))
     if not articles:
         return HttpResponse(_("Ushbu sonda hali chop etilgan maqolalar mavjud emas."), status=404)
 
@@ -1788,34 +1788,34 @@ def download_issue_pdf(request, journal_slug, issue_pk):
             print("Back cover error:", e)
 
     # 1.5. TAHRIRIYAT A'ZOLARI SAHIFASI
+    from . import issue_pdf
     doc_editorial = None
     try:
         staff = StaffMember.objects.filter(journal=current_journal, is_active=True).order_by('order', 'full_name')
-        leadership = staff.filter(position__in=['editor_in_chief', 'deputy_editor', 'secretary'])
-        editorial_board = staff.filter(position='member')
-        
-        editorial_html = render_to_string('issue_editorial_pdf.html', {
-            'leadership': leadership,
-            'editorial_board': editorial_board,
-        })
-        buf_ed = io.BytesIO()
-        pisa.CreatePDF(src=editorial_html, dest=buf_ed, encoding='utf-8')
-        doc_editorial = fitz.open(stream=buf_ed.getvalue(), filetype="pdf")
+        order = {'editor_in_chief': 0, 'deputy_editor': 1, 'secretary': 2}
+        leadership = sorted((p for p in staff if p.position in order), key=lambda p: order[p.position])
+        editorial_board = [p for p in staff if p.position not in order]
+        if leadership or editorial_board:
+            doc_editorial = issue_pdf.build_editorial(current_journal, leadership, editorial_board)
     except Exception as e:
         print("Editorial page generation error:", e)
 
-    cover_page_count = (len(doc_cover) if doc_cover else 0) + (len(doc_back_cover) if doc_back_cover else 0) + (len(doc_editorial) if doc_editorial else 0)
+    cover_page_count = (len(doc_cover) if doc_cover else 0) + (len(doc_editorial) if doc_editorial else 0)
 
     # 2. MAQOLALAR PDF NUSXASINI TAYYORLASH
     prepared_articles = []
     for art in articles:
         try:
             raw_bytes = None
-            file_name = getattr(art.pdf_file, 'name', '') or ''
-            ext = file_name.lower().rsplit('.', 1)[-1].split('?')[0] if art.pdf_file else ''
-
-            if ext == 'pdf':
-                raw_bytes = _get_pdf_bytes(art.pdf_file)
+            if art.pdf_file:
+                try:
+                    from .docconvert import pdf_path_for
+                    real = pdf_path_for(art.pdf_file.path)
+                    if real:
+                        with open(real, 'rb') as fh:
+                            raw_bytes = fh.read()
+                except Exception:
+                    raw_bytes = None
             
             if not raw_bytes:
                 raw_bytes = _build_pdf_from_html_xhtml2pdf(art, request)
@@ -1835,10 +1835,10 @@ def download_issue_pdf(request, journal_slug, issue_pk):
         master_doc = fitz.open()
         if doc_cover and len(doc_cover) > 0:
             master_doc.insert_pdf(doc_cover)
-        if doc_back_cover and len(doc_back_cover) > 0:
-            master_doc.insert_pdf(doc_back_cover)
         if doc_editorial and len(doc_editorial) > 0:
             master_doc.insert_pdf(doc_editorial)
+        if doc_back_cover and len(doc_back_cover) > 0:
+            master_doc.insert_pdf(doc_back_cover)
 
         if len(master_doc) > 0:
             final_bytes = master_doc.tobytes()
@@ -1852,7 +1852,8 @@ def download_issue_pdf(request, journal_slug, issue_pk):
     toc_doc = None
     article_items = []
     
-    for attempt in range(2):
+    toc_links = []
+    for attempt in range(3):
         article_items = []
         current_page = cover_page_count + (len(toc_doc) if toc_doc else 1) + 1
 
@@ -1874,113 +1875,55 @@ def download_issue_pdf(request, journal_slug, issue_pk):
             })
             current_page = end_p + 1
 
-        toc_html = render_to_string('issue_toc_pdf.html', {
-            'issue': issue,
-            'article_items': article_items,
-        })
-        buf_toc = io.BytesIO()
-        pisa.CreatePDF(src=toc_html, dest=buf_toc, encoding='utf-8')
-        new_toc_doc = fitz.open(stream=buf_toc.getvalue(), filetype="pdf")
-        
-        if toc_doc and len(new_toc_doc) == len(toc_doc):
-            break
+        new_toc_doc, toc_links = issue_pdf.build_toc(issue, current_journal, article_items)
+
+        same = toc_doc is not None and len(new_toc_doc) == len(toc_doc)
         toc_doc = new_toc_doc
+        if same:
+            break
 
     # 4. BARCHA QISMLARNI BITTA MASTER PDF GA BIRLASHTIRISH
     master_doc = fitz.open()
     if doc_cover and len(doc_cover) > 0:
         master_doc.insert_pdf(doc_cover)
-    if doc_back_cover and len(doc_back_cover) > 0:
-        master_doc.insert_pdf(doc_back_cover)
     if doc_editorial and len(doc_editorial) > 0:
         master_doc.insert_pdf(doc_editorial)
     if toc_doc and len(toc_doc) > 0:
         master_doc.insert_pdf(toc_doc)
     for item in prepared_articles:
         master_doc.insert_pdf(item['doc'])
+    articles_end = len(master_doc)
+    if doc_back_cover and len(doc_back_cover) > 0:
+        master_doc.insert_pdf(doc_back_cover)
 
-    # 5. UZLUKSIZ RAQAMLASH VA FOOTER QO'SHISH
-    total_pages = len(master_doc)
+    # 5. UZLUKSIZ RAQAMLASH VA FOOTER: maqola faylidagi eski raqam olinib, umumiy raqam qo'yiladi
     unbound_count = cover_page_count + (len(toc_doc) if toc_doc else 0)
-
-    issue_full = f"{issue.year}-yil, {issue.number}-son (Jild {issue.volume})"
-    NAVY = (0.04, 0.145, 0.251)
-    GRAY_TEXT = (0.35, 0.35, 0.35)
-    LINE_COLOR = (0.82, 0.85, 0.88)
-
-    for idx in range(total_pages):
+    footer_left = f"{current_journal.title} | {issue_pdf._issue_label(issue)}"
+    for idx in range(unbound_count, articles_end):
         page = master_doc[idx]
-        if idx < unbound_count:
-            continue
-
-        w = page.rect.width
-        h = page.rect.height
-        margin_left = 85.0    # 3.0 cm (maqola matni bilan bir liniyada)
-        margin_right = 42.5   # 1.5 cm
-        footer_line_y = h - 40.0
-
         try:
-            page.draw_line(fitz.Point(margin_left, footer_line_y), fitz.Point(w - margin_right, footer_line_y), color=LINE_COLOR, width=0.5)
-        except Exception:
-            pass
-
-        rect_f_left = fitz.Rect(margin_left, footer_line_y + 4, w - 100, h - 15)
+            issue_pdf.remove_original_page_numbers(page)
+        except Exception as e:
+            print("Page number cleanup error:", e)
         try:
-                page.insert_textbox(rect_f_left, f"{getattr(article, 'journal', None) and article.journal.title or ''} | {issue_full}", fontsize=8, color=GRAY_TEXT, align=0)
-        except Exception:
-            pass
+            issue_pdf.draw_footer(page, footer_left, idx + 1)
+        except Exception as e:
+            print("Footer error:", e)
 
-        rect_f_right = fitz.Rect(w - 100, footer_line_y + 4, w - margin_right, h - 15)
-        page_num = idx + 1
-        try:
-            page.insert_textbox(rect_f_right, f"{page_num}", fontsize=8.5, color=NAVY, align=2)
-        except Exception:
-            pass
-
-    # 5.5. MUNDARIJADAGI MAVZULARGA VA NATIVE PDF BOOKMARK (OUTLINE) GA INTERAKTIV GOTO HAVOLALAR QO'SHISH
+    # 5.5. MUNDARIJADAN MAQOLAGA O'TISH HAVOLALARI VA PDF BOOKMARK
     try:
-        toc_page_offset = cover_page_count  # Mundarija boshlanadigan 0-indeksli sahifa
-        toc_num_pages = len(toc_doc) if toc_doc else 0
-        pdf_toc_outline = []
-
-        if toc_num_pages > 0:
-            pdf_toc_outline.append([1, _("Mundarija / Contents"), toc_page_offset + 1])
-
-        for item_idx, item in enumerate(article_items, 1):
-            art = item['article']
-            target_page_idx = item['start_page'] - 1  # Maqola boshlanadigan 0-indeksli sahifa
-            art_title = _clean_text(art.title)
-            
-            # PDF native bookmark outline ro'yxatiga qo'shish
-            pdf_toc_outline.append([1, f"{item_idx}. {art_title[:75]}", item['start_page']])
-
-            # Mundarija sahifalarida matnni izlash va bosiladigan ichki havolalar (internal links) o'rnatish
-            title_query = _clean_text(art.title[:30]).strip()
-            num_query = f"{item_idx}."
-
-            for p_offset in range(toc_num_pages):
-                current_toc_p_idx = toc_page_offset + p_offset
-                if current_toc_p_idx >= total_pages:
-                    break
-                toc_page = master_doc[current_toc_p_idx]
-
-                # Sarlavha matnini topish
-                rects = toc_page.search_for(title_query) if title_query else []
-                if not rects:
-                    rects = toc_page.search_for(num_query)
-
-                for r in rects:
-                    # Mundarijadagi ushbu qatorni to'liq bosiladigan zona (link rect) qilish
-                    link_rect = fitz.Rect(36.0, max(0.0, r.y0 - 4.0), toc_page.rect.width - 36.0, min(toc_page.rect.height, r.y1 + 14.0))
-                    toc_page.insert_link({
-                        'kind': fitz.LINK_GOTO,
-                        'from': link_rect,
-                        'page': target_page_idx,
-                        'to': fitz.Point(0.0, 0.0),
-                    })
-
-        if pdf_toc_outline:
-            master_doc.set_toc(pdf_toc_outline)
+        toc_page_offset = cover_page_count
+        outline = []
+        if toc_doc and len(toc_doc):
+            outline.append([1, _("Mundarija"), toc_page_offset + 1])
+        for n, (item, (toc_idx, rect)) in enumerate(zip(article_items, toc_links), 1):
+            outline.append([1, f"{n}. {_clean_text(item['article'].title)[:75]}", item['start_page']])
+            master_doc[toc_page_offset + toc_idx].insert_link({
+                'kind': fitz.LINK_GOTO, 'from': rect,
+                'page': item['start_page'] - 1, 'to': fitz.Point(0, 0),
+            })
+        if outline:
+            master_doc.set_toc(outline)
     except Exception as e:
         print("Error adding interactive TOC links/bookmarks:", e)
 

@@ -533,3 +533,58 @@ class WordArticleTests(TestCase):
                 self.assertEqual(r.status_code, 200)
                 self.assertEqual(r['Content-Type'], 'application/pdf')
                 self.assertTrue(b''.join(r.streaming_content).startswith(b'%PDF'), name)
+
+
+class IssuePdfTests(TestCase):
+    """To'liq son: mundarija va tahririyat Unicode bilan, bet raqamlari to'g'ri."""
+
+    def make_issue(self, out_path=None):
+        import tempfile, shutil, fitz
+        from unittest import mock
+        from django.core.files.base import ContentFile
+        from django.test import override_settings
+        tmp = tempfile.mkdtemp(); self.addCleanup(shutil.rmtree, tmp)
+        ov = override_settings(MEDIA_ROOT=tmp); ov.enable(); self.addCleanup(ov.disable)
+        p = mock.patch('journal.signals.translate_text', side_effect=lambda t, *a, **k: t); p.start(); self.addCleanup(p.stop)
+        j = Journal.objects.create(title='Moliya va intellektual texnologiyalar', slug='moliya-va-intellektual-texnologiyalar',
+                                   issn='3162-1562', publication_status='published', is_active=True)
+        issue = JournalIssue.objects.create(journal=j, volume=1, number=1, year=2026, is_published=True, status='published')
+        StaffMember.objects.create(journal=j, full_name='Nodirov Azizxon Asrorovich', position='editor_in_chief', workplace='TIFT universiteti Rektori')
+        StaffMember.objects.create(journal=j, full_name='Zokirov Sanjar Zohidjon o‘g‘li', position='secretary', workplace='TIFT universiteti')
+        for i in range(12):
+            StaffMember.objects.create(journal=j, full_name=f'Po‘latov Muhiddin {i}', position='member', academic_degree='i.f.d.',
+                                       academic_title='prof.', workplace='Samarqand iqtisodiyot va servis instituti rektori', order=i)
+        titles = ['МОНЕТАРНАЯ ПОЛИТИКА И ТРАНСМИССИОННЫЙ МЕХАНИЗМ', 'O‘ZBEK TILIDAGI YOZMA NUTQNI TABIIY TILNI QAYTA ISHLASH ASOSIDA TAHLIL',
+                  'Kripto aktivlarni global moliyaviy boshqaruvda funksional tartibga solish va soliq shaffofligi: xalqaro modellar']
+        for n in range(15):
+            doc = fitz.open()
+            for k in range(3):
+                pg = doc.new_page()
+                pg.insert_text((72, 100), f'Article {n} body', fontsize=12)
+                pg.insert_text((pg.rect.width / 2, pg.rect.height - 30), str(k + 1), fontsize=10)
+            a = Article.objects.create(journal=j, issue=issue, title=titles[n % 3], authors='Абдурахимова Саида, Mamadjanov Farrux G‘ayratovich',
+                                       status='published', order_in_issue=n)
+            a.pdf_file.save(f'a{n}.pdf', ContentFile(doc.tobytes()))
+        r = self.client.get(reverse('download_issue_pdf', args=[j.slug, issue.pk]))
+        self.assertEqual(r.status_code, 200)
+        if out_path:
+            open(out_path, 'wb').write(r.content)
+        return fitz.open(stream=r.content, filetype='pdf'), issue
+
+    def test_toc_unicode_and_page_numbers(self):
+        doc, issue = self.make_issue()
+        text = '\n'.join(p.get_text() for p in doc)
+        self.assertIn('МОНЕТАРНАЯ', text)
+        self.assertIn('O‘ZBEK', text)
+        self.assertIn('Zokirov Sanjar Zohidjon o‘g‘li', text)
+        arts = list(Article.objects.filter(issue=issue).order_by('order_in_issue'))
+        first = arts[0]
+        page = doc[first.start_page - 1]
+        self.assertIn('Article 0 body', page.get_text())
+        words = [w[4] for w in page.get_text('words') if w[1] > page.rect.height * 0.88]
+        self.assertIn(str(first.start_page), words)
+        mid = page.rect.width / 2
+        old = [w for w in page.get_text('words') if w[4] == '1' and abs(w[0] - mid) < 5]
+        self.assertEqual(old, [])  # maqola faylidagi eski raqam olib tashlangan
+        self.assertEqual(arts[-1].end_page, arts[-1].start_page + 2)
+        self.assertEqual(len(doc.get_toc()), len(arts) + 1)
