@@ -4,46 +4,54 @@
 # Parol yoki boshqa maxfiy ma'lumotlarni bu faylga YOZMANG.
 set -euo pipefail
 
-APP_DIR=/home/devuser/apps/architect-edu/Tift_ojs_journal
-BACKUP_DIR=/home/devuser/backups/$(date +%Y%m%d_%H%M%S)
+# Butun skript funksiya ichida: bash uni oxirigacha o'qib olib keyin bajaradi,
+# shuning uchun "git reset" shu faylni o'zgartirsa ham qatorlar o'tkazib yuborilmaydi.
+main() {
 
-cd "$APP_DIR"
+    APP_DIR=/home/devuser/apps/architect-edu/Tift_ojs_journal
+    BACKUP_DIR=/home/devuser/backups/$(date +%Y%m%d_%H%M%S)
 
-# 1. Baza va media fayllarini zaxiralash (git ularni o'chirib yubormasligi uchun)
-mkdir -p "$BACKUP_DIR"
-[ -f db.sqlite3 ] && cp -a db.sqlite3 "$BACKUP_DIR/"
-[ -d media ] && cp -a media "$BACKUP_DIR/"
-echo "Zaxira: $BACKUP_DIR"
+    cd "$APP_DIR"
 
-# 2. Kodni yangilash
-git fetch origin
-git reset --hard origin/main
+    # 1. Baza va media fayllarini zaxiralash (git ularni o'chirib yubormasligi uchun)
+    mkdir -p "$BACKUP_DIR"
+    [ -f db.sqlite3 ] && cp -a db.sqlite3 "$BACKUP_DIR/"
+    [ -d media ] && cp -a media "$BACKUP_DIR/"
+    echo "Zaxira: $BACKUP_DIR"
 
-# 3. Zaxiradan qaytarish (agar git o'chirgan bo'lsa)
-[ -f "$BACKUP_DIR/db.sqlite3" ] && [ ! -f db.sqlite3 ] && cp -a "$BACKUP_DIR/db.sqlite3" .
-[ -d "$BACKUP_DIR/media" ] && cp -an "$BACKUP_DIR/media" . 2>/dev/null || true
+    # 2. Kodni yangilash
+    git fetch origin
+    git reset --hard origin/main
 
-# 4. Kutubxonalar, migratsiyalar, statik fayllar
-# makemigrations serverda ishlatilmaydi — migratsiyalar lokalda yaratilib commit qilinadi
-./venv/bin/pip install -q -r requirements.txt
-./venv/bin/python manage.py migrate --noinput
-./venv/bin/python manage.py collectstatic --noinput
-# Annotatsiyasi bo'sh maqolalarni PDF fayldan to'ldirish (faqat bo'sh maydonlar, qayta ishga tushirish xavfsiz)
-./venv/bin/python manage.py fill_abstracts || true
-# PDF o'rniga Word yuklangan maqolalar uchun PDF nusxa (brauzerda ochilishi uchun)
-./venv/bin/python manage.py convert_word_articles || true
-# Til almashtirilganda jurnal nomlari va yo'nalishlar ham o'zgarishi uchun bo'sh RU/EN tarjimalarni to'ldirish
-./venv/bin/python manage.py compilemessages -i venv >/dev/null 2>&1 || true
-# Eski tift-fintech.uz konferensiyalari (faqat yangilari qo'shiladi)
-./venv/bin/python manage.py import_fintech_conferences || true
-./venv/bin/python manage.py translate_content || true
-# Eslatma: populate_editorial_board.py / insert_categories.py endi har deployda ishga tushirilmaydi —
-# ular admin panelda kiritilgan tahririyat va yo'nalish ma'lumotlarini qayta yozib yuborardi.
-# Kerak bo'lsa qo'lda ishga tushiring: ./venv/bin/python insert_categories.py
+    # 3. Zaxiradan qaytarish (agar git o'chirgan bo'lsa)
+    [ -f "$BACKUP_DIR/db.sqlite3" ] && [ ! -f db.sqlite3 ] && cp -a "$BACKUP_DIR/db.sqlite3" .
+    [ -d "$BACKUP_DIR/media" ] && cp -an "$BACKUP_DIR/media" . 2>/dev/null || true
 
-# 5. Servisni qayta ishga tushirish (sudoers da parolsiz ruxsat bo'lishi kerak)
-if sudo -n systemctl restart tift-journal.service 2>/dev/null; then
-    echo "Servis qayta ishga tushirildi: $(systemctl is-active tift-journal.service)"
-else
-    echo "DIQQAT: servisni qo'lda qayta ishga tushiring: sudo systemctl restart tift-journal.service"
-fi
+    # 4. Kutubxonalar, migratsiyalar, statik fayllar
+    # makemigrations serverda ishlatilmaydi — migratsiyalar lokalda yaratilib commit qilinadi
+    ./venv/bin/pip install -q -r requirements.txt
+    ./venv/bin/python manage.py migrate --noinput
+    ./venv/bin/python manage.py collectstatic --noinput
+    # Annotatsiyasi bo'sh maqolalarni PDF fayldan to'ldirish (faqat bo'sh maydonlar, qayta ishga tushirish xavfsiz)
+    ./venv/bin/python manage.py fill_abstracts || true
+    # PDF o'rniga Word yuklangan maqolalar uchun PDF nusxa (brauzerda ochilishi uchun)
+    ./venv/bin/python manage.py convert_word_articles || true
+    # Til almashtirilganda jurnal nomlari va yo'nalishlar ham o'zgarishi uchun bo'sh RU/EN tarjimalarni to'ldirish
+    ./venv/bin/python manage.py compilemessages -i venv >/dev/null 2>&1 || true
+    # Eski tift-fintech.uz konferensiyalari (faqat yangilari qo'shiladi)
+    ./venv/bin/python manage.py import_fintech_conferences || true
+    ./venv/bin/python manage.py translate_content || true
+    # Eslatma: populate_editorial_board.py / insert_categories.py endi har deployda ishga tushirilmaydi —
+    # ular admin panelda kiritilgan tahririyat va yo'nalish ma'lumotlarini qayta yozib yuborardi.
+    # Kerak bo'lsa qo'lda ishga tushiring: ./venv/bin/python insert_categories.py
+
+    # 5. Servisni qayta ishga tushirish (sudoers da parolsiz ruxsat bo'lishi kerak)
+    if sudo -n systemctl restart tift-journal.service 2>/dev/null; then
+        echo "Servis qayta ishga tushirildi: $(systemctl is-active tift-journal.service)"
+    else
+        echo "DIQQAT: servisni qo'lda qayta ishga tushiring: sudo systemctl restart tift-journal.service"
+    fi
+}
+
+main "$@"
+exit

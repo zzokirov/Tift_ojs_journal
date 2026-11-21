@@ -641,3 +641,21 @@ class ConferenceTests(TestCase):
         self.client.force_login(admin)
         self.assertEqual(self.client.get('/admin/journal/conference/').status_code, 200)
         self.assertEqual(self.client.get('/admin/journal/conference/add/').status_code, 200)
+
+    def test_import_links_existing_instead_of_duplicating(self):
+        import datetime
+        from io import StringIO
+        from unittest import mock
+        from django.core.management import call_command
+        with mock.patch('journal.signals.translate_text', side_effect=lambda t, *a, **k: t), \
+                mock.patch('journal.management.commands.import_fintech_conferences.download', side_effect=OSError('offline')):
+            j = Journal.objects.create(title='Moliya', slug='moliya-va-intellektual-texnologiyalar', publication_status='published', is_active=True)
+            Conference.objects.create(journal=j, title='XXI asr. Ilm-fan, innovatsiyalar, ta’lim: xorijiy tillarni o‘qitishning dolzarb masalalari',
+                                      date=datetime.date(2025, 2, 21), location='Toshkent')
+            call_command('import_fintech_conferences', stdout=StringIO())
+            call_command('import_fintech_conferences', stdout=StringIO())
+        self.assertEqual(Conference.objects.filter(journal=j).count(), 12)
+        c = Conference.objects.get(date=datetime.date(2025, 2, 21))
+        self.assertEqual(c.legacy_id, 10)
+        self.assertEqual(c.location, 'Toshkent')  # admin kiritgani saqlandi
+        self.assertEqual(c.participants, '80')

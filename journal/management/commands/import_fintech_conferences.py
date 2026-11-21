@@ -35,6 +35,22 @@ def parse_date(text, year):
     return first, ('–'.join(norm) if len(norm) > 1 else '')
 
 
+def norm(text):
+    """Taqqoslash uchun: kichik harf, faqat harf va raqamlar."""
+    text = (text or '').lower().replace('‘', "'").replace('’', "'").replace('ʻ', "'")
+    return re.sub(r'[^0-9a-zа-яёўқғҳ]+', '', text)
+
+
+def find_existing(journal, date, title):
+    """Avval qo'lda kiritilgan (legacy_id'siz) shu konferensiya: sana bir xil va mavzu mos."""
+    key = norm(title)
+    for c in Conference.objects.filter(journal=journal, legacy_id__isnull=True, date=date):
+        other = norm(c.title_uz or c.title)
+        if other and (other in key or key in other or other[:40] == key[:40]):
+            return c
+    return None
+
+
 def download(url):
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     with urllib.request.urlopen(req, timeout=60) as r:
@@ -56,12 +72,29 @@ class Command(BaseCommand):
             items = json.load(fh)
 
         pre_save.disconnect(translate_conference, sender=Conference)
-        added = 0
+        added = matched = 0
         try:
             for it in items:
                 if Conference.objects.filter(legacy_id=it['id']).exists():
                     continue
                 date, date_text = parse_date(it.get('held_date'), it['year'])
+                existing = find_existing(journal, date, it.get('topic_uz', ''))
+                if existing:
+                    # Bo'sh maydonlarni to'ldiramiz, admin kiritganiga tegmaymiz
+                    fill = {'legacy_id': it['id']}
+                    for field, value in (('participants', (it.get('participants') or '').strip()),
+                                         ('organization_uz', it.get('organization_uz', '')),
+                                         ('organization', it.get('organization_uz', '')),
+                                         ('location_uz', it.get('location_uz', '')),
+                                         ('date_text', date_text),
+                                         ('url', '' if existing.pdf_file else (it.get('link') or '').strip()),
+                                         ('order', it.get('order') or 0)):
+                        if value and not getattr(existing, field):
+                            fill[field] = value
+                    Conference.objects.filter(pk=existing.pk).update(**fill)
+                    matched += 1
+                    self.stdout.write(f"  = {date:%Y} {existing.title[:70]}")
+                    continue
                 c = Conference(journal=journal, legacy_id=it['id'], date=date, date_text=date_text,
                                participants=(it.get('participants') or '').strip(),
                                url=(it.get('link') or '').strip(), order=it.get('order') or 0)
@@ -86,4 +119,4 @@ class Command(BaseCommand):
                 self.stdout.write(f"  + {c.date:%Y} {c.title[:70]}")
         finally:
             pre_save.connect(translate_conference, sender=Conference)
-        self.stdout.write(self.style.SUCCESS(f"Konferensiyalar: {added} ta qo'shildi"))
+        self.stdout.write(self.style.SUCCESS(f"Konferensiyalar: {added} ta qo'shildi, {matched} ta mavjudiga bog'landi"))
