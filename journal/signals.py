@@ -3,17 +3,46 @@ from django.dispatch import receiver
 from .models import ArticleCategory, StaffMember, Article, News, Conference, Document
 import threading
 
+_tr_lock = threading.Lock()
+_tr_state = {'last': 0.0, 'blocked_until': 0.0}
+MIN_INTERVAL = 0.3      # Google: sekundiga 5 tadan ko'p so'rov mumkin emas
+BLOCK_PAUSE = 15 * 60   # "too many requests" dan keyin 15 daqiqa so'rov yubormaymiz
+
+
 def translate_text(text, target_lang):
+    """uz -> target_lang. Xato yoki cheklovda asl matnni qaytaradi (saqlash hech qachon to'xtamaydi)."""
     if not text:
         return text
+    import time
+    with _tr_lock:
+        now = time.monotonic()
+        if now < _tr_state['blocked_until']:
+            return text
+        wait = _tr_state['last'] + MIN_INTERVAL - now
+        if wait > 0:
+            time.sleep(wait)
+        _tr_state['last'] = time.monotonic()
     try:
         from deep_translator import GoogleTranslator
         translator = GoogleTranslator(source='uz', target=target_lang)
         # Deep translator supports up to 5k chars natively
-        return translator.translate(text)
+        return translator.translate(text[:4900]) or text
     except Exception as e:
-        print(f"Translation error: {e}")
+        msg = str(e)
+        if 'too many requests' in msg.lower() or '429' in msg:
+            with _tr_lock:
+                if time.monotonic() >= _tr_state['blocked_until']:
+                    print("Translation paused for 15 min: Google rate limit")
+                _tr_state['blocked_until'] = time.monotonic() + BLOCK_PAUSE
+        else:
+            print(f"Translation error: {msg[:200]}")
         return text
+
+
+def translation_blocked():
+    import time
+    return time.monotonic() < _tr_state['blocked_until']
+
 
 def _fit(instance, field_name, value):
     """Tarjima o'zbekchadan uzunroq bo'lishi mumkin: maydon chegarasidan oshsa baza

@@ -685,3 +685,23 @@ class ConferenceTests(TestCase):
         html = self.client.get(reverse('conferences', args=[j.slug])).content.decode()
         self.assertLess(html.index('Sentabr konf'), html.index('Mart konf'))
         self.assertLess(html.index('Mart konf'), html.index('Fevral konf'))
+
+
+class TranslationRateLimitTests(TestCase):
+    def test_rate_limit_pauses_further_requests(self):
+        from unittest import mock
+        from journal import signals
+        signals._tr_state['blocked_until'] = 0.0
+        calls = []
+
+        class Fake:
+            def __init__(self, **kw): pass
+            def translate(self, text):
+                calls.append(text)
+                raise Exception('Server Error: You made too many requests to the server.')
+        with mock.patch('deep_translator.GoogleTranslator', Fake), mock.patch('journal.signals.MIN_INTERVAL', 0):
+            self.assertEqual(signals.translate_text('salom', 'ru'), 'salom')
+            self.assertEqual(signals.translate_text('dunyo', 'en'), 'dunyo')
+        self.assertEqual(calls, ['salom'])  # ikkinchi so'rov yuborilmadi
+        self.assertTrue(signals.translation_blocked())
+        signals._tr_state['blocked_until'] = 0.0

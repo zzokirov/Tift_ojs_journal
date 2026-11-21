@@ -7,7 +7,7 @@ Qo'lda kiritilgan tarjimalarga tegilmaydi.
 from django.core.management.base import BaseCommand
 
 from journal.models import Journal, ArticleCategory, Conference
-from journal.signals import translate_text, _fit
+from journal.signals import translate_text, translation_blocked, _fit
 
 TARGETS = (
     (Journal, ('title', 'short_description', 'full_description', 'research_areas', 'publication_frequency')),
@@ -26,6 +26,11 @@ class Command(BaseCommand):
         changed = 0
         for model, fields in TARGETS:
             for obj in model.objects.all():
+                if translation_blocked():
+                    self.stdout.write(self.style.WARNING(
+                        "Google tarjima vaqtincha cheklandi — qolganlari keyingi deployda tarjima qilinadi"))
+                    self.stdout.write(self.style.SUCCESS(f"Tarjima qilindi: {changed} ta yozuv"))
+                    return
                 updates = {}
                 for field in fields:
                     uz = (getattr(obj, f'{field}_uz', '') or '').strip()
