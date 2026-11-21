@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.core.exceptions import ValidationError
 from django.urls import reverse
-from journal.models import User, Journal, JournalIssue, ArticleCategory, Article, StaffMember, ReviewRecord
+from journal.models import User, Journal, JournalIssue, ArticleCategory, Article, StaffMember, ReviewRecord, Conference
 
 
 class JournalIsolationTests(TestCase):
@@ -609,3 +609,35 @@ class IssuePdfTests(TestCase):
         self.assertNotIn('Bank, kredit', toc_text)
         r = self.client.get(reverse('issue_detail', args=[issue.journal.slug, issue.pk]))
         self.assertEqual(r.status_code, 200)
+
+
+class ConferenceTests(TestCase):
+    def test_parse_legacy_dates(self):
+        import datetime
+        from journal.management.commands.import_fintech_conferences import parse_date
+        self.assertEqual(parse_date('28.03.2026', 2026), (datetime.date(2026, 3, 28), ''))
+        self.assertEqual(parse_date('25-09-2026', 2026), (datetime.date(2026, 9, 25), ''))
+        self.assertEqual(parse_date('30.05.2025–31.05.2025', 2025),
+                         (datetime.date(2025, 5, 30), '30.05.2025–31.05.2025'))
+
+    def test_page_nav_and_admin(self):
+        import datetime
+        from unittest import mock
+        with mock.patch('journal.signals.translate_text', side_effect=lambda t, *a, **k: t):
+            j = Journal.objects.create(title='Moliya', slug='moliya-va-intellektual-texnologiyalar', publication_status='published', is_active=True)
+            arch = Journal.objects.create(title='Arxitektura', slug='arxitektura-va-talim', publication_status='published', is_active=True)
+            Conference.objects.create(journal=j, title='Yashil iqtisodiyot konferensiyasi', date=datetime.date(2026, 9, 25),
+                                      participants='130', organization='TIFT', location='Toshkent', url='https://example.com/c')
+            Conference.objects.create(journal=j, title='Eski konferensiya', date=datetime.date(2025, 5, 30), date_text='30.05.2025–31.05.2025')
+        r = self.client.get(reverse('conferences', args=[j.slug]))
+        self.assertContains(r, 'Yashil iqtisodiyot konferensiyasi')
+        self.assertContains(r, '130 ishtirokchi')
+        self.assertContains(r, '30.05.2025–31.05.2025')
+        html = r.content.decode()
+        self.assertLess(html.index('>2026<'), html.index('>2025<'))
+        self.assertContains(self.client.get(reverse('index', args=[j.slug])), reverse('conferences', args=[j.slug]))
+        self.assertNotContains(self.client.get(reverse('index', args=[arch.slug])), reverse('conferences', args=[arch.slug]))
+        admin = User.objects.create_superuser('adm', 'adm@example.com', 'pw')
+        self.client.force_login(admin)
+        self.assertEqual(self.client.get('/admin/journal/conference/').status_code, 200)
+        self.assertEqual(self.client.get('/admin/journal/conference/add/').status_code, 200)

@@ -1648,8 +1648,14 @@ def review_article_action(request, pk):
 
 def conferences(request, journal_slug):
     current_journal = _get_current_journal(journal_slug)
-    items = Conference.objects.filter(journal=current_journal, is_active=True).order_by('-date')
-    return render(request, 'conferences.html', {'current_journal': current_journal, 'items': items})
+    items = list(Conference.objects.filter(journal=current_journal, is_active=True))
+    by_year = {}
+    for c in items:
+        by_year.setdefault(c.date.year, []).append(c)
+    years = [{'year': y, 'items': sorted(by_year[y], key=lambda c: (c.order, c.date, c.pk))}
+             for y in sorted(by_year, reverse=True)]
+    return render(request, 'conferences.html', {
+        'current_journal': current_journal, 'years': years, 'total': len(items)})
 
 
 def news_list(request, journal_slug):

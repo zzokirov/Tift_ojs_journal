@@ -385,17 +385,34 @@ class StaffMemberAdmin(JournalAdminMixin, TranslationAdmin):
 
 @admin.register(Conference)
 class ConferenceAdmin(JournalAdminMixin, TranslationAdmin):
-    list_display = ('journal', 'title', 'date', 'location', 'is_active', 'created_at')
-    list_filter = ('journal', 'is_active',)
-    search_fields = ('title', 'description', 'location')
-    list_editable = ('is_active',)
-    ordering = ('-date',)
-    list_per_page = 20
+    list_display = ('title', 'journal', 'date_col', 'participants', 'location', 'has_file', 'order', 'is_active')
+    list_display_links = ('title',)
+    list_filter = ('journal', 'is_active', ('date', admin.DateFieldListFilter))
+    search_fields = ('title', 'organization', 'location', 'description')
+    list_editable = ('order', 'is_active')
+    ordering = ('-date', 'order')
+    date_hierarchy = 'date'
+    list_per_page = 30
     fieldsets = (
-        (_("Konferensiya ma'lumotlari"), {
-            'fields': ('title', 'description', 'pdf_file', 'date', 'location', 'url', 'is_active')
+        (_("Konferensiya"), {
+            'fields': ('journal', 'title', 'date', 'date_text', 'location', 'organization', 'participants'),
+        }),
+        (_("Fayl va havola"), {
+            'fields': ('pdf_file', 'url'),
+            'description': _("PDF (masalan, konferensiya to'plami) yoki tashqi havola (Google Drive va h.k.)."),
+        }),
+        (_("Qo'shimcha"), {
+            'fields': ('description', 'order', 'is_active'),
         }),
     )
+
+    @admin.display(description=_("Sana"), ordering='date')
+    def date_col(self, obj):
+        return obj.display_date
+
+    @admin.display(description=_("Fayl"), boolean=True)
+    def has_file(self, obj):
+        return bool(obj.pdf_file or obj.url)
 
 
 # ─── NEWS ADMIN ───────────────────────────────────────────────────────────────

@@ -1,53 +1,79 @@
 {% extends 'base.html' %}
 {% load static i18n %}
-{% block title %}{% trans "Konferensiyalar | TIFT Jurnali" %}{% endblock %}
+{% block title %}{% trans "Konferensiyalar" %} | {{ current_journal.title }}{% endblock %}
 {% block content %}
 
+{% trans "Konferensiyalar" as page_title %}
+{% blocktrans count counter=total asvar page_meta %}{{ counter }} ta konferensiya{% plural %}{{ counter }} ta konferensiya{% endblocktrans %}
+{% include 'partials/page_header.html' with title=page_title meta=page_meta %}
 
+<style>
+  .conf-year{display:flex;align-items:baseline;gap:.75rem;margin:0 0 .75rem}
+  .conf-year b{font-size:1.5rem;font-weight:800;color:var(--accent-dark);letter-spacing:-.02em}
+  .conf-year span{font-size:.85rem;color:var(--muted)}
+  .conf-row{display:grid;grid-template-columns:4.25rem 1fr auto;gap:1rem;align-items:center;padding:1rem 1.1rem;border-bottom:1px solid var(--line);transition:background .2s}
+  .conf-row:last-child{border-bottom:0}
+  .conf-row:hover{background:var(--accent-soft)}
+  .conf-date{text-align:center;border-radius:.75rem;background:var(--accent-soft);border:1px solid var(--accent-line);padding:.45rem .25rem;line-height:1.1}
+  .conf-date .d{display:block;font-size:1.35rem;font-weight:800;color:var(--accent-dark)}
+  .conf-date .m{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:.15rem}
+  .conf-title{font-weight:700;color:#0f172a;line-height:1.4}
+  a.conf-title:hover{color:var(--accent-dark)}
+  .conf-meta{display:flex;flex-wrap:wrap;gap:.35rem 1rem;margin-top:.4rem;font-size:.8rem;color:var(--muted)}
+  .conf-meta i{color:var(--accent);margin-right:.3rem;width:.8rem;text-align:center}
+  .conf-btn{display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap;font-size:.8rem;font-weight:700;padding:.5rem .9rem;border-radius:.65rem;border:1px solid var(--accent-line);color:var(--accent-dark);background:#fff;transition:all .2s}
+  .conf-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  @media (max-width:640px){
+    .conf-row{grid-template-columns:3.5rem 1fr;gap:.75rem}
+    .conf-row .conf-act{grid-column:2}
+    .conf-date{align-self:start}
+  }
+</style>
 
-<div class="site-container px-4 py-12">
-    {% if items %}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {% for item in items %}
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 card-hover">
-                    <div class="flex items-start justify-between gap-4 mb-3">
-                        <h3 class="font-bold text-navy-900 text-lg leading-snug">{{ item.title }}</h3>
-                        <span class="flex-shrink-0 bg-green-50 text-green-700 border border-green-200 text-xs font-bold px-3 py-1 rounded-full">
-                            {{ item.date|date:"d.m.Y" }}
-                        </span>
-                    </div>
-                    {% if item.location %}
-                        <p class="text-gray-500 text-sm flex items-center gap-2 mb-3">
-                            <i class="fas fa-map-marker-alt text-green-500"></i> {{ item.location }}
-                        </p>
-                    {% endif %}
-                    {% if item.description %}
-                        <p class="text-gray-600 text-sm leading-relaxed mb-4">{{ item.description }}</p>
-                    {% endif %}
-                    {% if item.url or item.pdf_file %}
-                        <div class="flex items-center gap-3">
-                            {% if item.url %}
-                            <a href="{{ item.url }}" target="_blank"
-                               class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all hover:scale-105">
-                                <i class="fas fa-external-link-alt"></i> {% trans "Batafsil" %}
-                            </a>
-                            {% endif %}
-                            {% if item.pdf_file %}
-                            <a href="{{ item.pdf_file.url }}" download target="_blank"
-                               class="inline-flex items-center gap-2 bg-red-500 hover:bg-red-400 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all hover:scale-105">
-                                <i class="fas fa-file-pdf"></i> {% trans "Axborot xatini yuklash" %}
-                            </a>
-                            {% endif %}
-                        </div>
-                    {% endif %}
+<div class="site-container py-6 space-y-8">
+    {% for group in years %}
+    <section>
+        <div class="conf-year">
+            <b>{{ group.year }}</b>
+            <span>{% trans "TIFT universitetida rejalashtirilgan xalqaro va respublika darajasidagi konferensiyalar" %}</span>
+        </div>
+        <div class="bg-white rounded-2xl border overflow-hidden" style="border-color:var(--line)">
+            {% for item in group.items %}
+            <article class="conf-row">
+                <div class="conf-date" title="{{ item.display_date }}">
+                    <span class="d">{{ item.date|date:"d" }}</span>
+                    <span class="m">{{ item.date|date:"M" }}</span>
                 </div>
+                <div class="min-w-0">
+                    {% if item.link %}
+                        <a href="{{ item.link }}" target="_blank" rel="noopener" class="conf-title">{{ item.title }}</a>
+                    {% else %}
+                        <p class="conf-title">{{ item.title }}</p>
+                    {% endif %}
+                    <div class="conf-meta">
+                        <span><i class="far fa-calendar"></i>{{ item.display_date }}</span>
+                        {% if item.location %}<span><i class="fas fa-location-dot"></i>{{ item.location }}</span>{% endif %}
+                        {% if item.participants %}<span><i class="fas fa-users"></i>{% blocktrans with n=item.participants %}{{ n }} ishtirokchi{% endblocktrans %}</span>{% endif %}
+                        {% if item.organization %}<span><i class="fas fa-building-columns"></i>{{ item.organization }}</span>{% endif %}
+                    </div>
+                    {% if item.description %}<p class="text-sm text-gray-600 mt-2 leading-relaxed">{{ item.description }}</p>{% endif %}
+                </div>
+                {% if item.link %}
+                <div class="conf-act">
+                    <a href="{{ item.link }}" target="_blank" rel="noopener" class="conf-btn">
+                        {% if item.pdf_file %}<i class="fas fa-file-pdf"></i> {% trans "To'plam (PDF)" %}{% else %}<i class="fas fa-arrow-up-right-from-square"></i> {% trans "Batafsil" %}{% endif %}
+                    </a>
+                </div>
+                {% endif %}
+            </article>
             {% endfor %}
         </div>
-    {% else %}
-        <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-16 text-center">
-            <i class="fas fa-calendar-check text-5xl text-gray-300 mb-4 block"></i>
-            <p class="text-gray-400">{% trans "Hozircha konferensiyalar mavjud emas." %}</p>
-        </div>
-    {% endif %}
+    </section>
+    {% empty %}
+    <div class="bg-white rounded-2xl border-2 border-dashed border-gray-200 p-12 text-center">
+        <i class="fas fa-calendar-check text-4xl text-gray-300 mb-3 block"></i>
+        <p class="text-gray-400">{% trans "Hozircha konferensiyalar mavjud emas." %}</p>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

@@ -6,12 +6,13 @@ Qo'lda kiritilgan tarjimalarga tegilmaydi.
 """
 from django.core.management.base import BaseCommand
 
-from journal.models import Journal, ArticleCategory
+from journal.models import Journal, ArticleCategory, Conference
 from journal.signals import translate_text
 
 TARGETS = (
     (Journal, ('title', 'short_description', 'full_description', 'research_areas', 'publication_frequency')),
     (ArticleCategory, ('name',)),
+    (Conference, ('title', 'organization', 'location')),
 )
 
 

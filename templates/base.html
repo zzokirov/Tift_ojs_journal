@@ -208,12 +208,14 @@
                         <a href="{% url 'about' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'about' %}text-emerald-700 font-bold border-b-2 border-emerald-600 pb-1{% else %}hover:text-emerald-700 transition{% endif %}">{% trans "Tahririyat a'zolari" %}</a>
                         <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'archive' or request.resolver_match.url_name == 'issue_detail' %}text-emerald-700 font-bold border-b-2 border-emerald-600 pb-1{% else %}hover:text-emerald-700 transition{% endif %}">{% trans "Arxiv" %}</a>
                         <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'documents' %}text-emerald-700 font-bold border-b-2 border-emerald-600 pb-1{% else %}hover:text-emerald-700 transition{% endif %}">{% trans "Hujjatlar" %}</a>
+                        {% if 'moliya' in current_journal.slug or current_journal.has_conferences %}<a href="{% url 'conferences' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'conferences' %}text-emerald-700 font-bold border-b-2 border-emerald-600 pb-1{% else %}hover:text-emerald-700 transition{% endif %}">{% trans "Konferensiyalar" %}</a>{% endif %}
                         <a href="#contact-section" class="hover:text-emerald-700 transition">{% trans "Aloqa" %}</a>
                     {% else %}
                         <a href="{% url 'index' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'index' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Bosh sahifa" %}</a>
                         <a href="{% url 'about' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'about' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Tahririyat a'zolari" %}</a>
                         <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'archive' or request.resolver_match.url_name == 'issue_detail' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Arxiv" %}</a>
                         <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'documents' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Hujjatlar" %}</a>
+                        {% if 'moliya' in current_journal.slug or current_journal.has_conferences %}<a href="{% url 'conferences' journal_slug=current_journal.slug %}" class="{% if request.resolver_match.url_name == 'conferences' %}text-blue-700 font-bold border-b-2 border-blue-700 pb-1{% else %}hover:text-blue-700 transition{% endif %}">{% trans "Konferensiyalar" %}</a>{% endif %}
                         <a href="#contact-section" class="hover:text-blue-700 transition">{% trans "Aloqa" %}</a>
                     {% endif %}
                 {% else %}
@@ -269,6 +271,7 @@
                 <a href="{% url 'about' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Tahririyat a'zolari" %}</a>
                 <a href="{% url 'archive' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Arxiv" %}</a>
                 <a href="{% url 'documents' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Hujjatlar" %}</a>
+                {% if 'moliya' in current_journal.slug or current_journal.has_conferences %}<a href="{% url 'conferences' journal_slug=current_journal.slug %}" class="block py-2 hover:text-blue-700">{% trans "Konferensiyalar" %}</a>{% endif %}
                 <a href="#contact-section" class="block py-2 hover:text-blue-700">{% trans "Aloqa" %}</a>
 
                 <a href="{% url 'portal_home' %}" class="block py-2 text-gray-500 hover:text-navy-900 border-t border-gray-100 mt-2 pt-2">
@@ -326,6 +329,7 @@
                             <li><a href="{% url 'about' journal_slug=current_journal.slug %}" class="hover:text-white transition">{% trans "Tahririyat a'zolari" %}</a></li>
                             <li><a href="{% url 'archive' journal_slug=current_journal.slug %}" class="hover:text-white transition">{% trans "Arxiv" %}</a></li>
                             <li><a href="{% url 'documents' journal_slug=current_journal.slug %}" class="hover:text-white transition">{% trans "Hujjatlar" %}</a></li>
+                            {% if 'moliya' in current_journal.slug or current_journal.has_conferences %}<li><a href="{% url 'conferences' journal_slug=current_journal.slug %}" class="hover:text-white transition">{% trans "Konferensiyalar" %}</a></li>{% endif %}
                         {% else %}
                             <li><a href="{% url 'portal_home' %}#journals-section" class="hover:text-white transition">{% trans "Jurnallar" %}</a></li>
                             <li><a href="{% url 'portal_home' %}#authors-section" class="hover:text-white transition">{% trans "Mualliflar uchun" %}</a></li>

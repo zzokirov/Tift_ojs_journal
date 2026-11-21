@@ -23,7 +23,7 @@ class NewsTranslationOptions(TranslationOptions):
 
 @register(Conference)
 class ConferenceTranslationOptions(TranslationOptions):
-    fields = ('title', 'description')
+    fields = ('title', 'description', 'organization', 'location')
 
 @register(Document)
 class DocumentTranslationOptions(TranslationOptions):

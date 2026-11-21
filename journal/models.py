@@ -135,6 +135,15 @@ class Journal(models.Model):
             return []
         return [x.strip() for x in self.research_areas.split(',') if x.strip()]
 
+def _journal_has_conferences(self):
+    if not hasattr(self, '_has_conf'):
+        self._has_conf = self.conferences.filter(is_active=True).exists()
+    return self._has_conf
+
+
+Journal.has_conferences = property(_journal_has_conferences)
+
+
 class JournalIssue(models.Model):
     journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='issues', verbose_name=_("Jurnal"), null=True, blank=True)
     volume = models.PositiveIntegerField(verbose_name=_("Jurnal jildi (Volume)"))
@@ -420,18 +429,32 @@ class Conference(models.Model):
     description = models.TextField(blank=True, verbose_name=_("Tavsif"))
     pdf_file    = models.FileField(upload_to="conferences/pdfs/", blank=True, null=True, verbose_name=_("Axborot xati / Fayl (PDF)"))
     date        = models.DateField(verbose_name=_("Sana"))
+    date_text   = models.CharField(max_length=100, blank=True, verbose_name=_("Sana (matn)"),
+                                   help_text=_("Ixtiyoriy: bir necha kunlik bo'lsa, masalan 30.05.2025–31.05.2025"))
+    participants = models.CharField(max_length=50, blank=True, verbose_name=_("Ishtirokchilar soni"))
+    organization = models.CharField(max_length=300, blank=True, verbose_name=_("Mas'ul tashkilot"))
     location    = models.CharField(max_length=255, blank=True, verbose_name=_("Joyi"))
-    url         = models.URLField(blank=True, verbose_name=_("Havola"))
+    url         = models.URLField(blank=True, max_length=500, verbose_name=_("Havola"))
+    order       = models.PositiveIntegerField(default=0, verbose_name=_("Tartib"))
+    legacy_id   = models.PositiveIntegerField(null=True, blank=True, unique=True, editable=False)
     is_active   = models.BooleanField(default=True, verbose_name=_("Ko'rsatish"))
     created_at  = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['-date', 'order']
         verbose_name = _("Konferensiya")
         verbose_name_plural = _("Konferensiyalar")
 
     def __str__(self):
         return self.title
+
+    @property
+    def display_date(self):
+        return self.date_text or self.date.strftime('%d.%m.%Y')
+
+    @property
+    def link(self):
+        return self.pdf_file.url if self.pdf_file else self.url
 
 
 # ─── YANGILIKLAR ─────────────────────────────────────────────────────────────

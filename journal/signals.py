@@ -50,7 +50,7 @@ def translate_news(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=Conference)
 def translate_conference(sender, instance, **kwargs):
-    auto_translate_fields(instance, ['title', 'description'], kwargs.get('update_fields'))
+    auto_translate_fields(instance, ['title', 'description', 'organization', 'location'], kwargs.get('update_fields'))
 
 @receiver(pre_save, sender=Document)
 def translate_document(sender, instance, **kwargs):

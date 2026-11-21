@@ -34,6 +34,8 @@ git reset --hard origin/main
 ./venv/bin/python manage.py convert_word_articles || true
 # Til almashtirilganda jurnal nomlari va yo'nalishlar ham o'zgarishi uchun bo'sh RU/EN tarjimalarni to'ldirish
 ./venv/bin/python manage.py compilemessages -i venv >/dev/null 2>&1 || true
+# Eski tift-fintech.uz konferensiyalari (faqat yangilari qo'shiladi)
+./venv/bin/python manage.py import_fintech_conferences || true
 ./venv/bin/python manage.py translate_content || true
 # Eslatma: populate_editorial_board.py / insert_categories.py endi har deployda ishga tushirilmaydi —
 # ular admin panelda kiritilgan tahririyat va yo'nalish ma'lumotlarini qayta yozib yuborardi.

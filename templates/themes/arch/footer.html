@@ -23,6 +23,7 @@
                         <li><a href="{% url 'archive' journal_slug=current_journal.slug %}" class="hover:text-paper transition">{% trans "Arxiv" %}</a></li>
                         <li><a href="{% url 'about' journal_slug=current_journal.slug %}" class="hover:text-paper transition">{% trans "Tahririyat a'zolari" %}</a></li>
                         <li><a href="{% url 'documents' journal_slug=current_journal.slug %}" class="hover:text-paper transition">{% trans "Hujjatlar" %}</a></li>
+                        {% if 'moliya' in current_journal.slug or current_journal.has_conferences %}<li><a href="{% url 'conferences' journal_slug=current_journal.slug %}" class="hover:text-paper transition">{% trans "Konferensiyalar" %}</a></li>{% endif %}
                     </ul>
                 </div>
                 <div>
