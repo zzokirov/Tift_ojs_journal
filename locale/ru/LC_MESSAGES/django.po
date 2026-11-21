@@ -2664,3 +2664,6 @@ msgstr[0] "%(counter)s направление"
 msgstr[1] "%(counter)s направления"
 msgstr[2] "%(counter)s направлений"
 msgstr[3] "%(counter)s статей"
+
+msgid "Mavzu"
+msgstr "Тема"

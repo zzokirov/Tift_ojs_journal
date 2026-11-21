@@ -425,15 +425,15 @@ class StaffMember(models.Model):
 
 class Conference(models.Model):
     journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='conferences', verbose_name=_("Jurnal"), null=True, blank=True)
-    title       = models.CharField(max_length=300, verbose_name=_("Nomi"))
+    title       = models.CharField(max_length=600, verbose_name=_("Mavzu"))
     description = models.TextField(blank=True, verbose_name=_("Tavsif"))
     pdf_file    = models.FileField(upload_to="conferences/pdfs/", blank=True, null=True, verbose_name=_("Axborot xati / Fayl (PDF)"))
     date        = models.DateField(verbose_name=_("Sana"))
     date_text   = models.CharField(max_length=100, blank=True, verbose_name=_("Sana (matn)"),
                                    help_text=_("Ixtiyoriy: bir necha kunlik bo'lsa, masalan 30.05.2025–31.05.2025"))
     participants = models.CharField(max_length=50, blank=True, verbose_name=_("Ishtirokchilar soni"))
-    organization = models.CharField(max_length=300, blank=True, verbose_name=_("Mas'ul tashkilot"))
-    location    = models.CharField(max_length=255, blank=True, verbose_name=_("Joyi"))
+    organization = models.CharField(max_length=500, blank=True, verbose_name=_("Mas'ul tashkilot"))
+    location    = models.CharField(max_length=500, blank=True, verbose_name=_("Joyi"))
     url         = models.URLField(blank=True, max_length=500, verbose_name=_("Havola"))
     order       = models.PositiveIntegerField(default=0, verbose_name=_("Tartib"))
     legacy_id   = models.PositiveIntegerField(null=True, blank=True, unique=True, editable=False)

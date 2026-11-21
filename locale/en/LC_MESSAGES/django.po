@@ -2657,3 +2657,6 @@ msgstr[0] "%(counter)s field"
 msgstr[1] "%(counter)s fields"
 msgstr[2] "%(counter)s articles"
 msgstr[3] "%(counter)s articles"
+
+msgid "Mavzu"
+msgstr "Topic"

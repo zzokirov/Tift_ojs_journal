@@ -663,3 +663,13 @@ class ConferenceTests(TestCase):
         self.assertEqual(c.legacy_id, 10)
         self.assertEqual(c.location, 'Toshkent')  # admin kiritgani saqlandi
         self.assertEqual(c.participants, '80')
+
+    def test_long_translation_is_trimmed_to_field_limit(self):
+        import datetime
+        from unittest import mock
+        j = Journal.objects.create(title='Moliya', slug='moliya-va-intellektual-texnologiyalar', publication_status='published', is_active=True)
+        with mock.patch('journal.signals.translate_text', side_effect=lambda t, lang: t + ' ' + 'дополнительно ' * 80):
+            c = Conference.objects.create(journal=j, title='Uzun mavzu ' * 40, date=datetime.date(2026, 1, 1),
+                                          organization='TIFT', location='Toshkent')
+        for f in ('title_ru', 'title_en', 'organization_ru', 'location_en'):
+            self.assertLessEqual(len(getattr(c, f)), Conference._meta.get_field(f).max_length, f)

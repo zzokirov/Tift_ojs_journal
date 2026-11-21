@@ -15,6 +15,20 @@ def translate_text(text, target_lang):
         print(f"Translation error: {e}")
         return text
 
+def _fit(instance, field_name, value):
+    """Tarjima o'zbekchadan uzunroq bo'lishi mumkin: maydon chegarasidan oshsa baza
+    (PostgreSQL) xato beradi va saqlash 500 bilan tugaydi. Shuning uchun qisqartiramiz."""
+    if not isinstance(value, str):
+        return value
+    try:
+        limit = instance._meta.get_field(field_name).max_length
+    except Exception:
+        limit = None
+    if limit and len(value) > limit:
+        value = value[:limit - 1].rstrip() + '…'
+    return value
+
+
 def auto_translate_fields(instance, fields, update_fields=None):
     # save(update_fields=[...]) tarjima maydonlariga tegmasa — tarmoqqa so'rov yubormaymiz
     if update_fields is not None and not any(
@@ -28,9 +42,9 @@ def auto_translate_fields(instance, fields, update_fields=None):
         if uz_val:
             # Only translate if RU or EN are missing or empty
             if not ru_val or not ru_val.strip():
-                setattr(instance, f"{field}_ru", translate_text(uz_val, 'ru'))
+                setattr(instance, f"{field}_ru", _fit(instance, f"{field}_ru", translate_text(uz_val, 'ru')))
             if not en_val or not en_val.strip():
-                setattr(instance, f"{field}_en", translate_text(uz_val, 'en'))
+                setattr(instance, f"{field}_en", _fit(instance, f"{field}_en", translate_text(uz_val, 'en')))
 
 @receiver(pre_save, sender=ArticleCategory)
 def translate_category(sender, instance, **kwargs):

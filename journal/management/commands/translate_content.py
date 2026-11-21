@@ -7,7 +7,7 @@ Qo'lda kiritilgan tarjimalarga tegilmaydi.
 from django.core.management.base import BaseCommand
 
 from journal.models import Journal, ArticleCategory, Conference
-from journal.signals import translate_text
+from journal.signals import translate_text, _fit
 
 TARGETS = (
     (Journal, ('title', 'short_description', 'full_description', 'research_areas', 'publication_frequency')),
@@ -40,7 +40,7 @@ class Command(BaseCommand):
                             continue
                         tr = (translate_text(uz, lang) or '').strip()
                         if tr and tr != uz:
-                            updates[f'{field}_{lang}'] = tr
+                            updates[f'{field}_{lang}'] = _fit(obj, f'{field}_{lang}', tr)
                 if updates:
                     # update(): pre_save signallari qayta ishga tushmaydi
                     model.objects.filter(pk=obj.pk).update(**updates)
