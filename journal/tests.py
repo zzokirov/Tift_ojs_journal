@@ -673,3 +673,15 @@ class ConferenceTests(TestCase):
                                           organization='TIFT', location='Toshkent')
         for f in ('title_ru', 'title_en', 'organization_ru', 'location_en'):
             self.assertLessEqual(len(getattr(c, f)), Conference._meta.get_field(f).max_length, f)
+
+    def test_same_year_sorted_newest_first(self):
+        import datetime
+        from unittest import mock
+        j = Journal.objects.create(title='Moliya', slug='moliya-va-intellektual-texnologiyalar', publication_status='published', is_active=True)
+        with mock.patch('journal.signals.translate_text', side_effect=lambda t, *a, **k: t):
+            for title, d, order in (('Mart konf', datetime.date(2026, 3, 28), 1), ('Sentabr konf', datetime.date(2026, 9, 25), 2),
+                                    ('Fevral konf', datetime.date(2026, 2, 28), 3)):
+                Conference.objects.create(journal=j, title=title, date=d, order=order)
+        html = self.client.get(reverse('conferences', args=[j.slug])).content.decode()
+        self.assertLess(html.index('Sentabr konf'), html.index('Mart konf'))
+        self.assertLess(html.index('Mart konf'), html.index('Fevral konf'))

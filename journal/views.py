@@ -1652,7 +1652,8 @@ def conferences(request, journal_slug):
     by_year = {}
     for c in items:
         by_year.setdefault(c.date.year, []).append(c)
-    years = [{'year': y, 'items': sorted(by_year[y], key=lambda c: (c.order, c.date, c.pk))}
+    # Yil ichida sana bo'yicha: eng so'nggisi tepada
+    years = [{'year': y, 'items': sorted(by_year[y], key=lambda c: (c.date, -c.order, c.pk), reverse=True)}
              for y in sorted(by_year, reverse=True)]
     return render(request, 'conferences.html', {
         'current_journal': current_journal, 'years': years, 'total': len(items)})
