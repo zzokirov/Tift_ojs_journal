@@ -641,6 +641,10 @@ class ConferenceTests(TestCase):
         self.client.force_login(admin)
         self.assertEqual(self.client.get('/admin/journal/conference/').status_code, 200)
         self.assertEqual(self.client.get('/admin/journal/conference/add/').status_code, 200)
+        # sidebar menyusida: umumiy rejimda va jurnal tanlanganda
+        self.assertContains(self.client.get('/admin/journal/document/'), 'href="/admin/journal/conference/"')
+        r = self.client.get(f'/admin/journal/document/?journal__id__exact={j.pk}')
+        self.assertContains(r, f'href="/admin/journal/conference/?journal__id__exact={j.pk}"')
 
     def test_import_links_existing_instead_of_duplicating(self):
         import datetime

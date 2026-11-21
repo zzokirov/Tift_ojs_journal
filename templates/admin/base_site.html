@@ -267,6 +267,14 @@
                     </a>
                 </li>
 
+                <!-- Konferensiyalar -->
+                <li>
+                    <a href="{% url 'admin:journal_conference_changelist' %}?journal__id__exact={{ admin_active_journal.id }}" class="custom-admin-nav-item {% if '/journal/conference/' in request.path %}active{% endif %}">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>{% trans "Konferensiyalar" %}</span>
+                    </a>
+                </li>
+
                 <!-- 7. Taqrizlar -->
                 <li>
                     <a href="{% url 'admin:journal_reviewrecord_changelist' %}" class="custom-admin-nav-item {% if '/journal/reviewrecord/' in request.path %}active{% endif %}">
@@ -365,6 +373,14 @@
                     <a href="{% url 'admin:journal_document_changelist' %}" class="custom-admin-nav-item {% if '/journal/document/' in request.path %}active{% endif %}">
                         <i class="fas fa-file-contract"></i>
                         <span>{% trans "Hujjatlar" %}</span>
+                    </a>
+                </li>
+
+                <!-- Konferensiyalar -->
+                <li>
+                    <a href="{% url 'admin:journal_conference_changelist' %}" class="custom-admin-nav-item {% if '/journal/conference/' in request.path %}active{% endif %}">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>{% trans "Konferensiyalar" %}</span>
                     </a>
                 </li>
 
