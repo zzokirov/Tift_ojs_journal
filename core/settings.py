@@ -330,3 +330,16 @@ AUTHENTICATION_BACKENDS = [
     'journal.backends.EmailAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+
+# Xatolar (500) traceback'i bilan stderr'ga yoziladi -> journalctl -u tift-journal.service
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {'plain': {'format': '%(asctime)s %(levelname)s %(name)s: %(message)s'}},
+    'handlers': {'stderr': {'class': 'logging.StreamHandler', 'formatter': 'plain'}},
+    'loggers': {
+        'django.request': {'handlers': ['stderr'], 'level': 'ERROR', 'propagate': False},
+        'django.security': {'handlers': ['stderr'], 'level': 'WARNING', 'propagate': False},
+    },
+}
